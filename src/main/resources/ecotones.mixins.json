@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "supercoder79.ecotones.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinBiomeLayers"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
