@@ -28,7 +28,7 @@ public class DesertScrubSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConf
         if (noise > 1.0D) {
             SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRASS_CONFIG);
         } else {
-            if (otherNoise.sample(x, z) + (noise / 5) > 0.25) {
+            if (otherNoise.sample(x, z) + (noise / 3f) > 0.25) {
                 SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRASS_CONFIG);
             }
             SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.SAND_CONFIG);
