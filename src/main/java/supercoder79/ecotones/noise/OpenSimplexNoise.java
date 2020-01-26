@@ -49,11 +49,7 @@ public class OpenSimplexNoise extends Noise {
     };
     private short[] perm;
     private short[] permGradIndex3D;
-    private long seed = -1L;
-
-    public OpenSimplexNoise() {
-        this(DEFAULT_SEED);
-    }
+    private long seed;
 
 //    public OpenSimplexNoise(short[] perm) {
 //        super(seed);
@@ -71,6 +67,7 @@ public class OpenSimplexNoise extends Noise {
     //Uses a simple 64-bit LCG.
     public OpenSimplexNoise(long seed) {
         super(seed);
+        System.out.println(seed);
         this.seed = seed;
         perm = new short[256];
         permGradIndex3D = new short[256];

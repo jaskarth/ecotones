@@ -33,7 +33,6 @@ public abstract class MixinBiomeLayers {
      */
     @Overwrite
     public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> build(LevelGeneratorType generatorType, OverworldChunkGeneratorConfig settings, LongFunction<C> contextProvider) {
-        System.out.println(seed);
         //Initialize land
         LayerFactory<T> layerFactory = LandLayer.INSTANCE.create(contextProvider.apply(1L));
         layerFactory = ScaleLayer.FUZZY.create(contextProvider.apply(2000L), layerFactory);

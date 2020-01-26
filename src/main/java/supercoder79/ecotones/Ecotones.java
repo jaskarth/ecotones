@@ -1,6 +1,12 @@
 package supercoder79.ecotones;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.biome.HumidityLayer1Biomes;
 import supercoder79.ecotones.biome.HumidityLayer2Biomes;
 import supercoder79.ecotones.biome.SwampBiomes;
