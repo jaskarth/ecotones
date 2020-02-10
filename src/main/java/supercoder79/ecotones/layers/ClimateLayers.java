@@ -10,8 +10,8 @@ import supercoder79.ecotones.noise.OpenSimplexNoise;
 import java.util.Map;
 
 public class ClimateLayers implements InitLayer {
-    public static OpenSimplexNoise humidityNoise;
-    public static OpenSimplexNoise temperatureNoise;
+    private static OpenSimplexNoise humidityNoise;
+    private static OpenSimplexNoise temperatureNoise;
 
     public ClimateLayers(long seed) {
         humidityNoise = new OpenSimplexNoise(seed);

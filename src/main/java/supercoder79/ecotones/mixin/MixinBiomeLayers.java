@@ -38,6 +38,7 @@ public abstract class MixinBiomeLayers {
         layerFactory = ScaleLayer.FUZZY.create(contextProvider.apply(2000L), layerFactory);
         layerFactory = IncreaseEdgeCurvatureLayer.INSTANCE.create(contextProvider.apply(1L), layerFactory);
         layerFactory = ScaleLayer.NORMAL.create(contextProvider.apply(2001L), layerFactory);
+
         layerFactory = stack(2601L, IncreaseEdgeCurvatureLayer.INSTANCE, layerFactory, 4, contextProvider);
         layerFactory = AddIslandLayer.INSTANCE.create(contextProvider.apply(2L), layerFactory);
         layerFactory = AddIslandLayer.INSTANCE.create(contextProvider.apply(6L), layerFactory);

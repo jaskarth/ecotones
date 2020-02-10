@@ -15,4 +15,10 @@ public class FeatureConfigHolder {
             (new RandomPatchFeatureConfig.Builder((new WeightedStateProvider()).addState(EcotonesBlocks.shortGrass.getDefaultState(), 2).addState(Blocks.GRASS.getDefaultState(), 1), new SimpleBlockPlacer())).tries(32).build();
     public static RandomPatchFeatureConfig RARELY_SHORT_GRASS_CONFIG =
             (new RandomPatchFeatureConfig.Builder((new WeightedStateProvider()).addState(EcotonesBlocks.shortGrass.getDefaultState(), 1).addState(Blocks.GRASS.getDefaultState(), 4), new SimpleBlockPlacer())).tries(32).build();
+
+    public static RandomPatchFeatureConfig PRAIRIE_CONFIG =
+            (new RandomPatchFeatureConfig.Builder((new WeightedStateProvider())
+                    .addState(EcotonesBlocks.shortGrass.getDefaultState(), 16)
+                    .addState(EcotonesBlocks.wildflowersBlock.getDefaultState(), 1)
+                    .addState(Blocks.GRASS.getDefaultState(), 2), new SimpleBlockPlacer())).tries(32).build();
 }

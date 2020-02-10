@@ -105,7 +105,7 @@ public class HumidityLayer2Biomes {
                                 .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(1, 0.5f, 1))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 30)))));
+                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.PRAIRIE_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 30)))));
 
         DRY_FOREST_BIOME = register( new Identifier("ecotones", "boreal_forest"), template.builder()
                 .temperature(0.8F)
@@ -121,9 +121,9 @@ public class HumidityLayer2Biomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 4, 6))))
 
-                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 3)
+                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 1)
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.PINE_TREE_CONFIG), 1)
-                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG), 1));
+                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG), 3));
 
         MOIST_FOREST_BIOME = register(new Identifier("ecotones", "spruce_forest"), template.builder()
                 .temperature(0.8F)

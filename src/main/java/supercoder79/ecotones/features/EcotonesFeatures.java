@@ -19,7 +19,7 @@ public class EcotonesFeatures {
         CACTI = Registry.register(Registry.FEATURE, new Identifier("ecotones", "cacti"), new PlaceCactiFeature(DefaultFeatureConfig::deserialize));
         SHRUB = Registry.register(Registry.FEATURE, new Identifier("ecotones", "shrub"), new ShrubFeature(ShrubConfig::deserialize));
         JUNGLE_PALM_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "palm_tree"),
-                new PalmTreeFeature(BranchedTreeFeatureConfig::deserialize2, Blocks.JUNGLE_WOOD.getDefaultState())
+                new PalmTreeFeature(BranchedTreeFeatureConfig::deserialize, Blocks.JUNGLE_WOOD.getDefaultState())
         );
         SUGARCANE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "sugarcane"), new SugarCaneFeature(DefaultFeatureConfig::deserialize));
     }
