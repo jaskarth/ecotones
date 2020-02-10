@@ -1,21 +1,21 @@
-package supercoder79.ecotones.layers;
+package supercoder79.ecotones.layers.climate;
 
 import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
+import net.minecraft.world.biome.layer.util.LayerFactory;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import net.minecraft.world.biome.layer.util.LayerSampleContext;
 import net.minecraft.world.biome.layer.util.LayerSampler;
+import supercoder79.ecotones.layers.seed.SeedLayer;
 import supercoder79.ecotones.noise.OpenSimplexNoise;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class MountainLayer implements IdentitySamplingLayer {
-    public static OpenSimplexNoise mountainNoise;
-    public static Map<Integer, Integer[]> Biome2MountainBiomeMap = new LinkedHashMap<>();
+public enum MountainLayer implements IdentitySamplingLayer, SeedLayer {
+    INSTANCE;
 
-    public MountainLayer(long seed) {
-        mountainNoise = new OpenSimplexNoise(seed);
-    }
+    private OpenSimplexNoise mountainNoise;
+    public static Map<Integer, Integer[]> Biome2MountainBiomeMap = new LinkedHashMap<>();
 
     @Override
     public int sample(LayerRandomnessSource context, int value) {
@@ -36,5 +36,11 @@ public class MountainLayer implements IdentitySamplingLayer {
         }
 
         return parent.sample(x, z);
+    }
+
+    @Override
+    public <R extends LayerSampler> LayerFactory<R> create(LayerSampleContext<R> context, LayerFactory<R> parent, long seed) {
+        mountainNoise = new OpenSimplexNoise(seed);
+        return this.create(context, parent);
     }
 }

@@ -1,22 +1,23 @@
-package supercoder79.ecotones.layers;
+package supercoder79.ecotones.layers.climate;
 
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.layer.type.InitLayer;
+import net.minecraft.world.biome.layer.util.LayerFactory;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
+import net.minecraft.world.biome.layer.util.LayerSampleContext;
+import net.minecraft.world.biome.layer.util.LayerSampler;
 import supercoder79.ecotones.biome.HumidityLayer1Biomes;
 import supercoder79.ecotones.biome.HumidityLayer2Biomes;
+import supercoder79.ecotones.layers.seed.SeedInitLayer;
 import supercoder79.ecotones.noise.OpenSimplexNoise;
 
 import java.util.Map;
 
-public class ClimateLayers implements InitLayer {
+public enum ClimateLayers implements InitLayer, SeedInitLayer {
+    INSTANCE;
+
     private static OpenSimplexNoise humidityNoise;
     private static OpenSimplexNoise temperatureNoise;
-
-    public ClimateLayers(long seed) {
-        humidityNoise = new OpenSimplexNoise(seed);
-        temperatureNoise = new OpenSimplexNoise(seed - 79);
-    }
 
     @Override
     public int sample(LayerRandomnessSource context, int x, int z) {
@@ -32,5 +33,12 @@ public class ClimateLayers implements InitLayer {
             }
         }
         return Registry.BIOME.getRawId(HumidityLayer1Biomes.DESERT_BIOME);
+    }
+
+    @Override
+    public <R extends LayerSampler> LayerFactory<R> create(LayerSampleContext<R> context, long seed) {
+        humidityNoise = new OpenSimplexNoise(seed);
+        temperatureNoise = new OpenSimplexNoise(seed - 79);
+        return this.create(context);
     }
 }

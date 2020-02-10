@@ -1,4 +1,4 @@
-package supercoder79.ecotones.layers;
+package supercoder79.ecotones.layers.util;
 
 import net.minecraft.world.biome.layer.type.InitLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;

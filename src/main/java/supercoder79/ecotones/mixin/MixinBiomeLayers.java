@@ -14,7 +14,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import supercoder79.ecotones.layers.*;
+import supercoder79.ecotones.layers.climate.BiomeMerger;
+import supercoder79.ecotones.layers.climate.ClimateLayers;
+import supercoder79.ecotones.layers.climate.DrainageLayer;
+import supercoder79.ecotones.layers.climate.MountainLayer;
+import supercoder79.ecotones.layers.util.LandLayer;
+import supercoder79.ecotones.layers.util.ShrinkLayer;
 
 import java.util.function.LongFunction;
 
@@ -47,14 +52,14 @@ public abstract class MixinBiomeLayers {
         layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 9, contextProvider);
 
         //Add our biomes
-        LayerFactory<T> biomeLayer = new ClimateLayers(seed + 79).create(contextProvider.apply(2L));
-        biomeLayer = new MountainLayer(seed + 1337).create(contextProvider.apply(49L), biomeLayer);
-        biomeLayer = new DrainageLayer(seed + 97).create(contextProvider.apply(4L), biomeLayer);
+        LayerFactory<T> biomeLayer = ClimateLayers.INSTANCE.create(contextProvider.apply(2L), seed + 79);
+        biomeLayer = MountainLayer.INSTANCE.create(contextProvider.apply(49L), biomeLayer, seed + 1337);
+        biomeLayer = DrainageLayer.INSTANCE.create(contextProvider.apply(4L), biomeLayer, seed + 97);
 
         biomeLayer = stack(7979L, ScaleLayer.NORMAL, biomeLayer, 7, contextProvider);
 
         //merge biomes
-        layerFactory = new BiomeMerger().create(contextProvider.apply(84L), layerFactory, biomeLayer);
+        layerFactory = BiomeMerger.INSTANCE.create(contextProvider.apply(84L), layerFactory, biomeLayer);
 
         //Add ocean temperatures
         LayerFactory<T> layerFactory2 = OceanTemperatureLayer.INSTANCE.create(contextProvider.apply(2L));

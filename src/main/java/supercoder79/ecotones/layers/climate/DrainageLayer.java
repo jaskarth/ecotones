@@ -1,20 +1,18 @@
-package supercoder79.ecotones.layers;
+package supercoder79.ecotones.layers.climate;
 
 import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
+import net.minecraft.world.biome.layer.util.LayerFactory;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import net.minecraft.world.biome.layer.util.LayerSampleContext;
 import net.minecraft.world.biome.layer.util.LayerSampler;
 import supercoder79.ecotones.biome.SwampBiomes;
+import supercoder79.ecotones.layers.seed.SeedLayer;
 import supercoder79.ecotones.noise.OpenSimplexNoise;
 
-public class DrainageLayer implements IdentitySamplingLayer {
+public enum  DrainageLayer implements IdentitySamplingLayer, SeedLayer {
+    INSTANCE;
 
-    public static OpenSimplexNoise drainageNoise;
-
-    public DrainageLayer(long seed) {
-        drainageNoise = new OpenSimplexNoise(seed);
-//        Biome2SwampBiomeMap.put();
-    }
+    private OpenSimplexNoise drainageNoise;
 
     @Override
     public int sample(LayerRandomnessSource context, int value) {
@@ -30,5 +28,11 @@ public class DrainageLayer implements IdentitySamplingLayer {
             return id != null ? id : sample;
         }
         return parent.sample(x, z);
+    }
+
+    @Override
+    public <R extends LayerSampler> LayerFactory<R> create(LayerSampleContext<R> context, LayerFactory<R> parent, long seed) {
+        drainageNoise = new OpenSimplexNoise(seed);
+        return this.create(context, parent);
     }
 }
