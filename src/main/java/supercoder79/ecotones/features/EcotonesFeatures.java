@@ -13,6 +13,7 @@ public class EcotonesFeatures {
     public static ShrubFeature SHRUB;
     public static PalmTreeFeature JUNGLE_PALM_TREE;
     public static SugarCaneFeature SUGARCANE;
+    public static SmallAcaciaTreeFeature SMALL_ACACIA;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig::deserialize));
@@ -22,5 +23,6 @@ public class EcotonesFeatures {
                 new PalmTreeFeature(BranchedTreeFeatureConfig::deserialize, Blocks.JUNGLE_WOOD.getDefaultState())
         );
         SUGARCANE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "sugarcane"), new SugarCaneFeature(DefaultFeatureConfig::deserialize));
+        SMALL_ACACIA = Registry.register(Registry.FEATURE, new Identifier("ecotones", "small_acacia"), new SmallAcaciaTreeFeature());
     }
 }

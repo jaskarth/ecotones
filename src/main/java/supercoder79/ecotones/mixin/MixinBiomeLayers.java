@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import supercoder79.ecotones.layers.generation.*;
-import supercoder79.ecotones.layers.util.LandLayer;
+import supercoder79.ecotones.layers.util.*;
 
 import java.util.function.LongFunction;
 
@@ -36,6 +36,7 @@ public abstract class MixinBiomeLayers {
     public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> build(LevelGeneratorType generatorType, OverworldChunkGeneratorConfig settings, LongFunction<C> contextProvider) {
         //Initialize land
         LayerFactory<T> layerFactory = LandLayer.INSTANCE.create(contextProvider.apply(1L));
+
         layerFactory = ScaleLayer.FUZZY.create(contextProvider.apply(2000L), layerFactory);
         layerFactory = IncreaseEdgeCurvatureLayer.INSTANCE.create(contextProvider.apply(1L), layerFactory);
         layerFactory = ScaleLayer.NORMAL.create(contextProvider.apply(2001L), layerFactory);
