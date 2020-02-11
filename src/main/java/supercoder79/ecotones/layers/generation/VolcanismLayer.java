@@ -1,21 +1,19 @@
-package supercoder79.ecotones.layers.climate;
+package supercoder79.ecotones.layers.generation;
 
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerFactory;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import net.minecraft.world.biome.layer.util.LayerSampleContext;
 import net.minecraft.world.biome.layer.util.LayerSampler;
+import supercoder79.ecotones.biome.VolcanicBiome;
 import supercoder79.ecotones.layers.seed.SeedLayer;
 import supercoder79.ecotones.noise.OpenSimplexNoise;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-public enum MountainLayer implements IdentitySamplingLayer, SeedLayer {
+public enum VolcanismLayer implements IdentitySamplingLayer, SeedLayer {
     INSTANCE;
 
-    private OpenSimplexNoise mountainNoise;
-    public static Map<Integer, Integer[]> Biome2MountainBiomeMap = new LinkedHashMap<>();
+    private OpenSimplexNoise volcanismNoise;
 
     @Override
     public int sample(LayerRandomnessSource context, int value) {
@@ -25,22 +23,17 @@ public enum MountainLayer implements IdentitySamplingLayer, SeedLayer {
     @Override
     public int sample(LayerSampleContext<?> context, LayerSampler parent, int x, int z) {
         int sample = parent.sample(x, z);
-        double mountain = mountainNoise.sample(x / 5f, z / 5f)*1.25;
-        if (mountain > 0.75) {
-            Integer id = Biome2MountainBiomeMap.get(sample)[1];
-            return id != null ? id : sample;
+        double drainage = volcanismNoise.sample(x, z)*1.25;
+        if (drainage < -0.75) {
+            return Registry.BIOME.getRawId(VolcanicBiome.INSTANCE);
         }
-        if (mountain > 0.5) {
-            Integer id = Biome2MountainBiomeMap.get(sample)[0];
-            return id != null ? id : sample;
-        }
-
-        return parent.sample(x, z);
+        return sample;
     }
+
 
     @Override
     public <R extends LayerSampler> LayerFactory<R> create(LayerSampleContext<R> context, LayerFactory<R> parent, long seed) {
-        mountainNoise = new OpenSimplexNoise(seed);
+        volcanismNoise = new OpenSimplexNoise(seed);
         return this.create(context, parent);
     }
 }

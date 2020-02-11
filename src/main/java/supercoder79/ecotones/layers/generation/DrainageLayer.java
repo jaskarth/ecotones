@@ -1,4 +1,4 @@
-package supercoder79.ecotones.layers.climate;
+package supercoder79.ecotones.layers.generation;
 
 import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerFactory;
@@ -27,7 +27,7 @@ public enum  DrainageLayer implements IdentitySamplingLayer, SeedLayer {
             Integer id = SwampBiomes.Biome2SwampBiomeMap.get(sample);
             return id != null ? id : sample;
         }
-        return parent.sample(x, z);
+        return sample;
     }
 
     @Override

@@ -19,7 +19,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.features.config.ShrubConfig;
-import supercoder79.ecotones.layers.climate.MountainLayer;
+import supercoder79.ecotones.layers.generation.MountainLayer;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
 
 import java.util.LinkedHashMap;

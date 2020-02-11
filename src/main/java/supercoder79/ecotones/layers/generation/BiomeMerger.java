@@ -1,4 +1,4 @@
-package supercoder79.ecotones.layers.climate;
+package supercoder79.ecotones.layers.generation;
 
 import net.minecraft.world.biome.layer.type.MergingLayer;
 import net.minecraft.world.biome.layer.util.IdentityCoordinateTransformer;

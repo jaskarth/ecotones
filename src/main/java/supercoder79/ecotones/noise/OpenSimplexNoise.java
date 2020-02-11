@@ -67,7 +67,6 @@ public class OpenSimplexNoise extends Noise {
     //Uses a simple 64-bit LCG.
     public OpenSimplexNoise(long seed) {
         super(seed);
-        System.out.println(seed);
         this.seed = seed;
         perm = new short[256];
         permGradIndex3D = new short[256];

@@ -1,4 +1,4 @@
-package supercoder79.ecotones.layers.climate;
+package supercoder79.ecotones.layers.generation;
 
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.layer.type.InitLayer;
