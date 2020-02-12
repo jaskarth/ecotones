@@ -145,13 +145,13 @@ public class SwampBiomes {
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 4)
                 .build());
 
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.RAINFOREST_BIOME), Registry.BIOME.getRawId(WETLAND_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.WET_FOREST_BIOME), Registry.BIOME.getRawId(WETLAND_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.MOIST_FOREST_BIOME), Registry.BIOME.getRawId(MARSH_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.TROPICAL_RAINFOREST_BIOME), Registry.BIOME.getRawId(WETLAND_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.LUSH_FOREST_BIOME), Registry.BIOME.getRawId(WETLAND_BIOME));
         Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.DRY_FOREST_BIOME), Registry.BIOME.getRawId(MARSH_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.VERY_DRY_FOREST_BIOME), Registry.BIOME.getRawId(MIRE_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.DESERT_WOODLAND_BIOME), Registry.BIOME.getRawId(MIRE_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.DESERT_SCRUB_BIOME), Registry.BIOME.getRawId(BOG_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.LUSH_SAVANNAH_BIOME), Registry.BIOME.getRawId(MARSH_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.TROPICAL_GRASSLAND_BIOME), Registry.BIOME.getRawId(MIRE_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.STEPPE_BIOME), Registry.BIOME.getRawId(MIRE_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.SCRUBLAND_BIOME), Registry.BIOME.getRawId(BOG_BIOME));
         Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.DESERT_BIOME), Registry.BIOME.getRawId(BOG_BIOME));
     }
 }

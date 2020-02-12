@@ -32,14 +32,14 @@ public class HumidityLayer2Biomes {
     public static Map<Double, Integer> Humidity2BiomeMap = new LinkedHashMap<>();
 
 
-    public static Biome DESERT_BIOME;
-    public static Biome DESERT_SCRUB_BIOME;
-    public static Biome DESERT_WOODLAND_BIOME;
-    public static Biome VERY_DRY_FOREST_BIOME;
-    public static Biome DRY_FOREST_BIOME;
-    public static Biome MOIST_FOREST_BIOME;
-    public static Biome WET_FOREST_BIOME;
-    public static Biome RAINFOREST_BIOME;
+    public static Biome COOL_DESERT_BIOME;
+    public static Biome COOL_SCRUBLAND_BIOME;
+    public static Biome COOL_STEPPE_BIOME;
+    public static Biome PRAIRIE_BIOME;
+    public static Biome BOREAL_FOREST_BIOME;
+    public static Biome SPRUCE_FOREST_BIOME;
+    public static Biome TEMPERATE_FOREST_BIOME;
+    public static Biome TEMPERATE_RAINFOREST_BIOME;
 
     private static TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
             .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.SAND_CONFIG)
@@ -58,10 +58,10 @@ public class HumidityLayer2Biomes {
             .addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4)));
 
     public static void init() {
-        DESERT_BIOME = register(new Identifier("ecotones", "cool_desert"), template.builder()
+        COOL_DESERT_BIOME = register(new Identifier("ecotones", "cool_desert"), template.builder()
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
-        DESERT_SCRUB_BIOME = register(new Identifier("ecotones", "cool_scrubland"), template.builder()
+        COOL_SCRUBLAND_BIOME = register(new Identifier("ecotones", "cool_scrubland"), template.builder()
                 .configureSurfaceBuilder(EcotonesSurfaces.DESERT_SCRUB_BUILDER, SurfaceBuilder.GRASS_CONFIG)
                 .temperature(1.2F)
                 .downfall(0.2F)
@@ -77,7 +77,7 @@ public class HumidityLayer2Biomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
                 .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 4));
-        DESERT_WOODLAND_BIOME = register( new Identifier("ecotones", "cool_steppe"), template.builder()
+        COOL_STEPPE_BIOME = register( new Identifier("ecotones", "cool_steppe"), template.builder()
                 .temperature(1.2F)
                 .downfall(0.35F)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
@@ -95,7 +95,7 @@ public class HumidityLayer2Biomes {
 
                 .addTreeFeature(EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT), 2)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG));
-        VERY_DRY_FOREST_BIOME = register(new Identifier("ecotones", "prairie"), template.builder()
+        PRAIRIE_BIOME = register(new Identifier("ecotones", "prairie"), template.builder()
                 .temperature(1F)
                 .downfall(0.4F)
                 .scale(0.025f)
@@ -111,7 +111,7 @@ public class HumidityLayer2Biomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.PRAIRIE_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 30)))));
 
-        DRY_FOREST_BIOME = register( new Identifier("ecotones", "boreal_forest"), template.builder()
+        BOREAL_FOREST_BIOME = register( new Identifier("ecotones", "boreal_forest"), template.builder()
                 .temperature(0.8F)
                 .downfall(0.5F)
                 .scale(0.15f)
@@ -129,7 +129,7 @@ public class HumidityLayer2Biomes {
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.PINE_TREE_CONFIG), 1)
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG), 3));
 
-        MOIST_FOREST_BIOME = register(new Identifier("ecotones", "spruce_forest"), template.builder()
+        SPRUCE_FOREST_BIOME = register(new Identifier("ecotones", "spruce_forest"), template.builder()
                 .temperature(0.8F)
                 .downfall(0.6F)
                 .scale(0.3f)
@@ -145,7 +145,7 @@ public class HumidityLayer2Biomes {
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 1)
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG), 5));
 
-        WET_FOREST_BIOME = register(new Identifier("ecotones", "temperate_forest"), template.builder()
+        TEMPERATE_FOREST_BIOME = register(new Identifier("ecotones", "temperate_forest"), template.builder()
                 .temperature(0.8F)
                 .downfall(0.8F)
                 .scale(0.4f)
@@ -162,7 +162,7 @@ public class HumidityLayer2Biomes {
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 5)
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.BIRCH_TREE_CONFIG), 1));
 
-        RAINFOREST_BIOME = register( new Identifier("ecotones", "temperate_rainforest"), template.builder()
+        TEMPERATE_RAINFOREST_BIOME = register( new Identifier("ecotones", "temperate_rainforest"), template.builder()
                 .temperature(0.8F)
                 .downfall(1F)
                 .scale(0.4f)
@@ -184,14 +184,14 @@ public class HumidityLayer2Biomes {
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG), 2)
                 .addTreeFeature(Feature.MEGA_JUNGLE_TREE.configure(DefaultBiomeFeatures.MEGA_JUNGLE_TREE_CONFIG), 1));
 
-        Humidity2BiomeMap.put(0.75, Registry.BIOME.getRawId(RAINFOREST_BIOME));
-        Humidity2BiomeMap.put(0.5, Registry.BIOME.getRawId(WET_FOREST_BIOME));
-        Humidity2BiomeMap.put(0.25, Registry.BIOME.getRawId(MOIST_FOREST_BIOME));
-        Humidity2BiomeMap.put(0.1, Registry.BIOME.getRawId(DRY_FOREST_BIOME));
-        Humidity2BiomeMap.put(-0.1, Registry.BIOME.getRawId(VERY_DRY_FOREST_BIOME));
-        Humidity2BiomeMap.put(-0.25, Registry.BIOME.getRawId(DESERT_WOODLAND_BIOME));
-        Humidity2BiomeMap.put(-0.5, Registry.BIOME.getRawId(DESERT_SCRUB_BIOME));
-        Humidity2BiomeMap.put(-0.75, Registry.BIOME.getRawId(DESERT_BIOME));
+        Humidity2BiomeMap.put(0.75, Registry.BIOME.getRawId(TEMPERATE_RAINFOREST_BIOME));
+        Humidity2BiomeMap.put(0.5, Registry.BIOME.getRawId(TEMPERATE_FOREST_BIOME));
+        Humidity2BiomeMap.put(0.25, Registry.BIOME.getRawId(SPRUCE_FOREST_BIOME));
+        Humidity2BiomeMap.put(0.1, Registry.BIOME.getRawId(BOREAL_FOREST_BIOME));
+        Humidity2BiomeMap.put(-0.1, Registry.BIOME.getRawId(PRAIRIE_BIOME));
+        Humidity2BiomeMap.put(-0.25, Registry.BIOME.getRawId(COOL_STEPPE_BIOME));
+        Humidity2BiomeMap.put(-0.5, Registry.BIOME.getRawId(COOL_SCRUBLAND_BIOME));
+        Humidity2BiomeMap.put(-0.75, Registry.BIOME.getRawId(COOL_DESERT_BIOME));
     }
 
     public static Biome register(Identifier name, TerraformBiome.Builder builder) {
@@ -203,7 +203,7 @@ public class HumidityLayer2Biomes {
 
         ids[1] = Registry.BIOME.getRawId(Registry.register(Registry.BIOME,
                 new Identifier(name.getNamespace(), name.getPath().concat("_mountainous")),
-                builder.depth(ret.getDepth()+1.5f).scale(ret.getScale()+0.3f).temperature(ret.getTemperature()-0.3f).build()));
+                builder.depth(ret.getDepth()+1.5f).scale(ret.getScale()+0.6f).temperature(ret.getTemperature()-0.3f).build()));
 
         MountainLayer.Biome2MountainBiomeMap.put(Registry.BIOME.getRawId(ret), ids);
 

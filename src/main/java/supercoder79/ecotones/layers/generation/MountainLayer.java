@@ -26,11 +26,11 @@ public enum MountainLayer implements IdentitySamplingLayer, SeedLayer {
     public int sample(LayerSampleContext<?> context, LayerSampler parent, int x, int z) {
         int sample = parent.sample(x, z);
         double mountain = mountainNoise.sample(x / 5f, z / 5f)*1.25;
-        if (mountain > 0.75) {
+        if (mountain > 0.65) {
             Integer id = Biome2MountainBiomeMap.get(sample)[1];
             return id != null ? id : sample;
         }
-        if (mountain > 0.5) {
+        if (mountain > 0.45) {
             Integer id = Biome2MountainBiomeMap.get(sample)[0];
             return id != null ? id : sample;
         }
