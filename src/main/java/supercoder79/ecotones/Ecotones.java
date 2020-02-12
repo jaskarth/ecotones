@@ -21,13 +21,15 @@ public class Ecotones implements ModInitializer {
 		HumidityLayer2Biomes.init();
 		SwampBiomes.init();
 		VolcanicBiome.init();
+		SuperVolcanicBiome.init();
 		HotSpringsBiome.init();
+		BlessedSpringsBiome.init();
 		OasisBiome.init();
 
 		ServerTickCallback.EVENT.register(server -> {
 			if (server.getTicks() % 300 == 0) {
 				for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
-					if (player.world.getBiome(player.getBlockPos()) == HotSpringsBiome.INSTANCE) {
+					if (player.world.getBiome(player.getBlockPos()) == BlessedSpringsBiome.INSTANCE) {
 						player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, player.getRandom().nextInt(200) + 60, 0, false, false, true));
 					}
 				}

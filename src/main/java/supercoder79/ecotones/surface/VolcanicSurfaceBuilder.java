@@ -15,7 +15,6 @@ public class VolcanicSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig>
     private static final TernarySurfaceConfig OBSIDIAN_CONFIG = new TernarySurfaceConfig(Blocks.OBSIDIAN.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState());
     private static final TernarySurfaceConfig COBBLESTONE_CONFIG = new TernarySurfaceConfig(Blocks.COBBLESTONE.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState());
     private static final TernarySurfaceConfig STONE_CONFIG = new TernarySurfaceConfig(Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState());
-    private static final TernarySurfaceConfig MAGMA_CONFIG = new TernarySurfaceConfig(Blocks.MAGMA_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState());
     private static final TernarySurfaceConfig REGULAR_CONFIG = new TernarySurfaceConfig(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState());
 
     public VolcanicSurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function) {
@@ -26,12 +25,10 @@ public class VolcanicSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig>
     public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, TernarySurfaceConfig surfaceBlocks) {
         int rand = random.nextInt(48);
         if (rand == 0) {
-            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, MAGMA_CONFIG);
-        } else if (rand <= 5) {
             SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, OBSIDIAN_CONFIG);
-        } else if (rand <= 11) {
+        } else if (rand <= 8) {
             SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, COBBLESTONE_CONFIG);
-        } else if (rand <= 17) {
+        } else if (rand <= 16) {
             SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, STONE_CONFIG);
         } else {
             SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, REGULAR_CONFIG);
