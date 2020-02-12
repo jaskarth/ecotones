@@ -25,14 +25,9 @@ public class GeyserBlock extends Block {
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         world.spawnParticles(ParticleTypes.POOF, pos.getX(), pos.getY()+0.125, pos.getZ(), 50, random.nextDouble()*0.005, 1, random.nextDouble()*0.005, 0.75f);
-        List<LivingEntity> list = world.getNonSpectatingEntities(LivingEntity.class, new Box(pos.getX()-1, pos.getY()-1, pos.getZ()-1, pos.getX()+1, pos.getY()+1, pos.getZ()+1));
+        List<LivingEntity> list = world.getNonSpectatingEntities(LivingEntity.class, new Box(pos.getX()-2, pos.getY()-2, pos.getZ()-2, pos.getX()+2, pos.getY()+2, pos.getZ()+2));
         for (LivingEntity entity : list) {
-            entity.damage(DamageSource.GENERIC, 2);
+            entity.damage(DamageSource.GENERIC, 8);
         }
-    }
-
-    @Override
-    public int getTickRate(WorldView worldView) {
-        return 100; //5 secs: should be 2 mins
     }
 }
