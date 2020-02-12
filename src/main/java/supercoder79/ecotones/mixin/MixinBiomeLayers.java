@@ -52,11 +52,20 @@ public abstract class MixinBiomeLayers {
         LayerFactory<T> biomeLayer = ClimateLayers.INSTANCE.create(contextProvider.apply(2L), seed + 79);
         biomeLayer = MountainLayer.INSTANCE.create(contextProvider.apply(49L), biomeLayer, seed + 1337);
         biomeLayer = DrainageLayer.INSTANCE.create(contextProvider.apply(4L), biomeLayer, seed + 97);
-        biomeLayer = VolcanismLayer.INSTANCE.create(contextProvider.apply(24L), biomeLayer, seed - 30);
+        //TODO: super rare volcanic and hot springs biomes that are really big (initialized in the regular biome layer)
 
         biomeLayer = stack(7979L, ScaleLayer.NORMAL, biomeLayer, 7, contextProvider);
 
-        //merge biomes
+        //Initialize special biomes (smaller biomes with c o o l effects)
+        LayerFactory<T> specialBiomesLayer = PlainsOnlyLayer.INSTANCE.create(contextProvider.apply(3L));
+        specialBiomesLayer = VolcanismLayer.INSTANCE.create(contextProvider.apply(24L), specialBiomesLayer, seed - 30);
+
+        specialBiomesLayer = stack(3043L, ScaleLayer.NORMAL, specialBiomesLayer, 5, contextProvider);
+
+        //Merge special biomes with the regular biome layer
+        biomeLayer = SpecialBiomeMerger.INSTANCE.create(contextProvider.apply(65L), biomeLayer, specialBiomesLayer);
+
+        //Merge biomes onto the continent
         layerFactory = BiomeMerger.INSTANCE.create(contextProvider.apply(84L), layerFactory, biomeLayer);
 
         //Add ocean temperatures

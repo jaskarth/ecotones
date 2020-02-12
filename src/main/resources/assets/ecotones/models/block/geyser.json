@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "block/stone",
+    "down": "block/stone",
+    "up": "ecotones:block/geyser",
+    "north": "block/stone",
+    "east": "block/stone",
+    "south": "block/stone",
+    "west": "block/stone"
+  }
+}

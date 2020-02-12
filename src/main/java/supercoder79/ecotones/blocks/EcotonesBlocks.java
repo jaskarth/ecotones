@@ -19,6 +19,8 @@ public class EcotonesBlocks {
     public static Block reeds;
     public static Block wildflowersBlock;
     public static Item wildflowersItem;
+    public static Block geyserBlock;
+
 
     public static void init() {
         peatBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "peat"), new Block(FabricBlockSettings.copy(Blocks.DIRT).breakByTool(FabricToolTags.SHOVELS).hardness(1f).build()));
@@ -32,5 +34,8 @@ public class EcotonesBlocks {
 
         wildflowersBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "wildflowers"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         wildflowersItem = Registry.register(Registry.ITEM, new Identifier("ecotones", "wildflowers"), new BlockItem(wildflowersBlock, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        geyserBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "geyser"), new GeyserBlock(FabricBlockSettings.of(Material.STONE).strength(2.5F, 8.0F).ticksRandomly().build()));
+        Registry.register(Registry.ITEM, new Identifier("ecotones", "geyser"), new BlockItem(geyserBlock, new Item.Settings().group(ItemGroup.DECORATIONS)));
     }
 }

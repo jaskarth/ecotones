@@ -1,10 +1,7 @@
 package supercoder79.ecotones;
 
 import net.fabricmc.api.ModInitializer;
-import supercoder79.ecotones.biome.HumidityLayer1Biomes;
-import supercoder79.ecotones.biome.HumidityLayer2Biomes;
-import supercoder79.ecotones.biome.SwampBiomes;
-import supercoder79.ecotones.biome.VolcanicBiome;
+import supercoder79.ecotones.biome.*;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
@@ -20,5 +17,6 @@ public class Ecotones implements ModInitializer {
 		HumidityLayer2Biomes.init();
 		SwampBiomes.init();
 		VolcanicBiome.init();
+		HotSpringsBiome.init();
 	}
 }
