@@ -7,6 +7,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.network.ServerPlayerEntity;
 import supercoder79.ecotones.biome.*;
 import supercoder79.ecotones.biome.special.*;
+import supercoder79.ecotones.biome.technical.BeachBiome;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
@@ -21,6 +22,8 @@ public class Ecotones implements ModInitializer {
 		HumidityLayer1Biomes.init();
 		HumidityLayer2Biomes.init();
 		SwampBiomes.init();
+
+		BeachBiome.init();
 
 		VolcanicBiome.init();
 		SuperVolcanicBiome.init();
