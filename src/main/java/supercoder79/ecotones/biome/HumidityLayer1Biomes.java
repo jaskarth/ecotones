@@ -53,14 +53,13 @@ public class HumidityLayer1Biomes {
                     DEFAULT_FLOWERS, DEFAULT_MUSHROOMS, FOREST_GRASS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
             .addStructureFeature(Feature.STRONGHOLD)
             .addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
-            .addDefaultSpawnEntries()
-            .addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4)));
+            .addDefaultSpawnEntries());
 
     public static void init() {
-        DESERT_BIOME = register(new Identifier("ecotones", "desert"), template.builder()
+        DESERT_BIOME = BiomeUtil.register(new Identifier("ecotones", "desert"), template.builder()
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
-        SCRUBLAND_BIOME = register(new Identifier("ecotones", "scrubland"), template.builder()
+        SCRUBLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "scrubland"), template.builder()
                 .configureSurfaceBuilder(EcotonesSurfaces.DESERT_SCRUB_BUILDER, SurfaceBuilder.GRASS_CONFIG)
                 .temperature(1.9F)
                 .downfall(0.2F)
@@ -85,7 +84,7 @@ public class HumidityLayer1Biomes {
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
 
                 .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 3));
-        STEPPE_BIOME = register( new Identifier("ecotones", "steppe"), template.builder()
+        STEPPE_BIOME = BiomeUtil.register( new Identifier("ecotones", "steppe"), template.builder()
                 .temperature(1.8F)
                 .downfall(0.3F)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
@@ -102,7 +101,7 @@ public class HumidityLayer1Biomes {
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
 
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG));
-        TROPICAL_GRASSLAND_BIOME = register(new Identifier("ecotones", "tropical_grassland"), template.builder()
+        TROPICAL_GRASSLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "tropical_grassland"), template.builder()
                 .temperature(1.7F)
                 .downfall(0.4F)
                 .scale(0.12f)
@@ -125,7 +124,7 @@ public class HumidityLayer1Biomes {
                 .addTreeFeature(EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT), 1)
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 12, 12)))));
-        LUSH_SAVANNAH_BIOME = register( new Identifier("ecotones", "lush_savannah"), template.builder()
+        LUSH_SAVANNAH_BIOME = BiomeUtil.register( new Identifier("ecotones", "lush_savannah"), template.builder()
                 .temperature(1.6F)
                 .downfall(0.5F)
                 .scale(0.15f)
@@ -147,7 +146,7 @@ public class HumidityLayer1Biomes {
                 .addTreeFeature(EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT), 2)
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 1));
 
-        DRY_FOREST_BIOME = register(new Identifier("ecotones", "dry_forest"), template.builder()
+        DRY_FOREST_BIOME = BiomeUtil.register(new Identifier("ecotones", "dry_forest"), template.builder()
                 .temperature(1.6F)
                 .downfall(0.6F)
                 .scale(0.3f)
@@ -167,7 +166,7 @@ public class HumidityLayer1Biomes {
                 .addTreeFeature(Feature.ACACIA_TREE.configure(DefaultBiomeFeatures.ACACIA_TREE_CONFIG), 1)
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.BIRCH_TREE_CONFIG), 1));
 
-        LUSH_FOREST_BIOME = register(new Identifier("ecotones", "lush_forest"), template.builder()
+        LUSH_FOREST_BIOME = BiomeUtil.register(new Identifier("ecotones", "lush_forest"), template.builder()
                 .temperature(1.6F)
                 .downfall(0.8F)
                 .scale(0.4f)
@@ -185,7 +184,7 @@ public class HumidityLayer1Biomes {
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.BIRCH_TREE_CONFIG), 2)
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG), 1));
 
-        TROPICAL_RAINFOREST_BIOME = register( new Identifier("ecotones", "tropical_rainforest"), template.builder()
+        TROPICAL_RAINFOREST_BIOME = BiomeUtil.register( new Identifier("ecotones", "tropical_rainforest"), template.builder()
                 .temperature(1.6F)
                 .downfall(1F)
                 .scale(0.4f)
@@ -216,21 +215,5 @@ public class HumidityLayer1Biomes {
         Humidity2BiomeMap.put(-0.25, Registry.BIOME.getRawId(STEPPE_BIOME));
         Humidity2BiomeMap.put(-0.5, Registry.BIOME.getRawId(SCRUBLAND_BIOME));
         Humidity2BiomeMap.put(-0.75, Registry.BIOME.getRawId(DESERT_BIOME));
-    }
-
-    public static Biome register(Identifier name, TerraformBiome.Builder builder) {
-        Integer[] ids = new Integer[2];
-        Biome ret = Registry.register(Registry.BIOME, name, builder.build());
-        ids[0] = Registry.BIOME.getRawId(Registry.register(Registry.BIOME,
-                new Identifier(name.getNamespace(), name.getPath().concat("_hilly")),
-                builder.depth(ret.getDepth()+0.75f).scale(ret.getScale()+0.2f).temperature(ret.getTemperature()-0.15f).build()));
-
-        ids[1] = Registry.BIOME.getRawId(Registry.register(Registry.BIOME,
-                new Identifier(name.getNamespace(), name.getPath().concat("_mountainous")),
-                builder.depth(ret.getDepth()+1.5f).scale(ret.getScale()+0.3f).temperature(ret.getTemperature()-0.3f).build()));
-
-        MountainLayer.Biome2MountainBiomeMap.put(Registry.BIOME.getRawId(ret), ids);
-
-        return ret;
     }
 }

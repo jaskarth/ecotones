@@ -1,4 +1,4 @@
-package supercoder79.ecotones.biome;
+package supercoder79.ecotones.biome.special;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;

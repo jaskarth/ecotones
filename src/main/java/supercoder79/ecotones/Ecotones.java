@@ -6,6 +6,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.network.ServerPlayerEntity;
 import supercoder79.ecotones.biome.*;
+import supercoder79.ecotones.biome.special.*;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
