@@ -21,11 +21,13 @@ public class Ecotones implements ModInitializer {
 		HumidityLayer1Biomes.init();
 		HumidityLayer2Biomes.init();
 		SwampBiomes.init();
+
 		VolcanicBiome.init();
 		SuperVolcanicBiome.init();
 		HotSpringsBiome.init();
 		BlessedSpringsBiome.init();
 		OasisBiome.init();
+		ThePitsBiome.init();
 
 		ServerTickCallback.EVENT.register(server -> {
 			if (server.getTicks() % 300 == 0) {
