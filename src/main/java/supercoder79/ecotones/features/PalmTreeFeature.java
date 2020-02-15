@@ -2,6 +2,7 @@ package supercoder79.ecotones.features;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockBox;
@@ -12,6 +13,7 @@ import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 import java.util.Random;
 import java.util.Set;
@@ -137,6 +139,11 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
         }
 
         setLogBlockState(world, rand, pos, logs, box, config);
+        BlockPos coconutPos = pos.toImmutable().offset(Direction.DOWN);
+        world.setBlockState(coconutPos.add(-1, 0, 0), EcotonesBlocks.coconutBlock.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST), 2);
+        world.setBlockState(coconutPos.add(1, 0, 0), EcotonesBlocks.coconutBlock.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST), 2);
+        world.setBlockState(coconutPos.add(0, 0, 1), EcotonesBlocks.coconutBlock.getDefaultState(), 2);
+        world.setBlockState(coconutPos.add(0, 0, -1), EcotonesBlocks.coconutBlock.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH), 2);
     }
 
     private void growLeaves(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {

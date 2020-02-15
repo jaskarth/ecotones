@@ -21,6 +21,7 @@ public class EcotonesClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
                 EcotonesBlocks.shortGrass,
                 EcotonesBlocks.wildflowersBlock,
-                EcotonesBlocks.reeds);
+                EcotonesBlocks.reeds,
+                EcotonesBlocks.coconutBlock);
     }
 }

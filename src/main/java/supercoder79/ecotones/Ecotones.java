@@ -10,6 +10,7 @@ import supercoder79.ecotones.biome.special.*;
 import supercoder79.ecotones.biome.technical.BeachBiome;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.features.EcotonesFeatures;
+import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
 
 public class Ecotones implements ModInitializer {
@@ -17,8 +18,10 @@ public class Ecotones implements ModInitializer {
 	@Override
 	public void onInitialize() {
         EcotonesBlocks.init();
+		EcotonesItems.init();
 		EcotonesFeatures.init();
 		EcotonesSurfaces.init();
+
 		HumidityLayer1Biomes.init();
 		HumidityLayer2Biomes.init();
 		SwampBiomes.init();

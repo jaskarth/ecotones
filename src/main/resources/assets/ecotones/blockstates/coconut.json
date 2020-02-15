@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=south": { "model": "ecotones:block/coconut" },
+    "facing=west": { "model": "ecotones:block/coconut", "y": 90 },
+    "facing=north": { "model": "ecotones:block/coconut", "y": 180 },
+    "facing=east": { "model": "ecotones:block/coconut", "y": 270 }
+  }
+}

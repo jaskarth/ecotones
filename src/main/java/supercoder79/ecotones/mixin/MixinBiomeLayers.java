@@ -21,7 +21,6 @@ import java.util.function.LongFunction;
 
 @Mixin(BiomeLayers.class)
 public abstract class MixinBiomeLayers {
-
     private static long seed = 0;
 
     @Shadow

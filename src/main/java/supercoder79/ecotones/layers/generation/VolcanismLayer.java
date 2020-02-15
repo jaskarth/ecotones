@@ -27,7 +27,7 @@ public enum VolcanismLayer implements IdentitySamplingLayer, SeedLayer {
     public int sample(LayerSampleContext<?> context, LayerSampler parent, int x, int z) {
         int sample = parent.sample(x, z);
 
-        if (context.nextInt(3) == 0) {
+        if (context.nextInt(6) == 0) {
             double volcanism = volcanismNoise.sample(x / 5f, z / 5f) * 1.25;
             if (volcanism < -0.8) {
                 return context.nextInt(10) == 0 ? Registry.BIOME.getRawId(SuperVolcanicBiome.INSTANCE) : Registry.BIOME.getRawId(VolcanicBiome.INSTANCE);
