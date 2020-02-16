@@ -4,12 +4,10 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
@@ -17,7 +15,7 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import supercoder79.ecotones.biome.api.SpecialBiomeRegistry;
+import supercoder79.ecotones.biome.api.BiomeRegistries;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
 
 public class ThePitsBiome extends Biome {
@@ -27,8 +25,12 @@ public class ThePitsBiome extends Biome {
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits_biome"), new ThePitsBiome(-1.5f));
         EDGE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits_edge"), new ThePitsBiome(0.175f));
-        SpecialBiomeRegistry.register(Registry.BIOME.getRawId(INSTANCE), id -> true);
-        SpecialBiomeRegistry.register(Registry.BIOME.getRawId(EDGE), id -> true);
+
+        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id -> true);
+        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(EDGE), id -> true);
+
+        BiomeRegistries.registerNoBeachBiome(Registry.BIOME.getRawId(INSTANCE));
+        BiomeRegistries.registerNoBeachBiome(Registry.BIOME.getRawId(EDGE));
     }
 
     protected ThePitsBiome(float height) {

@@ -4,7 +4,7 @@ import net.minecraft.world.biome.layer.type.MergingLayer;
 import net.minecraft.world.biome.layer.util.IdentityCoordinateTransformer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import net.minecraft.world.biome.layer.util.LayerSampler;
-import supercoder79.ecotones.biome.api.SpecialBiomeRegistry;
+import supercoder79.ecotones.biome.api.BiomeRegistries;
 
 public enum SpecialBiomeMerger implements MergingLayer, IdentityCoordinateTransformer {
     INSTANCE;
@@ -19,7 +19,7 @@ public enum SpecialBiomeMerger implements MergingLayer, IdentityCoordinateTransf
         int specialSample = sampler2.sample(x, z);
         
         if (specialSample != 1) {
-            boolean canApply = SpecialBiomeRegistry.biomes.get(specialSample).apply(biomeSample);
+            boolean canApply = BiomeRegistries.specialBiomes.get(specialSample).apply(biomeSample);
             return canApply ? specialSample : biomeSample;
         }
         return biomeSample;

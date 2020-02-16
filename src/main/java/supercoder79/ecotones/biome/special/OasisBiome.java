@@ -16,7 +16,7 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import supercoder79.ecotones.biome.api.SpecialBiomeRegistry;
+import supercoder79.ecotones.biome.api.BiomeRegistries;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.ShrubConfig;
 
@@ -25,7 +25,7 @@ public class OasisBiome extends Biome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "oasis"), new OasisBiome());
-        SpecialBiomeRegistry.register(Registry.BIOME.getRawId(INSTANCE), id ->
+        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id ->
                 Registry.BIOME.get(id).getName().asString().contains("desert") || Registry.BIOME.get(id).getName().asString().contains("scrub"));
     }
 

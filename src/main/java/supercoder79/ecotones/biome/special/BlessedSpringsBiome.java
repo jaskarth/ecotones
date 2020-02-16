@@ -14,7 +14,7 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import supercoder79.ecotones.biome.api.SpecialBiomeRegistry;
+import supercoder79.ecotones.biome.api.BiomeRegistries;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.ShrubConfig;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
@@ -24,7 +24,7 @@ public class BlessedSpringsBiome extends Biome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "blessed_springs"), new BlessedSpringsBiome());
-        SpecialBiomeRegistry.register(Registry.BIOME.getRawId(INSTANCE), id -> true);
+        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id -> true);
     }
 
     protected BlessedSpringsBiome() {
