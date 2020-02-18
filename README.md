@@ -1,16 +1,12 @@
-# Fabric Example Mod
+Ecotones creates biomes based on factors such as humidity, temperature, elevation, and soil drainage. When put together, these factors create a lot of unique biomes! Ecotones currently adds 27 biomes with many variants. It replaces the vanilla generator so it's currently not compatible with any other biome mod.
 
-## Setup
+ 
+# Discord Server
 
-1. Edit build.gradle and mod.json to suit your needs.
-    * The "mixins" object can be removed from mod.json if you do not need to use mixins.
-    * Please replace all occurences of "modid" with your own mod ID - sometimes, a different string may also suffice.
-2. Run the following command:
+https://discord.gg/BuBGds9
 
-```
-./gradlew idea
-```
+Join to talk about Ecotones and get information about the next updates! 
 
-## License
+# WARNING
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This mod is highly in development and things will change with or without notice! Don't use this mod unless you're fine with a lot of changes to your world!
