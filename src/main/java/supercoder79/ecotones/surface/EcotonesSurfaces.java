@@ -13,6 +13,7 @@ public class EcotonesSurfaces {
     public static SurfaceBuilder<TernarySurfaceConfig> HOT_SPRINGS_BUILDER;
     public static SurfaceBuilder<TernarySurfaceConfig> BLESSED_SPRINGS_BUILDER;
     public static SurfaceBuilder<TernarySurfaceConfig> DELETE_WATER_BUILDER;
+    public static SurfaceBuilder<TernarySurfaceConfig> GREEN_SPIRES_BUILDER;
 
     public static void init() {
         DESERT_SCRUB_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "desert_scrub_builder"), new DesertScrubSurfaceBuilder(TernarySurfaceConfig::deserialize));
@@ -22,5 +23,6 @@ public class EcotonesSurfaces {
         HOT_SPRINGS_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "hot_springs_builder"), new HotSpringsSurfaceBuilder(TernarySurfaceConfig::deserialize));
         BLESSED_SPRINGS_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "blessed_springs_builder"), new BlessedSpringsSurfaceBuilder(TernarySurfaceConfig::deserialize));
         DELETE_WATER_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "delete_water_builder"), new DeleteWaterSurfaceBuilder(TernarySurfaceConfig::deserialize));
+        GREEN_SPIRES_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "green_spires_builder"), new GreenSpiresSurfaceBuilder(TernarySurfaceConfig::deserialize));
     }
 }

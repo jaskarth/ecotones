@@ -23,7 +23,7 @@ public class ThePitsBiome extends Biome {
     public static ThePitsBiome EDGE;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits_biome"), new ThePitsBiome(-1.5f));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits"), new ThePitsBiome(-1.5f));
         EDGE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits_edge"), new ThePitsBiome(0.175f));
 
         BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id -> true);
