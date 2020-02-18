@@ -65,8 +65,6 @@ public abstract class MixinBiomeLayers {
         specialBiomesLayer = BiomeEdgeLayer.INSTANCE.create(contextProvider.apply(32L), specialBiomesLayer);
         specialBiomesLayer = BiomeEdgeEnsureLayer.INSTANCE.create(contextProvider.apply(37L), specialBiomesLayer);
 
-        specialBiomesLayer = stack(303L, ScaleLayer.NORMAL, specialBiomesLayer, 0, contextProvider);
-
         //Merge special biomes with the regular biome layer
         biomeLayer = SpecialBiomeMerger.INSTANCE.create(contextProvider.apply(65L), biomeLayer, specialBiomesLayer);
 

@@ -1,0 +1,17 @@
+{
+  "block.ecotones.peat": "Peat Block",
+  "block.ecotones.short_grass": "Short Grass",
+  "block.ecotones.reeds": "Reeds",
+  "block.ecotones.wildflowers": "Wildflowers",
+  "block.ecotones.geyser": "Geyser",
+  "block.ecotones.coconut": "Coconut",
+
+  "item.ecotones.peat": "Peat Block",
+  "item.ecotones.short_grass": "Short Grass",
+  "item.ecotones.reeds": "Reeds",
+  "item.ecotones.wildflowers": "Wildflowers",
+  "item.ecotones.geyser": "Geyser",
+  "item.ecotones.coconut": "Coconut",
+
+  "item.ecotones.peat_item": "Peat"
+}
