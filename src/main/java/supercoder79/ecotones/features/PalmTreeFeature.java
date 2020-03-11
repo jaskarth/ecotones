@@ -72,7 +72,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
             setToDirt(world, below);
         }
 
-        BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+        BlockPos.Mutable pos = origin.method_25503();
         growTrunk(world, rand, pos, logs, box, config, height);
         growLeaves(world, rand, pos, leaves, box, config);
 
@@ -80,7 +80,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
     }
 
     private boolean check(TestableWorld world, BlockPos origin, int height) {
-        BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+        BlockPos.Mutable pos = origin.method_25503();
 
         for(int y = 0; y < height; y++) {
             int radius = y >= 2 ? 1 : 0;

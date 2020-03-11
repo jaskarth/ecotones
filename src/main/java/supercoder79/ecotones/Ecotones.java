@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.event.server.ServerTickCallback;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.BlockPos;
 import supercoder79.ecotones.biome.*;
 import supercoder79.ecotones.biome.special.*;
 import supercoder79.ecotones.biome.technical.BeachBiome;
@@ -35,11 +36,12 @@ public class Ecotones implements ModInitializer {
 		OasisBiome.init();
 		ThePitsBiome.init();
 		GreenSpiresBiome.init();
+		HazelGroveBiome.init();
 
 		ServerTickCallback.EVENT.register(server -> {
 			if (server.getTicks() % 300 == 0) {
 				for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
-					if (player.world.getBiome(player.getBlockPos()) == BlessedSpringsBiome.INSTANCE) {
+					if (player.world.getBiome(new BlockPos(player.getPos())) == BlessedSpringsBiome.INSTANCE) {
 						player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, player.getRandom().nextInt(200) + 60, 0, false, false, true));
 					}
 				}

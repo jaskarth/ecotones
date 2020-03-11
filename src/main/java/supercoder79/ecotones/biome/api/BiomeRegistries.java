@@ -14,6 +14,13 @@ public class BiomeRegistries {
         specialBiomes.put(id, rule);
     }
 
+    //yes i know this is stupid shuddup
+    public static void registerAllSpecial(IntFunction<Boolean> rule, int... ids) {
+        for (int id : ids) {
+            specialBiomes.put(id, rule);
+        }
+    }
+
     public static void registerNoBeachBiome(int id) {
         noBeachBiomes.add(id);
     }

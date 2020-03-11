@@ -1,10 +1,9 @@
 package supercoder79.ecotones.blocks;
 
+import com.terraformersmc.terraform.block.TerraformSaplingBlock;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tools.FabricToolTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
+import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
@@ -12,6 +11,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import supercoder79.ecotones.blocks.sapling.HazelSaplingGenerator;
 
 public class EcotonesBlocks {
     public static Block peatBlock;
@@ -22,6 +22,10 @@ public class EcotonesBlocks {
     public static Item wildflowersItem;
     public static Block geyserBlock;
     public static Block coconutBlock;
+    public static Block hazelLeavesBlock;
+    public static Item hazelLeavesItem;
+    public static Block hazelSaplingBlock;
+    public static Item hazelSaplingItem;
 
 
     public static void init() {
@@ -41,5 +45,10 @@ public class EcotonesBlocks {
         Registry.register(Registry.ITEM, new Identifier("ecotones", "geyser"), new BlockItem(geyserBlock, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         coconutBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "coconut"), new CoconutBlock(FabricBlockSettings.of(Material.PLANT).strength(0.2F, 3.0F).sounds(BlockSoundGroup.WOOD).nonOpaque().build()));
+        hazelLeavesBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "hazel_leaves"), new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().build()));
+        hazelLeavesItem = Registry.register(Registry.ITEM, new Identifier("ecotones", "hazel_leaves"), new BlockItem(hazelLeavesBlock, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        hazelSaplingBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "hazel_sapling"), new TerraformSaplingBlock(new HazelSaplingGenerator()));
+        hazelSaplingItem = Registry.register(Registry.ITEM, new Identifier("ecotones", "hazel_sapling"), new BlockItem(hazelSaplingBlock, new Item.Settings().group(ItemGroup.DECORATIONS)));
     }
 }

@@ -12,6 +12,7 @@ public class EcotonesItems {
 
     public static void init() {
         Registry.register(Registry.ITEM, new Identifier("ecotones", "coconut"), new Item(new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).build())));
+        Registry.register(Registry.ITEM, new Identifier("ecotones", "hazelnut"), new Item(new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(2).saturationModifier(0.2F).build())));
         peatItem = Registry.register(Registry.ITEM, new Identifier("ecotones", "peat_item"), new Item(new Item.Settings().group(ItemGroup.MISC)));
         FuelRegistry.INSTANCE.add(peatItem, 400);
     }

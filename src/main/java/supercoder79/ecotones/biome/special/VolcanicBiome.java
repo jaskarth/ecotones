@@ -37,7 +37,7 @@ public class VolcanicBiome extends Biome {
                 .scale(0.0125F)
                 .temperature(1.6F)
                 .downfall(0.4F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(4159204)
                         .waterFogColor(329011)
                         .fogColor(12638463)
