@@ -1,4 +1,4 @@
-package supercoder79.ecotones.features;
+package supercoder79.ecotones.features.tree;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
@@ -72,7 +72,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
             setToDirt(world, below);
         }
 
-        BlockPos.Mutable pos = origin.method_25503();
+        BlockPos.Mutable pos = origin.mutableCopy();
         growTrunk(world, rand, pos, logs, box, config, height);
         growLeaves(world, rand, pos, leaves, box, config);
 
@@ -80,7 +80,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
     }
 
     private boolean check(TestableWorld world, BlockPos origin, int height) {
-        BlockPos.Mutable pos = origin.method_25503();
+        BlockPos.Mutable pos = origin.mutableCopy();
 
         for(int y = 0; y < height; y++) {
             int radius = y >= 2 ? 1 : 0;

@@ -16,7 +16,7 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import supercoder79.ecotones.biome.api.BiomeRegistries;
+import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.ShrubConfig;
 import supercoder79.ecotones.surface.EcotonesSurfaces;

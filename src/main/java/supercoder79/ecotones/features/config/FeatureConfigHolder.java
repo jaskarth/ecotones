@@ -11,14 +11,23 @@ public class FeatureConfigHolder {
             new RandomPatchFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .addState(EcotonesBlocks.reeds.getDefaultState(), 1)
                     .addState(EcotonesBlocks.shortGrass.getDefaultState(), 3), new SimpleBlockPlacer()).tries(8).build();
+
     public static RandomPatchFeatureConfig MOSTLY_SHORT_GRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .addState(EcotonesBlocks.shortGrass.getDefaultState(), 8)
                     .addState(Blocks.GRASS.getDefaultState(), 1), new SimpleBlockPlacer()).tries(32).build();
+
+    public static RandomPatchFeatureConfig SCRUBLAND_CONFIG =
+            new RandomPatchFeatureConfig.Builder((new WeightedBlockStateProvider())
+                    .addState(EcotonesBlocks.shortGrass.getDefaultState(), 6)
+                    .addState(EcotonesBlocks.smallShrubBlock.getDefaultState(), 2)
+                    .addState(Blocks.GRASS.getDefaultState(), 1), new SimpleBlockPlacer()).tries(32).build();
+
     public static RandomPatchFeatureConfig SHORT_GRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .addState(EcotonesBlocks.shortGrass.getDefaultState(), 2)
                     .addState(Blocks.GRASS.getDefaultState(), 1), new SimpleBlockPlacer()).tries(32).build();
+
     public static RandomPatchFeatureConfig RARELY_SHORT_GRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder((new WeightedBlockStateProvider())
                     .addState(EcotonesBlocks.shortGrass.getDefaultState(), 1)

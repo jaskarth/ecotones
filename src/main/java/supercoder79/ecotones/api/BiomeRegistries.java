@@ -1,4 +1,4 @@
-package supercoder79.ecotones.biome.api;
+package supercoder79.ecotones.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;

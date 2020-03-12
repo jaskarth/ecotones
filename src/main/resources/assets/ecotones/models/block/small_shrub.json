@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "cross": "ecotones:block/reeds"
+        "cross": "ecotones:block/small_shrub"
     }
 }

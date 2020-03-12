@@ -33,11 +33,11 @@ public class HazelFoliagePlacer extends FoliagePlacer {
         return this.radius + random.nextInt(this.randomRadius + 1);
     }
 
-    protected boolean method_23451(Random random, int i, int j, int k, int l, int m) {
+    protected boolean isInvalidForLeaves(Random random, int i, int j, int k, int l, int m) {
         return Math.abs(j) == m && Math.abs(l) == m;
     }
 
-    public int method_23447(int i, int j, int k, int l) {
+    public int getRadiusForPlacement(int i, int j, int k, int l) {
         return l <= 1 ? 0 : 2;
     }
 }

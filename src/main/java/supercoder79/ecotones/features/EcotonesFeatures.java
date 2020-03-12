@@ -6,6 +6,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import supercoder79.ecotones.features.config.ShrubConfig;
+import supercoder79.ecotones.features.tree.BananaTreeFeature;
+import supercoder79.ecotones.features.tree.PalmTreeFeature;
 
 public class EcotonesFeatures {
     public static DesertifySoilFeature DESERTIFY_SOIL;
@@ -14,6 +16,7 @@ public class EcotonesFeatures {
     public static PalmTreeFeature JUNGLE_PALM_TREE;
     public static SugarCaneFeature SUGARCANE;
     public static SmallAcaciaTreeFeature SMALL_ACACIA;
+    public static BananaTreeFeature BANANA_TREE;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig::deserialize));
@@ -24,5 +27,6 @@ public class EcotonesFeatures {
         );
         SUGARCANE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "sugarcane"), new SugarCaneFeature(DefaultFeatureConfig::deserialize));
         SMALL_ACACIA = Registry.register(Registry.FEATURE, new Identifier("ecotones", "small_acacia"), new SmallAcaciaTreeFeature());
+        BANANA_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "banana_tree"), new BananaTreeFeature(BranchedTreeFeatureConfig::deserialize));
     }
 }

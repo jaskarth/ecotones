@@ -37,6 +37,7 @@ public class Ecotones implements ModInitializer {
 		ThePitsBiome.init();
 		GreenSpiresBiome.init();
 		HazelGroveBiome.init();
+		PinePeaksBiome.init();
 
 		ServerTickCallback.EVENT.register(server -> {
 			if (server.getTicks() % 300 == 0) {
