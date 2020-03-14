@@ -19,6 +19,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.ShrubConfig;
 import supercoder79.ecotones.features.foliage.SmallPineFoliagePlacer;
+import supercoder79.ecotones.treedecorator.PineConeTreeDecorator;
 
 public class PinePeaksBiome extends Biome {
     public static BranchedTreeFeatureConfig SMALL_PINE_CONFIG = new BranchedTreeFeatureConfig.Builder(

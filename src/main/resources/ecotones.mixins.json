@@ -3,9 +3,13 @@
   "package": "supercoder79.ecotones.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinBiomeLayers"
+    "MixinOverworldDimension"
   ],
   "client": [
+    "MixinLevelGeneratorTypeClient"
+  ],
+  "server": [
+    "MixinLevelGeneratorTypeServer"
   ],
   "injectors": {
     "defaultRequire": 1

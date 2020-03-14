@@ -12,7 +12,7 @@ public enum SpecialBiomeMerger implements MergingLayer, IdentityCoordinateTransf
     @Override
     public int sample(LayerRandomnessSource context, LayerSampler sampler1, LayerSampler sampler2, int x, int z) {
         int biomeSample = sampler1.sample(x, z);
-        if (x < 512 && z < 512 && x > -512 && z > -512) {
+        if (x < 256 && z < 256 && x > -256 && z > -256) {
             return biomeSample;
         }
 

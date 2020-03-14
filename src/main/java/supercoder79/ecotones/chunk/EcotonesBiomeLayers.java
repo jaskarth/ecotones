@@ -1,38 +1,28 @@
-package supercoder79.ecotones.mixin;
+package supercoder79.ecotones.chunk;
 
 import net.minecraft.world.biome.layer.*;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
-import net.minecraft.world.biome.layer.util.LayerFactory;
-import net.minecraft.world.biome.layer.util.LayerSampleContext;
-import net.minecraft.world.biome.layer.util.LayerSampler;
+import net.minecraft.world.biome.layer.util.*;
 import net.minecraft.world.biome.source.BiomeLayerSampler;
 import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
 import net.minecraft.world.level.LevelGeneratorType;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import supercoder79.ecotones.layers.generation.*;
 import supercoder79.ecotones.layers.util.*;
 
 import java.util.function.LongFunction;
 
-@Mixin(BiomeLayers.class)
-public abstract class MixinBiomeLayers {
-    private static long seed = 0;
+public class EcotonesBiomeLayers {
+    private static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> stack(long seed, ParentedLayer layer, LayerFactory<T> parent, int count, LongFunction<C> contextProvider) {
+        LayerFactory<T> layerFactory = parent;
 
-    @Shadow
-    protected static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> stack(long seed, ParentedLayer layer, LayerFactory<T> parent, int count, LongFunction<C> contextProvider) {
-        return null;
+        for(int i = 0; i < count; ++i) {
+            layerFactory = layer.create((LayerSampleContext)contextProvider.apply(seed + (long)i), layerFactory);
+        }
+
+        return layerFactory;
     }
 
-    /**
-     * @author SuperCoder79
-     */
-    @Overwrite
-    public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> build(LevelGeneratorType generatorType, OverworldChunkGeneratorConfig settings, LongFunction<C> contextProvider) {
+    public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> build(long seed, LongFunction<C> contextProvider) {
         //Initialize land
         LayerFactory<T> layerFactory = LandLayer.INSTANCE.create(contextProvider.apply(1L));
 
@@ -84,8 +74,8 @@ public abstract class MixinBiomeLayers {
         return layerFactory;
     }
 
-    @Inject(method = "build(JLnet/minecraft/world/level/LevelGeneratorType;Lnet/minecraft/world/gen/chunk/OverworldChunkGeneratorConfig;)Lnet/minecraft/world/biome/source/BiomeLayerSampler;", at = @At("HEAD"))
-    private static void captureSeed(long seedIn, LevelGeneratorType type, OverworldChunkGeneratorConfig config, CallbackInfoReturnable<BiomeLayerSampler> info) {
-        seed = seedIn;
+    public static BiomeLayerSampler build(long seed) {
+        LayerFactory<CachingLayerSampler> layerFactory = build(seed, (salt) -> new CachingLayerContext(25, seed, salt));
+        return new BiomeLayerSampler(layerFactory);
     }
 }

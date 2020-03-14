@@ -44,11 +44,10 @@ public enum ClimateLayers implements InitLayer, SeedInitLayer {
     @Override
     public <R extends LayerSampler> LayerFactory<R> create(LayerSampleContext<R> context, long seed) {
         Random random = new Random(seed);
-        offsetX = (random.nextDouble()-0.5)*300;
-        offsetZ = (random.nextDouble()-0.5)*300;
-        offsetX2 = (random.nextDouble()-0.5)*300;
-        offsetZ2 = (random.nextDouble()-0.5)*300;
-        System.out.println("offsets: " + offsetX + ", " + offsetZ);
+        offsetX = (random.nextDouble()-0.5)*1000;
+        offsetZ = (random.nextDouble()-0.5)*1000;
+        offsetX2 = (random.nextDouble()-0.5)*1000;
+        offsetZ2 = (random.nextDouble()-0.5)*1000;
         humidityNoise = new OpenSimplexNoise(seed);
         temperatureNoise = new OpenSimplexNoise(seed - 79);
         return this.create(context);
