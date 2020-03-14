@@ -4,8 +4,6 @@ import net.minecraft.world.biome.layer.*;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
 import net.minecraft.world.biome.layer.util.*;
 import net.minecraft.world.biome.source.BiomeLayerSampler;
-import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
-import net.minecraft.world.level.LevelGeneratorType;
 import supercoder79.ecotones.layers.generation.*;
 import supercoder79.ecotones.layers.util.*;
 
@@ -16,7 +14,7 @@ public class EcotonesBiomeLayers {
         LayerFactory<T> layerFactory = parent;
 
         for(int i = 0; i < count; ++i) {
-            layerFactory = layer.create((LayerSampleContext)contextProvider.apply(seed + (long)i), layerFactory);
+            layerFactory = layer.create(contextProvider.apply(seed + i), layerFactory);
         }
 
         return layerFactory;
@@ -32,7 +30,6 @@ public class EcotonesBiomeLayers {
 
         layerFactory = stack(2601L, IncreaseEdgeCurvatureLayer.INSTANCE, layerFactory, 4, contextProvider);
         layerFactory = AddIslandLayer.INSTANCE.create(contextProvider.apply(2L), layerFactory);
-        layerFactory = AddIslandLayer.INSTANCE.create(contextProvider.apply(6L), layerFactory);
 
         //scale up the land to be bigger
         layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 9, contextProvider);

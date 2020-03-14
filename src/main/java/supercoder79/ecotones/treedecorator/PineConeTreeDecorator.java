@@ -6,7 +6,6 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.decorator.TreeDecorator;
-import net.minecraft.world.gen.decorator.TreeDecoratorType;
 
 import java.util.List;
 import java.util.Random;

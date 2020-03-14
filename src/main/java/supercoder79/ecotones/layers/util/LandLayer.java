@@ -8,7 +8,7 @@ public enum LandLayer implements InitLayer {
 
     @Override
     public int sample(LayerRandomnessSource context, int x, int z) {
-        if (x < 8 && z < 8 && x > -8 && z > -8) {
+        if (x < 1 && z < 1 && x > -1 && z > -1) {
             return 1;
         }
         return context.nextInt(2) == 0 ? 1 : 0;

@@ -28,8 +28,10 @@ public class EcotonesBlocks {
     public static Item hazelLeavesItem;
     public static Block hazelSaplingBlock;
     public static Item hazelSaplingItem;
+    public static Block sandyGrassBlock;
+    public static Item sandyGrassItem;
 
-
+    //TODO: fix this disaster
     public static void init() {
         peatBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "peat"), new Block(FabricBlockSettings.copy(Blocks.DIRT).breakByTool(FabricToolTags.SHOVELS).hardness(1f).build()));
         Registry.register(Registry.ITEM, new Identifier("ecotones", "peat"), new BlockItem(peatBlock, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
@@ -55,5 +57,8 @@ public class EcotonesBlocks {
 
         hazelSaplingBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "hazel_sapling"), new TerraformSaplingBlock(new HazelSaplingGenerator()));
         hazelSaplingItem = Registry.register(Registry.ITEM, new Identifier("ecotones", "hazel_sapling"), new BlockItem(hazelSaplingBlock, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        sandyGrassBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "sandy_grass"), new EcotonesSandyGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        sandyGrassItem = Registry.register(Registry.ITEM, new Identifier("ecotones", "sandy_grass"), new BlockItem(sandyGrassBlock, new Item.Settings().group(ItemGroup.DECORATIONS)));
     }
 }
