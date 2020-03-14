@@ -7,6 +7,8 @@ import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 public class FeatureConfigHolder {
+
+    // grass
     public static RandomPatchFeatureConfig REEDS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
                     .addState(EcotonesBlocks.reeds.getDefaultState(), 1)
@@ -46,7 +48,7 @@ public class FeatureConfigHolder {
                     .spreadZ(15)
                     .tries(24).build();
 
-
+    // flowers
     public static RandomPatchFeatureConfig TAIGA_FLOWERS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
                     .addState(EcotonesBlocks.wildflowersBlock.getDefaultState(), 1),
@@ -54,4 +56,13 @@ public class FeatureConfigHolder {
                     .spreadX(15)
                     .spreadZ(15)
                     .tries(64).build();
+
+    // misc
+    public static RandomPatchFeatureConfig SURFACE_ROCKS =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.surfaceRockBlock.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(15)
+                    .spreadZ(15)
+                    .tries(4).build();
 }

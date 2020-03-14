@@ -1,0 +1,20 @@
+{
+	"textures": {
+		"0": "minecraft:block/cactus_side",
+		"particle": "minecraft:lock/cactus_side"
+	},
+	"elements": [
+		{
+			"from": [7, 0, 7],
+			"to": [9, 12, 9],
+			"faces": {
+				"north": {"uv": [7, 4, 9, 16], "texture": "#0"},
+				"east": {"uv": [7, 4, 9, 16], "texture": "#0"},
+				"south": {"uv": [7, 4, 9, 16], "texture": "#0"},
+				"west": {"uv": [7, 4, 9, 16], "texture": "#0"},
+				"up": {"uv": [8, 4, 10, 6], "texture": "#0"},
+				"down": {"uv": [8, 4, 10, 6], "texture": "#0"}
+			}
+		}
+	]
+}

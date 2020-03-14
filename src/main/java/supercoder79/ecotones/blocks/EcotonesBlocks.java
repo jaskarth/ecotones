@@ -32,6 +32,8 @@ public class EcotonesBlocks {
     public static Item hazelSaplingItem;
     public static Block sandyGrassBlock;
     public static Item sandyGrassItem;
+    public static Block surfaceRockBlock;
+    public static Item surfaceRockItem;
 
     //TODO: fix this disaster
     public static void init() {
@@ -62,5 +64,8 @@ public class EcotonesBlocks {
 
         sandyGrassBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "sandy_grass"), new EcotonesSandyGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         sandyGrassItem = Registry.register(Registry.ITEM, new Identifier("ecotones", "sandy_grass"), new BlockItem(sandyGrassBlock, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        surfaceRockBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "surface_rock"), new SurfaceRockBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.STONE).build()));
+        surfaceRockItem = Registry.register(Registry.ITEM, new Identifier("ecotones", "surface_rock"), new BlockItem(surfaceRockBlock, new Item.Settings().group(ItemGroup.DECORATIONS)));
     }
 }

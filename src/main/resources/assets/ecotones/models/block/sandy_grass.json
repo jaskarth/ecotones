@@ -1,6 +1,6 @@
 {
-    "parent": "block/cross",
-    "textures": {
-        "cross": "ecotones:block/sandy_grass"
-    }
+	"parent": "block/cross",
+	"textures": {
+		"cross": "ecotones:block/sandy_grass"
+	}
 }
