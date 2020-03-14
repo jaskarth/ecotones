@@ -2,7 +2,6 @@ package supercoder79.ecotones.biome;
 
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -20,7 +19,6 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.features.config.ShrubConfig;
-import supercoder79.ecotones.layers.generation.MountainLayer;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
 
 import java.util.LinkedHashMap;

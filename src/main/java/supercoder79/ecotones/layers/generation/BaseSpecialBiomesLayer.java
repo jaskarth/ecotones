@@ -5,7 +5,6 @@ import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.biome.special.HazelGroveBiome;
 import supercoder79.ecotones.biome.special.OasisBiome;
-import supercoder79.ecotones.biome.special.PinePeaksBiome;
 import supercoder79.ecotones.biome.special.ThePitsBiome;
 
 public enum BaseSpecialBiomesLayer implements IdentitySamplingLayer {

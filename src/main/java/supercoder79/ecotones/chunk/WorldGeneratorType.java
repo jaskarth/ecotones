@@ -1,7 +1,6 @@
 package supercoder79.ecotones.chunk;
 
 import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.chunk.ChunkGeneratorType;
 import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;

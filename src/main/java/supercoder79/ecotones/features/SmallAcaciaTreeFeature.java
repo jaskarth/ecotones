@@ -1,6 +1,5 @@
 package supercoder79.ecotones.features;
 
-import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
@@ -12,7 +11,6 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class SmallAcaciaTreeFeature extends Feature<DefaultFeatureConfig> {
     private static BlockState LEAF_STATE = Blocks.ACACIA_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1);

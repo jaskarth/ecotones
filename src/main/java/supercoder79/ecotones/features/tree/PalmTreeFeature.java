@@ -2,7 +2,6 @@ package supercoder79.ecotones.features.tree;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockBox;

@@ -2,13 +2,8 @@ package supercoder79.ecotones.chunk;
 
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.Dynamic;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.class_4952;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.source.VanillaLayeredBiomeSource;
-import net.minecraft.world.biome.source.VanillaLayeredBiomeSourceConfig;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
 import net.minecraft.world.level.LevelGeneratorType;
