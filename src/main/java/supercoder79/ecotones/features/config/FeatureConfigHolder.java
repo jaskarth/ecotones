@@ -65,4 +65,12 @@ public class FeatureConfigHolder {
                     .spreadX(15)
                     .spreadZ(15)
                     .tries(4).build();
+
+    public static RandomPatchFeatureConfig CLOVER =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.cloverBlock.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(15)
+                    .spreadZ(15)
+                    .tries(12).build();
 }

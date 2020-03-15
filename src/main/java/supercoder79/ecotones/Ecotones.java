@@ -49,6 +49,7 @@ public class Ecotones implements ModInitializer {
 		GreenSpiresBiome.init();
 		HazelGroveBiome.init();
 		PinePeaksBiome.init();
+		UluruBiome.init();
 
 		loadMeOnClientPls = WorldType.ECOTONES;
 
