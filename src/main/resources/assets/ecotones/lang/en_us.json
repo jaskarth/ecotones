@@ -5,6 +5,12 @@
   "block.ecotones.wildflowers": "Wildflowers",
   "block.ecotones.geyser": "Geyser",
   "block.ecotones.coconut": "Coconut",
+  "block.ecotones.hazel_leaves": "Hazel Leaves",
+  "block.ecotones.hazel_sapling": "Hazel Sapling",
+  "block.ecotones.sandy_grass": "Sandy Grass",
+  "block.ecotones.surface_rock": "Surface Rock",
+  "block.ecotones.clover": "Clover",
+  "block.ecotones.pinecone": "Pine Cone",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -12,6 +18,12 @@
   "item.ecotones.wildflowers": "Wildflowers",
   "item.ecotones.geyser": "Geyser",
   "item.ecotones.coconut": "Coconut",
+  "item.ecotones.hazel_leaves": "Hazel Leaves",
+  "item.ecotones.hazel_sapling": "Hazel Sapling",
+  "item.ecotones.sandy_grass": "Sandy Grass",
+  "item.ecotones.surface_rock": "Surface Rock",
+  "item.ecotones.clover": "Clover",
+  "item.ecotones.pinecone": "Pine Cone",
 
   "item.ecotones.peat_item": "Peat"
 }

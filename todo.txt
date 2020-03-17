@@ -6,6 +6,7 @@
 * Bayou
 * Steppe -> something unique
 * More surface rocks on special biomes
+* Add pinecones to other pine trees
 * Mixed sand/grass savannah
 
 # Blocks
