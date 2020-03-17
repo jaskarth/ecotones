@@ -32,6 +32,7 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.hazelSaplingBlock,
                 EcotonesBlocks.smallShrubBlock,
                 EcotonesBlocks.sandyGrassBlock,
-                EcotonesBlocks.cloverBlock);
+                EcotonesBlocks.cloverBlock,
+                EcotonesBlocks.pineconeBlock);
     }
 }

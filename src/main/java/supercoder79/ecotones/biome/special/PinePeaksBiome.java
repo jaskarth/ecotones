@@ -19,6 +19,7 @@ import supercoder79.ecotones.biome.HumidityLayer2Biomes;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.ShrubConfig;
 import supercoder79.ecotones.features.foliage.SmallPineFoliagePlacer;
+import supercoder79.ecotones.treedecorator.PineconeTreeDecorator;
 
 public class PinePeaksBiome extends Biome {
     public static BranchedTreeFeatureConfig SMALL_PINE_CONFIG = new BranchedTreeFeatureConfig.Builder(
@@ -31,6 +32,7 @@ public class PinePeaksBiome extends Biome {
             .foliageHeight(4)
             .foliageHeightRandom(2)
             .noVines()
+            .treeDecorators(ImmutableList.of(new PineconeTreeDecorator(2)))
             .build();
 
     public static PinePeaksBiome INSTANCE;
@@ -38,7 +40,7 @@ public class PinePeaksBiome extends Biome {
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "pine_peaks"), new PinePeaksBiome());
         BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id ->
-                id == Registry.BIOME.getRawId(HumidityLayer2Biomes.BOREAL_FOREST_BIOME) || id ==Registry.BIOME.getRawId(HumidityLayer2Biomes.SPRUCE_FOREST_BIOME));
+                id == Registry.BIOME.getRawId(HumidityLayer2Biomes.LICHEN_WOODLAND_BIOME) || id ==Registry.BIOME.getRawId(HumidityLayer2Biomes.SPRUCE_FOREST_BIOME));
     }
 
 
@@ -72,7 +74,9 @@ public class PinePeaksBiome extends Biome {
                 Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(1, 0.66f, 1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.TAIGA_GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))));
+                Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.TAIGA_GRASS_CONFIG)
+                        .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE
+                                .configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))));
 
         DefaultBiomeFeatures.addDefaultDisks(this);
         DefaultBiomeFeatures.addLandCarvers(this);

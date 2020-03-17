@@ -19,6 +19,7 @@ import supercoder79.ecotones.chunk.WorldGeneratorType;
 import supercoder79.ecotones.chunk.WorldType;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.items.EcotonesItems;
+import supercoder79.ecotones.sound.Sounds;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
 
 public class Ecotones implements ModInitializer {
@@ -29,6 +30,8 @@ public class Ecotones implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		Sounds.init();
+
         EcotonesBlocks.init();
 		EcotonesItems.init();
 		EcotonesFeatures.init();

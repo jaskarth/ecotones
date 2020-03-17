@@ -1,10 +1,16 @@
 package supercoder79.ecotones.features.config;
 
+import com.google.common.collect.ImmutableList;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
+import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
+import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.treedecorator.PineconeTreeDecorator;
 
 public class FeatureConfigHolder {
 
@@ -73,4 +79,18 @@ public class FeatureConfigHolder {
                     .spreadX(15)
                     .spreadZ(15)
                     .tries(12).build();
+
+    // trees
+    public static BranchedTreeFeatureConfig SPRUCE_TREE_CONFIG =
+            (new BranchedTreeFeatureConfig.Builder(
+                    new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
+                    new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
+                    new SpruceFoliagePlacer(2, 1)))
+                    .baseHeight(6)
+                    .heightRandA(3)
+                    .trunkHeight(1)
+                    .trunkHeightRandom(1)
+                    .trunkTopOffsetRandom(2)
+                    .treeDecorators(ImmutableList.of(new PineconeTreeDecorator(6)))
+                    .noVines().build();
 }

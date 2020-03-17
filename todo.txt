@@ -1,14 +1,20 @@
+# Biomes
 * Plateau biomes?
-* Biome color based clover & wildflowers
-* Boreal Forest -> forest & plains hybrid
-* More surface rocks
-* Implement curly grass
-* Steppe -> something unique
-* Steal zoerestria Bluff
-* Some type of mesa thing
-* Mixed sand/grass savannah
-* Stop procrastinating on cold biomes
-* More flower types
 * Rare prairie variants
 * Heathland
 * Moor
+* Bayou
+* Steppe -> something unique
+* More surface rocks on special biomes
+* Mixed sand/grass savannah
+
+# Blocks
+* More flower types
+* Aquatic plants
+* Implement curly grass
+* Biome color based clover & wildflowers
+* Berry Bushes
+
+# Misc
+* Stop procrastinating on cold biomes
+* Steal zoerestria Bluff

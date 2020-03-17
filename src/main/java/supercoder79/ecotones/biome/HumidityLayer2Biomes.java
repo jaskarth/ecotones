@@ -28,12 +28,11 @@ import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
 public class HumidityLayer2Biomes {
     public static Map<Double, Integer> Humidity2BiomeMap = new LinkedHashMap<>();
 
-
     public static Biome COOL_DESERT_BIOME;
     public static Biome COOL_SCRUBLAND_BIOME;
     public static Biome COOL_STEPPE_BIOME;
     public static Biome PRAIRIE_BIOME;
-    public static Biome BOREAL_FOREST_BIOME;
+    public static Biome LICHEN_WOODLAND_BIOME;
     public static Biome SPRUCE_FOREST_BIOME;
     public static Biome TEMPERATE_FOREST_BIOME;
     public static Biome TEMPERATE_RAINFOREST_BIOME;
@@ -114,8 +113,7 @@ public class HumidityLayer2Biomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.PRAIRIE_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 30)))));
 
-        //TODO: make this a grassland/spruce combination
-        BOREAL_FOREST_BIOME = BiomeUtil.register( new Identifier("ecotones", "boreal_forest"), template.builder()
+        LICHEN_WOODLAND_BIOME = BiomeUtil.register( new Identifier("ecotones", "lichen_woodland"), template.builder()
                 .temperature(0.8F)
                 .downfall(0.5F)
                 .scale(0.15f)
@@ -124,21 +122,20 @@ public class HumidityLayer2Biomes {
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SHRUB.configure(new ShrubConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
-                                .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(2, 0.25f, 1))))
+                                .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(3, 0.25f, 1))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG)
                                 .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 4, 6))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(FeatureConfigHolder.TAIGA_FLOWERS)
-                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))))
+                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
+                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))))
 
-                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 1)
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.PINE_TREE_CONFIG), 1)
-                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG), 3));
+                .addTreeFeature(EcotonesFeatures.SMALL_SPRUCE.configure(FeatureConfig.DEFAULT), 2));
 
         SPRUCE_FOREST_BIOME = BiomeUtil.register(new Identifier("ecotones", "spruce_forest"), template.builder()
                 .temperature(0.8F)
@@ -159,7 +156,7 @@ public class HumidityLayer2Biomes {
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.TAIGA_GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 6, 8))))
-                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG), 7));
+                .addTreeFeature(Feature.NORMAL_TREE.configure(FeatureConfigHolder.SPRUCE_TREE_CONFIG), 7));
 
         TEMPERATE_FOREST_BIOME = BiomeUtil.register(new Identifier("ecotones", "temperate_forest"), template.builder()
                 .temperature(0.8F)
@@ -206,7 +203,7 @@ public class HumidityLayer2Biomes {
         Humidity2BiomeMap.put(0.75, Registry.BIOME.getRawId(TEMPERATE_RAINFOREST_BIOME));
         Humidity2BiomeMap.put(0.5, Registry.BIOME.getRawId(TEMPERATE_FOREST_BIOME));
         Humidity2BiomeMap.put(0.25, Registry.BIOME.getRawId(SPRUCE_FOREST_BIOME));
-        Humidity2BiomeMap.put(0.1, Registry.BIOME.getRawId(BOREAL_FOREST_BIOME));
+        Humidity2BiomeMap.put(0.1, Registry.BIOME.getRawId(LICHEN_WOODLAND_BIOME));
         Humidity2BiomeMap.put(-0.1, Registry.BIOME.getRawId(PRAIRIE_BIOME));
         Humidity2BiomeMap.put(-0.25, Registry.BIOME.getRawId(COOL_STEPPE_BIOME));
         Humidity2BiomeMap.put(-0.5, Registry.BIOME.getRawId(COOL_SCRUBLAND_BIOME));

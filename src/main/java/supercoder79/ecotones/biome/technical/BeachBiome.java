@@ -16,6 +16,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
+import supercoder79.ecotones.sound.Sounds;
 
 public class BeachBiome extends Biome {
     public static BeachBiome INSTANCE;
@@ -36,7 +37,8 @@ public class BeachBiome extends Biome {
                 .effects((new BiomeEffects.Builder())
                         .waterColor(4159204)
                         .waterFogColor(329011)
-                        .fogColor(12638463).build())
+                        .fogColor(12638463)
+                        .loopSound(Sounds.BEACH_LOOP).build())
                 .parent(null)
                 .noises(ImmutableList.of(new Biome.MixedNoisePoint(0.0F, 0.0F, -0.1F, 0.0F, 0.9935F))));
 
