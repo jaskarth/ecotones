@@ -4,6 +4,7 @@ package supercoder79.ecotones.features;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.class_5138;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -24,7 +25,7 @@ public class ShrubFeature extends Feature<ShrubConfig> {
     }
 
     @Override
-    public boolean generate(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, ShrubConfig config) {
+    public boolean generate(IWorld world, class_5138 arg, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, ShrubConfig config) {
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
         int height = random.nextInt(2) + 1;
         for (int i = 0; i < height; i++) {

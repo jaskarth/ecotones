@@ -1,7 +1,6 @@
 package supercoder79.ecotones.blocks;
 
 import net.minecraft.block.*;
-import net.minecraft.entity.EntityContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -20,7 +19,7 @@ public class EcotonesGrassBlock extends Block implements Fertilizable {
         super(settings);
     }
 
-    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos) {
+    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
         return SHAPE;
     }
 

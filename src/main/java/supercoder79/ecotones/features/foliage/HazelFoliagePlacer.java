@@ -10,11 +10,14 @@ import java.util.Random;
 import java.util.Set;
 
 public class HazelFoliagePlacer extends FoliagePlacer {
-    public HazelFoliagePlacer(int radius, int radiusRandom) {
-        super(radius, radiusRandom, FoliagePlacerType.BLOB_FOLIAGE_PLACER);
+    private final int field_23752;
+
+    public HazelFoliagePlacer(int i, int j, int k, int l, int m) {
+        super(i, j, k, l, FoliagePlacerType.BLOB_FOLIAGE_PLACER);
+        this.field_23752 = m;
     }
 
-    public void generate(ModifiableTestableWorld world, Random random, BranchedTreeFeatureConfig config, int i, int j, int k, BlockPos pos, Set<BlockPos> positions) {
+    public void generate(ModifiableTestableWorld world, Random random, BranchedTreeFeatureConfig config, int i, BlockPos pos, int j, int k, Set<BlockPos> positions) {
         int h = 0;
         int m = 1;
         int t = 3;
@@ -25,19 +28,23 @@ public class HazelFoliagePlacer extends FoliagePlacer {
                 m++;
                 t--;
             }
-            this.generate(world, random, config, i, pos, l, m, positions);
+            this.generate(world, random, config, pos, j, l, m, positions);
         }
     }
 
-    public int getRadius(Random random, int i, int j, BranchedTreeFeatureConfig config) {
+    public int getRadius(Random random, int baseHeight, BranchedTreeFeatureConfig config) {
         return this.radius + random.nextInt(this.randomRadius + 1);
+    }
+
+    public int method_26989(Random random, int i) {
+        return this.field_23752;
     }
 
     protected boolean isInvalidForLeaves(Random random, int i, int j, int k, int l, int m) {
         return Math.abs(j) == m && Math.abs(l) == m;
     }
 
-    public int getRadiusForPlacement(int i, int j, int k, int l) {
-        return l <= 1 ? 0 : 2;
+    public int getRadiusForPlacement(int trunkHeight, int baseHeight, int radius) {
+        return radius <= 1 ? 0 : 2;
     }
 }

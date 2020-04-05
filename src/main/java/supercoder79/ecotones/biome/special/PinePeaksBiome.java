@@ -2,6 +2,7 @@ package supercoder79.ecotones.biome.special;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
+import net.minecraft.class_5140;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -25,12 +26,8 @@ public class PinePeaksBiome extends Biome {
     public static BranchedTreeFeatureConfig SMALL_PINE_CONFIG = new BranchedTreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
-            new SmallPineFoliagePlacer(1, 0))
-            .baseHeight(9)
-            .heightRandA(6)
-            .trunkTopOffset(1)
-            .foliageHeight(4)
-            .foliageHeightRandom(2)
+            new SmallPineFoliagePlacer(1, 0, 1, 0, 4, 2),
+            new class_5140(9, 6, 0))
             .noVines()
             .treeDecorators(ImmutableList.of(new PineconeTreeDecorator(2)))
             .build();

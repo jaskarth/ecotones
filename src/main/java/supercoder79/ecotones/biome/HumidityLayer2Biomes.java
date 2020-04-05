@@ -89,7 +89,7 @@ public class HumidityLayer2Biomes {
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                        Feature.ACACIA_TREE.configure(DefaultBiomeFeatures.ACACIA_TREE_CONFIG)
+                        Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.ACACIA_TREE_CONFIG)
                                 .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.225f, 1))))
 
                 .addTreeFeature(EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT), 2)

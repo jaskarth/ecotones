@@ -147,7 +147,7 @@ public class HumidityLayer1Biomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 12, 20))))
 
-                .addTreeFeature(Feature.ACACIA_TREE.configure(DefaultBiomeFeatures.ACACIA_TREE_CONFIG), 1)
+                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.ACACIA_TREE_CONFIG), 1)
                 .addTreeFeature(EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT), 2)
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 1));
 
@@ -168,7 +168,7 @@ public class HumidityLayer1Biomes {
 
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 3)
                 .addTreeFeature(EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT), 2)
-                .addTreeFeature(Feature.ACACIA_TREE.configure(DefaultBiomeFeatures.ACACIA_TREE_CONFIG), 1)
+                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.ACACIA_TREE_CONFIG), 1)
                 .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.BIRCH_TREE_CONFIG), 1));
 
         LUSH_FOREST_BIOME = BiomeUtil.register(new Identifier("ecotones", "lush_forest"), template.builder()

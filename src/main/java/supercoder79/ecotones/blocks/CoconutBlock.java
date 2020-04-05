@@ -3,7 +3,7 @@ package supercoder79.ecotones.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -27,7 +27,7 @@ public class CoconutBlock extends HorizontalFacingBlock {
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos) {
+    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
         switch(state.get(FACING)) {
             case SOUTH:
                 return AGE_TO_SOUTH_SHAPE;

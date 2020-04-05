@@ -2,10 +2,10 @@ package supercoder79.ecotones.chunk;
 
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.Dynamic;
-import net.minecraft.class_4952;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
+import net.minecraft.world.level.LevelGeneratorOptions;
 import net.minecraft.world.level.LevelGeneratorType;
 import supercoder79.ecotones.Ecotones;
 
@@ -31,7 +31,7 @@ public class WorldType<T extends ChunkGenerator<?>> {
         }
 
         try {
-            this.generatorType = constructor.newInstance(13, name, (BiFunction<LevelGeneratorType, Dynamic<?>, class_4952>) LevelGenUtil::makeChunkGenerator);
+            this.generatorType = constructor.newInstance(13, name, (BiFunction<LevelGeneratorType, Dynamic<?>, LevelGeneratorOptions>) LevelGenUtil::makeChunkGenerator);
         } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
             System.out.println("oh god oh frick");
             e.printStackTrace();

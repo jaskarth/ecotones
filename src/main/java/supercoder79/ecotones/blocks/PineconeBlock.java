@@ -3,7 +3,7 @@ package supercoder79.ecotones.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -19,8 +19,8 @@ public class PineconeBlock extends Block {
         super(settings);
     }
 
-    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos) {
-        Vec3d vec3d = state.getOffsetPos(view, pos);
+    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ePos) {
+        Vec3d vec3d = state.getModelOffset(view, pos);
         return SHAPE.offset(vec3d.x, vec3d.y, vec3d.z);
     }
 

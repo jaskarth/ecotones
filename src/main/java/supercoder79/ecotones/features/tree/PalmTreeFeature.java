@@ -56,7 +56,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
         boolean sand = false;
 
         if (!isNaturalDirtOrGrass(world, below)) {
-            if(world.testBlockState(below, state -> state.matches(BlockTags.SAND))) {
+            if(world.testBlockState(below, state -> state.isIn(BlockTags.SAND))) {
                 sand = true;
             } else {
                 return false;
@@ -86,7 +86,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
 
             for(int z = -radius; z <= radius; z++) {
                 for(int x = -radius; x <= radius; x++) {
-                    pos.set(origin).setOffset(x, y, z);
+                    pos.set(origin).move(x, y, z);
 
                     if(!canTreeReplace(world, pos)) {
                         return false;
@@ -102,7 +102,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
     private void growTrunk(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, BranchedTreeFeatureConfig config, int height) {
         for (int i = 0; i < 2; i++) {
             setLogBlockState(world, rand, pos, logs, box, config);
-            pos.setOffset(Direction.UP);
+            pos.move(Direction.UP);
         }
 
         int run = 0;
@@ -119,9 +119,9 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
                 setBlockState(logs, world, pos, bark, box);
 
                 if (rand.nextBoolean()) {
-                    pos.setOffset(velocityX, 0, 0);
+                    pos.move(velocityX, 0, 0);
                 } else {
-                    pos.setOffset(0, 0, velocityZ);
+                    pos.move(0, 0, velocityZ);
                 }
                 run = 0;
 
@@ -134,7 +134,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
                 setLogBlockState(world, rand, pos, logs, box, config);
             }
 
-            pos.setOffset(Direction.UP);
+            pos.move(Direction.UP);
         }
 
         setLogBlockState(world, rand, pos, logs, box, config);
@@ -148,27 +148,27 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
     private void growLeaves(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
         BlockPos center = pos.toImmutable();
 
-        setLeavesBlockState(world, rand, pos.set(center).setOffset(0, 1, 0), leaves, box, config);
-        setLeavesBlockState(world, rand, pos.set(center).setOffset(1, 1, 0), leaves, box, config);
-        setLeavesBlockState(world, rand, pos.set(center).setOffset(0, 1, 1), leaves, box, config);
-        setLeavesBlockState(world, rand, pos.set(center).setOffset(-1, 1, 0), leaves, box, config);
-        setLeavesBlockState(world, rand, pos.set(center).setOffset(0, 1, -1), leaves, box, config);
+        setLeavesBlockState(world, rand, pos.set(center).move(0, 1, 0), leaves, box, config);
+        setLeavesBlockState(world, rand, pos.set(center).move(1, 1, 0), leaves, box, config);
+        setLeavesBlockState(world, rand, pos.set(center).move(0, 1, 1), leaves, box, config);
+        setLeavesBlockState(world, rand, pos.set(center).move(-1, 1, 0), leaves, box, config);
+        setLeavesBlockState(world, rand, pos.set(center).move(0, 1, -1), leaves, box, config);
 
         boolean invertLeafSpiral = rand.nextBoolean();
 
         for (int dZ = -1; dZ < 2; dZ++) {
             for (int dX = -1; dX < 2; dX++) {
-                setLeavesBlockState(world, rand, pos.set(center).setOffset(dZ, 0, dX), leaves, box, config);
+                setLeavesBlockState(world, rand, pos.set(center).move(dZ, 0, dX), leaves, box, config);
             }
         }
 
         for (int d = 0; d < 4; d++) {
             Direction direction = Direction.fromHorizontal(d);
 
-            pos.set(center).setOffset(direction, 2);
+            pos.set(center).move(direction, 2);
             placeSpiral(world, rand, pos, leaves, box, config, direction, !invertLeafSpiral);
 
-            pos.set(center).setOffset(direction, 3);
+            pos.set(center).move(direction, 3);
             placeSpiral(world, rand, pos, leaves, box, config, direction, invertLeafSpiral);
         }
     }
@@ -177,10 +177,10 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
         setLeavesBlockState(world, rand, pos, leaves, box, config);
 
         Direction spiral = spiral(direction, invertLeafSpiral);
-        setLeavesBlockState(world, rand, pos.setOffset(spiral), leaves, box, config);
+        setLeavesBlockState(world, rand, pos.move(spiral), leaves, box, config);
 
         for (int i = 0; i < 2; i++) {
-            setLeavesBlockState(world, rand, pos.setOffset(Direction.DOWN), leaves, box, config);
+            setLeavesBlockState(world, rand, pos.move(Direction.DOWN), leaves, box, config);
         }
     }
 

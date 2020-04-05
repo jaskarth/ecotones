@@ -10,6 +10,10 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+repositories {
+	maven { url = "https://jitpack.io" }
+}
+
 minecraft {
 }
 
@@ -20,6 +24,10 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modCompile "com.terraformersmc:terraform:${project.terraform_version}"
+
+//	modRuntime ("com.github.SuperCoder7979:databreaker:master") {
+//		exclude module : "fabric-loader"
+//	}
 
 	include "com.terraformersmc:terraform:${project.terraform_version}"
 

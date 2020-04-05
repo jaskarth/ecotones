@@ -10,15 +10,21 @@ import java.util.Random;
 import java.util.Set;
 
 public class SmallPineFoliagePlacer extends FoliagePlacer {
-    public SmallPineFoliagePlacer(int i, int j) {
-        super(i, j, FoliagePlacerType.PINE_FOLIAGE_PLACER);
+    private final int field_23755;
+    private final int field_23756;
+
+    public SmallPineFoliagePlacer(int i, int j, int k, int l, int m, int n) {
+        super(i, j, k, l, FoliagePlacerType.PINE_FOLIAGE_PLACER);
+        this.field_23755 = m;
+        this.field_23756 = n;
     }
 
-    public void generate(ModifiableTestableWorld world, Random random, BranchedTreeFeatureConfig config, int baseHeight, int trunkHeight, int radius, BlockPos pos, Set<BlockPos> leaves) {
+    public void generate(ModifiableTestableWorld world, Random random, BranchedTreeFeatureConfig config, int baseHeight, BlockPos pos, int trunkHeight, int radius, Set<BlockPos> leaves) {
         int i = 0;
+        int l = this.field_23753 + random.nextInt(this.field_23754 + 1);
 
-        for(int j = baseHeight; j >= trunkHeight; --j) {
-            this.generate(world, random, config, baseHeight, pos, j, i, leaves);
+        for(int j = trunkHeight + l; j >= l; --j) {
+            this.generate(world, random, config, pos, trunkHeight, j, i, leaves);
             if (i >= 1 && j == trunkHeight + 1) {
                 --i;
             } else if (i < radius) {
@@ -28,7 +34,12 @@ public class SmallPineFoliagePlacer extends FoliagePlacer {
 
     }
 
-    public int getRadius(Random random, int baseHeight, int trunkHeight, BranchedTreeFeatureConfig config) {
+    @Override
+    public int method_26989(Random random, int i) {
+        return this.field_23755 + random.nextInt(this.field_23756 + 1);
+    }
+
+    public int getRadius(Random random, int baseHeight, BranchedTreeFeatureConfig config) {
         return 1;
     }
 
@@ -36,7 +47,7 @@ public class SmallPineFoliagePlacer extends FoliagePlacer {
         return Math.abs(x) == radius && Math.abs(z) == radius && radius > 0;
     }
 
-    public int getRadiusForPlacement(int trunkHeight, int baseHeight, int radius, int currentTreeHeight) {
-        return currentTreeHeight <= 1 ? 0 : 2;
+    public int getRadiusForPlacement(int trunkHeight, int baseHeight, int radius) {
+        return radius <= 1 ? 0 : 2;
     }
 }

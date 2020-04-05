@@ -2,6 +2,8 @@ package supercoder79.ecotones.biome.special;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
+import net.minecraft.class_5139;
+import net.minecraft.class_5140;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -30,8 +32,9 @@ public class HazelGroveBiome extends Biome {
             new BranchedTreeFeatureConfig.Builder(
                     new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
                     new SimpleBlockStateProvider(EcotonesBlocks.hazelLeavesBlock.getDefaultState()),
-                    new HazelFoliagePlacer(2, 0))
-        .baseHeight(5).heightRandA(2).foliageHeight(4).noVines().build();
+                    new HazelFoliagePlacer(2, 0, 0, 0, 3),
+                    new class_5140(3, 1, 0))
+        .noVines().build();
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove"), new HazelGroveBiome(false, false));

@@ -2,6 +2,7 @@ package supercoder79.ecotones.features;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Blocks;
+import net.minecraft.class_5138;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -18,7 +19,7 @@ public class SugarCaneFeature extends Feature<DefaultFeatureConfig> {
     }
 
     @Override
-    public boolean generate(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, DefaultFeatureConfig config) {
+    public boolean generate(IWorld world, class_5138 arg, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, DefaultFeatureConfig config) {
         for (int x = -1; x < 2; x++) {
             for (int z = -1; z < 2; z++) {
                 if (world.getBlockState(pos.add(x, -1, z)) != Blocks.GRASS_BLOCK.getDefaultState()) return true;

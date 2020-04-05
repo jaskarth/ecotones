@@ -3,6 +3,7 @@ package supercoder79.ecotones.features.config;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.class_5140;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
@@ -85,12 +86,8 @@ public class FeatureConfigHolder {
             (new BranchedTreeFeatureConfig.Builder(
                     new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
                     new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
-                    new SpruceFoliagePlacer(2, 1)))
-                    .baseHeight(6)
-                    .heightRandA(3)
-                    .trunkHeight(1)
-                    .trunkHeightRandom(1)
-                    .trunkTopOffsetRandom(2)
+                    new SpruceFoliagePlacer(2, 1, 0, 2, 1, 1),
+                    new class_5140(6, 3, 2))
                     .treeDecorators(ImmutableList.of(new PineconeTreeDecorator(6)))
-                    .noVines().build();
+                    .noVines().build());
 }
