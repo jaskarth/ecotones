@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.function.IntFunction;
 
 public class BiomeRegistries {
-    public static Map<Integer, IntFunction<Boolean>> specialBiomes = new HashMap<>();
-    public static List<Integer> noBeachBiomes = new ArrayList<>();
+    public static final Map<Integer, IntFunction<Boolean>> specialBiomes = new HashMap<>();
+    public static final List<Integer> noBeachBiomes = new ArrayList<>();
 
     public static void registerSpecialBiome(int id, IntFunction<Boolean> rule) {
         specialBiomes.put(id, rule);

@@ -21,7 +21,7 @@ public class SmallPineFoliagePlacer extends FoliagePlacer {
 
     public void generate(ModifiableTestableWorld world, Random random, BranchedTreeFeatureConfig config, int baseHeight, BlockPos pos, int trunkHeight, int radius, Set<BlockPos> leaves) {
         int i = 0;
-        int l = this.field_23753 + random.nextInt(this.field_23754 + 1);
+        int l = this.offset + random.nextInt(this.randomOffset + 1);
 
         for(int j = trunkHeight + l; j >= l; --j) {
             this.generate(world, random, config, pos, trunkHeight, j, i, leaves);
@@ -35,7 +35,7 @@ public class SmallPineFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    public int method_26989(Random random, int i) {
+    public int getHeight(Random random, int i) {
         return this.field_23755 + random.nextInt(this.field_23756 + 1);
     }
 

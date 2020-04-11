@@ -3,10 +3,7 @@ package supercoder79.ecotones.layers.generation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
-import supercoder79.ecotones.biome.special.HazelGroveBiome;
-import supercoder79.ecotones.biome.special.OasisBiome;
-import supercoder79.ecotones.biome.special.ThePitsBiome;
-import supercoder79.ecotones.biome.special.UluruBiome;
+import supercoder79.ecotones.biome.special.*;
 
 public enum BaseSpecialBiomesLayer implements IdentitySamplingLayer {
     INSTANCE;
@@ -16,6 +13,7 @@ public enum BaseSpecialBiomesLayer implements IdentitySamplingLayer {
         if (context.nextInt(79) == 0) return Registry.BIOME.getRawId(OasisBiome.INSTANCE);
         if (context.nextInt(100) == 0) return Registry.BIOME.getRawId(ThePitsBiome.INSTANCE);
         if (context.nextInt(100) == 0) return Registry.BIOME.getRawId(UluruBiome.INSTANCE);
+        if (context.nextInt(10) == 0) return Registry.BIOME.getRawId(FlowerPrairieBiome.INSTANCE);
 
         //TODO: move this to its own layer
         if (context.nextInt(4) == 0) {

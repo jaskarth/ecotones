@@ -13,11 +13,13 @@ import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
+import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
 
 public class VolcanicBiome extends Biome {
@@ -58,6 +60,10 @@ public class VolcanicBiome extends Biome {
         DefaultBiomeFeatures.addDefaultMushrooms(this);
         DefaultBiomeFeatures.addSprings(this);
         DefaultBiomeFeatures.addFrozenTopLayer(this);
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
+                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, Blocks.IRON_ORE.getDefaultState(), 9)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(30, 0, 0, 64))));
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, Blocks.GOLD_ORE.getDefaultState(), 9)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(6, 0, 0, 32))));

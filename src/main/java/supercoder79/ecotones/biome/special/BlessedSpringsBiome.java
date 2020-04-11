@@ -8,14 +8,12 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
+import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.features.EcotonesFeatures;
+import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.features.config.ShrubConfig;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
 
@@ -52,6 +50,10 @@ public class BlessedSpringsBiome extends Biome {
         DefaultBiomeFeatures.addDefaultMushrooms(this);
         DefaultBiomeFeatures.addSprings(this);
         DefaultBiomeFeatures.addFrozenTopLayer(this);
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
+                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.TAIGA_GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 6, 8))));

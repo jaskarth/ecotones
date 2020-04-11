@@ -102,6 +102,7 @@ public class HumidityLayer2Biomes {
                 .grassColor(0xabcf59)
 
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
+
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SHRUB.configure(new ShrubConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))

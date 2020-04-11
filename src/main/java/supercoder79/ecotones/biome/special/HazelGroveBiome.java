@@ -2,8 +2,6 @@ package supercoder79.ecotones.biome.special;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
-import net.minecraft.class_5139;
-import net.minecraft.class_5140;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -16,6 +14,7 @@ import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.features.EcotonesFeatures;
@@ -32,8 +31,8 @@ public class HazelGroveBiome extends Biome {
             new BranchedTreeFeatureConfig.Builder(
                     new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
                     new SimpleBlockStateProvider(EcotonesBlocks.hazelLeavesBlock.getDefaultState()),
-                    new HazelFoliagePlacer(2, 0, 0, 0, 3),
-                    new class_5140(3, 1, 0))
+                    new HazelFoliagePlacer(2, 0, 0, 0, 4),
+                    new StraightTrunkPlacer(3, 1, 0))
         .noVines().build();
 
     public static void init() {

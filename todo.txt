@@ -6,8 +6,10 @@
 * Bayou
 * Steppe -> something unique
 * More surface rocks on special biomes
-* Add pinecones to other pine trees
 * Mixed sand/grass savannah
+* Flower prairie hilly and mountainous variants (need a recode of the shitty mountain system)
+* Forest with balloon-y trees (see misc entry)
+* Lowlands with jungle bush-like shrubs
 
 # Blocks
 * More flower types
@@ -19,3 +21,4 @@
 # Misc
 * Stop procrastinating on cold biomes
 * Steal zoerestria Bluff
+* Balloon-y tree with edges hanging off (this is very hard to describe in text)

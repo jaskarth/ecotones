@@ -10,25 +10,26 @@ import java.util.Random;
 import java.util.Set;
 
 public class HazelFoliagePlacer extends FoliagePlacer {
-    private final int field_23752;
+    private final int height;
 
-    public HazelFoliagePlacer(int i, int j, int k, int l, int m) {
-        super(i, j, k, l, FoliagePlacerType.BLOB_FOLIAGE_PLACER);
-        this.field_23752 = m;
+    public HazelFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset, int height) {
+        super(radius, randomRadius, offset, randomOffset, FoliagePlacerType.BLOB_FOLIAGE_PLACER);
+        this.height = height;
     }
-
-    public void generate(ModifiableTestableWorld world, Random random, BranchedTreeFeatureConfig config, int i, BlockPos pos, int j, int k, Set<BlockPos> positions) {
+    
+    public void generate(ModifiableTestableWorld world, Random random, BranchedTreeFeatureConfig config, int trunkHeight, BlockPos pos, int foliageHeight, int radius, Set<BlockPos> positions) {
         int h = 0;
         int m = 1;
         int t = 3;
-        for(int l = i; l >= j; --l) {
+        for(int l = foliageHeight + getHeight(random, 0); l >= getHeight(random, 0); --l) {
             h++;
             if (h == t) {
                 h = 0;
                 m++;
                 t--;
             }
-            this.generate(world, random, config, pos, j, l, m, positions);
+            // this l - 3 is horrible but it works
+            this.generate(world, random, config, pos, radius, l - 3, m, positions);
         }
     }
 
@@ -36,8 +37,8 @@ public class HazelFoliagePlacer extends FoliagePlacer {
         return this.radius + random.nextInt(this.randomRadius + 1);
     }
 
-    public int method_26989(Random random, int i) {
-        return this.field_23752;
+    public int getHeight(Random random, int i) {
+        return this.height;
     }
 
     protected boolean isInvalidForLeaves(Random random, int i, int j, int k, int l, int m) {

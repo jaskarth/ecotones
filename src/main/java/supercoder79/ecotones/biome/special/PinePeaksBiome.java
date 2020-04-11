@@ -2,7 +2,6 @@ package supercoder79.ecotones.biome.special;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
-import net.minecraft.class_5140;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -15,6 +14,7 @@ import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.biome.HumidityLayer2Biomes;
 import supercoder79.ecotones.features.EcotonesFeatures;
@@ -27,7 +27,7 @@ public class PinePeaksBiome extends Biome {
             new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
             new SmallPineFoliagePlacer(1, 0, 1, 0, 4, 2),
-            new class_5140(9, 6, 0))
+            new StraightTrunkPlacer(9, 6, 0))
             .noVines()
             .treeDecorators(ImmutableList.of(new PineconeTreeDecorator(2)))
             .build();

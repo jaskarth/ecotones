@@ -68,7 +68,8 @@ public class HumidityLayer1Biomes {
                 .addDefaultFeature(PLAINS_TALL_GRASS)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(40))))
+                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG)
+                                .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(40))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
