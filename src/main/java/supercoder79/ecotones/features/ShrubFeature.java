@@ -3,7 +3,6 @@ package supercoder79.ecotones.features;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.StructureAccessor;
@@ -16,8 +15,6 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class ShrubFeature extends Feature<ShrubConfig> {
-    private final BlockState woodState = Blocks.ACACIA_LOG.getDefaultState();
-    private final BlockState leafState = Blocks.OAK_LEAVES.getDefaultState().with(Properties.DISTANCE_1_7, 1);
 
     public ShrubFeature(Function<Dynamic<?>, ? extends ShrubConfig> configDeserializer) {
         super(configDeserializer);

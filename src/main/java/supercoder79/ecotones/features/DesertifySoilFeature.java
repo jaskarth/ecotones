@@ -20,12 +20,15 @@ public class DesertifySoilFeature extends Feature<DefaultFeatureConfig> {
 
     @Override
     public boolean generate(IWorld world, StructureAccessor accessor, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, DefaultFeatureConfig config) {
-        if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
+        if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return false;
 
         world.setBlockState(pos.down(), Blocks.COARSE_DIRT.getDefaultState(), 3);
 
-        if (random.nextInt(3) == 0)
+        //66% chance of dead bush
+        if (random.nextInt(3) > 0) {
             world.setBlockState(pos, Blocks.DEAD_BUSH.getDefaultState(), 3);
+        }
+
         return true;
     }
 }
