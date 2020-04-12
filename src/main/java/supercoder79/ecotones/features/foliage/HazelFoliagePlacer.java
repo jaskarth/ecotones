@@ -16,7 +16,7 @@ public class HazelFoliagePlacer extends FoliagePlacer {
         super(radius, randomRadius, offset, randomOffset, FoliagePlacerType.BLOB_FOLIAGE_PLACER);
         this.height = height;
     }
-    
+
     public void generate(ModifiableTestableWorld world, Random random, BranchedTreeFeatureConfig config, int trunkHeight, BlockPos pos, int foliageHeight, int radius, Set<BlockPos> positions) {
         int h = 0;
         int m = 1;
