@@ -8,6 +8,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
 import supercoder79.ecotones.biome.HumidityLayer1Biomes;
 import supercoder79.ecotones.biome.HumidityLayer2Biomes;
@@ -54,10 +55,20 @@ public class Ecotones implements ModInitializer {
 		PinePeaksBiome.init();
 		UluruBiome.init();
 		FlowerPrairieBiome.init();
+		WoodlandThicketBiome.init();
+
+		//this is stupid but whatever
+		int ecotonesBiomes = 0;
+		for (Identifier id : Registry.BIOME.getIds()) {
+			if (id.getNamespace().contains("ecotones")) {
+				ecotonesBiomes++;
+			}
+		}
+		System.out.println("[ecotones] Registering " + ecotonesBiomes + " ecotones biomes!");
 
 		loadMeOnClientPls = WorldType.ECOTONES;
 
-		WORLDGEN_TYPE = Registry.register(Registry.CHUNK_GENERATOR_TYPE, new Identifier("simplexterrain", "simplex"), new WorldGeneratorType(false, OverworldChunkGeneratorConfig::new));
+		WORLDGEN_TYPE = Registry.register(Registry.CHUNK_GENERATOR_TYPE, new Identifier("ecotones", "ecotones"), new WorldGeneratorType(false, OverworldChunkGeneratorConfig::new));
 
 		ServerTickCallback.EVENT.register(server -> {
 			if (server.getTicks() % 300 == 0) {

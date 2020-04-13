@@ -6,6 +6,7 @@ import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.biome.special.GreenSpiresBiome;
 import supercoder79.ecotones.biome.special.HazelGroveBiome;
 import supercoder79.ecotones.biome.special.PinePeaksBiome;
+import supercoder79.ecotones.biome.special.WoodlandThicketBiome;
 
 public enum BigSpecialBiomesLayer implements IdentitySamplingLayer {
     INSTANCE;
@@ -15,6 +16,7 @@ public enum BigSpecialBiomesLayer implements IdentitySamplingLayer {
         if (context.nextInt(400) == 0) return Registry.BIOME.getRawId(GreenSpiresBiome.INSTANCE);
         if (context.nextInt(300) == 0) return Registry.BIOME.getRawId(HazelGroveBiome.INSTANCE);
         if (context.nextInt(60) == 0) return Registry.BIOME.getRawId(PinePeaksBiome.INSTANCE);
+        if (context.nextInt(50) == 0) return Registry.BIOME.getRawId(WoodlandThicketBiome.INSTANCE);
 
         return sample;
     }

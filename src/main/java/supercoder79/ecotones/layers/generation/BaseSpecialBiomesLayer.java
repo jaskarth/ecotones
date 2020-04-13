@@ -15,23 +15,10 @@ public enum BaseSpecialBiomesLayer implements IdentitySamplingLayer {
         if (context.nextInt(79) == 0) return Registry.BIOME.getRawId(OasisBiome.INSTANCE);
 
         // less rarer, so at the end
-        if (context.nextInt(8) == 0) return Registry.BIOME.getRawId(FlowerPrairieBiome.INSTANCE);
-        if (context.nextInt(8) == 0) return Registry.BIOME.getRawId(FlowerPrairieBiome.HILLY);
-        if (context.nextInt(8) == 0) return Registry.BIOME.getRawId(FlowerPrairieBiome.MOUNTAINOUS);
+        if (context.nextInt(10) == 0) return Registry.BIOME.getRawId(FlowerPrairieBiome.INSTANCE);
+        if (context.nextInt(10) == 0) return Registry.BIOME.getRawId(FlowerPrairieBiome.HILLY);
+        if (context.nextInt(10) == 0) return Registry.BIOME.getRawId(FlowerPrairieBiome.MOUNTAINOUS);
 
-        //TODO: move this to its own layer
-        if (context.nextInt(4) == 0) {
-            if (sample == Registry.BIOME.getRawId(HazelGroveBiome.INSTANCE)) {
-                switch (context.nextInt(3)) {
-                    case 0:
-                        return Registry.BIOME.getRawId(HazelGroveBiome.CLEARING);
-                    case 1:
-                        return Registry.BIOME.getRawId(HazelGroveBiome.HILLY);
-                    case 2:
-                        return Registry.BIOME.getRawId(HazelGroveBiome.CLEARING_HILLY);
-                }
-            }
-        }
         return sample;
     }
 }

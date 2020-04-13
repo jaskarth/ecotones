@@ -48,6 +48,7 @@ public class EcotonesBiomeLayers {
         specialBiomesLayer = stack(3043L, ScaleLayer.NORMAL, specialBiomesLayer, 2, contextProvider);
 
         specialBiomesLayer = BaseSpecialBiomesLayer.INSTANCE.create(contextProvider.apply(32L), specialBiomesLayer);
+        specialBiomesLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), specialBiomesLayer);
         specialBiomesLayer = VolcanismLayer.INSTANCE.create(contextProvider.apply(24L), specialBiomesLayer, seed - 30);
 
         specialBiomesLayer = stack(3043L, ScaleLayer.NORMAL, specialBiomesLayer, 5, contextProvider);
