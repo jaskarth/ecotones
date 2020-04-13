@@ -23,21 +23,27 @@ import supercoder79.ecotones.features.config.ShrubConfig;
 
 public class FlowerPrairieBiome extends Biome {
     public static FlowerPrairieBiome INSTANCE;
+    public static FlowerPrairieBiome HILLY;
+    public static FlowerPrairieBiome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "flower_prairie"), new FlowerPrairieBiome());
-        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id -> {
-            return Registry.BIOME.get(id).getName().asString().contains("prairie");
-        });
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "flower_prairie"), new FlowerPrairieBiome(0.5F, 0.025F));
+        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie"));
+
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "flower_prairie_hilly"), new FlowerPrairieBiome(1.25F, 0.225F));
+        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(HILLY), id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie_hilly"));
+
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "flower_prairie_mountainous"), new FlowerPrairieBiome(2F, 0.625F));
+        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(MOUNTAINOUS), id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie_mountainous"));
     }
 
-    public FlowerPrairieBiome() {
+    public FlowerPrairieBiome(float depth, float scale) {
         super((new Biome.Settings())
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Biome.Precipitation.RAIN)
                 .category(Biome.Category.PLAINS)
-                .depth(0.5F)
-                .scale(0.025f)
+                .depth(depth)
+                .scale(scale)
                 .temperature(1F)
                 .downfall(0.4F)
                 .effects(new BiomeEffects.Builder()
