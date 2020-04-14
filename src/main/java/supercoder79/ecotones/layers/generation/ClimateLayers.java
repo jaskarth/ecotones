@@ -27,8 +27,8 @@ public enum ClimateLayers implements InitLayer, SeedInitLayer {
 
     @Override
     public int sample(LayerRandomnessSource context, int x, int z) {
-        double humidity = (humidityNoise.sample((x + offsetX) / 7.5f, (z + offsetZ) / 7.5f)*1.25);
-        double temperature = temperatureNoise.sample((x + offsetX2) / 20f, (z + offsetZ2) / 20f);
+        double humidity = (humidityNoise.sample((x + offsetX) / 5f, (z + offsetZ) / 5f)*1.25);
+        double temperature = temperatureNoise.sample((x + offsetX2) / 15f, (z + offsetZ2) / 15f);
         if (temperature > 0) {
             for (Map.Entry<Double, Integer> biome : HumidityLayer1Biomes.Humidity2BiomeMap.entrySet()) {
                 if (humidity > biome.getKey()) return biome.getValue();
@@ -38,16 +38,17 @@ public enum ClimateLayers implements InitLayer, SeedInitLayer {
                 if (humidity > biome.getKey()) return biome.getValue();
             }
         }
+
         return Registry.BIOME.getRawId(HumidityLayer1Biomes.DESERT_BIOME);
     }
 
     @Override
     public <R extends LayerSampler> LayerFactory<R> create(LayerSampleContext<R> context, long seed) {
         Random random = new Random(seed);
-        offsetX = (random.nextDouble()-0.5)*1000;
-        offsetZ = (random.nextDouble()-0.5)*1000;
-        offsetX2 = (random.nextDouble()-0.5)*1000;
-        offsetZ2 = (random.nextDouble()-0.5)*1000;
+        offsetX = (random.nextDouble()-0.5)*10000;
+        offsetZ = (random.nextDouble()-0.5)*10000;
+        offsetX2 = (random.nextDouble()-0.5)*10000;
+        offsetZ2 = (random.nextDouble()-0.5)*10000;
         humidityNoise = new OpenSimplexNoise(seed);
         temperatureNoise = new OpenSimplexNoise(seed - 79);
         return this.create(context);

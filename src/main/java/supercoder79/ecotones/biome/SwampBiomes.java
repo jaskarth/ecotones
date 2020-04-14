@@ -1,6 +1,5 @@
 package supercoder79.ecotones.biome;
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -28,7 +27,7 @@ public class SwampBiomes {
     public static Biome MARSH_BIOME;
     public static Biome WETLAND_BIOME;
 
-    private static TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+    private static EcotonesBiome.Template template = new EcotonesBiome.Template(EcotonesBiome.builder()
             .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
             .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
             .depth(-0.125F)

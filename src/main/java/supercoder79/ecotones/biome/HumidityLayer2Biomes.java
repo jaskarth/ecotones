@@ -1,6 +1,5 @@
 package supercoder79.ecotones.biome;
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -37,7 +36,7 @@ public class HumidityLayer2Biomes {
     public static Biome TEMPERATE_FOREST_BIOME;
     public static Biome TEMPERATE_RAINFOREST_BIOME;
 
-    private static TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+    private static EcotonesBiome.Template template = new EcotonesBiome.Template(EcotonesBiome.builder()
             .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.SAND_CONFIG)
             .precipitation(Biome.Precipitation.NONE).category(Biome.Category.FOREST)
             .depth(0.5F)
@@ -58,12 +57,14 @@ public class HumidityLayer2Biomes {
 
     public static void init() {
         COOL_DESERT_BIOME = BiomeUtil.register(new Identifier("ecotones", "cool_desert"), template.builder()
+                .hilliness(1.6)
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
         COOL_SCRUBLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "cool_scrubland"), template.builder()
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .temperature(1.2F)
                 .downfall(0.2F)
+                .hilliness(1.6)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -79,6 +80,8 @@ public class HumidityLayer2Biomes {
         COOL_STEPPE_BIOME = BiomeUtil.register( new Identifier("ecotones", "cool_steppe"), template.builder()
                 .temperature(1.2F)
                 .downfall(0.35F)
+                .hilliness(2.8)
+                .volatility(0.88)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -98,6 +101,7 @@ public class HumidityLayer2Biomes {
                 .temperature(1F)
                 .downfall(0.4F)
                 .scale(0.025f)
+                .hilliness(2.2)
                 .foliageColor(0xabcf59)
                 .grassColor(0xabcf59)
 
@@ -118,6 +122,7 @@ public class HumidityLayer2Biomes {
                 .temperature(0.8F)
                 .downfall(0.5F)
                 .scale(0.15f)
+                .hilliness(1.4)
                 .addDefaultFeatures(PLAINS_TALL_GRASS)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 
@@ -142,6 +147,7 @@ public class HumidityLayer2Biomes {
                 .temperature(0.8F)
                 .downfall(0.6F)
                 .scale(0.3f)
+                .hilliness(1.6)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 
@@ -163,6 +169,8 @@ public class HumidityLayer2Biomes {
                 .temperature(0.8F)
                 .downfall(0.8F)
                 .scale(0.4f)
+                .hilliness(2.2)
+                .volatility(0.96)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
@@ -183,6 +191,8 @@ public class HumidityLayer2Biomes {
                 .temperature(0.8F)
                 .downfall(1F)
                 .scale(0.4f)
+                .hilliness(3.2)
+                .volatility(0.92)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)

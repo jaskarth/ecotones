@@ -3,7 +3,10 @@ package supercoder79.ecotones.layers.generation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
-import supercoder79.ecotones.biome.special.*;
+import supercoder79.ecotones.biome.special.FlowerPrairieBiome;
+import supercoder79.ecotones.biome.special.OasisBiome;
+import supercoder79.ecotones.biome.special.ThePitsBiome;
+import supercoder79.ecotones.biome.special.UluruBiome;
 
 public enum BaseSpecialBiomesLayer implements IdentitySamplingLayer {
     INSTANCE;

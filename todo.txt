@@ -1,15 +1,12 @@
 # Biomes
 * Plateau biomes?
-* Rare prairie variants
 * Heathland
 * Moor
 * Bayou
 * Steppe -> something unique
-* More surface rocks on special biomes
-* Mixed sand/grass savannah
-* Flower prairie hilly and mountainous variants (need a recode of the shitty mountain system)
 * Forest with balloon-y trees (see misc entry)
 * Lowlands with jungle bush-like shrubs
+* Wasteland biome
 
 # Blocks
 * More flower types
@@ -22,3 +19,5 @@
 * Stop procrastinating on cold biomes
 * Steal zoerestria Bluff
 * Balloon-y tree with edges hanging off (this is very hard to describe in text)
+* Pinecones drop sap
+* Remake special biomes to be "can spawn at" instead of "can replace at"

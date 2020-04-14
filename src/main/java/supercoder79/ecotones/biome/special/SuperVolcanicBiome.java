@@ -19,10 +19,11 @@ import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
 
-public class SuperVolcanicBiome extends Biome {
+public class SuperVolcanicBiome extends EcotonesBiome {
     public static SuperVolcanicBiome INSTANCE;
 
     public static void init() {
@@ -48,7 +49,9 @@ public class SuperVolcanicBiome extends Biome {
                                 random -> random.nextGaussian() * 9.999999747378752E-5D,
                                 random -> random.nextGaussian() * 9.999999974752427E-7D))
                         .build()).parent(null)
-                .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))));
+                .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
+                2,
+                1);
         this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
         this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));
         DefaultBiomeFeatures.addLandCarvers(this);

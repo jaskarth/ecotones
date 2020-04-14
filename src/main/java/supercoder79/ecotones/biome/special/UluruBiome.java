@@ -17,11 +17,12 @@ import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.ShrubConfig;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
 
-public class UluruBiome extends Biome {
+public class UluruBiome extends EcotonesBiome {
     public static UluruBiome INSTANCE;
 
     public static void init() {
@@ -45,7 +46,9 @@ public class UluruBiome extends Biome {
                         .waterFogColor(329011)
                         .fogColor(12638463)
                         .build()).parent(null)
-                .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))));
+                .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
+                0.25,
+                1);
 
         this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
         this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));

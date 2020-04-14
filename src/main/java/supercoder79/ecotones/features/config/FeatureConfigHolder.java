@@ -1,7 +1,6 @@
 package supercoder79.ecotones.features.config;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;

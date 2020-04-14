@@ -16,12 +16,13 @@ import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.ShrubConfig;
 import supercoder79.ecotones.features.foliage.HazelFoliagePlacer;
 
-public class HazelGroveBiome extends Biome {
+public class HazelGroveBiome extends EcotonesBiome {
     public static HazelGroveBiome INSTANCE;
     public static HazelGroveBiome CLEARING;
     public static HazelGroveBiome HILLY;
@@ -58,7 +59,9 @@ public class HazelGroveBiome extends Biome {
                         .waterFogColor(329011)
                         .fogColor(12638463)
                         .build()).parent(null)
-                .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))));
+                .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
+                hilly ? 2.f : 1,
+                hilly ? 0.65 : 1);
 
         this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
         this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));

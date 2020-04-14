@@ -17,11 +17,12 @@ import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.features.config.ShrubConfig;
 
-public class FlowerPrairieBiome extends Biome {
+public class FlowerPrairieBiome extends EcotonesBiome {
     public static FlowerPrairieBiome INSTANCE;
     public static FlowerPrairieBiome HILLY;
     public static FlowerPrairieBiome MOUNTAINOUS;
@@ -51,7 +52,9 @@ public class FlowerPrairieBiome extends Biome {
                         .waterFogColor(329011)
                         .fogColor(12638463)
                         .build()).parent(null)
-                .noises(ImmutableList.of(new Biome.MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))));
+                .noises(ImmutableList.of(new Biome.MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
+                1,
+                0.9);
         this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
         this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));
         DefaultBiomeFeatures.addLandCarvers(this);

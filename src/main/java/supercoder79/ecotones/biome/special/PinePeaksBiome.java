@@ -16,13 +16,14 @@ import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.biome.HumidityLayer2Biomes;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.ShrubConfig;
 import supercoder79.ecotones.features.foliage.SmallPineFoliagePlacer;
 import supercoder79.ecotones.treedecorator.PineconeTreeDecorator;
 
-public class PinePeaksBiome extends Biome {
+public class PinePeaksBiome extends EcotonesBiome {
     public static BranchedTreeFeatureConfig SMALL_PINE_CONFIG = new BranchedTreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
@@ -37,7 +38,7 @@ public class PinePeaksBiome extends Biome {
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "pine_peaks"), new PinePeaksBiome());
         BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id ->
-                id == Registry.BIOME.getRawId(HumidityLayer2Biomes.LICHEN_WOODLAND_BIOME) || id ==Registry.BIOME.getRawId(HumidityLayer2Biomes.SPRUCE_FOREST_BIOME));
+                id == Registry.BIOME.getRawId(HumidityLayer2Biomes.LICHEN_WOODLAND_BIOME) || id == Registry.BIOME.getRawId(HumidityLayer2Biomes.SPRUCE_FOREST_BIOME));
     }
 
 
@@ -55,7 +56,9 @@ public class PinePeaksBiome extends Biome {
                         .waterFogColor(329011)
                         .fogColor(12638463)
                         .build()).parent(null)
-                .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))));
+                .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
+                3,
+                0.65);
 
         this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
         this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));
