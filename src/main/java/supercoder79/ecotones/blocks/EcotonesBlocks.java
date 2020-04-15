@@ -38,6 +38,8 @@ public class EcotonesBlocks {
     public static Item cloverItem;
     public static Block pineconeBlock;
     public static Item pineconeItem;
+    public static Block driedDirtBlock;
+    public static Item driedDirtItem;
 
     //TODO: fix this disaster
     public static void init() {
@@ -77,5 +79,8 @@ public class EcotonesBlocks {
 
         pineconeBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "pinecone"), new PineconeBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         pineconeItem = Registry.register(Registry.ITEM, new Identifier("ecotones", "pinecone"), new BlockItem(pineconeBlock, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        driedDirtBlock = Registry.register(Registry.BLOCK, new Identifier("ecotones", "dried_dirt"), new Block(FabricBlockSettings.copy(Blocks.DIRT).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build()));
+        driedDirtItem = Registry.register(Registry.ITEM, new Identifier("ecotones", "dried_dirt"), new BlockItem(driedDirtBlock, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
     }
 }

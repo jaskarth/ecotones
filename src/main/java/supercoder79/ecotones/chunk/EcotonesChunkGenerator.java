@@ -1,12 +1,16 @@
 package supercoder79.ecotones.chunk;
 
 import net.minecraft.util.Util;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
+import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.SurfaceChunkGenerator;
 import supercoder79.ecotones.biome.EcotonesBiome;
@@ -169,6 +173,16 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<OverworldChunk
     @Override
     protected void sampleNoiseColumn(double[] buffer, int x, int z) {
         this.sampleNoiseColumn(buffer, x, z, 684.4119873046875D, 684.4119873046875D, 8.555149841308594D, 4.277574920654297D, 3, -10);
+    }
+
+    @Override
+    public void populateEntities(ChunkRegion region) {
+        int i = region.getCenterChunkX();
+        int j = region.getCenterChunkZ();
+        Biome biome = region.getBiome((new ChunkPos(i, j)).getCenterBlockPos());
+        ChunkRandom chunkRandom = new ChunkRandom();
+        chunkRandom.setPopulationSeed(region.getSeed(), i << 4, j << 4);
+        SpawnHelper.populateEntities(region, biome, i, j, chunkRandom);
     }
 
     @Override

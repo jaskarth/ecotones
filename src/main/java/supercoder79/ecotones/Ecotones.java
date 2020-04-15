@@ -55,6 +55,7 @@ public class Ecotones implements ModInitializer {
 		UluruBiome.init();
 		FlowerPrairieBiome.init();
 		WoodlandThicketBiome.init();
+		WastelandBiome.init();
 
 		//this is stupid but whatever
 		int ecotonesBiomes = 0;

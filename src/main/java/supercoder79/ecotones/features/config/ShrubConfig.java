@@ -14,7 +14,12 @@ public class ShrubConfig implements FeatureConfig {
 
     public ShrubConfig(BlockState woodState, BlockState leafState) {
         this.woodState = woodState;
-        this.leafState = leafState.with(Properties.DISTANCE_1_7, 1);
+
+        if (leafState.getProperties().contains(Properties.DISTANCE_1_7)) {
+            this.leafState = leafState.with(Properties.DISTANCE_1_7, 1);
+        } else {
+            this.leafState = leafState;
+        }
     }
 
     @Override

@@ -21,3 +21,4 @@
 * Balloon-y tree with edges hanging off (this is very hard to describe in text)
 * Pinecones drop sap
 * Remake special biomes to be "can spawn at" instead of "can replace at"
+* Add all biomes to lang file

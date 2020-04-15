@@ -11,6 +11,7 @@
   "block.ecotones.surface_rock": "Surface Rock",
   "block.ecotones.clover": "Clover",
   "block.ecotones.pinecone": "Pine Cone",
+  "block.ecotones.dried_dirt": "Dried Dirt",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -24,6 +25,7 @@
   "item.ecotones.surface_rock": "Surface Rock",
   "item.ecotones.clover": "Clover",
   "item.ecotones.pinecone": "Pine Cone",
+  "item.ecotones.dried_dirt": "Dried Dirt",
 
   "item.ecotones.peat_item": "Peat"
 }
