@@ -8,11 +8,11 @@ import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
 import net.minecraft.world.gen.feature.FeatureConfig;
 
-public class ShrubConfig implements FeatureConfig {
+public class SimpleTreeFeatureConfig implements FeatureConfig {
     public final BlockState woodState;
     public final BlockState leafState;
 
-    public ShrubConfig(BlockState woodState, BlockState leafState) {
+    public SimpleTreeFeatureConfig(BlockState woodState, BlockState leafState) {
         this.woodState = woodState;
 
         if (leafState.getProperties().contains(Properties.DISTANCE_1_7)) {
@@ -30,7 +30,7 @@ public class ShrubConfig implements FeatureConfig {
         return new Dynamic(ops, ops.createMap(builder.build()));
     }
 
-    public static <T> ShrubConfig deserialize(Dynamic<T> dynamic) {
-        return new ShrubConfig(dynamic.get("wood_state").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState()), dynamic.get("leaf_state").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState()));
+    public static <T> SimpleTreeFeatureConfig deserialize(Dynamic<T> dynamic) {
+        return new SimpleTreeFeatureConfig(dynamic.get("wood_state").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState()), dynamic.get("leaf_state").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState()));
     }
 }

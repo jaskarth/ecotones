@@ -28,8 +28,8 @@ public class PlaceCactiFeature extends Feature<DefaultFeatureConfig> {
         if (random.nextInt(4) > 0) {
             world.setBlockState(pos, Blocks.CACTUS.getDefaultState(), 3);
 
-            //75% chance of middle
-            if (random.nextInt(4) > 0) {
+            //66% chance of middle
+            if (random.nextInt(3) > 0) {
                 world.setBlockState(pos.up(), Blocks.CACTUS.getDefaultState(), 3);
 
                 //50% chance of top

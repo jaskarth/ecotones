@@ -20,7 +20,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
-import supercoder79.ecotones.features.config.ShrubConfig;
+import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
 
 public class FlowerPrairieBiome extends EcotonesBiome {
     public static FlowerPrairieBiome INSTANCE;
@@ -80,7 +80,7 @@ public class FlowerPrairieBiome extends EcotonesBiome {
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
                         .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))));
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.SHRUB.configure(new ShrubConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
+                EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
                         .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(1, 0.5f, 1))));
 
         DefaultBiomeFeatures.addForestFlowers(this);

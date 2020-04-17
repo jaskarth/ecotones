@@ -27,8 +27,8 @@ public enum ClimateLayers implements InitLayer, SeedInitLayer {
 
     @Override
     public int sample(LayerRandomnessSource context, int x, int z) {
-        double humidity = (humidityNoise.sample((x + offsetX) / 5f, (z + offsetZ) / 5f)*1.25);
-        double temperature = temperatureNoise.sample((x + offsetX2) / 15f, (z + offsetZ2) / 15f);
+        double humidity = humidityNoise.sample((x + offsetX) / 2f, (z + offsetZ) / 2f);
+        double temperature = temperatureNoise.sample((x + offsetX2) / 10f, (z + offsetZ2) / 10f);
         if (temperature > 0) {
             for (Map.Entry<Double, Integer> biome : HumidityLayer1Biomes.Humidity2BiomeMap.entrySet()) {
                 if (humidity > biome.getKey()) return biome.getValue();

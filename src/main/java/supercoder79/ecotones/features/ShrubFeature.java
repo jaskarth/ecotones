@@ -9,19 +9,19 @@ import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.Feature;
-import supercoder79.ecotones.features.config.ShrubConfig;
+import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.function.Function;
 
-public class ShrubFeature extends Feature<ShrubConfig> {
+public class ShrubFeature extends Feature<SimpleTreeFeatureConfig> {
 
-    public ShrubFeature(Function<Dynamic<?>, ? extends ShrubConfig> configDeserializer) {
+    public ShrubFeature(Function<Dynamic<?>, ? extends SimpleTreeFeatureConfig> configDeserializer) {
         super(configDeserializer);
     }
 
     @Override
-    public boolean generate(IWorld world, StructureAccessor accessor, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, ShrubConfig config) {
+    public boolean generate(IWorld world, StructureAccessor accessor, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
         int height = random.nextInt(2) + 1;
         for (int i = 0; i < height; i++) {

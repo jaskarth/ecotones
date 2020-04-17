@@ -32,7 +32,7 @@ public class EcotonesBiomeLayers {
         layerFactory = AddIslandLayer.INSTANCE.create(contextProvider.apply(2L), layerFactory);
 
         //scale up the land to be bigger
-        layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 8, contextProvider);
+        layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 7, contextProvider);
 
         //Add our biomes
         LayerFactory<T> biomeLayer = ClimateLayers.INSTANCE.create(contextProvider.apply(2L), seed + 79);
