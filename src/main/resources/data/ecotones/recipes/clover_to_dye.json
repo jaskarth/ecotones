@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ecotones:wildflowers"
+    }
+  ],
+  "result": {
+    "item": "minecraft:white_dye"
+  }
+}

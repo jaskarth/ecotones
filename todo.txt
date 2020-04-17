@@ -6,7 +6,7 @@
 * Steppe -> something unique
 * Forest with balloon-y trees (see misc entry)
 * Lowlands with jungle bush-like shrubs
-* Wasteland biome
+* Clover field biome
 
 # Blocks
 * More flower types
@@ -14,6 +14,8 @@
 * Implement curly grass
 * Biome color based clover & wildflowers
 * Berry Bushes
+* Sap block
+* Sap mob trap
 
 # Misc
 * Stop procrastinating on cold biomes
@@ -22,3 +24,4 @@
 * Pinecones drop sap
 * Remake special biomes to be "can spawn at" instead of "can replace at"
 * Add all biomes to lang file
+* Large rock formations
