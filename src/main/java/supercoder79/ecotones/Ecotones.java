@@ -15,8 +15,8 @@ import supercoder79.ecotones.biome.SwampBiomes;
 import supercoder79.ecotones.biome.special.*;
 import supercoder79.ecotones.biome.technical.BeachBiome;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
-import supercoder79.ecotones.chunk.WorldGeneratorType;
-import supercoder79.ecotones.chunk.WorldType;
+import supercoder79.ecotones.generation.WorldGeneratorType;
+import supercoder79.ecotones.generation.WorldType;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.sound.Sounds;
@@ -56,6 +56,7 @@ public class Ecotones implements ModInitializer {
 		FlowerPrairieBiome.init();
 		WoodlandThicketBiome.init();
 		WastelandBiome.init();
+		CloverFieldsBiome.init();
 
 		//this is stupid but whatever
 		int ecotonesBiomes = 0;

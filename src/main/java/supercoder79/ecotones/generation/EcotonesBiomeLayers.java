@@ -1,4 +1,4 @@
-package supercoder79.ecotones.chunk;
+package supercoder79.ecotones.generation;
 
 import net.minecraft.world.biome.layer.*;
 import net.minecraft.world.biome.layer.type.ParentedLayer;

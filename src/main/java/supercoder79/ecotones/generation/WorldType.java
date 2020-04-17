@@ -1,4 +1,4 @@
-package supercoder79.ecotones.chunk;
+package supercoder79.ecotones.generation;
 
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.Dynamic;

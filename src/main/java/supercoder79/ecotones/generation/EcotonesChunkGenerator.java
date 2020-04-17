@@ -1,22 +1,39 @@
-package supercoder79.ecotones.chunk;
+package supercoder79.ecotones.generation;
 
+import net.minecraft.structure.StructureManager;
+import net.minecraft.structure.StructureStart;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.crash.CrashException;
+import net.minecraft.util.crash.CrashReport;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.StructureAccessor;
+import net.minecraft.world.gen.carver.ConfiguredCarver;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.SurfaceChunkGenerator;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.StructureFeature;
 import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.noise.OctaveNoiseSampler;
 import supercoder79.ecotones.noise.OpenSimplexNoise;
+import supercoder79.ecotones.util.ImprovedChunkRandom;
 
+import java.util.BitSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.IntStream;
 
 public class EcotonesChunkGenerator extends SurfaceChunkGenerator<OverworldChunkGeneratorConfig> {
@@ -209,5 +226,59 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<OverworldChunk
         }
 
         return noise;
+    }
+
+    // Vanilla random improvements
+    @Override
+    public void generateFeatures(ChunkRegion world, StructureAccessor structureAccessor) {
+        int centerX = world.getCenterChunkX();
+        int centerZ = world.getCenterChunkZ();
+        int topX = centerX * 16;
+        int topZ = centerZ * 16;
+        BlockPos pos = new BlockPos(topX, 0, topZ);
+        Biome biome = this.getDecorationBiome(world.getBiomeAccess(), pos.add(8, 8, 8));
+        ImprovedChunkRandom random = new ImprovedChunkRandom();
+        long populationSeed = random.setPopulationSeed(world.getSeed(), topX, topZ, biome.getScale() + scaleNoise.sample(topX + 8, topZ + 8));
+
+        for (GenerationStep.Feature step : GenerationStep.Feature.values()) {
+            try {
+                biome.generateFeatureStep(step, structureAccessor, this, world, populationSeed, random, pos);
+            } catch (Exception var18) {
+                CrashReport crashReport = CrashReport.create(var18, "Biome decoration");
+                crashReport.addElement("Generation")
+                        .add("CenterX", centerX)
+                        .add("CenterZ", centerZ)
+                        .add("Step", step)
+                        .add("Seed", populationSeed)
+                        .add("Biome", Registry.BIOME.getId(biome));
+                throw new CrashException(crashReport);
+            }
+        }
+    }
+
+    @Override
+    public void carve(BiomeAccess biomeAccess, Chunk chunk, GenerationStep.Carver carver) {
+        ImprovedChunkRandom chunkRandom = new ImprovedChunkRandom();
+        ChunkPos chunkPos = chunk.getPos();
+        int j = chunkPos.x;
+        int k = chunkPos.z;
+        Biome biome = this.getDecorationBiome(biomeAccess, chunkPos.getCenterBlockPos());
+        BitSet bitSet = chunk.getCarvingMask(carver);
+
+        for(int l = j - 8; l <= j + 8; ++l) {
+            for(int m = k - 8; m <= k + 8; ++m) {
+                List<ConfiguredCarver<?>> list = biome.getCarversForStep(carver);
+                ListIterator listIterator = list.listIterator();
+
+                while(listIterator.hasNext()) {
+                    int n = listIterator.nextIndex();
+                    ConfiguredCarver<?> configuredCarver = (ConfiguredCarver)listIterator.next();
+                    chunkRandom.setCarverSeed(this.seed + (long)n, l, m);
+                    if (configuredCarver.shouldCarve(chunkRandom, l, m)) {
+                        configuredCarver.carve(chunk, (blockPos) -> this.getDecorationBiome(biomeAccess, blockPos), chunkRandom, this.getSeaLevel(), l, m, j, k, bitSet);
+                    }
+                }
+            }
+        }
     }
 }

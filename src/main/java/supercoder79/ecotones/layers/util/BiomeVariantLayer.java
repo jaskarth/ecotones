@@ -3,6 +3,7 @@ package supercoder79.ecotones.layers.util;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.biome.special.CloverFieldsBiome;
 import supercoder79.ecotones.biome.special.HazelGroveBiome;
 import supercoder79.ecotones.biome.special.WastelandBiome;
 import supercoder79.ecotones.biome.special.WoodlandThicketBiome;
@@ -49,6 +50,19 @@ public enum BiomeVariantLayer implements IdentitySamplingLayer {
                         return Registry.BIOME.getRawId(WastelandBiome.SHRUB);
                     case 4:
                         return Registry.BIOME.getRawId(WastelandBiome.DEPTHS);
+                }
+            }
+
+            if (sample == Registry.BIOME.getRawId(CloverFieldsBiome.INSTANCE)) {
+                switch (context.nextInt(4)) {
+                    case 0:
+                        return Registry.BIOME.getRawId(CloverFieldsBiome.THICKET);
+                    case 1:
+                        return Registry.BIOME.getRawId(CloverFieldsBiome.HILLS);
+                    case 2:
+                        return Registry.BIOME.getRawId(CloverFieldsBiome.FLATS);
+                    case 3:
+                        return Registry.BIOME.getRawId(CloverFieldsBiome.SHRUB);
                 }
             }
         }

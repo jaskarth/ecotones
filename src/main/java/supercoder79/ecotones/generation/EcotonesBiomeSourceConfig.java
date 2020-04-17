@@ -1,4 +1,4 @@
-package supercoder79.ecotones.chunk;
+package supercoder79.ecotones.generation;
 
 public class EcotonesBiomeSourceConfig {
     private final long seed;

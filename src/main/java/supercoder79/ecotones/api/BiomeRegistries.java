@@ -1,5 +1,9 @@
 package supercoder79.ecotones.api;
 
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
+import supercoder79.ecotones.biome.EcotonesBiome;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +19,16 @@ public class BiomeRegistries {
     }
 
     //yes i know this is stupid shuddup
+    //TODO: remove this and replace with other
     public static void registerAllSpecial(IntFunction<Boolean> rule, int... ids) {
         for (int id : ids) {
             specialBiomes.put(id, rule);
+        }
+    }
+
+    public static void registerAllSpecial(IntFunction<Boolean> rule, EcotonesBiome... biomes) {
+        for (EcotonesBiome biome : biomes) {
+            specialBiomes.put(Registry.BIOME.getRawId(biome), rule);
         }
     }
 

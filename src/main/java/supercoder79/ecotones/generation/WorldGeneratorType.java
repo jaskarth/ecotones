@@ -1,4 +1,4 @@
-package supercoder79.ecotones.chunk;
+package supercoder79.ecotones.generation;
 
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.source.BiomeSource;

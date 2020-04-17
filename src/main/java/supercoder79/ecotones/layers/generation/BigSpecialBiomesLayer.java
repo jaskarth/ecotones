@@ -14,6 +14,7 @@ public enum BigSpecialBiomesLayer implements IdentitySamplingLayer {
         if (context.nextInt(300) == 0) return Registry.BIOME.getRawId(HazelGroveBiome.INSTANCE);
         if (context.nextInt(150) == 0) return Registry.BIOME.getRawId(WastelandBiome.INSTANCE);
         if (context.nextInt(60) == 0) return Registry.BIOME.getRawId(PinePeaksBiome.INSTANCE);
+        if (context.nextInt(45) == 0) return Registry.BIOME.getRawId(CloverFieldsBiome.INSTANCE);
         if (context.nextInt(30) == 0) return Registry.BIOME.getRawId(WoodlandThicketBiome.INSTANCE);
 
         return sample;
