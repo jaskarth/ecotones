@@ -9,6 +9,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
+import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.biome.HumidityLayer1Biomes;
 import supercoder79.ecotones.biome.HumidityLayer2Biomes;
 import supercoder79.ecotones.biome.SwampBiomes;
@@ -47,6 +48,7 @@ public class Ecotones implements ModInitializer {
 		SuperVolcanicBiome.init();
 		HotSpringsBiome.init();
 		BlessedSpringsBiome.init();
+
 		OasisBiome.init();
 		ThePitsBiome.init();
 		GreenSpiresBiome.init();
@@ -57,6 +59,8 @@ public class Ecotones implements ModInitializer {
 		WoodlandThicketBiome.init();
 		WastelandBiome.init();
 		CloverFieldsBiome.init();
+
+		BiomeRegistries.compile();
 
 		//this is stupid but whatever
 		int ecotonesBiomes = 0;

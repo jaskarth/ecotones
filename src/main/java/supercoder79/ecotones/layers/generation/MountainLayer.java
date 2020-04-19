@@ -40,7 +40,7 @@ public enum MountainLayer implements ParentedLayer, IdentityCoordinateTransforme
         Random random = new Random(seed + 80);
         offsetX = (random.nextDouble()-0.5)*10000;
         offsetZ = (random.nextDouble()-0.5)*10000;
-        mountainNoise = new OpenSimplexNoise(seed);
+        mountainNoise = new OpenSimplexNoise(seed + 90);
         return this.create(context, parent);
     }
 }

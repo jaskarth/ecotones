@@ -31,6 +31,8 @@ public class OasisBiome extends EcotonesBiome {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "oasis"), new OasisBiome());
         BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id ->
                 Registry.BIOME.get(id).getName().asString().contains("desert") || Registry.BIOME.get(id).getName().asString().contains("scrub"));
+
+        BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 79);
     }
 
 

@@ -33,7 +33,7 @@ public enum  DrainageLayer implements ParentedLayer, IdentityCoordinateTransform
         Random random = new Random(seed - 80);
         offsetX = (random.nextDouble()-0.5)*10000;
         offsetZ = (random.nextDouble()-0.5)*10000;
-        drainageNoise = new OpenSimplexNoise(seed);
+        drainageNoise = new OpenSimplexNoise(seed - 80);
         return this.create(context, parent);
     }
 }

@@ -1,17 +1,18 @@
 package supercoder79.ecotones.api;
 
+import it.unimi.dsi.fastutil.ints.IntComparators;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.biome.EcotonesBiome;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.IntFunction;
+import java.util.stream.Collectors;
 
 public class BiomeRegistries {
     public static final Map<Integer, IntFunction<Boolean>> specialBiomes = new HashMap<>();
+    public static final Map<Integer, Integer> bigSpecialBiomes = new HashMap<>();
+    public static final Map<Integer, Integer> smallSpecialBiomes = new HashMap<>();
     public static final List<Integer> noBeachBiomes = new ArrayList<>();
 
     public static void registerSpecialBiome(int id, IntFunction<Boolean> rule) {
@@ -32,7 +33,40 @@ public class BiomeRegistries {
         }
     }
 
+    public static void registerBigSpecialBiome(EcotonesBiome biome, int chance) {
+        bigSpecialBiomes.put(Registry.BIOME.getRawId(biome), chance);
+    }
+
+    public static void registerSmallSpecialBiome(EcotonesBiome biome, int chance) {
+        smallSpecialBiomes.put(Registry.BIOME.getRawId(biome), chance);
+    }
+
     public static void registerNoBeachBiome(int id) {
         noBeachBiomes.add(id);
+    }
+
+    public static void compile() {
+        Map<Integer, Integer> tempMap = new HashMap<>();
+        bigSpecialBiomes.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .forEachOrdered(x -> tempMap.put(x.getKey(), x.getValue()));
+        bigSpecialBiomes.clear();
+
+        tempMap.forEach(bigSpecialBiomes::put);
+
+        bigSpecialBiomes.forEach((id, chance) -> System.out.println(Registry.BIOME.get(id).getTranslationKey() + ": 1 / " + chance));
+
+        tempMap.clear();
+
+        smallSpecialBiomes.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .forEachOrdered(x -> tempMap.put(x.getKey(), x.getValue()));
+        smallSpecialBiomes.clear();
+
+        tempMap.forEach(smallSpecialBiomes::put);
+
+        smallSpecialBiomes.forEach((id, chance) -> System.out.println(Registry.BIOME.get(id).getTranslationKey() + ": 1 / " + chance));
     }
 }

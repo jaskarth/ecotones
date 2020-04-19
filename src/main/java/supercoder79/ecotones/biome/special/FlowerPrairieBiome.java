@@ -36,6 +36,10 @@ public class FlowerPrairieBiome extends EcotonesBiome {
 
         MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "flower_prairie_mountainous"), new FlowerPrairieBiome(2F, 0.625F));
         BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(MOUNTAINOUS), id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie_mountainous"));
+
+        BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 10);
+        BiomeRegistries.registerSmallSpecialBiome(HILLY, 10);
+        BiomeRegistries.registerSmallSpecialBiome(MOUNTAINOUS, 10);
     }
 
     public FlowerPrairieBiome(float depth, float scale) {

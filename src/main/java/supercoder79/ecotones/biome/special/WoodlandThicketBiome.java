@@ -43,6 +43,8 @@ public class WoodlandThicketBiome extends EcotonesBiome {
 
             return name.contains("prairie") || name.contains("forest") || name.contains("woodland");
         }, Registry.BIOME.getRawId(INSTANCE), Registry.BIOME.getRawId(CLEARING), Registry.BIOME.getRawId(HILLY), Registry.BIOME.getRawId(HILLY_CLEARING));
+
+        BiomeRegistries.registerBigSpecialBiome(INSTANCE, 30);
     }
 
     public WoodlandThicketBiome(float depth, float scale, double hilliness, double volatility, int treeAmt) {

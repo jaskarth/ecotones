@@ -42,6 +42,7 @@ public class HazelGroveBiome extends EcotonesBiome {
         HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove_hilly"), new HazelGroveBiome(false, true));
         CLEARING_HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove_hilly_clearing"), new HazelGroveBiome(true, true));
         BiomeRegistries.registerAllSpecial(id -> true, Registry.BIOME.getRawId(INSTANCE), Registry.BIOME.getRawId(CLEARING), Registry.BIOME.getRawId(HILLY), Registry.BIOME.getRawId(CLEARING_HILLY));
+        BiomeRegistries.registerBigSpecialBiome(INSTANCE, 300);
     }
 
 

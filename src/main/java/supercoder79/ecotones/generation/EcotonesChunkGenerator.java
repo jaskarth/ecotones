@@ -128,7 +128,7 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<OverworldChunk
         double delta2 = this.method_16410();
 
         for(int y = 0; y < this.getNoiseSizeY(); ++y) {
-            double noise = this.sampleNoise(x, y, z, d, e, f, g) + scaleNoise.sample(x, y, z);
+            double noise = this.sampleNoise(x, y, z, d, e, f, g) - (scaleNoise.sample(x, y, z) * 5);
             //calculate volatility
             noise -= this.computeNoiseFalloff(depth, scale, y) * volatility;
             if ((double)y > delta1) {

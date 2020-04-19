@@ -16,8 +16,7 @@ public enum SpecialBiomeMerger implements MergingLayer, IdentityCoordinateTransf
         int specialSample = sampler2.sample(x, z);
         
         if (specialSample != 1) {
-            boolean canApply = BiomeRegistries.specialBiomes.get(specialSample).apply(biomeSample);
-            return canApply ? specialSample : biomeSample;
+            return specialSample;
         }
         return biomeSample;
     }

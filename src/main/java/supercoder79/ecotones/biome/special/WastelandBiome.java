@@ -48,6 +48,8 @@ public class WastelandBiome extends EcotonesBiome {
         BiomeRegistries.registerAllSpecial(id ->
                 Registry.BIOME.get(id).getName().asString().contains("desert") || Registry.BIOME.get(id).getName().asString().contains("scrub"),
                 Registry.BIOME.getRawId(INSTANCE), Registry.BIOME.getRawId(THICKET), Registry.BIOME.getRawId(FLATS), Registry.BIOME.getRawId(HILLS), Registry.BIOME.getRawId(SHRUB), Registry.BIOME.getRawId(DEPTHS));
+
+        BiomeRegistries.registerBigSpecialBiome(INSTANCE, 150);
     }
 
 

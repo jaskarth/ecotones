@@ -6,7 +6,7 @@
 * Steppe -> something unique
 * Forest with balloon-y trees (see misc entry)
 * Lowlands with jungle bush-like shrubs
-* Clover field biome
+* Kauri forest
 
 # Blocks
 * More flower types
@@ -25,3 +25,4 @@
 * Remake special biomes to be "can spawn at" instead of "can replace at"
 * Add all biomes to lang file
 * Large rock formations
+* Move swamps to special biomes
