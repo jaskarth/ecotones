@@ -10,10 +10,7 @@ import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.CountDecoratorConfig;
-import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placer.DoublePlantPlacer;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
@@ -372,6 +369,7 @@ public class EcotonesBiome extends Biome {
 
         public <FC extends FeatureConfig> EcotonesBiome.Builder addStructureFeature(StructureFeature<FC> feature, FC config) {
             this.structureFeatures.put((StructureFeature) feature, config);
+            this.features.add(new FeatureEntry(GenerationStep.Feature.SURFACE_STRUCTURES, feature.configure(config).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT))));
             return this;
         }
 

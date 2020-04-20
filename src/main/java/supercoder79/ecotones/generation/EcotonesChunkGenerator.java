@@ -1,5 +1,7 @@
 package supercoder79.ecotones.generation;
 
+import net.minecraft.entity.EntityCategory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.Util;
@@ -9,6 +11,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.village.ZombieSiegeManager;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.SpawnHelper;
@@ -16,9 +19,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.ChunkRandom;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.StructureAccessor;
+import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
@@ -36,7 +37,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.IntStream;
 
-public class EcotonesChunkGenerator extends SurfaceChunkGenerator<OverworldChunkGeneratorConfig> {
+public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkGeneratorConfig> {
     private static final float[] BIOME_WEIGHT_TABLE = Util.make(new float[25], (table) -> {
         for(int x = -2; x <= 2; ++x) {
             for(int z = -2; z <= 2; ++z) {
@@ -54,7 +55,12 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<OverworldChunk
 
     private final OctaveNoiseSampler<OpenSimplexNoise> scaleNoise;
 
-    public EcotonesChunkGenerator(IWorld world, BiomeSource biomeSource, OverworldChunkGeneratorConfig config) {
+    private final PhantomSpawner phantomSpawner = new PhantomSpawner();
+    private final PillagerSpawner pillagerSpawner = new PillagerSpawner();
+    private final CatSpawner catSpawner = new CatSpawner();
+    private final ZombieSiegeManager zombieSiegeManager = new ZombieSiegeManager();
+
+    public EcotonesChunkGenerator(IWorld world, BiomeSource biomeSource, EcotonesChunkGeneratorConfig config) {
         super(world, biomeSource, 4, 8, 256, config, true);
         this.hillinessNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-15, 0));
         this.noiseSampler1 = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-15, 0));
@@ -226,6 +232,37 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<OverworldChunk
         }
 
         return noise;
+    }
+
+    // stupid entity spawning
+
+    public List<Biome.SpawnEntry> getEntitySpawnList(StructureAccessor structureAccessor, EntityCategory entityCategory, BlockPos blockPos) {
+        if (Feature.SWAMP_HUT.method_14029(this.world, structureAccessor, blockPos)) {
+            if (entityCategory == EntityCategory.MONSTER) {
+                return Feature.SWAMP_HUT.getMonsterSpawns();
+            }
+
+            if (entityCategory == EntityCategory.CREATURE) {
+                return Feature.SWAMP_HUT.getCreatureSpawns();
+            }
+        } else if (entityCategory == EntityCategory.MONSTER) {
+            if (Feature.PILLAGER_OUTPOST.isApproximatelyInsideStructure(this.world, structureAccessor, blockPos)) {
+                return Feature.PILLAGER_OUTPOST.getMonsterSpawns();
+            }
+
+            if (Feature.OCEAN_MONUMENT.isApproximatelyInsideStructure(this.world, structureAccessor, blockPos)) {
+                return Feature.OCEAN_MONUMENT.getMonsterSpawns();
+            }
+        }
+
+        return super.getEntitySpawnList(structureAccessor, entityCategory, blockPos);
+    }
+
+    public void spawnEntities(ServerWorld world, boolean spawnMonsters, boolean spawnAnimals) {
+        this.phantomSpawner.spawn(world, spawnMonsters, spawnAnimals);
+        this.pillagerSpawner.spawn(world, spawnMonsters, spawnAnimals);
+        this.catSpawner.spawn(world, spawnMonsters, spawnAnimals);
+        this.zombieSiegeManager.spawn(world, spawnMonsters, spawnAnimals);
     }
 
     // Vanilla random improvements

@@ -16,6 +16,7 @@ import supercoder79.ecotones.biome.SwampBiomes;
 import supercoder79.ecotones.biome.special.*;
 import supercoder79.ecotones.biome.technical.BeachBiome;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.generation.EcotonesChunkGeneratorConfig;
 import supercoder79.ecotones.generation.WorldGeneratorType;
 import supercoder79.ecotones.generation.WorldType;
 import supercoder79.ecotones.features.EcotonesFeatures;
@@ -59,6 +60,7 @@ public class Ecotones implements ModInitializer {
 		WoodlandThicketBiome.init();
 		WastelandBiome.init();
 		CloverFieldsBiome.init();
+		PoplarForestBiome.init();
 
 		BiomeRegistries.compile();
 
@@ -73,7 +75,7 @@ public class Ecotones implements ModInitializer {
 
 		loadMeOnClientPls = WorldType.ECOTONES;
 
-		WORLDGEN_TYPE = Registry.register(Registry.CHUNK_GENERATOR_TYPE, new Identifier("ecotones", "ecotones"), new WorldGeneratorType(false, OverworldChunkGeneratorConfig::new));
+		WORLDGEN_TYPE = Registry.register(Registry.CHUNK_GENERATOR_TYPE, new Identifier("ecotones", "ecotones"), new WorldGeneratorType(false, EcotonesChunkGeneratorConfig::new));
 
 		ServerTickCallback.EVENT.register(server -> {
 			if (server.getTicks() % 300 == 0) {

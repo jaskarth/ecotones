@@ -46,6 +46,7 @@ public class BiomeRegistries {
     }
 
     public static void compile() {
+        //TODO: this doesnt seem like its doing anything
         Map<Integer, Integer> tempMap = new HashMap<>();
         bigSpecialBiomes.entrySet()
                 .stream()
@@ -54,8 +55,6 @@ public class BiomeRegistries {
         bigSpecialBiomes.clear();
 
         tempMap.forEach(bigSpecialBiomes::put);
-
-        bigSpecialBiomes.forEach((id, chance) -> System.out.println(Registry.BIOME.get(id).getTranslationKey() + ": 1 / " + chance));
 
         tempMap.clear();
 
@@ -66,7 +65,5 @@ public class BiomeRegistries {
         smallSpecialBiomes.clear();
 
         tempMap.forEach(smallSpecialBiomes::put);
-
-        smallSpecialBiomes.forEach((id, chance) -> System.out.println(Registry.BIOME.get(id).getTranslationKey() + ": 1 / " + chance));
     }
 }

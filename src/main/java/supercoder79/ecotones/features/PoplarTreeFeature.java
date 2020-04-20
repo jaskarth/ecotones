@@ -34,7 +34,7 @@ public class PoplarTreeFeature extends Feature<SimpleTreeFeatureConfig> {
         }
 
         mutable = pos.mutableCopy();
-        mutable.move(Direction.UP, 2);
+        mutable.move(Direction.UP, random.nextInt(3) + 2);
 
         for (int y = 0; y < 12; y++) {
             Shapes.circle(mutable.mutableCopy(), maxRadius * radius(y / 11.f), leafPos -> {

@@ -2,15 +2,13 @@ package supercoder79.ecotones.layers.util;
 
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.layer.BiomeLayers;
 import net.minecraft.world.biome.layer.type.CrossSamplingLayer;
+import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
-import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.biome.technical.BeachBiome;
 
-public enum ExpandShorelineLayer implements CrossSamplingLayer {
+public enum DeepOceanLayer implements CrossSamplingLayer {
     INSTANCE;
-
-    private static final int BEACH = Registry.BIOME.getRawId(BeachBiome.INSTANCE);
 
     private static final int WARM_OCEAN_ID = Registry.BIOME.getRawId(Biomes.WARM_OCEAN);
     private static final int LUKEWARM_OCEAN_ID = Registry.BIOME.getRawId(Biomes.LUKEWARM_OCEAN);
@@ -25,17 +23,37 @@ public enum ExpandShorelineLayer implements CrossSamplingLayer {
 
     @Override
     public int sample(LayerRandomnessSource context, int n, int e, int s, int w, int center) {
-        if (BiomeRegistries.noBeachBiomes.contains(center)) return center;
+        if (isShallowOcean(center)) {
+            int i = 0;
+            if (isShallowOcean(n)) {
+                ++i;
+            }
 
-        if (!isOcean(center)) {
-            if (n == BEACH || e == BEACH || s == BEACH || w == BEACH) {
-                return BEACH;
+            if (isShallowOcean(e)) {
+                ++i;
+            }
+
+            if (isShallowOcean(w)) {
+                ++i;
+            }
+
+            if (isShallowOcean(s)) {
+                ++i;
+            }
+
+            if (i > 3) {
+                if (center == OCEAN_ID) return DEEP_OCEAN_ID;
+                if (center == WARM_OCEAN_ID) return DEEP_WARM_OCEAN_ID;
+                if (center == LUKEWARM_OCEAN_ID) return DEEP_LUKEWARM_OCEAN_ID;
+                if (center == COLD_OCEAN_ID) return DEEP_COLD_OCEAN_ID;
+                if (center == FROZEN_OCEAN_ID) return DEEP_FROZEN_OCEAN_ID;
             }
         }
+
         return center;
     }
 
-    protected static boolean isOcean(int id) {
-        return id == WARM_OCEAN_ID || id == LUKEWARM_OCEAN_ID || id == OCEAN_ID || id == COLD_OCEAN_ID || id == FROZEN_OCEAN_ID || id == DEEP_WARM_OCEAN_ID || id == DEEP_LUKEWARM_OCEAN_ID || id == DEEP_OCEAN_ID || id == DEEP_COLD_OCEAN_ID || id == DEEP_FROZEN_OCEAN_ID;
+    protected static boolean isShallowOcean(int id) {
+        return id == WARM_OCEAN_ID || id == LUKEWARM_OCEAN_ID || id == OCEAN_ID || id == COLD_OCEAN_ID || id == FROZEN_OCEAN_ID;
     }
 }

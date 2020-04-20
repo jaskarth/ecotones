@@ -10,10 +10,7 @@ import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
@@ -59,9 +56,11 @@ public class HumidityLayer1Biomes {
     public static void init() {
         DESERT_BIOME = BiomeUtil.register(new Identifier("ecotones", "desert"), template.builder()
                 .hilliness(1.6)
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/desert/town_centers", 8))
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
         SCRUBLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "scrubland"), template.builder()
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/desert/town_centers", 10))
                 .configureSurfaceBuilder(EcotonesSurfaces.DESERT_SCRUB_BUILDER, SurfaceBuilder.GRASS_CONFIG)
                 .temperature(1.9F)
                 .downfall(0.2F)
@@ -96,6 +95,7 @@ public class HumidityLayer1Biomes {
 
                 .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 3));
         STEPPE_BIOME = BiomeUtil.register( new Identifier("ecotones", "steppe"), template.builder()
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 6))
                 .temperature(1.8F)
                 .downfall(0.3F)
                 .hilliness(2.8)
@@ -119,6 +119,7 @@ public class HumidityLayer1Biomes {
 
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG));
         TROPICAL_GRASSLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "tropical_grassland"), template.builder()
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 10))
                 .temperature(1.7F)
                 .downfall(0.4F)
                 .scale(0.12f)
@@ -147,6 +148,7 @@ public class HumidityLayer1Biomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 12, 12)))));
         LUSH_SAVANNAH_BIOME = BiomeUtil.register( new Identifier("ecotones", "lush_savannah"), template.builder()
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 12))
                 .temperature(1.6F)
                 .downfall(0.5F)
                 .scale(0.15f)

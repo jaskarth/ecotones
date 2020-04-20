@@ -3,10 +3,7 @@ package supercoder79.ecotones.layers.util;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
-import supercoder79.ecotones.biome.special.CloverFieldsBiome;
-import supercoder79.ecotones.biome.special.HazelGroveBiome;
-import supercoder79.ecotones.biome.special.WastelandBiome;
-import supercoder79.ecotones.biome.special.WoodlandThicketBiome;
+import supercoder79.ecotones.biome.special.*;
 
 public enum BiomeVariantLayer implements IdentitySamplingLayer {
     INSTANCE;
@@ -63,6 +60,23 @@ public enum BiomeVariantLayer implements IdentitySamplingLayer {
                         return Registry.BIOME.getRawId(CloverFieldsBiome.FLATS);
                     case 3:
                         return Registry.BIOME.getRawId(CloverFieldsBiome.SHRUB);
+                }
+            }
+
+            if (sample == Registry.BIOME.getRawId(PoplarForestBiome.INSTANCE)) {
+                switch (context.nextInt(6)) {
+                    case 0:
+                        return Registry.BIOME.getRawId(PoplarForestBiome.THICKET);
+                    case 1:
+                        return Registry.BIOME.getRawId(PoplarForestBiome.HILLS);
+                    case 2:
+                        return Registry.BIOME.getRawId(PoplarForestBiome.FLATS);
+                    case 3:
+                        return Registry.BIOME.getRawId(PoplarForestBiome.SHRUB);
+                    case 4:
+                        return Registry.BIOME.getRawId(PoplarForestBiome.OAK);
+                    case 5:
+                        return Registry.BIOME.getRawId(PoplarForestBiome.BIRCH);
                 }
             }
         }

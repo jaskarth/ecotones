@@ -49,7 +49,7 @@ public class WorldType<T extends ChunkGenerator<?>> {
     }
 
     public static final WorldType<EcotonesChunkGenerator> ECOTONES = new WorldType<>("ecotones", (world) -> {
-        OverworldChunkGeneratorConfig chunkGenConfig = new OverworldChunkGeneratorConfig();
+        EcotonesChunkGeneratorConfig chunkGenConfig = new EcotonesChunkGeneratorConfig();
         EcotonesBiomeSourceConfig biomeSourceConfig = new EcotonesBiomeSourceConfig(world.getSeed());
 
         return Ecotones.WORLDGEN_TYPE.create(world, new EcotonesBiomeSource(biomeSourceConfig), chunkGenConfig);

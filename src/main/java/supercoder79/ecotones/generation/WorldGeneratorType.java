@@ -7,9 +7,9 @@ import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
 
 import java.util.function.Supplier;
 
-public class WorldGeneratorType extends ChunkGeneratorType<OverworldChunkGeneratorConfig, EcotonesChunkGenerator> {
+public class WorldGeneratorType extends ChunkGeneratorType<EcotonesChunkGeneratorConfig, EcotonesChunkGenerator> {
 
-    public WorldGeneratorType(boolean buffetScreen, Supplier<OverworldChunkGeneratorConfig> configSupplier) {
+    public WorldGeneratorType(boolean buffetScreen, Supplier<EcotonesChunkGeneratorConfig> configSupplier) {
         super(null, buffetScreen, configSupplier);
     }
 
@@ -18,7 +18,7 @@ public class WorldGeneratorType extends ChunkGeneratorType<OverworldChunkGenerat
     }
 
     @Override
-    public EcotonesChunkGenerator create(IWorld world, BiomeSource biomeSource, OverworldChunkGeneratorConfig config) {
+    public EcotonesChunkGenerator create(IWorld world, BiomeSource biomeSource, EcotonesChunkGeneratorConfig config) {
         return new EcotonesChunkGenerator(world, biomeSource, config);
     }
 }

@@ -14,11 +14,12 @@ import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.sound.Sounds;
 
-public class BeachBiome extends Biome {
+public class BeachBiome extends EcotonesBiome {
     public static BeachBiome INSTANCE;
 
     public static void init() {
@@ -40,7 +41,9 @@ public class BeachBiome extends Biome {
                         .fogColor(12638463)
                         .loopSound(Sounds.BEACH_LOOP).build())
                 .parent(null)
-                .noises(ImmutableList.of(new Biome.MixedNoisePoint(0.0F, 0.0F, -0.1F, 0.0F, 0.9935F))));
+                .noises(ImmutableList.of(new Biome.MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
+                0.05,
+                1.4);
 
         this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
         this.addStructureFeature(Feature.BURIED_TREASURE.configure(new BuriedTreasureFeatureConfig(0.01F)));
@@ -57,6 +60,10 @@ public class BeachBiome extends Biome {
         DefaultBiomeFeatures.addDefaultVegetation(this);
         DefaultBiomeFeatures.addSprings(this);
         DefaultBiomeFeatures.addFrozenTopLayer(this);
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
+                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(3))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.JUNGLE_PALM_TREE.configure(DefaultBiomeFeatures.JUNGLE_SAPLING_TREE_CONFIG)

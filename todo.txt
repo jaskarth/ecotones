@@ -7,6 +7,7 @@
 * Forest with balloon-y trees (see misc entry)
 * Lowlands with jungle bush-like shrubs
 * Kauri forest
+* Weird Desert (lots of tall cacti)
 
 # Blocks
 * More flower types
@@ -21,8 +22,15 @@
 * Stop procrastinating on cold biomes
 * Steal zoerestria Bluff
 * Balloon-y tree with edges hanging off (this is very hard to describe in text)
-* Pinecones drop sap
-* Remake special biomes to be "can spawn at" instead of "can replace at"
 * Add all biomes to lang file
 * Large rock formations
 * Move swamps to special biomes
+* Drainage affects tree height in biomes
+* Do some stuff with making big special biomes a part of the existing climate gen
+
+till next release:
+* Add temples
+* Add pillager things
+* Make sure everything in vanilla is obtainable
+* Register swamps as slime biomes
+* Watering-hole alike caves

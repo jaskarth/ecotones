@@ -10,7 +10,7 @@ public class LevelGenUtil {
 
     //why is this even necesarry????
     public static LevelGeneratorOptions makeChunkGenerator(LevelGeneratorType levelGeneratorType, Dynamic<?> dynamic) {
-        OverworldChunkGeneratorConfig overworldChunkGeneratorConfig = ChunkGeneratorType.SURFACE.createConfig();
-        return new LevelGeneratorOptions(levelGeneratorType, dynamic, (world) -> new EcotonesChunkGenerator(world, new EcotonesBiomeSource(new EcotonesBiomeSourceConfig(world.getSeed())), overworldChunkGeneratorConfig));
+        EcotonesChunkGeneratorConfig chunkGeneratorConfig = new EcotonesChunkGeneratorConfig();
+        return new LevelGeneratorOptions(levelGeneratorType, dynamic, (world) -> new EcotonesChunkGenerator(world, new EcotonesBiomeSource(new EcotonesBiomeSourceConfig(world.getSeed())), chunkGeneratorConfig));
     }
 }

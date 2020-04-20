@@ -31,8 +31,16 @@ public class EcotonesBiomeLayers {
         layerFactory = stack(2601L, IncreaseEdgeCurvatureLayer.INSTANCE, layerFactory, 4, contextProvider);
         layerFactory = AddIslandLayer.INSTANCE.create(contextProvider.apply(2L), layerFactory);
 
+        layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 2, contextProvider);
+
+        //Add ocean temperatures and deep oceans
+        LayerFactory<T> layerFactory2 = OceanTemperatureLayer.INSTANCE.create(contextProvider.apply(2L));
+        layerFactory2 = stack(2001L, ScaleLayer.NORMAL, layerFactory2, 6, contextProvider);
+        layerFactory = ApplyOceanTemperatureLayer.INSTANCE.create(contextProvider.apply(100L), layerFactory, layerFactory2);
+        layerFactory = DeepOceanLayer.INSTANCE.create(contextProvider.apply(102L), layerFactory);
+
         //scale up the land to be bigger
-        layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 7, contextProvider);
+        layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 5, contextProvider);
 
         //Add our biomes
         LayerFactory<T> biomeLayer = ClimateLayers.INSTANCE.create(contextProvider.apply(2L), seed + 79);
@@ -51,7 +59,7 @@ public class EcotonesBiomeLayers {
         specialBiomesLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), specialBiomesLayer);
         specialBiomesLayer = VolcanismLayer.INSTANCE.create(contextProvider.apply(24L), specialBiomesLayer, seed - 30);
 
-        specialBiomesLayer = stack(3043L, ScaleLayer.NORMAL, specialBiomesLayer, 5, contextProvider);
+        specialBiomesLayer = stack(3080L, ScaleLayer.NORMAL, specialBiomesLayer, 5, contextProvider);
 
         specialBiomesLayer = BiomeEdgeLayer.INSTANCE.create(contextProvider.apply(36L), specialBiomesLayer);
         specialBiomesLayer = BiomeEdgeEnsureLayer.INSTANCE.create(contextProvider.apply(37L), specialBiomesLayer);
@@ -65,10 +73,11 @@ public class EcotonesBiomeLayers {
         layerFactory = ShorelineLayer.INSTANCE.create(contextProvider.apply(54L), layerFactory);
         layerFactory = stack(2001L, ExpandShorelineLayer.INSTANCE, layerFactory, 7, contextProvider);
 
-        //Add ocean temperatures
-        LayerFactory<T> layerFactory2 = OceanTemperatureLayer.INSTANCE.create(contextProvider.apply(2L));
-        layerFactory2 = stack(2001L, ScaleLayer.NORMAL, layerFactory2, 6, contextProvider);
-        layerFactory = ApplyOceanTemperatureLayer.INSTANCE.create(contextProvider.apply(100L), layerFactory, layerFactory2);
+//        //Add ocean temperatures
+//        LayerFactory<T> layerFactory2 = OceanTemperatureLayer.INSTANCE.create(contextProvider.apply(2L));
+//        layerFactory2 = stack(2001L, ScaleLayer.NORMAL, layerFactory2, 6, contextProvider);
+//        layerFactory = ApplyOceanTemperatureLayer.INSTANCE.create(contextProvider.apply(100L), layerFactory, layerFactory2);
+//        layerFactory = DeepOceanLayer.INSTANCE.create(contextProvider.apply(102L), layerFactory);
         return layerFactory;
     }
 
