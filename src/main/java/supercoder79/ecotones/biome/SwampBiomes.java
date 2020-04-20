@@ -1,5 +1,6 @@
 package supercoder79.ecotones.biome;
 
+import com.terraformersmc.terraform.util.TerraformBiomeSets;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -152,5 +153,7 @@ public class SwampBiomes {
         Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.STEPPE_BIOME), Registry.BIOME.getRawId(MIRE_BIOME));
         Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.SCRUBLAND_BIOME), Registry.BIOME.getRawId(BOG_BIOME));
         Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.DESERT_BIOME), Registry.BIOME.getRawId(BOG_BIOME));
+
+        TerraformBiomeSets.addSlimeSpawnBiomes(BOG_BIOME, MIRE_BIOME, MARSH_BIOME, WETLAND_BIOME);
     }
 }

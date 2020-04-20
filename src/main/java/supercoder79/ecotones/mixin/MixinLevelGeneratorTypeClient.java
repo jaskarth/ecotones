@@ -2,6 +2,7 @@ package supercoder79.ecotones.mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.level.LevelGeneratorType;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,6 +27,6 @@ public class MixinLevelGeneratorTypeClient {
     @Inject(method = "getTranslationKey", at = @At("HEAD"), cancellable = true)
     @Environment(EnvType.CLIENT)
     void getTranslationKey(CallbackInfoReturnable<String> cir) {
-        if (this.name.equals("ecotones")) cir.setReturnValue("Ecotones");
+        if (this.name.equals("ecotones")) cir.setReturnValue(Formatting.DARK_GREEN + "Ecotones");
     }
 }
