@@ -27,10 +27,8 @@
 * Move swamps to special biomes
 * Drainage affects tree height in biomes
 * Do some stuff with making big special biomes a part of the existing climate gen
+* Take another look at well carvers
+* Add roofed forest alternative
 
 till next release:
-* Add temples
-* Add pillager things
-* Make sure everything in vanilla is obtainable
 * Register swamps as slime biomes
-* Watering-hole alike caves

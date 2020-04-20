@@ -1,6 +1,8 @@
 package supercoder79.ecotones.biome;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.class_5183;
+import net.minecraft.class_5187;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -48,6 +50,8 @@ public class HumidityLayer1Biomes {
             .addStructureFeature(Feature.STRONGHOLD)
             .addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 
+            .addStructureFeature(Feature.field_23996, new class_5187(class_5183.class_5185.field_24000))
+
             .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
 
@@ -56,16 +60,19 @@ public class HumidityLayer1Biomes {
     public static void init() {
         DESERT_BIOME = BiomeUtil.register(new Identifier("ecotones", "desert"), template.builder()
                 .hilliness(1.6)
+                .addStructureFeature(Feature.DESERT_PYRAMID, FeatureConfig.DEFAULT)
+                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
                 .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/desert/town_centers", 8))
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
         SCRUBLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "scrubland"), template.builder()
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/desert/town_centers", 10))
                 .configureSurfaceBuilder(EcotonesSurfaces.DESERT_SCRUB_BUILDER, SurfaceBuilder.GRASS_CONFIG)
                 .temperature(1.9F)
                 .downfall(0.2F)
                 .hilliness(1.6)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
+                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/desert/town_centers", 10))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG)
@@ -95,12 +102,13 @@ public class HumidityLayer1Biomes {
 
                 .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 3));
         STEPPE_BIOME = BiomeUtil.register( new Identifier("ecotones", "steppe"), template.builder()
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 6))
                 .temperature(1.8F)
                 .downfall(0.3F)
                 .hilliness(2.8)
                 .volatility(0.88)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
+                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 4))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
@@ -119,14 +127,16 @@ public class HumidityLayer1Biomes {
 
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG));
         TROPICAL_GRASSLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "tropical_grassland"), template.builder()
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 10))
+                .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .temperature(1.7F)
                 .downfall(0.4F)
                 .scale(0.12f)
                 .hilliness(1.8)
 
+                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 10))
+
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
-                .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
@@ -148,13 +158,14 @@ public class HumidityLayer1Biomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 12, 12)))));
         LUSH_SAVANNAH_BIOME = BiomeUtil.register( new Identifier("ecotones", "lush_savannah"), template.builder()
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 12))
                 .temperature(1.6F)
                 .downfall(0.5F)
                 .scale(0.15f)
                 .hilliness(1.4)
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 12))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
@@ -219,6 +230,7 @@ public class HumidityLayer1Biomes {
                 .scale(0.4f)
                 .hilliness(3.4)
                 .volatility(0.88)
+                .addStructureFeature(Feature.JUNGLE_TEMPLE, FeatureConfig.DEFAULT)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)

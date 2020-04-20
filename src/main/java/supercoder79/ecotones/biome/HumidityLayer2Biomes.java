@@ -55,6 +55,8 @@ public class HumidityLayer2Biomes {
     public static void init() {
         COOL_DESERT_BIOME = BiomeUtil.register(new Identifier("ecotones", "cool_desert"), template.builder()
                 .hilliness(1.6)
+                .addStructureFeature(Feature.DESERT_PYRAMID, FeatureConfig.DEFAULT)
+                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
                 .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/desert/town_centers", 10))
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
@@ -63,6 +65,8 @@ public class HumidityLayer2Biomes {
                 .temperature(1.2F)
                 .downfall(0.2F)
                 .hilliness(1.6)
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 4))
+                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -76,12 +80,13 @@ public class HumidityLayer2Biomes {
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SCRUBLAND_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
                 .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 4));
         COOL_STEPPE_BIOME = BiomeUtil.register( new Identifier("ecotones", "cool_steppe"), template.builder()
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 5))
                 .temperature(1.2F)
                 .downfall(0.35F)
                 .hilliness(2.8)
                 .volatility(0.88)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 5))
+                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
@@ -108,6 +113,7 @@ public class HumidityLayer2Biomes {
                 .hilliness(2.2)
                 .foliageColor(0xabcf59)
                 .grassColor(0xabcf59)
+                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
 
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
 
@@ -123,13 +129,14 @@ public class HumidityLayer2Biomes {
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.PRAIRIE_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 30)))));
 
         LICHEN_WOODLAND_BIOME = BiomeUtil.register( new Identifier("ecotones", "lichen_woodland"), template.builder()
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/taiga/town_centers", 4))
                 .temperature(0.8F)
                 .downfall(0.5F)
                 .scale(0.15f)
                 .hilliness(1.4)
                 .addDefaultFeatures(PLAINS_TALL_GRASS)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/taiga/town_centers", 4))
+                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
@@ -149,13 +156,14 @@ public class HumidityLayer2Biomes {
                 .addTreeFeature(EcotonesFeatures.SMALL_SPRUCE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState())), 2));
 
         SPRUCE_FOREST_BIOME = BiomeUtil.register(new Identifier("ecotones", "spruce_forest"), template.builder()
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/taiga/town_centers", 10))
                 .temperature(0.8F)
                 .downfall(0.6F)
                 .scale(0.3f)
                 .hilliness(1.6)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/taiga/town_centers", 10))
+                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
@@ -199,6 +207,7 @@ public class HumidityLayer2Biomes {
                 .scale(0.4f)
                 .hilliness(3.2)
                 .volatility(0.92)
+                .addStructureFeature(Feature.JUNGLE_TEMPLE, FeatureConfig.DEFAULT)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)

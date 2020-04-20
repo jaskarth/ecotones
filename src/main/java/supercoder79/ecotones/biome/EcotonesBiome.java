@@ -369,7 +369,8 @@ public class EcotonesBiome extends Biome {
 
         public <FC extends FeatureConfig> EcotonesBiome.Builder addStructureFeature(StructureFeature<FC> feature, FC config) {
             this.structureFeatures.put((StructureFeature) feature, config);
-            this.features.add(new FeatureEntry(GenerationStep.Feature.SURFACE_STRUCTURES, feature.configure(config).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT))));
+            //TODO: this breaks shit but i also want it to work. gonna fix it later
+//            this.features.add(new FeatureEntry(GenerationStep.Feature.SURFACE_STRUCTURES, feature.configure(config).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT))));
             return this;
         }
 
