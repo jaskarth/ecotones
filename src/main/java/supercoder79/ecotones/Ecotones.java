@@ -9,7 +9,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.biome.HumidityLayer1Biomes;
 import supercoder79.ecotones.biome.HumidityLayer2Biomes;
@@ -17,8 +16,10 @@ import supercoder79.ecotones.biome.SwampBiomes;
 import supercoder79.ecotones.biome.special.*;
 import supercoder79.ecotones.biome.technical.BeachBiome;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.command.GetDataAtCommand;
 import supercoder79.ecotones.compat.TerrestriaCompat;
 import supercoder79.ecotones.compat.TraverseCompat;
+import supercoder79.ecotones.decorator.EcotonesDecorators;
 import supercoder79.ecotones.generation.EcotonesChunkGeneratorConfig;
 import supercoder79.ecotones.generation.WorldGeneratorType;
 import supercoder79.ecotones.generation.WorldType;
@@ -39,6 +40,7 @@ public class Ecotones implements ModInitializer {
 
         EcotonesBlocks.init();
 		EcotonesItems.init();
+		EcotonesDecorators.init();
 		EcotonesFeatures.init();
 		EcotonesSurfaces.init();
 
@@ -78,6 +80,8 @@ public class Ecotones implements ModInitializer {
 		}
 
 		BiomeRegistries.compile();
+
+		GetDataAtCommand.init();
 
 		//this is stupid but whatever
 		int ecotonesBiomes = 0;
