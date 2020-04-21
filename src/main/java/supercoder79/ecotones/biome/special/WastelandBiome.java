@@ -50,6 +50,8 @@ public class WastelandBiome extends EcotonesBiome {
                 Registry.BIOME.getRawId(INSTANCE), Registry.BIOME.getRawId(THICKET), Registry.BIOME.getRawId(FLATS), Registry.BIOME.getRawId(HILLS), Registry.BIOME.getRawId(SHRUB), Registry.BIOME.getRawId(DEPTHS));
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 150);
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 2);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, THICKET, FLATS, HILLS, SHRUB, DEPTHS);
     }
 
 

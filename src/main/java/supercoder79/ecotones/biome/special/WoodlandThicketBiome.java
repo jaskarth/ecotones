@@ -45,6 +45,9 @@ public class WoodlandThicketBiome extends EcotonesBiome {
         }, Registry.BIOME.getRawId(INSTANCE), Registry.BIOME.getRawId(CLEARING), Registry.BIOME.getRawId(HILLY), Registry.BIOME.getRawId(HILLY_CLEARING));
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 30);
+
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 4);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, CLEARING, HILLY, HILLY_CLEARING);
     }
 
     public WoodlandThicketBiome(float depth, float scale, double hilliness, double volatility, int treeAmt) {

@@ -1,16 +1,10 @@
 package supercoder79.ecotones.layers.generation;
 
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.type.MergingLayer;
 import net.minecraft.world.biome.layer.util.IdentityCoordinateTransformer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import net.minecraft.world.biome.layer.util.LayerSampler;
 import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.biome.special.FlowerPrairieBiome;
-import supercoder79.ecotones.biome.special.OasisBiome;
-import supercoder79.ecotones.biome.special.ThePitsBiome;
-import supercoder79.ecotones.biome.special.UluruBiome;
 
 import java.util.Map;
 
@@ -19,10 +13,10 @@ public enum BaseSpecialBiomesLayer implements MergingLayer, IdentityCoordinateTr
 
     @Override
     public int sample(LayerRandomnessSource context, LayerSampler sampler1, LayerSampler sampler2, int x, int z) {
-        for (Map.Entry<Integer, Integer> biomeMap : BiomeRegistries.smallSpecialBiomes.entrySet()) {
+        for (Map.Entry<Integer, Integer> biomeMap : BiomeRegistries.SMALL_SPECIAL_BIOMES.entrySet()) {
             if (context.nextInt(biomeMap.getValue()) == 0) {
                 //try to see if the position is valid for spawning
-                if (BiomeRegistries.specialBiomes.get(biomeMap.getKey()).apply(sampler2.sample(x, z))) {
+                if (BiomeRegistries.SPECIAL_BIOMES.get(biomeMap.getKey()).apply(sampler2.sample(x, z))) {
                     return biomeMap.getKey();
                 }
             }

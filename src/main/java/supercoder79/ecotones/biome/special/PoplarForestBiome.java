@@ -50,6 +50,9 @@ public class PoplarForestBiome extends EcotonesBiome {
                 , INSTANCE, THICKET, FLATS, HILLS, SHRUB);
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 40);
+
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 2);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, CLEARING, THICKET, FLATS, HILLS, SHRUB, OAK, BIRCH);
     }
 
     public PoplarForestBiome(float depth, float scale, int oakTreeSpawnAmt, int birchTreeSpawnAmt, int shrubSpawnAmt, double hilliness, double volatility) {

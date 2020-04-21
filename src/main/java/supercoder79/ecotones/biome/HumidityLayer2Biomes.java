@@ -47,6 +47,8 @@ public class HumidityLayer2Biomes {
             .addStructureFeature(Feature.STRONGHOLD)
             .addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 
+            .addStructureFeature(Feature.RUINED_PORTAL, new RuinedPortalFeatureConfig(RuinedPortalFeature.Type.STANDARD))
+
             .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
 
@@ -57,7 +59,7 @@ public class HumidityLayer2Biomes {
                 .hilliness(1.6)
                 .addStructureFeature(Feature.DESERT_PYRAMID, FeatureConfig.DEFAULT)
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/desert/town_centers", 10))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 10))
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
         COOL_SCRUBLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "cool_scrubland"), template.builder()
@@ -65,7 +67,7 @@ public class HumidityLayer2Biomes {
                 .temperature(1.2F)
                 .downfall(0.2F)
                 .hilliness(1.6)
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 4))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 4))
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
 
@@ -85,7 +87,7 @@ public class HumidityLayer2Biomes {
                 .hilliness(2.8)
                 .volatility(0.88)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 5))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 5))
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -106,7 +108,7 @@ public class HumidityLayer2Biomes {
                 .addTreeFeature(EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT), 1)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG));
         PRAIRIE_BIOME = BiomeUtil.register(new Identifier("ecotones", "prairie"), template.builder()
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/plains/town_centers", 10))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/plains/town_centers", 10))
                 .temperature(1F)
                 .downfall(0.4F)
                 .scale(0.025f)
@@ -135,7 +137,7 @@ public class HumidityLayer2Biomes {
                 .hilliness(1.4)
                 .addDefaultFeatures(PLAINS_TALL_GRASS)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/taiga/town_centers", 4))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/taiga/town_centers", 4))
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -162,7 +164,7 @@ public class HumidityLayer2Biomes {
                 .hilliness(1.6)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/taiga/town_centers", 10))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/taiga/town_centers", 10))
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,

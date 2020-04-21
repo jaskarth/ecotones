@@ -25,7 +25,7 @@ public enum ExpandShorelineLayer implements CrossSamplingLayer {
 
     @Override
     public int sample(LayerRandomnessSource context, int n, int e, int s, int w, int center) {
-        if (BiomeRegistries.noBeachBiomes.contains(center)) return center;
+        if (BiomeRegistries.NO_BEACH_BIOMES.contains(center)) return center;
 
         if (!isOcean(center)) {
             if (n == BEACH || e == BEACH || s == BEACH || w == BEACH) {

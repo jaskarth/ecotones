@@ -40,6 +40,8 @@ public class CloverFieldsBiome extends EcotonesBiome {
                 , INSTANCE, THICKET, FLATS, HILLS, SHRUB);
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 45);
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 2);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, THICKET, FLATS, HILLS, SHRUB);
     }
 
     public CloverFieldsBiome(float depth, float scale, int treeSpawnAmt, int shrubSpawnAmt, double hilliness, double volatility) {

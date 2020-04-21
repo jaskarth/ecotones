@@ -1,8 +1,6 @@
 package supercoder79.ecotones.biome;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.class_5183;
-import net.minecraft.class_5187;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -50,7 +48,7 @@ public class HumidityLayer1Biomes {
             .addStructureFeature(Feature.STRONGHOLD)
             .addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 
-            .addStructureFeature(Feature.field_23996, new class_5187(class_5183.class_5185.field_24000))
+            .addStructureFeature(Feature.RUINED_PORTAL, new RuinedPortalFeatureConfig(RuinedPortalFeature.Type.STANDARD))
 
             .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
@@ -62,7 +60,7 @@ public class HumidityLayer1Biomes {
                 .hilliness(1.6)
                 .addStructureFeature(Feature.DESERT_PYRAMID, FeatureConfig.DEFAULT)
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/desert/town_centers", 8))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 8))
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
         SCRUBLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "scrubland"), template.builder()
@@ -72,7 +70,7 @@ public class HumidityLayer1Biomes {
                 .hilliness(1.6)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/desert/town_centers", 10))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 10))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG)
@@ -108,7 +106,7 @@ public class HumidityLayer1Biomes {
                 .volatility(0.88)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 4))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 4))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
@@ -134,7 +132,7 @@ public class HumidityLayer1Biomes {
                 .hilliness(1.8)
 
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 10))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 10))
 
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
 
@@ -165,7 +163,7 @@ public class HumidityLayer1Biomes {
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 12))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 12))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)

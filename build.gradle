@@ -25,9 +25,9 @@ dependencies {
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modCompile "com.terraformersmc:terraform:${project.terraform_version}"
 
-//	modRuntime ("com.github.SuperCoder7979:databreaker:master") {
-//		exclude module : "fabric-loader"
-//	}
+	modRuntime ("com.github.SuperCoder7979:databreaker:2574cc57c136b27f74f50bfa770fd0454b113f9b") {
+		exclude module : "fabric-loader"
+	}
 
 	include "com.terraformersmc:terraform:${project.terraform_version}"
 

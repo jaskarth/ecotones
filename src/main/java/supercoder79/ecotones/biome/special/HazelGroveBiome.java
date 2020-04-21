@@ -26,7 +26,7 @@ public class HazelGroveBiome extends EcotonesBiome {
     public static HazelGroveBiome INSTANCE;
     public static HazelGroveBiome CLEARING;
     public static HazelGroveBiome HILLY;
-    public static HazelGroveBiome CLEARING_HILLY;
+    public static HazelGroveBiome HILLY_CLEARING;
 
     public static BranchedTreeFeatureConfig HAZEL_CONFIG =
             new BranchedTreeFeatureConfig.Builder(
@@ -40,9 +40,11 @@ public class HazelGroveBiome extends EcotonesBiome {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove"), new HazelGroveBiome(false, false));
         CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove_clearing"), new HazelGroveBiome(true, false));
         HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove_hilly"), new HazelGroveBiome(false, true));
-        CLEARING_HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove_hilly_clearing"), new HazelGroveBiome(true, true));
-        BiomeRegistries.registerAllSpecial(id -> true, Registry.BIOME.getRawId(INSTANCE), Registry.BIOME.getRawId(CLEARING), Registry.BIOME.getRawId(HILLY), Registry.BIOME.getRawId(CLEARING_HILLY));
+        HILLY_CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove_hilly_clearing"), new HazelGroveBiome(true, true));
+        BiomeRegistries.registerAllSpecial(id -> true, Registry.BIOME.getRawId(INSTANCE), Registry.BIOME.getRawId(CLEARING), Registry.BIOME.getRawId(HILLY), Registry.BIOME.getRawId(HILLY_CLEARING));
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 300);
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 4);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, CLEARING, HILLY, HILLY_CLEARING);
     }
 
 

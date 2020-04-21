@@ -29,6 +29,3 @@
 * Do some stuff with making big special biomes a part of the existing climate gen
 * Take another look at well carvers
 * Add roofed forest alternative
-
-till next release:
-* Register swamps as slime biomes
