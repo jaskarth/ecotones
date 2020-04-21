@@ -36,7 +36,7 @@ public class CloverFieldsBiome extends EcotonesBiome {
         SHRUB = Registry.register(Registry.BIOME, new Identifier("ecotones", "clover_shrubs"), new CloverFieldsBiome(0.5F, 0.025F, 0, 4, 2.8, 0.9));
 
         BiomeRegistries.registerAllSpecial(id ->
-                Registry.BIOME.get(id).getName().asString().contains("lichen_woodland") || Registry.BIOME.get(id).getName().asString().contains("spruce_forest") || Registry.BIOME.get(id).getName().asString().contains("prairie")
+                BiomeUtil.contains(id, "lichen_woodland") || BiomeUtil.contains(id, "spruce_forest") || BiomeUtil.contains(id, "prairie")
                 , INSTANCE, THICKET, FLATS, HILLS, SHRUB);
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 45);

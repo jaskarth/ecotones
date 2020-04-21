@@ -37,8 +37,8 @@ public class PinePeaksBiome extends EcotonesBiome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "pine_peaks"), new PinePeaksBiome());
-        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id ->
-                Registry.BIOME.get(id).getName().asString().contains("lichen_woodland") || Registry.BIOME.get(id).getName().asString().contains("spruce_forest") || Registry.BIOME.get(id).getName().asString().contains("prairie"));
+        BiomeRegistries.registerSpecialBiome(INSTANCE, id ->
+                BiomeUtil.contains(id, "lichen_woodland") || BiomeUtil.contains(id, "spruce_forest") || BiomeUtil.contains(id, "prairie"));
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 80);
     }

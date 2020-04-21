@@ -28,7 +28,7 @@ public class SuperVolcanicBiome extends EcotonesBiome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "supervolcanic_biome"), new SuperVolcanicBiome());
-        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id -> true);
+        BiomeRegistries.registerSpecialBiome(INSTANCE, id -> true);
     }
 
     protected SuperVolcanicBiome() {

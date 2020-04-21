@@ -22,7 +22,7 @@ public class BlessedSpringsBiome extends EcotonesBiome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "blessed_springs"), new BlessedSpringsBiome());
-        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id -> true);
+        BiomeRegistries.registerSpecialBiome(INSTANCE, id -> true);
     }
 
     protected BlessedSpringsBiome() {

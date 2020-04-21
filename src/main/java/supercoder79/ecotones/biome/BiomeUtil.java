@@ -55,4 +55,8 @@ public class BiomeUtil {
         biome.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
         biome.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1));
     }
+
+    public static boolean contains(int id, String name) {
+        return Registry.BIOME.get(id).getName().asString().contains(name);
+    }
 }

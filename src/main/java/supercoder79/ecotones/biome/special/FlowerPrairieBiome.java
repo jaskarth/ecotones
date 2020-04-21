@@ -29,13 +29,13 @@ public class FlowerPrairieBiome extends EcotonesBiome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "flower_prairie"), new FlowerPrairieBiome(0.5F, 0.025F));
-        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie"));
+        BiomeRegistries.registerSpecialBiome(INSTANCE, id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie"));
 
         HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "flower_prairie_hilly"), new FlowerPrairieBiome(1.25F, 0.225F));
-        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(HILLY), id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie_hilly"));
+        BiomeRegistries.registerSpecialBiome(HILLY, id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie_hilly"));
 
         MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "flower_prairie_mountainous"), new FlowerPrairieBiome(2F, 0.625F));
-        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(MOUNTAINOUS), id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie_mountainous"));
+        BiomeRegistries.registerSpecialBiome(MOUNTAINOUS, id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie_mountainous"));
 
         BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 10);
         BiomeRegistries.registerSmallSpecialBiome(HILLY, 10);

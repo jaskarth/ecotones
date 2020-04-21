@@ -28,7 +28,7 @@ public class VolcanicBiome extends EcotonesBiome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "volcanic_biome"), new VolcanicBiome());
-        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id -> true);
+        BiomeRegistries.registerSpecialBiome(INSTANCE, id -> true);
     }
 
     protected VolcanicBiome() {

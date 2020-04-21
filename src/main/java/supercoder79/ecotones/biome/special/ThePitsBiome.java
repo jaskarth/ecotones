@@ -30,8 +30,8 @@ public class ThePitsBiome extends EcotonesBiome {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits"), new ThePitsBiome(-1.5f));
         EDGE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits_edge"), new ThePitsBiome(0.375f));
 
-        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id -> !(id == Registry.BIOME.getRawId(BeachBiome.INSTANCE)));
-        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(EDGE), id -> !(id == Registry.BIOME.getRawId(BeachBiome.INSTANCE)));
+        BiomeRegistries.registerSpecialBiome(INSTANCE, id -> !(id == Registry.BIOME.getRawId(BeachBiome.INSTANCE)));
+        BiomeRegistries.registerSpecialBiome(EDGE, id -> !(id == Registry.BIOME.getRawId(BeachBiome.INSTANCE)));
 
         BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 200);
     }

@@ -2,6 +2,7 @@ package supercoder79.ecotones;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.server.ServerTickCallback;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -16,6 +17,8 @@ import supercoder79.ecotones.biome.SwampBiomes;
 import supercoder79.ecotones.biome.special.*;
 import supercoder79.ecotones.biome.technical.BeachBiome;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.compat.TerrestriaCompat;
+import supercoder79.ecotones.compat.TraverseCompat;
 import supercoder79.ecotones.generation.EcotonesChunkGeneratorConfig;
 import supercoder79.ecotones.generation.WorldGeneratorType;
 import supercoder79.ecotones.generation.WorldType;
@@ -39,17 +42,21 @@ public class Ecotones implements ModInitializer {
 		EcotonesFeatures.init();
 		EcotonesSurfaces.init();
 
+		// base biomes
 		HumidityLayer1Biomes.init();
 		HumidityLayer2Biomes.init();
 		SwampBiomes.init();
 
+		// technical biomes
 		BeachBiome.init();
 
+		// volcanic biomes
 		VolcanicBiome.init();
 		SuperVolcanicBiome.init();
 		HotSpringsBiome.init();
 		BlessedSpringsBiome.init();
 
+		// special biomes
 		OasisBiome.init();
 		ThePitsBiome.init();
 		GreenSpiresBiome.init();
@@ -62,6 +69,14 @@ public class Ecotones implements ModInitializer {
 		CloverFieldsBiome.init();
 		PoplarForestBiome.init();
 
+		// mod compat
+		if (FabricLoader.getInstance().isModLoaded("traverse")) {
+			TraverseCompat.init();
+		}
+		if (FabricLoader.getInstance().isModLoaded("terrestria")) {
+			TerrestriaCompat.init();
+		}
+
 		BiomeRegistries.compile();
 
 		//this is stupid but whatever
@@ -71,6 +86,7 @@ public class Ecotones implements ModInitializer {
 				ecotonesBiomes++;
 			}
 		}
+
 		System.out.println("[ecotones] Registering " + ecotonesBiomes + " ecotones biomes!");
 
 		loadMeOnClientPls = WorldType.ECOTONES;

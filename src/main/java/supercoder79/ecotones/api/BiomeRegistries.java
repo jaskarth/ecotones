@@ -1,6 +1,7 @@
 package supercoder79.ecotones.api;
 
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.biome.EcotonesBiome;
 
 import java.util.*;
@@ -15,8 +16,8 @@ public class BiomeRegistries {
     public static final Map<Integer, Integer> BIOME_VARANT_CHANCE = new HashMap<>();
     public static final Map<Integer, int[]> BIOME_VARIANTS = new HashMap<>();
 
-    public static void registerSpecialBiome(int id, IntFunction<Boolean> rule) {
-        SPECIAL_BIOMES.put(id, rule);
+    public static void registerSpecialBiome(Biome biome, IntFunction<Boolean> rule) {
+        SPECIAL_BIOMES.put(Registry.BIOME.getRawId(biome), rule);
     }
 
     //yes i know this is stupid shuddup
@@ -27,25 +28,25 @@ public class BiomeRegistries {
         }
     }
 
-    public static void registerAllSpecial(IntFunction<Boolean> rule, EcotonesBiome... biomes) {
-        for (EcotonesBiome biome : biomes) {
+    public static void registerAllSpecial(IntFunction<Boolean> rule, Biome... biomes) {
+        for (Biome biome : biomes) {
             SPECIAL_BIOMES.put(Registry.BIOME.getRawId(biome), rule);
         }
     }
 
-    public static void registerBigSpecialBiome(EcotonesBiome biome, int chance) {
+    public static void registerBigSpecialBiome(Biome biome, int chance) {
         BIG_SPECIAL_BIOMES.put(Registry.BIOME.getRawId(biome), chance);
     }
 
-    public static void registerSmallSpecialBiome(EcotonesBiome biome, int chance) {
+    public static void registerSmallSpecialBiome(Biome biome, int chance) {
         SMALL_SPECIAL_BIOMES.put(Registry.BIOME.getRawId(biome), chance);
     }
 
-    public static void registerBiomeVariantChance(EcotonesBiome biome, int chance) {
+    public static void registerBiomeVariantChance(Biome biome, int chance) {
         BIOME_VARANT_CHANCE.put(Registry.BIOME.getRawId(biome), chance);
     }
 
-    public static void registerBiomeVariants(EcotonesBiome parent, EcotonesBiome... variants) {
+    public static void registerBiomeVariants(Biome parent, Biome... variants) {
         int[] ids = new int[variants.length];
         for (int i = 0; i < variants.length; i++) {
             ids[i] = Registry.BIOME.getRawId(variants[i]);

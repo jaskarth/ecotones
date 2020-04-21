@@ -2,8 +2,11 @@ package supercoder79.ecotones.biome.special;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityCategory;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
@@ -17,6 +20,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.biome.BiomeUtil;
 import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.features.EcotonesFeatures;
@@ -46,7 +50,7 @@ public class WastelandBiome extends EcotonesBiome {
         DEPTHS = Registry.register(Registry.BIOME, new Identifier("ecotones", "wasteland_depths"), new WastelandBiome(0.1f, -0.25f, 0, 2, 1.25));
 
         BiomeRegistries.registerAllSpecial(id ->
-                Registry.BIOME.get(id).getName().asString().contains("desert") || Registry.BIOME.get(id).getName().asString().contains("scrub"),
+                BiomeUtil.contains(id, "desert") || BiomeUtil.contains(id, "scrub"),
                 Registry.BIOME.getRawId(INSTANCE), Registry.BIOME.getRawId(THICKET), Registry.BIOME.getRawId(FLATS), Registry.BIOME.getRawId(HILLS), Registry.BIOME.getRawId(SHRUB), Registry.BIOME.getRawId(DEPTHS));
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 150);
@@ -101,6 +105,16 @@ public class WastelandBiome extends EcotonesBiome {
         DefaultBiomeFeatures.addDefaultMushrooms(this);
         DefaultBiomeFeatures.addSprings(this);
         DefaultBiomeFeatures.addFrozenTopLayer(this);
+
+        this.addSpawn(EntityCategory.AMBIENT, new Biome.SpawnEntry(EntityType.BAT, 10, 8, 8));
+        this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SPIDER, 100, 4, 4));
+        this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ZOMBIE, 95, 4, 4));
+        this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
+        this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SKELETON, 100, 4, 4));
+        this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.CREEPER, 100, 4, 4));
+        this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SLIME, 100, 4, 4));
+        this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
+        this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1));
     }
 
     @Override

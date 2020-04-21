@@ -36,20 +36,20 @@ public class SmallAcaciaTreeFeature extends Feature<DefaultFeatureConfig> {
             world.setBlockState(pos.add(xOffset*2, offset + 2, zOffset*2), Blocks.ACACIA_LOG.getDefaultState(), 2);
             if (random.nextInt(2) == 0) {
                 world.setBlockState(pos.add(xOffset*3, offset + 3, zOffset*3), Blocks.ACACIA_LOG.getDefaultState(), 2);
-                world.setBlockState(pos.add((xOffset * 3), offset + 3, (zOffset*3) + 1), LEAF_STATE, 2);
-                world.setBlockState(pos.add((xOffset * 3), offset + 3, (zOffset*3) - 1), LEAF_STATE, 2);
-                world.setBlockState(pos.add((xOffset*3) - 1, offset + 3, (zOffset * 3)), LEAF_STATE, 2);
-                world.setBlockState(pos.add((xOffset*3) + 1, offset + 3, (zOffset * 3)), LEAF_STATE, 2);
+                setIfAir(world, pos.add((xOffset * 3), offset + 3, (zOffset*3) + 1), LEAF_STATE);
+                setIfAir(world, pos.add((xOffset * 3), offset + 3, (zOffset*3) - 1), LEAF_STATE);
+                setIfAir(world, pos.add((xOffset*3) - 1, offset + 3, (zOffset * 3)), LEAF_STATE);
+                setIfAir(world, pos.add((xOffset*3) + 1, offset + 3, (zOffset * 3)), LEAF_STATE);
                 for (int x = -1; x <= 1; x++) {
                     for (int z = -1; z <= 1; z++) {
                         world.setBlockState(pos.add((xOffset * 3) + x, offset + 4, (zOffset*3) + z), LEAF_STATE, 2);
                     }
                 }
             } else {
-                world.setBlockState(pos.add((xOffset * 2), offset + 2, (zOffset*2) + 1), LEAF_STATE, 2);
-                world.setBlockState(pos.add((xOffset * 2), offset + 2, (zOffset*2) - 1), LEAF_STATE, 2);
-                world.setBlockState(pos.add((xOffset*2) - 1, offset + 2, (zOffset * 2)), LEAF_STATE, 2);
-                world.setBlockState(pos.add((xOffset*2) + 1, offset + 2, (zOffset * 2)), LEAF_STATE, 2);
+                setIfAir(world, pos.add((xOffset * 2), offset + 2, (zOffset*2) + 1), LEAF_STATE);
+                setIfAir(world, pos.add((xOffset * 2), offset + 2, (zOffset*2) - 1), LEAF_STATE);
+                setIfAir(world, pos.add((xOffset*2) - 1, offset + 2, (zOffset * 2)), LEAF_STATE);
+                setIfAir(world, pos.add((xOffset*2) + 1, offset + 2, (zOffset * 2)), LEAF_STATE);
                 for (int x = -1; x <= 1; x++) {
                     for (int z = -1; z <= 1; z++) {
                         world.setBlockState(pos.add((xOffset * 2) + x, offset + 3, (zOffset*2) + z), LEAF_STATE, 2);
@@ -60,5 +60,9 @@ public class SmallAcaciaTreeFeature extends Feature<DefaultFeatureConfig> {
         }
 
         return true;
+    }
+
+    protected void setIfAir(IWorld world, BlockPos pos, BlockState state) {
+        if (world.getBlockState(pos).isAir()) world.setBlockState(pos, state, 2);
     }
 }

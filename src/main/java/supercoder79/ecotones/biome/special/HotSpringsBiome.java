@@ -24,7 +24,7 @@ public class HotSpringsBiome extends EcotonesBiome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "hot_springs"), new HotSpringsBiome());
-        BiomeRegistries.registerSpecialBiome(Registry.BIOME.getRawId(INSTANCE), id -> true);
+        BiomeRegistries.registerSpecialBiome(INSTANCE, id -> true);
     }
 
     protected HotSpringsBiome() {

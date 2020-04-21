@@ -46,7 +46,7 @@ public class PoplarForestBiome extends EcotonesBiome {
         BIRCH = Registry.register(Registry.BIOME, new Identifier("ecotones", "poplar_forest_birch"), new PoplarForestBiome(0.5F, 0.05F, 1, 5, 1, 2.4, 0.95));
 
         BiomeRegistries.registerAllSpecial(id ->
-                Registry.BIOME.get(id).getName().asString().contains("lichen_woodland") || Registry.BIOME.get(id).getName().asString().contains("spruce_forest") || Registry.BIOME.get(id).getName().asString().contains("prairie")
+                BiomeUtil.contains(id, "lichen_woodland") || BiomeUtil.contains(id, "spruce_forest") || BiomeUtil.contains(id, "prairie")
                 , INSTANCE, THICKET, FLATS, HILLS, SHRUB);
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 40);
