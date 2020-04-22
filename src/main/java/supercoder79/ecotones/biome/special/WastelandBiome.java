@@ -2,10 +2,14 @@ package supercoder79.ecotones.biome.special;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
+import net.minecraft.class_5204;
+import net.minecraft.class_5207;
+import net.minecraft.class_5212;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
@@ -28,11 +32,16 @@ import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
 
+import java.util.OptionalInt;
+
 public class WastelandBiome extends EcotonesBiome {
-    private static final BranchedTreeFeatureConfig WASTELAND_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
+    private static final TreeFeatureConfig WASTELAND_TREE = new TreeFeatureConfig.Builder(
+            new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.AIR.getDefaultState()),
-            new BlobFoliagePlacer(0, 0, 0, 0, 0),
-            new StraightTrunkPlacer(0, 0, 0)).build();
+            new class_5207(2, 0, 4, 0, 4),
+            new class_5212(3, 11, 0),
+            new class_5204(0, 0, 0, OptionalInt.of(4)))
+            .method_27374().method_27375(Heightmap.Type.MOTION_BLOCKING).build();
 
     public static WastelandBiome INSTANCE;
     public static WastelandBiome THICKET;
@@ -93,7 +102,7 @@ public class WastelandBiome extends EcotonesBiome {
                         .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 1, 2))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.FANCY_TREE.configure(WASTELAND_TREE)
+                Feature.TREE.configure(WASTELAND_TREE)
                         .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, treeChance, 1))));
 
         DefaultBiomeFeatures.addDefaultDisks(this);

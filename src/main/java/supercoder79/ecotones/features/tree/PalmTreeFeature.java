@@ -9,20 +9,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.features.AbstractTreeFeature;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
 //Code from Terrestria, used with permission
-public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> {
+public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
     private BlockState bark;
 
-    public PalmTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, BlockState bark) {
+    public PalmTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> function, BlockState bark) {
         super(function);
 
         this.bark = bark;
@@ -43,7 +42,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
     }
 
     @Override
-    public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
+    public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
         // Total trunk height
         int height = rand.nextInt(5) + 8;
 
@@ -99,7 +98,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
     }
 
     // Grows the bent trunk of the tree.
-    private void growTrunk(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, BranchedTreeFeatureConfig config, int height) {
+    private void growTrunk(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, TreeFeatureConfig config, int height) {
         for (int i = 0; i < 2; i++) {
             setLogBlockState(world, rand, pos, logs, box, config);
             pos.move(Direction.UP);
@@ -145,7 +144,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
         world.setBlockState(coconutPos.add(0, 0, -1), EcotonesBlocks.coconutBlock.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH), 2);
     }
 
-    private void growLeaves(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
+    private void growLeaves(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
         BlockPos center = pos.toImmutable();
 
         setLeavesBlockState(world, rand, pos.set(center).move(0, 1, 0), leaves, box, config);
@@ -173,7 +172,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
         }
     }
 
-    private void placeSpiral(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config, Direction direction, boolean invertLeafSpiral) {
+    private void placeSpiral(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config, Direction direction, boolean invertLeafSpiral) {
         setLeavesBlockState(world, rand, pos, leaves, box, config);
 
         Direction spiral = spiral(direction, invertLeafSpiral);

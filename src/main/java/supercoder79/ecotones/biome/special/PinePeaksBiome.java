@@ -2,6 +2,7 @@ package supercoder79.ecotones.biome.special;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
+import net.minecraft.class_5204;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.BiomeEffects;
@@ -24,14 +25,14 @@ import supercoder79.ecotones.features.foliage.SmallPineFoliagePlacer;
 import supercoder79.ecotones.treedecorator.PineconeTreeDecorator;
 
 public class PinePeaksBiome extends EcotonesBiome {
-    public static BranchedTreeFeatureConfig SMALL_PINE_CONFIG = new BranchedTreeFeatureConfig.Builder(
+    public static TreeFeatureConfig SMALL_PINE_CONFIG = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
             new SmallPineFoliagePlacer(1, 0, 1, 0, 4, 2),
-            new StraightTrunkPlacer(9, 6, 0))
-            .noVines()
-            .treeDecorators(ImmutableList.of(new PineconeTreeDecorator(2)))
-            .build();
+            new StraightTrunkPlacer(9, 6, 0),
+            new class_5204(2, 0, 2))
+            .method_27374()
+            .build().method_27373(ImmutableList.of(new PineconeTreeDecorator(2)));
 
     public static PinePeaksBiome INSTANCE;
 
@@ -70,10 +71,7 @@ public class PinePeaksBiome extends EcotonesBiome {
                         .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(3, 0.5f, 1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.NORMAL_TREE.configure(SMALL_PINE_CONFIG).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(16, 0.66f, 1))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.SPRUCE_TREE_CONFIG).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(1, 0.66f, 1))));
+                Feature.TREE.configure(SMALL_PINE_CONFIG).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(16, 0.66f, 1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.TAIGA_GRASS_CONFIG)
