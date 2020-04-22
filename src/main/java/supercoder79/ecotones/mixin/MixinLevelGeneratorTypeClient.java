@@ -2,6 +2,8 @@ package supercoder79.ecotones.mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.level.LevelGeneratorType;
 import org.spongepowered.asm.mixin.Final;
@@ -26,7 +28,7 @@ public class MixinLevelGeneratorTypeClient {
     //dirty hack but i can't be assed to figure out why the lang file won't work
     @Inject(method = "getTranslationKey", at = @At("HEAD"), cancellable = true)
     @Environment(EnvType.CLIENT)
-    void getTranslationKey(CallbackInfoReturnable<String> cir) {
-        if (this.name.equals("ecotones")) cir.setReturnValue(Formatting.DARK_GREEN + "Ecotones");
+    void getTranslationKey(CallbackInfoReturnable<Text> cir) {
+        if (this.name.equals("ecotones")) cir.setReturnValue(new LiteralText(Formatting.DARK_GREEN + "Ecotones"));
     }
 }

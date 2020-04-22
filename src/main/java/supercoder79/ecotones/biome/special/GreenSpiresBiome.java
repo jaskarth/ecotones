@@ -51,7 +51,7 @@ public class GreenSpiresBiome extends EcotonesBiome {
                         .fogColor(12638463)
                         .build()).parent(null)
                 .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
-                2,
+                8,
                 0.7);
 
         this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
@@ -66,7 +66,7 @@ public class GreenSpiresBiome extends EcotonesBiome {
                         .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(2, 0.5f, 1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG)
+                Feature.TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG)
                         .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(6, 0.5f, 1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

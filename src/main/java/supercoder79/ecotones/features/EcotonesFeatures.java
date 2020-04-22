@@ -3,7 +3,7 @@ package supercoder79.ecotones.features;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.features.tree.BananaTreeFeature;
@@ -29,11 +29,11 @@ public class EcotonesFeatures {
         CACTI = Registry.register(Registry.FEATURE, new Identifier("ecotones", "cacti"), new PlaceCactiFeature(DefaultFeatureConfig::deserialize));
         SHRUB = Registry.register(Registry.FEATURE, new Identifier("ecotones", "shrub"), new ShrubFeature(SimpleTreeFeatureConfig::deserialize));
         JUNGLE_PALM_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "palm_tree"),
-                new PalmTreeFeature(BranchedTreeFeatureConfig::deserialize, Blocks.JUNGLE_WOOD.getDefaultState())
+                new PalmTreeFeature(TreeFeatureConfig::deserialize, Blocks.JUNGLE_WOOD.getDefaultState())
         );
         SUGARCANE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "sugarcane"), new SugarCaneFeature(DefaultFeatureConfig::deserialize));
         SMALL_ACACIA = Registry.register(Registry.FEATURE, new Identifier("ecotones", "small_acacia"), new SmallAcaciaTreeFeature());
-        BANANA_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "banana_tree"), new BananaTreeFeature(BranchedTreeFeatureConfig::deserialize));
+        BANANA_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "banana_tree"), new BananaTreeFeature(TreeFeatureConfig::deserialize));
         SMALL_SPRUCE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "small_spruce"), new SmallSpruceTreeFeature());
         BIG_SHRUB = Registry.register(Registry.FEATURE, new Identifier("ecotones", "big_shrub"), new BigShrubFeature(SimpleTreeFeatureConfig::deserialize));
         POPLAR_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "poplar_tree"), new PoplarTreeFeature(SimpleTreeFeatureConfig::deserialize));

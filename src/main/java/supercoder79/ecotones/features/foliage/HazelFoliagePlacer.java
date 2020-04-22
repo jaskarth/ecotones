@@ -2,7 +2,8 @@ package supercoder79.ecotones.features.foliage;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
@@ -17,24 +18,21 @@ public class HazelFoliagePlacer extends FoliagePlacer {
         this.height = height;
     }
 
-    public void generate(ModifiableTestableWorld world, Random random, BranchedTreeFeatureConfig config, int trunkHeight, BlockPos pos, int foliageHeight, int radius, Set<BlockPos> positions) {
-        int h = 0;
-        int m = 1;
-        int t = 3;
-        for(int l = foliageHeight + getHeight(random, 0); l >= getHeight(random, 0); --l) {
-            h++;
-            if (h == t) {
-                h = 0;
-                m++;
-                t--;
-            }
-            // this l - 3 is horrible but it works
-            this.generate(world, random, config, pos, radius, l - 3, m, positions);
+    protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig treeFeatureConfig, int trunkHeight, FoliagePlacer.class_5208 arg, int foliageHeight, int radius, Set<BlockPos> leaves, int i) {
+        for(int j = i; j >= i - foliageHeight; --j) {
+            int k = Math.max(radius + arg.method_27389() - 1 - j / 2, 0);
+            this.generate(world, random, treeFeatureConfig, arg.method_27388(), k, leaves, j, arg.method_27390());
         }
     }
 
-    public int getRadius(Random random, int baseHeight, BranchedTreeFeatureConfig config) {
-        return this.radius + random.nextInt(this.randomRadius + 1);
+    @Override
+    public int getHeight(Random random, int trunkHeight, TreeFeatureConfig treeFeatureConfig) {
+        return this.height;
+    }
+
+    @Override
+    protected boolean isInvalidForLeaves(Random random, int baseHeight, int dx, int dy, int dz, boolean bl) {
+        return baseHeight == dz && dy == dz && dz > 0;
     }
 
     public int getHeight(Random random, int i) {

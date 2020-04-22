@@ -100,7 +100,7 @@ public class WoodlandThicketBiome extends EcotonesBiome {
                         .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(9))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.FANCY_TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG)
+                Feature.TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG)
                         .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(treeAmt, 0.65F, 2))));
 
         BiomeUtil.addDefaultSpawns(this);

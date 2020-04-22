@@ -27,7 +27,7 @@ dependencies {
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 
-	modRuntime ("com.github.SuperCoder7979:databreaker:2574cc57c136b27f74f50bfa770fd0454b113f9b") {
+	modRuntime ("com.github.SuperCoder7979:databreaker:1ad39e9bf4fa8435010c9587c1b6960b57501c81") {
 		exclude module : "fabric-loader"
 	}
 

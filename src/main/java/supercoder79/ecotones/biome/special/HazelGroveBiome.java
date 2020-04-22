@@ -2,6 +2,7 @@ package supercoder79.ecotones.biome.special;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
+import net.minecraft.class_5204;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.BiomeEffects;
@@ -30,13 +31,14 @@ public class HazelGroveBiome extends EcotonesBiome {
     public static HazelGroveBiome HILLY;
     public static HazelGroveBiome HILLY_CLEARING;
 
-    public static BranchedTreeFeatureConfig HAZEL_CONFIG =
-            new BranchedTreeFeatureConfig.Builder(
+    public static TreeFeatureConfig HAZEL_CONFIG =
+            new TreeFeatureConfig.Builder(
                     new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
                     new SimpleBlockStateProvider(EcotonesBlocks.hazelLeavesBlock.getDefaultState()),
-                    new HazelFoliagePlacer(2, 0, 0, 0, 4),
-                    new StraightTrunkPlacer(3, 1, 0))
-        .noVines().build();
+                    new HazelFoliagePlacer(2, 0, 3, 0, 4),
+                    new StraightTrunkPlacer(3, 1, 0),
+                    new class_5204(2, 0, 2))
+        .method_27374().build();
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove"), new HazelGroveBiome(false, false));
@@ -73,7 +75,7 @@ public class HazelGroveBiome extends EcotonesBiome {
 
         if (clearing) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                    Feature.NORMAL_TREE.configure(HAZEL_CONFIG)
+                    Feature.TREE.configure(HAZEL_CONFIG)
                             .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.5f, 1))));
 
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -81,7 +83,7 @@ public class HazelGroveBiome extends EcotonesBiome {
                             .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(6))));
         } else {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                    Feature.NORMAL_TREE.configure(HAZEL_CONFIG)
+                    Feature.TREE.configure(HAZEL_CONFIG)
                             .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(3, 0.5f, 2))));
 
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

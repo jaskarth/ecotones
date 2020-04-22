@@ -90,7 +90,7 @@ public class SwampBiomes {
                         EcotonesFeatures.SUGARCANE.configure(FeatureConfig.DEFAULT)
                                 .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.25f, 1))))
 
-                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 1)
+                .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 1)
                 .build());
         MARSH_BIOME = Registry.register(Registry.BIOME, new Identifier("ecotones", "marsh"), template.builder()
                 .grassColor(0x549129)
@@ -116,7 +116,7 @@ public class SwampBiomes {
                         EcotonesFeatures.SUGARCANE.configure(FeatureConfig.DEFAULT)
                                 .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.5f, 1))))
 
-                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 2)
+                .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 2)
                 .build());
         WETLAND_BIOME = Registry.register(Registry.BIOME, new Identifier("ecotones", "wetland"), template.builder()
                 .grassColor(0x64b52b)
@@ -142,7 +142,7 @@ public class SwampBiomes {
                         EcotonesFeatures.SUGARCANE.configure(FeatureConfig.DEFAULT)
                                 .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(1, 0.5f, 1))))
 
-                .addTreeFeature(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 4)
+                .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 4)
                 .build());
 
         Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.TROPICAL_RAINFOREST_BIOME), Registry.BIOME.getRawId(WETLAND_BIOME));
