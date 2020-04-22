@@ -25,13 +25,13 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
     public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, ShrubDecoratorConfig config, BlockPos pos) {
         //gets data on how many shrubs to place based on the soil drainage.
         //performs an abs function on noise to make it [0, 1].
-        //drainage of 0: either too much or too little drainage, 50% of target shrub count
-        //drainage of 1: perfect drainage, 150% of target shrub count
+        //drainage of 1: either too much or too little drainage, 50% of target shrub count
+        //drainage of 0: perfect drainage, 150% of target shrub count
 
         double noise = 0.5; // default for if the chunk generator is not ours
         //get noise at position (this is fairly inaccurate because the pos is at the top left of the chunk and we center it
         if (generator instanceof EcotonesChunkGenerator) {
-            noise = ((EcotonesChunkGenerator)generator).getSoilDrainageNoise().sample(pos.getX() + 8, pos.getZ() + 8);
+            noise = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
         }
         double shrubCountCoefficient = 0.5 + noise; //50% to 150%
         //multiply with target count
@@ -60,7 +60,6 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
             int y = world.getTopY(Heightmap.Type.MOTION_BLOCKING, x, z);
-            new BlockPos(x, y, z).isWithinDistance(new BlockPos(3, 4, 6), 3);
 
             //test surrounding blockstates to make sure the area is good
             boolean isLikelyInvalid = false;
@@ -78,10 +77,20 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
             if (solidAround > 2) {
                 isLikelyInvalid = true;
             }
+            int shrubHeightFinal = finalMaxShrubHeight;
 
+            //modulate height based on height of terrain.
+            if (y > 90) {
+                shrubHeightFinal--;
+            }
+            if (y > 150) {
+                shrubHeightFinal--;
+            }
+            //ensure the minimum is 1
+            shrubHeightFinal = Math.max(shrubHeightFinal, 1);
 
             //return data and position
-            return new DataPos(x, y, z).setData(finalNoise, finalMaxShrubHeight, isLikelyInvalid);
+            return new DataPos(x, y, z).setData(finalNoise, shrubHeightFinal, isLikelyInvalid);
         });
     }
 }

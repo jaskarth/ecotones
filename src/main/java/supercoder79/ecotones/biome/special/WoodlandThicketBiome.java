@@ -19,6 +19,8 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.biome.BiomeUtil;
 import supercoder79.ecotones.biome.EcotonesBiome;
+import supercoder79.ecotones.decorator.EcotonesDecorators;
+import supercoder79.ecotones.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
@@ -95,7 +97,7 @@ public class WoodlandThicketBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(8, 0.5f, 1))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(9))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.FANCY_TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG)

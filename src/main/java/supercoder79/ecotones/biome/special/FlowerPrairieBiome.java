@@ -17,7 +17,10 @@ import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.biome.BiomeUtil;
 import supercoder79.ecotones.biome.EcotonesBiome;
+import supercoder79.ecotones.decorator.EcotonesDecorators;
+import supercoder79.ecotones.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
@@ -85,7 +88,7 @@ public class FlowerPrairieBiome extends EcotonesBiome {
                         .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))));
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(1, 0.5f, 1))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(2))));
 
         DefaultBiomeFeatures.addForestFlowers(this);
 
@@ -118,6 +121,8 @@ public class FlowerPrairieBiome extends EcotonesBiome {
         this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SLIME, 100, 4, 4));
         this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
         this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1));
+
+        BiomeUtil.addDefaultFeatures(this);
     }
 
     @Override

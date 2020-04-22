@@ -22,6 +22,7 @@ public class EcotonesFeatures {
     public static SmallSpruceTreeFeature SMALL_SPRUCE;
     public static BigShrubFeature BIG_SHRUB;
     public static PoplarTreeFeature POPLAR_TREE;
+    public static DrainageDecorationFeature DRAINAGE;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig::deserialize));
@@ -36,5 +37,6 @@ public class EcotonesFeatures {
         SMALL_SPRUCE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "small_spruce"), new SmallSpruceTreeFeature());
         BIG_SHRUB = Registry.register(Registry.FEATURE, new Identifier("ecotones", "big_shrub"), new BigShrubFeature(SimpleTreeFeatureConfig::deserialize));
         POPLAR_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "poplar_tree"), new PoplarTreeFeature(SimpleTreeFeatureConfig::deserialize));
+        DRAINAGE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "drainage"), new DrainageDecorationFeature(DefaultFeatureConfig::deserialize));
     }
 }

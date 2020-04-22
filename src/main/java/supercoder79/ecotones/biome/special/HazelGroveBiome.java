@@ -18,6 +18,8 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.biome.BiomeUtil;
 import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.decorator.EcotonesDecorators;
+import supercoder79.ecotones.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.features.foliage.HazelFoliagePlacer;
@@ -76,7 +78,7 @@ public class HazelGroveBiome extends EcotonesBiome {
 
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                            .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(3, 0.5f, 3))));
+                            .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(6))));
         } else {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     Feature.NORMAL_TREE.configure(HAZEL_CONFIG)
@@ -84,7 +86,7 @@ public class HazelGroveBiome extends EcotonesBiome {
 
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                            .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(2, 0.5f, 1))));
+                            .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(3))));
         }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -101,6 +103,7 @@ public class HazelGroveBiome extends EcotonesBiome {
         DefaultBiomeFeatures.addFrozenTopLayer(this);
 
         BiomeUtil.addDefaultSpawns(this);
+        BiomeUtil.addDefaultFeatures(this);
     }
 
     @Override

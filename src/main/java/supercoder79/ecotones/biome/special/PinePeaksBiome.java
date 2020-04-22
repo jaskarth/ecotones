@@ -18,6 +18,8 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.biome.BiomeUtil;
 import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.biome.HumidityLayer2Biomes;
+import supercoder79.ecotones.decorator.EcotonesDecorators;
+import supercoder79.ecotones.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.features.foliage.SmallPineFoliagePlacer;
@@ -67,7 +69,7 @@ public class PinePeaksBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(3, 0.5f, 1))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(4))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.NORMAL_TREE.configure(SMALL_PINE_CONFIG).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(16, 0.66f, 1))));
@@ -91,5 +93,6 @@ public class PinePeaksBiome extends EcotonesBiome {
         DefaultBiomeFeatures.addFrozenTopLayer(this);
 
         BiomeUtil.addDefaultSpawns(this);
+        BiomeUtil.addDefaultFeatures(this);
     }
 }

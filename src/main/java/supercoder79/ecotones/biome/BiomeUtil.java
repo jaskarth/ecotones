@@ -6,6 +6,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.DecoratorConfig;
+import net.minecraft.world.gen.feature.FeatureConfig;
+import supercoder79.ecotones.decorator.EcotonesDecorators;
+import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.layers.generation.MountainLayer;
 
 public class BiomeUtil {
@@ -54,6 +59,11 @@ public class BiomeUtil {
         biome.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SLIME, 100, 4, 4));
         biome.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
         biome.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1));
+    }
+
+    public static void addDefaultFeatures(EcotonesBiome biome) {
+        biome.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT).createDecoratedFeature(EcotonesDecorators.DRAINAGE_DECORATOR.configure(DecoratorConfig.DEFAULT)));
     }
 
     public static boolean contains(int id, String name) {

@@ -70,7 +70,7 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkG
         this.lowerNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-7, 0));
 
         this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 8, 256, 0.2, -0.2);
-        soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1536, 2, -2);
+        soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1536, 2, 2);
     }
 
     @Override
@@ -327,5 +327,9 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkG
 
     public OctaveNoiseSampler<OpenSimplexNoise> getSoilDrainageNoise() {
         return soilDrainageNoise;
+    }
+
+    public double getSoilQualityAt(double x, double z) {
+        return 1 - Math.abs(soilDrainageNoise.sample(x, z));
     }
 }

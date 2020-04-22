@@ -19,6 +19,7 @@ import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.biome.BiomeUtil;
 import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.surface.EcotonesSurfaces;
@@ -89,5 +90,7 @@ public class SuperVolcanicBiome extends EcotonesBiome {
         this.addSpawn(EntityCategory.MONSTER, new SpawnEntry(EntityType.SLIME, 100, 4, 4));
         this.addSpawn(EntityCategory.MONSTER, new SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
         this.addSpawn(EntityCategory.MONSTER, new SpawnEntry(EntityType.WITCH, 5, 1, 1));
+
+        BiomeUtil.addDefaultFeatures(this);
     }
 }
