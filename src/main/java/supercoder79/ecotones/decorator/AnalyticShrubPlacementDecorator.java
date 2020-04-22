@@ -64,8 +64,13 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
             //test surrounding blockstates to make sure the area is good
             boolean isLikelyInvalid = false;
             int solidAround = 0;
+            int solidBase = 0;
             for (int x1 = -1; x1 <= 1; x1++) {
                 for (int z1 = -1; z1 <= 1; z1++) {
+                    if (world.getBlockState(new BlockPos(x + x1, y - 1, z + z1)).getMaterial().isSolid()) {
+                        solidBase++;
+                    }
+
                     for (int y1 = 0; y1 <= 1; y1++) {
                         if (world.getBlockState(new BlockPos(x + x1, y + y1, z + z1)).getMaterial().isSolid()) {
                             solidAround++;
@@ -73,8 +78,9 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
                     }
                 }
             }
-            // if there are too many solid blocks, mark as invalid
-            if (solidAround > 2) {
+            // mark as invalid if the base isn't a full 3x3 and if there are too many blocks around the surface.
+            // this definitely needs more testing.
+            if (solidAround > 2 || solidBase < 9) {
                 isLikelyInvalid = true;
             }
             int shrubHeightFinal = finalMaxShrubHeight;
