@@ -1,0 +1,98 @@
+package supercoder79.ecotones.features.tree;
+
+import com.mojang.datafixers.Dynamic;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.StructureAccessor;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
+import net.minecraft.world.gen.feature.Feature;
+import supercoder79.ecotones.api.TreeGenerationConfig;
+import supercoder79.ecotones.util.DataPos;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Function;
+
+public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
+    public ImprovedBirchTreeFeature(Function<Dynamic<?>, ? extends TreeGenerationConfig> configDeserializer) {
+        super(configDeserializer);
+    }
+
+    @Override
+    public boolean generate(IWorld world, StructureAccessor accessor, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, TreeGenerationConfig config) {
+        //ensure spawn
+        if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
+        int maxHeight = 9;
+        if (pos instanceof DataPos) {
+            DataPos data = (DataPos)pos;
+            maxHeight = data.maxHeight;
+        }
+
+        List<BlockPos> leafPlacementNodes = new ArrayList<>();
+
+        trunk(world, pos, random, (float) ((Math.PI / 2) + ((random.nextFloat() - 0.5) * config.yawChange)), (float) ((random.nextFloat() - 0.5) * config.pitchChange), maxHeight, leafPlacementNodes, config);
+
+        growLeaves(world, leafPlacementNodes, config);
+
+        return false;
+    }
+
+    //grows leaves in a 3d + formation.
+    private void growLeaves(IWorld world, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+        for (BlockPos node : leafPlacementNodes) {
+            for (Direction direction : Direction.values()) {
+                BlockPos local = node.offset(direction);
+                if (world.getBlockState(local).isAir()) {
+                    world.setBlockState(local, config.leafState, 0);
+                }
+            }
+        }
+    }
+
+    private void trunk(IWorld world, BlockPos startPos, Random random, float yaw, float pitch, int maxHeight, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+        for (int i = 0; i < maxHeight; i++) {
+            BlockPos local = startPos.add(
+                    MathHelper.sin(pitch) * MathHelper.cos(yaw) * i,
+                    MathHelper.cos(pitch) * i,
+                    MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
+            world.setBlockState(local, config.woodState, 0);
+
+            if ((maxHeight - i) > 3 && (maxHeight - i) < (maxHeight - 3)) {
+                branch(world, local, random, leafPlacementNodes, config);
+            }
+
+            if (i == (maxHeight - 1)) {
+                for (int j = 0; j < random.nextInt(4) + 1; j++) {
+                    BlockPos leafLocal = local.down(j);
+
+                    //if the position is wood, place a leaf node
+                    if (world.getBlockState(leafLocal) == config.woodState) {
+                        leafPlacementNodes.add(leafLocal);
+                    }
+
+                    //search in all other directions to ensure we found everything
+                    for (Direction direction : Direction.values()) {
+                        BlockPos local2 = leafLocal.offset(direction);
+                        if (world.getBlockState(local2) == config.woodState) {
+                            leafPlacementNodes.add(local2);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    private void branch(IWorld world, BlockPos trunkPos, Random random, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+        BlockPos.Mutable mutable = trunkPos.mutableCopy();
+        mutable.move(random.nextBoolean() ? Direction.EAST : Direction.WEST);
+        mutable.move(random.nextBoolean() ? Direction.NORTH : Direction.SOUTH);
+        world.setBlockState(mutable, config.woodState, 0);
+        leafPlacementNodes.add(mutable.toImmutable());
+    }
+}

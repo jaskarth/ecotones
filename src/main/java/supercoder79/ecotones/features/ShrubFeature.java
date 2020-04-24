@@ -26,7 +26,7 @@ public class ShrubFeature extends Feature<SimpleTreeFeatureConfig> {
         //grab data from the decorator
         if (pos instanceof DataPos) {
             DataPos data = ((DataPos)pos);
-            randomHeight = data.maxShrubHeight;
+            randomHeight = data.maxHeight;
             if (data.isLikelyInvalid) return false;
         }
         //TODO: lower leaf count in < 0.1 drainage areas

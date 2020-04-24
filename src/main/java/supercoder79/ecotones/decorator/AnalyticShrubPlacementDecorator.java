@@ -21,6 +21,8 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
         super(configDeserializer);
     }
 
+    //TODO: use a for loop instead of a stream for more control
+
     @Override
     public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, ShrubDecoratorConfig config, BlockPos pos) {
         //gets data on how many shrubs to place based on the soil drainage.
@@ -80,7 +82,7 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
             }
             // mark as invalid if the base isn't a full 3x3 and if there are too many blocks around the surface.
             // this definitely needs more testing.
-            if (solidAround > 2 || solidBase < 9) {
+            if (solidAround > 2 || solidBase < 8) {
                 isLikelyInvalid = true;
             }
             int shrubHeightFinal = finalMaxShrubHeight;

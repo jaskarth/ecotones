@@ -5,11 +5,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.features.tree.BananaTreeFeature;
-import supercoder79.ecotones.features.tree.PalmTreeFeature;
-import supercoder79.ecotones.features.tree.SmallAcaciaTreeFeature;
-import supercoder79.ecotones.features.tree.SmallSpruceTreeFeature;
+import supercoder79.ecotones.features.tree.*;
 
 public class EcotonesFeatures {
     public static DesertifySoilFeature DESERTIFY_SOIL;
@@ -23,6 +21,8 @@ public class EcotonesFeatures {
     public static BigShrubFeature BIG_SHRUB;
     public static PoplarTreeFeature POPLAR_TREE;
     public static DrainageDecorationFeature DRAINAGE;
+    public static BranchingOakTreeFeature BRANCHING_OAK;
+    public static ImprovedBirchTreeFeature IMPROVED_BIRCH;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig::deserialize));
@@ -38,5 +38,7 @@ public class EcotonesFeatures {
         BIG_SHRUB = Registry.register(Registry.FEATURE, new Identifier("ecotones", "big_shrub"), new BigShrubFeature(SimpleTreeFeatureConfig::deserialize));
         POPLAR_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "poplar_tree"), new PoplarTreeFeature(SimpleTreeFeatureConfig::deserialize));
         DRAINAGE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "drainage"), new DrainageDecorationFeature(DefaultFeatureConfig::deserialize));
+        BRANCHING_OAK = Registry.register(Registry.FEATURE, new Identifier("ecotones", "branching_oak"), new BranchingOakTreeFeature(TreeGenerationConfig::deserialize));
+        IMPROVED_BIRCH = Registry.register(Registry.FEATURE, new Identifier("ecotones", "improved_birch"), new ImprovedBirchTreeFeature(TreeGenerationConfig::deserialize));
     }
 }

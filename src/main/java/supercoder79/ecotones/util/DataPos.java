@@ -5,7 +5,7 @@ import supercoder79.ecotones.api.DrainageType;
 
 public class DataPos extends BlockPos {
     public double drainage;
-    public int maxShrubHeight;
+    public int maxHeight;
     public boolean isLikelyInvalid;
     public DrainageType drainageType;
 
@@ -13,10 +13,15 @@ public class DataPos extends BlockPos {
         super(x, y, z);
     }
 
-    public DataPos setData(double drainage, int maxShrubHeight, boolean isLikelyInvalid) {
+    public DataPos setData(double drainage, int maxHeight, boolean isLikelyInvalid) {
         this.drainage = drainage;
-        this.maxShrubHeight = maxShrubHeight;
+        this.maxHeight = maxHeight;
         this.isLikelyInvalid = isLikelyInvalid;
+        return this;
+    }
+
+    public DataPos setMaxHeight(int maxHeight) {
+        this.maxHeight = maxHeight;
         return this;
     }
 

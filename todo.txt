@@ -29,3 +29,10 @@
 * Do some stuff with making big special biomes a part of the existing climate gen
 * Take another look at well carvers
 * Add roofed forest alternative
+
+# Improved terrain
+* Change shrubs to grow more frequently in medium quality areas
+* Change shrubs to grow shorter when under trees
+* Trees create podzol, maybe?
+* Surrounding chunks influence chunk data
+* Trees generate shorter at high altitudes

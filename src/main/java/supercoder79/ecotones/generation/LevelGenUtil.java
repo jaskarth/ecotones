@@ -1,10 +1,13 @@
 package supercoder79.ecotones.generation;
 
 import com.mojang.datafixers.Dynamic;
+import net.minecraft.world.biome.source.FixedBiomeSource;
+import net.minecraft.world.biome.source.FixedBiomeSourceConfig;
 import net.minecraft.world.gen.chunk.ChunkGeneratorType;
 import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
 import net.minecraft.world.level.LevelGeneratorOptions;
 import net.minecraft.world.level.LevelGeneratorType;
+import supercoder79.ecotones.biome.HumidityLayer2Biomes;
 
 public class LevelGenUtil {
 
