@@ -12,6 +12,7 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
+import supercoder79.ecotones.util.TreeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +78,13 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                     MathHelper.sin(pitch) * MathHelper.cos(yaw) * i,
                     MathHelper.cos(pitch) * i,
                     MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
-            world.setBlockState(local, config.woodState, 0);
+
+            //if the tree hits a solid block, stop the branch
+            if (TreeUtil.canLogReplace(world, local)) {
+                world.setBlockState(local, config.woodState, 0);
+            } else {
+                break;
+            }
 
             //place thick trunk if the tree is big enough
             if (((maxHeight / config.branchingFactor) - depth) > config.thickTrunkDepth) {
@@ -92,6 +99,21 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                 //test for last branch, then set leaves
                 if (depth == (maxHeight / config.branchingFactor) - 1) {
                     leafPlacementNodes.add(local);
+                    break;
+                }
+
+                //test upwards to ensure we have sky light
+                BlockPos.Mutable mutable = local.mutableCopy();
+                boolean shouldNotBranch = false;
+                for (int y = local.getY() + 1; y < 256; y++) {
+                    mutable.setY(y);
+                    if (!TreeUtil.canLogReplace(world, mutable)) {
+                        shouldNotBranch = true;
+                        break;
+                    }
+                }
+                //break if non opaque blocks were found
+                if (shouldNotBranch) {
                     break;
                 }
 

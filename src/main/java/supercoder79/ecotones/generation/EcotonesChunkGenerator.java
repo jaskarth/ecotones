@@ -2,8 +2,6 @@ package supercoder79.ecotones.generation;
 
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.structure.StructureManager;
-import net.minecraft.structure.StructureStart;
 import net.minecraft.util.Util;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
@@ -21,18 +19,14 @@ import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.OverworldChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.SurfaceChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.StructureFeature;
 import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.noise.OctaveNoiseSampler;
 import supercoder79.ecotones.noise.OpenSimplexNoise;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 
 import java.util.BitSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.IntStream;
@@ -48,13 +42,13 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkG
     });
 
     private final OctaveNoiseSampler<OpenSimplexNoise> soilDrainageNoise;
+    private final OctaveNoiseSampler<OpenSimplexNoise> soilRockinessNoise;
 
     private final OctavePerlinNoiseSampler hillinessNoise;
 
     private final OctavePerlinNoiseSampler noiseSampler1;
     private final OctavePerlinNoiseSampler noiseSampler2;
     private final OctavePerlinNoiseSampler lowerNoise;
-
     private final OctaveNoiseSampler<OpenSimplexNoise> scaleNoise;
 
     private final PhantomSpawner phantomSpawner = new PhantomSpawner();
@@ -71,6 +65,7 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkG
 
         this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 8, 256, 0.2, -0.2);
         soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1536, 2, 2);
+        soilRockinessNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1536, 2, 2);
     }
 
     @Override
@@ -84,9 +79,9 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkG
         int seaLevel = this.getSeaLevel();
         float centerDepth = this.biomeSource.getBiomeForNoiseGen(x, seaLevel, z).getDepth();
 
-        for(int l = -2; l <= 2; ++l) {
-            for(int m = -2; m <= 2; ++m) {
-                Biome biome = this.biomeSource.getBiomeForNoiseGen(x + l, seaLevel, z + m);
+        for(int x1 = -2; x1 <= 2; ++x1) {
+            for(int z1 = -2; z1 <= 2; ++z1) {
+                Biome biome = this.biomeSource.getBiomeForNoiseGen(x + x1, seaLevel, z + z1);
                 //vanilla attributes
                 float depth = biome.getDepth();
                 float scale = biome.getScale();
@@ -99,7 +94,7 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkG
                     volatility = ((EcotonesBiome)biome).getVolatility();
                 }
 
-                float weight = BIOME_WEIGHT_TABLE[l + 2 + (m + 2) * 5] / (depth + 2.0F);
+                float weight = BIOME_WEIGHT_TABLE[x1 + 2 + (z1 + 2) * 5] / (depth + 2.0F);
                 if (biome.getDepth() > centerDepth) {
                     weight /= 2.0F;
                 }
@@ -327,6 +322,10 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkG
 
     public OctaveNoiseSampler<OpenSimplexNoise> getSoilDrainageNoise() {
         return soilDrainageNoise;
+    }
+
+    public OctaveNoiseSampler<OpenSimplexNoise> getSoilRockinessNoise() {
+        return soilRockinessNoise;
     }
 
     public double getSoilQualityAt(double x, double z) {

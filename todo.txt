@@ -8,8 +8,14 @@
 * Lowlands with jungle bush-like shrubs
 * Kauri forest
 * Weird Desert (lots of tall cacti)
+* Mixed forest
+* Lake biomes
+* Rivers
+* Different beach types
+* Inland oceans
+* Coastal biome variants
 
-# Blocks
+# Blocks and items
 * More flower types
 * Aquatic plants
 * Implement curly grass
@@ -17,6 +23,8 @@
 * Berry Bushes
 * Sap block
 * Sap mob trap
+* Acorns -> grow large trees
+* Birch seeds -> grow large birch trees
 
 # Misc
 * Stop procrastinating on cold biomes
@@ -36,3 +44,4 @@
 * Trees create podzol, maybe?
 * Surrounding chunks influence chunk data
 * Trees generate shorter at high altitudes
+* Acacia trees

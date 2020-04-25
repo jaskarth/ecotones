@@ -58,7 +58,13 @@ public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConf
             int z = random.nextInt(16) + pos.getZ();
             int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
 
-            return new DataPos(x, y, z).setMaxHeight(maxHeight);
+            //make trees smaller as the height increases
+            int maxFinal = maxHeight;
+            if (y > 80) {
+                maxFinal = Math.max(maxHeight, maxHeight - ((y - 80) / 15));
+            }
+
+            return new DataPos(x, y, z).setMaxHeight(maxFinal);
         });
     }
 }

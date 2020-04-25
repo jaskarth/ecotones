@@ -12,6 +12,7 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
+import supercoder79.ecotones.util.TreeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
 
         List<BlockPos> leafPlacementNodes = new ArrayList<>();
 
-        trunk(world, pos, random, (float) ((Math.PI / 2) + ((random.nextFloat() - 0.5) * config.yawChange)), (float) ((random.nextFloat() - 0.5) * config.pitchChange), maxHeight, leafPlacementNodes, config);
+        trunk(world, pos, random, (float) (Math.PI / 2), 0, maxHeight, leafPlacementNodes, config);
 
         growLeaves(world, leafPlacementNodes, config);
 
@@ -55,12 +56,25 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
     }
 
     private void trunk(IWorld world, BlockPos startPos, Random random, float yaw, float pitch, int maxHeight, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+        boolean hasModified = false;
         for (int i = 0; i < maxHeight; i++) {
             BlockPos local = startPos.add(
                     MathHelper.sin(pitch) * MathHelper.cos(yaw) * i,
                     MathHelper.cos(pitch) * i,
                     MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
-            world.setBlockState(local, config.woodState, 0);
+
+            //if the tree hits a solid block, stop
+            if (TreeUtil.canLogReplace(world, local)) {
+                world.setBlockState(local, config.woodState, 0);
+            } else {
+                break;
+            }
+
+            if (i > 0 && i % config.branchingFactor == 0 && !hasModified) {
+                pitch += ((random.nextFloat() - 0.5) * config.pitchChange);
+                yaw += ((random.nextFloat() - 0.5) * config.yawChange);
+                hasModified = true;
+            }
 
             if ((maxHeight - i) > 3 && (maxHeight - i) < (maxHeight - 3)) {
                 branch(world, local, random, leafPlacementNodes, config);
@@ -89,6 +103,11 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
     }
 
     private void branch(IWorld world, BlockPos trunkPos, Random random, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+        if (random.nextInt(3) == 0) {
+            leafPlacementNodes.add(trunkPos);
+            return;
+        }
+
         BlockPos.Mutable mutable = trunkPos.mutableCopy();
         mutable.move(random.nextBoolean() ? Direction.EAST : Direction.WEST);
         mutable.move(random.nextBoolean() ? Direction.NORTH : Direction.SOUTH);
