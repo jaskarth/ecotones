@@ -35,12 +35,15 @@ public class EcotonesBiomeLayers {
 
         //Add ocean temperatures and deep oceans
         LayerFactory<T> layerFactory2 = OceanTemperatureLayer.INSTANCE.create(contextProvider.apply(2L));
-        layerFactory2 = stack(2001L, ScaleLayer.NORMAL, layerFactory2, 6, contextProvider);
+        layerFactory2 = stack(2301L, ScaleLayer.NORMAL, layerFactory2, 6, contextProvider);
         layerFactory = ApplyOceanTemperatureLayer.INSTANCE.create(contextProvider.apply(100L), layerFactory, layerFactory2);
         layerFactory = DeepOceanLayer.INSTANCE.create(contextProvider.apply(102L), layerFactory);
 
         //scale up the land to be bigger
-        layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 5, contextProvider);
+        layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 2, contextProvider);
+        //add beaches
+        layerFactory = ShorelineLayer.INSTANCE.create(contextProvider.apply(54L), layerFactory);
+        layerFactory = stack(2081L, ScaleLayer.NORMAL, layerFactory, 3, contextProvider);
 
         //Add our biomes
         LayerFactory<T> biomeLayer = ClimateLayers.INSTANCE.create(contextProvider.apply(2L), seed + 79);
@@ -69,15 +72,6 @@ public class EcotonesBiomeLayers {
 
         //Merge biomes onto the continent
         layerFactory = BiomeMerger.INSTANCE.create(contextProvider.apply(84L), layerFactory, biomeLayer);
-
-        layerFactory = ShorelineLayer.INSTANCE.create(contextProvider.apply(54L), layerFactory);
-        layerFactory = stack(2001L, ExpandShorelineLayer.INSTANCE, layerFactory, 7, contextProvider);
-
-//        //Add ocean temperatures
-//        LayerFactory<T> layerFactory2 = OceanTemperatureLayer.INSTANCE.create(contextProvider.apply(2L));
-//        layerFactory2 = stack(2001L, ScaleLayer.NORMAL, layerFactory2, 6, contextProvider);
-//        layerFactory = ApplyOceanTemperatureLayer.INSTANCE.create(contextProvider.apply(100L), layerFactory, layerFactory2);
-//        layerFactory = DeepOceanLayer.INSTANCE.create(contextProvider.apply(102L), layerFactory);
         return layerFactory;
     }
 

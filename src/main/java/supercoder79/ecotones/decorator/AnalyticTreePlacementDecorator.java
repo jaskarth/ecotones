@@ -11,6 +11,8 @@ import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.generation.EcotonesChunkGenerator;
 import supercoder79.ecotones.util.DataPos;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.IntStream;
@@ -53,7 +55,9 @@ public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConf
             }
         }
 
-        return IntStream.range(0, targetCount).mapToObj((i) -> {
+        List<BlockPos> positions = new ArrayList<>();
+        int attempts = 0;
+        while (positions.size() < targetCount) {
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
             int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
@@ -64,7 +68,37 @@ public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConf
                 maxFinal = Math.max(maxHeight, maxHeight - ((y - 80) / 15));
             }
 
-            return new DataPos(x, y, z).setMaxHeight(maxFinal);
-        });
+            int solidAround = 0;
+            int solidBase = 0;
+            for (int x1 = -1; x1 <= 1; x1++) {
+                for (int z1 = -1; z1 <= 1; z1++) {
+                    if (world.getBlockState(new BlockPos(x + x1, y - 1, z + z1)).getMaterial().isSolid()) {
+                        solidBase++;
+                    }
+
+                    for (int y1 = 0; y1 <= 1; y1++) {
+                        if (world.getBlockState(new BlockPos(x + x1, y + y1, z + z1)).getMaterial().isSolid()) {
+                            solidAround++;
+                        }
+                    }
+                }
+            }
+
+            if (solidAround > 1 || solidBase < 9) {
+                attempts++;
+                //give up if we have attempted too many times
+                if (attempts > 20) {
+                    attempts = 0;
+                    positions.add(new DataPos(x, y, z).setMaxHeight(maxFinal).setLikelyInvalid(true));
+                } else {
+                    continue;
+                }
+            }
+            attempts = 0;
+
+            positions.add(new DataPos(x, y, z).setMaxHeight(maxFinal + random.nextInt(3)));
+        }
+
+        return IntStream.range(0, targetCount).mapToObj(positions::get);
     }
 }

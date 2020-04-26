@@ -28,10 +28,11 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
     public boolean generate(IWorld world, StructureAccessor accessor, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, TreeGenerationConfig config) {
         //ensure spawn
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
-        int maxHeight = 9;
+        int maxHeight = 12;
         if (pos instanceof DataPos) {
             DataPos data = (DataPos)pos;
             maxHeight = data.maxHeight;
+            if (data.isLikelyInvalid) return false;
         }
 
         List<BlockPos> leafPlacementNodes = new ArrayList<>();

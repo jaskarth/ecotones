@@ -20,9 +20,9 @@ import java.util.Random;
 import java.util.function.Function;
 
 //creates a branching trunk then places leaves
-public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
+public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
 
-    public BranchingOakTreeFeature(Function<Dynamic<?>, ? extends TreeGenerationConfig> configDeserializer) {
+    public BranchingAcaciaTreeFeature(Function<Dynamic<?>, ? extends TreeGenerationConfig> configDeserializer) {
         super(configDeserializer);
     }
 
@@ -41,7 +41,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
 
         List<BlockPos> leafPlacementNodes = new ArrayList<>();
 
-        branch(world, pos, random, (float) (Math.PI / 2), 0, maxHeight, 0, leafPlacementNodes, config);
+        branch(world, pos, random, (float) ((Math.PI / 2) + ((random.nextDouble() - 0.5) * (Math.PI * config.yawChange))), (float) ((random.nextDouble() - 0.5) * (Math.PI * config.pitchChange)), maxHeight, 0, leafPlacementNodes, config);
 
         growLeaves(world, leafPlacementNodes, config);
 
@@ -87,15 +87,6 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                 break;
             }
 
-            //place thick trunk if the tree is big enough
-            if (((maxHeight / config.branchingFactor) - depth) > config.thickTrunkDepth) {
-                world.setBlockState(local.up(), config.woodState, 0);
-                for (Direction direction : Direction.Type.HORIZONTAL) {
-                    BlockPos local2 = local.offset(direction);
-                    world.setBlockState(local2, config.woodState, 0);
-                }
-            }
-
             if (i == height - 1) {
                 //test for last branch, then set leaves
                 if (depth == (maxHeight / config.branchingFactor) - 1) {
@@ -119,7 +110,9 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                 }
 
                 branch(world, local, random, (float) (yaw + ((random.nextDouble() - 0.5) * (Math.PI * config.yawChange))), (float) (pitch + ((random.nextDouble() - 0.5) * (Math.PI * config.pitchChange))), maxHeight, depth + 1, leafPlacementNodes, config);
-                branch(world, local, random, (float) (yaw - ((random.nextDouble() - 0.5) * (Math.PI * config.yawChange))), (float) (pitch - ((random.nextDouble() - 0.5) * (Math.PI * config.pitchChange))), maxHeight, depth + 1, leafPlacementNodes, config);
+                if (random.nextBoolean()) {
+                    branch(world, local, random, (float) (yaw - ((random.nextDouble() - 0.5) * (Math.PI * config.yawChange))), (float) (pitch - ((random.nextDouble() - 0.5) * (Math.PI * config.pitchChange))), maxHeight, depth + 1, leafPlacementNodes, config);
+                }
             }
         }
     }

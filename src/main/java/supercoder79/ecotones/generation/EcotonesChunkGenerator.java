@@ -319,7 +319,6 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkG
 
     // data getters
 
-
     public OctaveNoiseSampler<OpenSimplexNoise> getSoilDrainageNoise() {
         return soilDrainageNoise;
     }
