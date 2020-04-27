@@ -18,7 +18,7 @@ public class WorldType<T extends ChunkGenerator<?>> {
     public static final Map<LevelGeneratorType, WorldType<?>> LGT_TO_WT_MAP = Maps.newHashMap();
     public static final Map<String, WorldType<?>> STR_TO_WT_MAP = Maps.newHashMap();
 
-    public LevelGeneratorType generatorType = null;
+    public static LevelGeneratorType generatorType = null;
     public final WorldTypeChunkGeneratorFactory<T> chunkGenSupplier;
 
     public WorldType(String name, WorldTypeChunkGeneratorFactory<T> chunkGenSupplier) {
@@ -31,7 +31,7 @@ public class WorldType<T extends ChunkGenerator<?>> {
         }
 
         try {
-            this.generatorType = constructor.newInstance(13, name, (BiFunction<LevelGeneratorType, Dynamic<?>, LevelGeneratorOptions>) LevelGenUtil::makeChunkGenerator);
+            generatorType = constructor.newInstance(13, name, (BiFunction<LevelGeneratorType, Dynamic<?>, LevelGeneratorOptions>) LevelGenUtil::makeChunkGenerator);
         } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
             System.out.println("oh god oh frick");
             e.printStackTrace();
@@ -40,7 +40,7 @@ public class WorldType<T extends ChunkGenerator<?>> {
 
         this.chunkGenSupplier = chunkGenSupplier;
 
-        if (this.generatorType == null) {
+        if (generatorType == null) {
             throw new NullPointerException("An old world type has a null generator type: " + name + "!");
         }
 

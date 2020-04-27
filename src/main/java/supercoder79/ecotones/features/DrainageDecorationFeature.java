@@ -26,11 +26,13 @@ public class DrainageDecorationFeature extends Feature<DefaultFeatureConfig> {
             DataPos data = ((DataPos)pos);
             if (data.isLikelyInvalid) return false;
 
-            // too little - clay
-            if (data.drainageType == DrainageType.TOO_LITTLE) {
-                world.setBlockState(pos.down(), Blocks.CLAY.getDefaultState(), 0);
-            } else { // too much - sand
-                world.setBlockState(pos.down(), Blocks.SAND.getDefaultState(), 0);
+            if (world.getBlockState(pos.down()) == Blocks.GRASS.getDefaultState()) {
+                // too little - clay
+                if (data.drainageType == DrainageType.TOO_LITTLE) {
+                    world.setBlockState(pos.down(), Blocks.CLAY.getDefaultState(), 0);
+                } else { // too much - sand
+                    world.setBlockState(pos.down(), Blocks.SAND.getDefaultState(), 0);
+                }
             }
             return true;
         } else {

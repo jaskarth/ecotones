@@ -74,6 +74,10 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
     private void branch(IWorld world, BlockPos startPos, Random random, float yaw, float pitch, int maxHeight, int depth, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
         int height = maxHeight / config.branchingFactor;
 
+        if (depth == (maxHeight / config.branchingFactor) - 1) {
+            height += random.nextInt(4);
+        }
+
         for (int i = 0; i < height; i++) {
             BlockPos local = startPos.add(
                     MathHelper.sin(pitch) * MathHelper.cos(yaw) * i,

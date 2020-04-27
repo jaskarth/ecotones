@@ -10,10 +10,12 @@ public class EcotonesDecorators {
     public static Decorator<ShrubDecoratorConfig> SHRUB_PLACEMENT_DECORATOR;
     public static Decorator<NopeDecoratorConfig> DRAINAGE_DECORATOR;
     public static Decorator<TreeGenerationConfig> TREE_DECORATOR;
+    public static Decorator<NopeDecoratorConfig> ABOVE_QUALITY;
 
     public static void init() {
         SHRUB_PLACEMENT_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "shrub_placement_decorator"), new AnalyticShrubPlacementDecorator(ShrubDecoratorConfig::deserialize));
         DRAINAGE_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "drainage_decorator"), new DrainageSurfaceDecorator(NopeDecoratorConfig::deserialize));
         TREE_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "tree_decorator"), new AnalyticTreePlacementDecorator(TreeGenerationConfig::deserialize));
+        ABOVE_QUALITY = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "above_quality"), new AboveQualityDecorator(NopeDecoratorConfig::deserialize));
     }
 }

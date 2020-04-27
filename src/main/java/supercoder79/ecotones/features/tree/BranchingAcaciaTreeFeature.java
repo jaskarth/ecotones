@@ -43,28 +43,24 @@ public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
 
         branch(world, pos, random, (float) ((Math.PI / 2) + ((random.nextDouble() - 0.5) * (Math.PI * config.yawChange))), (float) ((random.nextDouble() - 0.5) * (Math.PI * config.pitchChange)), maxHeight, 0, leafPlacementNodes, config);
 
-        growLeaves(world, leafPlacementNodes, config);
+        growLeaves(world, random, leafPlacementNodes, config);
 
         return false;
     }
 
-    private void growLeaves(IWorld world, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+    private void growLeaves(IWorld world, Random random, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
         for (BlockPos node : leafPlacementNodes) {
-            generateSmallLeafLayer(world, node.up(2), config);
-            generateSmallLeafLayer(world, node.down(2), config);
+            generateSmallLeafLayer(world, random, node.up(2), config);
 
-            for (int x = -2; x <= 2; x++) {
-                for (int z = -2; z <= 2; z++) {
-                    for (int y = -1; y <= 1; y++) {
-                        //skip the edges
-                        if (Math.abs(x) == 2 && Math.abs(z) == 2) {
-                            continue;
-                        }
-                        //test and set
-                        BlockPos local = node.add(x, y, z);
-                        if (world.getBlockState(local).isAir()) {
-                            world.setBlockState(local, config.leafState, 0);
-                        }
+            for (int x = -3; x <= 3; x++) {
+                for (int z = -3; z <= 3; z++) {
+                    if (Math.abs(x) == 3 && Math.abs(z) == 3) {
+                        continue;
+                    }
+
+                    BlockPos local = node.add(x, 1, z);
+                    if (world.getBlockState(local).isAir()) {
+                        world.setBlockState(local, config.leafState, 0);
                     }
                 }
             }
@@ -73,6 +69,10 @@ public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
 
     private void branch(IWorld world, BlockPos startPos, Random random, float yaw, float pitch, int maxHeight, int depth, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
         int height = maxHeight / config.branchingFactor;
+
+        if (depth == (maxHeight / config.branchingFactor) - 1) {
+            height += random.nextInt(4);
+        }
 
         for (int i = 0; i < height; i++) {
             BlockPos local = startPos.add(
@@ -117,14 +117,37 @@ public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
         }
     }
 
-    private void generateSmallLeafLayer(IWorld world, BlockPos pos, TreeGenerationConfig config) {
-        if (world.getBlockState(pos).isAir()) {
-            world.setBlockState(pos, config.leafState, 0);
-        }
-        for (Direction direction : Direction.Type.HORIZONTAL) {
-            BlockPos local = pos.offset(direction);
-            if (world.getBlockState(local).isAir()) {
-                world.setBlockState(local, config.leafState, 0);
+    private void generateSmallLeafLayer(IWorld world, Random random, BlockPos pos, TreeGenerationConfig config) {
+        //switch small leaf types
+        if (random.nextBoolean()) {
+            //make smaller version of normal leaf layer
+            for (int x = -2; x <= 2; x++) {
+                for (int z = -2; z <= 2; z++) {
+                    if (Math.abs(x) == 2 && Math.abs(z) == 2) {
+                        continue;
+                    }
+                    BlockPos local = pos.add(x, 0, z);
+                    if (world.getBlockState(local).isAir()) {
+                        world.setBlockState(local, config.leafState, 0);
+                    }
+                }
+            }
+        } else {
+            //make vanilla-like small leaf layer
+            for (int x = -1; x <= 1; x++) {
+                for (int z = -1; z <= 1; z++) {
+                    BlockPos local = pos.add(x, 0, z);
+                    if (world.getBlockState(local).isAir()) {
+                        world.setBlockState(local, config.leafState, 0);
+                    }
+                }
+            }
+
+            for (Direction direction : Direction.Type.HORIZONTAL) {
+                BlockPos local = pos.offset(direction, 2);
+                if (world.getBlockState(local).isAir()) {
+                    world.setBlockState(local, config.leafState, 0);
+                }
             }
         }
     }
