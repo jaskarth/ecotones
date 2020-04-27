@@ -10,6 +10,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
@@ -155,5 +156,9 @@ public class SwampBiomes {
         Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.DESERT_BIOME), Registry.BIOME.getRawId(BOG_BIOME));
 
         TerraformBiomeSets.addSlimeSpawnBiomes(BOG_BIOME, MIRE_BIOME, MARSH_BIOME, WETLAND_BIOME);
+        BiomeRegistries.registerNoBeachBiome(BOG_BIOME);
+        BiomeRegistries.registerNoBeachBiome(MIRE_BIOME);
+        BiomeRegistries.registerNoBeachBiome(MARSH_BIOME);
+        BiomeRegistries.registerNoBeachBiome(WETLAND_BIOME);
     }
 }

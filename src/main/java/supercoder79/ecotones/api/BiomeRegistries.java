@@ -55,8 +55,8 @@ public class BiomeRegistries {
         BIOME_VARIANTS.put(Registry.BIOME.getRawId(parent), ids);
     }
 
-    public static void registerNoBeachBiome(int id) {
-        NO_BEACH_BIOMES.add(id);
+    public static void registerNoBeachBiome(Biome biome) {
+        NO_BEACH_BIOMES.add(Registry.BIOME.getRawId(biome));
     }
 
     public static void compile() {

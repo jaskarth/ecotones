@@ -26,7 +26,7 @@ public class DrainageDecorationFeature extends Feature<DefaultFeatureConfig> {
             DataPos data = ((DataPos)pos);
             if (data.isLikelyInvalid) return false;
 
-            if (world.getBlockState(pos.down()) == Blocks.GRASS.getDefaultState()) {
+            if (world.getBlockState(pos.down()) == Blocks.GRASS_BLOCK.getDefaultState()) {
                 // too little - clay
                 if (data.drainageType == DrainageType.TOO_LITTLE) {
                     world.setBlockState(pos.down(), Blocks.CLAY.getDefaultState(), 0);
