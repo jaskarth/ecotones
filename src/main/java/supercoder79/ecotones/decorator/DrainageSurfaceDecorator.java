@@ -30,17 +30,17 @@ public class DrainageSurfaceDecorator extends Decorator<NopeDecoratorConfig> {
         DrainageType type = DrainageType.DEFAULT;
         if (generator instanceof EcotonesChunkGenerator) {
             quality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
-            if (quality < 0.225) {
+            if (quality < 0.2) {
                 //if the drainage is poor, let's see what kind of poor drainage - too much or too little?
                 double noise = ((EcotonesChunkGenerator)generator).getSoilDrainageNoise().sample(pos.getX() + 8, pos.getZ() + 8);
                 // too much - place sand
-                if (noise > 0.75) {
+                if (noise > 0.8) {
                     type = DrainageType.TOO_MUCH;
                 } else { // too little - clay
                     type = DrainageType.TOO_LITTLE;
                 }
                 //1 - 6 decorations
-                decorationCount = (int) ((0.225 - quality) * 15);
+                decorationCount = (int) ((0.2 - quality) * 10);
             }
         }
 

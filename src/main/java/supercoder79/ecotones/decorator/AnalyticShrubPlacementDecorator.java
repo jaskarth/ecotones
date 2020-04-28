@@ -61,7 +61,7 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
             //randomize x and z
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
-            int y = world.getTopY(Heightmap.Type.MOTION_BLOCKING, x, z);
+            int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
 
             //test surrounding blockstates to make sure the area is good
             boolean isLikelyInvalid = false;

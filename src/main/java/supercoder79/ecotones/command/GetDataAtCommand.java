@@ -27,6 +27,7 @@ public class GetDataAtCommand {
         ChunkGenerator generator = source.getWorld().getChunkManager().getChunkGenerator();
         if (generator instanceof EcotonesChunkGenerator) {
             source.sendFeedback(new LiteralText("Soil Drainage: " + ((EcotonesChunkGenerator)generator).getSoilDrainageNoise().sample(source.getPosition().x, source.getPosition().z)), false);
+            source.sendFeedback(new LiteralText("Soil Rockiness: " + ((EcotonesChunkGenerator)generator).getSoilRockinessNoise().sample(source.getPosition().x, source.getPosition().z)), false);
             source.sendFeedback(new LiteralText("Soil Quality: " + ((EcotonesChunkGenerator)generator).getSoilQualityAt(source.getPosition().x, source.getPosition().z)), false);
         } else {
             source.sendFeedback(new LiteralText("This only works on ecotones worlds."), false);
