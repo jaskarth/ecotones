@@ -3,6 +3,7 @@ package supercoder79.ecotones.api;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.biome.EcotonesBiome;
+import supercoder79.ecotones.layers.generation.MountainLayer;
 
 import java.util.*;
 import java.util.function.IntFunction;
@@ -53,6 +54,10 @@ public class BiomeRegistries {
         }
 
         BIOME_VARIANTS.put(Registry.BIOME.getRawId(parent), ids);
+    }
+
+    public static void registerMountains(Biome base, Biome hilly, Biome mountainous) {
+        MountainLayer.Biome2MountainBiomeMap.put(Registry.BIOME.getRawId(base), new Integer[]{Registry.BIOME.getRawId(hilly), Registry.BIOME.getRawId(mountainous)});
     }
 
     public static void registerNoBeachBiome(Biome biome) {

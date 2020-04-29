@@ -1,4 +1,4 @@
-package supercoder79.ecotones.biome.special;
+package supercoder79.ecotones.biome.alternative;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
@@ -16,6 +16,7 @@ import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.biome.BiomeUtil;
 import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
@@ -49,6 +50,8 @@ public class HazelGroveBiome extends EcotonesBiome {
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 300);
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 4);
         BiomeRegistries.registerBiomeVariants(INSTANCE, CLEARING, HILLY, HILLY_CLEARING);
+        Climate.HOT_VERY_HUMID.add(INSTANCE, 0.08);
+        Climate.HOT_HUMID.add(INSTANCE, 0.04);
     }
 
 

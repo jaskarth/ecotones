@@ -34,7 +34,6 @@
 * Large rock formations
 * Move swamps to special biomes
 * Drainage affects tree height in biomes
-* Do some stuff with making big special biomes a part of the existing climate gen
 * Take another look at well carvers
 * Add roofed forest alternative
 
@@ -43,5 +42,11 @@
 * Change shrubs to grow shorter when under trees
 * Trees create podzol, maybe?
 * Surrounding chunks influence chunk data
-* Trees generate shorter at high altitudes
-* Acacia trees
+* Possion Disk Sampling
+* look into Adaptive Incremental Stippling
+* Improve branching algorithm (cellular automata? L-systems?)
+* Different tree species
+* Fruit trees
+* Leaf generation variations
+* Abstract the shit out of tree gen
+* Special tree generation items (acorn, birch seed)

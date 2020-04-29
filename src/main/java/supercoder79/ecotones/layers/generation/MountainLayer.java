@@ -22,6 +22,12 @@ public enum MountainLayer implements ParentedLayer, IdentityCoordinateTransforme
     @Override
     public int sample(LayerSampleContext<?> context, LayerSampler parent, int x, int z) {
         int sample = parent.sample(x, z);
+
+        // fail early if no mountain biomes were registered
+        if (!Biome2MountainBiomeMap.containsKey(sample)) {
+            return sample;
+        }
+
         double mountain = mountainNoise.sample((x + offsetX) / 3f, (z + offsetZ) / 3f)*1.25;
         if (mountain > 0.75) {
             Integer id = Biome2MountainBiomeMap.get(sample)[1];

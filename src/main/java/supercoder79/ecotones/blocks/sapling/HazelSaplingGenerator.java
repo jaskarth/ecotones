@@ -4,7 +4,7 @@ import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
-import supercoder79.ecotones.biome.special.HazelGroveBiome;
+import supercoder79.ecotones.biome.alternative.HazelGroveBiome;
 
 import java.util.Random;
 

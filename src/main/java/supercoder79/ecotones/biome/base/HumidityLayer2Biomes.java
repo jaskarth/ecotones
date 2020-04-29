@@ -1,29 +1,25 @@
-package supercoder79.ecotones.biome;
+package supercoder79.ecotones.biome.base;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.biome.BiomeUtil;
+import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.decorator.EcotonesDecorators;
 import supercoder79.ecotones.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
 
 public class HumidityLayer2Biomes {
-    public static Map<Double, Integer> Humidity2BiomeMap = new LinkedHashMap<>();
-
     public static Biome COOL_DESERT_BIOME;
     public static Biome COOL_SCRUBLAND_BIOME;
     public static Biome COOL_STEPPE_BIOME;
@@ -239,13 +235,13 @@ public class HumidityLayer2Biomes {
                 .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG), 2)
                 .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.MEGA_JUNGLE_TREE_CONFIG), 1));
 
-        Humidity2BiomeMap.put(0.75, Registry.BIOME.getRawId(TEMPERATE_RAINFOREST_BIOME));
-        Humidity2BiomeMap.put(0.5, Registry.BIOME.getRawId(TEMPERATE_FOREST_BIOME));
-        Humidity2BiomeMap.put(0.25, Registry.BIOME.getRawId(SPRUCE_FOREST_BIOME));
-        Humidity2BiomeMap.put(0.1, Registry.BIOME.getRawId(LICHEN_WOODLAND_BIOME));
-        Humidity2BiomeMap.put(-0.1, Registry.BIOME.getRawId(PRAIRIE_BIOME));
-        Humidity2BiomeMap.put(-0.25, Registry.BIOME.getRawId(COOL_STEPPE_BIOME));
-        Humidity2BiomeMap.put(-0.5, Registry.BIOME.getRawId(COOL_SCRUBLAND_BIOME));
-        Humidity2BiomeMap.put(-0.75, Registry.BIOME.getRawId(COOL_DESERT_BIOME));
+        Climate.WARM_DESERT.add(COOL_DESERT_BIOME, 1);
+        Climate.WARM_VERY_DRY.add(COOL_SCRUBLAND_BIOME, 1);
+        Climate.WARM_DRY.add(COOL_STEPPE_BIOME, 1);
+        Climate.WARM_MODERATE.add(PRAIRIE_BIOME, 1);
+        Climate.WARM_MILD.add(LICHEN_WOODLAND_BIOME, 1);
+        Climate.WARM_HUMID.add(SPRUCE_FOREST_BIOME, 1);
+        Climate.WARM_VERY_HUMID.add(TEMPERATE_FOREST_BIOME, 1);
+        Climate.WARM_RAINFOREST.add(TEMPERATE_RAINFOREST_BIOME, 1);
     }
 }

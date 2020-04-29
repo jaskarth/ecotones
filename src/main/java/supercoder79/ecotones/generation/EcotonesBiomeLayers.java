@@ -50,7 +50,9 @@ public class EcotonesBiomeLayers {
         biomeLayer = MountainLayer.INSTANCE.create(contextProvider.apply(49L), biomeLayer, seed + 1337);
         biomeLayer = DrainageLayer.INSTANCE.create(contextProvider.apply(4L), biomeLayer, seed + 97);
 
-        biomeLayer = stack(7979L, ScaleLayer.NORMAL, biomeLayer, 7, contextProvider);
+        biomeLayer = stack(7970L, ScaleLayer.NORMAL, biomeLayer, 2, contextProvider);
+        biomeLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), biomeLayer);
+        biomeLayer = stack(7979L, ScaleLayer.NORMAL, biomeLayer, 5, contextProvider);
 
         //Initialize special biomes (smaller biomes with c o o l effects)
         LayerFactory<T> specialBiomesLayer = PlainsOnlyLayer.INSTANCE.create(contextProvider.apply(3L));

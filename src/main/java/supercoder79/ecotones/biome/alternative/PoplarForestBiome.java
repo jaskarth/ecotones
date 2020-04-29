@@ -1,20 +1,20 @@
-package supercoder79.ecotones.biome.special;
+package supercoder79.ecotones.biome.alternative;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.CountDecoratorConfig;
-import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.decorator.*;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.MineshaftFeature;
+import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.biome.BiomeUtil;
 import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.decorator.EcotonesDecorators;
@@ -23,44 +23,56 @@ import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;
 
-public class CloverFieldsBiome extends EcotonesBiome {
-    public static CloverFieldsBiome INSTANCE;
-    public static CloverFieldsBiome THICKET;
-    public static CloverFieldsBiome FLATS;
-    public static CloverFieldsBiome HILLS;
-    public static CloverFieldsBiome SHRUB;
+public class PoplarForestBiome extends EcotonesBiome {
+    public static PoplarForestBiome INSTANCE;
+    public static PoplarForestBiome CLEARING;
+    public static PoplarForestBiome THICKET;
+    public static PoplarForestBiome FLATS;
+    public static PoplarForestBiome HILLS;
+    public static PoplarForestBiome SHRUB;
+
+    public static PoplarForestBiome BIRCH;
+    public static PoplarForestBiome OAK;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "clover_fields"), new CloverFieldsBiome(0.5F, 0.05F, 0, 1, 2.4, 0.95));
-        THICKET = Registry.register(Registry.BIOME, new Identifier("ecotones", "clover_thicket"), new CloverFieldsBiome(0.5F, 0.025F, 2, 2, 2.8, 0.9));
-        FLATS = Registry.register(Registry.BIOME, new Identifier("ecotones", "clover_flats"), new CloverFieldsBiome(0.5F, 0.01F, 0, 2, 1.2, 1.2));
-        HILLS = Registry.register(Registry.BIOME, new Identifier("ecotones", "clover_hills"), new CloverFieldsBiome(1.2F, 0.625F, 0, 1, 4.8, 0.75));
-        SHRUB = Registry.register(Registry.BIOME, new Identifier("ecotones", "clover_shrubs"), new CloverFieldsBiome(0.5F, 0.025F, 0, 4, 2.8, 0.9));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "poplar_forest"), new PoplarForestBiome(0.5F, 0.05F, 3, 2, 1, 2.4, 0.95));
+        CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "poplar_forest_clearing"), new PoplarForestBiome(0.5F, 0.05F, 0, 0, 1, 2.4, 0.95));
+        THICKET = Registry.register(Registry.BIOME, new Identifier("ecotones", "poplar_forest_thicket"), new PoplarForestBiome(0.5F, 0.025F, 6, 6, 2, 2.8, 0.9));
+        FLATS = Registry.register(Registry.BIOME, new Identifier("ecotones", "poplar_forest_flats"), new PoplarForestBiome(0.5F, 0.01F, 2, 2, 2, 1.2, 1.2));
+        HILLS = Registry.register(Registry.BIOME, new Identifier("ecotones", "poplar_forest_hills"), new PoplarForestBiome(1.2F, 0.625F, 3, 2, 1, 4.8, 0.75));
+        SHRUB = Registry.register(Registry.BIOME, new Identifier("ecotones", "poplar_forest_shrubs"), new PoplarForestBiome(0.5F, 0.025F, 2, 2, 4, 2.8, 0.9));
+
+        OAK = Registry.register(Registry.BIOME, new Identifier("ecotones", "poplar_forest_oak"), new PoplarForestBiome(0.5F, 0.05F, 5, 1, 1, 2.4, 0.95));
+        BIRCH = Registry.register(Registry.BIOME, new Identifier("ecotones", "poplar_forest_birch"), new PoplarForestBiome(0.5F, 0.05F, 1, 5, 1, 2.4, 0.95));
 
         BiomeRegistries.registerAllSpecial(id ->
                 BiomeUtil.contains(id, "lichen_woodland") || BiomeUtil.contains(id, "spruce_forest") || BiomeUtil.contains(id, "prairie")
                 , INSTANCE, THICKET, FLATS, HILLS, SHRUB);
 
-        BiomeRegistries.registerBigSpecialBiome(INSTANCE, 45);
+        BiomeRegistries.registerBigSpecialBiome(INSTANCE, 40);
+
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 2);
-        BiomeRegistries.registerBiomeVariants(INSTANCE, THICKET, FLATS, HILLS, SHRUB);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, CLEARING, THICKET, FLATS, HILLS, SHRUB, OAK, BIRCH);
+        Climate.WARM_VERY_HUMID.add(INSTANCE, 0.3);
+        Climate.HOT_VERY_HUMID.add(INSTANCE, 0.2);
+        Climate.HOT_HUMID.add(INSTANCE, 0.15);
     }
 
-    public CloverFieldsBiome(float depth, float scale, int treeSpawnAmt, int shrubSpawnAmt, double hilliness, double volatility) {
-        super((new Biome.Settings())
+    public PoplarForestBiome(float depth, float scale, int oakTreeSpawnAmt, int birchTreeSpawnAmt, int shrubSpawnAmt, double hilliness, double volatility) {
+        super((new Settings())
                         .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
-                        .precipitation(Biome.Precipitation.RAIN)
-                        .category(Biome.Category.PLAINS)
+                        .precipitation(Precipitation.RAIN)
+                        .category(Category.PLAINS)
                         .depth(depth)
                         .scale(scale)
-                        .temperature(1F)
-                        .downfall(0.4F)
+                        .temperature(0.7F)
+                        .downfall(0.6F)
                         .effects(new BiomeEffects.Builder()
                                 .waterColor(4159204)
                                 .waterFogColor(329011)
                                 .fogColor(12638463)
                                 .build()).parent(null)
-                        .noises(ImmutableList.of(new Biome.MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
+                        .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
                 hilliness,
                 volatility);
 
@@ -80,15 +92,11 @@ public class CloverFieldsBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))));
+                        .createDecoratedFeature(EcotonesDecorators.ROCKINESS.configure(DecoratorConfig.DEFAULT)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG)
                         .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 6, 14))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
-                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(14))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
@@ -96,23 +104,13 @@ public class CloverFieldsBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.POPLAR_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(treeSpawnAmt, 0.25f, 1))));
+                        .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(oakTreeSpawnAmt, 0.25f, 1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.POPLAR_TREE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(treeSpawnAmt, 0.25f, 1))));
+                EcotonesFeatures.POPLAR_TREE.configure(new SimpleTreeFeatureConfig(Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState()))
+                        .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(birchTreeSpawnAmt, 0.25f, 1))));
 
         BiomeUtil.addDefaultSpawns(this);
         BiomeUtil.addDefaultFeatures(this);
-    }
-
-    @Override
-    public int getGrassColorAt(double x, double y) {
-        return 0x308046;
-    }
-
-    @Override
-    public int getFoliageColor() {
-        return 0x308046;
     }
 }

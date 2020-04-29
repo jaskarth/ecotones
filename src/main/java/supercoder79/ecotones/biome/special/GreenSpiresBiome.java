@@ -30,6 +30,7 @@ public class GreenSpiresBiome extends EcotonesBiome {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "green_spires"), new GreenSpiresBiome());
         BiomeRegistries.registerSpecialBiome(INSTANCE, id -> true);
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 400);
+        BiomeRegistries.registerNoBeachBiome(INSTANCE);
     }
 
 

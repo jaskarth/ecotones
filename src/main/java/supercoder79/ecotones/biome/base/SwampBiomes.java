@@ -1,4 +1,4 @@
-package supercoder79.ecotones.biome;
+package supercoder79.ecotones.biome.base;
 
 import com.terraformersmc.terraform.util.TerraformBiomeSets;
 import net.minecraft.block.Blocks;
@@ -11,6 +11,7 @@ import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.features.EcotonesFeatures;
 import supercoder79.ecotones.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.features.config.SimpleTreeFeatureConfig;

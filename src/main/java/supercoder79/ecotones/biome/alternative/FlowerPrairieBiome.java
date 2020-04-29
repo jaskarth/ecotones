@@ -1,4 +1,4 @@
-package supercoder79.ecotones.biome.special;
+package supercoder79.ecotones.biome.alternative;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
@@ -14,6 +14,7 @@ import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.biome.BiomeUtil;
 import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.decorator.EcotonesDecorators;
@@ -29,17 +30,10 @@ public class FlowerPrairieBiome extends EcotonesBiome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "flower_prairie"), new FlowerPrairieBiome(0.5F, 0.025F));
-        BiomeRegistries.registerSpecialBiome(INSTANCE, id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie"));
-
         HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "flower_prairie_hilly"), new FlowerPrairieBiome(1.25F, 0.225F));
-        BiomeRegistries.registerSpecialBiome(HILLY, id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie_hilly"));
-
         MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "flower_prairie_mountainous"), new FlowerPrairieBiome(2F, 0.625F));
-        BiomeRegistries.registerSpecialBiome(MOUNTAINOUS, id -> Registry.BIOME.get(id).getName().asString().equals("biome.ecotones.prairie_mountainous"));
-
-        BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 10);
-        BiomeRegistries.registerSmallSpecialBiome(HILLY, 10);
-        BiomeRegistries.registerSmallSpecialBiome(MOUNTAINOUS, 10);
+        BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
+        Climate.WARM_MODERATE.add(INSTANCE, 0.2);
     }
 
     public FlowerPrairieBiome(float depth, float scale) {

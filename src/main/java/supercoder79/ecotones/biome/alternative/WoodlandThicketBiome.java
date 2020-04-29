@@ -1,4 +1,4 @@
-package supercoder79.ecotones.biome.special;
+package supercoder79.ecotones.biome.alternative;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
@@ -17,6 +17,7 @@ import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.biome.BiomeUtil;
 import supercoder79.ecotones.biome.EcotonesBiome;
 import supercoder79.ecotones.decorator.EcotonesDecorators;
@@ -34,7 +35,7 @@ public class WoodlandThicketBiome extends EcotonesBiome {
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "woodland_thicket"), new WoodlandThicketBiome(0.5F, 0.125F, 2.1, 1, 5));
         CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "woodland_clearing"), new WoodlandThicketBiome(0.5F, 0.0F, 1.2, 0.88, 2));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "woodland_hilly"), new WoodlandThicketBiome(1.2F, 0.8F, 3.2, 0.6, 5));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "woodland_hilly"), new WoodlandThicketBiome(1.2F, 0.8F, 3.2, 0.7, 5));
         HILLY_CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "woodland_clearing_hilly"), new WoodlandThicketBiome(1.2F, 0.2F, 1.6, 0.8, 2));
 
         BiomeRegistries.registerAllSpecial(id -> {
@@ -50,6 +51,9 @@ public class WoodlandThicketBiome extends EcotonesBiome {
 
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 4);
         BiomeRegistries.registerBiomeVariants(INSTANCE, CLEARING, HILLY, HILLY_CLEARING);
+        Climate.WARM_VERY_HUMID.add(INSTANCE, 0.3);
+        Climate.HOT_VERY_HUMID.add(INSTANCE, 0.2);
+        Climate.HOT_HUMID.add(INSTANCE, 0.15);
     }
 
     public WoodlandThicketBiome(float depth, float scale, double hilliness, double volatility, int treeAmt) {

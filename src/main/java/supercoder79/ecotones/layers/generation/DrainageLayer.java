@@ -1,9 +1,8 @@
 package supercoder79.ecotones.layers.generation;
 
-import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
 import net.minecraft.world.biome.layer.util.*;
-import supercoder79.ecotones.biome.SwampBiomes;
+import supercoder79.ecotones.biome.base.SwampBiomes;
 import supercoder79.ecotones.layers.seed.SeedLayer;
 import supercoder79.ecotones.noise.OpenSimplexNoise;
 
