@@ -122,8 +122,17 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                     break;
                 }
 
-                branch(world, local, random, (float) (yaw + ((random.nextDouble() - 0.5) * (Math.PI * config.yawChange))), (float) (pitch + ((random.nextDouble() - 0.5) * (Math.PI * config.pitchChange))), maxHeight, depth + 1, leafPlacementNodes, config);
-                branch(world, local, random, (float) (yaw - ((random.nextDouble() - 0.5) * (Math.PI * config.yawChange))), (float) (pitch - ((random.nextDouble() - 0.5) * (Math.PI * config.pitchChange))), maxHeight, depth + 1, leafPlacementNodes, config);
+                //branch in approximately opposite directions
+                double maxYaw = (Math.PI * config.pitchChange);
+                double yaw1 = random.nextDouble() - 0.5;
+                double yaw2 = -yaw1;
+
+                double maxPitch = (Math.PI * config.yawChange);
+                double pitch1 = random.nextDouble() - 0.5;
+                double pitch2 = -pitch1;
+
+                branch(world, local, random, (float) (yaw + (yaw1 * maxYaw)), (float) (pitch + (pitch1 * maxPitch)), maxHeight, depth + 1, leafPlacementNodes, config);
+                branch(world, local, random, (float) (yaw + (yaw2 * maxYaw)), (float) (pitch + (pitch2 * maxPitch)), maxHeight, depth + 1, leafPlacementNodes, config);
             }
         }
     }

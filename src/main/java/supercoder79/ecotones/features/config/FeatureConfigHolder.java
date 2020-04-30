@@ -6,12 +6,14 @@ import net.minecraft.class_5204;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
+import net.minecraft.world.gen.placer.DoublePlantPlacer;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.treedecorator.PineconeTreeDecorator;
+import supercoder79.ecotones.util.DoubleOrNormalPlacer;
 
 public class FeatureConfigHolder {
 
@@ -47,6 +49,13 @@ public class FeatureConfigHolder {
                     .addState(EcotonesBlocks.shortGrass.getDefaultState(), 16)
                     .addState(EcotonesBlocks.wildflowersBlock.getDefaultState(), 1)
                     .addState(Blocks.GRASS.getDefaultState(), 2), new SimpleBlockPlacer()).tries(32).build();
+
+    public static RandomPatchFeatureConfig TALL_GRASS_CONFIG =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.shortGrass.getDefaultState(), 1)
+                    .addState(EcotonesBlocks.wildflowersBlock.getDefaultState(), 1)
+                    .addState(Blocks.GRASS.getDefaultState(), 4)
+                    .addState(Blocks.TALL_GRASS.getDefaultState(), 1), new DoubleOrNormalPlacer()).tries(32).build();
 
     public static RandomPatchFeatureConfig DESERT_GRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()

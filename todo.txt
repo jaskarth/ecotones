@@ -3,6 +3,9 @@
 * Heathland
 * Moor
 * Bayou
+* Temperate Grassland
+* Everglades
+* Chaparral
 * Steppe -> something unique
 * Forest with balloon-y trees (see misc entry)
 * Lowlands with jungle bush-like shrubs

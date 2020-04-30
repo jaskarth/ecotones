@@ -71,6 +71,7 @@ public class Ecotones implements ModInitializer {
 		WastelandBiome.init();
 		CloverFieldsBiome.init();
 		PoplarForestBiome.init();
+		TemperateGrasslandBiome.init();
 
 		// mod compat
 		if (FabricLoader.getInstance().isModLoaded("traverse")) {
