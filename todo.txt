@@ -3,7 +3,6 @@
 * Heathland
 * Moor
 * Bayou
-* Temperate Grassland
 * Everglades
 * Chaparral
 * Steppe -> something unique
