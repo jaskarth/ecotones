@@ -82,6 +82,10 @@ public class HumidityLayer1Biomes {
                         EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
                         .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(3, 0.5f, 2))))
 
+                .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                        Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
+                                .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(12))))
+
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
                                 .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(5))))
@@ -114,6 +118,10 @@ public class HumidityLayer1Biomes {
                         EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
                                 .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(7, 0.5f, 3))))
 
+                .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                        Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
+                                .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(13))))
+
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
                                 .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(4))))
@@ -137,6 +145,10 @@ public class HumidityLayer1Biomes {
                 .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 10))
 
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
+
+                .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                        Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
+                                .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(14))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
@@ -166,6 +178,10 @@ public class HumidityLayer1Biomes {
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
                 .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 12))
+
+                .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                        Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
+                                .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(14))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)

@@ -33,6 +33,11 @@ public class FeatureConfigHolder {
                     .addState(EcotonesBlocks.shortGrass.getDefaultState(), 6)
                     .addState(EcotonesBlocks.smallShrubBlock.getDefaultState(), 2)
                     .addState(Blocks.GRASS.getDefaultState(), 1), new SimpleBlockPlacer()).tries(32).build();
+    public static RandomPatchFeatureConfig COOL_SCRUBLAND_CONFIG =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.shortGrass.getDefaultState(), 4)
+                    .addState(EcotonesBlocks.smallShrubBlock.getDefaultState(), 5)
+                    .addState(Blocks.GRASS.getDefaultState(), 1), new SimpleBlockPlacer()).tries(48).build();
 
     public static RandomPatchFeatureConfig SHORT_GRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()

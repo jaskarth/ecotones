@@ -16,6 +16,7 @@
 * Different beach types
 * Inland oceans
 * Coastal biome variants
+* Palm forest
 
 # Blocks and items
 * More flower types
@@ -45,7 +46,7 @@
 * Trees create podzol, maybe?
 * Surrounding chunks influence chunk data
 * Possion Disk Sampling
-* look into Adaptive Incremental Stippling
+* look into Adaptive Incremental Stippling (https://iopscience.iop.org/article/10.1088/1361-6501/ab10b9)
 * Improve branching algorithm (cellular automata? L-systems?)
 * Different tree species
 * Fruit trees
