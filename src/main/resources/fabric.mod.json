@@ -1,19 +1,18 @@
 {
   "schemaVersion": 1,
   "id": "ecotones",
-  "version": "0.3.0",
+  "version": "0.4.0",
 
   "name": "Ecotones",
-  "description": "A biome overhauld mod",
+  "description": "A biome overhaul mod with realistic and expansive biomes filled with life",
   "authors": [
     "SuperCoder79"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/SuperCoder7979/ecotones"
   },
 
-  "license": "CC0-1.0",
+  "license": "LGPLv3",
   "icon": "assets/ecotones/icon.png",
 
   "environment": "*",
@@ -35,6 +34,7 @@
     "minecraft": ">=1.16-"
   },
   "suggests": {
-    "flamingo": "*"
+    "traverse": "*",
+    "terrestria": "*"
   }
 }

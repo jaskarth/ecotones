@@ -59,6 +59,12 @@ public class HumidityLayer2Biomes {
                 .addStructureFeature(Feature.DESERT_PYRAMID, FeatureConfig.DEFAULT)
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
                 .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 10))
+
+                .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 4)
+
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(3))))
+
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
         COOL_SCRUBLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "cool_scrubland"), template.builder()

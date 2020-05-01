@@ -55,6 +55,11 @@ public class HumidityLayer1Biomes {
             .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS).createDecoratedFeature(EcotonesDecorators.ROCKINESS.configure(DecoratorConfig.DEFAULT)))
 
+            .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 2)
+
+            .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                    Feature.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))))
+
             .addDefaultSpawnEntries());
 
     public static void init() {
@@ -62,7 +67,7 @@ public class HumidityLayer1Biomes {
                 .hilliness(1.6)
                 .addStructureFeature(Feature.DESERT_PYRAMID, FeatureConfig.DEFAULT)
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 8))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 5))
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
         SCRUBLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "scrubland"), template.builder()
@@ -72,7 +77,7 @@ public class HumidityLayer1Biomes {
                 .hilliness(1.6)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 10))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 5))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG)
@@ -142,7 +147,7 @@ public class HumidityLayer1Biomes {
                 .hilliness(1.8)
 
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 10))
+                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 8))
 
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
 

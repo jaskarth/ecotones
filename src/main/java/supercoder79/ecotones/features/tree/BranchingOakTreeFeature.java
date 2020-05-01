@@ -41,7 +41,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
 
         List<BlockPos> leafPlacementNodes = new ArrayList<>();
 
-        branch(world, pos, random, (float) (Math.PI / 2), 0, maxHeight, 0, leafPlacementNodes, config);
+        branch(world, pos, random, (float) (random.nextDouble() * 2 * Math.PI), 0, maxHeight, 0, leafPlacementNodes, config);
 
         growLeaves(world, leafPlacementNodes, config);
 
