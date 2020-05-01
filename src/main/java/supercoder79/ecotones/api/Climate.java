@@ -1,8 +1,6 @@
 package supercoder79.ecotones.api;
 
 import com.google.common.collect.Lists;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.WeightedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;

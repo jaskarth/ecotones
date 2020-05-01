@@ -5,8 +5,8 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import supercoder79.ecotones.generation.EcotonesChunkGenerator;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
+import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 
 @Mixin(ChunkGenerator.class)
 public class MixinChunkGenerator {

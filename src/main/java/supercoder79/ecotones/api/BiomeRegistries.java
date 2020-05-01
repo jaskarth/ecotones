@@ -2,10 +2,12 @@ package supercoder79.ecotones.api;
 
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import supercoder79.ecotones.biome.EcotonesBiome;
-import supercoder79.ecotones.layers.generation.MountainLayer;
+import supercoder79.ecotones.world.layers.generation.MountainLayer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.IntFunction;
 
 public class BiomeRegistries {

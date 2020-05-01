@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import supercoder79.ecotones.generation.WorldType;
+import supercoder79.ecotones.world.generation.WorldType;
 
 @Mixin(OverworldDimension.class)
 public abstract class MixinOverworldDimension extends Dimension {

@@ -4,7 +4,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeUtil;
 
 public class TerrestriaCompat {
     public static void init() {

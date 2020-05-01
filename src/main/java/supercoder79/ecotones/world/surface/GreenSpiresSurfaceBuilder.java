@@ -1,0 +1,41 @@
+package supercoder79.ecotones.world.surface;
+
+import com.mojang.datafixers.Dynamic;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
+
+import java.util.Random;
+import java.util.function.Function;
+
+public class GreenSpiresSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
+    private static final TernarySurfaceConfig GEYSER_CONFIG = new TernarySurfaceConfig(EcotonesBlocks.geyserBlock.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.GRAVEL.getDefaultState());
+
+    public GreenSpiresSurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function) {
+        super(function);
+    }
+
+    @Override
+    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, TernarySurfaceConfig config) {
+        int rand = random.nextInt(1024);
+        if (rand == 1) {
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, GEYSER_CONFIG);
+        } else if (rand == 2) {
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, config);
+            boolean n = chunk.getBlockState(new BlockPos(x-1, height-1, z)).isAir();
+            boolean s = chunk.getBlockState(new BlockPos(x+1, height-1, z)).isAir();
+            boolean e = chunk.getBlockState(new BlockPos(x, height-1, z+1)).isAir();
+            boolean w = chunk.getBlockState(new BlockPos(x, height-1, z-1)).isAir();
+            if (!n && !s && !e && !w) {
+                chunk.setBlockState(new BlockPos(x, height-1, z), Blocks.WATER.getDefaultState(), false);
+            }
+        } else {
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, config);
+        }
+    }
+}

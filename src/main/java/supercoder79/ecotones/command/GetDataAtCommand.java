@@ -5,11 +5,8 @@ import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import supercoder79.ecotones.generation.EcotonesChunkGenerator;
-
-import java.util.Objects;
+import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 
 public class GetDataAtCommand {
     public static void init() {

@@ -7,16 +7,12 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.datafixer.NbtOps;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.GameMode;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.level.LevelGeneratorOptions;
-import net.minecraft.world.level.LevelGeneratorType;
 import net.minecraft.world.level.LevelInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,9 +20,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import supercoder79.ecotones.Ecotones;
-import supercoder79.ecotones.generation.LevelGenUtil;
-import supercoder79.ecotones.generation.WorldType;
+import supercoder79.ecotones.world.generation.LevelGenUtil;
+import supercoder79.ecotones.world.generation.WorldType;
 
 import java.util.Random;
 
