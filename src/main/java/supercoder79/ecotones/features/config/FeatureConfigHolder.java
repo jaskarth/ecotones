@@ -2,9 +2,9 @@ package supercoder79.ecotones.features.config;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
-import net.minecraft.class_5204;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
+import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.placer.DoublePlantPlacer;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
@@ -102,6 +102,6 @@ public class FeatureConfigHolder {
                     new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
                     new SpruceFoliagePlacer(2, 1, 0, 2, 1, 1),
                     new StraightTrunkPlacer(6, 4, 3),
-                    new class_5204(2, 0, 2)))
-                    .method_27374().build().method_27373(ImmutableList.of(new PineconeTreeDecorator(6)));
+                    new TwoLayersFeatureSize(2, 0, 2)))
+                    .method_27374().build().setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(6)));
 }

@@ -18,10 +18,11 @@ public class HazelFoliagePlacer extends FoliagePlacer {
         this.height = height;
     }
 
-    protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig treeFeatureConfig, int trunkHeight, FoliagePlacer.class_5208 arg, int foliageHeight, int radius, Set<BlockPos> leaves, int i) {
+    @Override
+    protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int i) {
         for(int j = i; j >= i - foliageHeight; --j) {
-            int k = Math.max(radius + arg.method_27389() - 1 - j / 2, 0);
-            this.generate(world, random, treeFeatureConfig, arg.method_27388(), k, leaves, j, arg.method_27390());
+            int k = Math.max(radius + treeNode.getFoliageRadius() - 1 - j / 2, 0);
+            this.generate(world, random, config, treeNode.getCenter(), k, leaves, j, treeNode.isGiantTrunk());
         }
     }
 

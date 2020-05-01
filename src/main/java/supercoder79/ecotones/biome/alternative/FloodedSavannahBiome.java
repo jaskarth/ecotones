@@ -67,11 +67,11 @@ public class FloodedSavannahBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.ACACIA.config)
-                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.ACACIA.config)));
+                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.ACACIA.config.decorationData)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BRANCHING_OAK.configure(TreeType.RARE_LARGE_OAK.config)
-                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_OAK.config)));
+                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_OAK.config.decorationData)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)

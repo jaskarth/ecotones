@@ -11,6 +11,7 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+	mavenLocal()
 	maven { url = "https://jitpack.io" }
 }
 
@@ -34,7 +35,7 @@ dependencies {
 	//wait for jelly to update to 1.16
 	modRuntime ("com.github.mrmangohands:sodium-fabric:4ba93ad1aa3b18b8284e4c455004da722bdd883e")
 	modRuntime ("com.github.SuperCoder7979:phosphor-fabric:11d964bf07d44bdf6cbdbb7cce25ed9da81d9f78")
-	modRuntime ("com.github.SuperCoder7979:lithium-fabric:084e95f5db18404cae388eb35d7ef87f181b650a")
+	modRuntime ("com.github.SuperCoder7979:lithium-fabric:126ed6dd3e0f163e3111104d8f8fbbb52c607ba4")
 
 	include "com.terraformersmc:terraform:${project.terraform_version}"
 

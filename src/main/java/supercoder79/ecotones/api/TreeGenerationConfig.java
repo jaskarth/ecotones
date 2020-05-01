@@ -10,7 +10,8 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 /**
  * Generation details for an ecotones tree. Tree generators may not implement every detail here.
  */
-public class TreeGenerationConfig implements FeatureConfig, DecoratorConfig {
+public class TreeGenerationConfig implements FeatureConfig {
+    public final DecorationData decorationData;
     public final double targetCount;
     public final BlockState woodState;
     public final BlockState leafState;
@@ -22,6 +23,7 @@ public class TreeGenerationConfig implements FeatureConfig, DecoratorConfig {
     public final double pitchChange;
 
     public TreeGenerationConfig(double targetCount, BlockState woodState, BlockState leafState, int branchingFactor, int thickTrunkDepth, int minSize, int noiseCoefficient, double yawChange, double pitchChange) {
+        this.decorationData = new DecorationData(targetCount, minSize, noiseCoefficient);
         this.targetCount = targetCount;
         this.woodState = woodState;
         if (leafState.getProperties().contains(Properties.DISTANCE_1_7)) {
@@ -45,5 +47,27 @@ public class TreeGenerationConfig implements FeatureConfig, DecoratorConfig {
     //this is highly blessed but it's alright
     public static TreeGenerationConfig deserialize(Dynamic<?> dynamic) {
         return TreeType.OAK.config;
+    }
+
+    public static class DecorationData implements DecoratorConfig {
+        public final double targetCount;
+        public final int minSize;
+        public final int noiseCoefficient;
+
+        public DecorationData(double targetCount, int minSize, int noiseCoefficient) {
+            this.targetCount = targetCount;
+            this.minSize = minSize;
+            this.noiseCoefficient = noiseCoefficient;
+        }
+
+        @Override
+        public <T> Dynamic<T> serialize(DynamicOps<T> ops) {
+            return null;
+        }
+
+        //blessed boogaloo
+        public static DecorationData deserialize(Dynamic<?> dynamic) {
+            return TreeType.OAK.config.decorationData;
+        }
     }
 }

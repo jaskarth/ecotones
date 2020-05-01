@@ -42,11 +42,11 @@ public abstract class MixinCreateWorldScreen extends Screen {
 
     @Shadow private Difficulty field_24290;
 
-    @Shadow private GameRules field_24288;
-
     @Shadow private TextFieldWidget levelNameField;
 
     @Shadow private String saveDirectoryName;
+
+    @Shadow private GameRules gameRules;
 
     @Inject(method = "init", at = @At("TAIL"))
     public void addEcotonesButton(CallbackInfo ci) {
@@ -79,7 +79,7 @@ public abstract class MixinCreateWorldScreen extends Screen {
                     false,
                     this.field_24290,
                     LevelGenUtil.makeChunkGenerator(WorldType.generatorType, new Dynamic<>(NbtOps.INSTANCE, new CompoundTag())),
-                    this.field_24288).enableCommands();
+                    this.gameRules).enableCommands();
 
             this.client.startIntegratedServer(this.saveDirectoryName, info);
         }

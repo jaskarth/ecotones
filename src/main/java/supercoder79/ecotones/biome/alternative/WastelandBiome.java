@@ -2,9 +2,6 @@ package supercoder79.ecotones.biome.alternative;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
-import net.minecraft.class_5204;
-import net.minecraft.class_5207;
-import net.minecraft.class_5212;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
@@ -18,9 +15,12 @@ import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
+import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
+import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.biome.BiomeUtil;
 import supercoder79.ecotones.biome.EcotonesBiome;
@@ -38,9 +38,9 @@ public class WastelandBiome extends EcotonesBiome {
     private static final TreeFeatureConfig WASTELAND_TREE = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.AIR.getDefaultState()),
-            new class_5207(2, 0, 4, 0, 4),
-            new class_5212(3, 11, 0),
-            new class_5204(0, 0, 0, OptionalInt.of(4)))
+            new LargeOakFoliagePlacer(2, 0, 4, 0, 4),
+            new LargeOakTrunkPlacer(3, 11, 0),
+            new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
             .method_27374().method_27375(Heightmap.Type.MOTION_BLOCKING).build();
 
     public static WastelandBiome INSTANCE;

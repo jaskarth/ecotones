@@ -2,7 +2,6 @@ package supercoder79.ecotones.biome.alternative;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
-import net.minecraft.class_5204;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.BiomeEffects;
@@ -12,6 +11,7 @@ import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
@@ -31,9 +31,9 @@ public class PinePeaksBiome extends EcotonesBiome {
             new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
             new SmallPineFoliagePlacer(1, 0, 1, 0, 4, 2),
             new StraightTrunkPlacer(9, 6, 0),
-            new class_5204(2, 0, 2))
+            new TwoLayersFeatureSize(2, 0, 2))
             .method_27374()
-            .build().method_27373(ImmutableList.of(new PineconeTreeDecorator(2)));
+            .build().setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(2)));
 
     public static PinePeaksBiome INSTANCE;
 

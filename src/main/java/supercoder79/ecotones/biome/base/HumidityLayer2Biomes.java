@@ -118,7 +118,7 @@ public class HumidityLayer2Biomes {
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.RARE_ACACIA.config)
-                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_ACACIA.config)))
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_ACACIA.config.decorationData)))
 
                 .addTreeFeature(EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT), 1)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG));
@@ -212,11 +212,11 @@ public class HumidityLayer2Biomes {
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.BRANCHING_OAK.configure(TreeType.OAK.config)
-                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.OAK.config)))
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.OAK.config.decorationData)))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.BIRCH.config)
-                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.BIRCH.config)))
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.BIRCH.config.decorationData)))
 
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,

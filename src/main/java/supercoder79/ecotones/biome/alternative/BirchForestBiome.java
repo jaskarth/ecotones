@@ -86,7 +86,7 @@ public class BirchForestBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.FOREST_BIRCH.config)
-                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.FOREST_BIRCH.config)));
+                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.FOREST_BIRCH.config.decorationData)));
 
         DefaultBiomeFeatures.addForestFlowers(this);
 

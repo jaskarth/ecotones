@@ -204,11 +204,11 @@ public class HumidityLayer1Biomes {
 //                .addTreeFeature(EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT), 2)
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.ACACIA.config)
-                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.ACACIA.config)))
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.ACACIA.config.decorationData)))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.BRANCHING_OAK.configure(TreeType.RARE_LARGE_OAK.config)
-                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_OAK.config)))
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_OAK.config.decorationData)))
         );
 
         DRY_FOREST_BIOME = BiomeUtil.register(new Identifier("ecotones", "dry_forest"), template.builder()
@@ -233,15 +233,15 @@ public class HumidityLayer1Biomes {
 
                         .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                                 EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.ACACIA.config)
-                                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.ACACIA.config)))
+                                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.ACACIA.config.decorationData)))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.BRANCHING_OAK.configure(TreeType.DRY_OAK.config)
-                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.DRY_OAK.config)))
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.DRY_OAK.config.decorationData)))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.DRY_BIRCH.config)
-                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.DRY_BIRCH.config)))
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.DRY_BIRCH.config.decorationData)))
         );
 
         LUSH_FOREST_BIOME = BiomeUtil.register(new Identifier("ecotones", "lush_forest"), template.builder()

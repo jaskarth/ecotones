@@ -26,17 +26,17 @@ public class SmallPineFoliagePlacer extends FoliagePlacer {
         this(data.get("radius").asInt(0), data.get("radius_random").asInt(0), data.get("offset").asInt(0), data.get("offset_random").asInt(0), data.get("height").asInt(0), data.get("height_random").asInt(0));
     }
 
-    protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig treeFeatureConfig, int trunkHeight, FoliagePlacer.class_5208 arg, int foliageHeight, int radius, Set<BlockPos> leaves, int i) {
+    protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig treeFeatureConfig, int trunkHeight, TreeNode node, int foliageHeight, int radius, Set<BlockPos> leaves, int i) {
         int j = 0;
 
         for(int k = i; k >= i - foliageHeight; --k) {
             if (k == i) {
-                this.generate(world, random, treeFeatureConfig, arg.method_27388(), 0, leaves, k + 1, arg.method_27390());
+                this.generate(world, random, treeFeatureConfig, node.getCenter(), 0, leaves, k + 1, node.isGiantTrunk());
             }
-            this.generate(world, random, treeFeatureConfig, arg.method_27388(), 1, leaves, k, arg.method_27390());
+            this.generate(world, random, treeFeatureConfig, node.getCenter(), 1, leaves, k, node.isGiantTrunk());
             if (j >= 1 && k == i - foliageHeight + 1) {
                 --j;
-            } else if (j < radius + arg.method_27389()) {
+            } else if (j < radius + node.getFoliageRadius()) {
                 ++j;
             }
         }

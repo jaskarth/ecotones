@@ -18,13 +18,13 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConfig> {
-    public AnalyticTreePlacementDecorator(Function<Dynamic<?>, ? extends TreeGenerationConfig> configDeserializer) {
+public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConfig.DecorationData> {
+    public AnalyticTreePlacementDecorator(Function<Dynamic<?>, ? extends TreeGenerationConfig.DecorationData> configDeserializer) {
         super(configDeserializer);
     }
 
     @Override
-    public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, TreeGenerationConfig config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, TreeGenerationConfig.DecorationData config, BlockPos pos) {
         double noise = 0.0; // default for if the chunk generator is not ours
         if (generator instanceof EcotonesChunkGenerator) {
             noise = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
