@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
@@ -321,6 +322,11 @@ public class EcotonesBiome extends Biome {
         public EcotonesBiome.Builder waterFogColor(int color) {
             super.waterFogColor(color);
 
+            return this;
+        }
+
+        public EcotonesBiome.Builder particleConfig(BiomeParticleConfig config) {
+            super.particleConfig(config);
             return this;
         }
 

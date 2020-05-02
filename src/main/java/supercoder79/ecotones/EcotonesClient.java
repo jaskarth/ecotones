@@ -4,11 +4,14 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.render.RenderLayer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.client.particle.EcotonesParticles;
+import supercoder79.ecotones.client.particle.SandParticle;
 
 @Environment(EnvType.CLIENT)
 public class EcotonesClient implements ClientModInitializer {
@@ -34,5 +37,7 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.sandyGrassBlock,
                 EcotonesBlocks.cloverBlock,
                 EcotonesBlocks.pineconeBlock);
+
+        ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAND, SandParticle.Factory::new);
     }
 }

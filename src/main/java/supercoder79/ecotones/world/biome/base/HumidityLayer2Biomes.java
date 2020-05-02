@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.biome.base;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
@@ -10,6 +11,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.world.biome.BiomeUtil;
 import supercoder79.ecotones.world.biome.EcotonesBiome;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
@@ -57,6 +59,7 @@ public class HumidityLayer2Biomes {
     public static void init() {
         COOL_DESERT_BIOME = BiomeUtil.register(new Identifier("ecotones", "cool_desert"), template.builder()
                 .hilliness(1.6)
+                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00225F, random -> random.nextDouble(), random -> random.nextDouble() * -0.2, random -> random.nextDouble()))
                 .addStructureFeature(Feature.DESERT_PYRAMID, FeatureConfig.DEFAULT)
                 .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
                 .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 10))

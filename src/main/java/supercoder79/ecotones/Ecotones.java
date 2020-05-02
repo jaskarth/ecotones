@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.sound.Sounds;
 import supercoder79.ecotones.command.GetDataAtCommand;
 import supercoder79.ecotones.compat.TerrestriaCompat;
@@ -38,6 +39,8 @@ public class Ecotones implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		Sounds.init();
+
+		EcotonesParticles.init();
 
         EcotonesBlocks.init();
 		EcotonesItems.init();
