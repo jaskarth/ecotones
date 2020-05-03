@@ -17,6 +17,7 @@
 * Inland oceans
 * Coastal biome variants
 * Palm forest
+* Bluebell wood
 
 # Blocks and items
 * More flower types
@@ -34,11 +35,11 @@
 * Steal zoerestria Bluff
 * Balloon-y tree with edges hanging off (this is very hard to describe in text)
 * Add all biomes to lang file
-* Large rock formations
 * Move swamps to special biomes
-* Drainage affects tree height in biomes
 * Take another look at well carvers
 * Add roofed forest alternative
+* Variants for the newly added biomes
+* Fallen logs for every biome
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas
