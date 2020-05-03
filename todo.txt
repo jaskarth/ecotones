@@ -16,7 +16,6 @@
 * Different beach types
 * Inland oceans
 * Coastal biome variants
-* Palm forest
 * Bluebell wood
 
 # Blocks and items
