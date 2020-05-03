@@ -24,14 +24,13 @@ public class EcotonesFeatures {
     public static BranchingOakTreeFeature BRANCHING_OAK;
     public static ImprovedBirchTreeFeature IMPROVED_BIRCH;
     public static BranchingAcaciaTreeFeature BRANCHING_ACACIA;
+    public static WideShrubFeature WIDE_SHRUB;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig::deserialize));
         CACTI = Registry.register(Registry.FEATURE, new Identifier("ecotones", "cacti"), new PlaceCactiFeature(DefaultFeatureConfig::deserialize));
         SHRUB = Registry.register(Registry.FEATURE, new Identifier("ecotones", "shrub"), new ShrubFeature(SimpleTreeFeatureConfig::deserialize));
-        JUNGLE_PALM_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "palm_tree"),
-                new PalmTreeFeature(TreeFeatureConfig::deserialize, Blocks.JUNGLE_WOOD.getDefaultState())
-        );
+        JUNGLE_PALM_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "palm_tree"), new PalmTreeFeature(TreeFeatureConfig::deserialize, Blocks.JUNGLE_WOOD.getDefaultState()));
         SUGARCANE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "sugarcane"), new SugarCaneFeature(DefaultFeatureConfig::deserialize));
         SMALL_ACACIA = Registry.register(Registry.FEATURE, new Identifier("ecotones", "small_acacia"), new SmallAcaciaTreeFeature());
         BANANA_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "banana_tree"), new BananaTreeFeature(TreeFeatureConfig::deserialize));
@@ -42,5 +41,6 @@ public class EcotonesFeatures {
         BRANCHING_OAK = Registry.register(Registry.FEATURE, new Identifier("ecotones", "branching_oak"), new BranchingOakTreeFeature(TreeGenerationConfig::deserialize));
         IMPROVED_BIRCH = Registry.register(Registry.FEATURE, new Identifier("ecotones", "improved_birch"), new ImprovedBirchTreeFeature(TreeGenerationConfig::deserialize));
         BRANCHING_ACACIA = Registry.register(Registry.FEATURE, new Identifier("ecotones", "branching_acacia"), new BranchingAcaciaTreeFeature(TreeGenerationConfig::deserialize));
+        WIDE_SHRUB = Registry.register(Registry.FEATURE, new Identifier("ecotones", "wide_shrub"), new WideShrubFeature(SimpleTreeFeatureConfig::deserialize));
     }
 }

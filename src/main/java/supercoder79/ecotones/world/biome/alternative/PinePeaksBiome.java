@@ -16,6 +16,7 @@ import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.world.biome.BiomeUtil;
 import supercoder79.ecotones.world.biome.EcotonesBiome;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
@@ -43,6 +44,8 @@ public class PinePeaksBiome extends EcotonesBiome {
                 BiomeUtil.contains(id, "lichen_woodland") || BiomeUtil.contains(id, "spruce_forest") || BiomeUtil.contains(id, "prairie"));
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 80);
+        Climate.WARM_HUMID.add(INSTANCE, 0.04);
+        Climate.WARM_MILD.add(INSTANCE, 0.02);
     }
 
 

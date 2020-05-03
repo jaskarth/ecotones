@@ -1,7 +1,6 @@
 # Biomes
 * Plateau biomes?
 * Heathland
-* Moor
 * Bayou
 * Everglades
 * Chaparral
@@ -39,6 +38,8 @@
 * Add roofed forest alternative
 * Variants for the newly added biomes
 * Fallen logs for every biome
+* Add edge biomes to everything
+* Burned village for dead spruce forests
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas

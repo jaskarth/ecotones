@@ -18,8 +18,8 @@ import supercoder79.ecotones.compat.TerrestriaCompat;
 import supercoder79.ecotones.compat.TraverseCompat;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.world.biome.alternative.*;
-import supercoder79.ecotones.world.biome.base.HumidityLayer1Biomes;
-import supercoder79.ecotones.world.biome.base.HumidityLayer2Biomes;
+import supercoder79.ecotones.world.biome.base.HotBiomes;
+import supercoder79.ecotones.world.biome.base.WarmBiomes;
 import supercoder79.ecotones.world.biome.base.SwampBiomes;
 import supercoder79.ecotones.world.biome.special.*;
 import supercoder79.ecotones.world.biome.technical.BeachBiome;
@@ -49,8 +49,8 @@ public class Ecotones implements ModInitializer {
 		EcotonesSurfaces.init();
 
 		// base biomes
-		HumidityLayer1Biomes.init();
-		HumidityLayer2Biomes.init();
+		HotBiomes.init();
+		WarmBiomes.init();
 		SwampBiomes.init();
 
 		// technical biomes
@@ -74,11 +74,13 @@ public class Ecotones implements ModInitializer {
 		WastelandBiome.init();
 		CloverFieldsBiome.init();
 		PoplarForestBiome.init();
+
 		TemperateGrasslandBiome.init();
 		BirchForestBiome.init();
 		FloodedSavannahBiome.init();
 		DeadSpruceForestBiome.init();
 		PalmForestBiome.init();
+		MoorBiome.init();
 
 		// mod compat
 		if (FabricLoader.getInstance().isModLoaded("traverse")) {

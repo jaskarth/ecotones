@@ -56,7 +56,14 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
         int finalMaxShrubHeight = maxShrubHeight;
 
         //cast for final shrub count
-        int shrubCount = (int) Math.ceil(shrubCountRaw);
+        int shrubCount = (int) Math.floor(shrubCountRaw);
+
+        if (shrubCountRaw < 1) {
+            if (random.nextDouble() < shrubCountRaw) {
+                shrubCount++;
+            }
+        }
+
         return IntStream.range(0, shrubCount).mapToObj((ix) -> {
             //randomize x and z
             int x = random.nextInt(16) + pos.getX();

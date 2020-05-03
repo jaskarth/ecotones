@@ -5,9 +5,9 @@ import com.mojang.datafixers.types.DynamicOps;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
 
 public class ShrubDecoratorConfig implements DecoratorConfig {
-    public int targetCount;
+    public double targetCount;
 
-    public ShrubDecoratorConfig(int targetCount) {
+    public ShrubDecoratorConfig(double targetCount) {
         this.targetCount = targetCount;
     }
 
@@ -17,7 +17,7 @@ public class ShrubDecoratorConfig implements DecoratorConfig {
     }
 
     public static ShrubDecoratorConfig deserialize(Dynamic<?> dynamic) {
-        int i = dynamic.get("targetCount").asInt(0);
+        double i = dynamic.get("targetCount").asDouble(0);
         return new ShrubDecoratorConfig(i);
     }
 }

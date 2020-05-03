@@ -23,7 +23,7 @@ import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
 
-public class HumidityLayer1Biomes {
+public class HotBiomes {
 
     public static Biome DESERT_BIOME;
     public static Biome SCRUBLAND_BIOME;

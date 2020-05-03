@@ -22,7 +22,7 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
 
-public class HumidityLayer2Biomes {
+public class WarmBiomes {
     public static Biome COOL_DESERT_BIOME;
     public static Biome COOL_SCRUBLAND_BIOME;
     public static Biome COOL_STEPPE_BIOME;
@@ -123,6 +123,10 @@ public class HumidityLayer2Biomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.RARE_ACACIA.config)
                                 .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_ACACIA.config.decorationData)))
+
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
+                                .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.15))))
 
                 .addTreeFeature(EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT), 1)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG));

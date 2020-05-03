@@ -147,14 +147,14 @@ public class SwampBiomes {
                 .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 4)
                 .build());
 
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.TROPICAL_RAINFOREST_BIOME), Registry.BIOME.getRawId(WETLAND_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.LUSH_FOREST_BIOME), Registry.BIOME.getRawId(WETLAND_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.DRY_FOREST_BIOME), Registry.BIOME.getRawId(MARSH_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.LUSH_SAVANNAH_BIOME), Registry.BIOME.getRawId(MARSH_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.TROPICAL_GRASSLAND_BIOME), Registry.BIOME.getRawId(MIRE_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.STEPPE_BIOME), Registry.BIOME.getRawId(MIRE_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.SCRUBLAND_BIOME), Registry.BIOME.getRawId(BOG_BIOME));
-        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HumidityLayer1Biomes.DESERT_BIOME), Registry.BIOME.getRawId(BOG_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HotBiomes.TROPICAL_RAINFOREST_BIOME), Registry.BIOME.getRawId(WETLAND_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HotBiomes.LUSH_FOREST_BIOME), Registry.BIOME.getRawId(WETLAND_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HotBiomes.DRY_FOREST_BIOME), Registry.BIOME.getRawId(MARSH_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HotBiomes.LUSH_SAVANNAH_BIOME), Registry.BIOME.getRawId(MARSH_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HotBiomes.TROPICAL_GRASSLAND_BIOME), Registry.BIOME.getRawId(MIRE_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HotBiomes.STEPPE_BIOME), Registry.BIOME.getRawId(MIRE_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HotBiomes.SCRUBLAND_BIOME), Registry.BIOME.getRawId(BOG_BIOME));
+        Biome2SwampBiomeMap.put(Registry.BIOME.getRawId(HotBiomes.DESERT_BIOME), Registry.BIOME.getRawId(BOG_BIOME));
 
         TerraformBiomeSets.addSlimeSpawnBiomes(BOG_BIOME, MIRE_BIOME, MARSH_BIOME, WETLAND_BIOME);
         BiomeRegistries.registerNoBeachBiome(BOG_BIOME);
