@@ -34,15 +34,15 @@ public class BirchForestBiome extends EcotonesBiome {
     public static BirchForestBiome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "birch_forest"), new BirchForestBiome(0.5F, 0.025F));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "birch_forest_hilly"), new BirchForestBiome(1.25F, 0.225F));
-        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "birch_forest_mountainous"), new BirchForestBiome(2F, 0.625F));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "birch_forest"), new BirchForestBiome(0.5F, 0.025F, 2.4, 0.95));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "birch_forest_hilly"), new BirchForestBiome(1.25F, 0.225F, 3.8, 0.85));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "birch_forest_mountainous"), new BirchForestBiome(2F, 0.625F, 4.2, 0.8));
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_VERY_HUMID.add(INSTANCE, 0.2);
         Climate.WARM_HUMID.add(INSTANCE, 0.1);
     }
 
-    public BirchForestBiome(float depth, float scale) {
+    public BirchForestBiome(float depth, float scale, double hilliness, double volatility) {
         super((new Settings())
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
@@ -87,6 +87,10 @@ public class BirchForestBiome extends EcotonesBiome {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.FOREST_BIRCH.config)
                         .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.FOREST_BIRCH.config.decorationData)));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState()))
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(2))));
 
         DefaultBiomeFeatures.addForestFlowers(this);
 

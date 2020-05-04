@@ -36,8 +36,8 @@ public class DeadSpruceForestBiome extends EcotonesBiome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest"), new DeadSpruceForestBiome(0.5F, 0.025F));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest_hilly"), new DeadSpruceForestBiome(1.25F, 0.225F));
-        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest_mountainous"), new DeadSpruceForestBiome(2F, 0.625F));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest_hilly"), new DeadSpruceForestBiome(1.25F, 0.125F));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest_mountainous"), new DeadSpruceForestBiome(2F, 0.325F));
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_VERY_HUMID.add(INSTANCE, 0.1);
         Climate.WARM_HUMID.add(INSTANCE, 0.05);

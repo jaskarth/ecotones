@@ -26,8 +26,8 @@ public class ThePitsBiome extends EcotonesBiome {
     public static ThePitsBiome EDGE;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits"), new ThePitsBiome(-1.5f));
-        EDGE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits_edge"), new ThePitsBiome(0.375f));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits"), new ThePitsBiome(-1.5f, false));
+        EDGE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits_edge"), new ThePitsBiome(0.375f, true));
 
         BiomeRegistries.registerSpecialBiome(INSTANCE, id -> !(id == Registry.BIOME.getRawId(BeachBiome.INSTANCE)));
         BiomeRegistries.registerSpecialBiome(EDGE, id -> !(id == Registry.BIOME.getRawId(BeachBiome.INSTANCE)));
@@ -35,7 +35,7 @@ public class ThePitsBiome extends EcotonesBiome {
         BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 200);
     }
 
-    protected ThePitsBiome(float height) {
+    protected ThePitsBiome(float height, boolean isEdge) {
         super((new Settings())
                 .configureSurfaceBuilder(EcotonesSurfaces.DELETE_WATER_BUILDER, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
@@ -64,13 +64,15 @@ public class ThePitsBiome extends EcotonesBiome {
         DefaultBiomeFeatures.addSprings(this);
         DefaultBiomeFeatures.addFrozenTopLayer(this);
 
-        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.STONE.getDefaultState(), 1))
-                        .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(3))));
+        if (!isEdge) {
+            this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                    Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.STONE.getDefaultState(), 1))
+                            .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(3))));
 
-        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.STONE.getDefaultState(), 2))
-                        .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(5))));
+            this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                    Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.STONE.getDefaultState(), 2))
+                            .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(5))));
+        }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)

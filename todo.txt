@@ -16,6 +16,7 @@
 * Inland oceans
 * Coastal biome variants
 * Bluebell wood
+* Sequoia forest
 
 # Blocks and items
 * More flower types

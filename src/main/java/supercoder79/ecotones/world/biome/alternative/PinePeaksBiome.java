@@ -82,6 +82,10 @@ public class PinePeaksBiome extends EcotonesBiome {
                         .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE
                                 .configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.65))));
+
         DefaultBiomeFeatures.addDefaultDisks(this);
         DefaultBiomeFeatures.addLandCarvers(this);
         DefaultBiomeFeatures.addDefaultStructures(this);

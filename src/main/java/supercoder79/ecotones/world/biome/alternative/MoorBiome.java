@@ -28,15 +28,15 @@ public class MoorBiome extends EcotonesBiome {
     public static MoorBiome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "moor"), new MoorBiome(0.5F, 0.025F));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "moor_hilly"), new MoorBiome(1.25F, 0.225F));
-        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "moor_mountainous"), new MoorBiome(2F, 0.625F));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "moor"), new MoorBiome(0.74F, 0.025F, 5, 0.97));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "moor_hilly"), new MoorBiome(1.5F, 0.125F, 6, 0.89));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "moor_mountainous"), new MoorBiome(2.5F, 0.525F, 8, 0.78));
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_MODERATE.add(INSTANCE, 0.05);
         Climate.WARM_DRY.add(INSTANCE, 0.1);
     }
 
-    public MoorBiome(float depth, float scale) {
+    public MoorBiome(float depth, float scale, double hilliness, double volatility) {
         super((new Settings())
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
@@ -51,8 +51,8 @@ public class MoorBiome extends EcotonesBiome {
                         .fogColor(12638463)
                         .build()).parent(null)
                 .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
-                1,
-                0.9);
+                hilliness,
+                volatility);
         this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
         this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));
         DefaultBiomeFeatures.addLandCarvers(this);

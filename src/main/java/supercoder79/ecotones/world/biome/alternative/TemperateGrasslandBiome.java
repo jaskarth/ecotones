@@ -12,10 +12,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -59,6 +56,7 @@ public class TemperateGrasslandBiome extends EcotonesBiome {
                 4,
                 0.9);
         this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
+        this.addStructureFeature(Feature.VILLAGE.configure(new StructurePoolFeatureConfig("village/plains/town_centers", 8)));
         this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));
         DefaultBiomeFeatures.addLandCarvers(this);
         DefaultBiomeFeatures.addPlainsTallGrass(this);
@@ -87,6 +85,10 @@ public class TemperateGrasslandBiome extends EcotonesBiome {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BRANCHING_OAK.configure(TreeType.RARE_LARGE_CLUSTERED_OAK.config)
                         .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_CLUSTERED_OAK.config.decorationData)));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.65))));
 
         DefaultBiomeFeatures.addForestFlowers(this);
 

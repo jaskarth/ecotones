@@ -32,15 +32,15 @@ public class PalmForestBiome extends EcotonesBiome {
     public static PalmForestBiome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "palm_forest"), new PalmForestBiome(0.5F, 0.025F));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "palm_forest_hilly"), new PalmForestBiome(1.25F, 0.225F));
-        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "palm_forest_mountainous"), new PalmForestBiome(2F, 0.625F));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "palm_forest"), new PalmForestBiome(0.5F, 0.025F, 2, 0.9));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "palm_forest_hilly"), new PalmForestBiome(1.25F, 0.225F, 2.4, 0.8));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "palm_forest_mountainous"), new PalmForestBiome(2F, 0.625F, 3, 0.7));
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_VERY_HUMID.add(INSTANCE, 0.2);
         Climate.HOT_RAINFOREST.add(INSTANCE, 0.07);
     }
 
-    public PalmForestBiome(float depth, float scale) {
+    public PalmForestBiome(float depth, float scale, double hilliness, double volatility) {
         super((new Settings())
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
@@ -55,8 +55,8 @@ public class PalmForestBiome extends EcotonesBiome {
                         .fogColor(12638463)
                         .build()).parent(null)
                 .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
-                5,
-                0.83);
+                hilliness,
+                volatility);
         this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
         this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));
         DefaultBiomeFeatures.addLandCarvers(this);
@@ -93,6 +93,10 @@ public class PalmForestBiome extends EcotonesBiome {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG)
                         .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(1, 0.15f, 2))));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.65))));
 
         DefaultBiomeFeatures.addForestFlowers(this);
 

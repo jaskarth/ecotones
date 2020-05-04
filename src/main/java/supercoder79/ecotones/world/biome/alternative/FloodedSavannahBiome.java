@@ -72,6 +72,10 @@ public class FloodedSavannahBiome extends EcotonesBiome {
                         .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_OAK.config.decorationData)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.35))));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
                         .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE
                                 .configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))));
