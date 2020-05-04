@@ -17,6 +17,7 @@
 * Coastal biome variants
 * Bluebell wood
 * Sequoia forest
+* Larch forest
 
 # Blocks and items
 * More flower types

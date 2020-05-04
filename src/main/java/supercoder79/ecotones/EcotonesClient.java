@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
+import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.render.RenderLayer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
@@ -19,8 +20,11 @@ public class EcotonesClient implements ClientModInitializer {
     public void onInitializeClient() {
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> view != null && pos != null ? BiomeColors.getFoliageColor(view, pos) : FoliageColors.getDefaultColor(),
-                EcotonesBlocks.shortGrass,
                 EcotonesBlocks.hazelLeavesBlock);
+
+        ColorProviderRegistry.BLOCK.register(
+                (state, view, pos, tintIndex) -> view != null && pos != null ? BiomeColors.getGrassColor(view, pos) : FoliageColors.getDefaultColor(),
+                EcotonesBlocks.shortGrass);
 
         ColorProviderRegistry.ITEM.register(((stack, tintIndex) -> FoliageColors.getDefaultColor()),
                 EcotonesBlocks.shortGrassItem,

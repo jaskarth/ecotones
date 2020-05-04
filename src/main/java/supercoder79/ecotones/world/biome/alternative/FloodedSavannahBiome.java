@@ -13,6 +13,7 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.TreeType;
 import supercoder79.ecotones.world.biome.BiomeUtil;
@@ -27,6 +28,7 @@ public class FloodedSavannahBiome extends EcotonesBiome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "flooded_savannah"), new FloodedSavannahBiome());
+        BiomeRegistries.registerNoBeachBiome(INSTANCE);
         Climate.HOT_MILD.add(INSTANCE, 0.1);
         Climate.HOT_MODERATE.add(INSTANCE, 0.2);
         Climate.HOT_DRY.add(INSTANCE, 0.1);

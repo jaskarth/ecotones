@@ -25,6 +25,7 @@ public class EcotonesFeatures {
     public static ImprovedBirchTreeFeature IMPROVED_BIRCH;
     public static BranchingAcaciaTreeFeature BRANCHING_ACACIA;
     public static WideShrubFeature WIDE_SHRUB;
+    public static AspenTreeFeature ASPEN_TREE;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig::deserialize));
@@ -42,5 +43,6 @@ public class EcotonesFeatures {
         IMPROVED_BIRCH = Registry.register(Registry.FEATURE, new Identifier("ecotones", "improved_birch"), new ImprovedBirchTreeFeature(TreeGenerationConfig::deserialize));
         BRANCHING_ACACIA = Registry.register(Registry.FEATURE, new Identifier("ecotones", "branching_acacia"), new BranchingAcaciaTreeFeature(TreeGenerationConfig::deserialize));
         WIDE_SHRUB = Registry.register(Registry.FEATURE, new Identifier("ecotones", "wide_shrub"), new WideShrubFeature(SimpleTreeFeatureConfig::deserialize));
+        ASPEN_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "test_tree"), new AspenTreeFeature(SimpleTreeFeatureConfig::deserialize));
     }
 }

@@ -16,6 +16,7 @@ public class EcotonesSurfaces {
     public static SurfaceBuilder<TernarySurfaceConfig> GREEN_SPIRES_BUILDER;
     public static SurfaceBuilder<TernarySurfaceConfig> ULURU_BUILDER;
     public static SurfaceBuilder<TernarySurfaceConfig> WASTELAND_BUILDER;
+    public static SurfaceBuilder<TernarySurfaceConfig> GRASS_MOUNTAIN;
 
     public static void init() {
         DESERT_SCRUB_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "desert_scrub_builder"), new DesertScrubSurfaceBuilder(TernarySurfaceConfig::deserialize));
@@ -28,5 +29,6 @@ public class EcotonesSurfaces {
         GREEN_SPIRES_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "green_spires_builder"), new GreenSpiresSurfaceBuilder(TernarySurfaceConfig::deserialize));
         ULURU_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "uluru_builder"), new UluruSurfaceBuilder(TernarySurfaceConfig::deserialize));
         WASTELAND_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "wasteland_builder"), new WastelandSurfaceBuilder(TernarySurfaceConfig::deserialize));
+        GRASS_MOUNTAIN = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "grass_mountain_builder"), new GrassMountainSurfaceBuilder(TernarySurfaceConfig::deserialize));
     }
 }
