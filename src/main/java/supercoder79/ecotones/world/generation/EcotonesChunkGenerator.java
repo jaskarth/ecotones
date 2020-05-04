@@ -137,6 +137,11 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkG
 
         for(int y = 0; y < this.getNoiseSizeY(); ++y) {
             double noise = this.sampleNoise(x, y, z, d, e, f, g) - (scaleNoise.sample(x, y, z) * 5);
+            //modify the noise for special reasons
+            Biome biome = this.biomeSource.getBiomeForNoiseGen(x, y, z);
+            if (biome instanceof EcotonesBiome) {
+                noise = ((EcotonesBiome)biome).modifyNoise(x, y, z, noise);
+            }
             //calculate volatility
             noise -= this.computeNoiseFalloff(depth, scale, y) * volatility;
             if ((double)y > delta1) {

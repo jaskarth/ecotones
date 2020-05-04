@@ -57,6 +57,10 @@ public class EcotonesBiome extends Biome {
     public double getVolatility() {
         return volatility;
     }
+
+    public double modifyNoise(int x, int y, int z, double noise) {
+        return noise;
+    }
     
     // --- TerraformBiome ---
 
