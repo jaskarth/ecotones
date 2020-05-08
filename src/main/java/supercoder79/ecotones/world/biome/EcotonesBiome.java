@@ -6,7 +6,7 @@ import com.terraformersmc.terraform.biome.builder.FeatureEntry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityCategory;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeParticleConfig;
@@ -46,7 +46,7 @@ public class EcotonesBiome extends Biome {
         this.hilliness = hilliness;
         this.volatility = volatility;
         for (SpawnEntry entry : spawns) {
-            this.addSpawn(entry.type.getCategory(), entry);
+            this.addSpawn(entry.type.getSpawnGroup(), entry);
         }
     }
 
@@ -104,7 +104,7 @@ public class EcotonesBiome extends Biome {
 
     //protected -> public
     @Override
-    public void addSpawn(EntityCategory type, SpawnEntry spawnEntry) {
+    public void addSpawn(SpawnGroup type, SpawnEntry spawnEntry) {
         super.addSpawn(type, spawnEntry);
     }
 

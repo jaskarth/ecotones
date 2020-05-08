@@ -8,7 +8,6 @@
 * Forest with balloon-y trees (see misc entry)
 * Lowlands with jungle bush-like shrubs
 * Kauri forest
-* Weird Desert (lots of tall cacti)
 * Mixed forest
 * Lake biomes
 * Rivers
@@ -18,6 +17,7 @@
 * Bluebell wood
 * Sequoia forest
 * Larch forest
+* Rice Field
 
 # Blocks and items
 * More flower types

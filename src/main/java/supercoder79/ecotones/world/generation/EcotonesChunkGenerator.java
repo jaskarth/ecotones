@@ -1,6 +1,6 @@
 package supercoder79.ecotones.world.generation;
 
-import net.minecraft.entity.EntityCategory;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Util;
 import net.minecraft.util.crash.CrashException;
@@ -243,16 +243,16 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkG
 
     // stupid entity spawning
 
-    public List<Biome.SpawnEntry> getEntitySpawnList(StructureAccessor structureAccessor, EntityCategory entityCategory, BlockPos blockPos) {
+    public List<Biome.SpawnEntry> getEntitySpawnList(StructureAccessor structureAccessor, SpawnGroup SpawnGroup, BlockPos blockPos) {
         if (Feature.SWAMP_HUT.method_14029(this.world, structureAccessor, blockPos)) {
-            if (entityCategory == EntityCategory.MONSTER) {
+            if (SpawnGroup == SpawnGroup.MONSTER) {
                 return Feature.SWAMP_HUT.getMonsterSpawns();
             }
 
-            if (entityCategory == EntityCategory.CREATURE) {
+            if (SpawnGroup == SpawnGroup.CREATURE) {
                 return Feature.SWAMP_HUT.getCreatureSpawns();
             }
-        } else if (entityCategory == EntityCategory.MONSTER) {
+        } else if (SpawnGroup == SpawnGroup.MONSTER) {
             if (Feature.PILLAGER_OUTPOST.isApproximatelyInsideStructure(this.world, structureAccessor, blockPos)) {
                 return Feature.PILLAGER_OUTPOST.getMonsterSpawns();
             }
@@ -262,7 +262,7 @@ public class EcotonesChunkGenerator extends SurfaceChunkGenerator<EcotonesChunkG
             }
         }
 
-        return super.getEntitySpawnList(structureAccessor, entityCategory, blockPos);
+        return super.getEntitySpawnList(structureAccessor, SpawnGroup, blockPos);
     }
 
     public void spawnEntities(ServerWorld world, boolean spawnMonsters, boolean spawnAnimals) {
