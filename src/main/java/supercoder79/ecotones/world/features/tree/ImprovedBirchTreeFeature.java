@@ -109,18 +109,20 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
             return;
         }
 
-        //TODO: check if position is valid
-
         // make an offsetted branch
         BlockPos.Mutable mutable = trunkPos.mutableCopy();
         Direction x = random.nextBoolean() ? Direction.EAST : Direction.WEST;
         Direction z = random.nextBoolean() ? Direction.NORTH : Direction.SOUTH;
         mutable.move(x);
         mutable.move(z);
-        world.setBlockState(mutable, config.woodState, 0);
+        if (TreeUtil.canLogReplace(world, mutable)) {
+            world.setBlockState(mutable, config.woodState, 0);
+        } else {
+            return;
+        }
 
         //make larger branches sometimes
-        if ( random.nextBoolean()) {
+        if (random.nextBoolean()) {
             // add leaves only half of the time
             if (random.nextBoolean()) {
                 leafPlacementNodes.add(mutable.toImmutable());
@@ -133,10 +135,13 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
             if (random.nextBoolean()) {
                 mutable.move(random.nextBoolean() ? Direction.UP : Direction.DOWN);
             }
-            world.setBlockState(mutable, config.woodState, 0);
-            leafPlacementNodes.add(mutable.toImmutable());
-        } else {
-            leafPlacementNodes.add(mutable.toImmutable());
+
+            if (TreeUtil.canLogReplace(world, mutable)) {
+                world.setBlockState(mutable, config.woodState, 0);
+            } else {
+                return;
+            }
         }
+        leafPlacementNodes.add(mutable.toImmutable());
     }
 }

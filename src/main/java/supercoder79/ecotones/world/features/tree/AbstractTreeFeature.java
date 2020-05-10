@@ -1,4 +1,4 @@
-package supercoder79.ecotones.world.features;
+package supercoder79.ecotones.world.features.tree;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;

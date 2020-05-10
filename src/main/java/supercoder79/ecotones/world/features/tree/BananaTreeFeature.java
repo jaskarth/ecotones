@@ -6,7 +6,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import supercoder79.ecotones.world.features.AbstractTreeFeature;
 
 import java.util.Random;
 import java.util.Set;

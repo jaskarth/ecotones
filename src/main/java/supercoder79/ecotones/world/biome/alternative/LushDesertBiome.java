@@ -5,6 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.BiomeEffects;
+import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
@@ -16,6 +17,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.world.biome.BiomeUtil;
 import supercoder79.ecotones.world.biome.EcotonesBiome;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
@@ -26,32 +28,38 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 public class LushDesertBiome extends EcotonesBiome {
     public static LushDesertBiome INSTANCE;
+    public static LushDesertBiome HILLY;
+    public static LushDesertBiome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "lush_desert"), new LushDesertBiome());
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "lush_desert"), new LushDesertBiome(0.5f, 0.3f, 2.4, 0.94));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "lush_desert_hilly"), new LushDesertBiome(1f, 0.5f, 4.2, 0.87));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "lush_desert_mountainous"), new LushDesertBiome(1.75f, 0.8f, 8, 0.81));
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
+        BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_DESERT.add(INSTANCE, 0.3);
         Climate.WARM_DESERT.add(INSTANCE, 0.12);
     }
 
 
-    protected LushDesertBiome() {
+    protected LushDesertBiome(float depth, float scale, double hilliness, double volatility) {
         super((new Settings())
                         .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.SAND_CONFIG)
                         .precipitation(Precipitation.RAIN)
                         .category(Category.PLAINS)
-                        .depth(0.5F)
-                        .scale(0.3F)
+                        .depth(depth)
+                        .scale(scale)
                         .temperature(2F)
                         .downfall(0.3F)
                         .effects((new BiomeEffects.Builder())
                                 .waterColor(4159204)
                                 .waterFogColor(329011)
                                 .fogColor(12638463)
+                                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00325F, random -> random.nextDouble(), random -> random.nextDouble() * -0.2, random -> random.nextDouble()))
                                 .build()).parent(null)
                         .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
-                2.4,
-                0.87);
+                hilliness,
+                volatility);
 
         this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
         this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));

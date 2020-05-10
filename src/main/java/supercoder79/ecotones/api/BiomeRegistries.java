@@ -67,7 +67,6 @@ public class BiomeRegistries {
     }
 
     public static void compile() {
-        //TODO: this doesnt seem like its doing anything
         Map<Integer, Integer> tempMap = new HashMap<>();
         BIG_SPECIAL_BIOMES.entrySet()
                 .stream()

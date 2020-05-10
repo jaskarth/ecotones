@@ -11,7 +11,6 @@ import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
-import supercoder79.ecotones.world.features.AbstractTreeFeature;
 
 import java.util.Random;
 import java.util.Set;

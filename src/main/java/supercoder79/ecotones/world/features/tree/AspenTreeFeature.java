@@ -1,4 +1,4 @@
-package supercoder79.ecotones.world.features;
+package supercoder79.ecotones.world.features.tree;
 
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.util.Shapes;
