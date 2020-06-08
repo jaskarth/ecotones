@@ -10,7 +10,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.BiomeParticleConfig;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
@@ -44,18 +44,13 @@ public class VolcanicBiome extends EcotonesBiome {
                         .waterColor(4159204)
                         .waterFogColor(329011)
                         .fogColor(12638463)
-                        .particleConfig(new BiomeParticleConfig(ParticleTypes.ASH, 0.00225F,
-                                random -> random.nextGaussian() * 9.999999974752427E-7D,
-                                random -> random.nextGaussian() * 9.999999747378752E-5D,
-                                random -> random.nextGaussian() * 9.999999974752427E-7D))
+                        .particleConfig(new BiomeParticleConfig(ParticleTypes.ASH, 0.00225F))
                         .build()).parent(null)
                 .noises(ImmutableList.of(new Biome.MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
                 2,
                 1);
-        this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
-        this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));
         DefaultBiomeFeatures.addLandCarvers(this);
-        DefaultBiomeFeatures.addDefaultStructures(this);
+        DefaultBiomeFeatures.method_28440(this);
         DefaultBiomeFeatures.addDungeons(this);
         DefaultBiomeFeatures.addMineables(this);
         DefaultBiomeFeatures.addDefaultOres(this);

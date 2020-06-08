@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.BiomeParticleConfig;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
@@ -55,18 +55,15 @@ public class LushDesertBiome extends EcotonesBiome {
                                 .waterColor(4159204)
                                 .waterFogColor(329011)
                                 .fogColor(12638463)
-                                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00325F, random -> random.nextDouble(), random -> random.nextDouble() * -0.2, random -> random.nextDouble()))
+                                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00325F))
                                 .build()).parent(null)
                         .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
                 hilliness,
                 volatility);
 
-        this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
-        this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));
-
-        this.addStructureFeature(Feature.VILLAGE.configure(new StructurePoolFeatureConfig("village/desert/town_centers", 8)));
-        this.addStructureFeature(Feature.PILLAGER_OUTPOST.configure(FeatureConfig.DEFAULT));
-        this.addStructureFeature(Feature.DESERT_PYRAMID.configure(FeatureConfig.DEFAULT));
+        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/desert/town_centers"), 8)));
+        this.addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST);
+        this.addStructureFeature(DefaultBiomeFeatures.DESERT_PYRAMID);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG)
@@ -83,7 +80,7 @@ public class LushDesertBiome extends EcotonesBiome {
 
         DefaultBiomeFeatures.addDefaultDisks(this);
         DefaultBiomeFeatures.addLandCarvers(this);
-        DefaultBiomeFeatures.addDefaultStructures(this);
+        DefaultBiomeFeatures.method_28440(this);
         DefaultBiomeFeatures.addDungeons(this);
         DefaultBiomeFeatures.addMineables(this);
         DefaultBiomeFeatures.addDefaultOres(this);

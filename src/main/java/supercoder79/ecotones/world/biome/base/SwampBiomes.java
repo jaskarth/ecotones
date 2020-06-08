@@ -5,7 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
@@ -41,10 +41,10 @@ public class SwampBiomes {
             .waterFogColor(0x2e8a07)
             .addDefaultFeatures(LAND_CARVERS, STRUCTURES, DUNGEONS, MINEABLES, ORES,
                     DEFAULT_FLOWERS, DEFAULT_MUSHROOMS, FOREST_GRASS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
-            .addStructureFeature(Feature.STRONGHOLD)
+            .addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
             .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                     Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.WATER.getDefaultState())).createDecoratedFeature(Decorator.WATER_LAKE.configure(new ChanceDecoratorConfig(1))))
-            .addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+            .addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
             .addDefaultSpawnEntries());
 
     public static void init() {

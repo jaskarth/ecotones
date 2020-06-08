@@ -1,14 +1,14 @@
 package supercoder79.ecotones.world.features.tree;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
@@ -17,17 +17,16 @@ import supercoder79.ecotones.util.TreeUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Function;
 
 //creates a branching trunk then places leaves
 public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
 
-    public BranchingAcaciaTreeFeature(Function<Dynamic<?>, ? extends TreeGenerationConfig> configDeserializer) {
-        super(configDeserializer);
+    public BranchingAcaciaTreeFeature(Codec<TreeGenerationConfig> codec) {
+        super(codec);
     }
 
     @Override
-    public boolean generate(IWorld world, StructureAccessor accessor, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, TreeGenerationConfig config) {
+    public boolean generate(ServerWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockPos pos, TreeGenerationConfig config) {
         //ensure spawn
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
 
@@ -48,7 +47,7 @@ public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
         return false;
     }
 
-    private void growLeaves(IWorld world, Random random, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+    private void growLeaves(WorldAccess world, Random random, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
         for (BlockPos node : leafPlacementNodes) {
             generateSmallLeafLayer(world, random, node.up(2), config);
 
@@ -67,7 +66,7 @@ public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
         }
     }
 
-    private void branch(IWorld world, BlockPos startPos, Random random, float yaw, float pitch, int maxHeight, int depth, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+    private void branch(WorldAccess world, BlockPos startPos, Random random, float yaw, float pitch, int maxHeight, int depth, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
         int height = maxHeight / config.branchingFactor;
 
         if (depth == (maxHeight / config.branchingFactor) - 1) {
@@ -126,7 +125,7 @@ public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
         }
     }
 
-    private void generateSmallLeafLayer(IWorld world, Random random, BlockPos pos, TreeGenerationConfig config) {
+    private void generateSmallLeafLayer(WorldAccess world, Random random, BlockPos pos, TreeGenerationConfig config) {
         //switch small leaf types
         if (random.nextBoolean()) {
             //make smaller version of normal leaf layer

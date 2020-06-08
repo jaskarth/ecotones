@@ -1,6 +1,6 @@
 package supercoder79.ecotones.world.features.tree;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
@@ -14,15 +14,13 @@ import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 import java.util.Random;
 import java.util.Set;
-import java.util.function.Function;
 
 //Code from Terrestria, used with permission
 public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
     private BlockState bark;
 
-    public PalmTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> function, BlockState bark) {
-        super(function);
-
+    public PalmTreeFeature(Codec<TreeFeatureConfig> codec, BlockState bark) {
+        super(codec);
         this.bark = bark;
     }
 

@@ -1,6 +1,6 @@
 package supercoder79.ecotones.world.surface;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -11,13 +11,12 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class GreenSpiresSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
     private static final TernarySurfaceConfig GEYSER_CONFIG = new TernarySurfaceConfig(EcotonesBlocks.geyserBlock.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.GRAVEL.getDefaultState());
 
-    public GreenSpiresSurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function) {
-        super(function);
+    public GreenSpiresSurfaceBuilder(Codec<TernarySurfaceConfig> codec) {
+        super(codec);
     }
 
     @Override

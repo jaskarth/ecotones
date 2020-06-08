@@ -1,63 +1,35 @@
 package supercoder79.ecotones.world.features.foliage;
 
-import com.google.common.collect.ImmutableMap;
-import com.mojang.datafixers.Dynamic;
-import com.mojang.datafixers.types.DynamicOps;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
+import net.minecraft.world.gen.foliage.PineFoliagePlacer;
 
 import java.util.Random;
 import java.util.Set;
 
-public class SmallPineFoliagePlacer extends FoliagePlacer {
-    private final int height;
-    private final int randomHeight;
+/**
+ * Slightly altered PineFoliagePlacer that makes large trees with thin leaf structures.
+ */
+public class SmallPineFoliagePlacer extends PineFoliagePlacer {
 
     public SmallPineFoliagePlacer(int i, int j, int k, int l, int m, int n) {
-        super(i, j, k, l, FoliagePlacerType.PINE_FOLIAGE_PLACER);
-        this.height = m;
-        this.randomHeight = n;
+        super(i, j, k, l, m, n);
     }
 
-    public <T> SmallPineFoliagePlacer(Dynamic<T> data) {
-        this(data.get("radius").asInt(0), data.get("radius_random").asInt(0), data.get("offset").asInt(0), data.get("offset_random").asInt(0), data.get("height").asInt(0), data.get("height_random").asInt(0));
-    }
-
-    protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig treeFeatureConfig, int trunkHeight, TreeNode node, int foliageHeight, int radius, Set<BlockPos> leaves, int i) {
-        int j = 0;
-
+    @Override
+    protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int i, BlockBox blockBox) {
         for(int k = i; k >= i - foliageHeight; --k) {
+            // topmost is a single block
             if (k == i) {
-                this.generate(world, random, treeFeatureConfig, node.getCenter(), 0, leaves, k + 1, node.isGiantTrunk());
-            }
-            this.generate(world, random, treeFeatureConfig, node.getCenter(), 1, leaves, k, node.isGiantTrunk());
-            if (j >= 1 && k == i - foliageHeight + 1) {
-                --j;
-            } else if (j < radius + node.getFoliageRadius()) {
-                ++j;
+                this.generate(world, random, config, treeNode.getCenter(), 0, leaves, k, treeNode.isGiantTrunk(), blockBox);
+            } else {
+                // everything after is a +
+                this.generate(world, random, config, treeNode.getCenter(), 1, leaves, k, treeNode.isGiantTrunk(), blockBox);
             }
         }
-
-    }
-
-    public int getRadius(Random random, int baseHeight) {
-        return super.getRadius(random, baseHeight) + random.nextInt(baseHeight + 1);
-    }
-
-    public int getHeight(Random random, int trunkHeight, TreeFeatureConfig treeFeatureConfig) {
-        return this.height + random.nextInt(this.randomHeight + 1);
-    }
-
-    protected boolean isInvalidForLeaves(Random random, int baseHeight, int dx, int dy, int dz, boolean bl) {
-        return baseHeight == dz && dy == dz && dz > 0;
-    }
-
-    public <T> T serialize(DynamicOps<T> ops) {
-        ImmutableMap.Builder<T, T> builder = ImmutableMap.builder();
-        builder.put(ops.createString("height"), ops.createInt(this.height)).put(ops.createString("height_random"), ops.createInt(this.randomHeight));
-        return ops.merge(super.serialize(ops), ops.createMap(builder.build()));
     }
 }

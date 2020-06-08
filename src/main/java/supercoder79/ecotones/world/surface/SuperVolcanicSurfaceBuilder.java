@@ -1,6 +1,6 @@
 package supercoder79.ecotones.world.surface;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
@@ -9,7 +9,6 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class SuperVolcanicSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
     private static final TernarySurfaceConfig OBSIDIAN_CONFIG = new TernarySurfaceConfig(Blocks.OBSIDIAN.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState());
@@ -18,8 +17,8 @@ public class SuperVolcanicSurfaceBuilder extends SurfaceBuilder<TernarySurfaceCo
     private static final TernarySurfaceConfig MAGMA_CONFIG = new TernarySurfaceConfig(Blocks.MAGMA_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState());
     private static final TernarySurfaceConfig REGULAR_CONFIG = new TernarySurfaceConfig(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState());
 
-    public SuperVolcanicSurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function) {
-        super(function);
+    public SuperVolcanicSurfaceBuilder(Codec<TernarySurfaceConfig> codec) {
+        super(codec);
     }
 
     @Override

@@ -1,29 +1,26 @@
 package supercoder79.ecotones.world.features.tree;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.util.Shapes;
 import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class AspenTreeFeature extends Feature<SimpleTreeFeatureConfig> {
-    public AspenTreeFeature(Function<Dynamic<?>, ? extends SimpleTreeFeatureConfig> configDeserializer) {
-        super(configDeserializer);
+    public AspenTreeFeature(Codec<SimpleTreeFeatureConfig> codec) {
+        super(codec);
     }
 
     @Override
-    public boolean generate(IWorld world, StructureAccessor accessor, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
+    public boolean generate(ServerWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return false;
 
         double maxRadius = 2 + ((random.nextDouble() - 0.5) * 0.2);

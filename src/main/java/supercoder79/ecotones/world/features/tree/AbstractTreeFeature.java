@@ -2,7 +2,7 @@ package supercoder79.ecotones.world.features.tree;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.block.AbstractBlock.AbstractBlockState;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,13 +18,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.shape.BitSetVoxelSet;
 import net.minecraft.util.shape.VoxelSet;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.ModifiableWorld;
-import net.minecraft.world.TestableWorld;
+import net.minecraft.world.*;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
@@ -32,8 +28,8 @@ import java.util.*;
 import java.util.function.Function;
 
 public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends Feature<T> {
-    public AbstractTreeFeature(Function<Dynamic<?>, ? extends T> function) {
-        super(function);
+    public AbstractTreeFeature(Codec<T> codec) {
+        super(codec);
     }
 
     protected static boolean canTreeReplace(TestableWorld world, BlockPos pos) {
@@ -132,12 +128,12 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
         world.setBlockState(pos, state, 19);
     }
 
-    public final boolean generate(IWorld iWorld, StructureAccessor structureAccessor, ChunkGenerator<? extends ChunkGeneratorConfig> chunkGenerator, Random random, BlockPos blockPos, T treeFeatureConfig) {
+    public final boolean generate(ServerWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, T treeFeatureConfig) {
         Set<BlockPos> set = Sets.newHashSet();
         Set<BlockPos> set2 = Sets.newHashSet();
         Set<BlockPos> set3 = Sets.newHashSet();
         BlockBox blockBox = BlockBox.empty();
-        boolean bl = this.generate(iWorld, random, blockPos, set, set2, blockBox, treeFeatureConfig);
+        boolean bl = this.generate(world, random, blockPos, set, set2, blockBox, treeFeatureConfig);
         if (blockBox.minX <= blockBox.maxX && bl && !set.isEmpty()) {
             if (!treeFeatureConfig.decorators.isEmpty()) {
                 List<BlockPos> list = Lists.newArrayList(set);
@@ -145,19 +141,19 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
                 list.sort(Comparator.comparingInt(Vec3i::getY));
                 list2.sort(Comparator.comparingInt(Vec3i::getY));
                 treeFeatureConfig.decorators.forEach((decorator) -> {
-                    decorator.generate(iWorld, random, list, list2, set3, blockBox);
+                    decorator.generate(world, random, list, list2, set3, blockBox);
                 });
             }
 
-            VoxelSet voxelSet = this.placeLogsAndLeaves(iWorld, blockBox, set, set3);
-            Structure.updateCorner(iWorld, 3, voxelSet, blockBox.minX, blockBox.minY, blockBox.minZ);
+            VoxelSet voxelSet = this.placeLogsAndLeaves(world, blockBox, set, set3);
+            Structure.updateCorner(world, 3, voxelSet, blockBox.minX, blockBox.minY, blockBox.minZ);
             return true;
         } else {
             return false;
         }
     }
 
-    private VoxelSet placeLogsAndLeaves(IWorld world, BlockBox box, Set<BlockPos> logs, Set<BlockPos> leaves) {
+    private VoxelSet placeLogsAndLeaves(WorldAccess world, BlockBox box, Set<BlockPos> logs, Set<BlockPos> leaves) {
         List<Set<BlockPos>> list = Lists.newArrayList();
         VoxelSet voxelSet = new BitSetVoxelSet(box.getBlockCountX(), box.getBlockCountY(), box.getBlockCountZ());
 

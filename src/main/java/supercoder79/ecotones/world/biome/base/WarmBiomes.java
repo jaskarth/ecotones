@@ -4,7 +4,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeParticleConfig;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
@@ -43,10 +43,10 @@ public class WarmBiomes {
             .waterFogColor(329011)
             .addDefaultFeatures(LAND_CARVERS, STRUCTURES, DUNGEONS, MINEABLES, ORES, DISKS,
                     DEFAULT_FLOWERS, DEFAULT_MUSHROOMS, FOREST_GRASS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
-            .addStructureFeature(Feature.STRONGHOLD)
-            .addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+            .addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
+            .addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 
-            .addStructureFeature(Feature.RUINED_PORTAL, new RuinedPortalFeatureConfig(RuinedPortalFeature.Type.STANDARD))
+            .addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL)
 
             .addCustomFeature(GenerationStep.Feature.RAW_GENERATION,
                     EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT).createDecoratedFeature(EcotonesDecorators.DRAINAGE_DECORATOR.configure(DecoratorConfig.DEFAULT)))
@@ -59,10 +59,10 @@ public class WarmBiomes {
     public static void init() {
         COOL_DESERT_BIOME = BiomeUtil.register(new Identifier("ecotones", "cool_desert"), template.builder()
                 .hilliness(1.6)
-                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00225F, random -> random.nextDouble(), random -> random.nextDouble() * -0.2, random -> random.nextDouble()))
-                .addStructureFeature(Feature.DESERT_PYRAMID, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 10))
+                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00225F))
+                .addStructureFeature(DefaultBiomeFeatures.DESERT_PYRAMID)
+                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
+                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/desert/town_centers"), 10)))
 
                 .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 4)
 
@@ -76,8 +76,8 @@ public class WarmBiomes {
                 .temperature(1.2F)
                 .downfall(0.2F)
                 .hilliness(1.6)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 4))
-                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
+                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/savanna/town_centers"), 4)))
+                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
 
                 .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
@@ -111,8 +111,8 @@ public class WarmBiomes {
                 .hilliness(2.8)
                 .volatility(0.88)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 5))
-                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
+                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/savanna/town_centers"), 5)))
+                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
@@ -136,14 +136,14 @@ public class WarmBiomes {
                 .addTreeFeature(EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT), 1)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG));
         PRAIRIE_BIOME = BiomeUtil.register(new Identifier("ecotones", "prairie"), template.builder()
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/plains/town_centers", 10))
                 .temperature(1F)
                 .downfall(0.4F)
                 .scale(0.025f)
                 .hilliness(2.2)
                 .foliageColor(0xabcf59)
                 .grassColor(0xabcf59)
-                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
+                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/plains/town_centers"), 10)))
+                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
 
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
 
@@ -169,8 +169,8 @@ public class WarmBiomes {
                 .hilliness(1.4)
                 .addDefaultFeatures(PLAINS_TALL_GRASS)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/taiga/town_centers", 4))
-                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
+                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/taiga/town_centers"), 4)))
+                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
@@ -208,8 +208,8 @@ public class WarmBiomes {
                 .hilliness(1.6)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/taiga/town_centers", 10))
-                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
+                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/taiga/town_centers"), 10)))
+                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
@@ -278,7 +278,7 @@ public class WarmBiomes {
                 .scale(0.4f)
                 .hilliness(3.2)
                 .volatility(0.92)
-                .addStructureFeature(Feature.JUNGLE_TEMPLE, FeatureConfig.DEFAULT)
+                .addStructureFeature(DefaultBiomeFeatures.JUNGLE_PYRAMID)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)

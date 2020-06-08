@@ -1,14 +1,17 @@
 package supercoder79.ecotones.world.features.config;
 
-import com.google.common.collect.ImmutableMap;
-import com.mojang.datafixers.Dynamic;
-import com.mojang.datafixers.types.DynamicOps;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
 import net.minecraft.world.gen.feature.FeatureConfig;
 
 public class SimpleTreeFeatureConfig implements FeatureConfig {
+    public static final Codec<SimpleTreeFeatureConfig> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+            BlockState.CODEC.fieldOf("wood_state").forGetter((config) -> config.woodState),
+            BlockState.CODEC.fieldOf("leaf_state").forGetter((config) -> config.leafState))
+            .apply(instance, SimpleTreeFeatureConfig::new));
+
     public final BlockState woodState;
     public final BlockState leafState;
 
@@ -20,17 +23,5 @@ public class SimpleTreeFeatureConfig implements FeatureConfig {
         } else {
             this.leafState = leafState;
         }
-    }
-
-    @Override
-    public <T> Dynamic<T> serialize(DynamicOps<T> ops) {
-        ImmutableMap.Builder<T, T> builder = ImmutableMap.builder();
-        builder.put(ops.createString("wood_state"), BlockState.serialize(ops, this.woodState).getValue());
-        builder.put(ops.createString("leaf_state"),  BlockState.serialize(ops, this.leafState).getValue());
-        return new Dynamic(ops, ops.createMap(builder.build()));
-    }
-
-    public static <T> SimpleTreeFeatureConfig deserialize(Dynamic<T> dynamic) {
-        return new SimpleTreeFeatureConfig(dynamic.get("wood_state").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState()), dynamic.get("leaf_state").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState()));
     }
 }

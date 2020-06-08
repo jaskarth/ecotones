@@ -1,30 +1,27 @@
 package supercoder79.ecotones.world.decorator;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 
 import java.util.Random;
-import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 //stupid name but i had to make it sound cool :P
 public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorConfig> {
-    public AnalyticShrubPlacementDecorator(Function<Dynamic<?>, ? extends ShrubDecoratorConfig> configDeserializer) {
-        super(configDeserializer);
+    public AnalyticShrubPlacementDecorator(Codec<ShrubDecoratorConfig> codec) {
+        super(codec);
     }
 
     //TODO: use a for loop instead of a stream for more control
-
     @Override
-    public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, ShrubDecoratorConfig config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(WorldAccess world, ChunkGenerator generator, Random random, ShrubDecoratorConfig config, BlockPos pos) {
         //gets data on how many shrubs to place based on the soil drainage.
         //performs an abs function on noise to make it [0, 1].
         //drainage of 1: either too much or too little drainage, 50% of target shrub count

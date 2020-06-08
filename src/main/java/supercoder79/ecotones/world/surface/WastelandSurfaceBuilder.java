@@ -1,6 +1,6 @@
 package supercoder79.ecotones.world.surface;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
@@ -9,13 +9,12 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class WastelandSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
     private static final TernarySurfaceConfig WASTELAND_GRASS = new TernarySurfaceConfig(SurfaceBuilder.GRASS_BLOCK, EcotonesBlocks.driedDirtBlock.getDefaultState(), SurfaceBuilder.GRAVEL);
 
-    public WastelandSurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function) {
-        super(function);
+    public WastelandSurfaceBuilder(Codec<TernarySurfaceConfig> codec) {
+        super(codec);
     }
 
     @Override

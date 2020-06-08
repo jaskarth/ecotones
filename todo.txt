@@ -56,3 +56,4 @@
 * Leaf generation variations
 * Abstract the shit out of tree gen
 * Special tree generation items (acorn, birch seed)
+* Trees don't set block to dirt

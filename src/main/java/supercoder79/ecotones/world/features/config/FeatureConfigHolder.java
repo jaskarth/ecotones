@@ -102,5 +102,5 @@ public class FeatureConfigHolder {
                     new SpruceFoliagePlacer(2, 1, 0, 2, 1, 1),
                     new StraightTrunkPlacer(6, 4, 3),
                     new TwoLayersFeatureSize(2, 0, 2)))
-                    .method_27374().build().setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(6)));
+                    .ignoreVines().build().setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(6)));
 }

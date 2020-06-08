@@ -1,5 +1,6 @@
 package supercoder79.ecotones;
 
+import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.server.ServerTickCallback;
 import net.fabricmc.loader.api.FabricLoader;
@@ -17,6 +18,8 @@ import supercoder79.ecotones.command.GetDataAtCommand;
 import supercoder79.ecotones.compat.TerrestriaCompat;
 import supercoder79.ecotones.compat.TraverseCompat;
 import supercoder79.ecotones.items.EcotonesItems;
+import supercoder79.ecotones.util.EcotonesBlockPlacers;
+import supercoder79.ecotones.world.EcotonesWorldType;
 import supercoder79.ecotones.world.biome.alternative.*;
 import supercoder79.ecotones.world.biome.base.HotBiomes;
 import supercoder79.ecotones.world.biome.base.WarmBiomes;
@@ -25,22 +28,21 @@ import supercoder79.ecotones.world.biome.special.*;
 import supercoder79.ecotones.world.biome.technical.BeachBiome;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
-import supercoder79.ecotones.world.generation.EcotonesChunkGeneratorConfig;
-import supercoder79.ecotones.world.generation.WorldGeneratorType;
-import supercoder79.ecotones.world.generation.WorldType;
+import supercoder79.ecotones.world.generation.EcotonesBiomeSource;
+import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
+import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
 
 public class Ecotones implements ModInitializer {
-
-	public static WorldGeneratorType WORLDGEN_TYPE;
-
-	private static WorldType<?> loadMeOnClientPls;
+	private static EcotonesWorldType worldType;
 
 	@Override
 	public void onInitialize() {
 		Sounds.init();
 
 		EcotonesParticles.init();
+		EcotonesBlockPlacers.init();
+		EcotonesTreeDecorators.init();
 
         EcotonesBlocks.init();
 		EcotonesItems.init();
@@ -106,9 +108,12 @@ public class Ecotones implements ModInitializer {
 
 		System.out.println("[ecotones] Registering " + ecotonesBiomes + " ecotones biomes!");
 
-		loadMeOnClientPls = WorldType.ECOTONES;
+		Registry.register(Registry.BIOME_SOURCE, new Identifier("ecotones", "ecotones"), EcotonesBiomeSource.CODEC);
+		Registry.register(Registry.CHUNK_GENERATOR, new Identifier("ecotones", "ecotones"), EcotonesChunkGenerator.CODEC);
 
-		WORLDGEN_TYPE = Registry.register(Registry.CHUNK_GENERATOR_TYPE, new Identifier("ecotones", "ecotones"), new WorldGeneratorType(false, EcotonesChunkGeneratorConfig::new));
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+			worldType = new EcotonesWorldType();
+		}
 
 		ServerTickCallback.EVENT.register(server -> {
 			if (server.getTicks() % 300 == 0) {

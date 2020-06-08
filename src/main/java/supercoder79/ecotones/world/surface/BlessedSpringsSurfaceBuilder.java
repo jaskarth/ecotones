@@ -1,6 +1,6 @@
 package supercoder79.ecotones.world.surface;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -11,7 +11,6 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class BlessedSpringsSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
     private static final TernarySurfaceConfig GEYSER_CONFIG = new TernarySurfaceConfig(EcotonesBlocks.geyserBlock.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState());
@@ -19,8 +18,8 @@ public class BlessedSpringsSurfaceBuilder extends SurfaceBuilder<TernarySurfaceC
     private static final TernarySurfaceConfig STONE_CONFIG = new TernarySurfaceConfig(Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState());
     private static final TernarySurfaceConfig REGULAR_CONFIG = new TernarySurfaceConfig(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState(), Blocks.STONE.getDefaultState());
 
-    public BlessedSpringsSurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function) {
-        super(function);
+    public BlessedSpringsSurfaceBuilder(Codec<TernarySurfaceConfig> codec) {
+        super(codec);
     }
 
     @Override

@@ -9,7 +9,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
@@ -41,7 +41,7 @@ public class WastelandBiome extends EcotonesBiome {
             new LargeOakFoliagePlacer(2, 0, 4, 0, 4),
             new LargeOakTrunkPlacer(3, 11, 0),
             new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
-            .method_27374().method_27375(Heightmap.Type.MOTION_BLOCKING).build();
+            .ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build();
 
     public static WastelandBiome INSTANCE;
     public static WastelandBiome THICKET;
@@ -85,10 +85,6 @@ public class WastelandBiome extends EcotonesBiome {
                 .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
                 hilliness,
                 volatility);
-
-        this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
-        this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));
-
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
                         .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.75f, 1))));
@@ -107,7 +103,7 @@ public class WastelandBiome extends EcotonesBiome {
 
         DefaultBiomeFeatures.addDefaultDisks(this);
         DefaultBiomeFeatures.addLandCarvers(this);
-        DefaultBiomeFeatures.addDefaultStructures(this);
+        DefaultBiomeFeatures.method_28440(this);
         DefaultBiomeFeatures.addDungeons(this);
         DefaultBiomeFeatures.addMineables(this);
         DefaultBiomeFeatures.addDefaultOres(this);

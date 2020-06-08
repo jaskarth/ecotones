@@ -4,11 +4,10 @@ import com.terraformersmc.terraform.util.Shapes;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
@@ -17,11 +16,11 @@ import java.util.Random;
 public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
 
     public SmallSpruceTreeFeature() {
-        super(SimpleTreeFeatureConfig::deserialize);
+        super(SimpleTreeFeatureConfig.CODEC);
     }
 
     @Override
-    public boolean generate(IWorld world, StructureAccessor accessor, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
+    public boolean generate(ServerWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return false;
 
         int heightAddition = random.nextInt(3);

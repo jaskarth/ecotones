@@ -4,7 +4,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeParticleConfig;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
@@ -45,10 +45,9 @@ public class HotBiomes {
             .waterFogColor(329011)
             .addDefaultFeatures(LAND_CARVERS, STRUCTURES, DUNGEONS, MINEABLES, ORES, DISKS,
                     DEFAULT_FLOWERS, DEFAULT_MUSHROOMS, FOREST_GRASS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
-            .addStructureFeature(Feature.STRONGHOLD)
-            .addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
-
-            .addStructureFeature(Feature.RUINED_PORTAL, new RuinedPortalFeatureConfig(RuinedPortalFeature.Type.STANDARD))
+            .addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
+            .addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
+            .addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL)
 
             .addCustomFeature(GenerationStep.Feature.RAW_GENERATION,
                     EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT).createDecoratedFeature(EcotonesDecorators.DRAINAGE_DECORATOR.configure(DecoratorConfig.DEFAULT)))
@@ -66,22 +65,22 @@ public class HotBiomes {
     public static void init() {
         DESERT_BIOME = BiomeUtil.register(new Identifier("ecotones", "desert"), template.builder()
                 .hilliness(1.6)
-                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00325F, random -> random.nextDouble(), random -> random.nextDouble() * -0.2, random -> random.nextDouble()))
-                .addStructureFeature(Feature.DESERT_PYRAMID, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 5))
+                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00325F))
+                .addStructureFeature(DefaultBiomeFeatures.DESERT_PYRAMID)
+                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
+                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/desert/town_centers"), 4)))
                 .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 3)
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
         SCRUBLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "scrubland"), template.builder()
                 .configureSurfaceBuilder(EcotonesSurfaces.DESERT_SCRUB_BUILDER, SurfaceBuilder.GRASS_CONFIG)
-                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00125F, random -> random.nextDouble(), random -> random.nextDouble() * -0.2, random -> random.nextDouble()))
+                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00125F))
                 .temperature(1.9F)
                 .downfall(0.2F)
                 .hilliness(1.6)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
-                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/desert/town_centers", 5))
+                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
+                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/desert/town_centers"), 5)))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG)
@@ -120,8 +119,8 @@ public class HotBiomes {
                 .hilliness(2.8)
                 .volatility(0.88)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
-                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 4))
+                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
+                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/savanna/town_centers"), 4)))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
@@ -154,8 +153,8 @@ public class HotBiomes {
                 .scale(0.12f)
                 .hilliness(1.8)
 
-                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 8))
+                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
+                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/savanna/town_centers"), 8)))
 
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
 
@@ -194,8 +193,8 @@ public class HotBiomes {
                 .hilliness(1.4)
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
-                .addStructureFeature(Feature.PILLAGER_OUTPOST, FeatureConfig.DEFAULT)
-                .addStructureFeature(Feature.VILLAGE, new StructurePoolFeatureConfig("village/savanna/town_centers", 12))
+                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
+                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/savanna/town_centers"), 12)))
 
                 .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                         Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
@@ -297,7 +296,7 @@ public class HotBiomes {
                 .scale(0.4f)
                 .hilliness(3.4)
                 .volatility(0.88)
-                .addStructureFeature(Feature.JUNGLE_TEMPLE, FeatureConfig.DEFAULT)
+                .addStructureFeature(DefaultBiomeFeatures.JUNGLE_PYRAMID)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)

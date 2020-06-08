@@ -1,11 +1,10 @@
 package supercoder79.ecotones.world.decorator;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
@@ -14,17 +13,16 @@ import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConfig.DecorationData> {
-    public AnalyticTreePlacementDecorator(Function<Dynamic<?>, ? extends TreeGenerationConfig.DecorationData> configDeserializer) {
-        super(configDeserializer);
+    public AnalyticTreePlacementDecorator(Codec<TreeGenerationConfig.DecorationData> codec) {
+        super(codec);
     }
 
     @Override
-    public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, TreeGenerationConfig.DecorationData config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(WorldAccess world, ChunkGenerator generator, Random random, TreeGenerationConfig.DecorationData config, BlockPos pos) {
         double noise = 0.0; // default for if the chunk generator is not ours
         if (generator instanceof EcotonesChunkGenerator) {
             noise = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);

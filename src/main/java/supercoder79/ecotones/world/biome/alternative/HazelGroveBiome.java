@@ -5,13 +5,14 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
@@ -24,7 +25,6 @@ import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.features.foliage.HazelFoliagePlacer;
 
 public class HazelGroveBiome extends EcotonesBiome {
     public static HazelGroveBiome INSTANCE;
@@ -36,10 +36,10 @@ public class HazelGroveBiome extends EcotonesBiome {
             new TreeFeatureConfig.Builder(
                     new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
                     new SimpleBlockStateProvider(EcotonesBlocks.hazelLeavesBlock.getDefaultState()),
-                    new HazelFoliagePlacer(2, 0, 3, 0, 4),
+                    new BlobFoliagePlacer(2, 0, 0, 0, 4),
                     new StraightTrunkPlacer(3, 1, 0),
                     new TwoLayersFeatureSize(2, 0, 2))
-        .method_27374().build();
+        .ignoreVines().build();
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove"), new HazelGroveBiome(false, false));
@@ -73,9 +73,6 @@ public class HazelGroveBiome extends EcotonesBiome {
                 hilly ? 4.f : 1.5,
                 hilly ? 0.8 : 1);
 
-        this.addStructureFeature(Feature.MINESHAFT.configure(new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL)));
-        this.addStructureFeature(Feature.STRONGHOLD.configure(FeatureConfig.DEFAULT));
-
         if (clearing) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     Feature.TREE.configure(HAZEL_CONFIG)
@@ -99,7 +96,7 @@ public class HazelGroveBiome extends EcotonesBiome {
 
         DefaultBiomeFeatures.addDefaultDisks(this);
         DefaultBiomeFeatures.addLandCarvers(this);
-        DefaultBiomeFeatures.addDefaultStructures(this);
+        DefaultBiomeFeatures.method_28440(this);
         DefaultBiomeFeatures.addDungeons(this);
         DefaultBiomeFeatures.addMineables(this);
         DefaultBiomeFeatures.addDefaultOres(this);

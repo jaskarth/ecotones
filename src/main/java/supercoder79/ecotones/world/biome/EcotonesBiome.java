@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.biome;
 import com.terraformersmc.terraform.biome.builder.BuilderBiomeSettings;
 import com.terraformersmc.terraform.biome.builder.DefaultFeature;
 import com.terraformersmc.terraform.biome.builder.FeatureEntry;
+import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
@@ -24,10 +25,7 @@ import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class EcotonesBiome extends Biome {
     private int grassColor = -1;
@@ -94,9 +92,9 @@ public class EcotonesBiome extends Biome {
     }
 
     @Override
-    public float getMaxSpawnLimit() {
+    public float getMaxSpawnChance() {
         if (spawnChance == -1) {
-            return super.getMaxSpawnLimit();
+            return super.getMaxSpawnChance();
         }
 
         return spawnChance;
@@ -115,7 +113,7 @@ public class EcotonesBiome extends Biome {
     public static final class Builder extends BuilderBiomeSettings {
         private ArrayList<DefaultFeature> defaultFeatures = new ArrayList<>();
         private ArrayList<FeatureEntry> features = new ArrayList<>();
-        private Map<StructureFeature<FeatureConfig>, FeatureConfig> structureFeatures = new HashMap<>();
+        private List<ConfiguredStructureFeature<? extends FeatureConfig, ? extends StructureFeature<? extends FeatureConfig>>> structureFeatures = new ArrayList();
         private Map<ConfiguredFeature, Integer> treeFeatures = new HashMap<>();
         private Map<ConfiguredFeature, Integer> rareTreeFeatures = new HashMap<>();
         private Map<BlockState, Integer> plantFeatures = new HashMap<>();
@@ -140,7 +138,7 @@ public class EcotonesBiome extends Biome {
 
             this.defaultFeatures.addAll(existing.defaultFeatures);
             this.features.addAll(existing.features);
-            this.structureFeatures.putAll(existing.structureFeatures);
+            this.structureFeatures.addAll(existing.structureFeatures);
             this.treeFeatures.putAll(existing.treeFeatures);
             this.rareTreeFeatures.putAll(existing.rareTreeFeatures);
             this.plantFeatures.putAll(existing.plantFeatures);
@@ -171,8 +169,8 @@ public class EcotonesBiome extends Biome {
             biome.setSpawnChance(this.spawnChance);
 
             // Add structures
-            for (Map.Entry<StructureFeature<FeatureConfig>, FeatureConfig> structure : structureFeatures.entrySet()) {
-                biome.addStructureFeature(structure.getKey().configure(structure.getValue()));
+            for (ConfiguredStructureFeature<? extends FeatureConfig, ? extends StructureFeature<? extends FeatureConfig>> structure : structureFeatures) {
+                biome.addStructureFeature(structure);
             }
 
             // Tree Feature stuff
@@ -376,21 +374,13 @@ public class EcotonesBiome extends Biome {
             return this;
         }
 
-        public EcotonesBiome.Builder addStructureFeature(StructureFeature<DefaultFeatureConfig> feature) {
-            return this.addStructureFeature(feature, FeatureConfig.DEFAULT);
-        }
-
-        public <FC extends FeatureConfig> EcotonesBiome.Builder addStructureFeature(StructureFeature<FC> feature, FC config) {
-            this.structureFeatures.put((StructureFeature) feature, config);
-            //TODO: this breaks shit but i also want it to work. gonna fix it later
-//            this.features.add(new FeatureEntry(GenerationStep.Feature.SURFACE_STRUCTURES, feature.configure(config).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT))));
+        public EcotonesBiome.Builder addStructureFeature(ConfiguredStructureFeature<? extends FeatureConfig, ? extends StructureFeature<? extends FeatureConfig>> stucture) {
+            this.structureFeatures.add(stucture);
             return this;
         }
 
-        public EcotonesBiome.Builder addStructureFeatures(StructureFeature<DefaultFeatureConfig>... defaultStructureFeatures) {
-            for (StructureFeature<DefaultFeatureConfig> feature : defaultStructureFeatures) {
-                this.structureFeatures.put((StructureFeature) feature, FeatureConfig.DEFAULT);
-            }
+        public EcotonesBiome.Builder addStructureFeatures(ConfiguredStructureFeature<? extends FeatureConfig, ? extends StructureFeature<? extends FeatureConfig>>... stuctures) {
+            this.structureFeatures.addAll(Arrays.asList(stuctures));
             return this;
         }
 

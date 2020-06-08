@@ -1,27 +1,25 @@
 package supercoder79.ecotones.world.decorator;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 
 import java.util.Random;
-import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class SoilRockinessDecorator extends Decorator<NopeDecoratorConfig> {
-    public SoilRockinessDecorator(Function<Dynamic<?>, ? extends NopeDecoratorConfig> configDeserializer) {
-        super(configDeserializer);
+    public SoilRockinessDecorator(Codec<NopeDecoratorConfig> codec) {
+        super(codec);
     }
 
     @Override
-    public Stream<BlockPos> getPositions(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, NopeDecoratorConfig config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(WorldAccess world, ChunkGenerator generator, Random random, NopeDecoratorConfig config, BlockPos pos) {
         int count = 0;
         double noise = 0.5;
         if (generator instanceof EcotonesChunkGenerator) {

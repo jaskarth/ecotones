@@ -14,10 +14,10 @@ public class EcotonesDecorators {
     public static Decorator<NopeDecoratorConfig> ROCKINESS;
 
     public static void init() {
-        SHRUB_PLACEMENT_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "shrub_placement_decorator"), new AnalyticShrubPlacementDecorator(ShrubDecoratorConfig::deserialize));
-        DRAINAGE_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "drainage_decorator"), new DrainageSurfaceDecorator(NopeDecoratorConfig::deserialize));
-        TREE_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "tree_decorator"), new AnalyticTreePlacementDecorator(TreeGenerationConfig.DecorationData::deserialize));
-        ABOVE_QUALITY = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "above_quality"), new AboveQualityDecorator(NopeDecoratorConfig::deserialize));
-        ROCKINESS = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "rockiness"), new SoilRockinessDecorator(NopeDecoratorConfig::deserialize));
+        SHRUB_PLACEMENT_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "shrub_placement_decorator"), new AnalyticShrubPlacementDecorator(ShrubDecoratorConfig.CODEC));
+        DRAINAGE_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "drainage_decorator"), new DrainageSurfaceDecorator(NopeDecoratorConfig.field_24891));
+        TREE_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "tree_decorator"), new AnalyticTreePlacementDecorator(TreeGenerationConfig.DecorationData.CODEC));
+        ABOVE_QUALITY = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "above_quality"), new AboveQualityDecorator(NopeDecoratorConfig.field_24891));
+        ROCKINESS = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "rockiness"), new SoilRockinessDecorator(NopeDecoratorConfig.field_24891));
     }
 }

@@ -3,15 +3,11 @@
   "package": "supercoder79.ecotones.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinOverworldDimension",
-    "MixinChunkGenerator"
+    "BlockPlacerTypeAccessor",
+    "TreeDecoratorTypeAccessor"
   ],
   "client": [
-    "MixinLevelGeneratorTypeClient",
     "MixinCreateWorldScreen"
-  ],
-  "server": [
-    "MixinLevelGeneratorTypeServer"
   ],
   "injectors": {
     "defaultRequire": 1

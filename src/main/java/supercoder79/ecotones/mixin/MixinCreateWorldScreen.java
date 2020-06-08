@@ -1,29 +1,26 @@
 package supercoder79.ecotones.mixin;
 
-import com.mojang.datafixers.Dynamic;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.world.CreateWorldScreen;
+import net.minecraft.client.gui.screen.world.MoreOptionsDialog;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.datafixer.NbtOps;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resource.DataPackSettings;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.GameMode;
 import net.minecraft.world.GameRules;
+import net.minecraft.world.gen.GeneratorOptions;
 import net.minecraft.world.level.LevelInfo;
-import org.apache.commons.lang3.StringUtils;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import supercoder79.ecotones.world.generation.LevelGenUtil;
-import supercoder79.ecotones.world.generation.WorldType;
-
-import java.util.Random;
 
 @Mixin(CreateWorldScreen.class)
 public abstract class MixinCreateWorldScreen extends Screen {
@@ -33,8 +30,6 @@ public abstract class MixinCreateWorldScreen extends Screen {
 
     @Shadow private boolean creatingLevel;
 
-    @Shadow private TextFieldWidget seedField;
-
     @Shadow private Difficulty field_24290;
 
     @Shadow private TextFieldWidget levelNameField;
@@ -42,6 +37,14 @@ public abstract class MixinCreateWorldScreen extends Screen {
     @Shadow private String saveDirectoryName;
 
     @Shadow private GameRules gameRules;
+
+    @Shadow public boolean hardcore;
+
+    @Shadow @Final public MoreOptionsDialog moreOptionsDialog;
+
+    @Shadow protected abstract boolean method_29696();
+
+    @Shadow protected DataPackSettings field_25479;
 
     @Inject(method = "init", at = @At("TAIL"))
     public void addEcotonesButton(CallbackInfo ci) {
@@ -51,32 +54,22 @@ public abstract class MixinCreateWorldScreen extends Screen {
     }
 
     private void createLevelEcotones() {
-        this.client.openScreen(null);
+        this.client.openScreen((Screen)null);
         if (!this.creatingLevel) {
             this.creatingLevel = true;
-            long l = (new Random()).nextLong();
-            String string = this.seedField.getText();
-            if (!StringUtils.isEmpty(string)) {
-                try {
-                    long m = Long.parseLong(string);
-                    if (m != 0L) {
-                        l = m;
-                    }
-                } catch (NumberFormatException var6) {
-                    l = string.hashCode();
+            if (this.method_29696()) {
+                GeneratorOptions generatorOptions = this.moreOptionsDialog.getGeneratorOptions(this.hardcore);
+                LevelInfo levelInfo2;
+                if (generatorOptions.isDebugWorld()) {
+                    GameRules gameRules = new GameRules();
+                    ((GameRules.BooleanRule)gameRules.get(GameRules.DO_DAYLIGHT_CYCLE)).set(false, (MinecraftServer)null);
+                    levelInfo2 = new LevelInfo(this.levelNameField.getText().trim(), GameMode.SPECTATOR, false, Difficulty.PEACEFUL, true, gameRules, DataPackSettings.SAFE_MODE);
+                } else {
+                    levelInfo2 = new LevelInfo(this.levelNameField.getText().trim(), GameMode.SPECTATOR, this.hardcore, this.field_24290, !this.hardcore, this.gameRules, this.field_25479);
                 }
+
+                this.client.method_29607(this.saveDirectoryName, levelInfo2, this.moreOptionsDialog.method_29700(), generatorOptions);
             }
-
-            LevelInfo info = new LevelInfo(this.levelNameField.getText().trim(),
-                    l,
-                    GameMode.CREATIVE,
-                    true,
-                    false,
-                    this.field_24290,
-                    LevelGenUtil.makeChunkGenerator(WorldType.generatorType, new Dynamic<>(NbtOps.INSTANCE, new CompoundTag())),
-                    this.gameRules).enableCommands();
-
-            this.client.startIntegratedServer(this.saveDirectoryName, info);
         }
     }
 }

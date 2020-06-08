@@ -31,5 +31,7 @@
 
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",
-  "item.ecotones.sap_ball": "Sap Ball"
+  "item.ecotones.sap_ball": "Sap Ball",
+
+  "generator.ecotones": "§2Ecotones"
 }

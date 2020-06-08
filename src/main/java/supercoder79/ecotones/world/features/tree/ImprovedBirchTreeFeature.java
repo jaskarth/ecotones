@@ -1,14 +1,14 @@
 package supercoder79.ecotones.world.features.tree;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
@@ -17,15 +17,15 @@ import supercoder79.ecotones.util.TreeUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Function;
 
 public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
-    public ImprovedBirchTreeFeature(Function<Dynamic<?>, ? extends TreeGenerationConfig> configDeserializer) {
-        super(configDeserializer);
+
+    public ImprovedBirchTreeFeature(Codec<TreeGenerationConfig> codec) {
+        super(codec);
     }
 
     @Override
-    public boolean generate(IWorld world, StructureAccessor accessor, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, TreeGenerationConfig config) {
+    public boolean generate(ServerWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockPos pos, TreeGenerationConfig config) {
         //ensure spawn
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
         int maxHeight = 12;
@@ -45,7 +45,7 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
     }
 
     //grows leaves in a 3d + formation.
-    private void growLeaves(IWorld world, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+    private void growLeaves(WorldAccess world, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
         for (BlockPos node : leafPlacementNodes) {
             for (Direction direction : Direction.values()) {
                 BlockPos local = node.offset(direction);
@@ -56,7 +56,7 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
         }
     }
 
-    private void trunk(IWorld world, BlockPos startPos, Random random, float yaw, float pitch, int maxHeight, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+    private void trunk(WorldAccess world, BlockPos startPos, Random random, float yaw, float pitch, int maxHeight, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
         boolean hasModified = false;
         for (int i = 0; i < maxHeight; i++) {
             BlockPos local = startPos.add(
@@ -103,7 +103,7 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
         }
     }
 
-    private void branch(IWorld world, BlockPos trunkPos, Random random, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+    private void branch(WorldAccess world, BlockPos trunkPos, Random random, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
         if (random.nextInt(3) == 0) {
             leafPlacementNodes.add(trunkPos);
             return;
