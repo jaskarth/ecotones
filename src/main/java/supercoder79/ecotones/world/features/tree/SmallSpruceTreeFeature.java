@@ -23,7 +23,7 @@ public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
     public boolean generate(ServerWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return false;
 
-        int heightAddition = random.nextInt(3);
+        int heightAddition = random.nextInt(4);
 
         double maxRadius = 1.8 + ((random.nextDouble() - 0.5) * 0.2);
 

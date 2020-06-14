@@ -4,6 +4,8 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 
+import java.util.Random;
+
 public class SandParticle extends SpriteBillboardParticle {
     protected SandParticle(ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
         super(clientWorld, x, y - 0.125D, z, velocityX, velocityY, velocityZ);
@@ -32,7 +34,8 @@ public class SandParticle extends SpriteBillboardParticle {
 
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            SandParticle particle = new SandParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
+            Random random = clientWorld.random;
+            SandParticle particle = new SandParticle(clientWorld, x, y, z, random.nextDouble(), random.nextDouble() * -0.2, random.nextDouble());
             particle.setSprite(this.spriteProvider);
             return particle;
         }

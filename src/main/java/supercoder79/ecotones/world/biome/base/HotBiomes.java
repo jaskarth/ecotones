@@ -286,9 +286,17 @@ public class HotBiomes {
                         EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
                                 .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.65))))
 
-                .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 4)
-                .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.BIRCH_TREE_CONFIG), 2)
-                .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG), 1));
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        EcotonesFeatures.BRANCHING_OAK.configure(TreeType.LUSH_OAK.config)
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.LUSH_OAK.config.decorationData)))
+
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.LUSH_BIRCH.config)
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.LUSH_BIRCH.config.decorationData)))
+
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        EcotonesFeatures.BRANCHING_OAK.configure(TreeType.LUSH_JUNGLE.config)
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.LUSH_JUNGLE.config.decorationData))));
 
         TROPICAL_RAINFOREST_BIOME = BiomeUtil.register( new Identifier("ecotones", "tropical_rainforest"), template.builder()
                 .temperature(1.6F)
@@ -317,8 +325,13 @@ public class HotBiomes {
                         EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
                                 .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(1))))
 
-                .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 2)
-                .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG), 3)
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        EcotonesFeatures.BRANCHING_OAK.configure(TreeType.DRY_OAK.config)
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.DRY_OAK.config.decorationData)))
+
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        EcotonesFeatures.BRANCHING_OAK.configure(TreeType.LUSH_JUNGLE.config)
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.LUSH_JUNGLE.config.decorationData)))
                 .addTreeFeature(EcotonesFeatures.JUNGLE_PALM_TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG), 3)
                 .addTreeFeature(EcotonesFeatures.BANANA_TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG), 2)
                 .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.MEGA_JUNGLE_TREE_CONFIG), 1));

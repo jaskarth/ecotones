@@ -17,7 +17,6 @@ public class PineconeTreeDecorator extends TreeDecorator {
     private final int rarity;
 
     public PineconeTreeDecorator(int rarity) {
-        super();
         this.rarity = rarity;
     }
 
@@ -33,7 +32,7 @@ public class PineconeTreeDecorator extends TreeDecorator {
     }
 
     @Override
-    protected TreeDecoratorType<?> method_28893() {
+    protected TreeDecoratorType<?> getType() {
         return EcotonesTreeDecorators.PINECONES;
     }
 }

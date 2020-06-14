@@ -1,7 +1,9 @@
 package supercoder79.ecotones.world.features.tree;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
@@ -9,14 +11,14 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.decorator.LeaveVineTreeDecorator;
+import net.minecraft.world.gen.decorator.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 //creates a branching trunk then places leaves
 public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
@@ -42,15 +44,16 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
 
         branch(world, pos, random, (float) (random.nextDouble() * 2 * Math.PI), 0, maxHeight, 0, leafPlacementNodes, config);
 
-        growLeaves(world, leafPlacementNodes, config);
+        growLeaves(world, random, leafPlacementNodes, config);
 
         return false;
     }
 
-    private void growLeaves(WorldAccess world, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+    private void growLeaves(WorldAccess world, Random random, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+        List<BlockPos> leaves = new ArrayList<>();
         for (BlockPos node : leafPlacementNodes) {
-            generateSmallLeafLayer(world, node.up(2), config);
-            generateSmallLeafLayer(world, node.down(2), config);
+            generateSmallLeafLayer(world, node.up(2), leaves, config);
+            generateSmallLeafLayer(world, node.down(2), leaves, config);
 
             for (int x = -2; x <= 2; x++) {
                 for (int z = -2; z <= 2; z++) {
@@ -63,10 +66,16 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                         BlockPos local = node.add(x, y, z);
                         if (world.getBlockState(local).isAir()) {
                             world.setBlockState(local, config.leafState, 0);
+                            leaves.add(local);
                         }
                     }
                 }
             }
+        }
+
+        if (config.generateVines) {
+            new LeaveVineTreeDecorator().generate(world, random, ImmutableList.of(), leaves, new HashSet<>(), BlockBox.empty());
+            new TrunkVineTreeDecorator().generate(world, random, ImmutableList.of(), leaves, new HashSet<>(), BlockBox.empty());
         }
     }
 
@@ -136,14 +145,16 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
         }
     }
 
-    private void generateSmallLeafLayer(WorldAccess world, BlockPos pos, TreeGenerationConfig config) {
+    private void generateSmallLeafLayer(WorldAccess world, BlockPos pos, List<BlockPos> leaves,TreeGenerationConfig config) {
         if (world.getBlockState(pos).isAir()) {
+            leaves.add(pos);
             world.setBlockState(pos, config.leafState, 0);
         }
         for (Direction direction : Direction.Type.HORIZONTAL) {
             BlockPos local = pos.offset(direction);
             if (world.getBlockState(local).isAir()) {
                 world.setBlockState(local, config.leafState, 0);
+                leaves.add(local);
             }
         }
     }

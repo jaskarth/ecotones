@@ -28,8 +28,6 @@ public abstract class MixinCreateWorldScreen extends Screen {
         super(title);
     }
 
-    @Shadow private boolean creatingLevel;
-
     @Shadow private Difficulty field_24290;
 
     @Shadow private TextFieldWidget levelNameField;
@@ -54,22 +52,19 @@ public abstract class MixinCreateWorldScreen extends Screen {
     }
 
     private void createLevelEcotones() {
-        this.client.openScreen((Screen)null);
-        if (!this.creatingLevel) {
-            this.creatingLevel = true;
-            if (this.method_29696()) {
-                GeneratorOptions generatorOptions = this.moreOptionsDialog.getGeneratorOptions(this.hardcore);
-                LevelInfo levelInfo2;
-                if (generatorOptions.isDebugWorld()) {
-                    GameRules gameRules = new GameRules();
-                    ((GameRules.BooleanRule)gameRules.get(GameRules.DO_DAYLIGHT_CYCLE)).set(false, (MinecraftServer)null);
-                    levelInfo2 = new LevelInfo(this.levelNameField.getText().trim(), GameMode.SPECTATOR, false, Difficulty.PEACEFUL, true, gameRules, DataPackSettings.SAFE_MODE);
-                } else {
-                    levelInfo2 = new LevelInfo(this.levelNameField.getText().trim(), GameMode.SPECTATOR, this.hardcore, this.field_24290, !this.hardcore, this.gameRules, this.field_25479);
-                }
-
-                this.client.method_29607(this.saveDirectoryName, levelInfo2, this.moreOptionsDialog.method_29700(), generatorOptions);
+        this.client.openScreen(null);
+        if (this.method_29696()) {
+            GeneratorOptions generatorOptions = this.moreOptionsDialog.getGeneratorOptions(this.hardcore);
+            LevelInfo levelInfo2;
+            if (generatorOptions.isDebugWorld()) {
+                GameRules gameRules = new GameRules();
+                gameRules.get(GameRules.DO_DAYLIGHT_CYCLE).set(false, null);
+                levelInfo2 = new LevelInfo(this.levelNameField.getText().trim(), GameMode.SPECTATOR, false, Difficulty.PEACEFUL, true, gameRules, DataPackSettings.SAFE_MODE);
+            } else {
+                levelInfo2 = new LevelInfo(this.levelNameField.getText().trim(), GameMode.SPECTATOR, this.hardcore, this.field_24290, !this.hardcore, this.gameRules, this.field_25479);
             }
+
+            this.client.method_29607(this.saveDirectoryName, levelInfo2, this.moreOptionsDialog.method_29700(), generatorOptions);
         }
     }
 }

@@ -299,8 +299,13 @@ public class WarmBiomes {
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
                                 .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 24))))
 
-                .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 2)
-                .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG), 2)
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        EcotonesFeatures.BRANCHING_OAK.configure(TreeType.DRY_OAK.config)
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.DRY_OAK.config.decorationData)))
+
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        EcotonesFeatures.BRANCHING_OAK.configure(TreeType.LUSH_JUNGLE.config)
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.LUSH_JUNGLE.config.decorationData)))
                 .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.MEGA_JUNGLE_TREE_CONFIG), 1));
 
         Climate.WARM_DESERT.add(COOL_DESERT_BIOME, 1);

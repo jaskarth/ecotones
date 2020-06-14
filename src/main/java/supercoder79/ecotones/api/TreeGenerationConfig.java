@@ -27,7 +27,8 @@ public class TreeGenerationConfig implements FeatureConfig {
             Codec.INT.fieldOf("min_size").forGetter((config) -> config.minSize),
             Codec.INT.fieldOf("noise_coefficient").forGetter((config) -> config.noiseCoefficient),
             Codec.DOUBLE.fieldOf("yaw_change").forGetter((config) -> config.yawChange),
-            Codec.DOUBLE.fieldOf("pitch_change").forGetter((config) -> config.pitchChange))
+            Codec.DOUBLE.fieldOf("pitch_change").forGetter((config) -> config.pitchChange),
+            Codec.BOOL.fieldOf("generate_vines").forGetter((config) -> config.generateVines))
             .apply(instance, TreeGenerationConfig::new));
     public final DecorationData decorationData;
     public final double targetCount;
@@ -39,8 +40,10 @@ public class TreeGenerationConfig implements FeatureConfig {
     public final int noiseCoefficient;
     public final double yawChange;
     public final double pitchChange;
+    public final boolean generateVines;
 
-    public TreeGenerationConfig(double targetCount, BlockState woodState, BlockState leafState, int branchingFactor, int thickTrunkDepth, int minSize, int noiseCoefficient, double yawChange, double pitchChange) {
+    public TreeGenerationConfig(double targetCount, BlockState woodState, BlockState leafState, int branchingFactor, int thickTrunkDepth, int minSize, int noiseCoefficient, double yawChange, double pitchChange, boolean generateVines) {
+        this.generateVines = generateVines;
         this.decorationData = new DecorationData(targetCount, minSize, noiseCoefficient);
         this.targetCount = targetCount;
         this.woodState = woodState;
