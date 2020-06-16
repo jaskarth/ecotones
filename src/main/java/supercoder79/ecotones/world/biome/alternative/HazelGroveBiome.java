@@ -18,6 +18,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.world.biome.BiomeUtil;
 import supercoder79.ecotones.world.biome.EcotonesBiome;
@@ -84,7 +85,7 @@ public class HazelGroveBiome extends EcotonesBiome {
         } else {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     Feature.TREE.configure(HAZEL_CONFIG)
-                            .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(3, 0.5f, 2))));
+                            .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(3.5))));
 
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
@@ -92,7 +93,8 @@ public class HazelGroveBiome extends EcotonesBiome {
         }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 4, 8))));
+                Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
+                        .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 4, 8))));
 
         DefaultBiomeFeatures.addDefaultDisks(this);
         DefaultBiomeFeatures.addLandCarvers(this);

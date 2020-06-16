@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
@@ -17,6 +18,7 @@ public class BananaTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 
     @Override
     protected boolean generate(ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> logPositions, Set<BlockPos> leavesPositions, BlockBox box, TreeFeatureConfig config) {
+        pos = world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, pos);
         BlockPos.Mutable mutable = pos.mutableCopy();
         if (!AbstractTreeFeature.isDirtOrGrass(world, pos.down())) return false;
         setToDirt(world, pos.down());

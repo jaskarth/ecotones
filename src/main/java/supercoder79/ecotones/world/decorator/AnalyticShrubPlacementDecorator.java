@@ -28,7 +28,7 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
         //drainage of 0: perfect drainage, 150% of target shrub count
 
         double noise = 0.5; // default for if the chunk generator is not ours
-        //get noise at position (this is fairly inaccurate because the pos is at the top left of the chunk and we center it
+        //get noise at position (this is fairly inaccurate because the pos is at the top left of the chunk and we center it)
         if (generator instanceof EcotonesChunkGenerator) {
             noise = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
         }

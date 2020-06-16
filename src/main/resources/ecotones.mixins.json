@@ -4,10 +4,10 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BlockPlacerTypeAccessor",
+    "MixinGeneratorOptions",
     "TreeDecoratorTypeAccessor"
   ],
   "client": [
-    "MixinCreateWorldScreen"
   ],
   "injectors": {
     "defaultRequire": 1
