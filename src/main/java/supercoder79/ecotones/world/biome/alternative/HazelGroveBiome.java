@@ -38,7 +38,7 @@ public class HazelGroveBiome extends EcotonesBiome {
                     new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
                     new SimpleBlockStateProvider(EcotonesBlocks.hazelLeavesBlock.getDefaultState()),
                     new BlobFoliagePlacer(2, 0, 0, 0, 4),
-                    new StraightTrunkPlacer(3, 1, 0),
+                    new StraightTrunkPlacer(6, 2, 0),
                     new TwoLayersFeatureSize(2, 0, 2))
         .ignoreVines().build();
 

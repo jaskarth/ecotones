@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(BlockPlacerType.class)
 public interface BlockPlacerTypeAccessor {
-    @Invoker
+    @Invoker(value = "<init>")
     static <P extends BlockPlacer> BlockPlacerType<P> createBlockPlacerType(Codec<P> codec) {
         throw new UnsupportedOperationException();
     }

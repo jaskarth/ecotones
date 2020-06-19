@@ -42,6 +42,7 @@
 * Fallen logs for every biome
 * Add edge biomes to everything
 * Burned village for dead spruce forests
+* Water patches in flooded savannas
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas
