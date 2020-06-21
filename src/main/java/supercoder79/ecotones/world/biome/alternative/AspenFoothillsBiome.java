@@ -72,7 +72,7 @@ public class AspenFoothillsBiome extends EcotonesBiome {
                         .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(3))));
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.STONE.getDefaultState(), 1))
+                Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.STONE.getDefaultState(), 1))
                         .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(4))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

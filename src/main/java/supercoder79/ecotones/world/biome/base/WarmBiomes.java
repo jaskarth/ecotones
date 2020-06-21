@@ -82,7 +82,7 @@ public class WarmBiomes {
                 .addDefaultFeature(PLAINS_TALL_GRASS)
 
                 .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                        Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
+                        Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
                                 .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(8))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -121,7 +121,7 @@ public class WarmBiomes {
                                 .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(4))))
 
                 .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                        Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
+                        Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
                                 .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(14))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,

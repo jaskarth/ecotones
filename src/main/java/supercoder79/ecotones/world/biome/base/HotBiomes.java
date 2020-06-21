@@ -92,7 +92,7 @@ public class HotBiomes {
                         .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(3, 0.5f, 2))))
 
                 .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                        Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
+                        Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
                                 .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(12))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -128,7 +128,7 @@ public class HotBiomes {
                                 .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(7, 0.5f, 3))))
 
                 .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                        Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
+                        Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
                                 .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(13))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -160,7 +160,7 @@ public class HotBiomes {
                 .addDefaultFeatures(PLAINS_TALL_GRASS, PLAINS_FEATURES)
 
                 .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                        Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
+                        Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
                                 .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(14))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -201,7 +201,7 @@ public class HotBiomes {
                 .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/savanna/town_centers"), 12)))
 
                 .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                        Feature.FOREST_ROCK.configure(new BoulderFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
+                        Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
                                 .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(14))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
