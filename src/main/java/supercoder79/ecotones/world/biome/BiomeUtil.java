@@ -67,6 +67,6 @@ public class BiomeUtil {
     }
 
     public static boolean contains(int id, String name) {
-        return Registry.BIOME.get(id).getName().asString().contains(name);
+        return Registry.BIOME.get(id).getTranslationKey().contains(name);
     }
 }
