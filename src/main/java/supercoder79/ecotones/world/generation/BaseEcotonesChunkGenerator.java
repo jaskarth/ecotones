@@ -278,9 +278,9 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                 }
             } while(k >= 256);
 
-            for(n = k + 4; n >= k; --n) {
-                if (n <= k + random.nextInt(5)) {
-                    chunk.setBlockState(mutable.set(blockPos.getX(), n, blockPos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+            for(int o = 4; o >= 0; --o) {
+                if (o <= random.nextInt(5)) {
+                    chunk.setBlockState(mutable.set(blockPos.getX(), o, blockPos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
                 }
             }
         }
