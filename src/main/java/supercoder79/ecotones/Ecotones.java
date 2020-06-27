@@ -28,6 +28,7 @@ import supercoder79.ecotones.world.biome.special.*;
 import supercoder79.ecotones.world.biome.technical.BeachBiome;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
+import supercoder79.ecotones.world.features.foliage.EcotonesFoliagePlacers;
 import supercoder79.ecotones.world.generation.EcotonesBiomeSource;
 import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
@@ -42,6 +43,7 @@ public class Ecotones implements ModInitializer {
 
 		EcotonesParticles.init();
 		EcotonesBlockPlacers.init();
+		EcotonesFoliagePlacers.init();
 		EcotonesTreeDecorators.init();
 
         EcotonesBlocks.init();
@@ -76,7 +78,6 @@ public class Ecotones implements ModInitializer {
 		WastelandBiome.init();
 		CloverFieldsBiome.init();
 		PoplarForestBiome.init();
-
 		TemperateGrasslandBiome.init();
 		BirchForestBiome.init();
 		FloodedSavannahBiome.init();
@@ -85,6 +86,7 @@ public class Ecotones implements ModInitializer {
 		MoorBiome.init();
 		AspenFoothillsBiome.init();
 		LushDesertBiome.init();
+		DrySteppeBiome.init();
 
 		// mod compat
 		if (FabricLoader.getInstance().isModLoaded("traverse")) {
