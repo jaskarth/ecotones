@@ -1,0 +1,98 @@
+package supercoder79.ecotones.world.biome.alternative;
+
+import com.google.common.collect.ImmutableList;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeEffects;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
+import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.ForestRockFeatureConfig;
+import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.EcotonesBiome;
+import supercoder79.ecotones.world.decorator.EcotonesDecorators;
+import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
+import supercoder79.ecotones.world.features.EcotonesFeatures;
+import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
+import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.surface.EcotonesSurfaces;
+
+public class DrySavannaBiome extends EcotonesBiome {
+    public static DrySavannaBiome INSTANCE;
+    public static DrySavannaBiome HILLY;
+    public static DrySavannaBiome MOUNTAINOUS;
+
+    public static void init() {
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna"), new DrySavannaBiome(0.5F, 0.025F, 3, 0.96));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna_hilly"), new DrySavannaBiome(1.25F, 0.125F, 6, 0.87));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna_mountainous"), new DrySavannaBiome(2F, 0.325F, 8, 0.82));
+        BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
+        Climate.HOT_VERY_DRY.add(INSTANCE, 0.3);
+        Climate.WARM_VERY_DRY.add(INSTANCE, 0.1);
+    }
+
+    public DrySavannaBiome(float depth, float scale, double hilliness, double volatility) {
+        super(new Biome.Settings()
+                        .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+                        .precipitation(Biome.Precipitation.RAIN)
+                        .category(Biome.Category.PLAINS)
+                        .depth(depth)
+                        .scale(scale)
+                        .temperature(1.2F)
+                        .downfall(0.025F)
+                        .effects(new BiomeEffects.Builder()
+                                .waterColor(4159204)
+                                .waterFogColor(329011)
+                                .fogColor(12638463)
+                                .build()).parent(null)
+                        .noises(ImmutableList.of(new Biome.MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
+                hilliness,
+                volatility);
+        DefaultBiomeFeatures.addLandCarvers(this);
+        DefaultBiomeFeatures.addPlainsTallGrass(this);
+        DefaultBiomeFeatures.method_28440(this);
+        DefaultBiomeFeatures.addDungeons(this);
+        DefaultBiomeFeatures.addMineables(this);
+        DefaultBiomeFeatures.addDefaultOres(this);
+        DefaultBiomeFeatures.addDefaultDisks(this);
+        DefaultBiomeFeatures.addDefaultMushrooms(this);
+        DefaultBiomeFeatures.addSprings(this);
+        DefaultBiomeFeatures.addFrozenTopLayer(this);
+        DefaultBiomeFeatures.addSavannaGrass(this);
+        DefaultBiomeFeatures.addSavannaTallGrass(this);
+
+        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
+                        .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(8))));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(1.6))));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SCRUBLAND_CONFIG)
+                        .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 7, 9))));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.RARE_ACACIA.config)
+                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_ACACIA.config.decorationData)));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
+                        .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(8, 0.75f, 1))));
+
+        BiomeUtil.addDefaultFeatures(this);
+        BiomeUtil.addDefaultSpawns(this);
+    }
+}

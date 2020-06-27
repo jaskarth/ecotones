@@ -44,5 +44,6 @@ public class EcotonesBiomes {
         AspenFoothillsBiome.init();
         LushDesertBiome.init();
         DrySteppeBiome.init();
+        DrySavannaBiome.init();
     }
 }

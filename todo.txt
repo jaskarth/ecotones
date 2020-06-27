@@ -3,7 +3,6 @@
 * Heathland
 * Bayou
 * Everglades
-* Chaparral
 * Steppe -> something unique
 * Forest with balloon-y trees (see misc entry)
 * Lowlands with jungle bush-like shrubs
@@ -18,6 +17,7 @@
 * Sequoia forest
 * Larch forest
 * Rice Field
+* Fertile valley
 
 # Blocks and items
 * More flower types
@@ -42,6 +42,7 @@
 * Add edge biomes to everything
 * Burned village for dead spruce forests
 * Fix: Water patches in flooded savannas spawn with air on sides
+* Improve the look of a few biomes (remove shrubs, more unique features, etc.)
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas

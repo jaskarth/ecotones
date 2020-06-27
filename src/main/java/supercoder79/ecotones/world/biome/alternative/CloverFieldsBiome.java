@@ -38,14 +38,6 @@ public class CloverFieldsBiome extends EcotonesBiome {
         FLATS = Registry.register(Registry.BIOME, new Identifier("ecotones", "clover_flats"), new CloverFieldsBiome(0.5F, 0.01F, 0, 2, 1.2, 1.2));
         HILLS = Registry.register(Registry.BIOME, new Identifier("ecotones", "clover_hills"), new CloverFieldsBiome(1.2F, 0.625F, 0, 1, 4.8, 0.75));
         SHRUB = Registry.register(Registry.BIOME, new Identifier("ecotones", "clover_shrubs"), new CloverFieldsBiome(0.5F, 0.025F, 0, 4, 2.8, 0.9));
-
-        BiomeRegistries.registerAllSpecial(id ->
-                BiomeUtil.contains(id, "lichen_woodland") || BiomeUtil.contains(id, "spruce_forest") || BiomeUtil.contains(id, "prairie")
-                , INSTANCE, THICKET, FLATS, HILLS, SHRUB);
-
-        BiomeRegistries.registerBigSpecialBiome(INSTANCE, 45);
-        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 2);
-        BiomeRegistries.registerBiomeVariants(INSTANCE, THICKET, FLATS, HILLS, SHRUB);
         Climate.WARM_MODERATE.add(INSTANCE, 0.1);
         Climate.WARM_MILD.add(INSTANCE, 0.1);
         Climate.WARM_HUMID.add(INSTANCE, 0.1);
