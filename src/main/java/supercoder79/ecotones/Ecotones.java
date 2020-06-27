@@ -20,6 +20,7 @@ import supercoder79.ecotones.compat.TraverseCompat;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.util.EcotonesBlockPlacers;
 import supercoder79.ecotones.world.EcotonesWorldType;
+import supercoder79.ecotones.world.biome.EcotonesBiomes;
 import supercoder79.ecotones.world.biome.alternative.*;
 import supercoder79.ecotones.world.biome.base.HotBiomes;
 import supercoder79.ecotones.world.biome.base.WarmBiomes;
@@ -52,41 +53,7 @@ public class Ecotones implements ModInitializer {
 		EcotonesFeatures.init();
 		EcotonesSurfaces.init();
 
-		// base biomes
-		HotBiomes.init();
-		WarmBiomes.init();
-		SwampBiomes.init();
-
-		// technical biomes
-		BeachBiome.init();
-
-		// volcanic biomes
-		VolcanicBiome.init();
-		SuperVolcanicBiome.init();
-		HotSpringsBiome.init();
-		BlessedSpringsBiome.init();
-
-		// special biomes
-		OasisBiome.init();
-		ThePitsBiome.init();
-		GreenSpiresBiome.init();
-		HazelGroveBiome.init();
-		PinePeaksBiome.init();
-		UluruBiome.init();
-		FlowerPrairieBiome.init();
-		WoodlandThicketBiome.init();
-		WastelandBiome.init();
-		CloverFieldsBiome.init();
-		PoplarForestBiome.init();
-		TemperateGrasslandBiome.init();
-		BirchForestBiome.init();
-		FloodedSavannahBiome.init();
-		DeadSpruceForestBiome.init();
-		PalmForestBiome.init();
-		MoorBiome.init();
-		AspenFoothillsBiome.init();
-		LushDesertBiome.init();
-		DrySteppeBiome.init();
+		EcotonesBiomes.init();
 
 		// mod compat
 		if (FabricLoader.getInstance().isModLoaded("traverse")) {

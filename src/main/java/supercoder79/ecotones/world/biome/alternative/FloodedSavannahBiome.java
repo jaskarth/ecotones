@@ -6,6 +6,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
+import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
@@ -37,7 +38,7 @@ public class FloodedSavannahBiome extends EcotonesBiome {
 
 
     protected FloodedSavannahBiome() {
-        super((new Biome.Settings())
+        super(new Biome.Settings()
                         .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                         .precipitation(Biome.Precipitation.RAIN)
                         .category(Biome.Category.PLAINS)
@@ -78,6 +79,10 @@ public class FloodedSavannahBiome extends EcotonesBiome {
                 Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
                         .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE
                                 .configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))));
+
+        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                EcotonesFeatures.PLACE_WATER.configure(FeatureConfig.DEFAULT)
+                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP.configure(new CountDecoratorConfig(2))));
 
         DefaultBiomeFeatures.addDefaultDisks(this);
         DefaultBiomeFeatures.addLandCarvers(this);

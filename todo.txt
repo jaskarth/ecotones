@@ -32,7 +32,6 @@
 
 # Misc
 * Stop procrastinating on cold biomes
-* Steal zoerestria Bluff
 * Balloon-y tree with edges hanging off (this is very hard to describe in text)
 * Add all biomes to lang file
 * Move swamps to special biomes
@@ -42,7 +41,7 @@
 * Fallen logs for every biome
 * Add edge biomes to everything
 * Burned village for dead spruce forests
-* Water patches in flooded savannas
+* Fix: Water patches in flooded savannas spawn with air on sides
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas
@@ -58,3 +57,6 @@
 * Abstract the shit out of tree gen
 * Special tree generation items (acorn, birch seed)
 * Trees don't set block to dirt
+
+# 1.17
+* flooded_savannah -> flooded_savanna
