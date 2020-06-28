@@ -27,6 +27,8 @@ public class EcotonesFeatures {
     public static WideShrubFeature WIDE_SHRUB;
     public static AspenTreeFeature ASPEN_TREE;
     public static PlaceWaterFeature PLACE_WATER;
+    public static FarmlandPatchFeature FARMLAND;
+    public static BeehiveFeature BEEHIVES;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig.CODEC));
@@ -46,5 +48,7 @@ public class EcotonesFeatures {
         WIDE_SHRUB = Registry.register(Registry.FEATURE, new Identifier("ecotones", "wide_shrub"), new WideShrubFeature(SimpleTreeFeatureConfig.CODEC));
         ASPEN_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "aspen_tree"), new AspenTreeFeature(SimpleTreeFeatureConfig.CODEC));
         PLACE_WATER = Registry.register(Registry.FEATURE, new Identifier("ecotones", "place_water"), new PlaceWaterFeature(DefaultFeatureConfig.CODEC));
+        FARMLAND = Registry.register(Registry.FEATURE, new Identifier("ecotones", "farmland"), new FarmlandPatchFeature(DefaultFeatureConfig.CODEC));
+        BEEHIVES = Registry.register(Registry.FEATURE, new Identifier("ecotones", "beehives"), new BeehiveFeature(DefaultFeatureConfig.CODEC));
     }
 }

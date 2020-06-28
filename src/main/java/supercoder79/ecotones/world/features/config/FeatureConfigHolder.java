@@ -54,12 +54,18 @@ public class FeatureConfigHolder {
                     .addState(EcotonesBlocks.wildflowersBlock.getDefaultState(), 1)
                     .addState(Blocks.GRASS.getDefaultState(), 2), new SimpleBlockPlacer()).tries(32).build();
 
-    public static RandomPatchFeatureConfig TALL_GRASS_CONFIG =
+    public static RandomPatchFeatureConfig GRASSLAND_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
                     .addState(EcotonesBlocks.shortGrass.getDefaultState(), 1)
                     .addState(EcotonesBlocks.wildflowersBlock.getDefaultState(), 1)
                     .addState(Blocks.GRASS.getDefaultState(), 4)
                     .addState(Blocks.TALL_GRASS.getDefaultState(), 1), new DoubleOrNormalPlacer()).tries(32).build();
+
+    public static RandomPatchFeatureConfig TALL_GRASS_CONFIG =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.shortGrass.getDefaultState(), 1)
+                    .addState(Blocks.GRASS.getDefaultState(), 6)
+                    .addState(Blocks.TALL_GRASS.getDefaultState(), 3), new DoubleOrNormalPlacer()).tries(32).build();
 
     public static RandomPatchFeatureConfig DESERT_GRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()

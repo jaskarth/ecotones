@@ -17,7 +17,6 @@
 * Sequoia forest
 * Larch forest
 * Rice Field
-* Fertile valley
 
 # Blocks and items
 * More flower types
@@ -43,6 +42,10 @@
 * Burned village for dead spruce forests
 * Fix: Water patches in flooded savannas spawn with air on sides
 * Improve the look of a few biomes (remove shrubs, more unique features, etc.)
+* Sugarcane feature in fertile valley
+* Better mod compat, deffered register system
+* Tweak biome weights
+* Beehives in other biomes
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas

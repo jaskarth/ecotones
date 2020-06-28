@@ -84,6 +84,10 @@ public class FloodedSavannahBiome extends EcotonesBiome {
                 EcotonesFeatures.PLACE_WATER.configure(FeatureConfig.DEFAULT)
                         .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP.configure(new CountDecoratorConfig(2))));
 
+        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                EcotonesFeatures.BEEHIVES.configure(FeatureConfig.DEFAULT)
+                        .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(128))));
+
         DefaultBiomeFeatures.addDefaultDisks(this);
         DefaultBiomeFeatures.addLandCarvers(this);
         DefaultBiomeFeatures.method_28440(this);
