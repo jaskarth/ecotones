@@ -1,9 +1,6 @@
 package supercoder79.ecotones.world.generation;
 
-import net.minecraft.world.biome.layer.AddIslandLayer;
-import net.minecraft.world.biome.layer.ApplyOceanTemperatureLayer;
-import net.minecraft.world.biome.layer.OceanTemperatureLayer;
-import net.minecraft.world.biome.layer.ScaleLayer;
+import net.minecraft.world.biome.layer.*;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
 import net.minecraft.world.biome.layer.util.*;
 import net.minecraft.world.biome.source.BiomeLayerSampler;
@@ -69,6 +66,15 @@ public class EcotonesBiomeLayers {
 
         specialBiomesLayer = BiomeEdgeLayer.INSTANCE.create(contextProvider.apply(36L), specialBiomesLayer);
         specialBiomesLayer = BiomeEdgeEnsureLayer.INSTANCE.create(contextProvider.apply(37L), specialBiomesLayer);
+
+        //River stuff
+        LayerFactory<T> riverLayer = SimpleLandNoiseLayer.INSTANCE.create(contextProvider.apply(100L), stack(1000L, ScaleLayer.NORMAL, layerFactory, 0, contextProvider));
+        riverLayer = stack(1000L, ScaleLayer.NORMAL, riverLayer, 7, contextProvider);
+        riverLayer = GenerateRiversLayer.INSTANCE.create(contextProvider.apply(1L), riverLayer);
+        riverLayer = stack(3000L, ScaleLayer.NORMAL, riverLayer, 2, contextProvider);
+
+        // merge rivers
+        biomeLayer = ApplyRiversLayer.INSTANCE.create(contextProvider.apply(79L), biomeLayer, riverLayer);
 
         //Merge special biomes with the regular biome layer
         biomeLayer = SpecialBiomeMerger.INSTANCE.create(contextProvider.apply(65L), biomeLayer, specialBiomesLayer);

@@ -6,6 +6,7 @@ import supercoder79.ecotones.world.biome.base.SwampBiomes;
 import supercoder79.ecotones.world.biome.base.WarmBiomes;
 import supercoder79.ecotones.world.biome.special.*;
 import supercoder79.ecotones.world.biome.technical.BeachBiome;
+import supercoder79.ecotones.world.biome.technical.RiverBiome;
 
 public class EcotonesBiomes {
     public static void init() {
@@ -16,6 +17,7 @@ public class EcotonesBiomes {
 
         // technical biomes
         BeachBiome.init();
+        RiverBiome.init();
 
         // volcanic biomes
         VolcanicBiome.init();
