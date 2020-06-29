@@ -19,11 +19,14 @@ import java.util.Random;
 public class MixinGeneratorOptions {
     @Inject(method = "fromProperties", at = @At("HEAD"), cancellable = true)
     private static void injectEcotones(Properties properties, CallbackInfoReturnable<GeneratorOptions> cir) {
+        // no server.properties file generated
         if (properties.get("level-type") == null) {
             return;
         }
 
+        // check for our world type and return if so
         if (properties.get("level-type").toString().trim().toLowerCase().equals("ecotones")) {
+            // get or generate seed
             String seed = (String) MoreObjects.firstNonNull(properties.get("level-seed"), "");
             long l = new Random().nextLong();
             if (!seed.isEmpty()) {
@@ -37,10 +40,14 @@ public class MixinGeneratorOptions {
                 }
             }
 
+
+            // get other misc data
             SimpleRegistry<DimensionOptions> dimensions = DimensionType.method_28517(l);
 
             String generate_structures = (String)properties.get("generate-structures");
             boolean generateStructures = generate_structures == null || Boolean.parseBoolean(generate_structures);
+
+            // return our chunk generator
             cir.setReturnValue(new GeneratorOptions(l, generateStructures, false, GeneratorOptions.method_28608(dimensions, new EcotonesChunkGenerator(new EcotonesBiomeSource(l), l))));
         }
     }

@@ -11,7 +11,7 @@ import supercoder79.ecotones.blocks.EcotonesBlocks;
 import java.util.Random;
 
 public class WastelandSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
-    private static final TernarySurfaceConfig WASTELAND_GRASS = new TernarySurfaceConfig(SurfaceBuilder.GRASS_BLOCK, EcotonesBlocks.driedDirtBlock.getDefaultState(), SurfaceBuilder.GRAVEL);
+    private static final TernarySurfaceConfig WASTELAND_GRASS = new TernarySurfaceConfig(SurfaceBuilder.GRASS_BLOCK, EcotonesBlocks.DRIED_DIRT.getDefaultState(), SurfaceBuilder.GRAVEL);
 
     public WastelandSurfaceBuilder(Codec<TernarySurfaceConfig> codec) {
         super(codec);

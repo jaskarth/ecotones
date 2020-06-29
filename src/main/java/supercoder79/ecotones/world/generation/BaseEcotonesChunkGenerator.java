@@ -71,7 +71,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     private final int field_24513;
 
     public BaseEcotonesChunkGenerator(BiomeSource biomeSource, long l) {
-        super(biomeSource, biomeSource, new StructuresConfig(false), l);
+        super(biomeSource, biomeSource, new StructuresConfig(true), l);
         this.verticalNoiseResolution = 8;
         this.horizontalNoiseResolution = 4;
         this.defaultBlock = Blocks.STONE.getDefaultState();

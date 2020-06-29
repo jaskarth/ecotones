@@ -13,7 +13,7 @@ import supercoder79.ecotones.blocks.EcotonesBlocks;
 import java.util.Random;
 
 public class GreenSpiresSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
-    private static final TernarySurfaceConfig GEYSER_CONFIG = new TernarySurfaceConfig(EcotonesBlocks.geyserBlock.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.GRAVEL.getDefaultState());
+    private static final TernarySurfaceConfig GEYSER_CONFIG = new TernarySurfaceConfig(EcotonesBlocks.GEYSER.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.GRAVEL.getDefaultState());
 
     public GreenSpiresSurfaceBuilder(Codec<TernarySurfaceConfig> codec) {
         super(codec);

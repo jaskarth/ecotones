@@ -28,10 +28,8 @@ public class EcotonesBiomeLayers {
         LayerFactory<T> layerFactory = LandLayer.INSTANCE.create(contextProvider.apply(1L));
 
         layerFactory = ScaleLayer.FUZZY.create(contextProvider.apply(2000L), layerFactory);
-//        layerFactory = IncreaseEdgeCurvatureLayer.INSTANCE.create(contextProvider.apply(1L), layerFactory);
         layerFactory = ScaleLayer.NORMAL.create(contextProvider.apply(2001L), layerFactory);
 
-//        layerFactory = stack(2601L, IncreaseEdgeCurvatureLayer.INSTANCE, layerFactory, 4, contextProvider);
         layerFactory = AddIslandLayer.INSTANCE.create(contextProvider.apply(2L), layerFactory);
 
         layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 2, contextProvider);

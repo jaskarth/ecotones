@@ -16,7 +16,6 @@ import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
-import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
@@ -36,7 +35,7 @@ public class HazelGroveBiome extends EcotonesBiome {
     public static TreeFeatureConfig HAZEL_CONFIG =
             new TreeFeatureConfig.Builder(
                     new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
-                    new SimpleBlockStateProvider(EcotonesBlocks.hazelLeavesBlock.getDefaultState()),
+                    new SimpleBlockStateProvider(EcotonesBlocks.HAZEL_LEAVES.getDefaultState()),
                     new BlobFoliagePlacer(2, 0, 0, 0, 4),
                     new StraightTrunkPlacer(6, 2, 0),
                     new TwoLayersFeatureSize(2, 0, 2))

@@ -13,10 +13,12 @@
 * Different beach types
 * Inland oceans
 * Coastal biome variants
-* Bluebell wood
 * Sequoia forest
 * Larch forest
 * Rice Field
+* Gravelly desert
+* Rocky desert
+* Stone Spires (basically the ending fight area of Avatar lmao)
 
 # Blocks and items
 * More flower types
