@@ -47,5 +47,6 @@ public class EcotonesBiomes {
         DrySavannaBiome.init();
         FertileValleyBiome.init();
         BluebellWoodBiome.init();
+        SpruceMarshBiome.init();
     }
 }
