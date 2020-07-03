@@ -42,6 +42,8 @@ public class EcotonesBlocks {
     public static Item DRIED_DIRT_ITEM;
     public static Block BLUEBELL;
     public static Item BLUEBELL_ITEM;
+    public static Block WIDE_FERN;
+    public static Item WIDE_FERN_ITEM;
 
     public static void init() {
         PEAT_BLOCK = Registry.register(Registry.BLOCK, new Identifier("ecotones", "peat"), new Block(FabricBlockSettings.copy(Blocks.DIRT).breakByTool(FabricToolTags.SHOVELS).hardness(1f).build()));
@@ -86,5 +88,8 @@ public class EcotonesBlocks {
 
         BLUEBELL = Registry.register(Registry.BLOCK, new Identifier("ecotones", "bluebell"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         BLUEBELL_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "bluebell"), new BlockItem(BLUEBELL, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        WIDE_FERN = Registry.register(Registry.BLOCK, new Identifier("ecotones", "wide_fern"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        WIDE_FERN_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "wide_fern"), new BlockItem(WIDE_FERN, new Item.Settings().group(ItemGroup.DECORATIONS)));
     }
 }

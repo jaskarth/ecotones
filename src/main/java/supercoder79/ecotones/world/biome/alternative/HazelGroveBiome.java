@@ -46,8 +46,8 @@ public class HazelGroveBiome extends EcotonesBiome {
         CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove_clearing"), new HazelGroveBiome(true, false));
         HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove_hilly"), new HazelGroveBiome(false, true));
         HILLY_CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "hazel_grove_hilly_clearing"), new HazelGroveBiome(true, true));
-        Climate.HOT_VERY_HUMID.add(INSTANCE, 0.08);
-        Climate.HOT_HUMID.add(INSTANCE, 0.04);
+        Climate.HOT_VERY_HUMID.add(INSTANCE, 0.1);
+        Climate.HOT_HUMID.add(INSTANCE, 0.05);
     }
 
 

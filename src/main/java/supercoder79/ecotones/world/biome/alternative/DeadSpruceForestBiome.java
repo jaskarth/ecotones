@@ -94,6 +94,9 @@ public class DeadSpruceForestBiome extends EcotonesBiome {
                 Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.SWEET_BERRY_BUSH_CONFIG)
                 .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(3))));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(FeatureConfigHolder.WIDE_FERNS)
+                .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))));
+
         DefaultBiomeFeatures.addForestFlowers(this);
         DefaultBiomeFeatures.addMossyRocks(this);
 

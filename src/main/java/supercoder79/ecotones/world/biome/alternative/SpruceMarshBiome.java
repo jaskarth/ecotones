@@ -32,6 +32,7 @@ public class SpruceMarshBiome extends EcotonesBiome {
         MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "spruce_marsh_mountainous"), new SpruceMarshBiome(0.4F, 0.625F));
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_HUMID.add(INSTANCE, 0.15);
+        BiomeRegistries.registerNoBeachBiome(INSTANCE);
     }
 
     public SpruceMarshBiome(float depth, float scale) {
@@ -96,10 +97,21 @@ public class SpruceMarshBiome extends EcotonesBiome {
                 Feature.TREE.configure(FeatureConfigHolder.SPRUCE_TREE_CONFIG)
                         .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(1.3))));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.SWEET_BERRY_BUSH_CONFIG)
+                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(3))));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.TREE.configure(FeatureConfigHolder.DEAD_LARGE_OAK)
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.075))));
+
         //todo refactor
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(PinePeaksBiome.SMALL_PINE_CONFIG)
                         .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.45))));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(FeatureConfigHolder.WIDE_FERNS)
+                .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(6))));
 
         DefaultBiomeFeatures.addForestFlowers(this);
 

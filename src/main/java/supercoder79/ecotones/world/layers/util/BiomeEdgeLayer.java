@@ -13,6 +13,7 @@ public enum BiomeEdgeLayer implements CrossSamplingLayer {
 
     @Override
     public int sample(LayerRandomnessSource context, int n, int e, int s, int w, int center) {
+        //todo: what the actual fuck was i doing here
         if (n == PITS || e == PITS || s == PITS || w == PITS) {
             if (n == PITS && e == PITS && s == PITS && w == PITS) {
                 return center;

@@ -2,17 +2,22 @@ package supercoder79.ecotones.world.features.config;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
+import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
+import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.util.DoubleOrNormalPlacer;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
+
+import java.util.OptionalInt;
 
 public class FeatureConfigHolder {
 
@@ -89,6 +94,14 @@ public class FeatureConfigHolder {
                     .spreadZ(15)
                     .tries(64).build();
 
+    public static RandomPatchFeatureConfig WIDE_FERNS =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.WIDE_FERN.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(11)
+                    .spreadZ(11)
+                    .tries(48).build();
+
     // misc
     public static RandomPatchFeatureConfig SURFACE_ROCKS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
@@ -115,4 +128,13 @@ public class FeatureConfigHolder {
                     new StraightTrunkPlacer(6, 4, 3),
                     new TwoLayersFeatureSize(2, 0, 2))
                     .ignoreVines().build().setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(6)));
+
+    public static TreeFeatureConfig DEAD_LARGE_OAK =
+            new TreeFeatureConfig.Builder(
+                    new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
+                    new SimpleBlockStateProvider(Blocks.AIR.getDefaultState()),
+                    new LargeOakFoliagePlacer(2, 0, 4, 0, 4),
+                    new LargeOakTrunkPlacer(8, 5, 0),
+                    new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
+                    .ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build();
 }

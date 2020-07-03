@@ -38,6 +38,10 @@ public class AspenTreeFeature extends Feature<SimpleTreeFeatureConfig> {
             mutable.move(Direction.UP);
         }
 
+        if (config.leafState.isAir()) {
+            return true;
+        }
+
         mutable = pos.mutableCopy();
         mutable.move(Direction.UP, leafDistance);
 
@@ -50,7 +54,7 @@ public class AspenTreeFeature extends Feature<SimpleTreeFeatureConfig> {
             mutable.move(Direction.UP);
         }
 
-        return false;
+        return true;
     }
 
     private double radius(double x) {

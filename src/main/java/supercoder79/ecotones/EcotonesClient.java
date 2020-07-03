@@ -23,10 +23,12 @@ public class EcotonesClient implements ClientModInitializer {
 
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> view != null && pos != null ? BiomeColors.getGrassColor(view, pos) : FoliageColors.getDefaultColor(),
+                EcotonesBlocks.WIDE_FERN,
                 EcotonesBlocks.SHORT_GRASS);
 
         ColorProviderRegistry.ITEM.register(((stack, tintIndex) -> FoliageColors.getDefaultColor()),
                 EcotonesBlocks.SHORT_GRASS_ITEM,
+                EcotonesBlocks.WIDE_FERN_ITEM,
                 EcotonesBlocks.HAZEL_LEAVES_ITEM);
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
@@ -40,6 +42,7 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.SANDY_GRASS,
                 EcotonesBlocks.CLOVER,
                 EcotonesBlocks.BLUEBELL,
+                EcotonesBlocks.WIDE_FERN,
                 EcotonesBlocks.PINECONE);
 
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAND, SandParticle.Factory::new);
