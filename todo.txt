@@ -19,6 +19,10 @@
 * Gravelly desert
 * Rocky desert
 * Stone Spires (basically the ending fight area of Avatar lmao)
+* Maple forest
+* Cherry forest
+* Floodplains
+* Birch forest style with oak trees
 
 # Blocks and items
 * More flower types

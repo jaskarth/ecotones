@@ -11,7 +11,9 @@ import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.world.biome.EcotonesBiome;
+import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
@@ -39,6 +41,15 @@ public class SwampBiomes {
             .downfall(1.5F)
             .waterColor(0x2e8a07)
             .waterFogColor(0x2e8a07)
+
+            .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                    Feature.TREE.configure(FeatureConfigHolder.DEAD_LARGE_OAK)
+                            .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.08))))
+
+            .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                    EcotonesFeatures.PLACE_WATER.configure(FeatureConfig.DEFAULT)
+                            .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP.configure(new CountDecoratorConfig(5))))
+
             .addDefaultFeatures(LAND_CARVERS, STRUCTURES, DUNGEONS, MINEABLES, ORES,
                     DEFAULT_FLOWERS, DEFAULT_MUSHROOMS, FOREST_GRASS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
             .addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
@@ -95,6 +106,7 @@ public class SwampBiomes {
                 .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 1)
                 .build());
         MARSH_BIOME = Registry.register(Registry.BIOME, new Identifier("ecotones", "marsh"), template.builder()
+                .configureSurfaceBuilder(EcotonesSurfaces.PEAT_SWAMP_BUILDER, SurfaceBuilder.GRASS_CONFIG)
                 .grassColor(0x549129)
                 .foliageColor(0x549129)
                 .addDefaultFeature(PLAINS_TALL_GRASS)
@@ -121,6 +133,7 @@ public class SwampBiomes {
                 .addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG), 2)
                 .build());
         WETLAND_BIOME = Registry.register(Registry.BIOME, new Identifier("ecotones", "wetland"), template.builder()
+                .configureSurfaceBuilder(EcotonesSurfaces.PEAT_SWAMP_BUILDER, SurfaceBuilder.GRASS_CONFIG)
                 .grassColor(0x64b52b)
                 .foliageColor(0x64b52b)
                 .addDefaultFeature(PLAINS_TALL_GRASS)

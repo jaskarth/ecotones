@@ -102,6 +102,14 @@ public class FeatureConfigHolder {
                     .spreadZ(11)
                     .tries(48).build();
 
+    public static RandomPatchFeatureConfig SMALL_LILAC =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.SMALL_LILAC.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(15)
+                    .spreadZ(15)
+                    .tries(12).build();
+
     // misc
     public static RandomPatchFeatureConfig SURFACE_ROCKS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()

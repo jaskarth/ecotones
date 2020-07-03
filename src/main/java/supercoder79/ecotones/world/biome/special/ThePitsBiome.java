@@ -16,6 +16,7 @@ import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.world.biome.BiomeUtil;
 import supercoder79.ecotones.world.biome.EcotonesBiome;
 import supercoder79.ecotones.world.biome.technical.BeachBiome;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
@@ -29,8 +30,7 @@ public class ThePitsBiome extends EcotonesBiome {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits"), new ThePitsBiome(-1.5f, false));
         EDGE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits_edge"), new ThePitsBiome(0.375f, true));
 
-        BiomeRegistries.registerSpecialBiome(INSTANCE, id -> !(id == Registry.BIOME.getRawId(BeachBiome.INSTANCE)));
-        BiomeRegistries.registerSpecialBiome(EDGE, id -> !(id == Registry.BIOME.getRawId(BeachBiome.INSTANCE)));
+        BiomeRegistries.registerAllSpecial(id -> (id != Registry.BIOME.getRawId(BeachBiome.INSTANCE)) && !BiomeUtil.isOcean(id), INSTANCE, EDGE);
 
         BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 200);
     }

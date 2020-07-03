@@ -4,6 +4,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.layer.type.CrossSamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.world.biome.BiomeUtil;
 
 public enum DeepOceanLayer implements CrossSamplingLayer {
     INSTANCE;
@@ -21,21 +22,21 @@ public enum DeepOceanLayer implements CrossSamplingLayer {
 
     @Override
     public int sample(LayerRandomnessSource context, int n, int e, int s, int w, int center) {
-        if (isShallowOcean(center)) {
+        if (BiomeUtil.isShallowOcean(center)) {
             int i = 0;
-            if (isShallowOcean(n)) {
+            if (BiomeUtil.isShallowOcean(n)) {
                 ++i;
             }
 
-            if (isShallowOcean(e)) {
+            if (BiomeUtil.isShallowOcean(e)) {
                 ++i;
             }
 
-            if (isShallowOcean(w)) {
+            if (BiomeUtil.isShallowOcean(w)) {
                 ++i;
             }
 
-            if (isShallowOcean(s)) {
+            if (BiomeUtil.isShallowOcean(s)) {
                 ++i;
             }
 
@@ -49,9 +50,5 @@ public enum DeepOceanLayer implements CrossSamplingLayer {
         }
 
         return center;
-    }
-
-    protected static boolean isShallowOcean(int id) {
-        return id == WARM_OCEAN_ID || id == LUKEWARM_OCEAN_ID || id == OCEAN_ID || id == COLD_OCEAN_ID || id == FROZEN_OCEAN_ID;
     }
 }
