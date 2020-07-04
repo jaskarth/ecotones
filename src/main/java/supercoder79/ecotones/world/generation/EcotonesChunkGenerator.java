@@ -11,11 +11,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
-import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.village.ZombieSiegeManager;
 import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
@@ -25,9 +23,6 @@ import net.minecraft.world.chunk.ProtoChunk;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorType;
-import net.minecraft.world.gen.chunk.SurfaceChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.StructureFeature;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.noise.OctaveNoiseSampler;
@@ -61,10 +56,6 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     private final OctaveNoiseSampler<OpenSimplexNoise> soilRockinessNoise;
 
     private final OctavePerlinNoiseSampler hillinessNoise;
-
-    private final OctavePerlinNoiseSampler noiseSampler1;
-    private final OctavePerlinNoiseSampler noiseSampler2;
-    private final OctavePerlinNoiseSampler lowerNoise;
     private final OctaveNoiseSampler<OpenSimplexNoise> scaleNoise;
 
     private final PhantomSpawner phantomSpawner = new PhantomSpawner();
@@ -77,9 +68,6 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         super(biomeSource, seed);
         this.seed = seed;
         this.hillinessNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-15, 0));
-        this.noiseSampler1 = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-15, 0));
-        this.noiseSampler2 = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-15, 0));
-        this.lowerNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-7, 0));
 
         this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 8, 256, 0.2, -0.2);
         soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1536, 1.7, 1.7);
@@ -139,69 +127,35 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     }
 
     @Override
-    protected void sampleNoiseColumn(double[] buffer, int x, int z, double d, double e, double f, double g, int i, int j) {
+    protected void sampleNoiseColumn(double[] buffer, int x, int z, double horizontalScale, double verticalScale, double horizontalStretch, double verticalStretch, int interpolationSize, int interpolateTowards) {
         double[] noiseRange = this.computeNoiseRange(x, z);
         double depth = noiseRange[0];
         double scale = noiseRange[1];
         double volatility = noiseRange[2];
 
-        //magic shit that i have no idea about how it works
-        double delta1 = this.method_16409();
-        double delta2 = this.method_16410();
+        double upperInterpolationStart = this.upperInterpolationStart();
+        double lowerInterpolationStart = this.lowerInterpolationStart();
 
         for(int y = 0; y < this.getNoiseSizeY(); ++y) {
-            double noise = this.sampleNoise(x, y, z, d, e, f, g) - (scaleNoise.sample(x, y, z) * 5);
+            double noise = this.sampleNoise(x, y, z, horizontalScale, verticalScale, horizontalStretch, verticalStretch) - (scaleNoise.sample(x, y, z) * 5);
             //modify the noise for special reasons
             Biome biome = this.biomeSource.getBiomeForNoiseGen(x, y, z);
             if (biome instanceof EcotonesBiome) {
                 noise = ((EcotonesBiome)biome).modifyNoise(x, y, z, noise);
             }
+
             //calculate volatility
             noise -= this.computeNoiseFalloff(depth, scale, y) * volatility;
-            if ((double)y > delta1) {
-                noise = MathHelper.clampedLerp(noise, (double)j, ((double)y - delta1) / (double)i);
-            } else if ((double)y < delta2) {
-                noise = MathHelper.clampedLerp(noise, -30.0D, (delta2 - (double)y) / (delta2 - 1.0D));
+
+            if ((double)y > upperInterpolationStart) {
+                noise = MathHelper.clampedLerp(noise, (double)interpolateTowards, ((double)y - upperInterpolationStart) / (double)interpolationSize);
+            } else if ((double)y < lowerInterpolationStart) {
+                noise = MathHelper.clampedLerp(noise, -30.0D, (lowerInterpolationStart - (double)y) / (lowerInterpolationStart - 1.0D));
             }
 
             buffer[y] = noise;
         }
 
-    }
-
-    //noise magic
-    private double sampleNoise(int x, int y, int z, double d, double e, double f, double g) {
-        double h = 0.0D;
-        double i = 0.0D;
-        double j = 0.0D;
-        double k = 1.0D;
-
-        for(int l = 0; l < 16; ++l) {
-            double m = OctavePerlinNoiseSampler.maintainPrecision((double)x * d * k);
-            double n = OctavePerlinNoiseSampler.maintainPrecision((double)y * e * k);
-            double o = OctavePerlinNoiseSampler.maintainPrecision((double)z * d * k);
-            double p = e * k;
-            PerlinNoiseSampler perlinNoiseSampler = this.noiseSampler1.getOctave(l);
-            if (perlinNoiseSampler != null) {
-                h += perlinNoiseSampler.sample(m, n, o, p, (double)y * p) / k;
-            }
-
-            PerlinNoiseSampler perlinNoiseSampler2 = this.noiseSampler2.getOctave(l);
-            if (perlinNoiseSampler2 != null) {
-                i += perlinNoiseSampler2.sample(m, n, o, p, (double)y * p) / k;
-            }
-
-            if (l < 8) {
-                PerlinNoiseSampler perlinNoiseSampler3 = this.lowerNoise.getOctave(l);
-                if (perlinNoiseSampler3 != null) {
-                    j += perlinNoiseSampler3.sample(OctavePerlinNoiseSampler.maintainPrecision((double)x * f * k), OctavePerlinNoiseSampler.maintainPrecision((double)y * g * k), OctavePerlinNoiseSampler.maintainPrecision((double)z * f * k), g * k, (double)y * g * k) / k;
-                }
-            }
-
-            k /= 2.0D;
-        }
-
-        return MathHelper.clampedLerp(h / 512.0D, i / 512.0D, (j / 10.0D + 1.0D) / 2.0D);
     }
 
     @Override
