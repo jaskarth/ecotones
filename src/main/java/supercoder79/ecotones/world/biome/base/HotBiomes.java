@@ -184,8 +184,8 @@ public class HotBiomes {
                                 .createDecoratedFeature(EcotonesDecorators.ABOVE_QUALITY.configure(DecoratorConfig.DEFAULT)))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                        EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT)
-                                .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(1.25))))
+                        EcotonesFeatures.SMALL_ACACIA.configure(TreeType.SMALL_ACACIA.config)
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.SMALL_ACACIA.config.decorationData)))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG)

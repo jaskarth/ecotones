@@ -136,8 +136,8 @@ public class WarmBiomes {
                                 .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.15))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                        EcotonesFeatures.SMALL_ACACIA.configure(FeatureConfig.DEFAULT)
-                                .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(1.25)))));
+                        EcotonesFeatures.SMALL_ACACIA.configure(TreeType.SMALL_ACACIA.config)
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.SMALL_ACACIA.config.decorationData))));
         PRAIRIE_BIOME = BiomeUtil.register(new Identifier("ecotones", "prairie"), template.builder()
                 .temperature(1F)
                 .downfall(0.4F)

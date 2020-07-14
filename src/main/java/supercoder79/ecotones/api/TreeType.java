@@ -16,6 +16,7 @@ public enum TreeType {
     DEAD_SPRUCE(new TreeGenerationConfig(3, Blocks.SPRUCE_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 4, -1, 10, 10, 0.5, 0.5, false)),
     RARE_DEAD_SPRUCE(new TreeGenerationConfig(0.06, Blocks.SPRUCE_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 4, -1, 6, 14, 0.5, 0.5, false)),
     ACACIA(new TreeGenerationConfig(0.8, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.45, 0.35, false)),
+    SMALL_ACACIA(new TreeGenerationConfig(0.6, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 2, 8, 3, 2, 0.5, 0.45, false)),
     FLOODED_ACACIA(new TreeGenerationConfig(1, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 12, 6, 6, 0.55, 0.425, false)),
     RARE_ACACIA(new TreeGenerationConfig(0.1, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.45, 0.35, false)),
     LUSH_JUNGLE(new TreeGenerationConfig(0.2, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.JUNGLE_LEAVES.getDefaultState(), 4, 4, 14, 8, 0.45, 0.45, true));
