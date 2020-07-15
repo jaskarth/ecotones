@@ -1,5 +1,6 @@
 package supercoder79.ecotones.world.layers.generation;
 
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
 import net.minecraft.world.biome.layer.util.IdentityCoordinateTransformer;
 import net.minecraft.world.biome.layer.util.LayerFactory;
@@ -13,6 +14,7 @@ import java.util.Random;
 
 public enum  DrainageLayer implements ParentedLayer, IdentityCoordinateTransformer, SeedLayer {
     INSTANCE;
+    private static final int SWAMP_ID = Registry.BIOME.getRawId(SwampBiomes.SWAMP_BIOME);
 
     private OpenSimplexNoise drainageNoise;
 
@@ -22,10 +24,9 @@ public enum  DrainageLayer implements ParentedLayer, IdentityCoordinateTransform
     @Override
     public int sample(LayerSampleContext<?> context, LayerSampler parent, int x, int z) {
         int sample = parent.sample(x, z);
-        double drainage = drainageNoise.sample(x + offsetX, z + offsetZ)*1.25;
-        if (drainage < -0.65) {
-            Integer id = SwampBiomes.Biome2SwampBiomeMap.get(sample);
-            return id != null ? id : sample;
+        double drainage = drainageNoise.sample(x + offsetX, z + offsetZ) * 1.25;
+        if (drainage < -0.75) {
+            return SWAMP_ID;
         }
         return sample;
     }

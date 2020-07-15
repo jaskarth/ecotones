@@ -52,6 +52,7 @@
 * Better mod compat, deffered register system
 * Tweak biome weights
 * Beehives in other biomes
+* Cancel river generation in some biomes
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas

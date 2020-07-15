@@ -25,7 +25,7 @@ public class FeatureConfigHolder {
     public static RandomPatchFeatureConfig REEDS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
                     .addState(EcotonesBlocks.REEDS.getDefaultState(), 1)
-                    .addState(EcotonesBlocks.SHORT_GRASS.getDefaultState(), 3), new SimpleBlockPlacer()).tries(8).build();
+                    .addState(EcotonesBlocks.SHORT_GRASS.getDefaultState(), 3), new SimpleBlockPlacer()).tries(16).build();
 
     public static RandomPatchFeatureConfig MOSTLY_SHORT_GRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
