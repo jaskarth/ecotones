@@ -35,8 +35,8 @@ public class DrySavannaBiome extends EcotonesBiome {
         HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna_hilly"), new DrySavannaBiome(1.25F, 0.125F, 6, 0.87));
         MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna_mountainous"), new DrySavannaBiome(2F, 0.325F, 8, 0.82));
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
-        Climate.HOT_VERY_DRY.add(INSTANCE, 0.3);
-        Climate.WARM_VERY_DRY.add(INSTANCE, 0.1);
+        Climate.HOT_VERY_DRY.add(INSTANCE, 0.5);
+        Climate.WARM_VERY_DRY.add(INSTANCE, 0.3);
     }
 
     public DrySavannaBiome(float depth, float scale, double hilliness, double volatility) {

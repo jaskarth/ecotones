@@ -49,8 +49,9 @@ public class DrySteppeBiome extends EcotonesBiome {
         HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_steppe_hilly"), new DrySteppeBiome(1.25F, 0.125F, 6, 0.87));
         MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_steppe_mountainous"), new DrySteppeBiome(2F, 0.325F, 8, 0.82));
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
-        Climate.HOT_DRY.add(INSTANCE, 0.1);
-        Climate.WARM_DRY.add(INSTANCE, 0.1);
+        Climate.HOT_VERY_DRY.add(INSTANCE, 0.6);
+        Climate.HOT_DRY.add(INSTANCE, 0.6);
+        Climate.WARM_DRY.add(INSTANCE, 0.3);
     }
 
     public DrySteppeBiome(float depth, float scale, double hilliness, double volatility) {
