@@ -33,7 +33,7 @@ public class BluebellWoodBiome extends EcotonesBiome {
         HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "bluebell_wood_hilly"), new BluebellWoodBiome(0.6F, 0.225F));
         MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "bluebell_wood_mountainous"), new BluebellWoodBiome(0.8F, 0.625F));
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
-        Climate.WARM_MILD.add(INSTANCE, 0.3);
+        Climate.WARM_MILD.add(INSTANCE, 0.2);
         Climate.WARM_HUMID.add(INSTANCE, 0.3);
     }
 

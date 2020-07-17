@@ -340,9 +340,14 @@ public class WarmBiomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.BRANCHING_OAK.configure(TreeType.LUSH_JUNGLE.config)
                                 .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.LUSH_JUNGLE.config.decorationData)))
+
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        EcotonesFeatures.BANANA_TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG)
+                                .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(2.25, true))))
+
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.TREE.configure(DefaultBiomeFeatures.MEGA_JUNGLE_TREE_CONFIG)
-                                .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(1.25, false)))));
+                                .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(1.25, true)))));
 
         Climate.WARM_DESERT.add(COOL_DESERT_BIOME, 1);
         Climate.WARM_VERY_DRY.add(COOL_SCRUBLAND_BIOME, 1);

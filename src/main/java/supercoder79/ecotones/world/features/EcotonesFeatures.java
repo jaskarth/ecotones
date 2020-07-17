@@ -29,6 +29,7 @@ public class EcotonesFeatures {
     public static PlaceWaterFeature PLACE_WATER;
     public static FarmlandPatchFeature FARMLAND;
     public static BeehiveFeature BEEHIVES;
+    public static MangroveTreeFeature MANGROVE_TREE;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig.CODEC));
@@ -50,5 +51,6 @@ public class EcotonesFeatures {
         PLACE_WATER = Registry.register(Registry.FEATURE, new Identifier("ecotones", "place_water"), new PlaceWaterFeature(DefaultFeatureConfig.CODEC));
         FARMLAND = Registry.register(Registry.FEATURE, new Identifier("ecotones", "farmland"), new FarmlandPatchFeature(DefaultFeatureConfig.CODEC));
         BEEHIVES = Registry.register(Registry.FEATURE, new Identifier("ecotones", "beehives"), new BeehiveFeature(DefaultFeatureConfig.CODEC));
+        MANGROVE_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "mangrove_tree"), new MangroveTreeFeature(TreeGenerationConfig.CODEC));
     }
 }

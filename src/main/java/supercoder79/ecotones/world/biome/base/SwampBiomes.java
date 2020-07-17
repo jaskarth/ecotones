@@ -80,8 +80,21 @@ public class SwampBiomes {
                         Feature.TREE.configure(FeatureConfigHolder.DEAD_LARGE_OAK)
                                 .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.25))))
 
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.LILY_PAD_CONFIG)
+                                .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(6))))
+
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SEAGRASS.configure(new SeagrassFeatureConfig(20, 0.3D))
                         .createDecoratedFeature(Decorator.TOP_SOLID_HEIGHTMAP.configure(DecoratorConfig.DEFAULT)))
+
+                .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                        Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
+                                .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(15))))
+
+                .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                        Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
+                                .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(9))))
+
                 .build());
         TerraformBiomeSets.addSlimeSpawnBiomes(SWAMP_BIOME);
         BiomeRegistries.registerNoBeachBiome(SWAMP_BIOME);

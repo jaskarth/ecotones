@@ -1,6 +1,5 @@
 # Biomes
 * Plateau biomes?
-* Heathland
 * Bayou
 * Everglades
 * Steppe -> something unique
@@ -9,7 +8,6 @@
 * Kauri forest
 * Mixed forest
 * Lake biomes
-* Rivers
 * Different beach types
 * Inland oceans
 * Coastal biome variants

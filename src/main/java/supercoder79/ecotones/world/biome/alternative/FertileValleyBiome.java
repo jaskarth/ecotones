@@ -31,8 +31,8 @@ public class FertileValleyBiome extends EcotonesBiome {
         HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley_hilly"), new FertileValleyBiome(0.3F, 0.225F));
         MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley_mountainous"), new FertileValleyBiome(0.5F, 0.625F));
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
-        Climate.WARM_MODERATE.add(INSTANCE, 0.3);
-        Climate.WARM_MILD.add(INSTANCE, 0.4);
+        Climate.WARM_MODERATE.add(INSTANCE, 0.2);
+        Climate.WARM_MILD.add(INSTANCE, 0.3);
     }
 
     public FertileValleyBiome(float depth, float scale) {
