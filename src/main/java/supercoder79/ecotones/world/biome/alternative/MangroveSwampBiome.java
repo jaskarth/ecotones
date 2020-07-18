@@ -12,7 +12,6 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.ForestRockFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -27,18 +26,18 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
-public class HotMangroveBiome extends EcotonesBiome {
-    public static HotMangroveBiome INSTANCE;
+public class MangroveSwampBiome extends EcotonesBiome {
+    public static MangroveSwampBiome INSTANCE;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "hot_mangrove"), new HotMangroveBiome());
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "mangrove_swamp"), new MangroveSwampBiome());
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
         Climate.HOT_MILD.add(INSTANCE, 0.5);
         Climate.HOT_MODERATE.add(INSTANCE, 0.4);
         Climate.HOT_DRY.add(INSTANCE, 0.2);
     }
 
-    protected HotMangroveBiome() {
+    protected MangroveSwampBiome() {
         super(new Settings()
                         .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                         .precipitation(Precipitation.RAIN)

@@ -14,6 +14,7 @@ public enum TreeType {
     DRY_BIRCH(new TreeGenerationConfig(0.3, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), 3, -1, 5, 12, 0.2, 0.2, false)),
     FOREST_BIRCH(new TreeGenerationConfig(3, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), 6, -1, 8, 24, 0.35, 0.35, false)),
     DEAD_SPRUCE(new TreeGenerationConfig(3, Blocks.SPRUCE_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 4, -1, 10, 10, 0.5, 0.5, false)),
+    RARE_DEAD_BIRCH(new TreeGenerationConfig(0.09, Blocks.BIRCH_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 6, -1, 16, 6, 0.45, 0.45, false)),
     RARE_DEAD_SPRUCE(new TreeGenerationConfig(0.06, Blocks.SPRUCE_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 4, -1, 6, 14, 0.5, 0.5, false)),
     ACACIA(new TreeGenerationConfig(0.8, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.45, 0.35, false)),
     SMALL_ACACIA(new TreeGenerationConfig(0.6, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 2, 8, 3, 2, 0.5, 0.45, false)),

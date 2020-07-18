@@ -50,6 +50,6 @@ public class EcotonesBiomes {
         FertileValleyBiome.init();
         BluebellWoodBiome.init();
         SpruceMarshBiome.init();
-        HotMangroveBiome.init();
+        MangroveSwampBiome.init();
     }
 }

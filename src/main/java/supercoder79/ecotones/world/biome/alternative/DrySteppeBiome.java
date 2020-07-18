@@ -116,6 +116,10 @@ public class DrySteppeBiome extends EcotonesBiome {
                 EcotonesFeatures.CACTI.configure(FeatureConfig.DEFAULT)
                         .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(2, 0.75f, 1))));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.TREE.configure(FeatureConfigHolder.DEAD_LARGE_OAK)
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.2))));
+
         BiomeUtil.addDefaultFeatures(this);
         BiomeUtil.addDefaultSpawns(this);
     }
