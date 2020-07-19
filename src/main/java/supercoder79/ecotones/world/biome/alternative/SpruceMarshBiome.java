@@ -35,6 +35,8 @@ public class SpruceMarshBiome extends EcotonesBiome {
         MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "spruce_marsh_mountainous"), new SpruceMarshBiome(0.4F, 0.625F, false));
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
         BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, THICKET);
+        BiomeRegistries.registerNoRiverBiome(INSTANCE);
+        BiomeRegistries.registerNoRiverBiome(THICKET);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_HUMID.add(INSTANCE, 0.3);
         Climate.WARM_MILD.add(INSTANCE, 0.2);

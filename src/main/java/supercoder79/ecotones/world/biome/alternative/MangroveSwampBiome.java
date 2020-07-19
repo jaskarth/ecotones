@@ -32,10 +32,11 @@ public class MangroveSwampBiome extends EcotonesBiome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "mangrove_swamp"), new MangroveSwampBiome());
-        Climate.HOT_MILD.add(INSTANCE, 0.4);
-        Climate.HOT_MODERATE.add(INSTANCE, 0.3);
+        Climate.HOT_MILD.add(INSTANCE, 0.3);
+        Climate.HOT_MODERATE.add(INSTANCE, 0.2);
         Climate.HOT_DRY.add(INSTANCE, 0.2);
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
+        BiomeRegistries.registerNoRiverBiome(INSTANCE);
         TerraformBiomeSets.addSlimeSpawnBiome(INSTANCE);
     }
 

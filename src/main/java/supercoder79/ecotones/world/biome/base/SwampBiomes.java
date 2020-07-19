@@ -98,5 +98,6 @@ public class SwampBiomes {
                 .build());
         TerraformBiomeSets.addSlimeSpawnBiomes(SWAMP_BIOME);
         BiomeRegistries.registerNoBeachBiome(SWAMP_BIOME);
+        BiomeRegistries.registerNoRiverBiome(SWAMP_BIOME);
     }
 }

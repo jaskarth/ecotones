@@ -8,6 +8,7 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
+import net.minecraft.world.gen.placer.ColumnPlacer;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
@@ -126,6 +127,12 @@ public class FeatureConfigHolder {
                     .spreadX(15)
                     .spreadZ(15)
                     .tries(12).build();
+
+    public static RandomPatchFeatureConfig LARGE_CACTUS_PATCH =
+            new RandomPatchFeatureConfig.Builder(
+                    new SimpleBlockStateProvider(Blocks.CACTUS.getDefaultState()),
+                    new ColumnPlacer(1, 2))
+                    .tries(32).cannotProject().build();
 
     // trees
     public static TreeFeatureConfig SPRUCE_TREE_CONFIG =

@@ -15,6 +15,7 @@ public class BiomeRegistries {
     public static final Map<Integer, Integer> BIG_SPECIAL_BIOMES = new HashMap<>();
     public static final Map<Integer, Integer> SMALL_SPECIAL_BIOMES = new HashMap<>();
     public static final List<Integer> NO_BEACH_BIOMES = new ArrayList<>();
+    public static final List<Integer> NO_RIVER_BIOMES = new ArrayList<>();
 
     public static final Map<Integer, Integer> BIOME_VARANT_CHANCE = new HashMap<>();
     public static final Map<Integer, int[]> BIOME_VARIANTS = new HashMap<>();
@@ -64,6 +65,10 @@ public class BiomeRegistries {
 
     public static void registerNoBeachBiome(Biome biome) {
         NO_BEACH_BIOMES.add(Registry.BIOME.getRawId(biome));
+    }
+
+    public static void registerNoRiverBiome(Biome biome) {
+        NO_RIVER_BIOMES.add(Registry.BIOME.getRawId(biome));
     }
 
     public static void compile() {
