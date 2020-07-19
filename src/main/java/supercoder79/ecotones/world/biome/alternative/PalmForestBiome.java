@@ -11,9 +11,6 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -24,7 +21,6 @@ import supercoder79.ecotones.world.biome.EcotonesBiome;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
-import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 public class PalmForestBiome extends EcotonesBiome {
@@ -98,8 +94,8 @@ public class PalmForestBiome extends EcotonesBiome {
                         .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.65))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.RARE_DEAD_BIRCH.config)
-                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DEAD_BIRCH.config.decorationData)));
+                EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.DEAD_BIRCH.config)
+                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.DEAD_BIRCH.config.decorationData)));
 
         DefaultBiomeFeatures.addForestFlowers(this);
 

@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.biome.alternative;
 
 import com.google.common.collect.ImmutableList;
+import com.terraformersmc.terraform.util.TerraformBiomeSets;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -23,20 +24,26 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 public class SpruceMarshBiome extends EcotonesBiome {
     public static SpruceMarshBiome INSTANCE;
+    public static SpruceMarshBiome THICKET;
     public static SpruceMarshBiome HILLY;
     public static SpruceMarshBiome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "spruce_marsh"), new SpruceMarshBiome(0.1F, 0.025F));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "spruce_marsh_hilly"), new SpruceMarshBiome(0.25F, 0.225F));
-        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "spruce_marsh_mountainous"), new SpruceMarshBiome(0.4F, 0.625F));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "spruce_marsh"), new SpruceMarshBiome(0.1F, 0.025F, false));
+        THICKET = Registry.register(Registry.BIOME, new Identifier("ecotones", "spruce_marsh_thicket"), new SpruceMarshBiome(0.1F, 0.025F, true));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "spruce_marsh_hilly"), new SpruceMarshBiome(0.25F, 0.225F, false));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "spruce_marsh_mountainous"), new SpruceMarshBiome(0.4F, 0.625F, false));
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, THICKET);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_HUMID.add(INSTANCE, 0.3);
         Climate.WARM_MILD.add(INSTANCE, 0.2);
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
+        BiomeRegistries.registerNoBeachBiome(THICKET);
+        TerraformBiomeSets.addSlimeSpawnBiomes(INSTANCE, THICKET, HILLY, MOUNTAINOUS);
     }
 
-    public SpruceMarshBiome(float depth, float scale) {
+    public SpruceMarshBiome(float depth, float scale, boolean thicket) {
         super(new Settings()
                         .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                         .precipitation(Precipitation.RAIN)
@@ -76,7 +83,7 @@ public class SpruceMarshBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.3))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(thicket ? 0.8 : 0.3))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BRANCHING_OAK.configure(TreeType.RARE_LARGE_OAK.config)
@@ -84,7 +91,7 @@ public class SpruceMarshBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.95))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(thicket ? 1.1 : 0.95))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
@@ -96,7 +103,7 @@ public class SpruceMarshBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(FeatureConfigHolder.SPRUCE_TREE_CONFIG)
-                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(1.3))));
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(thicket ? 3.5 : 1.3))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.SWEET_BERRY_BUSH_CONFIG)
@@ -104,7 +111,7 @@ public class SpruceMarshBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(FeatureConfigHolder.DEAD_LARGE_OAK)
-                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.2))));
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(thicket ? 0.3 : 0.2))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.LILY_PAD_CONFIG)

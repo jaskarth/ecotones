@@ -318,8 +318,8 @@ public class WarmBiomes {
                                 .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                        EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.RARE_DEAD_BIRCH.config)
-                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DEAD_BIRCH.config.decorationData)))
+                        EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.DEAD_BIRCH.config)
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.DEAD_BIRCH.config.decorationData)))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SHORT_GRASS_CONFIG)

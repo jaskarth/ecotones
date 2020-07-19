@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.biome.alternative;
 
 import com.google.common.collect.ImmutableList;
+import com.terraformersmc.terraform.util.TerraformBiomeSets;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -31,10 +32,11 @@ public class MangroveSwampBiome extends EcotonesBiome {
 
     public static void init() {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "mangrove_swamp"), new MangroveSwampBiome());
-        BiomeRegistries.registerNoBeachBiome(INSTANCE);
-        Climate.HOT_MILD.add(INSTANCE, 0.5);
-        Climate.HOT_MODERATE.add(INSTANCE, 0.4);
+        Climate.HOT_MILD.add(INSTANCE, 0.4);
+        Climate.HOT_MODERATE.add(INSTANCE, 0.3);
         Climate.HOT_DRY.add(INSTANCE, 0.2);
+        BiomeRegistries.registerNoBeachBiome(INSTANCE);
+        TerraformBiomeSets.addSlimeSpawnBiome(INSTANCE);
     }
 
     protected MangroveSwampBiome() {

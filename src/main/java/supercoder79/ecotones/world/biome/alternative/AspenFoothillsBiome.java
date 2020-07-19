@@ -26,21 +26,25 @@ import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class AspenFoothillsBiome extends EcotonesBiome {
     public static AspenFoothillsBiome INSTANCE;
+    public static AspenFoothillsBiome CLEARING;
     public static AspenFoothillsBiome HILLY;
     public static AspenFoothillsBiome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "aspen_foothills"), new AspenFoothillsBiome(1F, 0.025F, 8, 0.95));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "aspen_hills"), new AspenFoothillsBiome(1.5F, 0.225F, 9, 0.85));
-        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "aspen_mountains"), new AspenFoothillsBiome(2.5F, 0.625F, 10, 0.8));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "aspen_foothills"), new AspenFoothillsBiome(1F, 0.025F, 8, 0.95, false));
+        CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "aspen_foothills_clearing"), new AspenFoothillsBiome(1F, 0.025F, 8, 0.95, true));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "aspen_hills"), new AspenFoothillsBiome(1.5F, 0.225F, 9, 0.85, false));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "aspen_mountains"), new AspenFoothillsBiome(2.5F, 0.625F, 10, 0.8, false));
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, CLEARING);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_VERY_HUMID.add(INSTANCE, 0.1);
-        Climate.WARM_HUMID.add(INSTANCE, 0.1);
-        Climate.WARM_MILD.add(INSTANCE, 0.05);
+        Climate.WARM_HUMID.add(INSTANCE, 0.2);
+        Climate.WARM_MILD.add(INSTANCE, 0.1);
     }
 
-    public AspenFoothillsBiome(float depth, float scale, double hilliness, double volatility) {
-        super((new Settings())
+    public AspenFoothillsBiome(float depth, float scale, double hilliness, double volatility, boolean clearing) {
+        super(new Settings()
                 .configureSurfaceBuilder(EcotonesSurfaces.GRASS_MOUNTAIN, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
                 .category(Category.PLAINS)
@@ -89,15 +93,15 @@ public class AspenFoothillsBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.ASPEN_TREE.configure(new SimpleTreeFeatureConfig(Blocks.BIRCH_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(4.2))));
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(clearing ? 0.2 : 4.2))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.ASPEN_TREE.configure(new SimpleTreeFeatureConfig(Blocks.BIRCH_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.08))));
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(clearing ? 0.15 : 0.08))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.BIRCH_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(3))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(clearing ? 4 : 3))));
 
         DefaultBiomeFeatures.addForestFlowers(this);
 

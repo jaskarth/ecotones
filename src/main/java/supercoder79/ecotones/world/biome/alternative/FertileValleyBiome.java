@@ -23,19 +23,25 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 public class FertileValleyBiome extends EcotonesBiome {
     public static FertileValleyBiome INSTANCE;
+    public static FertileValleyBiome CLEARING;
+    public static FertileValleyBiome THICKET;
     public static FertileValleyBiome HILLY;
     public static FertileValleyBiome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley"), new FertileValleyBiome(0.2F, 0.025F));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley_hilly"), new FertileValleyBiome(0.3F, 0.225F));
-        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley_mountainous"), new FertileValleyBiome(0.5F, 0.625F));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley"), new FertileValleyBiome(0.2F, 0.025F, 0.6, 0.15));
+        CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley_clearing"), new FertileValleyBiome(0.2F, 0.025F, 0.1, 0.35));
+        THICKET = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley_thicket"), new FertileValleyBiome(0.2F, 0.025F, 1.6, 0.4));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley_hilly"), new FertileValleyBiome(0.3F, 0.225F, 0.6, 0.15));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley_mountainous"), new FertileValleyBiome(0.5F, 0.625F, 0.6, 0.15));
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, THICKET, CLEARING);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_MODERATE.add(INSTANCE, 0.2);
         Climate.WARM_MILD.add(INSTANCE, 0.3);
     }
 
-    public FertileValleyBiome(float depth, float scale) {
+    public FertileValleyBiome(float depth, float scale, double treeAmt, double wideShrubAmt) {
         super(new Settings()
                         .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                         .precipitation(Precipitation.RAIN)
@@ -76,7 +82,7 @@ public class FertileValleyBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.5))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.4 + (wideShrubAmt / 4)))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BRANCHING_OAK.configure(TreeType.RARE_LARGE_CLUSTERED_OAK.config)
@@ -84,7 +90,7 @@ public class FertileValleyBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.15))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(wideShrubAmt))));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 EcotonesFeatures.FARMLAND.configure(FeatureConfig.DEFAULT)
@@ -92,7 +98,7 @@ public class FertileValleyBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.POPLAR_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.6))));
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(treeAmt))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)

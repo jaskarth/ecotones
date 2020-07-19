@@ -25,19 +25,25 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 public class BluebellWoodBiome extends EcotonesBiome {
     public static BluebellWoodBiome INSTANCE;
+    public static BluebellWoodBiome CLEARING;
+    public static BluebellWoodBiome FLATS;
     public static BluebellWoodBiome HILLY;
     public static BluebellWoodBiome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "bluebell_wood"), new BluebellWoodBiome(0.3F, 0.025F));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "bluebell_wood_hilly"), new BluebellWoodBiome(0.6F, 0.225F));
-        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "bluebell_wood_mountainous"), new BluebellWoodBiome(0.8F, 0.625F));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "bluebell_wood"), new BluebellWoodBiome(0.3F, 0.05F, false, false));
+        FLATS = Registry.register(Registry.BIOME, new Identifier("ecotones", "bluebell_wood_flats"), new BluebellWoodBiome(0.3F, 0F, false, true));
+        CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "bluebell_wood_clearing"), new BluebellWoodBiome(0.3F, 0.0125F, true, false));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "bluebell_wood_hilly"), new BluebellWoodBiome(0.6F, 0.225F, false, false));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "bluebell_wood_mountainous"), new BluebellWoodBiome(0.8F, 0.625F, false, false));
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, FLATS, CLEARING);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_MILD.add(INSTANCE, 0.2);
         Climate.WARM_HUMID.add(INSTANCE, 0.3);
     }
 
-    public BluebellWoodBiome(float depth, float scale) {
+    public BluebellWoodBiome(float depth, float scale, boolean clearing, boolean flat) {
         super(new Settings()
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
@@ -52,8 +58,8 @@ public class BluebellWoodBiome extends EcotonesBiome {
                         .fogColor(12638463)
                         .build()).parent(null)
                 .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
-                3,
-                0.9);
+                flat ? 1 : 3,
+                flat ? 1.1 : 0.9);
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/plains/town_centers"), 8)));
         DefaultBiomeFeatures.addLandCarvers(this);
         DefaultBiomeFeatures.addPlainsTallGrass(this);
@@ -77,15 +83,17 @@ public class BluebellWoodBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.6))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(clearing ? 0.8 : 0.6))));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.BRANCHING_OAK.configure(TreeType.MEDIUM_RARE_OAK.config)
-                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.MEDIUM_RARE_OAK.config.decorationData)));
+        if (!clearing) {
+            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                    EcotonesFeatures.BRANCHING_OAK.configure(TreeType.MEDIUM_RARE_OAK.config)
+                            .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.MEDIUM_RARE_OAK.config.decorationData)));
+        }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.85))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(clearing ? 1 : 0.85))));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 EcotonesFeatures.BEEHIVES.configure(FeatureConfig.DEFAULT)
@@ -93,11 +101,11 @@ public class BluebellWoodBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
-                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))));
+                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(clearing ? 4 : 2))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(FeatureConfigHolder.DEAD_LARGE_OAK)
-                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.075))));
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(clearing ? 0.1 : 0.075))));
 
         DefaultBiomeFeatures.addForestFlowers(this);
 

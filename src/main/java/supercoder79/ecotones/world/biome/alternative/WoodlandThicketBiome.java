@@ -34,22 +34,10 @@ public class WoodlandThicketBiome extends EcotonesBiome {
     public static WoodlandThicketBiome HILLY_CLEARING;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "woodland_thicket"), new WoodlandThicketBiome(0.5F, 0.125F, 2.1, 1, 5));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "woodland_thicket"), new WoodlandThicketBiome(0.5F, 0.125F, 2.1, 1, 8));
         CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "woodland_clearing"), new WoodlandThicketBiome(0.5F, 0.0F, 1.2, 0.88, 2));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "woodland_hilly"), new WoodlandThicketBiome(1.2F, 0.8F, 3.2, 0.7, 5));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "woodland_hilly"), new WoodlandThicketBiome(1.2F, 0.8F, 3.2, 0.7, 6));
         HILLY_CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "woodland_clearing_hilly"), new WoodlandThicketBiome(1.2F, 0.2F, 1.6, 0.8, 2));
-
-        BiomeRegistries.registerAllSpecial(id -> {
-            String name = Registry.BIOME.get(id).getTranslationKey();
-
-            //don't replace rainforests
-            if (name.contains("rainforest")) return false;
-
-            return name.contains("prairie") || name.contains("forest") || name.contains("woodland");
-        }, Registry.BIOME.getRawId(INSTANCE), Registry.BIOME.getRawId(CLEARING), Registry.BIOME.getRawId(HILLY), Registry.BIOME.getRawId(HILLY_CLEARING));
-
-        BiomeRegistries.registerBigSpecialBiome(INSTANCE, 30);
-
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 4);
         BiomeRegistries.registerBiomeVariants(INSTANCE, CLEARING, HILLY, HILLY_CLEARING);
         Climate.WARM_VERY_HUMID.add(INSTANCE, 0.3);
@@ -104,7 +92,7 @@ public class WoodlandThicketBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.POPLAR_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.25))));
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.3))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(FeatureConfigHolder.DEAD_LARGE_OAK)

@@ -281,7 +281,7 @@ public class HotBiomes {
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.TREE.configure(FeatureConfigHolder.DEAD_LARGE_OAK)
-                                .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.05))))
+                                .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.075))))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
@@ -319,8 +319,8 @@ public class HotBiomes {
                                 .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.LUSH_BIRCH.config.decorationData)))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                        EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.RARE_DEAD_BIRCH.config)
-                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DEAD_BIRCH.config.decorationData)))
+                        EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.DEAD_BIRCH.config)
+                                .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.DEAD_BIRCH.config.decorationData)))
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.BRANCHING_OAK.configure(TreeType.LUSH_JUNGLE.config)

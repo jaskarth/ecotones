@@ -28,19 +28,23 @@ import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class DrySavannaBiome extends EcotonesBiome {
     public static DrySavannaBiome INSTANCE;
+    public static DrySavannaBiome THICKET;
     public static DrySavannaBiome HILLY;
     public static DrySavannaBiome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna"), new DrySavannaBiome(0.5F, 0.025F, 3, 0.96));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna_hilly"), new DrySavannaBiome(1.25F, 0.125F, 6, 0.87));
-        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna_mountainous"), new DrySavannaBiome(2F, 0.325F, 8, 0.82));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna"), new DrySavannaBiome(0.5F, 0.025F, 3, 0.96, false));
+        THICKET = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna_thicket"), new DrySavannaBiome(0.5F, 0.025F, 3, 0.96, true));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna_hilly"), new DrySavannaBiome(1.25F, 0.125F, 6, 0.87, false));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "dry_savanna_mountainous"), new DrySavannaBiome(2F, 0.325F, 8, 0.82, false));
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, THICKET);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_VERY_DRY.add(INSTANCE, 0.5);
         Climate.WARM_VERY_DRY.add(INSTANCE, 0.3);
     }
 
-    public DrySavannaBiome(float depth, float scale, double hilliness, double volatility) {
+    public DrySavannaBiome(float depth, float scale, double hilliness, double volatility, boolean thicket) {
         super(new Biome.Settings()
                         .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                         .precipitation(Biome.Precipitation.RAIN)
@@ -78,15 +82,21 @@ public class DrySavannaBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(1.6))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(thicket ? 2.8 : 1.6))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SCRUBLAND_CONFIG)
                         .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 7, 9))));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.RARE_ACACIA.config)
-                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_ACACIA.config.decorationData)));
+        if (thicket) {
+            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                    EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.ACACIA.config)
+                            .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.ACACIA.config.decorationData)));
+        } else {
+            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                    EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.RARE_ACACIA.config)
+                            .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_ACACIA.config.decorationData)));
+        }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
@@ -94,7 +104,7 @@ public class DrySavannaBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(FeatureConfigHolder.DEAD_LARGE_OAK)
-                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.15))));
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(thicket ? 0.25 : 0.15))));
 
         BiomeUtil.addDefaultFeatures(this);
         BiomeUtil.addDefaultSpawns(this);

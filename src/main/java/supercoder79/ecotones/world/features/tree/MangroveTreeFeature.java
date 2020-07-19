@@ -146,6 +146,9 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
             world.setBlockState(pos, config.woodState, 0);
 
             pos = pos.up();
+            if (world.getBlockState(pos).isAir()) {
+                world.setBlockState(pos, config.leafState, 0);
+            }
             for (Direction direction : Direction.values()) {
                 BlockPos local = pos.offset(direction);
                 if (world.getBlockState(local).isAir()) {

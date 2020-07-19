@@ -31,20 +31,24 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 public class DeadSpruceForestBiome extends EcotonesBiome {
     public static DeadSpruceForestBiome INSTANCE;
+    public static DeadSpruceForestBiome CLEARING;
     public static DeadSpruceForestBiome HILLY;
     public static DeadSpruceForestBiome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest"), new DeadSpruceForestBiome(0.5F, 0.025F));
-        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest_hilly"), new DeadSpruceForestBiome(1.25F, 0.125F));
-        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest_mountainous"), new DeadSpruceForestBiome(2F, 0.325F));
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest"), new DeadSpruceForestBiome(0.5F, 0.025F, false));
+        CLEARING = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest_clearing"), new DeadSpruceForestBiome(0.5F, 0.025F, true));
+        HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest_hilly"), new DeadSpruceForestBiome(1.25F, 0.125F, false));
+        MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "dead_spruce_forest_mountainous"), new DeadSpruceForestBiome(2F, 0.325F, false));
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, CLEARING);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_VERY_HUMID.add(INSTANCE, 0.1);
         Climate.WARM_HUMID.add(INSTANCE, 0.05);
     }
 
-    public DeadSpruceForestBiome(float depth, float scale) {
-        super((new Settings())
+    public DeadSpruceForestBiome(float depth, float scale, boolean clearing) {
+        super(new Settings()
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
                 .category(Category.PLAINS)
@@ -81,11 +85,21 @@ public class DeadSpruceForestBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(5))));
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(4))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.DEAD_SPRUCE.config)
-                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.DEAD_SPRUCE.config.decorationData)));
+                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
+                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(clearing ? 0.9 : 0.15))));
+
+        if (clearing) {
+            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                    EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.RARE_DEAD_SPRUCE.config)
+                            .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DEAD_SPRUCE.config.decorationData)));
+        } else {
+            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                    EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.DEAD_SPRUCE.config)
+                            .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.DEAD_SPRUCE.config.decorationData)));
+        }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(FeatureConfigHolder.TAIGA_FLOWERS)
                 .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(5))));
