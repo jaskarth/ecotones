@@ -1,8 +1,8 @@
 package supercoder79.ecotones.world.biome;
 
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
-import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -33,21 +33,21 @@ public class BiomeUtil {
         ids[0] = Registry.BIOME.getRawId(Registry.register(Registry.BIOME,
                 new Identifier(name.getNamespace(), name.getPath().concat("_hilly")),
                 builder
-                        .depth(ret.getDepth() + 0.75f)
+                        .depth(ret.getDepth() + 0.5f)
                         .scale(ret.getScale() + 0.15f)
-                        .temperature(ret.getTemperature() -0.1f)
+                        .temperature(ret.getTemperature() - 0.1f)
                         .hilliness(ret.getHilliness() + 0.8)
-                        .volatility(ret.getVolatility() - 0.35)
+                        .volatility(ret.getVolatility() - 0.225)
                         .build()));
 
         ids[1] = Registry.BIOME.getRawId(Registry.register(Registry.BIOME,
                 new Identifier(name.getNamespace(), name.getPath().concat("_mountainous")),
                 builder
-                        .depth(ret.getDepth() + 1.5f)
-                        .scale(ret.getScale() + 0.45f)
+                        .depth(ret.getDepth() + 1.125f)
+                        .scale(ret.getScale() + 0.4f)
                         .temperature(ret.getTemperature() - 0.2f)
                         .hilliness(ret.getHilliness() + 2.6)
-                        .volatility(ret.getVolatility() - 0.45)
+                        .volatility(ret.getVolatility() - 0.35)
                         .build()));
 
         MountainLayer.Biome2MountainBiomeMap.put(Registry.BIOME.getRawId(ret), ids);

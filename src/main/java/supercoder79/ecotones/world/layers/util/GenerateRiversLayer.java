@@ -1,7 +1,6 @@
 package supercoder79.ecotones.world.layers.util;
 
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.layer.type.CrossSamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.world.biome.technical.RiverBiome;

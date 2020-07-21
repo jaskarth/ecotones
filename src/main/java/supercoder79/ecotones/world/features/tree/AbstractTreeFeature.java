@@ -25,7 +25,6 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.*;
-import java.util.function.Function;
 
 public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends Feature<T> {
     public AbstractTreeFeature(Codec<T> codec) {

@@ -10,7 +10,6 @@ import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 
 import java.util.Random;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class AboveQualityDecorator extends Decorator<NopeDecoratorConfig> {

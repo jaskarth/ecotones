@@ -34,6 +34,7 @@ public class FertileValleyBiome extends EcotonesBiome {
         THICKET = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley_thicket"), new FertileValleyBiome(0.2F, 0.025F, 1.6, 0.4));
         HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley_hilly"), new FertileValleyBiome(0.3F, 0.225F, 0.6, 0.15));
         MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "fertile_valley_mountainous"), new FertileValleyBiome(0.5F, 0.625F, 0.6, 0.15));
+        BiomeRegistries.registerNoBeachBiomes(INSTANCE, THICKET, CLEARING, HILLY, MOUNTAINOUS);
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
         BiomeRegistries.registerBiomeVariants(INSTANCE, THICKET, CLEARING);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);

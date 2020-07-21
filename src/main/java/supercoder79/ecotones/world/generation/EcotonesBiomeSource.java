@@ -1,7 +1,6 @@
 package supercoder79.ecotones.world.generation;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -9,7 +8,6 @@ import net.minecraft.world.biome.source.BiomeLayerSampler;
 import net.minecraft.world.biome.source.BiomeSource;
 
 import java.util.List;
-import java.util.Set;
 
 public class EcotonesBiomeSource extends BiomeSource {
     public static Codec<EcotonesBiomeSource> CODEC = Codec.LONG.fieldOf("seed").xmap(EcotonesBiomeSource::new, source -> source.seed).stable().codec();

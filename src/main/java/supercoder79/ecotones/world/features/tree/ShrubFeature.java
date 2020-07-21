@@ -13,7 +13,6 @@ import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class ShrubFeature extends Feature<SimpleTreeFeatureConfig> {
 

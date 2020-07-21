@@ -24,7 +24,6 @@ import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class DrySavannaBiome extends EcotonesBiome {
     public static DrySavannaBiome INSTANCE;

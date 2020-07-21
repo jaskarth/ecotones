@@ -1,5 +1,6 @@
 package supercoder79.ecotones.api;
 
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.world.layers.generation.MountainLayer;
@@ -19,6 +20,7 @@ public class BiomeRegistries {
 
     public static final Map<Integer, Integer> BIOME_VARANT_CHANCE = new HashMap<>();
     public static final Map<Integer, int[]> BIOME_VARIANTS = new HashMap<>();
+    public static final Map<List<Identifier>, Runnable> DEFERRED_REGISTERS = new HashMap<>();
 
     public static void registerSpecialBiome(Biome biome, IntFunction<Boolean> rule) {
         SPECIAL_BIOMES.put(Registry.BIOME.getRawId(biome), rule);
@@ -67,8 +69,30 @@ public class BiomeRegistries {
         NO_BEACH_BIOMES.add(Registry.BIOME.getRawId(biome));
     }
 
+    public static void registerNoBeachBiomes(Biome... biomes) {
+        for (Biome biome : biomes) {
+            registerNoBeachBiome(biome);
+        }
+    }
+
+    public static void registerNoRiverBiomes(Biome... biomes) {
+        for (Biome biome : biomes) {
+            registerNoRiverBiome(biome);
+        }
+    }
+
     public static void registerNoRiverBiome(Biome biome) {
         NO_RIVER_BIOMES.add(Registry.BIOME.getRawId(biome));
+    }
+
+    public static void dispatch(List<Identifier> requiredBiomes, Runnable runnable) {
+        for (Identifier biome : requiredBiomes) {
+            if (!Registry.BIOME.containsId(biome)) {
+                DEFERRED_REGISTERS.put(requiredBiomes, runnable);
+            }
+        }
+
+        runnable.run();
     }
 
     public static void compile() {

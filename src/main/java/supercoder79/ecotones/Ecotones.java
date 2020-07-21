@@ -2,6 +2,7 @@ package supercoder79.ecotones;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.event.server.ServerTickCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -21,12 +22,7 @@ import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.util.EcotonesBlockPlacers;
 import supercoder79.ecotones.world.EcotonesWorldType;
 import supercoder79.ecotones.world.biome.EcotonesBiomes;
-import supercoder79.ecotones.world.biome.alternative.*;
-import supercoder79.ecotones.world.biome.base.HotBiomes;
-import supercoder79.ecotones.world.biome.base.WarmBiomes;
-import supercoder79.ecotones.world.biome.base.SwampBiomes;
-import supercoder79.ecotones.world.biome.special.*;
-import supercoder79.ecotones.world.biome.technical.BeachBiome;
+import supercoder79.ecotones.world.biome.special.BlessedSpringsBiome;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.foliage.EcotonesFoliagePlacers;
@@ -34,6 +30,8 @@ import supercoder79.ecotones.world.generation.EcotonesBiomeSource;
 import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
+
+import java.util.List;
 
 public class Ecotones implements ModInitializer {
 	private static EcotonesWorldType worldType;
@@ -83,6 +81,28 @@ public class Ecotones implements ModInitializer {
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
 			worldType = new EcotonesWorldType();
 		}
+
+		RegistryEntryAddedCallback.event(Registry.BIOME).register((idx, id, biome) -> {
+			// Iterate through, search for biomes
+			for (List<Identifier> identifiers : BiomeRegistries.DEFERRED_REGISTERS.keySet()) {
+				// If the current list contains the biome, check if the others are as well
+				if (identifiers.contains(id)) {
+					// Ensure all needed biomes are loaded
+					boolean run = true;
+					for (Identifier identifier : identifiers) {
+						if (!Registry.BIOME.containsId(identifier)) {
+							run = false;
+							break;
+						}
+					}
+
+					// If everything is good, then run
+					if (run) {
+						BiomeRegistries.DEFERRED_REGISTERS.get(identifiers).run();
+					}
+				}
+			}
+		});
 
 		ServerTickCallback.EVENT.register(server -> {
 			if (server.getTicks() % 300 == 0) {

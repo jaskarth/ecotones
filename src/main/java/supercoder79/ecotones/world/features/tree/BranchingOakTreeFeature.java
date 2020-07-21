@@ -18,7 +18,10 @@ import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 
 //creates a branching trunk then places leaves
 public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
