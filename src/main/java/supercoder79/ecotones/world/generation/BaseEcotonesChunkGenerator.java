@@ -107,7 +107,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
             frequency /= 2.0;
         }
 
-        double clampedInterpolation = (interpolationValue / 10.0 + 1.0) / 2.0;
+        double clampedInterpolation = (interpolationValue / 16.0 + 1.0) / 2.0;
 
         if (clampedInterpolation >= 1) {
             // Sample only upper noise, as the lower noise will be interpolated out.

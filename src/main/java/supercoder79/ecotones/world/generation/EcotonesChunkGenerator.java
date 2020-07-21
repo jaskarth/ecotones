@@ -137,7 +137,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         double lowerInterpolationStart = this.lowerInterpolationStart();
 
         for(int y = 0; y < this.getNoiseSizeY(); ++y) {
-            double noise = this.sampleNoise(x, y, z, horizontalScale, verticalScale, horizontalStretch, verticalStretch) - (scaleNoise.sample(x, y, z) * 5);
+            double noise = this.sampleNoise(x, y, z, horizontalScale, verticalScale, horizontalStretch, verticalStretch) + (scaleNoise.sample(x, y, z) * 5);
             //modify the noise for special reasons
             Biome biome = this.biomeSource.getBiomeForNoiseGen(x, y, z);
             if (biome instanceof EcotonesBiome) {
