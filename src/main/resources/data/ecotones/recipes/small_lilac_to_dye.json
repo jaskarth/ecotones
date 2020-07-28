@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ecotones:small_lilac"
+    }
+  ],
+  "result": {
+    "item": "minecraft:magenta_dye"
+  }
+}
