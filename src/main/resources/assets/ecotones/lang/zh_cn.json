@@ -3,7 +3,7 @@
   "block.ecotones.short_grass": "矮草",
   "block.ecotones.reeds": "芦苇",
   "block.ecotones.wildflowers": "野花",
-  "block.ecotones.geyser": "Geyser",
+  "block.ecotones.geyser": "间歇喷泉",
   "block.ecotones.coconut": "椰子",
   "block.ecotones.hazel_leaves": "榛树树叶",
   "block.ecotones.hazel_sapling": "榛树树苗",
@@ -12,7 +12,7 @@
   "block.ecotones.clover": "四叶草",
   "block.ecotones.pinecone": "松果",
   "block.ecotones.dried_dirt": "干土",
-  "block.ecotones.small_shrub": 小型灌木",
+  "block.ecotones.small_shrub": "小型灌木",
 
   "item.ecotones.peat": "泥炭块",
   "item.ecotones.short_grass": "矮草",
