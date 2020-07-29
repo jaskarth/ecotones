@@ -14,7 +14,6 @@ import java.util.Random;
 
 public enum  DrainageLayer implements ParentedLayer, IdentityCoordinateTransformer, SeedLayer {
     INSTANCE;
-    private static final int SWAMP_ID = Registry.BIOME.getRawId(SwampBiomes.SWAMP_BIOME);
 
     private OpenSimplexNoise drainageNoise;
 
@@ -26,7 +25,7 @@ public enum  DrainageLayer implements ParentedLayer, IdentityCoordinateTransform
         int sample = parent.sample(x, z);
         double drainage = drainageNoise.sample(x + offsetX, z + offsetZ) * 1.25;
         if (drainage < -0.75) {
-            return SWAMP_ID;
+            return Registry.BIOME.getRawId(SwampBiomes.SWAMP_BIOME);
         }
         return sample;
     }
