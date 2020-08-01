@@ -23,23 +23,14 @@ public class SimpleTreePlacementDecorator extends Decorator<SimpleTreeDecoration
     public Stream<BlockPos> getPositions(WorldAccess world, ChunkGenerator generator, Random random, SimpleTreeDecorationData config, BlockPos pos) {
         List<BlockPos> positions = new ArrayList<>();
 
-        double noise = 0.5; // default for if the chunk generator is not ours
+        double soilQuality = 0.5; // default for if the chunk generator is not ours
         //get noise at position (this is fairly inaccurate because the pos is at the top left of the chunk and we center it)
         if (generator instanceof EcotonesChunkGenerator) {
-            noise = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
+            soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
         }
 
         //basic amount modulation
-        //TODO: soil quality noise
-        double rawAmt = config.count;
-        if (noise > 0.7) {
-            rawAmt *= 1.4;
-        } else if (noise > 0.4) {
-            rawAmt *= 1.2;
-        } else if (noise < 0.15) {
-            rawAmt *= 0.5;
-        }
-
+        double rawAmt = config.count * qualityToDensity(soilQuality);
         int amt = (int) rawAmt;
 
         if (random.nextDouble() < (rawAmt - amt)) {
@@ -90,5 +81,10 @@ public class SimpleTreePlacementDecorator extends Decorator<SimpleTreeDecoration
         }
 
         return positions.stream();
+    }
+
+    // Desmos: x^{3}+0.1x+0.4
+    private double qualityToDensity(double q) {
+        return (q * q * q) + (0.1 * q) + 0.4;
     }
 }

@@ -13,7 +13,6 @@ import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConfig.DecorationData> {
@@ -23,27 +22,24 @@ public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConf
 
     @Override
     public Stream<BlockPos> getPositions(WorldAccess world, ChunkGenerator generator, Random random, TreeGenerationConfig.DecorationData config, BlockPos pos) {
-        double noise = 0.0; // default for if the chunk generator is not ours
+        double soilQuality = 0.0; // default for if the chunk generator is not ours
         if (generator instanceof EcotonesChunkGenerator) {
-            noise = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
+            soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
         }
 
         //get the height from minSize to minSize + noiseCoefficient (can be more because of noise map bullshit)
-        int maxHeight = (int) (config.minSize + Math.max(noise * config.noiseCoefficient, 0));
+        int maxHeight = (int) (config.minSize + Math.max(soilQuality * config.noiseCoefficient, 0));
 
         int targetCount = 0;
         if (config.targetCount >= 1) {
             targetCount = (int)config.targetCount;
-            //increase in high quality areas to make very thick forests
-            if (noise > 0.7) {
-                targetCount++;
-            }
+            double extraTreesRaw = qualityToDensity(soilQuality);
+            int extraTreeCount = (int) Math.floor(extraTreesRaw);
 
-            //decrease the count based on the soil quality
-            if (noise < 0.3) {
-                if (random.nextDouble() > noise) {
-                    targetCount--;
-                }
+            targetCount += extraTreeCount;
+
+            if (random.nextDouble() < (extraTreesRaw - extraTreeCount)) {
+                targetCount++;
             }
 
         } else {
@@ -97,6 +93,11 @@ public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConf
             positions.add(new DataPos(x, y, z).setMaxHeight(maxFinal + random.nextInt(3)));
         }
 
-        return IntStream.range(0, targetCount).mapToObj(positions::get);
+        return positions.stream();
+    }
+
+    // Desmos: x^{3}+2.75x-1.5
+    private double qualityToDensity(double q) {
+        return (q * q * q) + (2.75 * q) - 1.5;
     }
 }

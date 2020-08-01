@@ -24,41 +24,34 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
     public Stream<BlockPos> getPositions(WorldAccess world, ChunkGenerator generator, Random random, ShrubDecoratorConfig config, BlockPos pos) {
         //gets data on how many shrubs to place based on the soil drainage.
         //performs an abs function on noise to make it [0, 1].
-        //drainage of 1: either too much or too little drainage, 50% of target shrub count
-        //drainage of 0: perfect drainage, 150% of target shrub count
+        //drainage of 0: either too much or too little drainage, 50% of target shrub count
+        //drainage of 1: perfect drainage, 150% of target shrub count
 
-        double noise = 0.5; // default for if the chunk generator is not ours
+        double soilQuality = 0.5; // default for if the chunk generator is not ours
         //get noise at position (this is fairly inaccurate because the pos is at the top left of the chunk and we center it)
         if (generator instanceof EcotonesChunkGenerator) {
-            noise = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
+            soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
         }
-        double shrubCountCoefficient = 0.5 + noise; //50% to 150%
+        double shrubCountCoefficient = 0.5 + soilQuality; //50% to 150%
         //multiply with target count
-        double shrubCountRaw = (config.targetCount * shrubCountCoefficient);
+        double shrubCountRaw = (config.targetCount * shrubCountCoefficient) * qualityToDensity(soilQuality);
         //height of shrub (this is randomized) and shrub count modifications
         int maxShrubHeight = 1;
-        if (noise > 0.7) {
+        if (soilQuality > 0.7) {
             maxShrubHeight = 3;
-            shrubCountRaw *= 1.4;
-        } else if (noise > 0.4) {
+        } else if (soilQuality > 0.4) {
             maxShrubHeight = 2;
-            shrubCountRaw *= 1.2;
-        } else if (noise < 0.15) {
-            // too low, reduce.
-            shrubCountRaw *= 0.5;
         }
 
         //java is bad
-        double finalNoise = noise;
+        double finalNoise = soilQuality;
         int finalMaxShrubHeight = maxShrubHeight;
 
         //cast for final shrub count
         int shrubCount = (int) Math.floor(shrubCountRaw);
 
-        if (shrubCountRaw < 1) {
-            if (random.nextDouble() < shrubCountRaw) {
-                shrubCount++;
-            }
+        if (random.nextDouble() < (shrubCountRaw - shrubCount)) {
+            shrubCount++;
         }
 
         return IntStream.range(0, shrubCount).mapToObj((ix) -> {
@@ -104,5 +97,10 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
             //return data and position
             return new DataPos(x, y, z).setData(finalNoise, shrubHeightFinal, isLikelyInvalid);
         });
+    }
+
+    // Desmos: x^{3}+0.1x+0.4
+    private double qualityToDensity(double q) {
+        return (q * q * q) + (0.1 * q) + 0.4;
     }
 }
