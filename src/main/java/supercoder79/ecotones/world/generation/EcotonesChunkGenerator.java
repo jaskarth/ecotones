@@ -69,8 +69,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         this.seed = seed;
         this.hillinessNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-15, 0));
 
-        this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 8, 256, 0.2, -0.2);
-        soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1536, 1.4, 1.4);
+        this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 256, 0.2, -0.2);
+        soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 3, 2048, 1.3, 1.3);
         soilRockinessNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1024, 2, -2);
     }
 
@@ -148,7 +148,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
             noise -= this.computeNoiseFalloff(depth, scale, y) * volatility;
 
             if ((double)y > upperInterpolationStart) {
-                noise = MathHelper.clampedLerp(noise, (double)interpolateTowards, ((double)y - upperInterpolationStart) / (double)interpolationSize);
+                noise = MathHelper.clampedLerp(noise, interpolateTowards, ((double)y - upperInterpolationStart) / (double)interpolationSize);
             } else if ((double)y < lowerInterpolationStart) {
                 noise = MathHelper.clampedLerp(noise, -30.0D, (lowerInterpolationStart - (double)y) / (lowerInterpolationStart - 1.0D));
             }
@@ -190,7 +190,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
     //height additions - makes the terrain a bit hillier
     private double sampleNoise(int x, int y) {
-        double noise = this.hillinessNoise.sample((double)(x * 200), 10.0D, (double)(y * 200), 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
+        double noise = this.hillinessNoise.sample((x * 200), 10.0D, (y * 200), 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
         if (noise < 0.0D) {
             noise = -noise * 0.3D;
         }
@@ -288,13 +288,13 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         BiomeAccess biomeAccess = access.withSource(this.biomeSource);
         ImprovedChunkRandom chunkRandom = new ImprovedChunkRandom();
         ChunkPos chunkPos = chunk.getPos();
-        int j = chunkPos.x;
-        int k = chunkPos.z;
+        int chunkX = chunkPos.x;
+        int chunkZ = chunkPos.z;
         Biome biome = this.biomeSource.getBiomeForNoiseGen(chunkPos.x << 2, 0, chunkPos.z << 2);
         BitSet bitSet = ((ProtoChunk)chunk).method_28510(carver);
 
-        for(int l = j - 8; l <= j + 8; ++l) {
-            for(int m = k - 8; m <= k + 8; ++m) {
+        for(int l = chunkX - 8; l <= chunkX + 8; ++l) {
+            for(int m = chunkZ - 8; m <= chunkZ + 8; ++m) {
                 List<ConfiguredCarver<?>> list = biome.getCarversForStep(carver);
                 ListIterator listIterator = list.listIterator();
 
@@ -303,7 +303,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
                     ConfiguredCarver<?> configuredCarver = (ConfiguredCarver)listIterator.next();
                     chunkRandom.setCarverSeed(seed + (long)n, l, m);
                     if (configuredCarver.shouldCarve(chunkRandom, l, m)) {
-                        configuredCarver.carve(chunk, biomeAccess::getBiome, chunkRandom, this.getSeaLevel(), l, m, j, k, bitSet);
+                        configuredCarver.carve(chunk, biomeAccess::getBiome, chunkRandom, this.getSeaLevel(), l, m, chunkX, chunkZ, bitSet);
                     }
                 }
             }
