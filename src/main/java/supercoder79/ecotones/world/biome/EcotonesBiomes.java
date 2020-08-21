@@ -29,12 +29,14 @@ public class EcotonesBiomes {
         OasisBiome.init();
         ThePitsBiome.init();
         GreenSpiresBiome.init();
+        UluruBiome.init();
+        WastelandBiome.init();
+
+        // Biome replacements
         HazelGroveBiome.init();
         PinePeaksBiome.init();
-        UluruBiome.init();
         FlowerPrairieBiome.init();
         WoodlandThicketBiome.init();
-        WastelandBiome.init();
         CloverFieldsBiome.init();
         PoplarForestBiome.init();
         TemperateGrasslandBiome.init();
@@ -51,5 +53,8 @@ public class EcotonesBiomes {
         BluebellWoodBiome.init();
         SpruceMarshBiome.init();
         MangroveSwampBiome.init();
+
+        // Rose Field biome
+        RoseFieldBiome.init();
     }
 }

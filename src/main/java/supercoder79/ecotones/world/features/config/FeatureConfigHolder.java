@@ -111,6 +111,14 @@ public class FeatureConfigHolder {
                     .spreadZ(15)
                     .tries(12).build();
 
+    public static RandomPatchFeatureConfig CYAN_ROSE =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.CYAN_ROSE.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(15)
+                    .spreadZ(15)
+                    .tries(32).build();
+
     // misc
     public static RandomPatchFeatureConfig SURFACE_ROCKS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()

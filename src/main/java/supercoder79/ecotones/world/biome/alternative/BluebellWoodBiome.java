@@ -108,6 +108,5 @@ public class BluebellWoodBiome extends EcotonesBiome {
         DefaultBiomeFeatures.addForestFlowers(this);
 
         BiomeUtil.addDefaultFeatures(this);
-        BiomeUtil.addDefaultFeatures(this);
     }
 }
