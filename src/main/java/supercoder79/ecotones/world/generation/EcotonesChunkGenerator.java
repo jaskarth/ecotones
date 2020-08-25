@@ -75,7 +75,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     }
 
     @Override
-    protected double[] computeNoiseRange(int x, int z) {
+    protected double[] computeNoiseData(int x, int z) {
         double[] buffer = new double[3];
         float weightedScale = 0.0F;
         float weightedDepth = 0.0F;
@@ -120,7 +120,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
         weightedScale = weightedScale * 0.9F + 0.1F;
         weightedDepth = (weightedDepth * 4.0F - 1.0F) / 8.0F;
-        buffer[0] = (double)weightedDepth + (this.sampleNoise(x, z) * weightedHilliness);
+        buffer[0] = (double)weightedDepth + (this.sampleHilliness(x, z) * weightedHilliness);
         buffer[1] = weightedScale + scaleNoise.sample(x, z);
         buffer[2] = weightedVolatility;
         return buffer;
@@ -128,21 +128,16 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
     @Override
     protected void sampleNoiseColumn(double[] buffer, int x, int z, double horizontalScale, double verticalScale, double horizontalStretch, double verticalStretch, int interpolationSize, int interpolateTowards) {
-        double[] noiseRange = this.computeNoiseRange(x, z);
-        double depth = noiseRange[0];
-        double scale = noiseRange[1];
-        double volatility = noiseRange[2];
+        double[] noiseData = this.computeNoiseData(x, z);
+        double depth = noiseData[0];
+        double scale = noiseData[1];
+        double volatility = noiseData[2];
 
         double upperInterpolationStart = this.upperInterpolationStart();
         double lowerInterpolationStart = this.lowerInterpolationStart();
 
         for(int y = 0; y < this.getNoiseSizeY(); ++y) {
-            double noise = this.sampleNoise(x, y, z, horizontalScale, verticalScale, horizontalStretch, verticalStretch) + (scaleNoise.sample(x, y, z) * 5);
-            //modify the noise for special reasons
-            Biome biome = this.biomeSource.getBiomeForNoiseGen(x, y, z);
-            if (biome instanceof EcotonesBiome) {
-                noise = ((EcotonesBiome)biome).modifyNoise(x, y, z, noise);
-            }
+            double noise = this.sampleTerrainNoise(x, y, z, horizontalScale, verticalScale, horizontalStretch, verticalStretch) + (scaleNoise.sample(x, y, z) * 5);
 
             //calculate volatility
             noise -= this.computeNoiseFalloff(depth, scale, y) * volatility;
@@ -150,7 +145,14 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
             if ((double)y > upperInterpolationStart) {
                 noise = MathHelper.clampedLerp(noise, interpolateTowards, ((double)y - upperInterpolationStart) / (double)interpolationSize);
             } else if ((double)y < lowerInterpolationStart) {
+                // Never occurs, only exists for vanilla consistency
                 noise = MathHelper.clampedLerp(noise, -30.0D, (lowerInterpolationStart - (double)y) / (lowerInterpolationStart - 1.0D));
+            }
+
+            //modify the noise for special reasons
+            Biome biome = this.biomeSource.getBiomeForNoiseGen(x, y, z);
+            if (biome instanceof EcotonesBiome) {
+                noise = ((EcotonesBiome)biome).modifyNoise(x, y, z, noise);
             }
 
             buffer[y] = noise;
@@ -175,12 +177,12 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
     @Override
     public void populateEntities(ChunkRegion region) {
-        int i = region.getCenterChunkX();
-        int j = region.getCenterChunkZ();
-        Biome biome = region.getBiome((new ChunkPos(i, j)).getCenterBlockPos());
+        int chunkX = region.getCenterChunkX();
+        int chunkZ = region.getCenterChunkZ();
+        Biome biome = region.getBiome((new ChunkPos(chunkX, chunkZ)).getCenterBlockPos());
         ChunkRandom chunkRandom = new ChunkRandom();
-        chunkRandom.setPopulationSeed(region.getSeed(), i << 4, j << 4);
-        SpawnHelper.populateEntities(region, biome, i, j, chunkRandom);
+        chunkRandom.setPopulationSeed(region.getSeed(), chunkX << 4, chunkZ << 4);
+        SpawnHelper.populateEntities(region, biome, chunkX, chunkZ, chunkRandom);
     }
 
     @Override
@@ -189,7 +191,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     }
 
     //height additions - makes the terrain a bit hillier
-    private double sampleNoise(int x, int y) {
+    private double sampleHilliness(int x, int y) {
         double noise = this.hillinessNoise.sample((x * 200), 10.0D, (y * 200), 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
         if (noise < 0.0D) {
             noise = -noise * 0.3D;
@@ -291,19 +293,19 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         int chunkX = chunkPos.x;
         int chunkZ = chunkPos.z;
         Biome biome = this.biomeSource.getBiomeForNoiseGen(chunkPos.x << 2, 0, chunkPos.z << 2);
-        BitSet bitSet = ((ProtoChunk)chunk).method_28510(carver);
+        BitSet carvingMask = ((ProtoChunk)chunk).method_28510(carver);
 
-        for(int l = chunkX - 8; l <= chunkX + 8; ++l) {
-            for(int m = chunkZ - 8; m <= chunkZ + 8; ++m) {
-                List<ConfiguredCarver<?>> list = biome.getCarversForStep(carver);
-                ListIterator listIterator = list.listIterator();
+        for(int localX = chunkX - 8; localX <= chunkX + 8; ++localX) {
+            for(int localZ = chunkZ - 8; localZ <= chunkZ + 8; ++localZ) {
+                List<ConfiguredCarver<?>> carverList = biome.getCarversForStep(carver);
+                ListIterator<ConfiguredCarver<?>> carvers = carverList.listIterator();
 
-                while(listIterator.hasNext()) {
-                    int n = listIterator.nextIndex();
-                    ConfiguredCarver<?> configuredCarver = (ConfiguredCarver)listIterator.next();
-                    chunkRandom.setCarverSeed(seed + (long)n, l, m);
-                    if (configuredCarver.shouldCarve(chunkRandom, l, m)) {
-                        configuredCarver.carve(chunk, biomeAccess::getBiome, chunkRandom, this.getSeaLevel(), l, m, chunkX, chunkZ, bitSet);
+                while(carvers.hasNext()) {
+                    int carverIndex = carvers.nextIndex();
+                    ConfiguredCarver<?> configuredCarver = carvers.next();
+                    chunkRandom.setCarverSeed(seed + (long) carverIndex, localX, localZ);
+                    if (configuredCarver.shouldCarve(chunkRandom, localX, localZ)) {
+                        configuredCarver.carve(chunk, biomeAccess::getBiome, chunkRandom, this.getSeaLevel(), localX, localZ, chunkX, chunkZ, carvingMask);
                     }
                 }
             }
