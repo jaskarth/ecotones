@@ -21,6 +21,8 @@
 * Cherry forest
 * Floodplains
 * Birch forest style with oak trees
+* Everest biome, somehow
+* Gravelly spruce forest
 
 # Blocks and items
 * More flower types
@@ -37,7 +39,6 @@
 * Stop procrastinating on cold biomes
 * Balloon-y tree with edges hanging off (this is very hard to describe in text)
 * Add all biomes to lang file
-* Move swamps to special biomes
 * Take another look at well carvers
 * Add roofed forest alternative
 * Variants for the newly added biomes
@@ -47,7 +48,7 @@
 * Fix: Water patches in flooded savannas spawn with air on sides
 * Improve the look of a few biomes (remove shrubs, more unique features, etc.)
 * Sugarcane feature in fertile valley
-* Better mod compat, deffered register system
+* Better mod compat, deferred register system
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas

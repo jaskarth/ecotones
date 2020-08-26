@@ -53,6 +53,7 @@ public class EcotonesBiomes {
         BluebellWoodBiome.init();
         SpruceMarshBiome.init();
         MangroveSwampBiome.init();
+        SparseForestBiome.init();
 
         // Rose Field biome
         RoseFieldBiome.init();
