@@ -85,8 +85,8 @@ public class BluebellWoodBiome extends EcotonesBiome {
 
         if (!clearing) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                    EcotonesFeatures.BRANCHING_OAK.configure(TreeType.MEDIUM_RARE_OAK.config)
-                            .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.MEDIUM_RARE_OAK.config.decorationData)));
+                    EcotonesFeatures.BRANCHING_OAK.configure(TreeType.MEDIUM_RARE_OAK)
+                            .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.MEDIUM_RARE_OAK.decorationData)));
         }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

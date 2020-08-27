@@ -76,8 +76,8 @@ public class MangroveSwampBiome extends EcotonesBiome {
                                 .configure(new NoiseHeightmapDecoratorConfig(-0.8D, 7, 12))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.MANGROVE_TREE.configure(TreeType.MANGROVE.config)
-                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.MANGROVE.config.decorationData)));
+                EcotonesFeatures.MANGROVE_TREE.configure(TreeType.MANGROVE)
+                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.MANGROVE.decorationData)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.LILY_PAD_CONFIG)

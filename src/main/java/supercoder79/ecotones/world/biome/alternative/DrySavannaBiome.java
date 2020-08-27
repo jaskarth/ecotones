@@ -89,12 +89,12 @@ public class DrySavannaBiome extends EcotonesBiome {
 
         if (thicket) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                    EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.ACACIA.config)
-                            .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.ACACIA.config.decorationData)));
+                    EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.ACACIA)
+                            .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.ACACIA.decorationData)));
         } else {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                    EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.RARE_ACACIA.config)
-                            .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_ACACIA.config.decorationData)));
+                    EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.RARE_ACACIA)
+                            .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_ACACIA.decorationData)));
         }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
