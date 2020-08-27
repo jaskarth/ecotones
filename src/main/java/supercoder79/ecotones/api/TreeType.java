@@ -23,7 +23,8 @@ public enum TreeType {
     FLOODED_ACACIA(new TreeGenerationConfig(1, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 12, 6, 6, 0.55, 0.425, false)),
     RARE_ACACIA(new TreeGenerationConfig(0.1, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.45, 0.35, false)),
     LUSH_JUNGLE(new TreeGenerationConfig(0.2, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.JUNGLE_LEAVES.getDefaultState(), 4, 4, 14, 8, 0.45, 0.45, true)),
-    MANGROVE(new TreeGenerationConfig(4, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 3, -1, 5, 2, 0.2, 0.2, false));
+    MANGROVE(new TreeGenerationConfig(4, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 3, -1, 5, 2, 0.2, 0.2, false)),
+    RARE_DARK_OAK(new TreeGenerationConfig(0.3, Blocks.DARK_OAK_LOG.getDefaultState(), Blocks.DARK_OAK_LEAVES.getDefaultState(), 3, -1, 6, 4, 0.2, 0.2, false));
 
     public final TreeGenerationConfig config;
 

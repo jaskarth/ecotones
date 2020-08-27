@@ -30,6 +30,7 @@ public class EcotonesFeatures {
     public static FarmlandPatchFeature FARMLAND;
     public static BeehiveFeature BEEHIVES;
     public static MangroveTreeFeature MANGROVE_TREE;
+    public static BranchingDarkOakTreeFeature BRANCHING_DARK_OAK;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig.CODEC));
@@ -52,5 +53,6 @@ public class EcotonesFeatures {
         FARMLAND = Registry.register(Registry.FEATURE, new Identifier("ecotones", "farmland"), new FarmlandPatchFeature(DefaultFeatureConfig.CODEC));
         BEEHIVES = Registry.register(Registry.FEATURE, new Identifier("ecotones", "beehives"), new BeehiveFeature(DefaultFeatureConfig.CODEC));
         MANGROVE_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "mangrove_tree"), new MangroveTreeFeature(TreeGenerationConfig.CODEC));
+        BRANCHING_DARK_OAK = Registry.register(Registry.FEATURE, new Identifier("ecotones", "branching_dark_oak"), new BranchingDarkOakTreeFeature(TreeGenerationConfig.CODEC));
     }
 }

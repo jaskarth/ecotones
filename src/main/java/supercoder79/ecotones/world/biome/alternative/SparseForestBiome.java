@@ -110,6 +110,10 @@ public class SparseForestBiome extends EcotonesBiome {
                 EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.RARE_DEAD_BIRCH.config)
                         .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DEAD_BIRCH.config.decorationData)));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.BRANCHING_DARK_OAK.configure(TreeType.RARE_DARK_OAK.config)
+                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DARK_OAK.config.decorationData)));
+
         BiomeUtil.addDefaultSpawns(this);
         BiomeUtil.addDefaultFeatures(this);
     }
