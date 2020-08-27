@@ -22,7 +22,6 @@
 * Floodplains
 * Birch forest style with oak trees
 * Everest biome, somehow
-* Gravelly spruce forest
 
 # Blocks and items
 * More flower types

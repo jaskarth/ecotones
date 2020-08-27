@@ -38,7 +38,7 @@ public class LushDesertBiome extends EcotonesBiome {
 
 
     protected LushDesertBiome(float depth, float scale, double hilliness, double volatility) {
-        super((new Settings())
+        super(new Settings()
                         .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.SAND_CONFIG)
                         .precipitation(Precipitation.RAIN)
                         .category(Category.PLAINS)

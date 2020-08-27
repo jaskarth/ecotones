@@ -67,6 +67,15 @@ public class FeatureConfigHolder {
                     .addState(Blocks.GRASS.getDefaultState(), 4)
                     .addState(Blocks.TALL_GRASS.getDefaultState(), 1), new DoubleOrNormalPlacer()).tries(32).build();
 
+    public static RandomPatchFeatureConfig TAIGA_GRASS_CONFIG =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.SHORT_GRASS.getDefaultState(), 1)
+                    .addState(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1)
+                    .addState(Blocks.GRASS.getDefaultState(), 4)
+                    .addState(Blocks.FERN.getDefaultState(), 4)
+                    .addState(Blocks.LARGE_FERN.getDefaultState(), 1)
+                    .addState(Blocks.TALL_GRASS.getDefaultState(), 1), new DoubleOrNormalPlacer()).tries(32).build();
+
     public static RandomPatchFeatureConfig TALL_GRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
                     .addState(EcotonesBlocks.SHORT_GRASS.getDefaultState(), 1)

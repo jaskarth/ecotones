@@ -40,7 +40,7 @@ public class EcotonesBiomeLayers {
         //scale up the land to be bigger
         layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 2, contextProvider);
         //add beaches
-        layerFactory = ShorelineLayer.INSTANCE.create(contextProvider.apply(54L), layerFactory);
+        layerFactory = ShorelineLayer.INSTANCE.create(contextProvider.apply(54L), layerFactory, seed + 43);
         layerFactory = stack(2081L, ScaleLayer.NORMAL, layerFactory, 3, contextProvider);
 
         //Add our biomes

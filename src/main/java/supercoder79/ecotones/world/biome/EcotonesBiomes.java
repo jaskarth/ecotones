@@ -6,6 +6,7 @@ import supercoder79.ecotones.world.biome.base.SwampBiomes;
 import supercoder79.ecotones.world.biome.base.WarmBiomes;
 import supercoder79.ecotones.world.biome.special.*;
 import supercoder79.ecotones.world.biome.technical.BeachBiome;
+import supercoder79.ecotones.world.biome.technical.GravelBeachBiome;
 import supercoder79.ecotones.world.biome.technical.RiverBiome;
 
 public class EcotonesBiomes {
@@ -17,6 +18,7 @@ public class EcotonesBiomes {
 
         // technical biomes
         BeachBiome.init();
+        GravelBeachBiome.init();
         RiverBiome.init();
 
         // volcanic biomes
@@ -54,6 +56,7 @@ public class EcotonesBiomes {
         SpruceMarshBiome.init();
         MangroveSwampBiome.init();
         SparseForestBiome.init();
+        ShieldTaigaBiome.init();
 
         // Rose Field biome
         RoseFieldBiome.init();
