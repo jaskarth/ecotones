@@ -36,7 +36,7 @@ public class VolcanicBiome extends EcotonesBiome {
     }
 
     protected VolcanicBiome() {
-        super((new Biome.Settings())
+        super(new Biome.Settings()
                 .configureSurfaceBuilder(EcotonesSurfaces.VOLCANIC_BUILDER, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Biome.Precipitation.RAIN)
                 .category(Biome.Category.PLAINS)

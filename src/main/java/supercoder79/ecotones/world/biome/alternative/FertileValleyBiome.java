@@ -113,6 +113,10 @@ public class FertileValleyBiome extends EcotonesBiome {
                 EcotonesFeatures.BEEHIVES.configure(FeatureConfig.DEFAULT)
                         .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(16))));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.SUGARCANE.configure(FeatureConfig.DEFAULT)
+                        .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.33f, 1))));
+
         DefaultBiomeFeatures.addForestFlowers(this);
 
         BiomeUtil.addDefaultFeatures(this);

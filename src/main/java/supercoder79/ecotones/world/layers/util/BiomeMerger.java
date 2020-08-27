@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.layers.util;
 
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.layer.type.MergingLayer;
 import net.minecraft.world.biome.layer.util.IdentityCoordinateTransformer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
@@ -12,7 +13,6 @@ import supercoder79.ecotones.world.biome.technical.BeachBiome;
 public enum BiomeMerger implements MergingLayer, IdentityCoordinateTransformer {
     INSTANCE;
 
-    private static final int BEACH = Registry.BIOME.getRawId(BeachBiome.INSTANCE);
     private static final int PITS = Registry.BIOME.getRawId(ThePitsBiome.INSTANCE);
     private static final int PITS_EDGE = Registry.BIOME.getRawId(ThePitsBiome.EDGE);
 
@@ -24,7 +24,7 @@ public enum BiomeMerger implements MergingLayer, IdentityCoordinateTransformer {
             return biomeSample;
         }
 
-        if (landSample == BEACH) {
+        if (Registry.BIOME.get(landSample).getCategory() == Biome.Category.BEACH) {
             if (BiomeRegistries.NO_BEACH_BIOMES.contains(biomeSample)) {
                 return biomeSample;
             }
