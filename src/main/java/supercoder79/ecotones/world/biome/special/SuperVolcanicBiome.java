@@ -20,8 +20,10 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.world.biome.BiomeUtil;
 import supercoder79.ecotones.world.biome.EcotonesBiome;
+import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
@@ -41,7 +43,7 @@ public class SuperVolcanicBiome extends EcotonesBiome {
                 .depth(0.25F)
                 .scale(0.0125F)
                 .temperature(1.6F)
-                .downfall(0.4F)
+                .downfall(0.2F)
                 .effects((new BiomeEffects.Builder())
                         .waterColor(4159204)
                         .waterFogColor(329011)
@@ -75,7 +77,12 @@ public class SuperVolcanicBiome extends EcotonesBiome {
                 .createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(2, 0, 0, 24))));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.LAVA.getDefaultState())).createDecoratedFeature(Decorator.WATER_LAKE.configure(new ChanceDecoratorConfig(1))));
+                Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.LAVA.getDefaultState()))
+                        .createDecoratedFeature(Decorator.WATER_LAKE.configure(new ChanceDecoratorConfig(1))));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.TREE.configure(FeatureConfigHolder.DEAD_LARGE_OAK)
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.2))));
 
         this.addSpawn(SpawnGroup.AMBIENT, new SpawnEntry(EntityType.BAT, 10, 8, 8));
         this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.SPIDER, 100, 4, 4));
