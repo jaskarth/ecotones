@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.features.config;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
@@ -143,7 +144,8 @@ public class FeatureConfigHolder {
                     new SimpleBlockPlacer())
                     .spreadX(15)
                     .spreadZ(15)
-                    .tries(12).build();
+                    .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)
+                    ).tries(12).build();
 
     public static RandomPatchFeatureConfig LARGE_CACTUS_PATCH =
             new RandomPatchFeatureConfig.Builder(

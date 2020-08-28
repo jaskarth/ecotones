@@ -57,6 +57,7 @@ public class EcotonesBiomes {
         MangroveSwampBiome.init();
         SparseForestBiome.init();
         ShieldTaigaBiome.init();
+        DarkOakThicketBiome.init();
 
         // Rose Field biome
         RoseFieldBiome.init();

@@ -39,14 +39,12 @@
 * Balloon-y tree with edges hanging off (this is very hard to describe in text)
 * Add all biomes to lang file
 * Take another look at well carvers
-* Add roofed forest alternative
 * Variants for the newly added biomes
 * Fallen logs for every biome
 * Add edge biomes to everything
 * Burned village for dead spruce forests
 * Fix: Water patches in flooded savannas spawn with air on sides
 * Improve the look of a few biomes (remove shrubs, more unique features, etc.)
-* Sugarcane feature in fertile valley
 * Better mod compat, deferred register system
 
 # Improved terrain
@@ -69,3 +67,4 @@
 * Smaller biome sizes
 * Smoother worldgen
 * Increase biome smoothing radius
+* Rename Dry Forest
