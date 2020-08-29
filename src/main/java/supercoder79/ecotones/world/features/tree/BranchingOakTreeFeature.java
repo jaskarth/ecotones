@@ -55,33 +55,15 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
 
         branch(world, pos, random, (float) (random.nextDouble() * 2 * Math.PI), (float) trait.getPitch(random), maxHeight, 0, leafPlacementNodes, trait, config);
 
-        growLeaves(world, random, leafPlacementNodes, config);
+        growLeaves(world, random, leafPlacementNodes, trait, config);
 
         return false;
     }
 
-    private void growLeaves(WorldAccess world, Random random, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+    private void growLeaves(WorldAccess world, Random random, List<BlockPos> leafPlacementNodes, OakTrait trait, TreeGenerationConfig config) {
         List<BlockPos> leaves = new ArrayList<>();
         for (BlockPos node : leafPlacementNodes) {
-            generateSmallLeafLayer(world, node.up(2), leaves, config);
-            generateSmallLeafLayer(world, node.down(2), leaves, config);
-
-            for (int x = -2; x <= 2; x++) {
-                for (int z = -2; z <= 2; z++) {
-                    for (int y = -1; y <= 1; y++) {
-                        //skip the edges
-                        if (Math.abs(x) == 2 && Math.abs(z) == 2) {
-                            continue;
-                        }
-                        //test and set
-                        BlockPos local = node.add(x, y, z);
-                        if (world.getBlockState(local).isAir()) {
-                            world.setBlockState(local, config.leafState, 0);
-                            leaves.add(local);
-                        }
-                    }
-                }
-            }
+            trait.generateLeaves(world, node, random, leaves, config);
         }
 
         if (config.generateVines) {
@@ -168,20 +150,6 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                 if (!didBranch) {
                     leafPlacementNodes.add(local);
                 }
-            }
-        }
-    }
-
-    private void generateSmallLeafLayer(WorldAccess world, BlockPos pos, List<BlockPos> leaves,TreeGenerationConfig config) {
-        if (world.getBlockState(pos).isAir()) {
-            leaves.add(pos);
-            world.setBlockState(pos, config.leafState, 0);
-        }
-        for (Direction direction : Direction.Type.HORIZONTAL) {
-            BlockPos local = pos.offset(direction);
-            if (world.getBlockState(local).isAir()) {
-                world.setBlockState(local, config.leafState, 0);
-                leaves.add(local);
             }
         }
     }

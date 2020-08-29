@@ -335,7 +335,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         int aX = random.nextInt(5) - 2;
         int aZ = random.nextInt(5) - 2;
 
-        random.setPosSeed((chunkX + aX) >> 10, (chunkZ + aZ) >> 10);
+        random.setPosSeed((chunkX + aX) >> 7, (chunkZ + aZ) >> 7);
 
         return random.nextLong();
     }

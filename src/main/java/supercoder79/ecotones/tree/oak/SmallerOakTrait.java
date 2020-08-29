@@ -8,12 +8,7 @@ import java.util.Random;
 public class SmallerOakTrait implements OakTrait {
     @Override
     public boolean generateThickTrunk() {
-        return true;
-    }
-
-    @Override
-    public int scaleHeight(int originalHeight) {
-        return originalHeight;
+        return false;
     }
 
     @Override

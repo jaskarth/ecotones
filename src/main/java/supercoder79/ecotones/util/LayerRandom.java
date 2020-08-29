@@ -3,7 +3,7 @@ package supercoder79.ecotones.util;
 import java.util.Random;
 
 public class LayerRandom extends Random {
-    private long worldSeed;
+    private final long worldSeed;
 
     public LayerRandom(long worldSeed) {
         this.worldSeed = worldSeed;

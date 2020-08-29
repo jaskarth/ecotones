@@ -16,11 +16,6 @@ public class ThinOakTrait implements OakTrait {
     }
 
     @Override
-    public double getPitch(Random random) {
-        return 0;
-    }
-
-    @Override
     public double branchChance() {
         return 0.95;
     }

@@ -104,10 +104,6 @@ public class DarkOakThicketBiome extends EcotonesBiome {
                         .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_OAK.decorationData)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.RARER_DEAD_BIRCH)
-                        .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARER_DEAD_BIRCH.decorationData)));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BRANCHING_DARK_OAK.configure(TreeType.STANDARD_DARK_OAK)
                         .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.STANDARD_DARK_OAK.decorationData)));
 

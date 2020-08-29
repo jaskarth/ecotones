@@ -5,15 +5,6 @@ import supercoder79.ecotones.tree.OakTrait;
 import java.util.Random;
 
 public class WarpedOakTrait implements OakTrait {
-    @Override
-    public boolean generateThickTrunk() {
-        return true;
-    }
-
-    @Override
-    public int scaleHeight(int originalHeight) {
-        return originalHeight;
-    }
 
     @Override
     public double getPitch(Random random) {
