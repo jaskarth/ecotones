@@ -11,7 +11,6 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.decorator.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.decorator.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.api.TreeGenerationConfig;
@@ -20,6 +19,7 @@ import supercoder79.ecotones.tree.Traits;
 import supercoder79.ecotones.tree.oak.DefaultOakTrait;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeUtil;
+import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -85,7 +85,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
         }
 
         if (config.generateVines) {
-            new LeaveVineTreeDecorator().generate(world, random, ImmutableList.of(), leaves, new HashSet<>(), BlockBox.empty());
+            new LeafVineTreeDecorator(3, 4, 2).generate(world, random, ImmutableList.of(), leaves, new HashSet<>(), BlockBox.empty());
             new TrunkVineTreeDecorator().generate(world, random, ImmutableList.of(), leaves, new HashSet<>(), BlockBox.empty());
         }
     }

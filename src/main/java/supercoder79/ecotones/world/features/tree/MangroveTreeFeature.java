@@ -14,11 +14,11 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.decorator.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeUtil;
+import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Random;
 
 public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
-    private static final LeaveVineTreeDecorator DECORATOR = new LeaveVineTreeDecorator();
+    private static final LeafVineTreeDecorator DECORATOR = new LeafVineTreeDecorator(3, 5, 3);
     public MangroveTreeFeature(Codec<TreeGenerationConfig> codec) {
         super(codec);
     }
