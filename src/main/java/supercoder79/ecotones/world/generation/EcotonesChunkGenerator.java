@@ -25,6 +25,7 @@ import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.StructureFeature;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
+import supercoder79.ecotones.util.LayerRandom;
 import supercoder79.ecotones.util.noise.OctaveNoiseSampler;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
 import supercoder79.ecotones.world.biome.EcotonesBiome;
@@ -324,5 +325,18 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
     public double getSoilQualityAt(double x, double z) {
         return 1 - Math.abs(soilDrainageNoise.sample(x, z));
+    }
+
+    // Tree trait data
+
+    public long getTraits(int chunkX, int chunkZ) {
+        LayerRandom random = new LayerRandom(this.seed);
+        random.setPosSeed(chunkX, chunkZ);
+        int aX = random.nextInt(5) - 2;
+        int aZ = random.nextInt(5) - 2;
+
+        random.setPosSeed((chunkX + aX) >> 10, (chunkZ + aZ) >> 10);
+
+        return random.nextLong();
     }
 }

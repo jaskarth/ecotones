@@ -15,6 +15,9 @@ import net.minecraft.world.gen.decorator.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.decorator.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.api.TreeGenerationConfig;
+import supercoder79.ecotones.tree.OakTrait;
+import supercoder79.ecotones.tree.Traits;
+import supercoder79.ecotones.tree.oak.DefaultOakTrait;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeUtil;
 
@@ -37,15 +40,20 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
 
         // initialize data
         int maxHeight = 9;
+        OakTrait trait = DefaultOakTrait.INSTANCE;
         if (pos instanceof DataPos) {
             DataPos data = (DataPos)pos;
             maxHeight = data.maxHeight;
+            trait = Traits.get(Traits.OAK, data.treeTraits);
             if (data.isLikelyInvalid) return false;
         }
 
+        // Scale height
+        maxHeight = trait.scaleHeight(maxHeight);
+
         List<BlockPos> leafPlacementNodes = new ArrayList<>();
 
-        branch(world, pos, random, (float) (random.nextDouble() * 2 * Math.PI), 0, maxHeight, 0, leafPlacementNodes, config);
+        branch(world, pos, random, (float) (random.nextDouble() * 2 * Math.PI), (float) trait.getPitch(random), maxHeight, 0, leafPlacementNodes, trait, config);
 
         growLeaves(world, random, leafPlacementNodes, config);
 
@@ -82,9 +90,10 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
         }
     }
 
-    private void branch(WorldAccess world, BlockPos startPos, Random random, float yaw, float pitch, int maxHeight, int depth, List<BlockPos> leafPlacementNodes, TreeGenerationConfig config) {
+    private void branch(WorldAccess world, BlockPos startPos, Random random, float yaw, float pitch, int maxHeight, int depth, List<BlockPos> leafPlacementNodes, OakTrait trait, TreeGenerationConfig config) {
         int height = maxHeight / config.branchingFactor;
 
+        // add some extra length to the last branch
         if (depth == (maxHeight / config.branchingFactor) - 1) {
             height += random.nextInt(4);
         }
@@ -103,7 +112,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
             }
 
             //place thick trunk if the tree is big enough
-            if (((maxHeight / config.branchingFactor) - depth) > config.thickTrunkDepth) {
+            if (((maxHeight / config.branchingFactor) - depth) > config.thickTrunkDepth && trait.generateThickTrunk()) {
                 world.setBlockState(local.up(), config.woodState, 0);
                 for (Direction direction : Direction.Type.HORIZONTAL) {
                     BlockPos local2 = local.offset(direction);
@@ -128,6 +137,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                         break;
                     }
                 }
+
                 //break if non opaque blocks were found
                 if (shouldNotBranch) {
                     break;
@@ -142,8 +152,22 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                 double pitch1 = random.nextDouble() - 0.5;
                 double pitch2 = -pitch1;
 
-                branch(world, local, random, (float) (yaw + (yaw1 * maxYaw)), (float) (pitch + (pitch1 * maxPitch)), maxHeight, depth + 1, leafPlacementNodes, config);
-                branch(world, local, random, (float) (yaw + (yaw2 * maxYaw)), (float) (pitch + (pitch2 * maxPitch)), maxHeight, depth + 1, leafPlacementNodes, config);
+                // Branch based on genetic traits
+                boolean didBranch = false;
+                if (random.nextDouble() < trait.branchChance()) {
+                    didBranch = true;
+                    branch(world, local, random, (float) (yaw + (yaw1 * maxYaw)), (float) (pitch + (pitch1 * maxPitch)), maxHeight, depth + 1, leafPlacementNodes, trait, config);
+                }
+
+                if (random.nextDouble() < trait.branchChance()) {
+                    didBranch = true;
+                    branch(world, local, random, (float) (yaw + (yaw2 * maxYaw)), (float) (pitch + (pitch2 * maxPitch)), maxHeight, depth + 1, leafPlacementNodes, trait, config);
+                }
+
+                // If no branches, then add leaves here
+                if (!didBranch) {
+                    leafPlacementNodes.add(local);
+                }
             }
         }
     }

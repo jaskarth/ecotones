@@ -2,6 +2,7 @@ package supercoder79.ecotones.world.decorator;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -23,8 +24,10 @@ public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConf
     @Override
     public Stream<BlockPos> getPositions(WorldAccess world, ChunkGenerator generator, Random random, TreeGenerationConfig.DecorationData config, BlockPos pos) {
         double soilQuality = 0.0; // default for if the chunk generator is not ours
+        long treeTraits = 0;
         if (generator instanceof EcotonesChunkGenerator) {
             soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
+            treeTraits = ((EcotonesChunkGenerator)generator).getTraits(pos.getX() >> 4, pos.getZ() >> 4);
         }
 
         //get the height from minSize to minSize + noiseCoefficient (can be more because of noise map bullshit)
@@ -83,14 +86,13 @@ public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConf
                 //give up if we have attempted too many times
                 if (attempts > 20) {
                     attempts = 0;
-                    positions.add(new DataPos(x, y, z).setMaxHeight(maxFinal).setLikelyInvalid(true));
+                    positions.add(new DataPos(x, y, z).setTreeTraits(treeTraits).setMaxHeight(maxFinal).setLikelyInvalid(true));
                 } else {
                     continue;
                 }
             }
-            attempts = 0;
 
-            positions.add(new DataPos(x, y, z).setMaxHeight(maxFinal + random.nextInt(3)));
+            positions.add(new DataPos(x, y, z).setTreeTraits(treeTraits).setMaxHeight(maxFinal + random.nextInt(3)));
         }
 
         return positions.stream();
