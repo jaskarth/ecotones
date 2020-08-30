@@ -29,7 +29,7 @@ public class GetDataAtCommand {
             source.sendFeedback(new LiteralText("Soil Drainage: " + chunkGenerator.getSoilDrainageNoise().sample(source.getPosition().x, source.getPosition().z)), false);
             source.sendFeedback(new LiteralText("Soil Rockiness: " + chunkGenerator.getSoilRockinessNoise().sample(source.getPosition().x, source.getPosition().z)), false);
             source.sendFeedback(new LiteralText("Soil Quality: " + chunkGenerator.getSoilQualityAt(source.getPosition().x, source.getPosition().z)), false);
-            source.sendFeedback(new LiteralText("Oak Tree Trait: " + Traits.get(Traits.OAK, chunkGenerator.getTraits(((int) source.getPosition().x) >> 4, ((int) source.getPosition().z) >> 4)).name()), false);
+            source.sendFeedback(new LiteralText("Oak Tree Trait: " + Traits.get(Traits.OAK, chunkGenerator.getTraits(((int) source.getPosition().x) >> 4, ((int) source.getPosition().z) >> 4, 79)).name()), false);
         } else {
             source.sendFeedback(new LiteralText("This only works on ecotones worlds."), false);
         }

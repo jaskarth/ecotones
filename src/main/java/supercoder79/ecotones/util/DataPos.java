@@ -8,7 +8,6 @@ public class DataPos extends BlockPos {
     public int maxHeight;
     public boolean isLikelyInvalid;
     public DrainageType drainageType;
-    public long treeTraits = 0;
 
     public DataPos(int x, int y, int z) {
         super(x, y, z);
@@ -33,11 +32,6 @@ public class DataPos extends BlockPos {
 
     public DataPos setLikelyInvalid(boolean isLikelyInvalid) {
         this.isLikelyInvalid = isLikelyInvalid;
-        return this;
-    }
-
-    public DataPos setTreeTraits(long treeTraits) {
-        this.treeTraits = treeTraits;
         return this;
     }
 }

@@ -58,11 +58,6 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
     private final OctavePerlinNoiseSampler hillinessNoise;
     private final OctaveNoiseSampler<OpenSimplexNoise> scaleNoise;
-
-    private final PhantomSpawner phantomSpawner = new PhantomSpawner();
-    private final PillagerSpawner pillagerSpawner = new PillagerSpawner();
-    private final CatSpawner catSpawner = new CatSpawner();
-    private final ZombieSiegeManager zombieSiegeManager = new ZombieSiegeManager();
     private final long seed;
 
     public EcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
@@ -241,13 +236,6 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         return super.getEntitySpawnList(biome, accessor, group, pos);
     }
 
-    public void spawnEntities(ServerWorld world, boolean spawnMonsters, boolean spawnAnimals) {
-        this.phantomSpawner.spawn(world, spawnMonsters, spawnAnimals);
-        this.pillagerSpawner.spawn(world, spawnMonsters, spawnAnimals);
-        this.catSpawner.spawn(world, spawnMonsters, spawnAnimals);
-        this.zombieSiegeManager.spawn(world, spawnMonsters, spawnAnimals);
-    }
-
     @Override
     protected Codec<? extends ChunkGenerator> method_28506() {
         return CODEC;
@@ -329,13 +317,13 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
     // Tree trait data
 
-    public long getTraits(int chunkX, int chunkZ) {
+    public long getTraits(int chunkX, int chunkZ, int salt) {
         LayerRandom random = new LayerRandom(this.seed);
         random.setPosSeed(chunkX, chunkZ);
         int aX = random.nextInt(5) - 2;
         int aZ = random.nextInt(5) - 2;
 
-        random.setPosSeed((chunkX + aX) >> 7, (chunkZ + aZ) >> 7);
+        random.setPosSeed((chunkX + aX) >> 7, (chunkZ + aZ) >> 7, salt);
 
         return random.nextLong();
     }

@@ -18,11 +18,11 @@ public class LayerRandom extends Random {
     }
 
     //Thanks, KaptainWutax :D
-    public void setPosSeed(int x, int z, int index) {
+    public void setPosSeed(int x, int z, int salt) {
         this.setSeed(worldSeed);
         long a = this.nextLong();
         long b = this.nextLong();
         long c = this.nextLong();
-        this.setSeed((a * x * x * x + b * z * z + (index + 1) * c) ^ worldSeed);
+        this.setSeed((a * x * x * x + b * z * z + (salt + 1) * c) ^ worldSeed);
     }
 }

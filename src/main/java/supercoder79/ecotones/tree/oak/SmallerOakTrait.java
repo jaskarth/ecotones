@@ -18,7 +18,7 @@ public class SmallerOakTrait implements OakTrait {
 
     @Override
     public double branchChance() {
-        return 0.65;
+        return 0.695;
     }
 
     @Override
