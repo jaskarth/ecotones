@@ -104,6 +104,10 @@ public class ShieldTaigaBiome extends EcotonesBiome {
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
                         .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.SMALL_SPRUCE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
+                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.3))));
+
         DefaultBiomeFeatures.addLandCarvers(this);
         DefaultBiomeFeatures.method_28440(this);
         DefaultBiomeFeatures.addDungeons(this);

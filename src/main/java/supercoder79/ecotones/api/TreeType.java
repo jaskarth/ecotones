@@ -3,14 +3,27 @@ package supercoder79.ecotones.api;
 import net.minecraft.block.Blocks;
 
 public class TreeType {
+    // Salts
+
+    // All these numbers are practically just keyboard mashes :P
+    // 79 is the default unknown value because wow i'm really creative
+
+    // Complex trees
+    public static final int OAK_SALT = 2428;
+
+    // Simple trees
+    public static final int SMALL_SPRUCE_SALT = 42232;
+
+    // Trees
+
     // Oak trees
-    public static final TreeGenerationConfig LARGE_OAK = new TreeGenerationConfig(1, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 4, 4, 6, 18, 0.5, 0.4, false, 79);
-    public static final TreeGenerationConfig MEDIUM_OAK = new TreeGenerationConfig(0.7, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 4, 4, 12, 12, 0.45, 0.45, false, 79);
-    public static final TreeGenerationConfig RARE_VARYING_OAK = new TreeGenerationConfig(0.2, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 3, 6, 4, 10, 0.35, 0.25, false, 79);
-    public static final TreeGenerationConfig RARE_LARGE_OAK = new TreeGenerationConfig(0.06, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 3, 5, 8, 4, 0.4, 0.3, false, 79);
-    public static final TreeGenerationConfig RARE_LARGE_CLUSTERED_OAK = new TreeGenerationConfig(0.04, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 4, 5, 12, 7, 0.3, 0.3, false, 79);
-    public static final TreeGenerationConfig MEDIUM_RARE_OAK = new TreeGenerationConfig(0.5, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 4, 5, 14, 7, 0.3, 0.3, false, 79);
-    public static final TreeGenerationConfig MEDIUM_SMALL_RARE_OAK = new TreeGenerationConfig(0.55, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 4, 5, 8, 5, 0.4, 0.4, false, 79);
+    public static final TreeGenerationConfig LARGE_OAK = new TreeGenerationConfig(1, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 4, 4, 6, 18, 0.5, 0.4, false, OAK_SALT);
+    public static final TreeGenerationConfig MEDIUM_OAK = new TreeGenerationConfig(0.7, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 4, 4, 12, 12, 0.45, 0.45, false, OAK_SALT);
+    public static final TreeGenerationConfig RARE_VARYING_OAK = new TreeGenerationConfig(0.2, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 3, 6, 4, 10, 0.35, 0.25, false, OAK_SALT);
+    public static final TreeGenerationConfig RARE_LARGE_OAK = new TreeGenerationConfig(0.06, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 3, 5, 8, 4, 0.4, 0.3, false, OAK_SALT);
+    public static final TreeGenerationConfig RARE_LARGE_CLUSTERED_OAK = new TreeGenerationConfig(0.04, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 4, 5, 12, 7, 0.3, 0.3, false, OAK_SALT);
+    public static final TreeGenerationConfig MEDIUM_RARE_OAK = new TreeGenerationConfig(0.5, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 4, 5, 14, 7, 0.3, 0.3, false, OAK_SALT);
+    public static final TreeGenerationConfig MEDIUM_SMALL_RARE_OAK = new TreeGenerationConfig(0.55, Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 4, 5, 8, 5, 0.4, 0.4, false, OAK_SALT);
 
     // Birch trees
     public static final TreeGenerationConfig STANDARD_BIRCH = new TreeGenerationConfig(0.7, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), 5, -1, 8, 20, 0.25, 0.25, false, 79);

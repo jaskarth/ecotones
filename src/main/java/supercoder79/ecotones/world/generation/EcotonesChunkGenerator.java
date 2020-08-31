@@ -66,8 +66,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         this.hillinessNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-15, 0));
 
         this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 256, 0.2, -0.2);
-        soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 3, 2048, 1.3, 1.3);
-        soilRockinessNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1024, 2, -2);
+        this.soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 3, 2048, 1.3, 1.3);
+        this.soilRockinessNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1024, 2, -2);
     }
 
     @Override

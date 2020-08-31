@@ -61,6 +61,4 @@ public interface OakTrait extends Trait {
             }
         }
     }
-
-    String name();
 }

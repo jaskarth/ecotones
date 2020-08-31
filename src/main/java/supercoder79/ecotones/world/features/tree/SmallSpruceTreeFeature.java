@@ -11,7 +11,12 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.tree.SmallSpruceTrait;
+import supercoder79.ecotones.tree.Traits;
+import supercoder79.ecotones.tree.smallspruce.DefaultSmallSpruceTrait;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
 import java.util.ArrayList;
@@ -29,9 +34,16 @@ public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
     public boolean generate(ServerWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return false;
 
-        int heightAddition = random.nextInt(4);
+        // Trait data
+        SmallSpruceTrait trait = DefaultSmallSpruceTrait.INSTANCE;
+        if (generator instanceof EcotonesChunkGenerator) {
+            long traits = ((EcotonesChunkGenerator) generator).getTraits(pos.getX() >> 4, pos.getZ() >> 4, TreeType.SMALL_SPRUCE_SALT);
+            trait = Traits.get(Traits.SMALL_SPRUCE, traits);
+        }
 
-        double maxRadius = 1.8 + ((random.nextDouble() - 0.5) * 0.2);
+        int heightAddition = trait.extraHeight(random);
+
+        double maxRadius = trait.maxRadius(random);
 
         BlockPos.Mutable mutable = pos.mutableCopy();
         for (int y = 0; y < 8 + heightAddition; y++) {
@@ -44,7 +56,7 @@ public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
 
         List<BlockPos> leaves = new ArrayList<>();
         for (int y = 0; y < 9; y++) {
-            Shapes.circle(mutable.mutableCopy(), maxRadius * radius(y / 10.f), leafPos -> {
+            Shapes.circle(mutable.mutableCopy(), maxRadius * trait.model(y / 10.f), leafPos -> {
                 if (AbstractTreeFeature.isAirOrLeaves(world, leafPos)) {
                     world.setBlockState(leafPos, config.leafState, 0);
                     leaves.add(leafPos.toImmutable());
@@ -57,9 +69,5 @@ public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
         PINECONES.generate(world, random, ImmutableList.of(), leaves, ImmutableSet.of(), new BlockBox());
 
         return false;
-    }
-
-    private double radius(double x) {
-        return -0.15 * (x * x) - x + 1.3;
     }
 }

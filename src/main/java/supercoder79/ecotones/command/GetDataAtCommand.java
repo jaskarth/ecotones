@@ -7,6 +7,7 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import supercoder79.ecotones.api.TreeType;
 import supercoder79.ecotones.tree.Traits;
 import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
 
@@ -26,10 +27,16 @@ public class GetDataAtCommand {
         ChunkGenerator generator = source.getWorld().getChunkManager().getChunkGenerator();
         if (generator instanceof EcotonesChunkGenerator) {
             EcotonesChunkGenerator chunkGenerator = (EcotonesChunkGenerator) generator;
-            source.sendFeedback(new LiteralText("Soil Drainage: " + chunkGenerator.getSoilDrainageNoise().sample(source.getPosition().x, source.getPosition().z)), false);
-            source.sendFeedback(new LiteralText("Soil Rockiness: " + chunkGenerator.getSoilRockinessNoise().sample(source.getPosition().x, source.getPosition().z)), false);
-            source.sendFeedback(new LiteralText("Soil Quality: " + chunkGenerator.getSoilQualityAt(source.getPosition().x, source.getPosition().z)), false);
-            source.sendFeedback(new LiteralText("Oak Tree Trait: " + Traits.get(Traits.OAK, chunkGenerator.getTraits(((int) source.getPosition().x) >> 4, ((int) source.getPosition().z) >> 4, 79)).name()), false);
+            double x = source.getPosition().x;
+            double z = source.getPosition().z;
+            int chunkX = (int) x >> 4;
+            int chunkZ = (int) z >> 4;
+
+            source.sendFeedback(new LiteralText("Soil Drainage: " + chunkGenerator.getSoilDrainageNoise().sample(x, z)), false);
+            source.sendFeedback(new LiteralText("Soil Rockiness: " + chunkGenerator.getSoilRockinessNoise().sample(x, z)), false);
+            source.sendFeedback(new LiteralText("Soil Quality: " + chunkGenerator.getSoilQualityAt(x, z)), false);
+            source.sendFeedback(new LiteralText("Oak Tree Trait: " + Traits.get(Traits.OAK, chunkGenerator.getTraits(chunkX, chunkZ, TreeType.OAK_SALT)).name()), false);
+            source.sendFeedback(new LiteralText("Small Spruce Tree Trait: " + Traits.get(Traits.SMALL_SPRUCE, chunkGenerator.getTraits(chunkX, chunkZ, TreeType.SMALL_SPRUCE_SALT)).name()), false);
         } else {
             source.sendFeedback(new LiteralText("This only works on ecotones worlds."), false);
         }

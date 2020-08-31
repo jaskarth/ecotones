@@ -237,7 +237,7 @@ public class WarmBiomes {
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SMALL_SPRUCE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
-                                .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(2.25)))));
+                                .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(2.5)))));
 
         SPRUCE_FOREST_BIOME = BiomeUtil.register(new Identifier("ecotones", "spruce_forest"), template.builder()
                 .temperature(0.8F)
