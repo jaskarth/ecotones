@@ -71,7 +71,7 @@ public class ShieldTaigaBiome extends EcotonesBiome {
                         .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(2.4))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.TREE.configure(PinePeaksBiome.SMALL_PINE_CONFIG)
+                Feature.TREE.configure(FeatureConfigHolder.SMALL_PINE_CONFIG)
                         .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(1.2))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

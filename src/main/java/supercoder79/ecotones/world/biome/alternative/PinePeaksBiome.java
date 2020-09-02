@@ -24,20 +24,12 @@ import supercoder79.ecotones.world.biome.EcotonesBiome;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
+import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.features.foliage.SmallPineFoliagePlacer;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
 public class PinePeaksBiome extends EcotonesBiome {
-    public static TreeFeatureConfig SMALL_PINE_CONFIG = new TreeFeatureConfig.Builder(
-            new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
-            new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
-            new SmallPineFoliagePlacer(1, 0, 1, 0, 4, 2),
-            new StraightTrunkPlacer(9, 6, 0),
-            new TwoLayersFeatureSize(2, 0, 2))
-            .ignoreVines()
-            .build().setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(2)));
-
     public static PinePeaksBiome INSTANCE;
 
     public static void init() {
@@ -74,7 +66,7 @@ public class PinePeaksBiome extends EcotonesBiome {
                         .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(4))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.TREE.configure(SMALL_PINE_CONFIG)
+                Feature.TREE.configure(FeatureConfigHolder.SMALL_PINE_CONFIG)
                         .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(10, true))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

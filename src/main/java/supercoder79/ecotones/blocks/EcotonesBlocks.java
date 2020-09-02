@@ -46,6 +46,8 @@ public class EcotonesBlocks {
     public static Item WIDE_FERN_ITEM;
     public static Block SMALL_LILAC;
     public static Item  SMALL_LILAC_ITEM;
+    public static Block LICHEN;
+    public static Item  LICHEN_ITEM;
     public static Block CYAN_ROSE;
     public static Item  CYAN_ROSE_ITEM;
 
@@ -98,6 +100,9 @@ public class EcotonesBlocks {
 
         SMALL_LILAC = Registry.register(Registry.BLOCK, new Identifier("ecotones", "small_lilac"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         SMALL_LILAC_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "small_lilac"), new BlockItem(SMALL_LILAC, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        LICHEN = Registry.register(Registry.BLOCK, new Identifier("ecotones", "lichen"), new LichenBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().hardness(0.2F).sounds(BlockSoundGroup.VINE).build()));
+        LICHEN_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "lichen"), new BlockItem(LICHEN, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         CYAN_ROSE = Registry.register(Registry.BLOCK, new Identifier("ecotones", "cyan_rose"), new CyanRoseBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         CYAN_ROSE_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "cyan_rose"), new BlockItem(CYAN_ROSE, new Item.Settings().group(ItemGroup.DECORATIONS)));

@@ -125,7 +125,7 @@ public class SpruceMarshBiome extends EcotonesBiome {
 
         //todo refactor
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.TREE.configure(PinePeaksBiome.SMALL_PINE_CONFIG)
+                Feature.TREE.configure(FeatureConfigHolder.SMALL_PINE_CONFIG)
                         .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.45))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(FeatureConfigHolder.WIDE_FERNS)

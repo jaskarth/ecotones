@@ -17,6 +17,7 @@ import supercoder79.ecotones.tree.Traits;
 import supercoder79.ecotones.tree.smallspruce.DefaultSmallSpruceTrait;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.treedecorator.LichenTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.Random;
 
 public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
     private static final PineconeTreeDecorator PINECONES = new PineconeTreeDecorator(2);
+    private static final LichenTreeDecorator LICHEN = new LichenTreeDecorator(3);
 
     public SmallSpruceTreeFeature() {
         super(SimpleTreeFeatureConfig.CODEC);
@@ -46,8 +48,11 @@ public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
         double maxRadius = trait.maxRadius(random);
 
         BlockPos.Mutable mutable = pos.mutableCopy();
+
+        List<BlockPos> logs = new ArrayList<>();
         for (int y = 0; y < 8 + heightAddition; y++) {
             world.setBlockState(mutable, config.woodState, 0);
+            logs.add(mutable.toImmutable());
             mutable.move(Direction.UP);
         }
 
@@ -66,7 +71,10 @@ public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
         }
 
         // Generate pinecones
-        PINECONES.generate(world, random, ImmutableList.of(), leaves, ImmutableSet.of(), new BlockBox());
+        PINECONES.generate(world, random, logs, leaves, ImmutableSet.of(), new BlockBox());
+
+        // Generate lichen
+        LICHEN.generate(world, random, logs, leaves, ImmutableSet.of(), new BlockBox());
 
         return false;
     }

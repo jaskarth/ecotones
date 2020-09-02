@@ -45,6 +45,7 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.WIDE_FERN,
                 EcotonesBlocks.SMALL_LILAC,
                 EcotonesBlocks.CYAN_ROSE,
+                EcotonesBlocks.LICHEN,
                 EcotonesBlocks.PINECONE);
 
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAND, SandParticle.Factory::new);
