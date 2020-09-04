@@ -37,6 +37,7 @@ public class GetDataAtCommand {
             source.sendFeedback(new LiteralText("Soil Quality: " + chunkGenerator.getSoilQualityAt(x, z)), false);
             source.sendFeedback(new LiteralText("Oak Tree Trait: " + Traits.get(Traits.OAK, chunkGenerator.getTraits(chunkX, chunkZ, TreeType.OAK_SALT)).name()), false);
             source.sendFeedback(new LiteralText("Small Spruce Tree Trait: " + Traits.get(Traits.SMALL_SPRUCE, chunkGenerator.getTraits(chunkX, chunkZ, TreeType.SMALL_SPRUCE_SALT)).name()), false);
+            source.sendFeedback(new LiteralText("Poplar Tree Trait: " + Traits.get(Traits.POPLAR, chunkGenerator.getTraits(chunkX, chunkZ, TreeType.POPLAR_SALT)).name()), false);
         } else {
             source.sendFeedback(new LiteralText("This only works on ecotones worlds."), false);
         }

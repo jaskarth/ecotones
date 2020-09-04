@@ -13,6 +13,7 @@ public class TreeType {
 
     // Simple trees
     public static final int SMALL_SPRUCE_SALT = 42232;
+    public static final int POPLAR_SALT = 7131314;
 
     // Trees
 
