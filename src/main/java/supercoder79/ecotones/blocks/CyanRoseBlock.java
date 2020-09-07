@@ -16,7 +16,7 @@ public class CyanRoseBlock extends EcotonesGrassBlock {
     }
 
     @Override
-    public void buildTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
+    public void buildTooltip(ItemStack stack, BlockView world, List<Text> tooltip, TooltipContext options) {
         tooltip.add(new TranslatableText("tooltip.amelia_rose_1").formatted(Formatting.AQUA, Formatting.ITALIC));
         tooltip.add(new TranslatableText("tooltip.amelia_rose_2").formatted(Formatting.AQUA, Formatting.ITALIC));
     }

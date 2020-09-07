@@ -148,6 +148,15 @@ public class FeatureConfigHolder {
                     .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)
                     ).tries(12).build();
 
+    public static RandomPatchFeatureConfig MOSS =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.MOSS.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(23)
+                    .spreadZ(23)
+                    .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)
+                    ).tries(16).build();
+
     public static RandomPatchFeatureConfig LARGE_CACTUS_PATCH =
             new RandomPatchFeatureConfig.Builder(
                     new SimpleBlockStateProvider(Blocks.CACTUS.getDefaultState()),

@@ -348,7 +348,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         }
 
         // Holds the rolling noise data for this chunk
-        // Instead of being noise[4 * 32 * 4] it's actually noise [2 * 5 * 33] to reuse noise data when moving onto the next column on the x axis.
+        // Instead of being noise[4 * 32 * 4] it's actually noise[2 * 5 * 33] to reuse noise data when moving onto the next column on the x axis.
         // This could probably be optimized but I'm a bit too lazy to figure out the best way to do so :P
         double[][][] noiseData = new double[2][this.noiseSizeZ + 1][this.noiseSizeY + 1];
 
@@ -422,14 +422,14 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                             double z0 = MathHelper.lerp(xLerp, x0z0, x1z0);
                             double z1 = MathHelper.lerp(xLerp, x0z1, x1z1);
 
-                            // [0, 4] -> z noise pieces
+                            // [0, 4) -> z noise pieces
                             for(int pieceZ = 0; pieceZ < this.horizontalNoiseResolution; ++pieceZ) {
                                 int realZ = chunkStartZ + noiseZ * this.horizontalNoiseResolution + pieceZ;
                                 int localZ = realZ & 15;
                                 double zLerp = (double) pieceZ / (double)this.horizontalNoiseResolution;
                                 // Get the real noise here by interpolating the last 2 noises together
                                 double rawNoise = MathHelper.lerp(zLerp, z0, z1);
-                                // Normalize the noise from [-256, 256] to [-1, 1]
+                                // Normalize the noise from (-256, 256) to [-1, 1]
                                 double density = MathHelper.clamp(rawNoise / 200.0D, -1.0D, 1.0D);
 
                                 // Iterate through structures to add density
@@ -438,10 +438,10 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                                 int structureZ;
                                 for(density = density / 2.0D - density * density * density / 24.0D; structurePieceIterator.hasNext(); density += getNoiseWeight(structureX, structureY, structureZ) * 0.8D) {
                                     StructurePiece structurePiece = structurePieceIterator.next();
-                                    BlockBox blockBox = structurePiece.getBoundingBox();
-                                    structureX = Math.max(0, Math.max(blockBox.minX - realX, realX - blockBox.maxX));
-                                    structureY = realY - (blockBox.minY + (structurePiece instanceof PoolStructurePiece ? ((PoolStructurePiece)structurePiece).getGroundLevelDelta() : 0));
-                                    structureZ = Math.max(0, Math.max(blockBox.minZ - realZ, realZ - blockBox.maxZ));
+                                    BlockBox box = structurePiece.getBoundingBox();
+                                    structureX = Math.max(0, Math.max(box.minX - realX, realX - box.maxX));
+                                    structureY = realY - (box.minY + (structurePiece instanceof PoolStructurePiece ? ((PoolStructurePiece)structurePiece).getGroundLevelDelta() : 0));
+                                    structureZ = Math.max(0, Math.max(box.minZ - realZ, realZ - box.maxZ));
                                 }
                                 structurePieceIterator.back(structurePieces.size());
 

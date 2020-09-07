@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/carpet",
+  "textures": {
+    "wool": "ecotones:block/moss",
+    "particle": "ecotones:block/moss"
+  }
+}
