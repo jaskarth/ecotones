@@ -20,6 +20,7 @@ import supercoder79.ecotones.world.biome.EcotonesBiome;
 import supercoder79.ecotones.world.biome.technical.BeachBiome;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
+import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class ThePitsBiome extends EcotonesBiome {
@@ -64,11 +65,11 @@ public class ThePitsBiome extends EcotonesBiome {
 
         if (!isEdge) {
             this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                    EcotonesFeatures.ROCK.configure(new ForestRockFeatureConfig(Blocks.STONE.getDefaultState(), 1))
+                    EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 1, false))
                             .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(3))));
 
             this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                    EcotonesFeatures.ROCK.configure(new ForestRockFeatureConfig(Blocks.STONE.getDefaultState(), 2))
+                    EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 2, false))
                             .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(5))));
         }
 

@@ -4,36 +4,35 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.collection.WeightedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.ForestRockFeatureConfig;
+import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class RockFeature extends Feature<ForestRockFeatureConfig> {
-    public RockFeature(Codec<ForestRockFeatureConfig> codec) {
+public class RockFeature extends Feature<RockFeatureConfig> {
+    public RockFeature(Codec<RockFeatureConfig> codec) {
         super(codec);
     }
 
     @Override
-    public boolean generate(ServerWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockPos pos, ForestRockFeatureConfig config) {
+    public boolean generate(ServerWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockPos pos, RockFeatureConfig config) {
         while(true) {
-            label48: {
+            restart: {
                 if (pos.getY() > 3) {
                     if (world.isAir(pos.down())) {
-                        break label48;
+                        break restart;
                     }
 
                     Block block = world.getBlockState(pos.down()).getBlock();
                     if (!isDirt(block) && !isStone(block)) {
-                        break label48;
+                        break restart;
                     }
                 }
 
@@ -57,7 +56,12 @@ public class RockFeature extends Feature<ForestRockFeatureConfig> {
                     while(iterator.hasNext()) {
                         BlockPos local = iterator.next();
                         if (local.getSquaredDistance(pos) <= (double)(radius * radius)) {
-                            postProcess(world, local, config.state, random, dirtPositions);
+                            // Post process if enabled
+                            if (config.postProcess) {
+                                postProcess(world, local, config.state, random, dirtPositions);
+                            } else {
+                                world.setBlockState(pos, config.state, 4);
+                            }
                         }
                     }
 
@@ -73,8 +77,9 @@ public class RockFeature extends Feature<ForestRockFeatureConfig> {
         }
     }
 
+    //TODO: refactor into custom post processor classes
     private static void postProcess(ServerWorldAccess world, BlockPos pos, BlockState state, Random random, List<BlockPos> dirtPositions) {
-        if (state.getBlock() == Blocks.COBBLESTONE) { // Generate new-style boulder
+        if (state.getBlock() == Blocks.COBBLESTONE) {
             BlockState placementState = state;
 
             if (random.nextInt(4) == 0) {
@@ -87,6 +92,19 @@ public class RockFeature extends Feature<ForestRockFeatureConfig> {
             }
 
             world.setBlockState(pos, placementState, 4);
+        } else if (state.getBlock() == Blocks.STONE) {
+            BlockState placementState = state;
+
+            if (random.nextInt(4) == 0) {
+                placementState = Blocks.COBBLESTONE.getDefaultState();
+            }
+
+            if (random.nextInt(3) == 0) {
+                placementState = Blocks.DIRT.getDefaultState();
+                dirtPositions.add(pos.toImmutable());
+            }
+
+            world.setBlockState(pos, placementState, 4);
         } else { // Usually stone, generate old-style
             world.setBlockState(pos, state, 4);
         }
@@ -94,7 +112,8 @@ public class RockFeature extends Feature<ForestRockFeatureConfig> {
 
     private static void convertToGrass(ServerWorldAccess world, List<BlockPos> dirtPositions) {
         for (BlockPos pos : dirtPositions) {
-            if (!world.getBlockState(pos.up()).isOpaque()) {
+            BlockState state = world.getBlockState(pos.up());
+            if (!state.isOpaque() && !(state.getBlock() == Blocks.WATER)) {
                 world.setBlockState(pos, Blocks.GRASS_BLOCK.getDefaultState(), 4);
             }
         }
