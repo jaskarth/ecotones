@@ -4,6 +4,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.ForestRockFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
@@ -31,6 +32,7 @@ public class EcotonesFeatures {
     public static BeehiveFeature BEEHIVES;
     public static MangroveTreeFeature MANGROVE_TREE;
     public static BranchingDarkOakTreeFeature BRANCHING_DARK_OAK;
+    public static RockFeature ROCK;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig.CODEC));
@@ -54,5 +56,6 @@ public class EcotonesFeatures {
         BEEHIVES = Registry.register(Registry.FEATURE, new Identifier("ecotones", "beehives"), new BeehiveFeature(DefaultFeatureConfig.CODEC));
         MANGROVE_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "mangrove_tree"), new MangroveTreeFeature(TreeGenerationConfig.CODEC));
         BRANCHING_DARK_OAK = Registry.register(Registry.FEATURE, new Identifier("ecotones", "branching_dark_oak"), new BranchingDarkOakTreeFeature(TreeGenerationConfig.CODEC));
+        ROCK = Registry.register(Registry.FEATURE, new Identifier("ecotones", "rock"), new RockFeature(ForestRockFeatureConfig.CODEC));
     }
 }

@@ -76,7 +76,7 @@ public class DrySavannaBiome extends EcotonesBiome {
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/savanna/town_centers"), 7)));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
+                EcotonesFeatures.ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
                         .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(8))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

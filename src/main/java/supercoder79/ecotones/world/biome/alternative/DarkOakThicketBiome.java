@@ -72,7 +72,7 @@ public class DarkOakThicketBiome extends EcotonesBiome {
         this.addStructureFeature(DefaultBiomeFeatures.MANSION);
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
+                EcotonesFeatures.ROCK.configure(new ForestRockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
                         .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(14))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
