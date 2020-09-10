@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.features;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -19,34 +20,41 @@ public class SugarCaneFeature extends Feature<DefaultFeatureConfig> {
 
     @Override
     public boolean generate(ServerWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockPos pos, DefaultFeatureConfig config) {
-        for (int x = -1; x < 2; x++) {
-            for (int z = -1; z < 2; z++) {
-                if (world.getBlockState(pos.add(x, -1, z)) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
+        // Check the position for a 3x3 of grass underneath to grow the sugarcane
+        for (int x = -1; x <= 1; x++) {
+            for (int z = -1; z <= 1; z++) {
+                if (world.getBlockState(pos.add(x, -1, z)) != Blocks.GRASS_BLOCK.getDefaultState()) return false;
             }
         }
 
+        // If the block 2 blocks down is transparent, it probably means we can't place water here.
+        if (!world.getBlockState(pos.down(2)).isOpaque()) return false;
+
+        // Set the base water block
         world.setBlockState(pos.down(), Blocks.WATER.getDefaultState(), 2);
-        if (random.nextInt(3) == 0) {
-            for (int i = 0; i < random.nextInt(4) + 1; i++) {
-                world.setBlockState(pos.add(-1, i, 0), Blocks.SUGAR_CANE.getDefaultState(), 2);
-            }
-        }
-        if (random.nextInt(3) == 0) {
-            for (int i = 0; i < random.nextInt(4) + 1; i++) {
-                world.setBlockState(pos.add(1, i, 0), Blocks.SUGAR_CANE.getDefaultState(), 2);
-            }
-        }
-        if (random.nextInt(3) == 0) {
-            for (int i = 0; i < random.nextInt(4) + 1; i++) {
-                world.setBlockState(pos.add(0, i, -1), Blocks.SUGAR_CANE.getDefaultState(), 2);
-            }
-        }
-        if (random.nextInt(3) == 0) {
-            for (int i = 0; i < random.nextInt(4) + 1; i++) {
-                world.setBlockState(pos.add(0, i, 1), Blocks.SUGAR_CANE.getDefaultState(), 2);
+
+        // Try to place a sugarcane column for every surrounding position
+        for (Direction direction : Direction.Type.HORIZONTAL) {
+            if (random.nextInt(3) == 0) { // Place a sugarcane column only 1/3 of the time
+                int height = getHeight(random);
+
+                BlockPos.Mutable mutable = pos.offset(direction).mutableCopy();
+
+                // Place sugarcane going up to the height
+                for (int y = 0; y < height; y++) {
+                    world.setBlockState(mutable, Blocks.SUGAR_CANE.getDefaultState(), 3);
+
+                    // Move onto the next block
+                    mutable.move(Direction.UP);
+                }
             }
         }
 
         return true;
+    }
+
+    private static int getHeight(Random random) {
+        // Get a biased distribution of sugarcane height from 1-4
+        return random.nextInt(random.nextInt(4) + 1) + 1;
     }
 }
