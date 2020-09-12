@@ -65,11 +65,11 @@ public class ThePitsBiome extends EcotonesBiome {
 
         if (!isEdge) {
             this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                    EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 1, false))
+                    Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.STONE.getDefaultState(), 1))
                             .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(3))));
 
             this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                    EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 2, false))
+                    Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.STONE.getDefaultState(), 2))
                             .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(5))));
         }
 

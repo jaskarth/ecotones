@@ -87,6 +87,10 @@ public class SwampBiomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SEAGRASS.configure(new SeagrassFeatureConfig(20, 0.3D))
                         .createDecoratedFeature(Decorator.TOP_SOLID_HEIGHTMAP.configure(DecoratorConfig.DEFAULT)))
 
+                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
+                                .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))))
+
                 .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                         EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
                                 .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(15))))

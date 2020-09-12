@@ -46,7 +46,7 @@ public class ShieldTaigaBiome extends EcotonesBiome {
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_HUMID.add(INSTANCE, 0.1);
-        Climate.WARM_MILD.add(INSTANCE, 0.2);
+        Climate.WARM_MILD.add(INSTANCE, 0.4);
     }
 
 
@@ -107,7 +107,7 @@ public class ShieldTaigaBiome extends EcotonesBiome {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
-                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))));
+                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SMALL_SPRUCE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))

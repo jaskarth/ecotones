@@ -153,7 +153,6 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
             buffer[y] = noise;
         }
-
     }
 
     @Override

@@ -39,7 +39,7 @@ public class PinePeaksBiome extends EcotonesBiome {
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 80);
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
-        Climate.WARM_HUMID.add(INSTANCE, 0.04);
+        Climate.WARM_HUMID.add(INSTANCE, 0.05);
         Climate.WARM_MILD.add(INSTANCE, 0.02);
     }
 
@@ -81,6 +81,10 @@ public class PinePeaksBiome extends EcotonesBiome {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.SWEET_BERRY_BUSH_CONFIG)
                 .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(2))));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
+                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))));
 
         DefaultBiomeFeatures.addDefaultDisks(this);
         DefaultBiomeFeatures.addLandCarvers(this);
