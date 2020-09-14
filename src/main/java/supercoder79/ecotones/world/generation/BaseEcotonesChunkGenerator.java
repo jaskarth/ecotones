@@ -1,5 +1,6 @@
 package supercoder79.ecotones.world.generation;
 
+import it.unimi.dsi.fastutil.HashCommon;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
@@ -34,6 +35,7 @@ import net.minecraft.world.gen.feature.StructureFeature;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.function.Predicate;
@@ -63,6 +65,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     private final NoiseSampler surfaceDepthNoise;
     protected final BlockState defaultBlock;
     protected final BlockState defaultFluid;
+    private final ThreadLocal<NoiseCache> noiseCache;
 
     public BaseEcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
         super(biomeSource, biomeSource, new StructuresConfig(true), seed);
@@ -78,6 +81,8 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         this.upperInterpolatedNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-15, 0));
         this.interpolationNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-7, 0));
         this.surfaceDepthNoise = new OctaveSimplexNoiseSampler(this.random, IntStream.rangeClosed(-3, 0));
+
+        this.noiseCache = ThreadLocal.withInitial(() -> new NoiseCache(128, this.noiseSizeY + 1));
     }
 
     public double sampleTerrainNoise(int x, int y, int z, double horizontalScale, double verticalScale, double horizontalStretch, double verticalStretch) {
@@ -259,7 +264,11 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         }
     }
 
-    protected abstract void sampleNoiseColumn(double[] buffer, int x, int z);
+    protected void sampleNoiseColumn(double[] buffer, int x, int z) {
+        this.noiseCache.get().get(buffer, x, z);
+    }
+
+    protected abstract void fillNoiseColumn(double[] buffer, int x, int z);
 
     public int getNoiseSizeY() {
         return this.noiseSizeY + 1;
@@ -509,5 +518,52 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         double ePow = Math.pow(2.718281828459045D, -(squaredY / 16.0D + squaredXZ / 16.0D));
         double finalizedVal = -normalizedY * MathHelper.fastInverseSqrt(squaredY / 2.0D + squaredXZ / 2.0D) / 2.0D;
         return finalizedVal * ePow;
+    }
+
+    private class NoiseCache {
+        private final long[] keys;
+        private final double[] values;
+
+        private final int mask;
+
+        private NoiseCache(int size, int noiseSize) {
+            size = MathHelper.smallestEncompassingPowerOfTwo(size);
+            this.mask = size - 1;
+
+            this.keys = new long[size];
+            Arrays.fill(this.keys, Long.MIN_VALUE);
+            this.values = new double[size * noiseSize];
+        }
+
+        public double[] get(double[] buffer, int x, int z) {
+            long key = key(x, z);
+            int idx = hash(key) & this.mask;
+
+            // if the entry here has a key that matches ours, we have a cache hit
+            if (this.keys[idx] == key) {
+                // Copy values into buffer
+                System.arraycopy(this.values, idx * buffer.length, buffer, 0, buffer.length);
+            } else {
+                // cache miss: sample and put the result into our cache entry
+
+                // Sample the noise column to store the new values
+                fillNoiseColumn(buffer, x, z);
+
+                // Create copy of the array
+                System.arraycopy(buffer, 0, this.values, idx * buffer.length, buffer.length);
+
+                this.keys[idx] = key;
+            }
+
+            return buffer;
+        }
+
+        private int hash(long key) {
+            return (int) HashCommon.mix(key);
+        }
+
+        private long key(int x, int z) {
+            return ChunkPos.toLong(x, z);
+        }
     }
 }
