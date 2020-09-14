@@ -20,21 +20,24 @@ public class SoilRockinessDecorator extends Decorator<NopeDecoratorConfig> {
 
     @Override
     public Stream<BlockPos> getPositions(WorldAccess world, ChunkGenerator generator, Random random, NopeDecoratorConfig config, BlockPos pos) {
-        int count = 0;
+        // Setup noise
         double noise = 0.5;
         if (generator instanceof EcotonesChunkGenerator) {
-            noise = ((EcotonesChunkGenerator)generator).getSoilRockinessNoise().sample(pos.getX() + 8, pos.getZ() + 8) * 2;
+            noise = ((EcotonesChunkGenerator)generator).getSoilRockinessNoise().sample(pos.getX() + 8, pos.getZ() + 8);
         }
 
-        if (noise > 1) {
-            noise -= 1;
+        // Convert soil rockiness to density and count
+        // Rockiness [0, 1] is converted into density [0, 3.25] in a quadratic fashion.
+        double density = rockinessToDensity(noise);
+        int count = (int) density;
+
+        // Use the extra count to randomly increase for a gradient
+        double extraChance = density - count;
+        if (random.nextDouble() < extraChance) {
             count++;
         }
-        if (random.nextDouble() < noise) {
-            count++;
-        }
 
-
+        // Return locations
         if (count == 0) {
             return Stream.empty();
         } else {
@@ -45,5 +48,10 @@ public class SoilRockinessDecorator extends Decorator<NopeDecoratorConfig> {
                 return new BlockPos(x, y, z);
             });
         }
+    }
+
+    // Desmos: x^{2}+2.25x
+    private double rockinessToDensity(double r) {
+        return (r * r) + (2.25 * r);
     }
 }
