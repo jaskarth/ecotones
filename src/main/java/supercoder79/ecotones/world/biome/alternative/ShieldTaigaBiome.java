@@ -59,7 +59,7 @@ public class ShieldTaigaBiome extends EcotonesBiome {
                 .scale(scale)
                 .temperature(0.7F)
                 .downfall(0.55F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(4159204)
                         .waterFogColor(329011)
                         .fogColor(12638463)

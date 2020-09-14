@@ -37,7 +37,7 @@ public class ThePitsBiome extends EcotonesBiome {
     }
 
     protected ThePitsBiome(float height, boolean isEdge) {
-        super((new Settings())
+        super(new Settings()
                 .configureSurfaceBuilder(EcotonesSurfaces.DELETE_WATER_BUILDER, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
                 .category(Category.PLAINS)
@@ -45,7 +45,7 @@ public class ThePitsBiome extends EcotonesBiome {
                 .scale(0.0125F)
                 .temperature(1.6F)
                 .downfall(0.4F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(4159204)
                         .waterFogColor(329011)
                         .fogColor(12638463)

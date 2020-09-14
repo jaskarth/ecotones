@@ -35,7 +35,7 @@ public class GreenSpiresBiome extends EcotonesBiome {
 
 
     protected GreenSpiresBiome() {
-        super((new Settings())
+        super(new Settings()
                 .configureSurfaceBuilder(EcotonesSurfaces.GREEN_SPIRES_BUILDER, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
                 .category(Category.PLAINS)
@@ -43,7 +43,7 @@ public class GreenSpiresBiome extends EcotonesBiome {
                 .scale(1.75F)
                 .temperature(1F)
                 .downfall(1F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(0x74ad57)
                         .waterFogColor(0x73a859)
                         .fogColor(12638463)

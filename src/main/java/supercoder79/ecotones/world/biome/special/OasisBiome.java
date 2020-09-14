@@ -43,7 +43,7 @@ public class OasisBiome extends EcotonesBiome {
                 .scale(0.125F)
                 .temperature(1F)
                 .downfall(1F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(4445678)
                         .waterFogColor(329011)
                         .fogColor(12638463)

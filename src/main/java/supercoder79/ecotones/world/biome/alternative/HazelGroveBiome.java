@@ -61,7 +61,7 @@ public class HazelGroveBiome extends EcotonesBiome {
                 .scale(hilly ? 0.6f : 0.05f)
                 .temperature(1F)
                 .downfall(1F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(4159204)
                         .waterFogColor(329011)
                         .fogColor(12638463)

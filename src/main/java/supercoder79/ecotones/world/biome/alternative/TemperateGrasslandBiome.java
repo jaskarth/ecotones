@@ -37,7 +37,7 @@ public class TemperateGrasslandBiome extends EcotonesBiome {
     }
 
     public TemperateGrasslandBiome(float depth, float scale) {
-        super((new Settings())
+        super(new Settings()
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
                 .category(Category.PLAINS)

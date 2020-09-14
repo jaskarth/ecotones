@@ -32,7 +32,7 @@ public class UluruBiome extends EcotonesBiome {
 
 
     protected UluruBiome() {
-        super((new Settings())
+        super(new Settings()
                 .configureSurfaceBuilder(EcotonesSurfaces.ULURU_BUILDER, SurfaceBuilder.BADLANDS_CONFIG)
                 .precipitation(Precipitation.NONE)
                 .category(Category.PLAINS)
@@ -40,7 +40,7 @@ public class UluruBiome extends EcotonesBiome {
                 .scale(0)
                 .temperature(1.7F)
                 .downfall(0.2F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(4159204)
                         .waterFogColor(329011)
                         .fogColor(12638463)

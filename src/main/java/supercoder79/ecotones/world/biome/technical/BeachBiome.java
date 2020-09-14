@@ -35,7 +35,7 @@ public class BeachBiome extends EcotonesBiome {
                 .scale(0.0F)
                 .temperature(0.9F)
                 .downfall(0.9F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(4159204)
                         .waterFogColor(329011)
                         .fogColor(12638463)

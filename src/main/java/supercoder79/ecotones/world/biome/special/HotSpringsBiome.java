@@ -38,7 +38,7 @@ public class HotSpringsBiome extends EcotonesBiome {
                 .scale(0.0125F)
                 .temperature(1.6F)
                 .downfall(0.4F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(4445678)
                         .waterFogColor(329011)
                         .fogColor(12638463)

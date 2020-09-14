@@ -45,7 +45,7 @@ public class PinePeaksBiome extends EcotonesBiome {
 
 
     protected PinePeaksBiome() {
-        super((new Settings())
+        super(new Settings()
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
                 .category(Category.PLAINS)
@@ -53,7 +53,7 @@ public class PinePeaksBiome extends EcotonesBiome {
                 .scale(1.1F)
                 .temperature(0.8F)
                 .downfall(0.5F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(4159204)
                         .waterFogColor(329011)
                         .fogColor(12638463)

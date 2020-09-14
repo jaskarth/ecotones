@@ -38,7 +38,7 @@ public class SuperVolcanicBiome extends EcotonesBiome {
     }
 
     protected SuperVolcanicBiome() {
-        super((new Settings())
+        super(new Settings()
                 .configureSurfaceBuilder(EcotonesSurfaces.SUPERVOLCANIC_BUILDER, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
                 .category(Category.PLAINS)
@@ -46,7 +46,7 @@ public class SuperVolcanicBiome extends EcotonesBiome {
                 .scale(0.0125F)
                 .temperature(1.6F)
                 .downfall(0.2F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(4159204)
                         .waterFogColor(329011)
                         .fogColor(12638463)

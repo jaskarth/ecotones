@@ -46,7 +46,7 @@ public class LushDesertBiome extends EcotonesBiome {
                         .scale(scale)
                         .temperature(2F)
                         .downfall(0.3F)
-                        .effects((new BiomeEffects.Builder())
+                        .effects(new BiomeEffects.Builder()
                                 .waterColor(4159204)
                                 .waterFogColor(329011)
                                 .fogColor(12638463)

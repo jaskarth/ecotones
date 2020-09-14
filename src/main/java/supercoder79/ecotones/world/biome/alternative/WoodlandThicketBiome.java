@@ -42,7 +42,7 @@ public class WoodlandThicketBiome extends EcotonesBiome {
     }
 
     public WoodlandThicketBiome(float depth, float scale, double hilliness, double volatility, int treeAmt) {
-        super((new Settings())
+        super(new Settings()
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Precipitation.RAIN)
                 .category(Category.PLAINS)

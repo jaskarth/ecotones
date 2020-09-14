@@ -60,7 +60,7 @@ public class PoplarForestBiome extends EcotonesBiome {
     }
 
     public PoplarForestBiome(float depth, float scale, int oakTreeSpawnAmt, int birchTreeSpawnAmt, int shrubSpawnAmt, double hilliness, double volatility) {
-        super((new Settings())
+        super(new Settings()
                         .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                         .precipitation(Precipitation.RAIN)
                         .category(Category.PLAINS)

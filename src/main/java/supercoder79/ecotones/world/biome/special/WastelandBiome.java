@@ -71,7 +71,7 @@ public class WastelandBiome extends EcotonesBiome {
 
 
     protected WastelandBiome(float treeChance, float depth, float scale, double hilliness, double volatility) {
-        super((new Settings())
+        super(new Settings()
                 .configureSurfaceBuilder(EcotonesSurfaces.WASTELAND_BUILDER, new TernarySurfaceConfig(EcotonesBlocks.DRIED_DIRT.getDefaultState(), EcotonesBlocks.DRIED_DIRT.getDefaultState(), SurfaceBuilder.GRAVEL))
                 .precipitation(Precipitation.NONE)
                 .category(Category.DESERT)
@@ -79,7 +79,7 @@ public class WastelandBiome extends EcotonesBiome {
                 .scale(scale)
                 .temperature(1.7F)
                 .downfall(0.2F)
-                .effects((new BiomeEffects.Builder())
+                .effects(new BiomeEffects.Builder()
                         .waterColor(0x947c26)
                         .waterFogColor(0x947c26)
                         .fogColor(0xc6e4f5)
