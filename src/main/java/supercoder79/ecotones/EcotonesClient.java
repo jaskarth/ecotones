@@ -10,6 +10,7 @@ import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.render.RenderLayer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.client.GoVote;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.particle.SandParticle;
 
@@ -17,6 +18,8 @@ import supercoder79.ecotones.client.particle.SandParticle;
 public class EcotonesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        GoVote.init();
+
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> view != null && pos != null ? BiomeColors.getFoliageColor(view, pos) : FoliageColors.getDefaultColor(),
                 EcotonesBlocks.HAZEL_LEAVES);
