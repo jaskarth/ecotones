@@ -17,6 +17,7 @@ import supercoder79.ecotones.client.sound.Sounds;
 import supercoder79.ecotones.world.biome.EcotonesBiome;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
+import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class GravelBeachBiome extends EcotonesBiome {
     public static GravelBeachBiome INSTANCE;
@@ -27,11 +28,11 @@ public class GravelBeachBiome extends EcotonesBiome {
 
     protected GravelBeachBiome() {
         super(new Settings()
-                .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRAVEL_CONFIG)
+                .configureSurfaceBuilder(EcotonesSurfaces.BEACH, SurfaceBuilder.GRAVEL_CONFIG)
                 .precipitation(Precipitation.RAIN)
                 .category(Category.BEACH)
-                .depth(0.0F)
-                .scale(0.0F)
+                .depth(-0.025F)
+                .scale(-0.07F)
                 .temperature(0.9F)
                 .downfall(0.9F)
                 .effects(new BiomeEffects.Builder()
@@ -42,7 +43,7 @@ public class GravelBeachBiome extends EcotonesBiome {
                 .parent(null)
                 .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
                 0.05,
-                1.4);
+                1.75);
 
         this.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT);
         this.addStructureFeature(DefaultBiomeFeatures.BURIED_TREASURE);
