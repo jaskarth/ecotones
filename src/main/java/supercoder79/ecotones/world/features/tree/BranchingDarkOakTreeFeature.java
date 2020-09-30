@@ -1,9 +1,7 @@
 package supercoder79.ecotones.world.features.tree;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;

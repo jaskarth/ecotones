@@ -2,7 +2,6 @@ package supercoder79.ecotones.world.decorator;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;

@@ -15,7 +15,6 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.world.biome.EcotonesBiome;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
-import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 

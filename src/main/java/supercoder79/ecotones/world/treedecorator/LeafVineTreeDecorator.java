@@ -1,9 +1,5 @@
 package supercoder79.ecotones.world.treedecorator;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.VineBlock;
@@ -15,6 +11,10 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.decorator.TreeDecorator;
 import net.minecraft.world.gen.decorator.TreeDecoratorType;
 import net.minecraft.world.gen.feature.Feature;
+
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 // Leaves from the vine
 // Falling so slow.

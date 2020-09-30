@@ -18,10 +18,13 @@ import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ProtoChunk;
-import net.minecraft.world.gen.*;
+import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.StructureFeature;
+import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.LayerRandom;
 import supercoder79.ecotones.util.noise.OctaveNoiseSampler;
@@ -76,12 +79,14 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         double weightedHilliness = 0.0F;
         double weightedVolatility = 0.0F;
         float weights = 0.0F;
-        int seaLevel = this.getSeaLevel();
-        float centerDepth = this.biomeSource.getBiomeForNoiseGen(x, seaLevel, z).getDepth();
 
-        for(int x1 = -2; x1 <= 2; ++x1) {
-            for(int z1 = -2; z1 <= 2; ++z1) {
-                Biome biome = this.biomeSource.getBiomeForNoiseGen(x + x1, seaLevel, z + z1);
+        BiomeCache cache = biomeCache.get();
+
+        float centerDepth = cache.get(x, z).getDepth();
+
+        for (int x1 = -2; x1 <= 2; ++x1) {
+            for (int z1 = -2; z1 <= 2; ++z1) {
+                Biome biome = cache.get(x + x1, z + z1);
                 //vanilla attributes
                 float depth = biome.getDepth();
                 float scale = biome.getScale();
@@ -144,7 +149,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
             }
 
             //modify the noise for special reasons
-            Biome biome = this.biomeSource.getBiomeForNoiseGen(x, y, z);
+            Biome biome = biomeCache.get().get(x, z);
             if (biome instanceof EcotonesBiome) {
                 noise = ((EcotonesBiome)biome).modifyNoise(x, y, z, noise);
             }

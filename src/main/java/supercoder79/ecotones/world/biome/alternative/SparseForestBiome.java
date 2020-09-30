@@ -9,7 +9,6 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.ForestRockFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;

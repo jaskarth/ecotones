@@ -30,7 +30,6 @@ public class LushDesertBiome extends EcotonesBiome {
         INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "lush_desert"), new LushDesertBiome(0.5f, 0.3f, 2.4, 0.94));
         HILLY = Registry.register(Registry.BIOME, new Identifier("ecotones", "lush_desert_hilly"), new LushDesertBiome(1f, 0.5f, 4.2, 0.87));
         MOUNTAINOUS = Registry.register(Registry.BIOME, new Identifier("ecotones", "lush_desert_mountainous"), new LushDesertBiome(1.75f, 0.8f, 8, 0.81));
-        BiomeRegistries.registerNoBeachBiome(INSTANCE);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_DESERT.add(INSTANCE, 0.3);
         Climate.WARM_DESERT.add(INSTANCE, 0.12);

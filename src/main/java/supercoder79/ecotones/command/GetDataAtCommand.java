@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import supercoder79.ecotones.api.TreeType;
 import supercoder79.ecotones.tree.Traits;

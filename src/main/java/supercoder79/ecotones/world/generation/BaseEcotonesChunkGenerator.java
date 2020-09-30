@@ -32,6 +32,7 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.feature.StructureFeature;
+import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 
 import javax.annotation.Nullable;
@@ -65,6 +66,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     private final NoiseSampler surfaceDepthNoise;
     protected final BlockState defaultBlock;
     protected final BlockState defaultFluid;
+    protected final ThreadLocal<BiomeCache> biomeCache;
     private final ThreadLocal<NoiseCache> noiseCache;
 
     public BaseEcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
@@ -82,6 +84,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         this.interpolationNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-7, 0));
         this.surfaceDepthNoise = new OctaveSimplexNoiseSampler(this.random, IntStream.rangeClosed(-3, 0));
 
+        this.biomeCache = ThreadLocal.withInitial(() -> new BiomeCache(256, biomeSource));
         this.noiseCache = ThreadLocal.withInitial(() -> new NoiseCache(128, this.noiseSizeY + 1));
     }
 

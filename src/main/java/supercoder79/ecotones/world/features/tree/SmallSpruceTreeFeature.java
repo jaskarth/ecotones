@@ -1,6 +1,5 @@
 package supercoder79.ecotones.world.features.tree;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.terraformersmc.terraform.util.Shapes;
 import net.minecraft.block.Blocks;

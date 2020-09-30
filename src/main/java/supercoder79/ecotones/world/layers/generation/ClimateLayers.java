@@ -15,13 +15,13 @@ import java.util.Random;
 public enum ClimateLayers implements InitLayer, SeedInitLayer {
     INSTANCE;
 
-    private static OpenSimplexNoise humidityNoise;
-    private static OpenSimplexNoise temperatureNoise;
+    public static OpenSimplexNoise humidityNoise;
+    public static OpenSimplexNoise temperatureNoise;
 
-    private double offsetX = 0;
-    private double offsetZ = 0;
-    private double offsetX2 = 0;
-    private double offsetZ2 = 0;
+    public double offsetX = 0;
+    public double offsetZ = 0;
+    public double offsetX2 = 0;
+    public double offsetZ2 = 0;
 
     @Override
     public int sample(LayerRandomnessSource context, int x, int z) {
@@ -83,10 +83,10 @@ public enum ClimateLayers implements InitLayer, SeedInitLayer {
     @Override
     public <R extends LayerSampler> LayerFactory<R> create(LayerSampleContext<R> context, long seed) {
         Random random = new Random(seed);
-        offsetX = (random.nextDouble()-0.5)*10000;
-        offsetZ = (random.nextDouble()-0.5)*10000;
-        offsetX2 = (random.nextDouble()-0.5)*10000;
-        offsetZ2 = (random.nextDouble()-0.5)*10000;
+        offsetX = (random.nextDouble() - 0.5) * 10000;
+        offsetZ = (random.nextDouble() - 0.5) * 10000;
+        offsetX2 = (random.nextDouble() - 0.5) * 10000;
+        offsetZ2 = (random.nextDouble() - 0.5) * 10000;
         humidityNoise = new OpenSimplexNoise(seed);
         temperatureNoise = new OpenSimplexNoise(seed - 79);
         return this.create(context);

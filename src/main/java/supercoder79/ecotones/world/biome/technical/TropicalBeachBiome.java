@@ -20,14 +20,14 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
-public class BeachBiome extends EcotonesBiome {
-    public static BeachBiome INSTANCE;
+public class TropicalBeachBiome extends EcotonesBiome {
+    public static TropicalBeachBiome INSTANCE;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "beach"), new BeachBiome());
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "tropical_beach"), new TropicalBeachBiome());
     }
 
-    protected BeachBiome() {
+    protected TropicalBeachBiome() {
         super((new Biome.Settings())
                 .configureSurfaceBuilder(EcotonesSurfaces.BEACH, SurfaceBuilder.SAND_CONFIG)
                 .precipitation(Biome.Precipitation.RAIN)

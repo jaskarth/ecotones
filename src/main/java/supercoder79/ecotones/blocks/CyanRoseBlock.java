@@ -7,7 +7,6 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.BlockView;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class CyanRoseBlock extends EcotonesGrassBlock {

@@ -11,11 +11,7 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
-import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
@@ -26,8 +22,6 @@ import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.features.foliage.SmallPineFoliagePlacer;
-import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
 public class PinePeaksBiome extends EcotonesBiome {
     public static PinePeaksBiome INSTANCE;

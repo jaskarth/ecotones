@@ -2,8 +2,6 @@ package supercoder79.ecotones.tree.oak;
 
 import supercoder79.ecotones.tree.OakTrait;
 
-import java.util.Random;
-
 public class ThinOakTrait implements OakTrait {
     @Override
     public boolean generateThickTrunk() {

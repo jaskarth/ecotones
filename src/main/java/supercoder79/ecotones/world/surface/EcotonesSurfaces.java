@@ -35,6 +35,6 @@ public class EcotonesSurfaces {
         GRASS_MOUNTAIN = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "grass_mountain_builder"), new GrassMountainSurfaceBuilder(TernarySurfaceConfig.CODEC));
         DRY_STEPPE = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "dry_steppe_builder"), new DrySteppeSurfaceBuilder(TernarySurfaceConfig.CODEC));
         SHIELD = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "shield"), new ShieldSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        BEACH = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "beach"), new BelowYSurfaceBuilder(TernarySurfaceConfig.CODEC, 66));
+        BEACH = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "beach"), new BeachSurfaceBuilder(TernarySurfaceConfig.CODEC, 66));
     }
 }

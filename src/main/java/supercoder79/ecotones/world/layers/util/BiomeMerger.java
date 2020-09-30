@@ -8,7 +8,6 @@ import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import net.minecraft.world.biome.layer.util.LayerSampler;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.world.biome.special.ThePitsBiome;
-import supercoder79.ecotones.world.biome.technical.BeachBiome;
 
 public enum BiomeMerger implements MergingLayer, IdentityCoordinateTransformer {
     INSTANCE;
