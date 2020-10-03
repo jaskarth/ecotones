@@ -1,5 +1,6 @@
 package supercoder79.ecotones.world.surface;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
@@ -21,6 +22,7 @@ public class EcotonesSurfaces {
     public static SurfaceBuilder<TernarySurfaceConfig> SHIELD;
     public static SurfaceBuilder<TernarySurfaceConfig> BEACH;
     public static SurfaceBuilder<TernarySurfaceConfig> MESA;
+    public static SurfaceBuilder<TernarySurfaceConfig> WHITE_MESA;
 
     public static void init() {
         DESERT_SCRUB_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "desert_scrub_builder"), new DesertScrubSurfaceBuilder(TernarySurfaceConfig.CODEC));
@@ -37,6 +39,7 @@ public class EcotonesSurfaces {
         DRY_STEPPE = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "dry_steppe_builder"), new DrySteppeSurfaceBuilder(TernarySurfaceConfig.CODEC));
         SHIELD = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "shield"), new ShieldSurfaceBuilder(TernarySurfaceConfig.CODEC));
         BEACH = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "beach"), new BeachSurfaceBuilder(TernarySurfaceConfig.CODEC, 66));
-        MESA = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "mesa"), new MesaSurfaceBuilder(TernarySurfaceConfig.CODEC, y -> y < 78));
+        MESA = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "mesa"), new MesaSurfaceBuilder(TernarySurfaceConfig.CODEC, y -> y < 78, MesaHelper::initializeRegularMesa, Blocks.TERRACOTTA.getDefaultState()));
+        WHITE_MESA = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "white_mesa"), new MesaSurfaceBuilder(TernarySurfaceConfig.CODEC, y -> y < 72 || y > 88, MesaHelper::initializeWhiteMesa, Blocks.WHITE_TERRACOTTA.getDefaultState()));
     }
 }

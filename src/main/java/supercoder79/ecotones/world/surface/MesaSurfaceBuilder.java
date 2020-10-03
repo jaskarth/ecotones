@@ -13,6 +13,7 @@ import net.minecraft.world.gen.surfacebuilder.BadlandsSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 import java.util.Random;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
@@ -22,10 +23,14 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
     private static final BlockState TERRACOTTA = Blocks.TERRACOTTA.getDefaultState();
 
     private final Predicate<Integer> grassPlacement;
+    private final Function<Long, BlockState[]> layerSetup;
+    private final BlockState cosineState;
 
-    public MesaSurfaceBuilder(Codec<TernarySurfaceConfig> codec, Predicate<Integer> grassPlacement) {
+    public MesaSurfaceBuilder(Codec<TernarySurfaceConfig> codec, Predicate<Integer> grassPlacement, Function<Long, BlockState[]> layerSetup, BlockState cosineState) {
         super(codec);
         this.grassPlacement = grassPlacement;
+        this.layerSetup = layerSetup;
+        this.cosineState = cosineState;
     }
 
     @Override
@@ -64,21 +69,21 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
 
                         placedDirtDepth = dirtDepth + Math.max(0, y - seaLevel);
                         if (y >= seaLevel - 1) {
-                            if (grassPlacement.test(y)) {
+                            if (this.grassPlacement.test(y)) {
                                 chunk.setBlockState(mutable, Blocks.GRASS_BLOCK.getDefaultState(), false);
                             } else if (y > seaLevel + 3 + dirtDepth) {
-                                BlockState blockState8;
+                                BlockState placeLayer;
                                 if (y >= 64 && y <= 127) {
                                     if (cosineNoise) {
-                                        blockState8 = TERRACOTTA;
+                                        placeLayer = this.cosineState;
                                     } else {
-                                        blockState8 = this.calculateLayerBlockState(x, y, z);
+                                        placeLayer = this.calculateLayerBlockState(x, y, z);
                                     }
                                 } else {
-                                    blockState8 = ORANGE_TERRACOTTA;
+                                    placeLayer = ORANGE_TERRACOTTA;
                                 }
 
-                                chunk.setBlockState(mutable, blockState8, false);
+                                chunk.setBlockState(mutable, placeLayer, false);
                             } else {
                                 chunk.setBlockState(mutable, biome.getSurfaceConfig().getTopMaterial(), false);
                                 setTop = true;
@@ -118,5 +123,10 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
         }
 
         this.seed = seed;
+    }
+
+    @Override
+    protected void initLayerBlocks(long seed) {
+        this.layerBlocks = this.layerSetup.apply(seed);
     }
 }

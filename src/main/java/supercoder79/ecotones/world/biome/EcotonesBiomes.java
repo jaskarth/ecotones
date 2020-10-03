@@ -62,6 +62,7 @@ public class EcotonesBiomes {
         DarkOakThicketBiome.init();
         SunflowerPlainsBiome.init();
         SavannaMesaBiome.init();
+        WhiteMesaBiome.init();
 
         // Rose Field biome
         RoseFieldBiome.init();
