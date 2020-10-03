@@ -20,20 +20,20 @@ public enum ShorelineLayer implements ParentedLayer, IdentityCoordinateTransform
 
     private OpenSimplexNoise beachNoise;
 
-    private double offsetX = 0;
-    private double offsetZ = 0;
+    private double beachOffsetX = 0;
+    private double beachOffsetZ = 0;
 
     public int sample(LayerRandomnessSource context, int x, int z, int n, int e, int s, int w, int center) {
         if (BiomeRegistries.NO_BEACH_BIOMES.contains(center)) return center;
 
         if (!BiomeUtil.isOcean(center)) {
             if (BiomeUtil.isOcean(n) || BiomeUtil.isOcean(e) || BiomeUtil.isOcean(s) || BiomeUtil.isOcean(w)) {
-                double humidity = MathHelper.clamp(ClimateLayers.humidityNoise.sample(((x >> 4) + ClimateLayers.INSTANCE.offsetX) / 2.5, ((z >> 4) + ClimateLayers.INSTANCE.offsetZ) / 2.5) * 1.25, -1, 1);
+                double humidity = MathHelper.clamp(ClimateLayers.humidityNoise.sample(((x >> 4) + ClimateLayers.INSTANCE.humidityOffsetX) / 2.5, ((z >> 4) + ClimateLayers.INSTANCE.humidityOffsetZ) / 2.5) * 1.25, -1, 1);
                 if (humidity < -0.5) {
                     return Registry.BIOME.getRawId(DryBeachBiome.INSTANCE);
                 } else {
                     // make gravel beaches sometimes
-                    if (beachNoise.sample((x + offsetX) / 24.0, (z + offsetZ) / 24.0) > 0.5) {
+                    if (beachNoise.sample((x + beachOffsetX) / 24.0, (z + beachOffsetZ) / 24.0) > 0.5) {
                         return Registry.BIOME.getRawId(GravelBeachBiome.INSTANCE);
                     }
 
@@ -47,6 +47,7 @@ public enum ShorelineLayer implements ParentedLayer, IdentityCoordinateTransform
 
     @Override
     public int sample(LayerSampleContext<?> context, LayerSampler parent, int x, int z) {
+        // We need the x/z coords in addition to the samples
         return this.sample(context, x, z,
                 parent.sample(x + 1, z),
                 parent.sample(x, z + 1),
@@ -58,8 +59,8 @@ public enum ShorelineLayer implements ParentedLayer, IdentityCoordinateTransform
     @Override
     public <R extends LayerSampler> LayerFactory<R> create(LayerSampleContext<R> context, LayerFactory<R> parent, long seed) {
         Random random = new Random(seed - 120);
-        offsetX = (random.nextDouble()-0.5)*10000;
-        offsetZ = (random.nextDouble()-0.5)*10000;
+        beachOffsetX = (random.nextDouble() - 0.5) * 10000;
+        beachOffsetZ = (random.nextDouble() - 0.5) * 10000;
         beachNoise = new OpenSimplexNoise(seed - 120);
         return this.create(context, parent);
     }

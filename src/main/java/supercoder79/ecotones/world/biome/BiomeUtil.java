@@ -26,7 +26,7 @@ public class BiomeUtil {
     private static final int DEEP_COLD_OCEAN_ID = Registry.BIOME.getRawId(Biomes.DEEP_COLD_OCEAN);
     private static final int DEEP_FROZEN_OCEAN_ID = Registry.BIOME.getRawId(Biomes.DEEP_FROZEN_OCEAN);
 
-    public static Biome register(Identifier name, EcotonesBiome.Builder builder) {
+    public static Biome registerBase(Identifier name, EcotonesBiome.Builder builder) {
         Integer[] ids = new Integer[2];
         //should be a safe cast
         EcotonesBiome ret = (EcotonesBiome) Registry.register(Registry.BIOME, name, builder.build());
@@ -50,7 +50,7 @@ public class BiomeUtil {
                         .volatility(ret.getVolatility() - 0.35)
                         .build()));
 
-        MountainLayer.Biome2MountainBiomeMap.put(Registry.BIOME.getRawId(ret), ids);
+        MountainLayer.BIOME_TO_MOUNTAINS.put(Registry.BIOME.getRawId(ret), ids);
 
         FabricBiomes.addSpawnBiome(ret);
         return ret;

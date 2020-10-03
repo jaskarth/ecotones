@@ -58,7 +58,7 @@ public class WarmBiomes {
             .addDefaultSpawnEntries());
 
     public static void init() {
-        COOL_DESERT_BIOME = BiomeUtil.register(new Identifier("ecotones", "cool_desert"), template.builder()
+        COOL_DESERT_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "cool_desert"), template.builder()
                 .hilliness(1.6)
                 .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00225F))
                 .addStructureFeature(DefaultBiomeFeatures.DESERT_PYRAMID)
@@ -72,7 +72,7 @@ public class WarmBiomes {
 
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
-        COOL_SCRUBLAND_BIOME = BiomeUtil.register(new Identifier("ecotones", "cool_scrubland"), template.builder()
+        COOL_SCRUBLAND_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "cool_scrubland"), template.builder()
                 .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .temperature(1.2F)
                 .downfall(0.2F)
@@ -114,7 +114,7 @@ public class WarmBiomes {
                                 .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.SMALL_ACACIA.decorationData)))
 
                 .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 4));
-        COOL_STEPPE_BIOME = BiomeUtil.register( new Identifier("ecotones", "cool_steppe"), template.builder()
+        COOL_STEPPE_BIOME = BiomeUtil.registerBase( new Identifier("ecotones", "cool_steppe"), template.builder()
                 .temperature(1.2F)
                 .downfall(0.35F)
                 .hilliness(2.8)
@@ -150,7 +150,7 @@ public class WarmBiomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesFeatures.SMALL_ACACIA.configure(TreeType.SMALL_ACACIA)
                                 .createDecoratedFeature(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.SMALL_ACACIA.decorationData))));
-        PRAIRIE_BIOME = BiomeUtil.register(new Identifier("ecotones", "prairie"), template.builder()
+        PRAIRIE_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "prairie"), template.builder()
                 .temperature(1F)
                 .downfall(0.4F)
                 .scale(0.025f)
@@ -185,7 +185,7 @@ public class WarmBiomes {
                 .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         Feature.RANDOM_PATCH.configure(FeatureConfigHolder.PRAIRIE_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 30)))));
 
-        LICHEN_WOODLAND_BIOME = BiomeUtil.register( new Identifier("ecotones", "lichen_woodland"), template.builder()
+        LICHEN_WOODLAND_BIOME = BiomeUtil.registerBase( new Identifier("ecotones", "lichen_woodland"), template.builder()
                 .temperature(0.8F)
                 .downfall(0.5F)
                 .scale(0.15f)
@@ -248,7 +248,7 @@ public class WarmBiomes {
                         EcotonesFeatures.SMALL_SPRUCE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
                                 .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(2.5)))));
 
-        SPRUCE_FOREST_BIOME = BiomeUtil.register(new Identifier("ecotones", "spruce_forest"), template.builder()
+        SPRUCE_FOREST_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "spruce_forest"), template.builder()
                 .temperature(0.8F)
                 .downfall(0.6F)
                 .scale(0.3f)
@@ -304,7 +304,7 @@ public class WarmBiomes {
                         Feature.TREE.configure(FeatureConfigHolder.SPRUCE_TREE_CONFIG)
                                 .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(7.5)))));
 
-        TEMPERATE_FOREST_BIOME = BiomeUtil.register(new Identifier("ecotones", "temperate_forest"), template.builder()
+        TEMPERATE_FOREST_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "temperate_forest"), template.builder()
                 .temperature(0.8F)
                 .downfall(0.8F)
                 .scale(0.4f)
@@ -354,7 +354,7 @@ public class WarmBiomes {
                                 .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 16, 20))))
         );
 
-        TEMPERATE_RAINFOREST_BIOME = BiomeUtil.register( new Identifier("ecotones", "temperate_rainforest"), template.builder()
+        TEMPERATE_RAINFOREST_BIOME = BiomeUtil.registerBase( new Identifier("ecotones", "temperate_rainforest"), template.builder()
                 .temperature(0.8F)
                 .downfall(1F)
                 .scale(0.4f)

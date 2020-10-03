@@ -20,6 +20,7 @@ public class EcotonesSurfaces {
     public static SurfaceBuilder<TernarySurfaceConfig> DRY_STEPPE;
     public static SurfaceBuilder<TernarySurfaceConfig> SHIELD;
     public static SurfaceBuilder<TernarySurfaceConfig> BEACH;
+    public static SurfaceBuilder<TernarySurfaceConfig> MESA;
 
     public static void init() {
         DESERT_SCRUB_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "desert_scrub_builder"), new DesertScrubSurfaceBuilder(TernarySurfaceConfig.CODEC));
@@ -36,5 +37,6 @@ public class EcotonesSurfaces {
         DRY_STEPPE = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "dry_steppe_builder"), new DrySteppeSurfaceBuilder(TernarySurfaceConfig.CODEC));
         SHIELD = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "shield"), new ShieldSurfaceBuilder(TernarySurfaceConfig.CODEC));
         BEACH = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "beach"), new BeachSurfaceBuilder(TernarySurfaceConfig.CODEC, 66));
+        MESA = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "mesa"), new MesaSurfaceBuilder(TernarySurfaceConfig.CODEC, y -> y < 78));
     }
 }

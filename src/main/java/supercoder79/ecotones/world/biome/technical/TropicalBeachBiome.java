@@ -24,7 +24,8 @@ public class TropicalBeachBiome extends EcotonesBiome {
     public static TropicalBeachBiome INSTANCE;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "tropical_beach"), new TropicalBeachBiome());
+        //TODO: rename to tropical_beach
+        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "beach"), new TropicalBeachBiome());
     }
 
     protected TropicalBeachBiome() {

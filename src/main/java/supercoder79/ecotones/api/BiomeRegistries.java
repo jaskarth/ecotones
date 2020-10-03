@@ -62,7 +62,7 @@ public class BiomeRegistries {
     }
 
     public static void registerMountains(Biome base, Biome hilly, Biome mountainous) {
-        MountainLayer.Biome2MountainBiomeMap.put(Registry.BIOME.getRawId(base), new Integer[]{Registry.BIOME.getRawId(hilly), Registry.BIOME.getRawId(mountainous)});
+        MountainLayer.BIOME_TO_MOUNTAINS.put(Registry.BIOME.getRawId(base), new Integer[]{Registry.BIOME.getRawId(hilly), Registry.BIOME.getRawId(mountainous)});
     }
 
     public static void registerNoBeachBiome(Biome biome) {

@@ -72,9 +72,9 @@ public class EcotonesBiome extends Biome {
 
     @Override
     @Environment(EnvType.CLIENT)
-    public int getGrassColorAt(double x, double y) {
+    public int getGrassColorAt(double x, double z) {
         if (grassColor == -1) {
-            return super.getGrassColorAt(x, y);
+            return super.getGrassColorAt(x, z);
         }
 
         return grassColor;

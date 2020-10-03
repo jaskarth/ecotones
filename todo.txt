@@ -64,6 +64,7 @@
 
 # 1.17
 * flooded_savannah -> flooded_savanna
+* beach -> tropical_beach
 * Smaller biome sizes
 * Smoother worldgen
 * Increase biome smoothing radius

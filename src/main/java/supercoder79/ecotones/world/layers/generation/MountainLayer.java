@@ -16,27 +16,27 @@ public enum MountainLayer implements ParentedLayer, IdentityCoordinateTransforme
     INSTANCE;
 
     private OpenSimplexNoise mountainNoise;
-    public static Map<Integer, Integer[]> Biome2MountainBiomeMap = new LinkedHashMap<>();
+    public static final Map<Integer, Integer[]> BIOME_TO_MOUNTAINS = new LinkedHashMap<>();
 
-    private double offsetX = 0;
-    private double offsetZ = 0;
+    private double mountainOffsetX = 0;
+    private double mountainOffsetZ = 0;
 
     @Override
     public int sample(LayerSampleContext<?> context, LayerSampler parent, int x, int z) {
         int sample = parent.sample(x, z);
 
         // fail early if no mountain biomes were registered
-        if (!Biome2MountainBiomeMap.containsKey(sample)) {
+        if (!BIOME_TO_MOUNTAINS.containsKey(sample)) {
             return sample;
         }
 
-        double mountain = mountainNoise.sample((x + offsetX) / 3f, (z + offsetZ) / 3f)*1.25;
+        double mountain = mountainNoise.sample((x + mountainOffsetX) / 3f, (z + mountainOffsetZ) / 3f)*1.25;
         if (mountain > 0.75) {
-            Integer id = Biome2MountainBiomeMap.get(sample)[1];
+            Integer id = BIOME_TO_MOUNTAINS.get(sample)[1];
             return id != null ? id : sample;
         }
         if (mountain > 0.5) {
-            Integer id = Biome2MountainBiomeMap.get(sample)[0];
+            Integer id = BIOME_TO_MOUNTAINS.get(sample)[0];
             return id != null ? id : sample;
         }
 
@@ -46,8 +46,8 @@ public enum MountainLayer implements ParentedLayer, IdentityCoordinateTransforme
     @Override
     public <R extends LayerSampler> LayerFactory<R> create(LayerSampleContext<R> context, LayerFactory<R> parent, long seed) {
         Random random = new Random(seed + 80);
-        offsetX = (random.nextDouble()-0.5)*10000;
-        offsetZ = (random.nextDouble()-0.5)*10000;
+        mountainOffsetX = (random.nextDouble() - 0.5) * 10000;
+        mountainOffsetZ = (random.nextDouble() - 0.5) * 10000;
         mountainNoise = new OpenSimplexNoise(seed + 90);
         return this.create(context, parent);
     }
