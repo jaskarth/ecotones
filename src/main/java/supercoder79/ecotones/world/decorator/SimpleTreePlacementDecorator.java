@@ -37,8 +37,6 @@ public class SimpleTreePlacementDecorator extends Decorator<SimpleTreeDecoration
             amt++;
         }
 
-        int attempts = 0;
-
         for (int i = 0; i < amt; i++) {
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
@@ -66,16 +64,7 @@ public class SimpleTreePlacementDecorator extends Decorator<SimpleTreeDecoration
                 }
             }
 
-            if (solidAround > 1 || solidBase < 9) {
-                attempts++;
-                // give up if we've attempted too many times
-                if (attempts > 20) {
-                    attempts = 0;
-                    positions.add(new BlockPos(x, y, z));
-                } else {
-                    continue;
-                }
-            } else {
+            if (!(solidAround > 1 || solidBase < 9)) {
                 positions.add(new BlockPos(x, y, z));
             }
         }
@@ -84,7 +73,7 @@ public class SimpleTreePlacementDecorator extends Decorator<SimpleTreeDecoration
     }
 
     // Desmos: x^{3}+0.1x+0.4
-    private double qualityToDensity(double q) {
+    protected double qualityToDensity(double q) {
         return (q * q * q) + (0.1 * q) + 0.4;
     }
 }

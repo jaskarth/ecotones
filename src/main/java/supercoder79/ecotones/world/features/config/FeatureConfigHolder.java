@@ -181,13 +181,4 @@ public class FeatureConfigHolder {
             new TwoLayersFeatureSize(2, 0, 2))
             .ignoreVines().build()
             .setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(2)));
-
-    public static TreeFeatureConfig DEAD_LARGE_OAK =
-            new TreeFeatureConfig.Builder(
-                    new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
-                    new SimpleBlockStateProvider(Blocks.AIR.getDefaultState()),
-                    new LargeOakFoliagePlacer(2, 0, 4, 0, 4),
-                    new LargeOakTrunkPlacer(8, 5, 0),
-                    new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
-                    .ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build();
 }

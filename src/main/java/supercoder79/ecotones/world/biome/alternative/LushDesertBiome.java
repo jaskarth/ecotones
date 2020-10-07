@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.biome.alternative;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.BiomeEffects;
@@ -16,10 +17,14 @@ import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.world.biome.BiomeUtil;
 import supercoder79.ecotones.world.biome.EcotonesBiome;
+import supercoder79.ecotones.world.decorator.EcotonesDecorators;
+import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
+import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 public class LushDesertBiome extends EcotonesBiome {
     public static LushDesertBiome INSTANCE;
@@ -71,6 +76,11 @@ public class LushDesertBiome extends EcotonesBiome {
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG)
                         .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_32
                                 .configure(new NoiseHeightmapDecoratorConfig(-0.8D, 9, 12))));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
+                        .createDecoratedFeature(EcotonesDecorators.REVERSE_QUALITY_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.125))));
+
 
         DefaultBiomeFeatures.addDefaultDisks(this);
         DefaultBiomeFeatures.addLandCarvers(this);

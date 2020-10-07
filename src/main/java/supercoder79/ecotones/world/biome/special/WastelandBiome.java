@@ -37,13 +37,6 @@ import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import java.util.OptionalInt;
 
 public class WastelandBiome extends EcotonesBiome {
-    private static final TreeFeatureConfig WASTELAND_TREE = new TreeFeatureConfig.Builder(
-            new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
-            new SimpleBlockStateProvider(Blocks.AIR.getDefaultState()),
-            new LargeOakFoliagePlacer(2, 0, 4, 0, 4),
-            new LargeOakTrunkPlacer(3, 11, 0),
-            new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
-            .ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build();
 
     public static WastelandBiome INSTANCE;
     public static WastelandBiome THICKET;
@@ -100,8 +93,8 @@ public class WastelandBiome extends EcotonesBiome {
                         .createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 1, 2))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.TREE.configure(WASTELAND_TREE)
-                        .createDecoratedFeature(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(treeChance))));
+                EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
+                        .createDecoratedFeature(EcotonesDecorators.REVERSE_QUALITY_TREE_DECORATOR.configure(new SimpleTreeDecorationData(treeChance))));
 
         DefaultBiomeFeatures.addDefaultDisks(this);
         DefaultBiomeFeatures.addLandCarvers(this);
