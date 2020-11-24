@@ -416,7 +416,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                             section.lock();
                         }
 
-                        // progress withing loop
+                        // progress within loop
                         double yLerp = (double) pieceY / (double)this.verticalNoiseResolution;
 
                         // Interpolate noise data based on y progress
