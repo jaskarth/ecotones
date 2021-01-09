@@ -7,7 +7,7 @@ import java.util.Random;
 public class WidePoplarTrait implements PoplarTrait {
     @Override
     public double maxRadius(Random random) {
-        return 2.8 + (random.nextDouble() * 0.2);
+        return 2.7 + (random.nextDouble() * 0.1);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package supercoder79.ecotones.blocks;
 
-import com.terraformersmc.terraform.block.LeafPileBlock;
+import com.terraformersmc.terraform.leaves.block.LeafPileBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;

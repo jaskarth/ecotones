@@ -3,19 +3,26 @@ package supercoder79.ecotones.world.biome.special;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.BiomeEffects;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.DecoratorConfig;
-import net.minecraft.world.gen.decorator.NoiseHeightmapDecoratorConfig;
+import net.minecraft.world.gen.UniformIntDistribution;
+import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.tree.CocoaBeansTreeDecorator;
+import net.minecraft.world.gen.tree.LeavesVineTreeDecorator;
+import net.minecraft.world.gen.tree.TrunkVineTreeDecorator;
+import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.world.biome.BiomeUtil;
-import supercoder79.ecotones.world.biome.EcotonesBiome;
+import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
@@ -23,11 +30,22 @@ import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
-public class GreenSpiresBiome extends EcotonesBiome {
-    public static GreenSpiresBiome INSTANCE;
+public class GreenSpiresBiome extends EcotonesBiomeBuilder {
+    public static final TreeFeatureConfig JUNGLE_TREE = new TreeFeatureConfig.Builder(
+            new SimpleBlockStateProvider(Blocks.JUNGLE_LOG.getDefaultState()),
+            new SimpleBlockStateProvider(Blocks.JUNGLE_LEAVES.getDefaultState()),
+            new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3),
+            new StraightTrunkPlacer(4, 8, 0), new TwoLayersFeatureSize(1, 0, 1))
+            .decorators(ImmutableList.of(
+                    new CocoaBeansTreeDecorator(0.2F),
+                    TrunkVineTreeDecorator.INSTANCE,
+                    LeavesVineTreeDecorator.INSTANCE)
+            ).ignoreVines().build();
+
+    public static Biome INSTANCE;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "green_spires"), new GreenSpiresBiome());
+        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "green_spires"), new GreenSpiresBiome().build());
         BiomeRegistries.registerSpecialBiome(INSTANCE, id -> true);
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 400);
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
@@ -35,67 +53,59 @@ public class GreenSpiresBiome extends EcotonesBiome {
 
 
     protected GreenSpiresBiome() {
-        super(new Settings()
-                .configureSurfaceBuilder(EcotonesSurfaces.GREEN_SPIRES_BUILDER, SurfaceBuilder.GRASS_CONFIG)
-                .precipitation(Precipitation.RAIN)
-                .category(Category.PLAINS)
-                .depth(0.2f)
-                .scale(1.75F)
-                .temperature(1F)
-                .downfall(1F)
-                .effects(new BiomeEffects.Builder()
-                        .waterColor(0x74ad57)
-                        .waterFogColor(0x73a859)
-                        .fogColor(12638463)
-                        .build()).parent(null)
-                .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
-                8,
-                0.7);
+        this.surfaceBuilder(EcotonesSurfaces.GREEN_SPIRES_BUILDER, SurfaceBuilder.GRASS_CONFIG);
+
+        this.depth(0.2f);
+        this.scale(1.75F);
+        this.temperature(1F);
+        this.downfall(1F);
+
+        this.precipitation(Biome.Precipitation.RAIN);
+
+        this.skyColor(0xadc1cc);
+        this.grassColor(0x73a859);
+        this.foliageColor(0x74ad57);
+        this.waterColor(0x74ad57);
+        this.waterFogColor(0x73a859);
+
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .createDecoratedFeature(EcotonesDecorators.ROCKINESS.configure(DecoratorConfig.DEFAULT)));
+                        .decorate(EcotonesDecorators.ROCKINESS.configure(DecoratorConfig.DEFAULT)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.JUNGLE_PALM_TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG)
-                        .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(2, 0.5f, 1))));
+                EcotonesFeatures.JUNGLE_PALM_TREE.configure(JUNGLE_TREE)
+                        .decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(2, 0.5f, 1)))
+                        .spreadHorizontally()
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.TREE.configure(DefaultBiomeFeatures.JUNGLE_TREE_CONFIG)
-                        .createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(6, 0.5f, 1))));
+                Feature.TREE.configure(JUNGLE_TREE)
+                        .decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(6, 0.5f, 1)))
+                        .spreadHorizontally()
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .createDecoratedFeature(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(8))));
+                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(8))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG).createDecoratedFeature(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 10, 20))));
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG)
+                        .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 10, 20))));
 
-        DefaultBiomeFeatures.addDefaultDisks(this);
-        DefaultBiomeFeatures.addLandCarvers(this);
-        DefaultBiomeFeatures.method_28440(this);
-        DefaultBiomeFeatures.addDungeons(this);
-        DefaultBiomeFeatures.addMineables(this);
-        DefaultBiomeFeatures.addDefaultOres(this);
-        DefaultBiomeFeatures.addDefaultMushrooms(this);
-        DefaultBiomeFeatures.addSprings(this);
-        DefaultBiomeFeatures.addFrozenTopLayer(this);
+        DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
+        DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDungeons(this.getGenerationSettings());
+        DefaultBiomeFeatures.addMineables(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultOres(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultMushrooms(this.getGenerationSettings());
+        DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
+        DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
-        BiomeUtil.addDefaultSpawns(this);
-        BiomeUtil.addDefaultFeatures(this);
-    }
-
-    @Override
-    public int getSkyColor() {
-        return 0xadc1cc;
-    }
-
-    @Override
-    public int getGrassColorAt(double x, double z) {
-        return 0x73a859;
-    }
-
-    @Override
-    public int getFoliageColor() {
-        return 0x74ad57; //8ACC6A
+        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
     }
 }

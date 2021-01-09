@@ -1,9 +1,13 @@
 package supercoder79.ecotones.api;
 
 import com.google.common.collect.Lists;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.Ecotones;
 
 import java.util.List;
 
@@ -52,40 +56,43 @@ public enum Climate {
     }
 
     public Integer choose(LayerRandomnessSource rand) {
-        if (biomeEntries.size() == 0) {
+        if (this.biomeEntries.size() == 0) {
             throw new UnsupportedOperationException("No biomes registered for climate " + this + "!!! This is a problem!");
         }
 
-        //valocode boogaloo
         double randVal = target(rand);
         int i = -1;
 
         while (randVal >= 0) {
             ++i;
-            randVal -= biomeEntries.get(i).weight;
+            randVal -= this.biomeEntries.get(i).weight;
         }
-        return Registry.BIOME.getRawId(biomeEntries.get(i).getBiome());
+
+        Biome biome = Ecotones.REGISTRY.get(this.biomeEntries.get(i).biome);
+
+        int id = Ecotones.REGISTRY.getRawId(biome);
+//        System.out.println(id);
+
+        return id;
     }
 
     public void add(Biome biome, double weight) {
         this.biomeEntries.add(new Entry(biome, weight));
-        weightTotal += weight;
+        this.weightTotal += weight;
     }
 
     private double target(LayerRandomnessSource random) {
-        return (double) random.nextInt(Integer.MAX_VALUE) * weightTotal / Integer.MAX_VALUE;
+        return (double) random.nextInt(Integer.MAX_VALUE) * this.weightTotal / Integer.MAX_VALUE;
     }
 
     private static class Entry {
-        private final Biome biome;
+        private final RegistryKey<Biome> biome;
         private final double weight;
         private Entry(Biome biome, double weight) {
-            this.biome = biome;
+            this.biome = BuiltinRegistries.BIOME.getKey(biome).get();
             this.weight = weight;
-        }
 
-        private Biome getBiome() {
-            return biome;
+//            System.out.println(this.biome);
         }
     }
 }

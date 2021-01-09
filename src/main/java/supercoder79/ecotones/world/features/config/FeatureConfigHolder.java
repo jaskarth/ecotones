@@ -3,25 +3,29 @@ package supercoder79.ecotones.world.features.config;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Blocks;
-import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.UniformIntDistribution;
+import net.minecraft.world.gen.feature.ConfiguredFeatures;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
-import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.foliage.JungleFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.placer.ColumnPlacer;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
-import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
+import net.minecraft.world.gen.tree.CocoaBeansTreeDecorator;
+import net.minecraft.world.gen.tree.LeavesVineTreeDecorator;
+import net.minecraft.world.gen.tree.TrunkVineTreeDecorator;
+import net.minecraft.world.gen.trunk.MegaJungleTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.util.DoubleOrNormalPlacer;
 import supercoder79.ecotones.world.features.foliage.SmallPineFoliagePlacer;
 import supercoder79.ecotones.world.treedecorator.LichenTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
-
-import java.util.OptionalInt;
 
 public class FeatureConfigHolder {
     // grass
@@ -40,6 +44,7 @@ public class FeatureConfigHolder {
                     .addState(EcotonesBlocks.SHORT_GRASS.getDefaultState(), 6)
                     .addState(EcotonesBlocks.SMALL_SHRUB.getDefaultState(), 2)
                     .addState(Blocks.GRASS.getDefaultState(), 1), new SimpleBlockPlacer()).tries(32).build();
+
     public static RandomPatchFeatureConfig COOL_SCRUBLAND_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
                     .addState(EcotonesBlocks.SHORT_GRASS.getDefaultState(), 4)
@@ -168,7 +173,7 @@ public class FeatureConfigHolder {
             new TreeFeatureConfig.Builder(
                     new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
                     new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
-                    new SpruceFoliagePlacer(2, 1, 0, 2, 1, 1),
+                    new SpruceFoliagePlacer(UniformIntDistribution.of(2, 1), UniformIntDistribution.of(0, 2), UniformIntDistribution.of(1, 1)),
                     new StraightTrunkPlacer(6, 4, 3),
                     new TwoLayersFeatureSize(2, 0, 2))
                     .ignoreVines().build().setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(6), new LichenTreeDecorator(12)));
@@ -176,9 +181,24 @@ public class FeatureConfigHolder {
     public static TreeFeatureConfig SMALL_PINE_CONFIG = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
-            new SmallPineFoliagePlacer(1, 0, 1, 0, 4, 2),
+            new SmallPineFoliagePlacer(UniformIntDistribution.of(1, 0), UniformIntDistribution.of(0, 1), UniformIntDistribution.of(4, 2)),
             new StraightTrunkPlacer(9, 6, 0),
             new TwoLayersFeatureSize(2, 0, 2))
             .ignoreVines().build()
             .setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(2)));
+
+    public static TreeFeatureConfig JUNGLE = new TreeFeatureConfig.Builder(
+            new SimpleBlockStateProvider(Blocks.JUNGLE_LOG.getDefaultState()),
+            new SimpleBlockStateProvider(Blocks.JUNGLE_LEAVES.getDefaultState()),
+            new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3),
+            new StraightTrunkPlacer(4, 8, 0), new TwoLayersFeatureSize(1, 0, 1))
+            .decorators(ImmutableList.of(new CocoaBeansTreeDecorator(0.2F), TrunkVineTreeDecorator.INSTANCE, LeavesVineTreeDecorator.INSTANCE)).ignoreVines().build();
+
+    public static TreeFeatureConfig MEGA_JUNGLE = new TreeFeatureConfig.Builder(
+            new SimpleBlockStateProvider(Blocks.JUNGLE_LOG.getDefaultState()),
+            new SimpleBlockStateProvider(Blocks.JUNGLE_LEAVES.getDefaultState()),
+            new JungleFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 2),
+            new MegaJungleTrunkPlacer(10, 2, 19),
+            new TwoLayersFeatureSize(1, 1, 2))
+            .decorators(ImmutableList.of(TrunkVineTreeDecorator.INSTANCE, LeavesVineTreeDecorator.INSTANCE)).build();
 }

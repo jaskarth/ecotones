@@ -6,6 +6,7 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
@@ -15,14 +16,14 @@ import java.util.Random;
 import java.util.Set;
 
 public class PlusLeavesFoliagePlacer extends FoliagePlacer {
-    public static final Codec<PlusLeavesFoliagePlacer> CODEC = RecordCodecBuilder.create(instance -> FoliagePlacer.method_28846(instance).apply(instance, PlusLeavesFoliagePlacer::new));
+    public static final Codec<PlusLeavesFoliagePlacer> CODEC = RecordCodecBuilder.create(instance -> FoliagePlacer.fillFoliagePlacerFields(instance).apply(instance, PlusLeavesFoliagePlacer::new));
 
-    public PlusLeavesFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
-        super(radius, randomRadius, offset, randomOffset);
+    public PlusLeavesFoliagePlacer(UniformIntDistribution radius, UniformIntDistribution offset) {
+        super(radius, offset);
     }
 
     @Override
-    protected FoliagePlacerType<?> method_28843() {
+    protected FoliagePlacerType<?> getType() {
         return EcotonesFoliagePlacers.PLUS_LEAVES;
     }
 
@@ -41,7 +42,7 @@ public class PlusLeavesFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    public int getHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
+    public int getRandomHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
         return 0;
     }
 

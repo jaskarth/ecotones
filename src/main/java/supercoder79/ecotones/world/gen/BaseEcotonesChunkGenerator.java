@@ -1,4 +1,4 @@
-package supercoder79.ecotones.world.generation;
+package supercoder79.ecotones.world.gen;
 
 import it.unimi.dsi.fastutil.HashCommon;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -17,7 +17,6 @@ import net.minecraft.util.math.noise.NoiseSampler;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.Heightmap.Type;
@@ -51,8 +50,8 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                 }
             }
         }
-
     });
+
     private static final BlockState AIR = Blocks.AIR.getDefaultState();
     private final int verticalNoiseResolution;
     private final int horizontalNoiseResolution;
@@ -202,10 +201,11 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         return this.sampleHeightmap(x, z, null, heightmapType.getBlockPredicate());
     }
 
-    public BlockView getColumnSample(int x, int z) {
+    public VerticalBlockSample getColumnSample(int x, int z) {
         BlockState[] states = new BlockState[this.noiseSizeY * this.verticalNoiseResolution];
         this.sampleHeightmap(x, z, states, null);
-        return new VerticalBlockSample(states);
+        // TODO: custom min y, using 0 for now
+        return new VerticalBlockSample(0, states);
     }
 
     private int sampleHeightmap(int x, int z, @Nullable BlockState[] blockStates, @Nullable Predicate<BlockState> predicate) {
@@ -323,7 +323,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         int chunkStartX = chunkX << 4;
         int chunkStartZ = chunkZ << 4;
 
-        for (StructureFeature<?> feature : StructureFeature.field_24861) {
+        for (StructureFeature<?> feature : StructureFeature.JIGSAW_STRUCTURES) {
             accessor.getStructuresWithChildren(ChunkSectionPos.from(pos, 0), feature).forEach(start -> {
                 Iterator<StructurePiece> pieces = start.getChildren().iterator();
                 

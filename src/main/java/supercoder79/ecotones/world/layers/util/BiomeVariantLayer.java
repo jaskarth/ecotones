@@ -1,7 +1,10 @@
 package supercoder79.ecotones.world.layers.util;
 
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 
 import java.util.Map;
@@ -11,15 +14,11 @@ public enum BiomeVariantLayer implements IdentitySamplingLayer {
 
     @Override
     public int sample(LayerRandomnessSource context, int sample) {
-
-        for (Map.Entry<Integer, Integer> biomeMap : BiomeRegistries.BIOME_VARANT_CHANCE.entrySet()) {
-            if (biomeMap.getKey() == sample) {
-                // see if we're allowed to set a biome variant here
-                if (context.nextInt(biomeMap.getValue()) == 0) {
-                    // get a random variant from the registry
-                    return BiomeRegistries.BIOME_VARIANTS.get(biomeMap.getKey())[context.nextInt(BiomeRegistries.BIOME_VARIANTS.get(biomeMap.getKey()).length)];
-                }
-            }
+        RegistryKey<Biome> key = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(sample)).get();
+        Integer chance = BiomeRegistries.BIOME_VARANT_CHANCE.get(key);
+        if (chance != null) {
+            RegistryKey<Biome>[] variants = BiomeRegistries.BIOME_VARIANTS.get(key);
+            return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(variants[context.nextInt(variants.length)]));
         }
 
         return sample;

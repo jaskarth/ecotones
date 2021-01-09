@@ -1,12 +1,11 @@
 package supercoder79.ecotones.world.features;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.gen.StructureAccessor;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
@@ -22,7 +21,8 @@ public class RockFeature extends Feature<RockFeatureConfig> {
     }
 
     @Override
-    public boolean generate(ServerWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockPos pos, RockFeatureConfig config) {
+    public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, RockFeatureConfig config) {
+        // TODO: cleanup
         while(true) {
             restart: {
                 if (pos.getY() > 3) {
@@ -30,8 +30,8 @@ public class RockFeature extends Feature<RockFeatureConfig> {
                         break restart;
                     }
 
-                    Block block = world.getBlockState(pos.down()).getBlock();
-                    if (!isDirt(block) && !isStone(block)) {
+                    BlockState state = world.getBlockState(pos.down());
+                    if (!isStone(state) && !isStone(state)) {
                         break restart;
                     }
                 }

@@ -61,6 +61,8 @@
 * Abstract the shit out of tree gen
 * Special tree generation items (acorn, birch seed)
 * Trees don't set block to dirt
+* Fix disks
+* Skip analysis when good soil quality
 
 # 1.17
 * flooded_savannah -> flooded_savanna
@@ -69,3 +71,6 @@
 * Smoother worldgen
 * Increase biome smoothing radius
 * Rename Dry Forest
+
+# Automation
+* Testing suite to find errors within biomes (no strongholds, etc.)

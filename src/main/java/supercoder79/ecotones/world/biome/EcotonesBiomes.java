@@ -1,9 +1,9 @@
 package supercoder79.ecotones.world.biome;
 
 import supercoder79.ecotones.world.biome.alternative.*;
-import supercoder79.ecotones.world.biome.base.HotBiomes;
-import supercoder79.ecotones.world.biome.base.SwampBiomes;
-import supercoder79.ecotones.world.biome.base.WarmBiomes;
+import supercoder79.ecotones.world.biome.base.SwampBiome;
+import supercoder79.ecotones.world.biome.base.hot.*;
+import supercoder79.ecotones.world.biome.base.warm.*;
 import supercoder79.ecotones.world.biome.special.*;
 import supercoder79.ecotones.world.biome.technical.DryBeachBiome;
 import supercoder79.ecotones.world.biome.technical.GravelBeachBiome;
@@ -12,10 +12,30 @@ import supercoder79.ecotones.world.biome.technical.TropicalBeachBiome;
 
 public class EcotonesBiomes {
     public static void init() {
-        // base biomes
-        HotBiomes.init();
-        WarmBiomes.init();
-        SwampBiomes.init();
+        // Hot biomes
+        DesertBiome.init();
+        ScrublandBiome.init();
+        SteppeBiome.init();
+        TropicalGrasslandBiome.init();
+        LushSavannaBiome.init();
+        DryForestBiome.init();
+        LushForestBiome.init();
+        TropicalRainforestBiome.init();
+
+        // Warm biomes
+        CoolDesertBiome.init();
+        CoolScrublandBiome.init();
+        CoolSteppeBiome.init();
+        PrairieBiome.init();
+        LichenWoodlandBiome.init();
+        SpruceForestBiome.init();
+        TemperateForestBiome.init();
+        TemperateRainforestBiome.init();
+
+        SwampBiome.init();
+//        HotBiomes.init();
+//        WarmBiomes.init();
+//        SwampBiomes.init();
 
         // technical biomes
         TropicalBeachBiome.init();
@@ -45,7 +65,7 @@ public class EcotonesBiomes {
         PoplarForestBiome.init();
         TemperateGrasslandBiome.init();
         BirchForestBiome.init();
-        FloodedSavannahBiome.init();
+        FloodedSavannaBiome.init();
         DeadSpruceForestBiome.init();
         PalmForestBiome.init();
         MoorBiome.init();

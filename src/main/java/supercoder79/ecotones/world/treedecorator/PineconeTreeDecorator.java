@@ -3,9 +3,9 @@ package supercoder79.ecotones.world.treedecorator;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.decorator.TreeDecorator;
-import net.minecraft.world.gen.decorator.TreeDecoratorType;
+import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.gen.tree.TreeDecorator;
+import net.minecraft.world.gen.tree.TreeDecoratorType;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class PineconeTreeDecorator extends TreeDecorator {
     }
 
     @Override
-    public void generate(WorldAccess world, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> set, BlockBox box) {
+    public void generate(StructureWorldAccess world, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> placedStates, BlockBox box) {
         for (BlockPos pos : leavesPositions) {
             if (world.getBlockState(pos.down()).isAir()) {
                 if (random.nextInt(rarity) == 0) {

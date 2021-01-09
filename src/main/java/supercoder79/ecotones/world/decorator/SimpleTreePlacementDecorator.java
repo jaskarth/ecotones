@@ -3,11 +3,10 @@ package supercoder79.ecotones.world.decorator;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.DecoratorContext;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +19,13 @@ public class SimpleTreePlacementDecorator extends Decorator<SimpleTreeDecoration
     }
 
     @Override
-    public Stream<BlockPos> getPositions(WorldAccess world, ChunkGenerator generator, Random random, SimpleTreeDecorationData config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, SimpleTreeDecorationData config, BlockPos pos) {
         List<BlockPos> positions = new ArrayList<>();
 
         double soilQuality = 0.5; // default for if the chunk generator is not ours
         //get noise at position (this is fairly inaccurate because the pos is at the top left of the chunk and we center it)
-        if (generator instanceof EcotonesChunkGenerator) {
-            soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
+        if (context.generator instanceof EcotonesChunkGenerator) {
+            soilQuality = ((EcotonesChunkGenerator)context.generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
         }
 
         //basic amount modulation
@@ -40,7 +39,7 @@ public class SimpleTreePlacementDecorator extends Decorator<SimpleTreeDecoration
         for (int i = 0; i < amt; i++) {
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
-            int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
+            int y = context.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
 
             //just go with the position if the ground check can be ignored
             if (config.ignoreGroundCheck) {
@@ -52,12 +51,12 @@ public class SimpleTreePlacementDecorator extends Decorator<SimpleTreeDecoration
             int solidBase = 0;
             for (int x1 = -1; x1 <= 1; x1++) {
                 for (int z1 = -1; z1 <= 1; z1++) {
-                    if (world.getBlockState(new BlockPos(x + x1, y - 1, z + z1)).getMaterial().isSolid()) {
+                    if (context.getBlockState(new BlockPos(x + x1, y - 1, z + z1)).getMaterial().isSolid()) {
                         solidBase++;
                     }
 
                     for (int y1 = 0; y1 <= 1; y1++) {
-                        if (world.getBlockState(new BlockPos(x + x1, y + y1, z + z1)).getMaterial().isSolid()) {
+                        if (context.getBlockState(new BlockPos(x + x1, y + y1, z + z1)).getMaterial().isSolid()) {
                             solidAround++;
                         }
                     }

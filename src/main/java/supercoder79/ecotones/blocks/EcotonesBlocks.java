@@ -1,6 +1,6 @@
 package supercoder79.ecotones.blocks;
 
-import com.terraformersmc.terraform.block.TerraformSaplingBlock;
+import com.terraformersmc.terraform.tree.block.TerraformSaplingBlock;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tools.FabricToolTags;
 import net.minecraft.block.Block;

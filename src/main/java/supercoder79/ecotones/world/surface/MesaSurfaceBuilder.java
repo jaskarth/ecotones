@@ -38,7 +38,7 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
         int localX = x & 15;
         int localZ = z & 15;
         BlockState blockState3 = WHITE_TERRACOTTA;
-        BlockState blockState4 = biome.getSurfaceConfig().getUnderMaterial();
+        BlockState blockState4 = biome.getGenerationSettings().getSurfaceConfig().getUnderMaterial();
         int dirtDepth = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
         boolean cosineNoise = Math.cos(noise / 3.0D * 3.141592653589793D) > 0.0D;
         int placedDirtDepth = -1;
@@ -60,7 +60,7 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
                             blockState4 = stone;
                         } else if (y >= seaLevel - 4 && y <= seaLevel + 1) {
                             blockState3 = WHITE_TERRACOTTA;
-                            blockState4 = biome.getSurfaceConfig().getUnderMaterial();
+                            blockState4 = biome.getGenerationSettings().getSurfaceConfig().getUnderMaterial();
                         }
 
                         if (y < seaLevel && (blockState3 == null || blockState3.isAir())) {
@@ -85,7 +85,7 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
 
                                 chunk.setBlockState(mutable, placeLayer, false);
                             } else {
-                                chunk.setBlockState(mutable, biome.getSurfaceConfig().getTopMaterial(), false);
+                                chunk.setBlockState(mutable, biome.getGenerationSettings().getSurfaceConfig().getTopMaterial(), false);
                                 setTop = true;
                             }
                         } else {

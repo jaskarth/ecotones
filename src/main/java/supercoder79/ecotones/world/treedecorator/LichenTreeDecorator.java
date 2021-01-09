@@ -5,9 +5,9 @@ import net.minecraft.block.VineBlock;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.decorator.TreeDecorator;
-import net.minecraft.world.gen.decorator.TreeDecoratorType;
+import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.gen.tree.TreeDecorator;
+import net.minecraft.world.gen.tree.TreeDecoratorType;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class LichenTreeDecorator extends TreeDecorator {
     }
 
     @Override
-    public void generate(WorldAccess world, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> set, BlockBox box) {
+    public void generate(StructureWorldAccess world, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> placedStates, BlockBox box) {
         for (BlockPos pos : logPositions) {
             if (random.nextInt(this.chance) == 0) {
                 // Get random direction
@@ -43,6 +43,6 @@ public class LichenTreeDecorator extends TreeDecorator {
     }
 
     private Direction randomDirection(Random random) {
-        return Direction.fromHorizontal(random.nextInt(4));
+        return Direction.Type.HORIZONTAL.random(random);
     }
 }

@@ -10,9 +10,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.api.TreeGenerationConfig;
@@ -32,7 +31,7 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
     }
 
     @Override
-    public boolean generate(ServerWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockPos pos, TreeGenerationConfig config) {
+    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, TreeGenerationConfig config) {
         BlockState downState = world.getBlockState(pos.down());
         if (downState != Blocks.GRASS_BLOCK.getDefaultState() && downState != Blocks.DIRT.getDefaultState()) return true;
         int maxHeight = 4;
@@ -70,7 +69,7 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
         return (random.nextFloat() - 0.5f) * 0.1f;
     }
 
-    private void growLeaves(WorldAccess world, Random random, List<BlockPos> leafPlacementNodes, List<BlockPos> leaves, TreeGenerationConfig config) {
+    private void growLeaves(StructureWorldAccess world, Random random, List<BlockPos> leafPlacementNodes, List<BlockPos> leaves, TreeGenerationConfig config) {
         for (BlockPos node : leafPlacementNodes) {
             generateSmallLeafLayer(world, node.up(), leaves, config);
             generateMainLeafLayer(world, node, leaves, config);

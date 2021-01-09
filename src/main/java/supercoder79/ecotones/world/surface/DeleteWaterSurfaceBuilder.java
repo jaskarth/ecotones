@@ -24,7 +24,7 @@ public class DeleteWaterSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConf
         for (int i = 0; i < 64; i++) {
             pos.setY(i);
             if (chunk.getBlockState(pos) == Blocks.WATER.getDefaultState()) {
-                chunk.setBlockState(pos, AIR, false);
+                chunk.setBlockState(pos, Blocks.AIR.getDefaultState(), false);
             }
         }
     }

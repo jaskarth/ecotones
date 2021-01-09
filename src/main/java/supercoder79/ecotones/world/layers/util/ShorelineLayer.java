@@ -1,9 +1,11 @@
 package supercoder79.ecotones.world.layers.util;
 
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
 import net.minecraft.world.biome.layer.util.*;
+import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
 import supercoder79.ecotones.world.biome.BiomeUtil;
@@ -17,6 +19,9 @@ import java.util.Random;
 
 public enum ShorelineLayer implements ParentedLayer, IdentityCoordinateTransformer, SeedLayer {
     INSTANCE;
+    public static final Identifier DRY = new Identifier("ecotones", "dry_beach");
+    public static final Identifier TROPICAL = new Identifier("ecotones", "tropical_beach");
+    public static final Identifier GRAVEL = new Identifier("ecotones", "gravel_beach");
 
     private OpenSimplexNoise beachNoise;
 
@@ -24,20 +29,22 @@ public enum ShorelineLayer implements ParentedLayer, IdentityCoordinateTransform
     private double beachOffsetZ = 0;
 
     public int sample(LayerRandomnessSource context, int x, int z, int n, int e, int s, int w, int center) {
-        if (BiomeRegistries.NO_BEACH_BIOMES.contains(center)) return center;
+        if (BiomeRegistries.NO_BEACH_BIOMES.contains(Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(center)).get())) {
+            return center;
+        }
 
         if (!BiomeUtil.isOcean(center)) {
             if (BiomeUtil.isOcean(n) || BiomeUtil.isOcean(e) || BiomeUtil.isOcean(s) || BiomeUtil.isOcean(w)) {
                 double humidity = MathHelper.clamp(ClimateLayers.humidityNoise.sample(((x >> 4) + ClimateLayers.INSTANCE.humidityOffsetX) / 2.5, ((z >> 4) + ClimateLayers.INSTANCE.humidityOffsetZ) / 2.5) * 1.25, -1, 1);
                 if (humidity < -0.5) {
-                    return Registry.BIOME.getRawId(DryBeachBiome.INSTANCE);
+                    return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(DRY));
                 } else {
                     // make gravel beaches sometimes
                     if (beachNoise.sample((x + beachOffsetX) / 24.0, (z + beachOffsetZ) / 24.0) > 0.5) {
-                        return Registry.BIOME.getRawId(GravelBeachBiome.INSTANCE);
+                        return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(GRAVEL));
                     }
 
-                    return Registry.BIOME.getRawId(TropicalBeachBiome.INSTANCE);
+                    return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(TROPICAL));
                 }
             }
         }

@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
@@ -39,7 +40,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
     }
 
     @Override
-    public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
+    public boolean generate(StructureWorldAccess world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
         // Total trunk height
         int height = rand.nextInt(5) + 8;
 

@@ -3,11 +3,10 @@ package supercoder79.ecotones.world.decorator;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.DecoratorContext;
 import supercoder79.ecotones.util.DataPos;
-import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -21,7 +20,7 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
 
     //TODO: use a for loop instead of a stream for more control
     @Override
-    public Stream<BlockPos> getPositions(WorldAccess world, ChunkGenerator generator, Random random, ShrubDecoratorConfig config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, ShrubDecoratorConfig config, BlockPos pos) {
         //gets data on how many shrubs to place based on the soil drainage.
         //performs an abs function on noise to make it [0, 1].
         //drainage of 0: either too much or too little drainage, 50% of target shrub count
@@ -29,8 +28,8 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
 
         double soilQuality = 0.5; // default for if the chunk generator is not ours
         //get noise at position (this is fairly inaccurate because the pos is at the top left of the chunk and we center it)
-        if (generator instanceof EcotonesChunkGenerator) {
-            soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
+        if (context.generator instanceof EcotonesChunkGenerator) {
+            soilQuality = ((EcotonesChunkGenerator)context.generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
         }
         double shrubCountCoefficient = 0.5 + soilQuality; //50% to 150%
         //multiply with target count
@@ -58,7 +57,7 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
             //randomize x and z
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
-            int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
+            int y = context.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
 
             //test surrounding blockstates to make sure the area is good
             boolean isLikelyInvalid = false;
@@ -66,12 +65,12 @@ public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorCon
             int solidBase = 0;
             for (int x1 = -1; x1 <= 1; x1++) {
                 for (int z1 = -1; z1 <= 1; z1++) {
-                    if (world.getBlockState(new BlockPos(x + x1, y - 1, z + z1)).getMaterial().isSolid()) {
+                    if (context.getBlockState(new BlockPos(x + x1, y - 1, z + z1)).getMaterial().isSolid()) {
                         solidBase++;
                     }
 
                     for (int y1 = 0; y1 <= 1; y1++) {
-                        if (world.getBlockState(new BlockPos(x + x1, y + y1, z + z1)).getMaterial().isSolid()) {
+                        if (context.getBlockState(new BlockPos(x + x1, y + y1, z + z1)).getMaterial().isSolid()) {
                             solidAround++;
                         }
                     }

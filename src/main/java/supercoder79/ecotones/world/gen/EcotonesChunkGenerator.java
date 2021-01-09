@@ -1,19 +1,24 @@
-package supercoder79.ecotones.world.generation;
+package supercoder79.ecotones.world.gen;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.class_5742;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Util;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.GenerationSettings;
+import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
@@ -23,23 +28,25 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.feature.StructureFeature;
 import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.LayerRandom;
 import supercoder79.ecotones.util.noise.OctaveNoiseSampler;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
-import supercoder79.ecotones.world.biome.EcotonesBiome;
 
 import java.util.BitSet;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     public static final Codec<EcotonesChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(
-                    BiomeSource.field_24713.fieldOf("biome_source").forGetter((generator) -> generator.biomeSource),
+                    BiomeSource.CODEC.fieldOf("biome_source").forGetter((generator) -> generator.biomeSource),
                     Codec.LONG.fieldOf("seed").stable().forGetter((generator) -> generator.seed))
                     .apply(instance, instance.stable(EcotonesChunkGenerator::new)));
 
@@ -60,14 +67,20 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     private final OctavePerlinNoiseSampler hillinessNoise;
     private final OctaveNoiseSampler<OpenSimplexNoise> scaleNoise;
     private final long seed;
+    private final Optional<Registry<Biome>> registry;
 
     public EcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
         super(biomeSource, seed);
         this.seed = seed;
         this.hillinessNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-15, 0));
+        if (biomeSource instanceof EcotonesBiomeSource) {
+            this.registry = Optional.of(((EcotonesBiomeSource)biomeSource).biomeRegistry);
+        } else {
+            this.registry = Optional.empty();
+        }
 
         this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 256, 0.2, -0.2);
-        this.soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 3, 2048, 1.3, 1.3);
+        this.soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 1.75, 0.75);
         this.soilRockinessNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1024, 2, -2);
     }
 
@@ -94,9 +107,13 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
                 //hilliness and volatility
                 double hilliness = 1;
                 double volatility = 1;
-                if (biome instanceof EcotonesBiome) {
-                    hilliness = ((EcotonesBiome)biome).getHilliness();
-                    volatility = ((EcotonesBiome)biome).getVolatility();
+
+                if (this.registry.isPresent()) {
+                    RegistryKey<Biome> key = this.registry.get().getKey(biome).get();
+                    BiomeGenData data = BiomeGenData.LOOKUP.getOrDefault(key, BiomeGenData.DEFAULT);
+
+                    hilliness = data.hilliness;
+                    volatility = data.volatility;
                 }
 
                 float weight = BIOME_WEIGHT_TABLE[x1 + 2 + (z1 + 2) * 5] / (depth + 2.0F);
@@ -150,9 +167,9 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
             //modify the noise for special reasons
             Biome biome = biomeCache.get().get(x, z);
-            if (biome instanceof EcotonesBiome) {
-                noise = ((EcotonesBiome)biome).modifyNoise(x, y, z, noise);
-            }
+//            if (biome instanceof EcotonesBiome) {
+//                noise = ((EcotonesBiome)biome).modifyNoise(x, y, z, noise);
+//            }
 
             buffer[y] = noise;
         }
@@ -177,7 +194,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     public void populateEntities(ChunkRegion region) {
         int chunkX = region.getCenterChunkX();
         int chunkZ = region.getCenterChunkZ();
-        Biome biome = region.getBiome((new ChunkPos(chunkX, chunkZ)).getCenterBlockPos());
+        Biome biome = region.getBiome((new ChunkPos(chunkX, chunkZ)).getStartPos());
         ChunkRandom chunkRandom = new ChunkRandom();
         chunkRandom.setPopulationSeed(region.getSeed(), chunkX << 4, chunkZ << 4);
         SpawnHelper.populateEntities(region, biome, chunkX, chunkZ, chunkRandom);
@@ -209,9 +226,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         return noise;
     }
 
-    // stupid entity spawning
-    public List<Biome.SpawnEntry> getEntitySpawnList(Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos) {
-        if (accessor.method_28388(pos, true, StructureFeature.SWAMP_HUT).hasChildren()) {
+    public List<SpawnSettings.SpawnEntry> getEntitySpawnList(Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos) {
+        if (accessor.getStructureAt(pos, true, StructureFeature.SWAMP_HUT).hasChildren()) {
             if (group == SpawnGroup.MONSTER) {
                 return StructureFeature.SWAMP_HUT.getMonsterSpawns();
             }
@@ -222,15 +238,15 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         }
 
         if (group == SpawnGroup.MONSTER) {
-            if (accessor.method_28388(pos, false, StructureFeature.PILLAGER_OUTPOST).hasChildren()) {
+            if (accessor.getStructureAt(pos, false, StructureFeature.PILLAGER_OUTPOST).hasChildren()) {
                 return StructureFeature.PILLAGER_OUTPOST.getMonsterSpawns();
             }
 
-            if (accessor.method_28388(pos, false, StructureFeature.MONUMENT).hasChildren()) {
+            if (accessor.getStructureAt(pos, false, StructureFeature.MONUMENT).hasChildren()) {
                 return StructureFeature.MONUMENT.getMonsterSpawns();
             }
 
-            if (accessor.method_28388(pos, true, StructureFeature.FORTRESS).hasChildren()) {
+            if (accessor.getStructureAt(pos, true, StructureFeature.FORTRESS).hasChildren()) {
                 return StructureFeature.FORTRESS.getMonsterSpawns();
             }
         }
@@ -239,13 +255,13 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     }
 
     @Override
-    protected Codec<? extends ChunkGenerator> method_28506() {
+    protected Codec<? extends ChunkGenerator> getCodec() {
         return CODEC;
     }
 
     @Override
     public ChunkGenerator withSeed(long seed) {
-        return new EcotonesChunkGenerator(new EcotonesBiomeSource(seed), seed);
+        return new EcotonesChunkGenerator(this.populationSource.withSeed(seed), seed);
     }
 
     // Vanilla random improvements
@@ -262,7 +278,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
         for (GenerationStep.Feature step : GenerationStep.Feature.values()) {
             try {
-                biome.generateFeatureStep(step, structureAccessor, this, world, populationSeed, random, pos);
+                biome.generateFeatureStep(structureAccessor, this, world, populationSeed, random, pos);
             } catch (Exception var18) {
                 CrashReport crashReport = CrashReport.create(var18, "Biome decoration");
                 crashReport.addElement("Generation")
@@ -270,7 +286,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
                         .add("CenterZ", centerZ)
                         .add("Step", step)
                         .add("Seed", populationSeed)
-                        .add("Biome", Registry.BIOME.getId(biome));
+                        .add("Biome", biome);
                 throw new CrashException(crashReport);
             }
         }
@@ -278,29 +294,30 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
     @Override
     public void carve(long seed, BiomeAccess access, Chunk chunk, GenerationStep.Carver carver) {
-        BiomeAccess biomeAccess = access.withSource(this.biomeSource);
+        BiomeAccess biomeAccess = access.withSource(this.populationSource);
         ImprovedChunkRandom chunkRandom = new ImprovedChunkRandom();
         ChunkPos chunkPos = chunk.getPos();
-        int chunkX = chunkPos.x;
-        int chunkZ = chunkPos.z;
-        Biome biome = this.biomeSource.getBiomeForNoiseGen(chunkPos.x << 2, 0, chunkPos.z << 2);
-        BitSet carvingMask = ((ProtoChunk)chunk).method_28510(carver);
+        int j = chunkPos.x;
+        int k = chunkPos.z;
+        GenerationSettings generationSettings = this.populationSource.getBiomeForNoiseGen(class_5742.method_33100(chunkPos.getStartX()), 0, class_5742.method_33100(chunkPos.getStartZ())).getGenerationSettings();
+        BitSet bitSet = ((ProtoChunk)chunk).getOrCreateCarvingMask(carver);
 
-        for(int localX = chunkX - 8; localX <= chunkX + 8; ++localX) {
-            for(int localZ = chunkZ - 8; localZ <= chunkZ + 8; ++localZ) {
-                List<ConfiguredCarver<?>> carverList = biome.getCarversForStep(carver);
-                ListIterator<ConfiguredCarver<?>> carvers = carverList.listIterator();
+        for(int l = j - 8; l <= j + 8; ++l) {
+            for(int m = k - 8; m <= k + 8; ++m) {
+                List<Supplier<ConfiguredCarver<?>>> list = generationSettings.getCarversForStep(carver);
+                ListIterator listIterator = list.listIterator();
 
-                while(carvers.hasNext()) {
-                    int carverIndex = carvers.nextIndex();
-                    ConfiguredCarver<?> configuredCarver = carvers.next();
-                    chunkRandom.setCarverSeed(seed + (long) carverIndex, localX, localZ);
-                    if (configuredCarver.shouldCarve(chunkRandom, localX, localZ)) {
-                        configuredCarver.carve(chunk, biomeAccess::getBiome, chunkRandom, this.getSeaLevel(), localX, localZ, chunkX, chunkZ, carvingMask);
+                while(listIterator.hasNext()) {
+                    int n = listIterator.nextIndex();
+                    ConfiguredCarver<?> configuredCarver = (ConfiguredCarver)((Supplier)listIterator.next()).get();
+                    chunkRandom.setCarverSeed(seed + (long)n, l, m);
+                    if (configuredCarver.shouldCarve(chunkRandom, l, m)) {
+                        configuredCarver.carve(chunk, biomeAccess::getBiome, chunkRandom, this.getSeaLevel(), l, m, j, k, bitSet);
                     }
                 }
             }
         }
+
     }
 
     // data getters
@@ -314,7 +331,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     }
 
     public double getSoilQualityAt(double x, double z) {
-        return 1 - Math.abs(soilDrainageNoise.sample(x, z));
+        return MathHelper.clamp((soilDrainageNoise.sample(x, z) / 2) + 0.5, 0, 1);
     }
 
     // Tree trait data

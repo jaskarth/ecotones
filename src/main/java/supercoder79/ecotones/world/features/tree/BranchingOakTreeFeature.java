@@ -7,19 +7,18 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.decorator.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.tree.TrunkVineTreeDecorator;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.tree.OakTrait;
 import supercoder79.ecotones.tree.Traits;
 import supercoder79.ecotones.tree.oak.DefaultOakTrait;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeUtil;
-import supercoder79.ecotones.world.generation.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
     }
 
     @Override
-    public boolean generate(ServerWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockPos pos, TreeGenerationConfig config) {
+    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, TreeGenerationConfig config) {
         //ensure spawn
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
 
@@ -69,7 +68,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
         return false;
     }
 
-    private void growLeaves(WorldAccess world, Random random, List<BlockPos> leafPlacementNodes, OakTrait trait, TreeGenerationConfig config) {
+    private void growLeaves(StructureWorldAccess world, Random random, List<BlockPos> leafPlacementNodes, OakTrait trait, TreeGenerationConfig config) {
         List<BlockPos> leaves = new ArrayList<>();
         for (BlockPos node : leafPlacementNodes) {
             trait.generateLeaves(world, node, random, leaves, config);

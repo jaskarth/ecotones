@@ -1,95 +1,105 @@
 package supercoder79.ecotones.world.biome.special;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.BiomeEffects;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.world.biome.BiomeUtil;
-import supercoder79.ecotones.world.biome.EcotonesBiome;
+import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.biome.technical.TropicalBeachBiome;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
-public class ThePitsBiome extends EcotonesBiome {
-    public static ThePitsBiome INSTANCE;
-    public static ThePitsBiome EDGE;
+public class ThePitsBiome extends EcotonesBiomeBuilder {
+    public static Biome INSTANCE;
+    public static Biome EDGE;
 
     public static void init() {
-        INSTANCE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits"), new ThePitsBiome(-1.5f, false));
-        EDGE = Registry.register(Registry.BIOME, new Identifier("ecotones", "the_pits_edge"), new ThePitsBiome(0.375f, true));
+        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "the_pits"), new ThePitsBiome(-1.5f, false).build());
+        EDGE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "the_pits_edge"), new ThePitsBiome(0.375f, true).build());
 
-        BiomeRegistries.registerAllSpecial(id -> (id != Registry.BIOME.getRawId(TropicalBeachBiome.INSTANCE)) && !BiomeUtil.isOcean(id), INSTANCE, EDGE);
+        BiomeRegistries.registerAllSpecial(id -> !BiomeUtil.isOcean(id), INSTANCE, EDGE);
 
         BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 200);
     }
 
     protected ThePitsBiome(float height, boolean isEdge) {
-        super(new Settings()
-                .configureSurfaceBuilder(EcotonesSurfaces.DELETE_WATER_BUILDER, SurfaceBuilder.GRASS_CONFIG)
-                .precipitation(Precipitation.RAIN)
-                .category(Category.PLAINS)
-                .depth(height)
-                .scale(0.0125F)
-                .temperature(1.6F)
-                .downfall(0.4F)
-                .effects(new BiomeEffects.Builder()
-                        .waterColor(4159204)
-                        .waterFogColor(329011)
-                        .fogColor(12638463)
-                        .build()).parent(null)
-                .noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 1.0F))),
-                0.35,
-                1);
-        DefaultBiomeFeatures.addLandCarvers(this);
-        DefaultBiomeFeatures.method_28440(this);
-        DefaultBiomeFeatures.addDungeons(this);
-        DefaultBiomeFeatures.addMineables(this);
-        DefaultBiomeFeatures.addDefaultOres(this);
-        DefaultBiomeFeatures.addDefaultDisks(this);
-        DefaultBiomeFeatures.addDefaultMushrooms(this);
-        DefaultBiomeFeatures.addSprings(this);
-        DefaultBiomeFeatures.addFrozenTopLayer(this);
+        this.surfaceBuilder(EcotonesSurfaces.DELETE_WATER_BUILDER, SurfaceBuilder.GRASS_CONFIG);
+
+        this.depth(height);
+        this.scale(0.0125F);
+        this.temperature(1.6F);
+        this.downfall(0.4F);
+
+        this.precipitation(Biome.Precipitation.RAIN);
+
+        DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDungeons(this.getGenerationSettings());
+        DefaultBiomeFeatures.addMineables(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultOres(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultMushrooms(this.getGenerationSettings());
+        DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
+        DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
         if (!isEdge) {
             this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                    Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.STONE.getDefaultState(), 1))
-                            .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(3))));
+                    Feature.FOREST_ROCK.configure(new SingleStateFeatureConfig(Blocks.STONE.getDefaultState()))
+                            .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                            .spreadHorizontally()
+                            .applyChance(2));
 
-            this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                    Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.STONE.getDefaultState(), 2))
-                            .createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(5))));
+//            this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+//                    Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.STONE.getDefaultState(), 2))
+//                            .decorate(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(5))));
         }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(12))));
+                        .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .repeat(12));
 
-        this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, Blocks.IRON_ORE.getDefaultState(), 9)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(30, 0, 0, 64))));
-        this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, Blocks.GOLD_ORE.getDefaultState(), 9)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(6, 0, 0, 32))));
+        this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
+                Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 9))
+                        .rangeOf(64)
+                        .spreadHorizontally()
+                        .repeat(30));
+
+        this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
+                Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 9))
+                        .rangeOf(32)
+                        .spreadHorizontally()
+                        .repeat(6));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.LAVA.getDefaultState()))
-                        .createDecoratedFeature(Decorator.LAVA_LAKE.configure(new ChanceDecoratorConfig(40))));
+                        .decorate(Decorator.LAVA_LAKE.configure(new ChanceDecoratorConfig(40))));
 
-        this.addSpawn(SpawnGroup.AMBIENT, new SpawnEntry(EntityType.BAT, 10, 8, 8));
-        this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.SPIDER, 100, 4, 4));
-        this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.ZOMBIE, 95, 4, 4));
-        this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
-        this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.SKELETON, 100, 4, 4));
-        this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.CREEPER, 100, 4, 4));
-        this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.SLIME, 100, 4, 4));
-        this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
-        this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.WITCH, 5, 1, 1));
+        this.addSpawn(SpawnGroup.AMBIENT, new SpawnSettings.SpawnEntry(EntityType.BAT, 10, 8, 8));
+        this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SPIDER, 100, 4, 4));
+        this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE, 95, 4, 4));
+        this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
+        this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SKELETON, 100, 4, 4));
+        this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.CREEPER, 100, 4, 4));
+        this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SLIME, 100, 4, 4));
+        this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
+        this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 5, 1, 1));
     }
 }

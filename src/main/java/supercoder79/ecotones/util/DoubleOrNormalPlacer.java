@@ -15,7 +15,7 @@ public class DoubleOrNormalPlacer extends BlockPlacer {
     public static Codec<DoubleOrNormalPlacer> CODEC = Codec.unit(() -> INSTANCE);
 
     @Override
-    public void method_23403(WorldAccess world, BlockPos pos, BlockState state, Random random) {
+    public void generate(WorldAccess world, BlockPos pos, BlockState state, Random random) {
         if (state.getBlock() instanceof TallPlantBlock) {
             ((TallPlantBlock)state.getBlock()).placeAt(world, pos, 2);
         } else {
@@ -24,7 +24,7 @@ public class DoubleOrNormalPlacer extends BlockPlacer {
     }
 
     @Override
-    protected BlockPlacerType<?> method_28673() {
+    protected BlockPlacerType<?> getType() {
         return EcotonesBlockPlacers.DOUBLE_OR_NORMAL;
     }
 }
