@@ -278,8 +278,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
         try {
             biome.generateFeatureStep(structureAccessor, this, world, populationSeed, random, pos);
-        } catch (Exception var18) {
-            CrashReport crashReport = CrashReport.create(var18, "Biome decoration");
+        } catch (Exception ex) {
+            CrashReport crashReport = CrashReport.create(ex, "Biome decoration");
             crashReport.addElement("Generation")
                     .add("CenterX", centerX)
                     .add("CenterZ", centerZ)

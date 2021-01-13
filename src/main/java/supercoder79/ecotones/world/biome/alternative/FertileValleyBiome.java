@@ -59,6 +59,8 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
         this.volatility(1.1);
 
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.field_26253, 7)));
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addSavannaGrass(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

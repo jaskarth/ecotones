@@ -13,6 +13,7 @@ import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountNoiseDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
@@ -68,6 +69,11 @@ public class WastelandBiome extends EcotonesBiomeBuilder {
         this.skyColor(0xf5dd89);
         this.grassColor(0x705719);
         this.foliageColor(0x705719);
+
+        this.hilliness(hilliness);
+        this.volatility(volatility);
+
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))

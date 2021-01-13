@@ -55,6 +55,8 @@ public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
         this.hilliness(4.0);
         this.volatility(0.92);
 
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.field_26253, 7)));
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

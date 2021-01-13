@@ -71,6 +71,8 @@ public class CloverFieldsBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
                         .repeat(1)

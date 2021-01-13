@@ -11,6 +11,7 @@ import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountNoiseDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
@@ -71,6 +72,8 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilly ? 4.0 : 1.5);
         this.volatility(hilly ? 0.8 : 1.0);
+
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
 
         if (clearing) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

@@ -66,6 +66,7 @@ public class DrySavannaBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSavannaGrass(this.getGenerationSettings());
         DefaultBiomeFeatures.addSavannaTallGrass(this.getGenerationSettings());
 
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> SavannaVillageData.field_26285, 7)));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,

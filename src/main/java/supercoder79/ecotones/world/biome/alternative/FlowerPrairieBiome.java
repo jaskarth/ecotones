@@ -57,6 +57,8 @@ public class FlowerPrairieBiome extends EcotonesBiomeBuilder {
         this.precipitation(Biome.Precipitation.RAIN);
 
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.field_26253, 7)));
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsFeatures(this.getGenerationSettings());

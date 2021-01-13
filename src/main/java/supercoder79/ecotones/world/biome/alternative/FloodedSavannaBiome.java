@@ -10,6 +10,7 @@ import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountNoiseDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
@@ -106,6 +107,8 @@ public class FloodedSavannaBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addDefaultMushrooms(this.getGenerationSettings());
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
+
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
 
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
         BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
