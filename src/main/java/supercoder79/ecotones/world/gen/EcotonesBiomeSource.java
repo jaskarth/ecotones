@@ -24,7 +24,7 @@ public class EcotonesBiomeSource extends BiomeSource {
     private final long seed;
 
     public EcotonesBiomeSource(Registry<Biome> biomeRegistry, long seed) {
-        super(ImmutableList.of()); // TODO: fix
+        super(BiomeGenData.LOOKUP.keySet().stream().map((k) -> () -> biomeRegistry.getOrThrow(k)));
         this.biomeRegistry = biomeRegistry;
         this.biomeSampler = EcotonesBiomeLayers.build(seed);
         this.seed = seed;

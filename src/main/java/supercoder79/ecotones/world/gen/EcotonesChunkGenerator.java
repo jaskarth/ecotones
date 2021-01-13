@@ -276,19 +276,16 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         ImprovedChunkRandom random = new ImprovedChunkRandom();
         long populationSeed = random.setPopulationSeed(world.getSeed(), topX, topZ, biome.getScale() + scaleNoise.sample(topX + 8, topZ + 8));
 
-        for (GenerationStep.Feature step : GenerationStep.Feature.values()) {
-            try {
-                biome.generateFeatureStep(structureAccessor, this, world, populationSeed, random, pos);
-            } catch (Exception var18) {
-                CrashReport crashReport = CrashReport.create(var18, "Biome decoration");
-                crashReport.addElement("Generation")
-                        .add("CenterX", centerX)
-                        .add("CenterZ", centerZ)
-                        .add("Step", step)
-                        .add("Seed", populationSeed)
-                        .add("Biome", biome);
-                throw new CrashException(crashReport);
-            }
+        try {
+            biome.generateFeatureStep(structureAccessor, this, world, populationSeed, random, pos);
+        } catch (Exception var18) {
+            CrashReport crashReport = CrashReport.create(var18, "Biome decoration");
+            crashReport.addElement("Generation")
+                    .add("CenterX", centerX)
+                    .add("CenterZ", centerZ)
+                    .add("Seed", populationSeed)
+                    .add("Biome", biome);
+            throw new CrashException(crashReport);
         }
     }
 
