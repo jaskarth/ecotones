@@ -1,0 +1,37 @@
+{
+  "block.ecotones.peat": "泥炭块",
+  "block.ecotones.short_grass": "矮草",
+  "block.ecotones.reeds": "芦苇",
+  "block.ecotones.wildflowers": "野花",
+  "block.ecotones.geyser": "间歇喷泉",
+  "block.ecotones.coconut": "椰子",
+  "block.ecotones.hazel_leaves": "榛树树叶",
+  "block.ecotones.hazel_sapling": "榛树树苗",
+  "block.ecotones.sandy_grass": "沙草",
+  "block.ecotones.surface_rock": "地表岩石",
+  "block.ecotones.clover": "四叶草",
+  "block.ecotones.pinecone": "松果",
+  "block.ecotones.dried_dirt": "干土",
+  "block.ecotones.small_shrub": "小型灌木",
+
+  "item.ecotones.peat": "泥炭块",
+  "item.ecotones.short_grass": "矮草",
+  "item.ecotones.reeds": "芦苇",
+  "item.ecotones.wildflowers": "野花",
+  "item.ecotones.geyser": "Geyser",
+  "item.ecotones.coconut": "椰子",
+  "item.ecotones.hazel_leaves": "榛树树叶",
+  "item.ecotones.hazel_sapling": "榛树树苗,
+  "item.ecotones.sandy_grass": "沙草",
+  "item.ecotones.surface_rock": "地表岩石",
+  "item.ecotones.clover": "四叶草",
+  "item.ecotones.pinecone": "松果",
+  "item.ecotones.dried_dirt": "干土",
+  "item.ecotones.small_shrub": "小型灌木",
+
+  "item.ecotones.peat_item": "泥炭",
+  "item.ecotones.pine_sap": "松树树液",
+  "item.ecotones.sap_ball": "树液球",
+
+  "generator.ecotones": "§2交错群系"
+}
