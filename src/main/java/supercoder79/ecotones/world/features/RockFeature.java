@@ -31,7 +31,7 @@ public class RockFeature extends Feature<RockFeatureConfig> {
                     }
 
                     BlockState state = world.getBlockState(pos.down());
-                    if (!isStone(state) && !isStone(state)) {
+                    if (!isStone(state.getBlock()) && !isStone(state.getBlock())) {
                         break restart;
                     }
                 }

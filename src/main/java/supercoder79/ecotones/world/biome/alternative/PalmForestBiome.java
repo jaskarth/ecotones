@@ -23,7 +23,7 @@ import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.tree.CocoaBeansTreeDecorator;
-import net.minecraft.world.gen.tree.LeavesVineTreeDecorator;
+import net.minecraft.world.gen.tree.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.tree.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -107,7 +107,7 @@ public class PalmForestBiome extends EcotonesBiomeBuilder {
                         .decorators(ImmutableList.of(
                                 new CocoaBeansTreeDecorator(0.2F),
                                 TrunkVineTreeDecorator.INSTANCE,
-                                LeavesVineTreeDecorator.INSTANCE)
+                                LeaveVineTreeDecorator.INSTANCE)
                         ).ignoreVines().build())
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(3.5))));
 

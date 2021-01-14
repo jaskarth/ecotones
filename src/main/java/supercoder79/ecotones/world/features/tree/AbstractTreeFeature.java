@@ -33,7 +33,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
     protected static boolean canTreeReplace(TestableWorld world, BlockPos pos) {
         return world.testBlockState(pos, (state) -> {
             Block block = state.getBlock();
-            return state.isAir() || state.isIn(BlockTags.LEAVES) || isSoil(state) || state.isIn(BlockTags.LOGS) || state.isIn(BlockTags.SAPLINGS) || block == Blocks.VINE;
+            return state.isAir() || state.isIn(BlockTags.LEAVES) || isSoil(state.getBlock()) || state.isIn(BlockTags.LOGS) || state.isIn(BlockTags.SAPLINGS) || block == Blocks.VINE;
         });
     }
 
@@ -44,7 +44,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
     protected static boolean isNaturalDirt(TestableWorld world, BlockPos pos) {
         return world.testBlockState(pos, (state) -> {
             Block block = state.getBlock();
-            return isSoil(state) && block != Blocks.GRASS_BLOCK && block != Blocks.MYCELIUM;
+            return isSoil(block) && block != Blocks.GRASS_BLOCK && block != Blocks.MYCELIUM;
         });
     }
 
@@ -61,13 +61,13 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
     }
 
     public static boolean isNaturalDirtOrGrass(TestableWorld world, BlockPos pos) {
-        return world.testBlockState(pos, Feature::isSoil);
+        return world.testBlockState(pos, (state) -> isSoil(state.getBlock()));
     }
 
     protected static boolean isDirtOrGrass(TestableWorld world, BlockPos pos) {
         return world.testBlockState(pos, (state) -> {
             Block block = state.getBlock();
-            return isSoil(state) || block == Blocks.FARMLAND;
+            return isSoil(block) || block == Blocks.FARMLAND;
         });
     }
 
@@ -158,7 +158,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
         while(var9.hasNext()) {
             blockPos2 = (BlockPos)var9.next();
             if (box.contains(blockPos2)) {
-                voxelSet.set(blockPos2.getX() - box.minX, blockPos2.getY() - box.minY, blockPos2.getZ() - box.minZ);
+                voxelSet.set(blockPos2.getX() - box.minX, blockPos2.getY() - box.minY, blockPos2.getZ() - box.minZ, true, true);
             }
         }
 
@@ -167,7 +167,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
         while(var9.hasNext()) {
             blockPos2 = (BlockPos)var9.next();
             if (box.contains(blockPos2)) {
-                voxelSet.set(blockPos2.getX() - box.minX, blockPos2.getY() - box.minY, blockPos2.getZ() - box.minZ);
+                voxelSet.set(blockPos2.getX() - box.minX, blockPos2.getY() - box.minY, blockPos2.getZ() - box.minZ, true, true);
             }
 
             Direction[] var11 = Direction.values();
@@ -182,7 +182,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
                         ((Set)list.get(0)).add(mutable.toImmutable());
                         setBlockStateWithoutUpdatingNeighbors(world, mutable, (BlockState)blockState.with(Properties.DISTANCE_1_7, 1));
                         if (box.contains(mutable)) {
-                            voxelSet.set(mutable.getX() - box.minX, mutable.getY() - box.minY, mutable.getZ() - box.minZ);
+                            voxelSet.set(mutable.getX() - box.minX, mutable.getY() - box.minY, mutable.getZ() - box.minZ, true, true);
                         }
                     }
                 }
@@ -197,7 +197,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
             while(var25.hasNext()) {
                 BlockPos blockPos3 = (BlockPos)var25.next();
                 if (box.contains(blockPos3)) {
-                    voxelSet.set(blockPos3.getX() - box.minX, blockPos3.getY() - box.minY, blockPos3.getZ() - box.minZ);
+                    voxelSet.set(blockPos3.getX() - box.minX, blockPos3.getY() - box.minY, blockPos3.getZ() - box.minZ, true, true);
                 }
 
                 Direction[] var27 = Direction.values();
@@ -214,7 +214,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
                                 BlockState blockState3 = (BlockState)blockState2.with(Properties.DISTANCE_1_7, k + 1);
                                 setBlockStateWithoutUpdatingNeighbors(world, mutable, blockState3);
                                 if (box.contains(mutable)) {
-                                    voxelSet.set(mutable.getX() - box.minX, mutable.getY() - box.minY, mutable.getZ() - box.minZ);
+                                    voxelSet.set(mutable.getX() - box.minX, mutable.getY() - box.minY, mutable.getZ() - box.minZ, true, true);
                                 }
 
                                 set2.add(mutable.toImmutable());

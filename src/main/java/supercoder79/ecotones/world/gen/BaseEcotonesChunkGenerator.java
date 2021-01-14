@@ -205,7 +205,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         BlockState[] states = new BlockState[this.noiseSizeY * this.verticalNoiseResolution];
         this.sampleHeightmap(x, z, states, null);
         // TODO: custom min y, using 0 for now
-        return new VerticalBlockSample(0, states);
+        return new VerticalBlockSample( states);
     }
 
     private int sampleHeightmap(int x, int z, @Nullable BlockState[] blockStates, @Nullable Predicate<BlockState> predicate) {

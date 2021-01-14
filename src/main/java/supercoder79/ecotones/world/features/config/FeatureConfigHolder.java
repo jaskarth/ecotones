@@ -17,7 +17,7 @@ import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.tree.CocoaBeansTreeDecorator;
-import net.minecraft.world.gen.tree.LeavesVineTreeDecorator;
+import net.minecraft.world.gen.tree.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.tree.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.trunk.MegaJungleTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
@@ -192,7 +192,7 @@ public class FeatureConfigHolder {
             new SimpleBlockStateProvider(Blocks.JUNGLE_LEAVES.getDefaultState()),
             new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3),
             new StraightTrunkPlacer(4, 8, 0), new TwoLayersFeatureSize(1, 0, 1))
-            .decorators(ImmutableList.of(new CocoaBeansTreeDecorator(0.2F), TrunkVineTreeDecorator.INSTANCE, LeavesVineTreeDecorator.INSTANCE)).ignoreVines().build();
+            .decorators(ImmutableList.of(new CocoaBeansTreeDecorator(0.2F), TrunkVineTreeDecorator.INSTANCE, LeaveVineTreeDecorator.INSTANCE)).ignoreVines().build();
 
     public static TreeFeatureConfig MEGA_JUNGLE = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.JUNGLE_LOG.getDefaultState()),
@@ -200,5 +200,5 @@ public class FeatureConfigHolder {
             new JungleFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 2),
             new MegaJungleTrunkPlacer(10, 2, 19),
             new TwoLayersFeatureSize(1, 1, 2))
-            .decorators(ImmutableList.of(TrunkVineTreeDecorator.INSTANCE, LeavesVineTreeDecorator.INSTANCE)).build();
+            .decorators(ImmutableList.of(TrunkVineTreeDecorator.INSTANCE, LeaveVineTreeDecorator.INSTANCE)).build();
 }

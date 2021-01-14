@@ -2,7 +2,6 @@ package supercoder79.ecotones.world.gen;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.class_5742;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Util;
 import net.minecraft.util.crash.CrashException;
@@ -296,7 +295,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         ChunkPos chunkPos = chunk.getPos();
         int j = chunkPos.x;
         int k = chunkPos.z;
-        GenerationSettings generationSettings = this.populationSource.getBiomeForNoiseGen(class_5742.method_33100(chunkPos.getStartX()), 0, class_5742.method_33100(chunkPos.getStartZ())).getGenerationSettings();
+        GenerationSettings generationSettings = this.populationSource.getBiomeForNoiseGen(chunkPos.x << 2, 0, chunkPos.z << 2).getGenerationSettings();
         BitSet bitSet = ((ProtoChunk)chunk).getOrCreateCarvingMask(carver);
 
         for(int l = j - 8; l <= j + 8; ++l) {
