@@ -112,7 +112,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         }
 
         // This uses 16.0 while vanilla uses 10.0, to get better looking terrain.
-        double clampedInterpolation = (interpolationValue / 16.0 + 1.0) / 2.0;
+        double clampedInterpolation = (interpolationValue / 32.0 + 1.0) / 2.0;
 
         if (clampedInterpolation >= 1) {
             // Sample only upper noise, as the lower noise will be interpolated out.

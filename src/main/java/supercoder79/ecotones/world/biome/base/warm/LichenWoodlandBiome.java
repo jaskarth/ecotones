@@ -124,6 +124,11 @@ public class LichenWoodlandBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(2));
 
+        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.PODZOL.configure(FeatureConfig.DEFAULT)
+                        .spreadHorizontally()
+                        .applyChance(3));
+
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SMALL_SPRUCE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(2.5))));

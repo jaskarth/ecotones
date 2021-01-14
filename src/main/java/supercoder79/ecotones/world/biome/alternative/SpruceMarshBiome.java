@@ -150,6 +150,12 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(8));
 
+        this.addFeature(GenerationStep.Feature.LAKES,
+                EcotonesFeatures.PODZOL.configure(FeatureConfig.DEFAULT)
+                        .spreadHorizontally()
+                        .applyChance(2)
+                        .repeat(3));
+
         //todo refactor
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(FeatureConfigHolder.SMALL_PINE_CONFIG)

@@ -10,6 +10,7 @@ import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -121,6 +122,11 @@ public class SparseForestBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BRANCHING_DARK_OAK.configure(TreeType.RARE_DARK_OAK)
                         .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DARK_OAK.decorationData)));
+
+        this.addFeature(GenerationStep.Feature.TOP_LAYER_MODIFICATION,
+                EcotonesFeatures.PODZOL.configure(FeatureConfig.DEFAULT)
+                        .spreadHorizontally()
+                        .applyChance(5));
 
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
         BiomeUtil.addDefaultFeatures(this.getGenerationSettings());

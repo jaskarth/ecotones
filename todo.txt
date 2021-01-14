@@ -28,7 +28,6 @@
 * Aquatic plants
 * Implement curly grass
 * Biome color based clover & wildflowers
-* Berry Bushes
 * Sap block
 * Sap mob trap
 * Acorns -> grow large trees
@@ -46,6 +45,7 @@
 * Fix: Water patches in flooded savannas spawn with air on sides
 * Improve the look of a few biomes (remove shrubs, more unique features, etc.)
 * Better mod compat, deferred register system
+* Geodes for all biomes
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas
@@ -68,7 +68,6 @@
 * flooded_savannah -> flooded_savanna
 * beach -> tropical_beach
 * Smaller biome sizes
-* Smoother worldgen
 * Increase biome smoothing radius
 * Rename Dry Forest
 

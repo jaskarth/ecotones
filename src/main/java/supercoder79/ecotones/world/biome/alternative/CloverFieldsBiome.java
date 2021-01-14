@@ -125,6 +125,11 @@ public class CloverFieldsBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.BEEHIVES.configure(FeatureConfig.DEFAULT)
                         .applyChance(64));
 
+        this.addFeature(GenerationStep.Feature.LAKES,
+                EcotonesFeatures.PODZOL.configure(FeatureConfig.DEFAULT)
+                        .spreadHorizontally()
+                        .applyChance(4));
+
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
         BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
     }

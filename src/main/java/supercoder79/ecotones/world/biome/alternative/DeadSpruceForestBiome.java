@@ -14,10 +14,7 @@ import net.minecraft.world.gen.decorator.CountNoiseDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
@@ -123,6 +120,11 @@ public class DeadSpruceForestBiome extends EcotonesBiomeBuilder {
                         .repeat(4)
                         .spreadHorizontally()
                         .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE)));
+
+        this.addFeature(GenerationStep.Feature.LAKES,
+                EcotonesFeatures.PODZOL.configure(FeatureConfig.DEFAULT)
+                        .spreadHorizontally()
+                        .repeat(2));
 
         DefaultBiomeFeatures.addForestFlowers(this.getGenerationSettings());
         DefaultBiomeFeatures.addMossyRocks(this.getGenerationSettings());
