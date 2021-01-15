@@ -89,6 +89,11 @@ public class FeatureConfigHolder {
                     .addState(Blocks.GRASS.getDefaultState(), 6)
                     .addState(Blocks.TALL_GRASS.getDefaultState(), 3), new DoubleOrNormalPlacer()).tries(32).build();
 
+    public static RandomPatchFeatureConfig ONLY_TALL_GRASS_CONFIG =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(Blocks.TALL_GRASS.getDefaultState(), 1), new DoubleOrNormalPlacer())
+                    .tries(96).build();
+
     public static RandomPatchFeatureConfig BLUEBELL_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
                     .addState(EcotonesBlocks.BLUEBELL.getDefaultState(), 32)
