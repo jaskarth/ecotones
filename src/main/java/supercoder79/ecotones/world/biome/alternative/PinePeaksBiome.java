@@ -2,6 +2,7 @@ package supercoder79.ecotones.world.biome.alternative;
 
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -78,7 +79,7 @@ public class PinePeaksBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
-                        new SimpleBlockStateProvider(Blocks.SWEET_BERRY_BUSH.getDefaultState()),
+                        new SimpleBlockStateProvider(Blocks.SWEET_BERRY_BUSH.getDefaultState().with(SweetBerryBushBlock.AGE, 3)),
                         SimpleBlockPlacer.INSTANCE).tries(64)
                         .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).cannotProject().build())
                         .repeat(2).spreadHorizontally().decorate(Decorator.HEIGHTMAP_SPREAD_DOUBLE.configure(NopeDecoratorConfig.INSTANCE)));
