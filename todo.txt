@@ -17,7 +17,6 @@
 * Gravelly desert
 * Rocky desert
 * Stone Spires (basically the ending fight area of Avatar lmao)
-* Maple forest
 * Cherry forest
 * Floodplains
 * Birch forest style with oak trees
@@ -46,6 +45,7 @@
 * Improve the look of a few biomes (remove shrubs, more unique features, etc.)
 * Better mod compat, deferred register system
 * Geodes for all biomes
+* Maple sapling
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas

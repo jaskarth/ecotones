@@ -1,6 +1,7 @@
 package supercoder79.ecotones.api;
 
 import net.minecraft.block.Blocks;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 public class TreeType {
     // Salts
@@ -49,6 +50,9 @@ public class TreeType {
     // Dark oak trees
     public static final TreeGenerationConfig RARE_DARK_OAK = new TreeGenerationConfig(0.3, Blocks.DARK_OAK_LOG.getDefaultState(), Blocks.DARK_OAK_LEAVES.getDefaultState(), 3, -1, 6, 4, 0.2, 0.2, false, 79);
     public static final TreeGenerationConfig STANDARD_DARK_OAK = new TreeGenerationConfig(3.5, Blocks.DARK_OAK_LOG.getDefaultState(), Blocks.DARK_OAK_LEAVES.getDefaultState(), 3, -1, 8, 8, 0.2, 0.2, false, 79);
+
+    // Maple Trees
+    public static final TreeGenerationConfig STANDARD_MAPLE = new TreeGenerationConfig(3.25, Blocks.OAK_LOG.getDefaultState(), EcotonesBlocks.MAPLE_LEAVES.getDefaultState(), 4, 3, 6, 5, 0.15, 0.15, false, 79);
 
     // Dead trees
     public static final TreeGenerationConfig DEAD_SPRUCE = new TreeGenerationConfig(3, Blocks.SPRUCE_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 4, -1, 10, 10, 0.5, 0.5, false, 79);

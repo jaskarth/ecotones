@@ -37,7 +37,7 @@ public class TemperateRainforestBiome extends EcotonesBiomeBuilder {
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "temperate_rainforest_mountainous"), new TemperateRainforestBiome(1.75f, 0.9f, 7, 0.74).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
-        Climate.HOT_RAINFOREST.add(INSTANCE, 1);
+        Climate.WARM_RAINFOREST.add(INSTANCE, 1);
     }
 
     protected TemperateRainforestBiome(float depth, float scale, double hilliness, double volatility) {

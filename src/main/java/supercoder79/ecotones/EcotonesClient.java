@@ -10,7 +10,7 @@ import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.render.RenderLayer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
-import supercoder79.ecotones.client.GoVote;
+import supercoder79.ecotones.client.Colors;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.particle.SandParticle;
 
@@ -18,7 +18,6 @@ import supercoder79.ecotones.client.particle.SandParticle;
 public class EcotonesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        GoVote.init();
 
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> view != null && pos != null ? BiomeColors.getFoliageColor(view, pos) : FoliageColors.getDefaultColor(),
@@ -29,10 +28,18 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.WIDE_FERN,
                 EcotonesBlocks.SHORT_GRASS);
 
-        ColorProviderRegistry.ITEM.register(((stack, tintIndex) -> FoliageColors.getDefaultColor()),
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColors.getDefaultColor(),
                 EcotonesBlocks.SHORT_GRASS_ITEM,
                 EcotonesBlocks.WIDE_FERN_ITEM,
                 EcotonesBlocks.HAZEL_LEAVES_ITEM);
+
+        // Maple leaves
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> Colors.maple(),
+                EcotonesBlocks.MAPLE_LEAVES_ITEM);
+
+        ColorProviderRegistry.BLOCK.register(
+                (state, view, pos, tintIndex) -> Colors.maple(),
+                EcotonesBlocks.MAPLE_LEAVES);
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
                 EcotonesBlocks.SHORT_GRASS,
@@ -50,7 +57,8 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.CYAN_ROSE,
                 EcotonesBlocks.LICHEN,
                 EcotonesBlocks.MOSS,
-                EcotonesBlocks.PINECONE);
+                EcotonesBlocks.PINECONE,
+                EcotonesBlocks.MAPLE_LEAVES);
 
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAND, SandParticle.Factory::new);
     }

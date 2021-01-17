@@ -9,8 +9,7 @@
     "TreeDecoratorTypeAccessor"
   ],
   "client": [
-    "MixinBiomeColors",
-    "MixinMinecraftClient"
+    "MixinBiomeColors"
   ],
   "injectors": {
     "defaultRequire": 1

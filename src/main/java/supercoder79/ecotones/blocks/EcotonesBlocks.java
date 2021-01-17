@@ -52,6 +52,8 @@ public class EcotonesBlocks {
     public static Item  MOSS_ITEM;
     public static Block CYAN_ROSE;
     public static Item  CYAN_ROSE_ITEM;
+    public static Block MAPLE_LEAVES;
+    public static Item MAPLE_LEAVES_ITEM;
 
     public static void init() {
         PEAT_BLOCK = Registry.register(Registry.BLOCK, new Identifier("ecotones", "peat"), new Block(FabricBlockSettings.copy(Blocks.DIRT).breakByTool(FabricToolTags.SHOVELS).hardness(1f).build()));
@@ -111,5 +113,8 @@ public class EcotonesBlocks {
 
         CYAN_ROSE = Registry.register(Registry.BLOCK, new Identifier("ecotones", "cyan_rose"), new CyanRoseBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         CYAN_ROSE_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "cyan_rose"), new BlockItem(CYAN_ROSE, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        MAPLE_LEAVES = Registry.register(Registry.BLOCK, new Identifier("ecotones", "maple_leaves"), new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().build()));
+        MAPLE_LEAVES_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "maple_leaves"), new BlockItem(MAPLE_LEAVES, new Item.Settings().group(ItemGroup.DECORATIONS)));
     }
 }

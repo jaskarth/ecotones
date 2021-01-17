@@ -11,6 +11,7 @@ public class TreeUtil {
         if (state.isAir() || !state.getMaterial().isSolid()) {
             return true;
         }
+
         return state.isIn(BlockTags.LEAVES) || state.isIn(BlockTags.LOGS);
     }
 }
