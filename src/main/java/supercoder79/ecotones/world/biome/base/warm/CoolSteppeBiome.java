@@ -24,19 +24,23 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 public class CoolSteppeBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
+    public static Biome THICKET;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_steppe"), new CoolSteppeBiome(0.5f, 0.075f, 2.8, 0.88).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_steppe_hilly"), new CoolSteppeBiome(1f, 0.5f, 4.2, 0.83).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_steppe_mountainous"), new CoolSteppeBiome(1.75f, 0.8f, 7, 0.75).build());
+        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_steppe"), new CoolSteppeBiome(0.5f, 0.075f, 2.8, 0.88, false).build());
+        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_steppe_thicket"), new CoolSteppeBiome(0.5f, 0.075f, 2.8, 0.88, true).build());
+        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_steppe_hilly"), new CoolSteppeBiome(1f, 0.5f, 4.2, 0.83, false).build());
+        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_steppe_mountainous"), new CoolSteppeBiome(1.75f, 0.8f, 7, 0.75, false).build());
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, THICKET);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.WARM_DRY.add(INSTANCE, 1);
     }
 
-    protected CoolSteppeBiome(float depth, float scale, double hilliness, double volatility) {
+    protected CoolSteppeBiome(float depth, float scale, double hilliness, double volatility, boolean thicket) {
         this.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG);
         this.precipitation(Biome.Precipitation.NONE);
         this.depth(depth);
@@ -74,6 +78,12 @@ public class CoolSteppeBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
                         .decorate(EcotonesDecorators.LARGE_ROCK.configure(new ChanceDecoratorConfig(10))));
+
+        if (thicket) {
+            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                    EcotonesFeatures.BIG_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
+                            .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(2.2))));
+        }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)

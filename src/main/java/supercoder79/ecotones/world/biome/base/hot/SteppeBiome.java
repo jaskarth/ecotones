@@ -27,19 +27,22 @@ import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class SteppeBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
+    public static Biome THICKET;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "steppe"), new SteppeBiome(0.5f, 0.075f, 2.8, 0.88).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "steppe_hilly"), new SteppeBiome(1f, 0.5f, 4.2, 0.83).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "steppe_mountainous"), new SteppeBiome(1.75f, 0.8f, 7, 0.75).build());
+        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "steppe"), new SteppeBiome(0.5f, 0.075f, 2.8, 0.88, false).build());
+        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "steppe_thicket"), new SteppeBiome(0.5f, 0.075f, 3.2, 0.98, true).build());
+        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "steppe_hilly"), new SteppeBiome(1f, 0.5f, 4.2, 0.83, false).build());
+        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "steppe_mountainous"), new SteppeBiome(1.75f, 0.8f, 7, 0.75, false).build());
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, THICKET);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
-
         Climate.HOT_DRY.add(INSTANCE, 1);
     }
 
-    protected SteppeBiome(float depth, float scale, double hilliness, double volatility) {
+    protected SteppeBiome(float depth, float scale, double hilliness, double volatility, boolean thicket) {
         this.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG);
         this.precipitation(Biome.Precipitation.NONE);
         this.depth(depth);
@@ -91,6 +94,12 @@ public class SteppeBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BIG_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
                         .decorate(EcotonesDecorators.ABOVE_QUALITY.configure(DecoratorConfig.DEFAULT)));
+
+        if (thicket) {
+            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                    EcotonesFeatures.BIG_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
+                            .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(2.0))));
+        }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))

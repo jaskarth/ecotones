@@ -31,19 +31,23 @@ import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class CoolScrublandBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
+    public static Biome THICKET;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_scrubland"), new CoolScrublandBiome(0.5f, 0.075f, 1.6, 1).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_scrubland_hilly"), new CoolScrublandBiome(1f, 0.5f, 4.2, 0.87).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_scrubland_mountainous"), new CoolScrublandBiome(1.75f, 0.8f, 8, 0.81).build());
+        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_scrubland"), new CoolScrublandBiome(0.5f, 0.075f, 1.6, 1, false).build());
+        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_scrubland_thicket"), new CoolScrublandBiome(0.5f, 0.075f, 1.6, 1, true).build());
+        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_scrubland_hilly"), new CoolScrublandBiome(1f, 0.5f, 4.2, 0.94, false).build());
+        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_scrubland_mountainous"), new CoolScrublandBiome(1.75f, 0.8f, 8, 0.87, false).build());
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, THICKET);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.WARM_VERY_DRY.add(INSTANCE, 1);
     }
 
-    protected CoolScrublandBiome(float depth, float scale, double hilliness, double volatility) {
+    protected CoolScrublandBiome(float depth, float scale, double hilliness, double volatility, boolean thicket) {
         this.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG);
         this.precipitation(Biome.Precipitation.NONE);
         this.depth(depth);
@@ -81,6 +85,12 @@ public class CoolScrublandBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.HEIGHTMAP_SPREAD_DOUBLE.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
                         .repeat(40));
+
+        if (thicket) {
+            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                    EcotonesFeatures.BIG_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
+                            .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(1.8))));
+        }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
