@@ -53,10 +53,12 @@ public class TreeType {
 
     // Maple Trees
     public static final TreeGenerationConfig STANDARD_MAPLE = new TreeGenerationConfig(3.25, Blocks.OAK_LOG.getDefaultState(), EcotonesBlocks.MAPLE_LEAVES.getDefaultState(), 4, 3, 6, 5, 0.15, 0.15, false, 79);
+    public static final TreeGenerationConfig VERY_RARE_MAPLE = new TreeGenerationConfig(0.01, Blocks.OAK_LOG.getDefaultState(), EcotonesBlocks.MAPLE_LEAVES.getDefaultState(), 4, 3, 7, 6, 0.15, 0.15, false, 79);
 
     // Dead trees
     public static final TreeGenerationConfig DEAD_SPRUCE = new TreeGenerationConfig(3, Blocks.SPRUCE_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 4, -1, 10, 10, 0.5, 0.5, false, 79);
     public static final TreeGenerationConfig RARE_DEAD_SPRUCE = new TreeGenerationConfig(0.06, Blocks.SPRUCE_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 4, -1, 6, 14, 0.5, 0.5, false, 79);
     public static final TreeGenerationConfig RARE_DEAD_BIRCH = new TreeGenerationConfig(0.08, Blocks.BIRCH_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 6, -1, 16, 6, 0.45, 0.45, false, 79);
     public static final TreeGenerationConfig RARER_DEAD_BIRCH = new TreeGenerationConfig(0.03, Blocks.BIRCH_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 6, -1, 12, 6, 0.45, 0.45, false, 79);
+    public static final TreeGenerationConfig DEAD_MAPLE = new TreeGenerationConfig(0.05, Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 4, 3, 7, 6, 0.15, 0.15, false, 79);
 }
