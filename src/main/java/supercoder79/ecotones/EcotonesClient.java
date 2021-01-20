@@ -12,6 +12,7 @@ import net.minecraft.client.render.RenderLayer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.client.Colors;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
+import supercoder79.ecotones.client.particle.MapleLeafParticle;
 import supercoder79.ecotones.client.particle.SandParticle;
 
 @Environment(EnvType.CLIENT)
@@ -38,7 +39,7 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.MAPLE_LEAVES_ITEM);
 
         ColorProviderRegistry.BLOCK.register(
-                (state, view, pos, tintIndex) -> Colors.maple(),
+                (state, view, pos, tintIndex) -> Colors.maple(pos),
                 EcotonesBlocks.MAPLE_LEAVES);
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
@@ -61,5 +62,6 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.MAPLE_LEAVES);
 
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAND, SandParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(EcotonesParticles.MAPLE_LEAF, MapleLeafParticle.Factory::new);
     }
 }

@@ -114,7 +114,7 @@ public class EcotonesBlocks {
         CYAN_ROSE = Registry.register(Registry.BLOCK, new Identifier("ecotones", "cyan_rose"), new CyanRoseBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         CYAN_ROSE_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "cyan_rose"), new BlockItem(CYAN_ROSE, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        MAPLE_LEAVES = Registry.register(Registry.BLOCK, new Identifier("ecotones", "maple_leaves"), new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().build()));
+        MAPLE_LEAVES = Registry.register(Registry.BLOCK, new Identifier("ecotones", "maple_leaves"), new MapleLeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().build()));
         MAPLE_LEAVES_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "maple_leaves"), new BlockItem(MAPLE_LEAVES, new Item.Settings().group(ItemGroup.DECORATIONS)));
     }
 }
