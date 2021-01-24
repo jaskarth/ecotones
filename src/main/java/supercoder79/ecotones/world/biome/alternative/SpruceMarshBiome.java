@@ -173,7 +173,7 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
 
         DefaultBiomeFeatures.addForestFlowers(this.getGenerationSettings());
 
-        BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
+        BiomeUtil.addDefaultFeatures(this);
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
     }
 }

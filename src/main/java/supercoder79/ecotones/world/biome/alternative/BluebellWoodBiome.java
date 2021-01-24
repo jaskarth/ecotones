@@ -115,6 +115,6 @@ public class BluebellWoodBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addForestFlowers(this.getGenerationSettings());
 
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
+        BiomeUtil.addDefaultFeatures(this);
     }
 }

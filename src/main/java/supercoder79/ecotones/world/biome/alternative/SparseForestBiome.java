@@ -129,6 +129,6 @@ public class SparseForestBiome extends EcotonesBiomeBuilder {
                         .applyChance(5));
 
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
+        BiomeUtil.addDefaultFeatures(this);
     }
 }

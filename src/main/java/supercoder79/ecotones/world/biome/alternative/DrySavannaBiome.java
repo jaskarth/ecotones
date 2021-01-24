@@ -104,7 +104,7 @@ public class DrySavannaBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
                         .decorate(EcotonesDecorators.REVERSE_QUALITY_TREE_DECORATOR.configure(new SimpleTreeDecorationData(thicket ? 0.35 : 0.15))));
 
-        BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
+        BiomeUtil.addDefaultFeatures(this);
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
     }
 }

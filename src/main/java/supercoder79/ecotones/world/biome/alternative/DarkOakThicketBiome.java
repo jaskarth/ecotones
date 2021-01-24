@@ -137,6 +137,6 @@ public class DarkOakThicketBiome extends EcotonesBiomeBuilder {
         this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
         this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 5, 1, 1));
 
-        BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
+        BiomeUtil.addDefaultFeatures(this);
     }
 }

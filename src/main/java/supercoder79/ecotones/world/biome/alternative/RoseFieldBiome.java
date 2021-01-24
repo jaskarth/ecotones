@@ -68,7 +68,7 @@ public class RoseFieldBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
-        BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
+        BiomeUtil.addDefaultFeatures(this);
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
