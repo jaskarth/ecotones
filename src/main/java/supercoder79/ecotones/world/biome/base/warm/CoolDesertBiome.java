@@ -109,6 +109,6 @@ public class CoolDesertBiome extends EcotonesBiomeBuilder {
         // TODO: grass patches
 
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
+        BiomeUtil.addDefaultFeatures(this);
     }
 }

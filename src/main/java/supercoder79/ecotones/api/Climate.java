@@ -10,6 +10,8 @@ import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalLong;
 
 public enum Climate {
     HOT_DESERT,
@@ -89,7 +91,11 @@ public enum Climate {
         private final RegistryKey<Biome> biome;
         private final double weight;
         private Entry(Biome biome, double weight) {
-            this.biome = BuiltinRegistries.BIOME.getKey(biome).get();
+            // Attempt from builtin
+            Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
+
+            // Mod compat mode: use dynamic registry
+            this.biome = optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome).get());
             this.weight = weight;
 
 //            System.out.println(this.biome);

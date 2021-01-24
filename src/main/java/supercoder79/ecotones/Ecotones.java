@@ -12,11 +12,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import supercoder79.ecotones.api.ModCompat;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.sound.EcotonesSounds;
 import supercoder79.ecotones.command.GetDataAtCommand;
 import supercoder79.ecotones.command.MapSoilQualityCommand;
+import supercoder79.ecotones.compat.TerrestriaCompat;
+import supercoder79.ecotones.compat.TraverseCompat;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.util.EcotonesBlockPlacers;
 import supercoder79.ecotones.world.EcotonesWorldType;
@@ -33,6 +38,8 @@ import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
 
 public class Ecotones implements ModInitializer {
+	public static final Logger LOGGER = LogManager.getLogger("ecotones");
+
 	// Dynamic registry
 	public static Registry<Biome> REGISTRY;
 	private static EcotonesWorldType worldType;
@@ -54,15 +61,17 @@ public class Ecotones implements ModInitializer {
 
 		EcotonesBiomes.init();
 
-		// mod compat
+		// Mod Compat handlers
 		if (FabricLoader.getInstance().isModLoaded("traverse")) {
-//			TraverseCompat.init();
-		}
-		if (FabricLoader.getInstance().isModLoaded("terrestria")) {
-//			TerrestriaCompat.init();
+			ModCompat.register(TraverseCompat::init);
+			log("Registered Traverse compat!");
 		}
 
-//		BiomeRegistries.compile();
+		if (FabricLoader.getInstance().isModLoaded("terrestria")) {
+			ModCompat.register(TerrestriaCompat::init);
+			log("Registered Terrestria compat!");
+		}
+
 
 		GetDataAtCommand.init();
 
@@ -83,7 +92,7 @@ public class Ecotones implements ModInitializer {
 			}
 		}
 
-		System.out.println("[ecotones] Registering " + ecotonesBiomes + " ecotones biomes!");
+		log("Registering " + ecotonesBiomes + " ecotones biomes!");
 
 		Registry.register(Registry.BIOME_SOURCE, new Identifier("ecotones", "ecotones"), EcotonesBiomeSource.CODEC);
 		Registry.register(Registry.CHUNK_GENERATOR, new Identifier("ecotones", "ecotones"), EcotonesChunkGenerator.CODEC);
@@ -91,29 +100,6 @@ public class Ecotones implements ModInitializer {
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
 			worldType = new EcotonesWorldType();
 		}
-
-		// TODO: re-do
-//		RegistryEntryAddedCallback.event(Registry.BIOME).register((idx, id, biome) -> {
-//			// Iterate through, search for biomes
-//			for (List<Identifier> identifiers : BiomeRegistries.DEFERRED_REGISTERS.keySet()) {
-//				// If the current list contains the biome, check if the others are as well
-//				if (identifiers.contains(id)) {
-//					// Ensure all needed biomes are loaded
-//					boolean run = true;
-//					for (Identifier identifier : identifiers) {
-//						if (!Registry.BIOME.containsId(identifier)) {
-//							run = false;
-//							break;
-//						}
-//					}
-//
-//					// If everything is good, then run
-//					if (run) {
-//						BiomeRegistries.DEFERRED_REGISTERS.get(identifiers).run();
-//					}
-//				}
-//			}
-//		});
 
 		ServerTickCallback.EVENT.register(server -> {
 			if (server.getTicks() % 300 == 0) {
@@ -124,5 +110,9 @@ public class Ecotones implements ModInitializer {
 				}
 			}
 		});
+	}
+
+	public static void log(String str) {
+		LOGGER.info("[ecotones] " + str);
 	}
 }

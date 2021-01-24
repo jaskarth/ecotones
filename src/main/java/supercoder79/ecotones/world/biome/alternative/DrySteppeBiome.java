@@ -132,7 +132,7 @@ public class DrySteppeBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(20));
 
-        BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
+        BiomeUtil.addDefaultFeatures(this);
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
     }
 }

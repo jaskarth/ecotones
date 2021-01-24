@@ -126,6 +126,6 @@ public class CloverFieldsBiome extends EcotonesBiomeBuilder {
                         .applyChance(64));
 
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this.getGenerationSettings());
+        BiomeUtil.addDefaultFeatures(this);
     }
 }

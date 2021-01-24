@@ -69,8 +69,8 @@ public class BiomeUtil {
         builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 5, 1, 1));
     }
 
-    public static void addDefaultFeatures(GenerationSettings.Builder builder) {
-        builder.feature(GenerationStep.Feature.RAW_GENERATION,
+    public static void addDefaultFeatures(EcotonesBiomeBuilder builder) {
+        builder.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT)
                         .decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure(DecoratorConfig.DEFAULT)));
     }
