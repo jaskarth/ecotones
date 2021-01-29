@@ -11,6 +11,7 @@ import net.minecraft.world.biome.BuiltinBiomes;
 import net.minecraft.world.biome.source.BiomeLayerSampler;
 import net.minecraft.world.biome.source.BiomeSource;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.api.ModCompat;
 
 public class EcotonesBiomeSource extends BiomeSource {
     public static Codec<EcotonesBiomeSource> CODEC =  RecordCodecBuilder.create((instance) -> {
@@ -29,14 +30,15 @@ public class EcotonesBiomeSource extends BiomeSource {
         this.biomeSampler = EcotonesBiomeLayers.build(seed);
         this.seed = seed;
 
+        Ecotones.REGISTRY = this.biomeRegistry;
+        ModCompat.run();
+
         for (Biome biome : this.biomeRegistry) {
             int id = this.biomeRegistry.getRawId(biome);
             if (!BuiltinBiomes.BY_RAW_ID.containsKey(id)) {
                 BuiltinBiomes.BY_RAW_ID.put(id, this.biomeRegistry.getKey(biome).get());
             }
         }
-
-        Ecotones.REGISTRY = this.biomeRegistry;
     }
 
     public Biome getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ) {

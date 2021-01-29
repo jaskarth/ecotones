@@ -18,6 +18,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.world.biome.BiomeUtil;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -107,5 +108,8 @@ public class PrairieBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BRANCHING_OAK.configure(TreeType.RARER_LARGE_OAK)
                         .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARER_LARGE_OAK.decorationData)));
+
+        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeUtil.addDefaultFeatures(this);
     }
 }

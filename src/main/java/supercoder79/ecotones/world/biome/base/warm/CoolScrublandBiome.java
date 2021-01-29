@@ -20,6 +20,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
+import supercoder79.ecotones.world.biome.BiomeUtil;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -136,5 +137,8 @@ public class CoolScrublandBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(1, 0.5f, 1))));
 
         // TODO: sand patches
+
+        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeUtil.addDefaultFeatures(this);
     }
 }

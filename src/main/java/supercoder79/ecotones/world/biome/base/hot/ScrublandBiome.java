@@ -19,6 +19,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
+import supercoder79.ecotones.world.biome.BiomeUtil;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -136,5 +137,8 @@ public class ScrublandBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
                         .decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(3, 0.5f, 2))));
+
+        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeUtil.addDefaultFeatures(this);
     }
 }
