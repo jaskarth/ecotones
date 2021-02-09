@@ -20,7 +20,7 @@ public class MapleLeavesBlock extends LeavesBlock {
 
         if (random.nextInt(100) == 0) {
             if (world.getBlockState(pos.down()).isAir()) {
-                world.addParticle(EcotonesParticles.MAPLE_LEAF, pos.getX() + random.nextDouble(), pos.getY() - 1.1, pos.getZ() + random.nextDouble(), 0, 0, 0);
+                world.addParticle(EcotonesParticles.MAPLE_LEAF, pos.getX() + random.nextDouble(), pos.getY() - 0.1, pos.getZ() + random.nextDouble(), 0, 0, 0);
             }
         }
     }
