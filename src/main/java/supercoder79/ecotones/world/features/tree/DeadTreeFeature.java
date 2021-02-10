@@ -12,6 +12,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
@@ -26,7 +27,12 @@ public class DeadTreeFeature extends Feature<SimpleTreeFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
+	public boolean generate(FeatureContext<SimpleTreeFeatureConfig> context) {
+		StructureWorldAccess world = context.getWorld();
+		BlockPos pos = context.getPos();
+		Random random = context.getRandom();
+		SimpleTreeFeatureConfig config = context.getConfig();
+
 		if (!(world.getBlockState(pos).isAir() && (world.getBlockState(pos.down()).isOf(Blocks.SAND) || world.getBlockState(pos.down()).isOf(Blocks.GRASS_BLOCK)))) {
 			return false;
 		}

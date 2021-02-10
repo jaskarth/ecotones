@@ -18,7 +18,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
@@ -53,7 +53,7 @@ public class LushDesertBiome extends EcotonesBiomeBuilder {
         this.hilliness(hilliness);
         this.volatility(volatility);
 
-        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> DesertVillageData.field_25948, 7)));
+        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> DesertVillageData.STRUCTURE_POOLS, 7)));
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
         this.addStructureFeature(ConfiguredStructureFeatures.DESERT_PYRAMID);
@@ -100,7 +100,7 @@ public class LushDesertBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
     }
 }

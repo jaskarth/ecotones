@@ -9,6 +9,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.Random;
 
@@ -19,7 +20,11 @@ public class PlaceCactiFeature extends Feature<DefaultFeatureConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, DefaultFeatureConfig config) {
+    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getPos();
+        Random random = context.getRandom();
+
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
 
         world.setBlockState(pos.down(), Blocks.SAND.getDefaultState(), 3);

@@ -12,7 +12,7 @@
 //import supercoder79.ecotones.api.SimpleTreeDecorationData;
 //import supercoder79.ecotones.api.TreeType;
 //import supercoder79.ecotones.client.particle.EcotonesParticles;
-//import supercoder79.ecotones.world.biome.BiomeUtil;
+//import supercoder79.ecotones.world.biome.BiomeHelper;
 //import supercoder79.ecotones.world.biome.EcotonesBiome;
 //import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 //import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -58,7 +58,7 @@
 //            .addDefaultSpawnEntries());
 //
 //    public static void init() {
-//        COOL_DESERT_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "cool_desert"), template.builder()
+//        COOL_DESERT_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "cool_desert"), template.builder()
 //                .hilliness(1.6)
 //                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00225F))
 //                .addStructureFeature(DefaultBiomeFeatures.DESERT_PYRAMID)
@@ -72,7 +72,7 @@
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).decorate(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
-//        COOL_SCRUBLAND_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "cool_scrubland"), template.builder()
+//        COOL_SCRUBLAND_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "cool_scrubland"), template.builder()
 //                .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 //                .temperature(1.2F)
 //                .downfall(0.2F)
@@ -114,7 +114,7 @@
 //                                .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.SMALL_ACACIA.decorationData)))
 //
 //                .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 4));
-//        COOL_STEPPE_BIOME = BiomeUtil.registerBase( new Identifier("ecotones", "cool_steppe"), template.builder()
+//        COOL_STEPPE_BIOME = BiomeHelper.registerBase( new Identifier("ecotones", "cool_steppe"), template.builder()
 //                .temperature(1.2F)
 //                .downfall(0.35F)
 //                .hilliness(2.8)
@@ -150,7 +150,7 @@
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.SMALL_ACACIA.configure(TreeType.SMALL_ACACIA)
 //                                .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.SMALL_ACACIA.decorationData))));
-//        PRAIRIE_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "prairie"), template.builder()
+//        PRAIRIE_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "prairie"), template.builder()
 //                .temperature(1F)
 //                .downfall(0.4F)
 //                .scale(0.025f)
@@ -185,7 +185,7 @@
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.PRAIRIE_CONFIG).decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 30)))));
 //
-//        LICHEN_WOODLAND_BIOME = BiomeUtil.registerBase( new Identifier("ecotones", "lichen_woodland"), template.builder()
+//        LICHEN_WOODLAND_BIOME = BiomeHelper.registerBase( new Identifier("ecotones", "lichen_woodland"), template.builder()
 //                .temperature(0.8F)
 //                .downfall(0.5F)
 //                .scale(0.15f)
@@ -248,7 +248,7 @@
 //                        EcotonesFeatures.SMALL_SPRUCE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
 //                                .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(2.5)))));
 //
-//        SPRUCE_FOREST_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "spruce_forest"), template.builder()
+//        SPRUCE_FOREST_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "spruce_forest"), template.builder()
 //                .temperature(0.8F)
 //                .downfall(0.6F)
 //                .scale(0.3f)
@@ -304,7 +304,7 @@
 //                        Feature.TREE.configure(FeatureConfigHolder.SPRUCE_TREE_CONFIG)
 //                                .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(7.5)))));
 //
-//        TEMPERATE_FOREST_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "temperate_forest"), template.builder()
+//        TEMPERATE_FOREST_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "temperate_forest"), template.builder()
 //                .temperature(0.8F)
 //                .downfall(0.8F)
 //                .scale(0.4f)
@@ -354,7 +354,7 @@
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 16, 20))))
 //        );
 //
-//        TEMPERATE_RAINFOREST_BIOME = BiomeUtil.registerBase( new Identifier("ecotones", "temperate_rainforest"), template.builder()
+//        TEMPERATE_RAINFOREST_BIOME = BiomeHelper.registerBase( new Identifier("ecotones", "temperate_rainforest"), template.builder()
 //                .temperature(0.8F)
 //                .downfall(1F)
 //                .scale(0.4f)

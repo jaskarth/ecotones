@@ -21,7 +21,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
@@ -59,7 +59,7 @@ public class DesertBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(ConfiguredStructureFeatures.DESERT_PYRAMID);
         this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
-        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> DesertVillageData.field_25948, 4)));
+        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> DesertVillageData.STRUCTURE_POOLS, 4)));
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
@@ -106,7 +106,7 @@ public class DesertBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.05))));
 
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
     }
 }

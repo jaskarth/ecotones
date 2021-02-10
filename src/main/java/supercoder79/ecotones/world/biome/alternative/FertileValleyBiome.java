@@ -14,7 +14,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.api.TreeType;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -58,7 +58,7 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
         this.hilliness(4.0);
         this.volatility(1.1);
 
-        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.field_26253, 7)));
+        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 7)));
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
@@ -133,7 +133,7 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
 
         DefaultBiomeFeatures.addForestFlowers(this.getGenerationSettings());
 
-        BiomeUtil.addDefaultFeatures(this);
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }
 }

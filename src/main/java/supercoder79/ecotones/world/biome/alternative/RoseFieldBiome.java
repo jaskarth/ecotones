@@ -17,7 +17,7 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.TreeType;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -68,8 +68,8 @@ public class RoseFieldBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
-        BiomeUtil.addDefaultFeatures(this);
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)

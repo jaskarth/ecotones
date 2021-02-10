@@ -1,13 +1,11 @@
 package supercoder79.ecotones.world.biome.base.hot;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.structure.DesertVillageData;
 import net.minecraft.structure.SavannaVillageData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
@@ -15,8 +13,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.client.particle.EcotonesParticles;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -24,7 +21,6 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class SteppeBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -58,7 +54,7 @@ public class SteppeBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
-        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> SavannaVillageData.field_26285, 5)));
+        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> SavannaVillageData.STRUCTURE_POOLS, 5)));
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
@@ -119,7 +115,7 @@ public class SteppeBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 5, 10))));
 
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
     }
 }

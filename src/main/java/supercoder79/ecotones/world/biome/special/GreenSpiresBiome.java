@@ -22,7 +22,7 @@ import net.minecraft.world.gen.tree.LeavesVineTreeDecorator;
 import net.minecraft.world.gen.tree.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -108,7 +108,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
     }
 }

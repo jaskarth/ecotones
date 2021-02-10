@@ -15,9 +15,8 @@ import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
-import supercoder79.ecotones.world.biome.technical.TropicalBeachBiome;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
@@ -29,7 +28,7 @@ public class ThePitsBiome extends EcotonesBiomeBuilder {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "the_pits"), new ThePitsBiome(-1.5f, false).build());
         EDGE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "the_pits_edge"), new ThePitsBiome(0.375f, true).build());
 
-        BiomeRegistries.registerAllSpecial(id -> !BiomeUtil.isOcean(id), INSTANCE, EDGE);
+        BiomeRegistries.registerAllSpecial(id -> !BiomeHelper.isOcean(id), INSTANCE, EDGE);
 
         BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 200);
     }

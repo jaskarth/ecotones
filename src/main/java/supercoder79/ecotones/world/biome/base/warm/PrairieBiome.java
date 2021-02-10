@@ -2,7 +2,6 @@ package supercoder79.ecotones.world.biome.base.warm;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.PlainsVillageData;
-import net.minecraft.structure.SavannaVillageData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -18,7 +17,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.api.TreeType;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -42,7 +41,7 @@ public class PrairieBiome extends EcotonesBiomeBuilder {
 
     protected PrairieBiome(float depth, float scale, double hilliness, double volatility) {
         this.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG);
-        this.precipitation(Biome.Precipitation.NONE);
+        this.precipitation(Biome.Precipitation.RAIN);
         this.depth(depth);
         this.scale(scale);
         this.temperature(1F);
@@ -58,7 +57,7 @@ public class PrairieBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
-        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.field_26253, 5)));
+        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 5)));
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
@@ -109,7 +108,7 @@ public class PrairieBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.BRANCHING_OAK.configure(TreeType.RARER_LARGE_OAK)
                         .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARER_LARGE_OAK.decorationData)));
 
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
     }
 }

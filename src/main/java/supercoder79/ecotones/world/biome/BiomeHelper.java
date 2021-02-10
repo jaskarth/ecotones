@@ -12,7 +12,7 @@ import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 
-public class BiomeUtil {
+public class BiomeHelper {
     public static final int WARM_OCEAN_ID = 44;
     public static final int LUKEWARM_OCEAN_ID = 45;
     public static final int OCEAN_ID = 0;
@@ -23,34 +23,6 @@ public class BiomeUtil {
     public static final int DEEP_OCEAN_ID = 24;
     public static final int DEEP_COLD_OCEAN_ID = 49;
     public static final int DEEP_FROZEN_OCEAN_ID = 50;
-
-//    public static Biome registerBase(Identifier name, EcotonesBiome.Builder builder) {
-//        Integer[] ids = new Integer[2];
-//        //should be a safe cast
-//        EcotonesBiome ret = (EcotonesBiome) Registry.register(Registry.BIOME, name, builder.build());
-//        ids[0] = Registry.BIOME.getRawId(Registry.register(Registry.BIOME,
-//                new Identifier(name.getNamespace(), name.getPath().concat("_hilly")),
-//                builder
-//                        .depth(ret.getDepth() + 0.5f)
-//                        .scale(ret.getScale() + 0.15f)
-//                        .temperature(ret.getTemperature() - 0.1f)
-//                        .hilliness(ret.getHilliness() + 0.8)
-//                        .volatility(ret.getVolatility() - 0.225)
-//                        .build()));
-//
-//        ids[1] = Registry.BIOME.getRawId(Registry.register(Registry.BIOME,
-//                new Identifier(name.getNamespace(), name.getPath().concat("_mountainous")),
-//                builder
-//                        .depth(ret.getDepth() + 1.125f)
-//                        .scale(ret.getScale() + 0.4f)
-//                        .temperature(ret.getTemperature() - 0.2f)
-//                        .hilliness(ret.getHilliness() + 2.6)
-//                        .volatility(ret.getVolatility() - 0.35)
-//                        .build()));
-//
-//        MountainLayer.BIOME_TO_MOUNTAINS.put(BuiltinRegistries.BIOME.getRawId(ret), ids);
-//        return ret;
-//    }
 
     public static void addDefaultSpawns(SpawnSettings.Builder builder) {
         builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 12, 4, 4));

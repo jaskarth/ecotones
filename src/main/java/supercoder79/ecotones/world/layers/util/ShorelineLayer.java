@@ -2,16 +2,12 @@ package supercoder79.ecotones.world.layers.util;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
 import net.minecraft.world.biome.layer.util.*;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
-import supercoder79.ecotones.world.biome.BiomeUtil;
-import supercoder79.ecotones.world.biome.technical.DryBeachBiome;
-import supercoder79.ecotones.world.biome.technical.GravelBeachBiome;
-import supercoder79.ecotones.world.biome.technical.TropicalBeachBiome;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.layers.generation.ClimateLayers;
 import supercoder79.ecotones.world.layers.seed.SeedLayer;
 
@@ -33,8 +29,8 @@ public enum ShorelineLayer implements ParentedLayer, IdentityCoordinateTransform
             return center;
         }
 
-        if (!BiomeUtil.isOcean(center)) {
-            if (BiomeUtil.isOcean(n) || BiomeUtil.isOcean(e) || BiomeUtil.isOcean(s) || BiomeUtil.isOcean(w)) {
+        if (!BiomeHelper.isOcean(center)) {
+            if (BiomeHelper.isOcean(n) || BiomeHelper.isOcean(e) || BiomeHelper.isOcean(s) || BiomeHelper.isOcean(w)) {
                 double humidity = MathHelper.clamp(ClimateLayers.humidityNoise.sample(((x >> 4) + ClimateLayers.INSTANCE.humidityOffsetX) / 2.5, ((z >> 4) + ClimateLayers.INSTANCE.humidityOffsetZ) / 2.5) * 1.25, -1, 1);
                 if (humidity < -0.5) {
                     return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(DRY));

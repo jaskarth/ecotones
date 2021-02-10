@@ -8,6 +8,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.Random;
 
@@ -18,7 +19,11 @@ public class SugarCaneFeature extends Feature<DefaultFeatureConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, DefaultFeatureConfig config) {
+    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getPos();
+        Random random = context.getRandom();
+
         // Check the position for a 3x3 of grass underneath to grow the sugarcane
         for (int x = -1; x <= 1; x++) {
             for (int z = -1; z <= 1; z++) {

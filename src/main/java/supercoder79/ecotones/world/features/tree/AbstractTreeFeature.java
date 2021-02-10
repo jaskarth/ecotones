@@ -19,9 +19,9 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.shape.BitSetVoxelSet;
 import net.minecraft.util.shape.VoxelSet;
 import net.minecraft.world.*;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.*;
 
@@ -118,19 +118,25 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
         world.setBlockState(pos, state, 19);
     }
 
-    public final boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, T treeFeatureConfig) {
+    @Override
+    public boolean generate(FeatureContext<T> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getPos();
+        Random random = context.getRandom();
+        T config = context.getConfig();
+
         Set<BlockPos> set = Sets.newHashSet();
         Set<BlockPos> set2 = Sets.newHashSet();
         Set<BlockPos> set3 = Sets.newHashSet();
         BlockBox blockBox = BlockBox.empty();
-        boolean bl = this.generate(world, random, blockPos, set, set2, blockBox, treeFeatureConfig);
+        boolean bl = this.generate(world, random, pos, set, set2, blockBox, config);
         if (blockBox.minX <= blockBox.maxX && bl && !set.isEmpty()) {
-            if (!treeFeatureConfig.decorators.isEmpty()) {
+            if (!config.decorators.isEmpty()) {
                 List<BlockPos> list = Lists.newArrayList(set);
                 List<BlockPos> list2 = Lists.newArrayList(set2);
                 list.sort(Comparator.comparingInt(Vec3i::getY));
                 list2.sort(Comparator.comparingInt(Vec3i::getY));
-                treeFeatureConfig.decorators.forEach((decorator) -> {
+                config.decorators.forEach((decorator) -> {
                     decorator.generate(world, random, list, list2, set3, blockBox);
                 });
             }

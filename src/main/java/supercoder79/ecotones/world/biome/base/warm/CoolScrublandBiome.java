@@ -1,26 +1,21 @@
 package supercoder79.ecotones.world.biome.base.warm;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.structure.DesertVillageData;
 import net.minecraft.structure.SavannaVillageData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeParticleConfig;
-import net.minecraft.world.gen.CountConfig;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placer.ColumnPlacer;
-import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.client.particle.EcotonesParticles;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -28,7 +23,6 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class CoolScrublandBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -63,7 +57,7 @@ public class CoolScrublandBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
-        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> SavannaVillageData.field_26285, 6)));
+        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> SavannaVillageData.STRUCTURE_POOLS, 6)));
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
@@ -138,7 +132,7 @@ public class CoolScrublandBiome extends EcotonesBiomeBuilder {
 
         // TODO: sand patches
 
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
     }
 }

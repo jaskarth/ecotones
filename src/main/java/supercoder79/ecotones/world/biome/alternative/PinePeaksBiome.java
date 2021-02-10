@@ -21,7 +21,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -35,7 +35,7 @@ public class PinePeaksBiome extends EcotonesBiomeBuilder {
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "pine_peaks"), new PinePeaksBiome().build());
         BiomeRegistries.registerSpecialBiome(INSTANCE, id ->
-                BiomeUtil.contains(id, "lichen_woodland") || BiomeUtil.contains(id, "spruce_forest") || BiomeUtil.contains(id, "prairie"));
+                BiomeHelper.contains(id, "lichen_woodland") || BiomeHelper.contains(id, "spruce_forest") || BiomeHelper.contains(id, "prairie"));
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 80);
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
@@ -100,7 +100,7 @@ public class PinePeaksBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
     }
 }

@@ -8,6 +8,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.TreeType;
 import supercoder79.ecotones.tree.PoplarTrait;
 import supercoder79.ecotones.tree.Traits;
@@ -25,7 +26,13 @@ public class PoplarTreeFeature extends Feature<SimpleTreeFeatureConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
+    public boolean generate(FeatureContext<SimpleTreeFeatureConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getPos();
+        Random random = context.getRandom();
+        SimpleTreeFeatureConfig config = context.getConfig();
+        ChunkGenerator generator = context.getGenerator();
+
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return false;
 
         // Trait data

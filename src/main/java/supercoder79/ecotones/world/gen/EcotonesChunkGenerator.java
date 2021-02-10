@@ -192,12 +192,11 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
     @Override
     public void populateEntities(ChunkRegion region) {
-        int chunkX = region.getCenterChunkX();
-        int chunkZ = region.getCenterChunkZ();
-        Biome biome = region.getBiome((new ChunkPos(chunkX, chunkZ)).getStartPos());
+        ChunkPos chunkPos = region.getCenterPos();
+        Biome biome = region.getBiome(chunkPos.getStartPos());
         ChunkRandom chunkRandom = new ChunkRandom();
-        chunkRandom.setPopulationSeed(region.getSeed(), chunkX << 4, chunkZ << 4);
-        SpawnHelper.populateEntities(region, biome, chunkX, chunkZ, chunkRandom);
+        chunkRandom.setPopulationSeed(region.getSeed(), chunkPos.getStartX(), chunkPos.getStartZ());
+        SpawnHelper.populateEntities(region, biome, chunkPos, chunkRandom);
     }
 
     @Override
@@ -267,22 +266,21 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     // Vanilla random improvements
     @Override
     public void generateFeatures(ChunkRegion world, StructureAccessor structureAccessor) {
-        int centerX = world.getCenterChunkX();
-        int centerZ = world.getCenterChunkZ();
-        int topX = centerX * 16;
-        int topZ = centerZ * 16;
-        BlockPos pos = new BlockPos(topX, 0, topZ);
-        Biome biome = this.biomeSource.getBiomeForNoiseGen((centerX << 2) + 2, 2, (centerZ << 2) + 2);
+        ChunkPos chunkPos = world.getCenterPos();
+        int centerX = chunkPos.getStartX();
+        int centerZ = chunkPos.getStartZ();
+        BlockPos pos = new BlockPos(centerX, 0, centerZ);
+        Biome biome = this.biomeSource.getBiomeForNoiseGen((chunkPos.x << 2) + 2, 2, (chunkPos.z << 2) + 2);
         ImprovedChunkRandom random = new ImprovedChunkRandom();
-        long populationSeed = random.setPopulationSeed(world.getSeed(), topX, topZ, biome.getScale() + scaleNoise.sample(topX + 8, topZ + 8));
+        long populationSeed = random.setPopulationSeed(world.getSeed(), centerX, centerZ, biome.getScale() + scaleNoise.sample(centerX + 8, centerZ + 8));
 
         try {
             biome.generateFeatureStep(structureAccessor, this, world, populationSeed, random, pos);
         } catch (Exception ex) {
             CrashReport crashReport = CrashReport.create(ex, "Biome decoration");
             crashReport.addElement("Generation")
-                    .add("CenterX", centerX)
-                    .add("CenterZ", centerZ)
+                    .add("CenterX", chunkPos.x)
+                    .add("CenterZ", chunkPos.x)
                     .add("Seed", populationSeed)
                     .add("Biome", biome);
             throw new CrashException(crashReport);

@@ -20,7 +20,7 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -47,7 +47,7 @@ public class WastelandBiome extends EcotonesBiomeBuilder {
         DEPTHS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "wasteland_depths"), new WastelandBiome(0.1f, -0.25f, 0, 2, 1.25).build());
 
         BiomeRegistries.registerAllSpecial(id ->
-                BiomeUtil.contains(id, "desert") || BiomeUtil.contains(id, "scrub"),
+                BiomeHelper.contains(id, "desert") || BiomeHelper.contains(id, "scrub"),
                 INSTANCE, THICKET, FLATS, HILLS, SHRUB, DEPTHS);
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 150);
@@ -116,6 +116,6 @@ public class WastelandBiome extends EcotonesBiomeBuilder {
         this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
         this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 5, 1, 1));
 
-        BiomeUtil.addDefaultFeatures(this);
+        BiomeHelper.addDefaultFeatures(this);
     }
 }

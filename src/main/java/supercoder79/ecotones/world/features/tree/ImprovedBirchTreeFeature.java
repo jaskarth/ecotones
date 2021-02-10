@@ -9,6 +9,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeUtil;
@@ -24,7 +25,12 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, TreeGenerationConfig config) {
+    public boolean generate(FeatureContext<TreeGenerationConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getPos();
+        Random random = context.getRandom();
+        TreeGenerationConfig config = context.getConfig();
+
         //ensure spawn
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
         int maxHeight = 12;

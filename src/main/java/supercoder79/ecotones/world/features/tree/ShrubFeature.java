@@ -8,6 +8,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
@@ -20,7 +21,12 @@ public class ShrubFeature extends Feature<SimpleTreeFeatureConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
+    public boolean generate(FeatureContext<SimpleTreeFeatureConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getPos();
+        Random random = context.getRandom();
+        SimpleTreeFeatureConfig config = context.getConfig();
+
         int randomHeight = 1;
         //grab data from the decorator
         if (pos instanceof DataPos) {

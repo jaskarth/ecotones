@@ -162,6 +162,9 @@
   "biome.ecotones.woodland_clearing": "Woodland Clearing",
   "biome.ecotones.woodland_hilly": "Hilly Woodland",
   "biome.ecotones.woodland_mountainous": "Mountainous Woodland",
+  "biome.ecotones.pine_forest": "Pine Forest",
+  "biome.ecotones.pine_forest_hilly": "Hilly Pine Forest",
+  "biome.ecotones.pine_forest_mountainous": "Mountainous Pine Forest",
 
 
   "block.ecotones.peat": "Peat Block",

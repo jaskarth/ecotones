@@ -20,7 +20,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.api.TreeType;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -57,7 +57,7 @@ public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
 
-        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.field_26253, 7)));
+        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 7)));
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsFeatures(this.getGenerationSettings());
@@ -127,6 +127,6 @@ public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
         this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
         this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 5, 1, 1));
 
-        BiomeUtil.addDefaultFeatures(this);
+        BiomeHelper.addDefaultFeatures(this);
     }
 }

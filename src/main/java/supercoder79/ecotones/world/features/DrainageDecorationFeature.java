@@ -7,6 +7,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.DrainageType;
 import supercoder79.ecotones.util.DataPos;
 
@@ -19,7 +20,10 @@ public class DrainageDecorationFeature extends Feature<DefaultFeatureConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, DefaultFeatureConfig config) {
+    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getPos();
+
         if (pos instanceof DataPos) {
             DataPos data = ((DataPos)pos);
             if (data.isLikelyInvalid) return false;

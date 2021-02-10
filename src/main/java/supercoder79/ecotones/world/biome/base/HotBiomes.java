@@ -43,7 +43,7 @@ public class HotBiomes {
 //            .addDefaultSpawnEntries());
 //
 //    public static void init() {
-//        DESERT_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "desert"), template.builder()
+//        DESERT_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "desert"), template.builder()
 //                .hilliness(1.6)
 //                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00325F))
 //                .addStructureFeature(DefaultBiomeFeatures.DESERT_PYRAMID)
@@ -54,7 +54,7 @@ public class HotBiomes {
 //                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
 //
-//        SCRUBLAND_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "scrubland"), template.builder()
+//        SCRUBLAND_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "scrubland"), template.builder()
 //                .configureSurfaceBuilder(EcotonesSurfaces.DESERT_SCRUB_BUILDER, SurfaceBuilder.GRASS_CONFIG)
 //                .particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00125F))
 //                .temperature(1.9F)
@@ -99,7 +99,7 @@ public class HotBiomes {
 //                                .decorate(EcotonesDecorators.ABOVE_QUALITY.configure(DecoratorConfig.DEFAULT)))
 //
 //                .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 3));
-//        STEPPE_BIOME = BiomeUtil.registerBase( new Identifier("ecotones", "steppe"), template.builder()
+//        STEPPE_BIOME = BiomeHelper.registerBase( new Identifier("ecotones", "steppe"), template.builder()
 //                .temperature(1.8F)
 //                .downfall(0.3F)
 //                .hilliness(2.8)
@@ -136,7 +136,7 @@ public class HotBiomes {
 //                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG).decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
 //
 //                .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG));
-//        TROPICAL_GRASSLAND_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "tropical_grassland"), template.builder()
+//        TROPICAL_GRASSLAND_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "tropical_grassland"), template.builder()
 //                .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 //                .temperature(1.7F)
 //                .downfall(0.4F)
@@ -183,7 +183,7 @@ public class HotBiomes {
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 12, 12)))));
-//        LUSH_SAVANNAH_BIOME = BiomeUtil.registerBase( new Identifier("ecotones", "lush_savannah"), template.builder()
+//        LUSH_SAVANNAH_BIOME = BiomeHelper.registerBase( new Identifier("ecotones", "lush_savannah"), template.builder()
 //                .temperature(1.6F)
 //                .downfall(0.5F)
 //                .scale(0.15f)
@@ -226,7 +226,7 @@ public class HotBiomes {
 //                                .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_OAK.decorationData)))
 //        );
 //
-//        DRY_FOREST_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "dry_forest"), template.builder()
+//        DRY_FOREST_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "dry_forest"), template.builder()
 //                .temperature(1.6F)
 //                .downfall(0.6F)
 //                .scale(0.3f)
@@ -277,7 +277,7 @@ public class HotBiomes {
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.65))))
 //        );
 //
-//        LUSH_FOREST_BIOME = BiomeUtil.registerBase(new Identifier("ecotones", "lush_forest"), template.builder()
+//        LUSH_FOREST_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "lush_forest"), template.builder()
 //                .temperature(1.6F)
 //                .downfall(0.8F)
 //                .scale(0.4f)
@@ -323,7 +323,7 @@ public class HotBiomes {
 //                        EcotonesFeatures.BRANCHING_OAK.configure(TreeType.LUSH_JUNGLE)
 //                                .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.LUSH_JUNGLE.decorationData))));
 //
-//        TROPICAL_RAINFOREST_BIOME = BiomeUtil.registerBase( new Identifier("ecotones", "tropical_rainforest"), template.builder()
+//        TROPICAL_RAINFOREST_BIOME = BiomeHelper.registerBase( new Identifier("ecotones", "tropical_rainforest"), template.builder()
 //                .temperature(1.6F)
 //                .downfall(1F)
 //                .scale(0.4f)

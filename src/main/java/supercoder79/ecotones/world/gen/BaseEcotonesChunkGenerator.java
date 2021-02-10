@@ -18,6 +18,7 @@ import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.Heightmap.Type;
 import net.minecraft.world.WorldAccess;
@@ -197,11 +198,11 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         return 0.0D;
     }
 
-    public int getHeight(int x, int z, Type heightmapType) {
+    public int getHeight(int x, int z, Type heightmapType, HeightLimitView world) {
         return this.sampleHeightmap(x, z, null, heightmapType.getBlockPredicate());
     }
 
-    public VerticalBlockSample getColumnSample(int x, int z) {
+    public VerticalBlockSample getColumnSample(int x, int z, HeightLimitView world) {
         BlockState[] states = new BlockState[this.noiseSizeY * this.verticalNoiseResolution];
         this.sampleHeightmap(x, z, states, null);
         // TODO: custom min y, using 0 for now

@@ -11,6 +11,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.minecraft.world.gen.tree.TrunkVineTreeDecorator;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.tree.OakTrait;
@@ -34,7 +35,13 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, TreeGenerationConfig config) {
+    public boolean generate(FeatureContext<TreeGenerationConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getPos();
+        Random random = context.getRandom();
+        ChunkGenerator generator = context.getGenerator();
+        TreeGenerationConfig config = context.getConfig();
+
         //ensure spawn
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
 

@@ -23,7 +23,7 @@ import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -117,6 +117,6 @@ public class WoodlandThicketBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
                         .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(2))));
 
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }
 }

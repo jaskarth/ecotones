@@ -7,7 +7,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 
 import java.util.ArrayList;
@@ -21,7 +23,12 @@ public class RockFeature extends Feature<RockFeatureConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, RockFeatureConfig config) {
+    public boolean generate(FeatureContext<RockFeatureConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getPos();
+        Random random = context.getRandom();
+        RockFeatureConfig config = context.getConfig();
+
         // TODO: cleanup
         while(true) {
             restart: {

@@ -18,7 +18,7 @@ import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -81,7 +81,7 @@ public class DrySteppeBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
-        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> SavannaVillageData.field_26285, 5)));
+        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> SavannaVillageData.STRUCTURE_POOLS, 5)));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
@@ -132,7 +132,7 @@ public class DrySteppeBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(20));
 
-        BiomeUtil.addDefaultFeatures(this);
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }
 }

@@ -17,7 +17,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.api.TreeType;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -42,7 +42,7 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
 
     protected SpruceForestBiome(float depth, float scale, double hilliness, double volatility) {
         this.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG);
-        this.precipitation(Biome.Precipitation.NONE);
+        this.precipitation(Biome.Precipitation.RAIN);
         this.depth(depth);
         this.scale(scale);
         this.temperature(0.8F);
@@ -55,7 +55,7 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
-        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> TaigaVillageData.field_26341, 5)));
+        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> TaigaVillageData.STRUCTURE_POOLS, 5)));
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
@@ -133,7 +133,7 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
                 Feature.TREE.configure(FeatureConfigHolder.SPRUCE_TREE_CONFIG)
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(7.5))));
 
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
     }
 }

@@ -17,7 +17,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -48,7 +48,7 @@ public class PoplarForestBiome extends EcotonesBiomeBuilder {
         BIRCH = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "poplar_forest_birch"), new PoplarForestBiome(0.5F, 0.05F, 1, 5, 1, 2.4, 0.95).build());
 
         BiomeRegistries.registerAllSpecial(id ->
-                BiomeUtil.contains(id, "lichen_woodland") || BiomeUtil.contains(id, "spruce_forest") || BiomeUtil.contains(id, "prairie"),
+                BiomeHelper.contains(id, "lichen_woodland") || BiomeHelper.contains(id, "spruce_forest") || BiomeHelper.contains(id, "prairie"),
                 INSTANCE, THICKET, FLATS, HILLS, SHRUB);
 
         BiomeRegistries.registerBigSpecialBiome(INSTANCE, 40);
@@ -128,7 +128,7 @@ public class PoplarForestBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE)));
 
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
-        BiomeUtil.addDefaultFeatures(this);
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultFeatures(this);
     }
 }

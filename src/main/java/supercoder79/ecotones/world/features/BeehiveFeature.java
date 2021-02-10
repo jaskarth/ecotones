@@ -14,6 +14,8 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 import java.util.List;
 import java.util.Random;
@@ -26,7 +28,11 @@ public class BeehiveFeature extends Feature<DefaultFeatureConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world,  ChunkGenerator generator, Random random, BlockPos pos, DefaultFeatureConfig config) {
+    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getPos();
+        Random random = context.getRandom();
+
         BlockPos.Mutable mutable = pos.mutableCopy();
 
         // set beehive position

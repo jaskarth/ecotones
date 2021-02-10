@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -89,6 +89,6 @@ public class HotSpringsBiome extends EcotonesBiomeBuilder {
                 Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.WATER.getDefaultState()))
                         .decorate(Decorator.WATER_LAKE.configure(new ChanceDecoratorConfig(1))));
 
-        BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }
 }

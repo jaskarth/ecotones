@@ -15,7 +15,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.world.biome.BiomeUtil;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
@@ -28,7 +28,7 @@ public class UluruBiome extends EcotonesBiomeBuilder {
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "uluru"), new UluruBiome().build());
         BiomeRegistries.registerSpecialBiome(INSTANCE, id ->
-                BiomeUtil.contains(id, "desert") || BiomeUtil.contains(id, "scrub"));
+                BiomeHelper.contains(id, "desert") || BiomeHelper.contains(id, "scrub"));
 
         BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 150);
     }
