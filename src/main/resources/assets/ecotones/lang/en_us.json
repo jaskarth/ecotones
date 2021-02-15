@@ -165,6 +165,9 @@
   "biome.ecotones.pine_forest": "Pine Forest",
   "biome.ecotones.pine_forest_hilly": "Hilly Pine Forest",
   "biome.ecotones.pine_forest_mountainous": "Mountainous Pine Forest",
+  "biome.ecotones.spruce_fields": "Spruce Fields",
+  "biome.ecotones.spruce_fields_hilly": "Hilly Spruce Fields",
+  "biome.ecotones.spruce_fields_mountainous": "Mountainous Spruce Fields",
 
 
   "block.ecotones.peat": "Peat Block",

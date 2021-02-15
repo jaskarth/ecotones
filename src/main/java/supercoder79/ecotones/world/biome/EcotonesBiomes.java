@@ -85,6 +85,7 @@ public class EcotonesBiomes {
         WhiteMesaBiome.init();
         MapleForestBiome.init();
         PineForestBiome.init();
+        SpruceFieldsBiome.init();
 
         // Rose Field biome
         RoseFieldBiome.init();
