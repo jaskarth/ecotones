@@ -12,12 +12,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
-import supercoder79.ecotones.util.TreeUtil;
+import supercoder79.ecotones.util.TreeHelper;
 import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 
 import java.util.ArrayList;
@@ -95,7 +94,7 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
             i++;
             if (i > 25) break;
 
-            if (TreeUtil.canLogReplace(world, local)) {
+            if (TreeHelper.canLogReplace(world, local)) {
                 world.setBlockState(local, config.woodState, 0);
             }
         }
@@ -110,7 +109,7 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
                     MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
 
             //if the tree hits a solid block, stop
-            if (TreeUtil.canLogReplace(world, local)) {
+            if (TreeHelper.canLogReplace(world, local)) {
                 world.setBlockState(local, config.woodState, 0);
             } else {
                 break;
@@ -147,7 +146,7 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
     private void branch(WorldAccess world, BlockPos trunkPos, Random random, List<BlockPos> leaves, TreeGenerationConfig config) {
         BlockPos pos = trunkPos.offset(Direction.Type.HORIZONTAL.random(random));
 
-        if (TreeUtil.canLogReplace(world, pos)) {
+        if (TreeHelper.canLogReplace(world, pos)) {
             world.setBlockState(pos, config.woodState, 0);
 
             pos = pos.up();

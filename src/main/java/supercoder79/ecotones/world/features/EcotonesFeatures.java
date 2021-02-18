@@ -36,6 +36,7 @@ public class EcotonesFeatures {
     public static DeadTreeFeature DEAD_TREE;
     public static PodzolPatchFeature PODZOL;
     public static MapleTreeFeature MAPLE_TREE;
+    public static BlueberryBushFeature BLUEBERRY_BUSH;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig.CODEC));
@@ -63,5 +64,6 @@ public class EcotonesFeatures {
         DEAD_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "dead_tree"), new DeadTreeFeature(SimpleTreeFeatureConfig.CODEC));
         PODZOL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "podzol"), new PodzolPatchFeature(DefaultFeatureConfig.CODEC));
         MAPLE_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "maple_tree"), new MapleTreeFeature(TreeGenerationConfig.CODEC));
+        BLUEBERRY_BUSH = Registry.register(Registry.FEATURE, new Identifier("ecotones", "blueberry_bush"), new BlueberryBushFeature(DefaultFeatureConfig.CODEC));
     }
 }

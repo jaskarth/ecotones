@@ -18,7 +18,7 @@ import supercoder79.ecotones.tree.OakTrait;
 import supercoder79.ecotones.tree.Traits;
 import supercoder79.ecotones.tree.oak.DefaultOakTrait;
 import supercoder79.ecotones.util.DataPos;
-import supercoder79.ecotones.util.TreeUtil;
+import supercoder79.ecotones.util.TreeHelper;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 
@@ -102,7 +102,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                     MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
 
             //if the tree hits a solid block, stop the branch
-            if (TreeUtil.canLogReplace(world, local)) {
+            if (TreeHelper.canLogReplace(world, local)) {
                 world.setBlockState(local, config.woodState, 0);
             } else {
                 break;
@@ -129,7 +129,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                 boolean shouldNotBranch = false;
                 for (int y = local.getY() + 1; y < 256; y++) {
                     mutable.setY(y);
-                    if (!TreeUtil.canLogReplace(world, mutable)) {
+                    if (!TreeHelper.canLogReplace(world, mutable)) {
                         shouldNotBranch = true;
                         break;
                     }

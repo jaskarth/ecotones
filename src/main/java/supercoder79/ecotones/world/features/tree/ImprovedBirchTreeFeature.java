@@ -7,12 +7,11 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
-import supercoder79.ecotones.util.TreeUtil;
+import supercoder79.ecotones.util.TreeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +69,7 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
                     MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
 
             //if the tree hits a solid block, stop
-            if (TreeUtil.canLogReplace(world, local)) {
+            if (TreeHelper.canLogReplace(world, local)) {
                 world.setBlockState(local, config.woodState, 0);
             } else {
                 break;
@@ -120,7 +119,7 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
         Direction z = random.nextBoolean() ? Direction.NORTH : Direction.SOUTH;
         mutable.move(x);
         mutable.move(z);
-        if (TreeUtil.canLogReplace(world, mutable)) {
+        if (TreeHelper.canLogReplace(world, mutable)) {
             world.setBlockState(mutable, config.woodState, 0);
         } else {
             return;
@@ -141,7 +140,7 @@ public class ImprovedBirchTreeFeature extends Feature<TreeGenerationConfig> {
                 mutable.move(random.nextBoolean() ? Direction.UP : Direction.DOWN);
             }
 
-            if (TreeUtil.canLogReplace(world, mutable)) {
+            if (TreeHelper.canLogReplace(world, mutable)) {
                 world.setBlockState(mutable, config.woodState, 0);
             } else {
                 return;

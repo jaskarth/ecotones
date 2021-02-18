@@ -190,6 +190,7 @@
   "block.ecotones.moss": "Moss",
   "block.ecotones.maple_leaves": "Maple Leaves",
   "block.ecotones.small_lilac": "Small Lilac",
+  "block.ecotones.blueberry_bush": "Blueberry Bush",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -215,6 +216,8 @@
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",
   "item.ecotones.sap_ball": "Sap Ball",
+  "item.ecotones.blueberries": "Blueberries",
+  "item.ecotones.blueberry_jam": "Blueberry Jam",
 
   "generator.ecotones": "§2Ecotones",
 

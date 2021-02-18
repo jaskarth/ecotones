@@ -34,6 +34,7 @@ public class GetDataAtCommand {
             source.sendFeedback(new LiteralText("Soil Drainage: " + chunkGenerator.getSoilDrainageNoise().sample(x, z)), false);
             source.sendFeedback(new LiteralText("Soil Rockiness: " + chunkGenerator.getSoilRockinessNoise().sample(x, z)), false);
             source.sendFeedback(new LiteralText("Soil Quality: " + chunkGenerator.getSoilQualityAt(x, z)), false);
+            source.sendFeedback(new LiteralText("Soil pH: " + chunkGenerator.getSoilPhAt(x, z)), false);
             source.sendFeedback(new LiteralText("Oak Tree Trait: " + Traits.get(Traits.OAK, chunkGenerator.getTraits(chunkX, chunkZ, TreeType.OAK_SALT)).name()), false);
             source.sendFeedback(new LiteralText("Small Spruce Tree Trait: " + Traits.get(Traits.SMALL_SPRUCE, chunkGenerator.getTraits(chunkX, chunkZ, TreeType.SMALL_SPRUCE_SALT)).name()), false);
             source.sendFeedback(new LiteralText("Poplar Tree Trait: " + Traits.get(Traits.POPLAR, chunkGenerator.getTraits(chunkX, chunkZ, TreeType.POPLAR_SALT)).name()), false);

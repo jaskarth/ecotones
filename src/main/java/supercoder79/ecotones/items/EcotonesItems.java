@@ -1,21 +1,30 @@
 package supercoder79.ecotones.items;
 
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 public class EcotonesItems {
-    public static Item peatItem;
+    public static Item PEAT_ITEM;
+    public static final Item BLUEBERRIES = new AliasedBlockItem(EcotonesBlocks.BLUEBERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(1).saturationModifier(0.1F).snack().build()));
+    public static final Item BLUEBERRY_JAM = new JamItem(new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.3F).build()));
 
     public static void init() {
+        // TODO: fix this
         Registry.register(Registry.ITEM, new Identifier("ecotones", "coconut"), new Item(new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).build())));
         Registry.register(Registry.ITEM, new Identifier("ecotones", "hazelnut"), new Item(new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(2).saturationModifier(0.2F).build())));
-        peatItem = Registry.register(Registry.ITEM, new Identifier("ecotones", "peat_item"), new Item(new Item.Settings().group(ItemGroup.MISC)));
+        PEAT_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "peat_item"), new Item(new Item.Settings().group(ItemGroup.MISC)));
         Registry.register(Registry.ITEM, new Identifier("ecotones", "pine_sap"), new Item(new Item.Settings().group(ItemGroup.MISC)));
         Registry.register(Registry.ITEM, new Identifier("ecotones", "sap_ball"), new Item(new Item.Settings().group(ItemGroup.MISC)));
-        FuelRegistry.INSTANCE.add(peatItem, 400);
+
+        Registry.register(Registry.ITEM, new Identifier("ecotones", "blueberries"), BLUEBERRIES);
+        Registry.register(Registry.ITEM, new Identifier("ecotones", "blueberry_jam"), BLUEBERRY_JAM);
+
+        FuelRegistry.INSTANCE.add(PEAT_ITEM, 400);
     }
 }

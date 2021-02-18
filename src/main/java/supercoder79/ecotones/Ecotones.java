@@ -19,6 +19,7 @@ import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.sound.EcotonesSounds;
 import supercoder79.ecotones.command.GetDataAtCommand;
+import supercoder79.ecotones.command.MapSoilPhCommand;
 import supercoder79.ecotones.command.MapSoilQualityCommand;
 import supercoder79.ecotones.compat.TerrestriaCompat;
 import supercoder79.ecotones.compat.TraverseCompat;
@@ -77,6 +78,7 @@ public class Ecotones implements ModInitializer {
 		// Dev only commands
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			MapSoilQualityCommand.init();
+			MapSoilPhCommand.init();
 		}
 
 		int ecotonesBiomes = 0;

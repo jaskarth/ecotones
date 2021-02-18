@@ -60,6 +60,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     });
 
     private final OctaveNoiseSampler<OpenSimplexNoise> soilDrainageNoise;
+    private final OctaveNoiseSampler<OpenSimplexNoise> soilPhNoise;
 
     //TODO: convert this to soil depth somehow
     private final OctaveNoiseSampler<OpenSimplexNoise> soilRockinessNoise;
@@ -81,6 +82,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
         this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 256, 0.2, -0.2);
         this.soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 1.75, 0.75);
+        this.soilPhNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 0.9, 0.9);
         this.soilRockinessNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1024, 2, -2);
     }
 
@@ -318,15 +320,19 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     // data getters
 
     public OctaveNoiseSampler<OpenSimplexNoise> getSoilDrainageNoise() {
-        return soilDrainageNoise;
+        return this.soilDrainageNoise;
     }
 
     public OctaveNoiseSampler<OpenSimplexNoise> getSoilRockinessNoise() {
-        return soilRockinessNoise;
+        return this.soilRockinessNoise;
     }
 
     public double getSoilQualityAt(double x, double z) {
-        return MathHelper.clamp((soilDrainageNoise.sample(x, z) / 2) + 0.5, 0, 1);
+        return MathHelper.clamp((this.soilDrainageNoise.sample(x, z) / 2) + 0.5, 0, 1);
+    }
+
+    public double getSoilPhAt(double x, double z) {
+        return this.soilPhNoise.sample(x, z);
     }
 
     // Tree trait data

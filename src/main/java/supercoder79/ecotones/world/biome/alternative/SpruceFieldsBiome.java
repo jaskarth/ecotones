@@ -137,6 +137,10 @@ public class SpruceFieldsBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .applyChance(5));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.BLUEBERRY_BUSH.configure(FeatureConfig.DEFAULT)
+                        .decorate(EcotonesDecorators.BLUEBERRY_BUSH.configure(new ShrubDecoratorConfig(0.2))));
+
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
         BiomeHelper.addDefaultFeatures(this);
     }

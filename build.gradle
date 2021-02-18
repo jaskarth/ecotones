@@ -66,7 +66,17 @@ processResources {
 
 	from(sourceSets.main.resources.srcDirs) {
 		exclude "fabric.mod.json"
+
+		// Exclude texture palettes
+		exclude 'assets/ecotones/textures/palette/**'
+
+		// Exclude unused textures
+		exclude 'assets/ecotones/textures/unused/**'
+
+		// Exclude template textures
+		exclude 'assets/ecotones/textures/template/**'
 	}
+
 }
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is

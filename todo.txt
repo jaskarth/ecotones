@@ -46,6 +46,9 @@
 * Better mod compat, deferred register system
 * Geodes for all biomes
 * Maple sapling
+* Blueberry jam recipe
+* Mason jar item
+* Add fruit tags
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas

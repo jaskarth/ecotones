@@ -3,10 +3,7 @@ package supercoder79.ecotones.blocks;
 import com.terraformersmc.terraform.tree.block.TerraformSaplingBlock;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tools.FabricToolTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.Material;
+import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -50,10 +47,12 @@ public class EcotonesBlocks {
     public static Item  LICHEN_ITEM;
     public static Block MOSS;
     public static Item  MOSS_ITEM;
-    public static Block CYAN_ROSE;
-    public static Item  CYAN_ROSE_ITEM;
     public static Block MAPLE_LEAVES;
     public static Item MAPLE_LEAVES_ITEM;
+    public static Block BLUEBERRY_BUSH;
+    public static Block CYAN_ROSE;
+    public static Item  CYAN_ROSE_ITEM;
+
 
     public static void init() {
         PEAT_BLOCK = Registry.register(Registry.BLOCK, new Identifier("ecotones", "peat"), new Block(FabricBlockSettings.copy(Blocks.DIRT).breakByTool(FabricToolTags.SHOVELS).hardness(1f).build()));
@@ -116,5 +115,7 @@ public class EcotonesBlocks {
 
         MAPLE_LEAVES = Registry.register(Registry.BLOCK, new Identifier("ecotones", "maple_leaves"), new MapleLeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().build()));
         MAPLE_LEAVES_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "maple_leaves"), new BlockItem(MAPLE_LEAVES, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        BLUEBERRY_BUSH = Registry.register(Registry.BLOCK, new Identifier("ecotones", "blueberry_bush"), new BlueberryBushBlock(AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)));
     }
 }

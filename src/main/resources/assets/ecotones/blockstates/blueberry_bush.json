@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "ecotones:block/blueberry_bush/blueberry_bush_stage0"
+    },
+    "age=1": {
+      "model": "ecotones:block/blueberry_bush/blueberry_bush_stage1"
+    },
+    "age=2": {
+      "model": "ecotones:block/blueberry_bush/blueberry_bush_stage2"
+    },
+    "age=3": {
+      "model": "ecotones:block/blueberry_bush/blueberry_bush_stage3"
+    },
+    "age=4": {
+      "model": "ecotones:block/blueberry_bush/blueberry_bush_stage4"
+    }
+  }
+}

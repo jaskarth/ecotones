@@ -17,6 +17,7 @@ public class EcotonesDecorators {
     public static Decorator<NopeDecoratorConfig> ABOVE_QUALITY;
     public static Decorator<NopeDecoratorConfig> ROCKINESS;
     public static Decorator<ChanceDecoratorConfig> LARGE_ROCK;
+    public static Decorator<ShrubDecoratorConfig> BLUEBERRY_BUSH;
 
     public static void init() {
         SHRUB_PLACEMENT_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "shrub_placement"), new AnalyticShrubPlacementDecorator(ShrubDecoratorConfig.CODEC));
@@ -27,5 +28,6 @@ public class EcotonesDecorators {
         SIMPLE_TREE_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "simple_tree"), new SimpleTreePlacementDecorator(SimpleTreeDecorationData.CODEC));
         REVERSE_QUALITY_TREE_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "reverse_quality_tree"), new ReverseTreePlacementDecorator(SimpleTreeDecorationData.CODEC));
         LARGE_ROCK = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "large_rock"), new LargeRockDecorator(ChanceDecoratorConfig.CODEC));
+        BLUEBERRY_BUSH = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "blueberry_bush"), new BlueberryBushDecorator(ShrubDecoratorConfig.CODEC));
     }
 }

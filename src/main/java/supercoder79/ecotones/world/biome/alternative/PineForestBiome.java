@@ -130,6 +130,10 @@ public class PineForestBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(2));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.BLUEBERRY_BUSH.configure(FeatureConfig.DEFAULT)
+                        .decorate(EcotonesDecorators.BLUEBERRY_BUSH.configure(new ShrubDecoratorConfig(0.1))));
+
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
         BiomeHelper.addDefaultFeatures(this);
     }
