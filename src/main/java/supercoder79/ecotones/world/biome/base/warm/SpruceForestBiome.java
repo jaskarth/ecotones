@@ -133,6 +133,10 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
                 Feature.TREE.configure(FeatureConfigHolder.SPRUCE_TREE_CONFIG)
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(7.5))));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.BLUEBERRY_BUSH.configure(FeatureConfig.DEFAULT)
+                        .decorate(EcotonesDecorators.BLUEBERRY_BUSH.configure(new ShrubDecoratorConfig(0.1))));
+
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
         BiomeHelper.addDefaultFeatures(this);
     }

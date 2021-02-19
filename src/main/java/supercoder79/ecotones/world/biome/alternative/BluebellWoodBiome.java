@@ -112,6 +112,10 @@ public class BluebellWoodBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
                         .decorate(EcotonesDecorators.REVERSE_QUALITY_TREE_DECORATOR.configure(new SimpleTreeDecorationData(clearing ? 0.1 : 0.075))));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.BLUEBERRY_BUSH.configure(FeatureConfig.DEFAULT)
+                        .decorate(EcotonesDecorators.BLUEBERRY_BUSH.configure(new ShrubDecoratorConfig(0.05))));
+
         DefaultBiomeFeatures.addForestFlowers(this.getGenerationSettings());
 
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());

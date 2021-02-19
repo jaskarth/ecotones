@@ -71,10 +71,6 @@ public class BeehiveFeature extends Feature<DefaultFeatureConfig> {
 
     private static boolean canSpawnAt(ServerWorldAccess world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
-        if (state.isAir()) {
-            return true;
-        }
-
-        return false;
+        return state.isAir();
     }
 }
