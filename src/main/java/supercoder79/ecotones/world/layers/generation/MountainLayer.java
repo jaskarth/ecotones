@@ -34,7 +34,10 @@ public enum MountainLayer implements ParentedLayer, IdentityCoordinateTransforme
             return sample;
         }
 
-        double mountain = mountainNoise.sample((x + mountainOffsetX) / 3f, (z + mountainOffsetZ) / 3f)*1.25;
+        double mountain = mountainNoise.sample((x + mountainOffsetX) / 3f, (z + mountainOffsetZ) / 3f) * 1.25;
+        // Make mountains spawn less frequently near the spawn
+        mountain *= distFactor(x, z);
+
         if (mountain > 0.75) {
             return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(BIOME_TO_MOUNTAINS.get(key)[1]));
         }
@@ -53,5 +56,9 @@ public enum MountainLayer implements ParentedLayer, IdentityCoordinateTransforme
         mountainOffsetZ = (random.nextDouble() - 0.5) * 10000;
         mountainNoise = new OpenSimplexNoise(seed + 90);
         return this.create(context, parent);
+    }
+
+    private static double distFactor(int x, int z) {
+        return Math.max(0, 1 - (4.0 / (x * x + z * z)));
     }
 }

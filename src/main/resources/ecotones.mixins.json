@@ -9,7 +9,9 @@
     "TreeDecoratorTypeAccessor"
   ],
   "client": [
-    "MixinBiomeColors"
+    "MixinBiomeColors",
+    "EntityModelLayersAccessor",
+    "MixinEntityModels"
   ],
   "injectors": {
     "defaultRequire": 1

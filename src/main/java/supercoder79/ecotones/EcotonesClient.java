@@ -5,15 +5,22 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import supercoder79.ecotones.api.client.ModelDataRegistry;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.client.Colors;
+import supercoder79.ecotones.client.model.DuckEntityModel;
+import supercoder79.ecotones.client.model.EcotonesModelLayers;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.particle.MapleLeafParticle;
 import supercoder79.ecotones.client.particle.SandParticle;
+import supercoder79.ecotones.client.render.DuckEntityRenderer;
+import supercoder79.ecotones.entity.EcotonesEntities;
 
 @Environment(EnvType.CLIENT)
 public class EcotonesClient implements ClientModInitializer {
@@ -64,5 +71,10 @@ public class EcotonesClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAND, SandParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.MAPLE_LEAF, MapleLeafParticle.Factory::new);
+
+        EcotonesModelLayers.init();
+
+        ModelDataRegistry.register(EcotonesModelLayers.DUCK, DuckEntityModel.getTexturedModelData());
+        EntityRendererRegistry.INSTANCE.register(EcotonesEntities.DUCK, DuckEntityRenderer::new);
     }
 }

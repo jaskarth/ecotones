@@ -23,6 +23,7 @@ import supercoder79.ecotones.command.MapSoilPhCommand;
 import supercoder79.ecotones.command.MapSoilQualityCommand;
 import supercoder79.ecotones.compat.TerrestriaCompat;
 import supercoder79.ecotones.compat.TraverseCompat;
+import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.util.EcotonesBlockPlacers;
 import supercoder79.ecotones.world.EcotonesWorldType;
@@ -59,6 +60,8 @@ public class Ecotones implements ModInitializer {
 		EcotonesDecorators.init();
 		EcotonesFeatures.init();
 		EcotonesSurfaces.init();
+
+		EcotonesEntities.init();
 
 		EcotonesBiomes.init();
 

@@ -8,6 +8,7 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.features.entity.BeehiveFeature;
 import supercoder79.ecotones.world.features.tree.*;
 
 public class EcotonesFeatures {

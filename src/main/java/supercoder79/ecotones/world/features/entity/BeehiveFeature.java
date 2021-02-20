@@ -1,4 +1,4 @@
-package supercoder79.ecotones.world.features;
+package supercoder79.ecotones.world.features.entity;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
