@@ -2,9 +2,11 @@ package supercoder79.ecotones.client.render;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import supercoder79.ecotones.client.model.DuckEntityModel;
@@ -22,6 +24,13 @@ public class DuckEntityRenderer extends MobEntityRenderer<DuckEntity, DuckEntity
     @Override
     public Identifier getTexture(DuckEntity entity) {
         return TEXTURE;
+    }
+
+    @Override
+    public void render(DuckEntity entity, float f, float g, MatrixStack matrices, VertexConsumerProvider vertexConsumerProvider, int i) {
+        this.getModel().setRoosting(entity.isRoosting());
+
+        super.render(entity, f, g, matrices, vertexConsumerProvider, i);
     }
 
     @Override

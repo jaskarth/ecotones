@@ -33,9 +33,6 @@ public class EcotonesBiomes {
         TemperateRainforestBiome.init();
 
         SwampBiome.init();
-//        HotBiomes.init();
-//        WarmBiomes.init();
-//        SwampBiomes.init();
 
         // technical biomes
         TropicalBeachBiome.init();

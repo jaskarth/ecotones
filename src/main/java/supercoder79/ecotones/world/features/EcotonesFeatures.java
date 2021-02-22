@@ -9,6 +9,7 @@ import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.features.entity.BeehiveFeature;
+import supercoder79.ecotones.world.features.entity.DuckNestFeature;
 import supercoder79.ecotones.world.features.tree.*;
 
 public class EcotonesFeatures {
@@ -39,6 +40,7 @@ public class EcotonesFeatures {
     public static MapleTreeFeature MAPLE_TREE;
     public static BlueberryBushFeature BLUEBERRY_BUSH;
     public static BarrenPineTreeFeature BARREN_PINE;
+    public static DuckNestFeature DUCK_NEST;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig.CODEC));
@@ -68,5 +70,6 @@ public class EcotonesFeatures {
         MAPLE_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "maple_tree"), new MapleTreeFeature(TreeGenerationConfig.CODEC));
         BLUEBERRY_BUSH = Registry.register(Registry.FEATURE, new Identifier("ecotones", "blueberry_bush"), new BlueberryBushFeature(DefaultFeatureConfig.CODEC));
         BARREN_PINE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "barren_pine"), new BarrenPineTreeFeature(SimpleTreeFeatureConfig.CODEC));
+        DUCK_NEST = Registry.register(Registry.FEATURE, new Identifier("ecotones", "duck_nest"), new DuckNestFeature(DefaultFeatureConfig.CODEC));
     }
 }

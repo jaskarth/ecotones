@@ -25,6 +25,7 @@ import supercoder79.ecotones.compat.TerrestriaCompat;
 import supercoder79.ecotones.compat.TraverseCompat;
 import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.items.EcotonesItems;
+import supercoder79.ecotones.util.AiLog;
 import supercoder79.ecotones.util.EcotonesBlockPlacers;
 import supercoder79.ecotones.world.EcotonesWorldType;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
@@ -75,6 +76,9 @@ public class Ecotones implements ModInitializer {
 			ModCompat.register(TerrestriaCompat::init);
 			log("Registered Terrestria compat!");
 		}
+
+		AiLog.init();
+		AiLog.log("[System] Starting AI log");
 
 		GetDataAtCommand.init();
 

@@ -4,7 +4,9 @@ import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.AnimalModel;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
@@ -17,6 +19,8 @@ public class DuckEntityModel<T extends Entity> extends AnimalModel<T> {
    private final ModelPart rightWing;
    private final ModelPart leftWing;
    private final ModelPart beak;
+
+   private boolean roosting = false;
 
    public DuckEntityModel(ModelPart root) {
       this.head = root.getChild("head");
@@ -50,6 +54,20 @@ public class DuckEntityModel<T extends Entity> extends AnimalModel<T> {
       return ImmutableList.of(this.body, this.rightLeg, this.leftLeg, this.rightWing, this.leftWing);
    }
 
+   @Override
+   public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+      if (this.roosting) {
+         matrices.push();
+         matrices.translate(0, 0.6, 0);
+      }
+
+      super.render(matrices, vertices, light, overlay, red, green, blue, alpha);
+
+      if (this.roosting) {
+         matrices.pop();
+      }
+   }
+
    public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
       this.head.pitch = headPitch * 0.017453292F;
       this.head.yaw = headYaw * 0.017453292F;
@@ -59,5 +77,9 @@ public class DuckEntityModel<T extends Entity> extends AnimalModel<T> {
       this.leftLeg.pitch = MathHelper.cos(limbAngle * 0.6662F + 3.1415927F) * 1.4F * limbDistance;
       this.rightWing.roll = animationProgress;
       this.leftWing.roll = -animationProgress;
+   }
+
+   public void setRoosting(boolean roosting) {
+      this.roosting = roosting;
    }
 }

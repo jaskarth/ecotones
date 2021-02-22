@@ -91,6 +91,10 @@ public class PinePeaksBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.BLUEBERRY_BUSH.configure(FeatureConfig.DEFAULT)
                         .decorate(EcotonesDecorators.BLUEBERRY_BUSH.configure(new ShrubDecoratorConfig(0.05))));
 
+        this.addFeature(GenerationStep.Feature.TOP_LAYER_MODIFICATION,
+                EcotonesFeatures.DUCK_NEST.configure(DefaultFeatureConfig.INSTANCE)
+                        .decorate(EcotonesDecorators.DUCK_NEST.configure(new ShrubDecoratorConfig(0.2))));
+
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());

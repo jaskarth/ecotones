@@ -6,11 +6,12 @@
     "BlockPlacerTypeAccessor",
     "FoliagePlacerTypeAccessor",
     "MixinGeneratorOptions",
+    "MixinMinecraftClient",
     "TreeDecoratorTypeAccessor"
   ],
   "client": [
-    "MixinBiomeColors",
     "EntityModelLayersAccessor",
+    "MixinBiomeColors",
     "MixinEntityModels"
   ],
   "injectors": {

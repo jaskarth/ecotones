@@ -1,52 +1,57 @@
 package supercoder79.ecotones.entity.ai;
 
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.entity.DuckEntity;
 import supercoder79.ecotones.util.AiLog;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class WanderToWaterGoal extends Goal {
-    private final PathAwareEntity mob;
-    protected double targetX;
-    protected double targetY;
-    protected double targetZ;
-    protected int chillInWaterTicks;
+public class RoostAtNestGoal extends Goal {
+    private final DuckEntity mob;
+    private BlockPos nestPos;
+    protected int roostTicks;
 
-    public WanderToWaterGoal(PathAwareEntity mob) {
+    public RoostAtNestGoal(DuckEntity mob) {
         this.mob = mob;
         this.setControls(EnumSet.of(Goal.Control.MOVE));
     }
 
     @Override
     public void stop() {
-        AiLog.log(this.mob, "Finished wandering and staying in water");
+        AiLog.log(this.mob, "Finished roost");
         this.mob.getNavigation().stop();
+        this.mob.setRoosting(false);
         super.stop();
     }
 
     @Override
-    public boolean shouldContinue() {
-        return (!this.mob.getNavigation().isIdle() || this.chillInWaterTicks > 0) && !this.mob.hasPassengers();
-    }
-
-    @Override
     public void tick() {
-        // Yes, this starts counting down before the duck reaches water. It seems to produce good results so i'm keeping it.
-        this.chillInWaterTicks--;
+        this.roostTicks--;
 
-        if (chillInWaterTicks < 0) {
-            this.chillInWaterTicks = 0;
+        if (roostTicks < 0) {
+            this.roostTicks = 0;
+        }
+
+        if (!this.mob.isRoosting()) {
+            if (this.mob.getBlockPos().getSquaredDistance(this.nestPos) <= 1) {
+                this.mob.setRoosting(true);
+            }
         }
     }
 
     @Override
+    public boolean shouldContinue() {
+        return (!this.mob.getNavigation().isIdle() || this.roostTicks > 0) && !this.mob.hasPassengers();
+    }
+
+    @Override
     public void start() {
-        this.mob.getNavigation().startMovingTo(this.targetX, this.targetY, this.targetZ, 1.0);
+        this.mob.getNavigation().startMovingTo(this.nestPos.getX() + 0.25, this.nestPos.getY(), this.nestPos.getZ() + 0.25, 1.0);
     }
 
     @Override
@@ -55,28 +60,27 @@ public class WanderToWaterGoal extends Goal {
             return false;
         }
 
-        boolean canStart = this.mob.getRandom().nextDouble() < 0.005;
+        boolean canStart = this.mob.getRandom().nextDouble() < 0.0025;
         if (!canStart) {
             return false;
         }
 
-        BlockPos target = locateWater(this.mob.world, 12, 6);
-        if (target == null) {
+        AiLog.log(this.mob, "Attempting find nest");
+        BlockPos nestPos = locateNest(this.mob.world, 16, 6);
+        if (nestPos == null) {
             return false;
         }
 
-        this.targetX = target.getX();
-        this.targetY = target.getY();
-        this.targetZ = target.getZ();
-        this.chillInWaterTicks = this.mob.getRandom().nextInt(200) + 200;
-        AiLog.log(this.mob, "Found water at [" + this.targetX + ", " + this.targetY + ", " + this.targetZ + "] and staying there for " + this.chillInWaterTicks + " ticks");
+        this.nestPos = nestPos;
+        this.roostTicks = 600 + this.mob.getRandom().nextInt(400);
+        AiLog.log(this.mob, "Found nest at " + nestPos.toString() + ". Moving there and staying for " + this.roostTicks + " ticks");
 
         return true;
     }
 
     @Nullable
-    protected BlockPos locateWater(BlockView world, int rangeX, int rangeY) {
-        BlockPos blockPos = this.mob.getBlockPos();
+    protected BlockPos locateNest(BlockView world, int rangeX, int rangeY) {
+        BlockPos blockPos = mob.getBlockPos();
         int x = blockPos.getX();
         int y = blockPos.getY();
         int z = blockPos.getZ();
@@ -88,7 +92,7 @@ public class WanderToWaterGoal extends Goal {
             for(int dy = y - rangeY; dy <= y + rangeY; ++dy) {
                 for(int dz = z - rangeX; dz <= z + rangeX; ++dz) {
                     mutable.set(dx, dy, dz);
-                    if (world.getFluidState(mutable).isIn(FluidTags.WATER)) {
+                    if (world.getBlockState(mutable).isOf(EcotonesBlocks.NEST)) {
                         int ax = dx - x;
                         int ay = dy - y;
                         int az = dz - z;
