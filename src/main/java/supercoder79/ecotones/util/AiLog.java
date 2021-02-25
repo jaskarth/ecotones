@@ -46,6 +46,10 @@ public class AiLog {
     }
 
     public static void log(String msg) {
+        if (!isDev()) {
+            return;
+        }
+
         try {
             writer.write(msg + "\n");
             writer.flush();
@@ -55,6 +59,10 @@ public class AiLog {
     }
 
     public static void close() {
+        if (!isDev()) {
+            return;
+        }
+
         try {
             writer.close();
         } catch (IOException e) {

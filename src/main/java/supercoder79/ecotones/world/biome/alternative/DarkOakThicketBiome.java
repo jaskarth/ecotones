@@ -10,10 +10,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -121,6 +118,10 @@ public class DarkOakThicketBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.PODZOL.configure(FeatureConfig.DEFAULT)
                         .spreadHorizontally()
                         .applyChance(3));
+
+        this.addFeature(GenerationStep.Feature.TOP_LAYER_MODIFICATION,
+                EcotonesFeatures.DUCK_NEST.configure(DefaultFeatureConfig.INSTANCE)
+                        .decorate(EcotonesDecorators.DUCK_NEST.configure(new ShrubDecoratorConfig(0.1))));
 
         this.addSpawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 12, 4, 4));
         this.addSpawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.PIG, 10, 4, 4));

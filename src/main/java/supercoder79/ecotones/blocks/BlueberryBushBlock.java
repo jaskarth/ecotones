@@ -131,7 +131,7 @@ public class BlueberryBushBlock extends PlantBlock implements Fertilizable {
         world.setBlockState(pos, state.with(AGE, age), 2);
     }
 
-    private static int baseCount(double soilQuality, double soilPh) {
+    public static int baseCount(double soilQuality, double soilPh) {
         int baseCount = 0;
         if (soilQuality > 0.6) {
             baseCount++;
@@ -148,7 +148,7 @@ public class BlueberryBushBlock extends PlantBlock implements Fertilizable {
         return baseCount;
     }
 
-    private static int randomCount(double soilQuality, double soilPh) {
+    public static int randomCount(double soilQuality, double soilPh) {
         int randomCount = 2;
         if (soilQuality > 0.5) {
             randomCount++;

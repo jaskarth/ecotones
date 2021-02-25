@@ -1,7 +1,6 @@
 package supercoder79.ecotones.entity.ai;
 
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
@@ -41,6 +40,11 @@ public class RoostAtNestGoal extends Goal {
             if (this.mob.getBlockPos().getSquaredDistance(this.nestPos) <= 1) {
                 this.mob.setRoosting(true);
             }
+        } else {
+            // Digest 2 food across the 1000 ticks
+            if (this.mob.exhaustFood(0.002)) {
+                this.mob.addEnergyPoints(0.002);
+            }
         }
     }
 
@@ -59,6 +63,8 @@ public class RoostAtNestGoal extends Goal {
         if (!this.mob.isOnGround()) {
             return false;
         }
+
+        // TODO: always roost at night
 
         boolean canStart = this.mob.getRandom().nextDouble() < 0.0025;
         if (!canStart) {
