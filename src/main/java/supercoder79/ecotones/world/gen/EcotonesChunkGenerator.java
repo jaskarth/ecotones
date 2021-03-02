@@ -4,12 +4,12 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.class_5742;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.registry.Registry;
@@ -28,22 +28,21 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.feature.StructureFeature;
+import supercoder79.ecotones.data.DataHolder;
+import supercoder79.ecotones.data.DataFunction;
+import supercoder79.ecotones.data.EcotonesData;
 import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.LayerRandom;
 import supercoder79.ecotones.util.noise.OctaveNoiseSampler;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
 
-import java.util.BitSet;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
+public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implements DataHolder {
     public static final Codec<EcotonesChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(
                     BiomeSource.CODEC.fieldOf("biome_source").forGetter((generator) -> generator.biomeSource),
@@ -69,6 +68,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     private final OctaveNoiseSampler<OpenSimplexNoise> scaleNoise;
     private final long seed;
     private final Optional<Registry<Biome>> registry;
+    private final Map<Identifier, DataFunction> data = new HashMap<>();
 
     public EcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
         super(biomeSource, seed);
@@ -82,8 +82,13 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
         this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 256, 0.2, -0.2);
         this.soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 1.75, 0.75);
-        this.soilPhNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 0.9, 0.9);
         this.soilRockinessNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1024, 2, -2);
+        this.soilPhNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 0.9, 0.9);
+
+        this.data.put(EcotonesData.SOIL_QUALITY, (x, z) -> MathHelper.clamp((this.soilDrainageNoise.sample(x, z) / 2) + 0.5, 0, 1));
+        this.data.put(EcotonesData.SOIL_DRAINAGE, this.soilDrainageNoise::sample);
+        this.data.put(EcotonesData.SOIL_ROCKINESS, this.soilRockinessNoise::sample);
+        this.data.put(EcotonesData.SOIL_PH, this.soilPhNoise::sample);
     }
 
     @Override
@@ -318,21 +323,29 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     }
 
     // data getters
-
+    @Deprecated
     public OctaveNoiseSampler<OpenSimplexNoise> getSoilDrainageNoise() {
         return this.soilDrainageNoise;
     }
 
+    @Deprecated
     public OctaveNoiseSampler<OpenSimplexNoise> getSoilRockinessNoise() {
         return this.soilRockinessNoise;
     }
 
+    @Deprecated
     public double getSoilQualityAt(double x, double z) {
         return MathHelper.clamp((this.soilDrainageNoise.sample(x, z) / 2) + 0.5, 0, 1);
     }
 
+    @Deprecated
     public double getSoilPhAt(double x, double z) {
         return this.soilPhNoise.sample(x, z);
+    }
+
+    @Override
+    public DataFunction get(Identifier id) {
+        return this.data.getOrDefault(id, DataFunction.NOOP);
     }
 
     // Tree trait data

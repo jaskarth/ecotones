@@ -23,6 +23,7 @@ import supercoder79.ecotones.command.MapSoilPhCommand;
 import supercoder79.ecotones.command.MapSoilQualityCommand;
 import supercoder79.ecotones.compat.TerrestriaCompat;
 import supercoder79.ecotones.compat.TraverseCompat;
+import supercoder79.ecotones.data.EcotonesData;
 import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.util.AiLog;
@@ -65,6 +66,8 @@ public class Ecotones implements ModInitializer {
 		EcotonesEntities.init();
 
 		EcotonesBiomes.init();
+
+		EcotonesData.init();
 
 		// Mod Compat handlers
 		if (FabricLoader.getInstance().isModLoaded("traverse")) {
