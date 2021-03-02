@@ -155,8 +155,8 @@ public class FeatureConfigHolder {
                     new SimpleBlockPlacer())
                     .spreadX(15)
                     .spreadZ(15)
-                    .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)
-                    ).tries(12).build();
+                    .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK))
+                    .tries(12).build();
 
     public static RandomPatchFeatureConfig MOSS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
@@ -164,8 +164,26 @@ public class FeatureConfigHolder {
                     new SimpleBlockPlacer())
                     .spreadX(23)
                     .spreadZ(23)
-                    .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)
-                    ).tries(16).build();
+                    .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK))
+                    .tries(16).build();
+
+    public static RandomPatchFeatureConfig PUMPKIN =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(Blocks.PUMPKIN.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(12)
+                    .spreadZ(12)
+                    .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK))
+                    .tries(64).build();
+
+    public static RandomPatchFeatureConfig COBWEB =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(Blocks.COBWEB.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(8)
+                    .spreadZ(8)
+                    .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK))
+                    .tries(12).build();
 
     public static RandomPatchFeatureConfig LARGE_CACTUS_PATCH =
             new RandomPatchFeatureConfig.Builder(

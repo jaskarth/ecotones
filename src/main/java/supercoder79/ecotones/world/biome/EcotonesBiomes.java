@@ -84,6 +84,7 @@ public class EcotonesBiomes {
         PineForestBiome.init();
         SpruceFieldsBiome.init();
         PineBarrensBiome.init();
+        PumpkinPatchBiome.init();
 
         // Rose Field biome
         RoseFieldBiome.init();

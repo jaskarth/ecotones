@@ -46,12 +46,14 @@ public class PlaceWaterFeature extends Feature<DefaultFeatureConfig> {
                 BlockPos origin = mutable.toImmutable();
                 for (Direction direction : Direction.Type.HORIZONTAL) {
                     mutable.set(origin, direction);
+
                     if (!world.getBlockState(mutable).isOpaque()) {
                         if (!world.getFluidState(mutable).isIn(FluidTags.WATER)) {
                             canSpawn = false;
+
+                            break;
                         }
 
-                        break;
                     }
                 }
 

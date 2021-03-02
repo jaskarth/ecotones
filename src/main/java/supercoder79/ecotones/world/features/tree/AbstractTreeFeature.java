@@ -25,6 +25,7 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.*;
 
+@Deprecated
 public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends Feature<T> {
     public AbstractTreeFeature(Codec<T> codec) {
         super(codec);

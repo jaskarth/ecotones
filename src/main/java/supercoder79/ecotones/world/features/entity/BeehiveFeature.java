@@ -50,7 +50,7 @@ public class BeehiveFeature extends Feature<DefaultFeatureConfig> {
 
         for(int i = 0; i < beeAmt; ++i) {
             BeeEntity beeEntity = new BeeEntity(EntityType.BEE, world.toServerWorld());
-            beehive.tryEnterHive(beeEntity, false, random.nextInt(599));
+            beehive.tryEnterHive(beeEntity, false, random.nextInt(600));
         }
 
         // set surrounding flowers

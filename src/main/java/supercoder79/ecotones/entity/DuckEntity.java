@@ -24,7 +24,7 @@ public class DuckEntity extends ChickenEntity {
     private double energyPoints;
 
     public DuckEntity(EntityType<? extends DuckEntity> entityType, World world) {
-        super(entityType, world);;
+        super(entityType, world);
     }
 
     @Override

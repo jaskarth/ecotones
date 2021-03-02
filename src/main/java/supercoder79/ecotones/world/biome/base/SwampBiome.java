@@ -14,6 +14,7 @@ import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.TreeType;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
@@ -23,12 +24,14 @@ import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
+// TODO: rewrite
 public class SwampBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
 
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "swamp"), new SwampBiome(0.5f, 0.075f).build());
         TerraformSlimeSpawnBiomes.addSlimeSpawnBiomes(BuiltinRegistries.BIOME.getKey(INSTANCE).get());
+        Climate.WARM_HUMID.add(INSTANCE, 0.1);
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
         BiomeRegistries.registerNoRiverBiome(INSTANCE);
     }
@@ -66,9 +69,9 @@ public class SwampBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 EcotonesFeatures.PLACE_WATER.configure(FeatureConfig.DEFAULT)
-                        .repeat(5)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
-                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE)));
+                        .repeat(3));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
