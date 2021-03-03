@@ -54,4 +54,12 @@ public class ImprovedChunkRandom extends ChunkRandom {
         this.setSeed(n);
         return n;
     }
+
+    public void setLayerSeed(long worldSeed, int x, int z, int index) {
+        this.setSeed(worldSeed);
+        long a = this.nextLong();
+        long b = this.nextLong();
+        long c = this.nextLong();
+        setSeed((a * x * x * x + b * z * z + (index + 1) * c) ^ worldSeed);
+    }
 }

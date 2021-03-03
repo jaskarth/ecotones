@@ -4,6 +4,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
@@ -13,34 +14,35 @@ import supercoder79.ecotones.world.features.entity.DuckNestFeature;
 import supercoder79.ecotones.world.features.tree.*;
 
 public class EcotonesFeatures {
-    public static DesertifySoilFeature DESERTIFY_SOIL;
-    public static PlaceCactiFeature CACTI;
-    public static ShrubFeature SHRUB;
-    public static PalmTreeFeature JUNGLE_PALM_TREE;
-    public static SugarCaneFeature SUGARCANE;
-    public static SmallAcaciaTreeFeature SMALL_ACACIA;
-    public static BananaTreeFeature BANANA_TREE;
-    public static SmallSpruceTreeFeature SMALL_SPRUCE;
-    public static BigShrubFeature BIG_SHRUB;
-    public static PoplarTreeFeature POPLAR_TREE;
-    public static DrainageDecorationFeature DRAINAGE;
-    public static BranchingOakTreeFeature BRANCHING_OAK;
-    public static ImprovedBirchTreeFeature IMPROVED_BIRCH;
-    public static BranchingAcaciaTreeFeature BRANCHING_ACACIA;
-    public static WideShrubFeature WIDE_SHRUB;
-    public static AspenTreeFeature ASPEN_TREE;
-    public static PlaceWaterFeature PLACE_WATER;
-    public static FarmlandPatchFeature FARMLAND;
-    public static BeehiveFeature BEEHIVES;
-    public static MangroveTreeFeature MANGROVE_TREE;
-    public static BranchingDarkOakTreeFeature BRANCHING_DARK_OAK;
-    public static RockFeature ROCK;
-    public static DeadTreeFeature DEAD_TREE;
-    public static PodzolPatchFeature PODZOL;
-    public static MapleTreeFeature MAPLE_TREE;
-    public static BlueberryBushFeature BLUEBERRY_BUSH;
-    public static BarrenPineTreeFeature BARREN_PINE;
-    public static DuckNestFeature DUCK_NEST;
+    public static Feature<DefaultFeatureConfig> DESERTIFY_SOIL;
+    public static Feature<DefaultFeatureConfig> CACTI;
+    public static Feature<SimpleTreeFeatureConfig> SHRUB;
+    public static Feature<TreeFeatureConfig> JUNGLE_PALM_TREE;
+    public static Feature<DefaultFeatureConfig> SUGARCANE;
+    public static Feature<TreeGenerationConfig> SMALL_ACACIA;
+    public static Feature<TreeFeatureConfig> BANANA_TREE;
+    public static Feature<SimpleTreeFeatureConfig> SMALL_SPRUCE;
+    public static Feature<SimpleTreeFeatureConfig> BIG_SHRUB;
+    public static Feature<SimpleTreeFeatureConfig> POPLAR_TREE;
+    public static Feature<DefaultFeatureConfig> DRAINAGE;
+    public static Feature<TreeGenerationConfig> BRANCHING_OAK;
+    public static Feature<TreeGenerationConfig> IMPROVED_BIRCH;
+    public static Feature<TreeGenerationConfig> BRANCHING_ACACIA;
+    public static Feature<SimpleTreeFeatureConfig> WIDE_SHRUB;
+    public static Feature<SimpleTreeFeatureConfig> ASPEN_TREE;
+    public static Feature<DefaultFeatureConfig> PLACE_WATER;
+    public static Feature<DefaultFeatureConfig> FARMLAND;
+    public static Feature<DefaultFeatureConfig> BEEHIVES;
+    public static Feature<TreeGenerationConfig> MANGROVE_TREE;
+    public static Feature<TreeGenerationConfig> BRANCHING_DARK_OAK;
+    public static Feature<RockFeatureConfig> ROCK;
+    public static Feature<SimpleTreeFeatureConfig> DEAD_TREE;
+    public static Feature<DefaultFeatureConfig> PODZOL;
+    public static Feature<TreeGenerationConfig> MAPLE_TREE;
+    public static Feature<DefaultFeatureConfig> BLUEBERRY_BUSH;
+    public static Feature<SimpleTreeFeatureConfig> BARREN_PINE;
+    public static Feature<DefaultFeatureConfig> DUCK_NEST;
+    public static Feature<DefaultFeatureConfig> PUMPKIN_FARM;
 
     public static void init() {
         DESERTIFY_SOIL = Registry.register(Registry.FEATURE, new Identifier("ecotones", "desertify"), new DesertifySoilFeature(DefaultFeatureConfig.CODEC));
@@ -71,5 +73,6 @@ public class EcotonesFeatures {
         BLUEBERRY_BUSH = Registry.register(Registry.FEATURE, new Identifier("ecotones", "blueberry_bush"), new BlueberryBushFeature(DefaultFeatureConfig.CODEC));
         BARREN_PINE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "barren_pine"), new BarrenPineTreeFeature(SimpleTreeFeatureConfig.CODEC));
         DUCK_NEST = Registry.register(Registry.FEATURE, new Identifier("ecotones", "duck_nest"), new DuckNestFeature(DefaultFeatureConfig.CODEC));
+        PUMPKIN_FARM = Registry.register(Registry.FEATURE, new Identifier("ecotones", "pumpkin_farm"), new PumpkinFarmFeature(DefaultFeatureConfig.CODEC));
     }
 }

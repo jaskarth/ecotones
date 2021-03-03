@@ -13,6 +13,7 @@ import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.blocks.sapling.HazelSaplingGenerator;
 
 public class EcotonesBlocks {
+    // TODO: refactor out items
     public static Block PEAT_BLOCK;
     public static Block SHORT_GRASS;
     public static Item SHORT_GRASS_ITEM;
