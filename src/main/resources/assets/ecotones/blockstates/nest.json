@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": { "model": "ecotones:block/nest" }
+    "eggs=0": { "model": "ecotones:block/nest" },
+    "eggs=1": { "model": "ecotones:block/nest_egg_1" },
+    "eggs=2": { "model": "ecotones:block/nest_egg_2" },
+    "eggs=3": { "model": "ecotones:block/nest_egg_3" }
   }
 }

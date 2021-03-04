@@ -1,11 +1,15 @@
 package supercoder79.ecotones.blocks;
 
+import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.server.world.ServerChunkManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -23,6 +27,7 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
+import java.util.List;
 import java.util.Random;
 
 public class BlueberryBushBlock extends PlantBlock implements Fertilizable {
@@ -129,6 +134,26 @@ public class BlueberryBushBlock extends PlantBlock implements Fertilizable {
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         int age = Math.min(4, state.get(AGE) + random.nextInt(2) + 1);
         world.setBlockState(pos, state.with(AGE, age), 2);
+    }
+
+    @Override
+    public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
+        int baseCount = 1;
+        int randomCount = 3;
+
+        ServerWorld world = builder.getWorld();
+        ChunkGenerator generator = world.getChunkManager().getChunkGenerator();
+
+        if (generator instanceof EcotonesChunkGenerator) {
+            BlockPos pos = new BlockPos(builder.get(LootContextParameters.ORIGIN));
+
+            double soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX(), pos.getZ());
+            double soilPh = ((EcotonesChunkGenerator)generator).getSoilPhAt(pos.getX(), pos.getZ());
+            baseCount = baseCount(soilQuality, soilPh);
+            randomCount = randomCount(soilQuality, soilPh);
+        }
+
+        return ImmutableList.of(new ItemStack(EcotonesItems.BLUEBERRIES, Math.max(1, baseCount + world.random.nextInt(randomCount))));
     }
 
     public static int baseCount(double soilQuality, double soilPh) {

@@ -11,10 +11,10 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 public class CoconutBlock extends HorizontalFacingBlock {
-    private static VoxelShape AGE_TO_EAST_SHAPE = Block.createCuboidShape(9.0D, 5.0D, 5.0D, 15.0D, 12.0D, 11.0D);
-    private static VoxelShape AGE_TO_WEST_SHAPE = Block.createCuboidShape(1.0D, 5.0D, 5.0D, 7.0D, 12.0D, 11.0D);
-    private static VoxelShape AGE_TO_NORTH_SHAPE = Block.createCuboidShape(5.0D, 5.0D, 1.0D, 11.0D, 12.0D, 7.0D);
-    private static VoxelShape AGE_TO_SOUTH_SHAPE = Block.createCuboidShape(5.0D, 5.0D, 9.0D, 11.0D, 12.0D, 15.0D);
+    private static final VoxelShape AGE_TO_EAST_SHAPE = Block.createCuboidShape(9.0D, 5.0D, 5.0D, 15.0D, 12.0D, 11.0D);
+    private static final VoxelShape AGE_TO_WEST_SHAPE = Block.createCuboidShape(1.0D, 5.0D, 5.0D, 7.0D, 12.0D, 11.0D);
+    private static final VoxelShape AGE_TO_NORTH_SHAPE = Block.createCuboidShape(5.0D, 5.0D, 1.0D, 11.0D, 12.0D, 7.0D);
+    private static final VoxelShape AGE_TO_SOUTH_SHAPE = Block.createCuboidShape(5.0D, 5.0D, 9.0D, 11.0D, 12.0D, 15.0D);
 
     public CoconutBlock(Settings settings) {
         super(settings);
