@@ -1,9 +1,11 @@
 package supercoder79.ecotones.entity.ai;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.blocks.NestBlock;
 import supercoder79.ecotones.entity.DuckEntity;
 import supercoder79.ecotones.util.AiLog;
 
@@ -14,6 +16,8 @@ public class RoostAtNestGoal extends Goal {
     private final DuckEntity mob;
     private BlockPos nestPos;
     protected int roostTicks;
+    protected int halfTick;
+    protected boolean checkedEgg = false;
 
     public RoostAtNestGoal(DuckEntity mob) {
         this.mob = mob;
@@ -44,6 +48,20 @@ public class RoostAtNestGoal extends Goal {
             // Digest 2 food across the 1000 ticks
             if (this.mob.exhaustFood(0.002)) {
                 this.mob.addEnergyPoints(0.002);
+            }
+
+            if (this.roostTicks < this.halfTick && this.mob.shouldLayEgg() && !this.checkedEgg) {
+                BlockState state = this.mob.world.getBlockState(this.nestPos);
+
+                if (state.isOf(EcotonesBlocks.NEST) && state.get(NestBlock.EGGS) < 3) {
+                    int newEggCount = state.get(NestBlock.EGGS) + 1;
+                    this.mob.world.setBlockState(this.nestPos, state.with(NestBlock.EGGS, newEggCount));
+                    this.mob.useEnergyPoints(5.0);
+                    this.mob.resetEggTimer();
+                    AiLog.log(this.mob, "Laying egg at " + this.nestPos + " which now has " + newEggCount + " eggs in it");
+                }
+
+                this.checkedEgg = true;
             }
         }
     }
@@ -79,6 +97,8 @@ public class RoostAtNestGoal extends Goal {
 
         this.nestPos = nestPos;
         this.roostTicks = 600 + this.mob.getRandom().nextInt(400);
+        this.halfTick = this.roostTicks / 2;
+        this.checkedEgg = false;
         AiLog.log(this.mob, "Found nest at " + nestPos.toString() + ". Moving there and staying for " + this.roostTicks + " ticks");
 
         return true;

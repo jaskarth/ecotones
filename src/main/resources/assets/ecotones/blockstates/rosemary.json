@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "flowering=false": { "model": "ecotones:block/rosemary/rosemary" },
+    "flowering=true": { "model": "ecotones:block/rosemary/rosemary_flowering" }
+  }
+}

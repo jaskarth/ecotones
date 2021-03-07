@@ -22,6 +22,7 @@ public class DuckEntity extends ChickenEntity {
     private static final TrackedData<Boolean> ROOSTING = DataTracker.registerData(DuckEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private double food;
     private double energyPoints;
+    private int eggLayingTicks;
 
     public DuckEntity(EntityType<? extends DuckEntity> entityType, World world) {
         super(entityType, world);
@@ -35,13 +36,27 @@ public class DuckEntity extends ChickenEntity {
 
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
-        this.food = 20 + 5;
+        this.food = 25;
+        resetEggTimer();
+
         return super.initialize(world, difficulty, spawnReason, entityData, entityTag);
     }
 
     @Override
     protected void mobTick() {
         super.mobTick();
+
+        if (this.eggLayingTicks > 0) {
+            this.eggLayingTicks--;
+        }
+    }
+
+    public boolean shouldLayEgg() {
+        return this.eggLayingTicks == 0 && this.energyPoints > 8.5;
+    }
+
+    public void resetEggTimer() {
+        this.eggLayingTicks = this.random.nextInt(6000) + 6000;
     }
 
     @Override
@@ -108,6 +123,7 @@ public class DuckEntity extends ChickenEntity {
         setRoosting(tag.getBoolean("roosting"));
         this.food = tag.getDouble("food");
         this.energyPoints = tag.getDouble("energy_points");
+        this.eggLayingTicks = tag.getInt("egg_laying_ticks");
     }
 
     @Override
@@ -116,5 +132,6 @@ public class DuckEntity extends ChickenEntity {
         tag.putBoolean("roosting", isRoosting());
         tag.putDouble("food", this.food);
         tag.putDouble("energy_points", this.energyPoints);
+        tag.putInt("egg_laying_ticks", this.eggLayingTicks);
     }
 }

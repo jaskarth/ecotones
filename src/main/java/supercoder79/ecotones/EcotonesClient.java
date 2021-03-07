@@ -67,7 +67,9 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.MOSS,
                 EcotonesBlocks.PINECONE,
                 EcotonesBlocks.MAPLE_LEAVES,
-                EcotonesBlocks.BLUEBERRY_BUSH);
+                EcotonesBlocks.BLUEBERRY_BUSH,
+                EcotonesBlocks.SWITCHGRASS,
+                EcotonesBlocks.ROSEMARY);
 
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAND, SandParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.MAPLE_LEAF, MapleLeafParticle.Factory::new);

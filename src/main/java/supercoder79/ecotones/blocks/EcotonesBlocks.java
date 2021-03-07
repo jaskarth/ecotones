@@ -53,6 +53,9 @@ public class EcotonesBlocks {
     public static Block BLUEBERRY_BUSH;
     public static Block NEST;
     public static Item NEST_ITEM;
+    public static Block SWITCHGRASS;
+    public static Item SWITCHGRASS_ITEM;
+    public static Block ROSEMARY;
     public static Block CYAN_ROSE;
     public static Item  CYAN_ROSE_ITEM;
 
@@ -64,10 +67,10 @@ public class EcotonesBlocks {
         SHORT_GRASS = Registry.register(Registry.BLOCK, new Identifier("ecotones", "short_grass"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         SHORT_GRASS_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "short_grass"), new BlockItem(SHORT_GRASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        REEDS = Registry.register(Registry.BLOCK, new Identifier("ecotones", "reeds"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        REEDS = Registry.register(Registry.BLOCK, new Identifier("ecotones", "reeds"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         Registry.register(Registry.ITEM, new Identifier("ecotones", "reeds"), new BlockItem(REEDS, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        WILDFLOWERS = Registry.register(Registry.BLOCK, new Identifier("ecotones", "wildflowers"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        WILDFLOWERS = Registry.register(Registry.BLOCK, new Identifier("ecotones", "wildflowers"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         WILDFLOWERS_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "wildflowers"), new BlockItem(WILDFLOWERS, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         SMALL_SHRUB = Registry.register(Registry.BLOCK, new Identifier("ecotones", "small_shrub"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
@@ -86,34 +89,34 @@ public class EcotonesBlocks {
         SANDY_GRASS = Registry.register(Registry.BLOCK, new Identifier("ecotones", "sandy_grass"), new EcotonesSandyGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         SANDY_GRASS_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "sandy_grass"), new BlockItem(SANDY_GRASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        SURFACE_ROCK = Registry.register(Registry.BLOCK, new Identifier("ecotones", "surface_rock"), new SurfaceRockBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.STONE).build()));
+        SURFACE_ROCK = Registry.register(Registry.BLOCK, new Identifier("ecotones", "surface_rock"), new SurfaceRockBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.STONE).build()));
         SURFACE_ROCK_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "surface_rock"), new BlockItem(SURFACE_ROCK, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        CLOVER = Registry.register(Registry.BLOCK, new Identifier("ecotones", "clover"), new EcotonesLeafPileBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        CLOVER = Registry.register(Registry.BLOCK, new Identifier("ecotones", "clover"), new EcotonesLeafPileBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         CLOVER_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "clover"), new BlockItem(CLOVER, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        PINECONE = Registry.register(Registry.BLOCK, new Identifier("ecotones", "pinecone"), new PineconeBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        PINECONE = Registry.register(Registry.BLOCK, new Identifier("ecotones", "pinecone"), new PineconeBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         PINECONE_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "pinecone"), new BlockItem(PINECONE, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         DRIED_DIRT = Registry.register(Registry.BLOCK, new Identifier("ecotones", "dried_dirt"), new Block(FabricBlockSettings.copy(Blocks.DIRT).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build()));
         DRIED_DIRT_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "dried_dirt"), new BlockItem(DRIED_DIRT, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
 
-        BLUEBELL = Registry.register(Registry.BLOCK, new Identifier("ecotones", "bluebell"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        BLUEBELL = Registry.register(Registry.BLOCK, new Identifier("ecotones", "bluebell"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         BLUEBELL_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "bluebell"), new BlockItem(BLUEBELL, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         WIDE_FERN = Registry.register(Registry.BLOCK, new Identifier("ecotones", "wide_fern"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         WIDE_FERN_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "wide_fern"), new BlockItem(WIDE_FERN, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        SMALL_LILAC = Registry.register(Registry.BLOCK, new Identifier("ecotones", "small_lilac"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        SMALL_LILAC = Registry.register(Registry.BLOCK, new Identifier("ecotones", "small_lilac"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         SMALL_LILAC_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "small_lilac"), new BlockItem(SMALL_LILAC, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         LICHEN = Registry.register(Registry.BLOCK, new Identifier("ecotones", "lichen"), new LichenBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().hardness(0.2F).sounds(BlockSoundGroup.VINE).build()));
         LICHEN_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "lichen"), new BlockItem(LICHEN, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        MOSS = Registry.register(Registry.BLOCK, new Identifier("ecotones", "moss"), new EcotonesLeafPileBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        MOSS = Registry.register(Registry.BLOCK, new Identifier("ecotones", "moss"), new EcotonesLeafPileBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         MOSS_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "moss"), new BlockItem(MOSS, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
-        CYAN_ROSE = Registry.register(Registry.BLOCK, new Identifier("ecotones", "cyan_rose"), new CyanRoseBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        CYAN_ROSE = Registry.register(Registry.BLOCK, new Identifier("ecotones", "cyan_rose"), new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         CYAN_ROSE_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "cyan_rose"), new BlockItem(CYAN_ROSE, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         MAPLE_LEAVES = Registry.register(Registry.BLOCK, new Identifier("ecotones", "maple_leaves"), new MapleLeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().build()));
@@ -123,5 +126,10 @@ public class EcotonesBlocks {
 
         NEST = Registry.register(Registry.BLOCK, new Identifier("ecotones", "nest"), new NestBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakInstantly().sounds(BlockSoundGroup.WOOD).build()));
         NEST_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "nest"), new BlockItem(NEST, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        SWITCHGRASS = Registry.register(Registry.BLOCK, new Identifier("ecotones", "switchgrass"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        SWITCHGRASS_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "switchgrass"), new BlockItem(SWITCHGRASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        ROSEMARY = Registry.register(Registry.BLOCK, new Identifier("ecotones", "rosemary"), new RosemaryBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
     }
 }

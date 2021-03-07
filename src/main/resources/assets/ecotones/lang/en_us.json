@@ -171,6 +171,9 @@
   "biome.ecotones.pine_barrens": "Pine Barrens",
   "biome.ecotones.pine_barrens_hilly": "Hilly Pine Barrens",
   "biome.ecotones.pine_barrens_mountainous": "Mountainous Pine Barrens",
+  "biome.ecotones.pumpkin_patch": "Pumpkin Patch",
+  "biome.ecotones.pumpkin_patch_hilly": "Hilly Pumpkin Patch",
+  "biome.ecotones.pumpkin_patch_mountainous": "Mountainous Pumpkin Patch",
 
 
   "block.ecotones.peat": "Peat Block",
@@ -195,6 +198,8 @@
   "block.ecotones.small_lilac": "Small Lilac",
   "block.ecotones.blueberry_bush": "Blueberry Bush",
   "block.ecotones.nest": "Nest",
+  "block.ecotones.switchgrass": "Switchgrass",
+  "block.ecotones.rosemary": "Rosemary",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -217,12 +222,15 @@
   "item.ecotones.maple_leaves": "Maple Leaves",
   "item.ecotones.small_lilac": "Small Lilac",
   "item.ecotones.nest": "Nest",
+  "item.ecotones.switchgrass": "Switchgrass",
+  "item.ecotones.rosemary": "Rosemary",
 
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",
   "item.ecotones.sap_ball": "Sap Ball",
   "item.ecotones.blueberries": "Blueberries",
   "item.ecotones.blueberry_jam": "Blueberry Jam",
+  "item.ecotones.duck_egg": "Duck Egg",
 
   "generator.ecotones": "§2Ecotones",
 
