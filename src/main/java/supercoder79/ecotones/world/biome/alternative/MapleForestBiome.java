@@ -26,6 +26,7 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class MapleForestBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -66,6 +67,7 @@ public class MapleForestBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);
         this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))

@@ -30,6 +30,7 @@ import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class HazelGroveBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -74,6 +75,7 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
         this.volatility(hilly ? 0.8 : 1.0);
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
 
         if (clearing) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

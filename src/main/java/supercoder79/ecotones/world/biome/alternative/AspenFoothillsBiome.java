@@ -26,6 +26,7 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class AspenFoothillsBiome extends EcotonesBiomeBuilder {
@@ -60,6 +61,7 @@ public class AspenFoothillsBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_BIRCH);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

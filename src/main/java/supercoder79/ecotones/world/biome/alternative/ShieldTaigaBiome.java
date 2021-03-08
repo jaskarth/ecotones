@@ -29,6 +29,7 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
@@ -61,6 +62,7 @@ public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
         this.volatility(volatility);
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());

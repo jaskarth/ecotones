@@ -27,6 +27,7 @@ import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -56,6 +57,7 @@ public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
         this.volatility(0.92);
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
 
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 7)));
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

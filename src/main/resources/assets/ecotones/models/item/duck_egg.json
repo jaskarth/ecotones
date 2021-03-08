@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "ecotones:block/duck_egg"
+    "layer0": "ecotones:item/duck_egg"
   }
 }

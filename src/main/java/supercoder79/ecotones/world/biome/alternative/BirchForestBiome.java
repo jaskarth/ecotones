@@ -25,6 +25,7 @@ import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class BirchForestBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -63,6 +64,7 @@ public class BirchForestBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_BIRCH);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)

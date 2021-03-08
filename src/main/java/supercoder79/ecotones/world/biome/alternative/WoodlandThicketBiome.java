@@ -30,6 +30,7 @@ import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 import java.util.OptionalInt;
 
@@ -65,6 +66,7 @@ public class WoodlandThicketBiome extends EcotonesBiomeBuilder {
         this.volatility(volatility);
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

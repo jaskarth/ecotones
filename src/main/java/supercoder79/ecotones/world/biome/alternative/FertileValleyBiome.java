@@ -21,6 +21,7 @@ import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class FertileValleyBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -60,6 +61,7 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
 
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 7)));
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addSavannaGrass(this.getGenerationSettings());

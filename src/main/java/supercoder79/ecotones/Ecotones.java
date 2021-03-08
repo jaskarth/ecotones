@@ -27,6 +27,7 @@ import supercoder79.ecotones.data.EcotonesData;
 import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.util.AiLog;
+import supercoder79.ecotones.util.CampfireLogHelper;
 import supercoder79.ecotones.util.EcotonesBlockPlacers;
 import supercoder79.ecotones.world.EcotonesWorldType;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
@@ -38,6 +39,9 @@ import supercoder79.ecotones.world.features.foliage.EcotonesFoliagePlacers;
 import supercoder79.ecotones.world.gen.BiomeGenData;
 import supercoder79.ecotones.world.gen.EcotonesBiomeSource;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructurePieces;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
 
@@ -63,21 +67,33 @@ public class Ecotones implements ModInitializer {
 		EcotonesFeatures.init();
 		EcotonesSurfaces.init();
 
+		EcotonesStructurePieces.init();
+		EcotonesStructures.init();
+		EcotonesConfiguredStructures.init();
+
 		EcotonesEntities.init();
 
 		EcotonesBiomes.init();
 
 		EcotonesData.init();
 
+		CampfireLogHelper.initVanilla();
+
 		// Mod Compat handlers
-		if (FabricLoader.getInstance().isModLoaded("traverse")) {
+		if (isModLoaded("traverse")) {
 			ModCompat.register(TraverseCompat::init);
 			log("Registered Traverse compat!");
 		}
 
-		if (FabricLoader.getInstance().isModLoaded("terrestria")) {
+		if (isModLoaded("terrestria")) {
 			ModCompat.register(TerrestriaCompat::init);
 			log("Registered Terrestria compat!");
+		}
+
+		// Love Aurora's Decorations <3
+		if (isModLoaded("aurorasdeco")) {
+			CampfireLogHelper.initAurorasDeco();
+			log("Registered Aurora's Decorations compat!");
 		}
 
 		AiLog.init();
@@ -112,6 +128,7 @@ public class Ecotones implements ModInitializer {
 			worldType = new EcotonesWorldType();
 		}
 
+		// TODO: fix this
 		ServerTickCallback.EVENT.register(server -> {
 			if (server.getTicks() % 300 == 0) {
 				for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
@@ -125,5 +142,9 @@ public class Ecotones implements ModInitializer {
 
 	public static void log(String str) {
 		LOGGER.info("[ecotones] " + str);
+	}
+
+	private static boolean isModLoaded(String modid) {
+		return FabricLoader.getInstance().isModLoaded(modid);
 	}
 }

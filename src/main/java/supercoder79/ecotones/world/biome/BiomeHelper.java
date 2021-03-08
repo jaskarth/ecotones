@@ -11,6 +11,7 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class BiomeHelper {
     public static final int WARM_OCEAN_ID = 44;

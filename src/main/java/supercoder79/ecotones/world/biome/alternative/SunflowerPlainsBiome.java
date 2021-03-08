@@ -29,6 +29,7 @@ import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class SunflowerPlainsBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -57,6 +58,7 @@ public class SunflowerPlainsBiome extends EcotonesBiomeBuilder {
         this.volatility(0.88);
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
 
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 5)));
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

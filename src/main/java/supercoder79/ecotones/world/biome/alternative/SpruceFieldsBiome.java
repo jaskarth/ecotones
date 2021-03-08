@@ -28,6 +28,7 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class SpruceFieldsBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -58,6 +59,7 @@ public class SpruceFieldsBiome extends EcotonesBiomeBuilder {
         this.volatility(volatility);
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());

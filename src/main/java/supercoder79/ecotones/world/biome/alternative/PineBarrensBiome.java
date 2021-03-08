@@ -28,6 +28,7 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class PineBarrensBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -68,6 +69,7 @@ public class PineBarrensBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
