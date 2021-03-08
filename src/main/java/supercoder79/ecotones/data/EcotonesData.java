@@ -8,7 +8,9 @@ public class EcotonesData {
     public static final Identifier SOIL_ROCKINESS = new Identifier("ecotones", "soil_rockiness");
     public static final Identifier SOIL_PH = new Identifier("ecotones", "soil_ph");
 
-    public static void init() {
+    public static final Identifier GRASS_NOISE = new Identifier("ecotones", "grass_noise");
 
+    public static void init() {
+        // TODO: some sort of default impl thing
     }
 }

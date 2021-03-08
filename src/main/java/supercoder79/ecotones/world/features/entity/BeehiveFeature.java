@@ -48,9 +48,11 @@ public class BeehiveFeature extends Feature<DefaultFeatureConfig> {
         BeehiveBlockEntity beehive = (BeehiveBlockEntity)world.getBlockEntity(mutable);
         int beeAmt = 1 + random.nextInt(3);
 
-        for(int i = 0; i < beeAmt; ++i) {
-            BeeEntity beeEntity = new BeeEntity(EntityType.BEE, world.toServerWorld());
-            beehive.tryEnterHive(beeEntity, false, random.nextInt(600));
+        if (beehive != null) {
+            for (int i = 0; i < beeAmt; ++i) {
+                BeeEntity beeEntity = new BeeEntity(EntityType.BEE, world.toServerWorld());
+                beehive.tryEnterHive(beeEntity, false, random.nextInt(600));
+            }
         }
 
         // set surrounding flowers

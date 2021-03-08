@@ -60,6 +60,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 
     private final OctaveNoiseSampler<OpenSimplexNoise> soilDrainageNoise;
     private final OctaveNoiseSampler<OpenSimplexNoise> soilPhNoise;
+    private final OctaveNoiseSampler<OpenSimplexNoise> grassNoise;
 
     //TODO: convert this to soil depth somehow
     private final OctaveNoiseSampler<OpenSimplexNoise> soilRockinessNoise;
@@ -84,11 +85,13 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         this.soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 1.75, 0.75);
         this.soilRockinessNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1024, 2, -2);
         this.soilPhNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 0.9, 0.9);
+        this.grassNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 800, 0.9, 0.9);
 
         this.data.put(EcotonesData.SOIL_QUALITY, (x, z) -> MathHelper.clamp((this.soilDrainageNoise.sample(x, z) / 2) + 0.5, 0, 1));
         this.data.put(EcotonesData.SOIL_DRAINAGE, this.soilDrainageNoise::sample);
         this.data.put(EcotonesData.SOIL_ROCKINESS, this.soilRockinessNoise::sample);
         this.data.put(EcotonesData.SOIL_PH, this.soilPhNoise::sample);
+        this.data.put(EcotonesData.GRASS_NOISE, this.grassNoise::sample);
     }
 
     @Override
