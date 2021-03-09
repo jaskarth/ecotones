@@ -17,6 +17,7 @@ public class EcotonesItems {
     public static final Item BLUEBERRY_JAM = new JamItem(new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.3F).build()));
     public static final Item DUCK_EGG = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item ROSEMARY = new AliasedBlockItem(EcotonesBlocks.ROSEMARY, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(1).saturationModifier(0.1F).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 6 * 20), 0.75f).snack().build()));
+    public static final Item ECOTONES_BOOK = new EcotonesBookItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC));
 
     public static void init() {
         // TODO: fix this
@@ -30,6 +31,7 @@ public class EcotonesItems {
         Registry.register(Registry.ITEM, new Identifier("ecotones", "blueberry_jam"), BLUEBERRY_JAM);
         Registry.register(Registry.ITEM, new Identifier("ecotones", "duck_egg"), DUCK_EGG);
         Registry.register(Registry.ITEM, new Identifier("ecotones", "rosemary"), ROSEMARY);
+        Registry.register(Registry.ITEM, new Identifier("ecotones", "ecotones_book"), ECOTONES_BOOK);
 
         FuelRegistry.INSTANCE.add(PEAT_ITEM, 400);
     }
