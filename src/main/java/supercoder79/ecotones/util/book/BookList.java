@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 public final class BookList {
-    private static final List<BookGenerator> BOOK_GENERATORS = ImmutableList.of(new BlueberryBookGenerator());
+    private static final List<BookGenerator> BOOK_GENERATORS = ImmutableList.of(new BlueberryBookGenerator(), new RosemaryBookGenerator());
 
     public static BookGenerator get(Random random) {
         return ListHelper.randomIn(BOOK_GENERATORS, random);

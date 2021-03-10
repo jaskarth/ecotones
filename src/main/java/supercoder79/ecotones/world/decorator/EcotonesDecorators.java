@@ -8,7 +8,7 @@ import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 
-public class EcotonesDecorators {
+public final class EcotonesDecorators {
     public static Decorator<ShrubDecoratorConfig> SHRUB_PLACEMENT_DECORATOR;
     public static Decorator<NopeDecoratorConfig> DRAINAGE_DECORATOR;
     public static Decorator<TreeGenerationConfig.DecorationData> TREE_DECORATOR;
@@ -19,8 +19,10 @@ public class EcotonesDecorators {
     public static Decorator<ChanceDecoratorConfig> LARGE_ROCK;
     public static Decorator<ShrubDecoratorConfig> BLUEBERRY_BUSH;
     public static Decorator<ShrubDecoratorConfig> DUCK_NEST;
+    public static Decorator<ShrubDecoratorConfig> ROSEMARY;
 
     public static void init() {
+        // TODO: cleanup
         SHRUB_PLACEMENT_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "shrub_placement"), new AnalyticShrubPlacementDecorator(ShrubDecoratorConfig.CODEC));
         DRAINAGE_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "drainage"), new DrainageSurfaceDecorator(NopeDecoratorConfig.CODEC));
         TREE_DECORATOR = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "tree"), new AnalyticTreePlacementDecorator(TreeGenerationConfig.DecorationData.CODEC));
@@ -31,5 +33,6 @@ public class EcotonesDecorators {
         LARGE_ROCK = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "large_rock"), new LargeRockDecorator(ChanceDecoratorConfig.CODEC));
         BLUEBERRY_BUSH = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "blueberry_bush"), new BlueberryBushDecorator(ShrubDecoratorConfig.CODEC));
         DUCK_NEST = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "duck_nest"), new DuckNestDecorator(ShrubDecoratorConfig.CODEC));
+        ROSEMARY = Registry.register(Registry.DECORATOR, new Identifier("ecotones", "rosemary"), new RosemaryDecorator(ShrubDecoratorConfig.CODEC));
     }
 }

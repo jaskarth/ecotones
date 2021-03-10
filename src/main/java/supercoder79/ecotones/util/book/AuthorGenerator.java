@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 public final class AuthorGenerator {
-    private static final List<String> FRIENDS = ImmutableList.of("Aurora", "Thalia", "Emi", "Jennifer", "march", "Luna");
+    private static final List<String> FRIENDS = ImmutableList.of("Aurora", "Thalia", "Emi", "Jennifer", "march", "Luna", "Lucy");
 
     public static String generate(Random random) {
 
