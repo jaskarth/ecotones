@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.blocks.sapling.HazelSaplingGenerator;
 
-public class EcotonesBlocks {
+public final class EcotonesBlocks {
     // TODO: refactor out items
     public static Block PEAT_BLOCK;
     public static Block SHORT_GRASS;
@@ -56,6 +56,8 @@ public class EcotonesBlocks {
     public static Block SWITCHGRASS;
     public static Item SWITCHGRASS_ITEM;
     public static Block ROSEMARY;
+    public static Block LAVENDER;
+    public static Item  LAVENDER_ITEM;
     public static Block CYAN_ROSE;
     public static Item  CYAN_ROSE_ITEM;
 
@@ -131,5 +133,8 @@ public class EcotonesBlocks {
         SWITCHGRASS_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "switchgrass"), new BlockItem(SWITCHGRASS, new Item.Settings().group(ItemGroup.DECORATIONS)));
 
         ROSEMARY = Registry.register(Registry.BLOCK, new Identifier("ecotones", "rosemary"), new RosemaryBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+
+        LAVENDER = Registry.register(Registry.BLOCK, new Identifier("ecotones", "lavender"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
+        LAVENDER_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "lavender"), new BlockItem(LAVENDER, new Item.Settings().group(ItemGroup.DECORATIONS)));
     }
 }

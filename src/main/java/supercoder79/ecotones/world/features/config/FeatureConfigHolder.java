@@ -138,6 +138,14 @@ public class FeatureConfigHolder {
                     .spreadZ(15)
                     .tries(12).build();
 
+    public static final RandomPatchFeatureConfig LAVENDER =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.LAVENDER.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(5)
+                    .spreadZ(5)
+                    .tries(12).build();
+
     public static final RandomPatchFeatureConfig CYAN_ROSE =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
                     .addState(EcotonesBlocks.CYAN_ROSE.getDefaultState(), 1),
