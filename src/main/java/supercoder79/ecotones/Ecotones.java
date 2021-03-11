@@ -92,7 +92,7 @@ public class Ecotones implements ModInitializer {
 
 		// Love Aurora's Decorations <3
 		if (isModLoaded("aurorasdeco")) {
-			CampfireLogHelper.initAurorasDeco();
+			ModCompat.register(CampfireLogHelper::initAurorasDeco);
 			log("Registered Aurora's Decorations compat!");
 		}
 

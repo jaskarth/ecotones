@@ -11,13 +11,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 
-public class EcotonesItems {
+public final class EcotonesItems {
     public static Item PEAT_ITEM;
     public static final Item BLUEBERRIES = new AliasedBlockItem(EcotonesBlocks.BLUEBERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(1).saturationModifier(0.1F).snack().build()));
-    public static final Item BLUEBERRY_JAM = new JamItem(new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.3F).build()));
+    public static final Item BLUEBERRY_JAM = new JamItem(EcotonesBlocks.BLUEBERRY_JAM_JAR, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.3F).build()));
     public static final Item DUCK_EGG = new Item(new Item.Settings().group(ItemGroup.MISC));
     public static final Item ROSEMARY = new AliasedBlockItem(EcotonesBlocks.ROSEMARY, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(1).saturationModifier(0.1F).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 6 * 20), 0.75f).snack().build()));
-    public static final Item ECOTONES_BOOK = new EcotonesBookItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC));
+    public static final Item ECOTONES_BOOK = new EcotonesBookItem(new Item.Settings().maxCount(1));
 
     public static void init() {
         // TODO: fix this

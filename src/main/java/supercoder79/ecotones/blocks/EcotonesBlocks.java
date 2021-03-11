@@ -58,6 +58,7 @@ public final class EcotonesBlocks {
     public static Block ROSEMARY;
     public static Block LAVENDER;
     public static Item  LAVENDER_ITEM;
+    public static Block BLUEBERRY_JAM_JAR;
     public static Block CYAN_ROSE;
     public static Item  CYAN_ROSE_ITEM;
 
@@ -136,5 +137,7 @@ public final class EcotonesBlocks {
 
         LAVENDER = Registry.register(Registry.BLOCK, new Identifier("ecotones", "lavender"), new EcotonesGrassBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build()));
         LAVENDER_ITEM = Registry.register(Registry.ITEM, new Identifier("ecotones", "lavender"), new BlockItem(LAVENDER, new Item.Settings().group(ItemGroup.DECORATIONS)));
+
+        BLUEBERRY_JAM_JAR = Registry.register(Registry.BLOCK, new Identifier("ecotones", "blueberry_jam_jar"), new JarBlock(FabricBlockSettings.of(Material.DECORATION).nonOpaque().breakInstantly().sounds(BlockSoundGroup.STONE).build()));
     }
 }

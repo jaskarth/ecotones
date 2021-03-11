@@ -72,6 +72,9 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.ROSEMARY,
                 EcotonesBlocks.LAVENDER);
 
+                BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
+                        EcotonesBlocks.BLUEBERRY_JAM_JAR);
+
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAND, SandParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.MAPLE_LEAF, MapleLeafParticle.Factory::new);
 

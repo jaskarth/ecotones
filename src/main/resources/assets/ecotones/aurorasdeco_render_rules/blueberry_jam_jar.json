@@ -1,0 +1,8 @@
+{
+  "match": {
+    "item": "ecotones:blueberry_jam"
+  },
+  "models": [
+    "ecotones:inherited/blueberry_jam_jar"
+  ]
+}
