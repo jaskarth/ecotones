@@ -60,6 +60,7 @@ public class SpruceFieldsBiome extends EcotonesBiomeBuilder {
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
+        this.addStructureFeature(EcotonesConfiguredStructures.COTTAGE);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());

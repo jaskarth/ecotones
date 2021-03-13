@@ -58,6 +58,8 @@ public class PineForestBiome extends EcotonesBiomeBuilder {
         this.volatility(volatility);
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
+        this.addStructureFeature(EcotonesConfiguredStructures.COTTAGE);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
@@ -68,7 +70,6 @@ public class PineForestBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))

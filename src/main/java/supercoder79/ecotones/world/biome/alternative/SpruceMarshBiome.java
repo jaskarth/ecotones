@@ -76,6 +76,7 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
+        this.addStructureFeature(EcotonesConfiguredStructures.COTTAGE);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

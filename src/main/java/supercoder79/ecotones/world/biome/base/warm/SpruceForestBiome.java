@@ -58,6 +58,7 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> TaigaVillageData.STRUCTURE_POOLS, 5)));
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
+        this.addStructureFeature(EcotonesConfiguredStructures.COTTAGE);
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

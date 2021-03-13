@@ -5,7 +5,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -47,10 +46,10 @@ public class CampfireStructureGenerator {
             this.boundingBox = new BlockBox(pos.add(-3, -3, -3), pos.add(3, 3, 3));
         }
 
-        public Piece(StructureManager manager, CompoundTag tag) {
-            super(EcotonesStructurePieces.CAMPFIRE, tag);
-            this.pos = new BlockPos(tag.getInt("x"), tag.getInt("y"), tag.getInt("z"));
-            this.logSource = Registry.BLOCK.get(new Identifier(tag.getString("log_source")));
+        public Piece(StructureManager manager, CompoundTag nbt) {
+            super(EcotonesStructurePieces.CAMPFIRE, nbt);
+            this.pos = new BlockPos(nbt.getInt("x"), nbt.getInt("y"), nbt.getInt("z"));
+            this.logSource = Registry.BLOCK.get(new Identifier(nbt.getString("log_source")));
         }
 
         @Override
