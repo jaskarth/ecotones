@@ -7,6 +7,7 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.api.TreeGenerationConfig;
+import supercoder79.ecotones.world.features.config.OakTreeFeatureConfig;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.features.entity.BeehiveFeature;
@@ -44,6 +45,7 @@ public final class EcotonesFeatures {
     public static Feature<DefaultFeatureConfig> DUCK_NEST;
     public static Feature<DefaultFeatureConfig> PUMPKIN_FARM;
     public static Feature<DefaultFeatureConfig> ROSEMARY;
+    public static Feature<OakTreeFeatureConfig> STRAIGHT_OAK;
 
     public static void init() {
         // TODO: cleanup
@@ -77,5 +79,6 @@ public final class EcotonesFeatures {
         DUCK_NEST = Registry.register(Registry.FEATURE, new Identifier("ecotones", "duck_nest"), new DuckNestFeature(DefaultFeatureConfig.CODEC));
         PUMPKIN_FARM = Registry.register(Registry.FEATURE, new Identifier("ecotones", "pumpkin_farm"), new PumpkinFarmFeature(DefaultFeatureConfig.CODEC));
         ROSEMARY = Registry.register(Registry.FEATURE, new Identifier("ecotones", "rosemary"), new RosemaryFeature(DefaultFeatureConfig.CODEC));
+        STRAIGHT_OAK = Registry.register(Registry.FEATURE, new Identifier("ecotones", "straight_oak"), new StraightOakTreeFeature(OakTreeFeatureConfig.CODEC));
     }
 }

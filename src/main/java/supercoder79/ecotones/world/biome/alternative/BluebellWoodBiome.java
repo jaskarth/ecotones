@@ -13,16 +13,14 @@ import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.api.Climate;
-import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.api.*;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
+import supercoder79.ecotones.world.features.config.OakTreeFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
@@ -83,7 +81,7 @@ public class BluebellWoodBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
-                        .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 8, 12))));
+                        .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 12, 18))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
@@ -91,8 +89,8 @@ public class BluebellWoodBiome extends EcotonesBiomeBuilder {
 
         if (!clearing) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                    EcotonesFeatures.BRANCHING_OAK.configure(TreeType.MEDIUM_RARE_OAK)
-                            .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.MEDIUM_RARE_OAK.decorationData)));
+                    EcotonesFeatures.STRAIGHT_OAK.configure(new OakTreeFeatureConfig(7, 14))
+                            .decorate(EcotonesDecorators.TREE_DECORATOR.configure(new TreeGenerationConfig.DecorationData(1.3, 0, 0))));
         }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

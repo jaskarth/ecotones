@@ -23,6 +23,7 @@ import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
+import supercoder79.ecotones.world.features.config.OakTreeFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
@@ -113,8 +114,8 @@ public class PrairieBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 20, 30))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.BRANCHING_OAK.configure(TreeType.RARER_LARGE_OAK)
-                        .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARER_LARGE_OAK.decorationData)));
+                EcotonesFeatures.STRAIGHT_OAK.configure(new OakTreeFeatureConfig(14, 9))
+                        .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_CLUSTERED_OAK.decorationData)));
 
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
         BiomeHelper.addDefaultFeatures(this);
