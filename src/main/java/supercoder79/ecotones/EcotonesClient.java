@@ -13,6 +13,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import supercoder79.ecotones.api.client.ModelDataRegistry;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.client.ClientPacketHandler;
 import supercoder79.ecotones.client.Colors;
 import supercoder79.ecotones.client.model.DuckEntityModel;
 import supercoder79.ecotones.client.model.EcotonesModelLayers;
@@ -26,6 +27,7 @@ import supercoder79.ecotones.entity.EcotonesEntities;
 public class EcotonesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        ClientPacketHandler.init();
 
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> view != null && pos != null ? BiomeColors.getFoliageColor(view, pos) : FoliageColors.getDefaultColor(),

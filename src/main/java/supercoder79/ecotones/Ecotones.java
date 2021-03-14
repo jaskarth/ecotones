@@ -46,6 +46,9 @@ import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
 
 public class Ecotones implements ModInitializer {
+	// TODO: split out into it's own class
+	public static final Identifier WORLD_TYPE = new Identifier("ecotones", "world_type");
+
 	public static final Logger LOGGER = LogManager.getLogger("ecotones");
 
 	// Dynamic registry

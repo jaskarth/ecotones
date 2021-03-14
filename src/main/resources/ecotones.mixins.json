@@ -7,14 +7,17 @@
     "FoliagePlacerTypeAccessor",
     "MixinGeneratorOptions",
     "MixinMinecraftClient",
+    "MixinPlayerManager",
     "StructureFeatureAccessor",
     "TreeDecoratorTypeAccessor"
   ],
   "client": [
     "EntityModelLayersAccessor",
+    "MixinBackgroundRenderer",
     "MixinBiomeColors",
+    "MixinClientPlayNetworkHandler",
     "MixinEntityModels",
-    "MixinClientPlayNetworkHandler"
+    "MixinDebugHud"
   ],
   "injectors": {
     "defaultRequire": 1
