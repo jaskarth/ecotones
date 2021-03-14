@@ -5,6 +5,7 @@
   "mixins": [
     "BlockPlacerTypeAccessor",
     "FoliagePlacerTypeAccessor",
+    "MixinBiomeSelectors",
     "MixinGeneratorOptions",
     "TreeDecoratorTypeAccessor"
   ],

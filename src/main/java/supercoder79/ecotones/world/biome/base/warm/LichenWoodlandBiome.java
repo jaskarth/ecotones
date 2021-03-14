@@ -130,6 +130,7 @@ public class LichenWoodlandBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(2.5))));
 
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeUtil.addTemperateSpawns(this.getSpawnSettings());
         BiomeUtil.addDefaultFeatures(this);
     }
 }

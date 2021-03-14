@@ -127,6 +127,7 @@ public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
         this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
         this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 5, 1, 1));
 
+        BiomeUtil.addTemperateSpawns(this.getSpawnSettings());
         BiomeUtil.addDefaultFeatures(this);
     }
 }

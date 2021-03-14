@@ -109,6 +109,7 @@ public class TemperateForestBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 16, 20))));
 
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeUtil.addTemperateSpawns(this.getSpawnSettings());
         BiomeUtil.addDefaultFeatures(this);
     }
 }

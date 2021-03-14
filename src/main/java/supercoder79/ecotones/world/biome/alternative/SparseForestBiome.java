@@ -123,6 +123,7 @@ public class SparseForestBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DARK_OAK.decorationData)));
 
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeUtil.addTemperateSpawns(this.getSpawnSettings());
         BiomeUtil.addDefaultFeatures(this);
     }
 }

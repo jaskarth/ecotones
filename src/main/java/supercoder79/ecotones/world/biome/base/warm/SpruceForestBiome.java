@@ -129,6 +129,7 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(7.5))));
 
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeUtil.addTemperateSpawns(this.getSpawnSettings());
         BiomeUtil.addDefaultFeatures(this);
     }
 }

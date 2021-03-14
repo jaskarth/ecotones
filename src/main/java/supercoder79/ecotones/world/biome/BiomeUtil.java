@@ -69,6 +69,12 @@ public class BiomeUtil {
         builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 5, 1, 1));
     }
 
+    public static void addTemperateSpawns(SpawnSettings.Builder builder) {
+        builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 8, 4, 4));
+        builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.RABBIT, 4, 2, 3));
+        builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.FOX, 8, 2, 4));
+    }
+
     public static void addDefaultFeatures(EcotonesBiomeBuilder builder) {
         builder.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT)

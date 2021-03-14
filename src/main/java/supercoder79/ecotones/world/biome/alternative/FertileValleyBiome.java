@@ -135,5 +135,6 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
 
         BiomeUtil.addDefaultFeatures(this);
         BiomeUtil.addDefaultSpawns(this.getSpawnSettings());
+        BiomeUtil.addTemperateSpawns(this.getSpawnSettings());
     }
 }
