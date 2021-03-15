@@ -1,5 +1,6 @@
 package supercoder79.ecotones.client;
 
+import net.minecraft.util.math.MathHelper;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
 
 public final class FogHandler {
@@ -12,7 +13,7 @@ public final class FogHandler {
     // TODO: fix problems with time sync
 
     public static double noiseFor(double time) {
-        return noise.sample(time / 1000.0, 0);
+        return noise.sample(time / 1200.0, 0);
     }
 
     public static double offsetFor(long time) {
@@ -21,7 +22,18 @@ public final class FogHandler {
 
         double offset = scaledTime / 4800.0;
 
-        return Math.max(0, (-(offset * offset) + 1) * 0.45);
+        long rawLocalTime = time % 24000L;
+        double o = 0;
+        if (rawLocalTime > 12000) {
+            o = 0.75;
+            // Night fade in
+            o = MathHelper.clampedLerp(0, o, (rawLocalTime - 12000) / 2000.0);
+
+            // Night fade out
+            o = MathHelper.clampedLerp(0, o, (24000 - rawLocalTime) / 2000.0);
+        }
+
+        return Math.max(0, (-(offset * offset) + 1) * 0.65) + o;
     }
 
     public static double multiplierFor(long time) {
@@ -29,6 +41,6 @@ public final class FogHandler {
     }
 
     public static double multiplierFor(double noise, double offset) {
-        return Math.max(0.15, Math.min(1, 1 - (Math.max(0, noise + offset) * 0.85)));
+        return Math.max(0.05, Math.min(1, 1 - (Math.max(0, noise + offset) * 0.85)));
     }
 }

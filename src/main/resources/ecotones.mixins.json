@@ -16,8 +16,9 @@
     "MixinBackgroundRenderer",
     "MixinBiomeColors",
     "MixinClientPlayNetworkHandler",
+    "MixinDebugHud",
     "MixinEntityModels",
-    "MixinDebugHud"
+    "MixinWorldRenderer"
   ],
   "injectors": {
     "defaultRequire": 1

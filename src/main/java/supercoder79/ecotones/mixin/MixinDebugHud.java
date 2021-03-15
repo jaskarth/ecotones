@@ -24,7 +24,7 @@ import java.util.List;
 @Mixin(DebugHud.class)
 public class MixinDebugHud {
     @Unique
-    private static final DecimalFormat FORMAT = new DecimalFormat("#.##");
+    private static final DecimalFormat FORMAT = new DecimalFormat("#.####");
     @Shadow @Final private MinecraftClient client;
 
     @Inject(method = "getLeftText", at = @At("TAIL"))
