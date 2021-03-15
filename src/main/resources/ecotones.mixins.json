@@ -16,6 +16,7 @@
     "MixinBackgroundRenderer",
     "MixinBiomeColors",
     "MixinClientPlayNetworkHandler",
+    "MixinClientWorld",
     "MixinDebugHud",
     "MixinEntityModels",
     "MixinWorldRenderer"
