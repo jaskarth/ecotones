@@ -105,6 +105,5 @@ public final class CloudHandler {
         }
 
         cloudTexCount = nonEmptyPixels;
-        System.out.println(cloudTexCount);
     }
 }

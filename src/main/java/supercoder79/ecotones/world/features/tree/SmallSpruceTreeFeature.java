@@ -10,12 +10,14 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.tree.SmallSpruceTrait;
 import supercoder79.ecotones.tree.Traits;
 import supercoder79.ecotones.tree.smallspruce.DefaultSmallSpruceTrait;
 import supercoder79.ecotones.util.Shapes;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.treedecorator.LeafPileTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.LichenTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
@@ -26,6 +28,7 @@ import java.util.Random;
 public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
     private static final PineconeTreeDecorator PINECONES = new PineconeTreeDecorator(2);
     private static final LichenTreeDecorator LICHEN = new LichenTreeDecorator(3);
+    private static final LeafPileTreeDecorator LEAF_PILES = new LeafPileTreeDecorator(EcotonesBlocks.SPRUCE_LEAF_PILE.getDefaultState(), 8, 3);
 
     public SmallSpruceTreeFeature() {
         super(SimpleTreeFeatureConfig.CODEC);
@@ -80,6 +83,9 @@ public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
 
         // Generate lichen
         LICHEN.generate(world, random, logs, leaves, ImmutableSet.of(), new BlockBox());
+
+        // Generate leaf piles
+        LEAF_PILES.generate(world, random, logs, leaves, ImmutableSet.of(), new BlockBox());
 
         return false;
     }

@@ -201,6 +201,7 @@
   "block.ecotones.switchgrass": "Switchgrass",
   "block.ecotones.rosemary": "Rosemary",
   "block.ecotones.blueberry_jam_jar": "Blueberry Jam Jar",
+  "block.ecotones.spruce_leaf_pile": "Spruce Leaf Pile",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -225,6 +226,7 @@
   "item.ecotones.nest": "Nest",
   "item.ecotones.switchgrass": "Switchgrass",
   "item.ecotones.rosemary": "Rosemary",
+  "item.ecotones.spruce_leaf_pile": "Spruce Leaf Pile",
 
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",

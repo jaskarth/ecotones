@@ -24,6 +24,7 @@ import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.util.DoubleOrNormalPlacer;
 import supercoder79.ecotones.world.features.foliage.SmallPineFoliagePlacer;
+import supercoder79.ecotones.world.treedecorator.LeafPileTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.LichenTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
@@ -213,7 +214,7 @@ public class FeatureConfigHolder {
                     new SpruceFoliagePlacer(UniformIntDistribution.of(2, 1), UniformIntDistribution.of(0, 2), UniformIntDistribution.of(1, 1)),
                     new StraightTrunkPlacer(6, 4, 3),
                     new TwoLayersFeatureSize(2, 0, 2))
-                    .ignoreVines().build().setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(6), new LichenTreeDecorator(12)));
+                    .ignoreVines().build().setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(6), new LichenTreeDecorator(12), new LeafPileTreeDecorator(EcotonesBlocks.SPRUCE_LEAF_PILE.getDefaultState(), 12, 4)));
 
     public static final TreeFeatureConfig SMALL_PINE_CONFIG = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
