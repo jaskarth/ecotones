@@ -114,7 +114,7 @@ public class PrairieBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 20, 30))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.STRAIGHT_OAK.configure(new OakTreeFeatureConfig(14, 9))
+                EcotonesFeatures.STRAIGHT_OAK.configure(new OakTreeFeatureConfig(14, 9).branchCount(3).branchLength(4).randomBranchLength(4))
                         .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_CLUSTERED_OAK.decorationData)));
 
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());

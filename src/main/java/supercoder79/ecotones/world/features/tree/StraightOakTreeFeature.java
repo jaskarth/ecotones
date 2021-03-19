@@ -41,14 +41,14 @@ public class StraightOakTreeFeature extends Feature<OakTreeFeatureConfig> {
 
         List<BlockPos> leafNodes = new ArrayList<>();
 
-        generateTrunk(world, pos, random, height, leafNodes);
+        generateTrunk(world, pos, random, height, leafNodes, config);
 
         generateLeaves(world, leafNodes);
 
         return true;
     }
 
-    private void generateTrunk(StructureWorldAccess world, BlockPos start, Random random, int height, List<BlockPos> leafNodes) {
+    private void generateTrunk(StructureWorldAccess world, BlockPos start, Random random, int height, List<BlockPos> leafNodes, OakTreeFeatureConfig config) {
         int branchStartHeight = -1;
 
         for (Direction direction : FeatureHelper.HORIZONTAL) {
@@ -68,12 +68,12 @@ public class StraightOakTreeFeature extends Feature<OakTreeFeatureConfig> {
                 leafNodes.add(local);
             }
 
-            int branchCount = 2 + random.nextInt(3);
+            int branchCount = config.getBranchCount() + random.nextInt(config.getRandomBranchCount());
             double theta = random.nextDouble() * 2 * Math.PI;
 
             for (int j = 0; j < branchCount; j++) {
                 if (i > branchStartHeight && i < height - 3) {
-                    generateBranch(world, random, local,(theta / branchCount) * i + (random.nextDouble() * 0.2), 3 + random.nextInt(3), leafNodes);
+                    generateBranch(world, random, local,(((double) j / branchCount) * 2 * Math.PI) + theta + (random.nextDouble() * 0.2),  config.getBranchLength() + random.nextInt(config.getRandomBranchLength()), leafNodes);
                 }
             }
         }
