@@ -29,6 +29,7 @@ import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.util.AiLog;
 import supercoder79.ecotones.util.CampfireLogHelper;
 import supercoder79.ecotones.util.EcotonesBlockPlacers;
+import supercoder79.ecotones.util.deco.BlockDecorations;
 import supercoder79.ecotones.world.EcotonesWorldType;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.biome.EcotonesBiomes;
@@ -81,6 +82,7 @@ public class Ecotones implements ModInitializer {
 		EcotonesData.init();
 
 		CampfireLogHelper.initVanilla();
+		BlockDecorations.init();
 
 		// Mod Compat handlers
 		if (isModLoaded("traverse")) {

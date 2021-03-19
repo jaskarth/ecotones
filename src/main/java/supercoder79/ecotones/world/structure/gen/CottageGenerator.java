@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.structure.gen;
 
 import net.minecraft.block.*;
+import net.minecraft.block.enums.BedPart;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.nbt.CompoundTag;
@@ -11,11 +12,13 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import supercoder79.ecotones.util.deco.BlockAttachment;
+import supercoder79.ecotones.util.deco.BlockDecorations;
+import supercoder79.ecotones.util.deco.DecorationCategory;
+import supercoder79.ecotones.world.features.FeatureHelper;
 import supercoder79.ecotones.world.structure.EcotonesStructurePieces;
 
 import java.util.List;
@@ -155,7 +158,46 @@ public class CottageGenerator {
             world.setBlockState(this.pos.add(4, 2, 4), Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.NORTH, true).with(PaneBlock.SOUTH, true), 3);
             world.setBlockState(this.pos.add(2, 2, 6), Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, true).with(PaneBlock.WEST, true), 3);
 
-            // TODO: fireplace, decorations
+            // Decorations
+            BlockDecorations.get(random, BlockAttachment.FLOOR, DecorationCategory.TABLES).generate(world, this.pos.add(3, 1, 5), Direction.UP);
+            BlockDecorations.get(random, BlockAttachment.FLOOR, DecorationCategory.INDUSTRY).generate(world, this.pos.add(3, 1, 3), Direction.UP);
+            BlockDecorations.get(random, BlockAttachment.CEILING, DecorationCategory.LIGHTS).generate(world, this.pos.add(3, 3, 5), Direction.UP);
+            BlockDecorations.get(random, BlockAttachment.CEILING, DecorationCategory.LIGHTS).generate(world, this.pos.add(0, 3, 0), Direction.UP);
+
+            // Bed
+            world.setBlockState(this.pos.add(0, 1, 0), Blocks.RED_BED.getDefaultState().with(BedBlock.FACING, Direction.NORTH).with(BedBlock.PART, BedPart.HEAD), 3);
+            world.setBlockState(this.pos.add(0, 1, 1), Blocks.RED_BED.getDefaultState().with(BedBlock.FACING, Direction.NORTH).with(BedBlock.PART, BedPart.FOOT), 3);
+
+            // Fireplace
+            for (int x = 2; x <= 3; x++) {
+                for (int z = 0; z <= 2; z++) {
+                    world.setBlockState(this.pos.add(x, 0, z), Blocks.COBBLESTONE.getDefaultState(), 3);
+                }
+            }
+
+            for (int z = 0; z <= 2; z+=2) {
+                world.setBlockState(this.pos.add(3, 1, z), Blocks.COBBLESTONE.getDefaultState(), 3);
+                world.setBlockState(this.pos.add(3, 2, z), Blocks.COBBLESTONE.getDefaultState(), 3);
+            }
+
+            world.setBlockState(this.pos.add(3, 2, 1), Blocks.COBBLESTONE.getDefaultState(), 3);
+            world.setBlockState(this.pos.add(3, 3, 1), Blocks.COBBLESTONE.getDefaultState(), 3);
+
+            world.setBlockState(this.pos.add(3, 1, 1), Blocks.CAMPFIRE.getDefaultState(), 3);
+
+            // Chimney
+            world.setBlockState(this.pos.add(3, 4, 1), Blocks.COBBLESTONE.getDefaultState(), 3);
+            world.setBlockState(this.pos.add(4, 4, 1), Blocks.COBBLESTONE.getDefaultState(), 3);
+
+            for (int y = 5; y <= 7; y++) {
+                world.setBlockState(this.pos.add(3, y, 1), Blocks.COBBLESTONE.getDefaultState(), 3);
+
+                for (Direction direction : FeatureHelper.HORIZONTAL) {
+                    world.setBlockState(this.pos.add(3, y, 1).offset(direction), Blocks.COBBLESTONE.getDefaultState(), 3);
+                }
+            }
+
+            world.setBlockState(this.pos.add(3, 7, 1), Blocks.CAMPFIRE.getDefaultState().with(CampfireBlock.SIGNAL_FIRE, true), 3);
 
             return true;
         }
