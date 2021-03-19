@@ -25,6 +25,7 @@ public class MixinClientWorld {
             cloudCount -= 0.75;
             cloudCount *= 4;
 
+            // TODO: lerp based on time
             red = MathHelper.clampedLerp(red, 0.9, cloudCount);
             green = MathHelper.clampedLerp(green, 0.9, cloudCount);
             blue = MathHelper.clampedLerp(blue, 0.9, cloudCount);

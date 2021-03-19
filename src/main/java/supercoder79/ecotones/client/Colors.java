@@ -4,7 +4,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 
-public class Colors {
+public final class Colors {
     public static int maple() {
         // 194, 51, 47
         return 0xc2332f;
