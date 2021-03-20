@@ -1,6 +1,6 @@
-package supercoder79.ecotones.tree.poplar;
+package supercoder79.ecotones.world.tree.trait.poplar;
 
-import supercoder79.ecotones.tree.PoplarTrait;
+import supercoder79.ecotones.world.tree.trait.PoplarTrait;
 
 import java.util.Random;
 

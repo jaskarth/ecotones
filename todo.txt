@@ -68,8 +68,6 @@
 * Skip analysis when good soil quality
 
 # 1.17
-* flooded_savannah -> flooded_savanna
-* beach -> tropical_beach
 * Smaller biome sizes
 * Increase biome smoothing radius
 * Rename Dry Forest

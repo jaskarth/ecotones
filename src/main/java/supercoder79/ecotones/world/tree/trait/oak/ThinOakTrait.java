@@ -1,6 +1,6 @@
-package supercoder79.ecotones.tree.oak;
+package supercoder79.ecotones.world.tree.trait.oak;
 
-import supercoder79.ecotones.tree.OakTrait;
+import supercoder79.ecotones.world.tree.trait.OakTrait;
 
 public class ThinOakTrait implements OakTrait {
     @Override

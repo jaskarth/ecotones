@@ -1,4 +1,4 @@
-package supercoder79.ecotones.tree;
+package supercoder79.ecotones.world.tree.trait;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;

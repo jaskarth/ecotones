@@ -1,14 +1,14 @@
-package supercoder79.ecotones.tree;
+package supercoder79.ecotones.world.tree.trait;
 
 import com.google.common.collect.ImmutableList;
-import supercoder79.ecotones.tree.oak.*;
-import supercoder79.ecotones.tree.poplar.DefaultPoplarTrait;
-import supercoder79.ecotones.tree.poplar.ShortPoplarTrait;
-import supercoder79.ecotones.tree.poplar.TaperedPoplarTrait;
-import supercoder79.ecotones.tree.poplar.WidePoplarTrait;
-import supercoder79.ecotones.tree.smallspruce.DefaultSmallSpruceTrait;
-import supercoder79.ecotones.tree.smallspruce.ShortSmallSpruceTrait;
-import supercoder79.ecotones.tree.smallspruce.WideSmallSpruceTrait;
+import supercoder79.ecotones.world.tree.trait.oak.*;
+import supercoder79.ecotones.world.tree.trait.poplar.DefaultPoplarTrait;
+import supercoder79.ecotones.world.tree.trait.poplar.ShortPoplarTrait;
+import supercoder79.ecotones.world.tree.trait.poplar.TaperedPoplarTrait;
+import supercoder79.ecotones.world.tree.trait.poplar.WidePoplarTrait;
+import supercoder79.ecotones.world.tree.trait.smallspruce.DefaultSmallSpruceTrait;
+import supercoder79.ecotones.world.tree.trait.smallspruce.ShortSmallSpruceTrait;
+import supercoder79.ecotones.world.tree.trait.smallspruce.WideSmallSpruceTrait;
 
 import java.util.List;
 

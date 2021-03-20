@@ -50,7 +50,7 @@ public class MixinDebugHud {
 
     @Inject(method = "render", at = @At("TAIL"))
     private void renderCloudTex(MatrixStack matrices, CallbackInfo ci) {
-        if (ClientSidedServerData.isInEcotonesWorld && EcotonesClientDebug.RENDER_CLOUDS_TEX) {
+        if (ClientSidedServerData.isInEcotonesWorld && EcotonesClientDebug.RENDER_CLOUDS_TEX && !this.client.options.debugProfilerEnabled) {
             MinecraftClient.getInstance().getTextureManager().bindTexture(CLOUDS);
             DrawableHelper.drawTexture(matrices, this.client.getWindow().getScaledWidth() - 128, this.client.getWindow().getScaledHeight() - 128, 0.0F, 0.0F, 128, 128, 128, 128);
         }
