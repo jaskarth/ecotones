@@ -7,8 +7,8 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import supercoder79.ecotones.api.TreeType;
-import supercoder79.ecotones.world.tree.trait.Traits;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.tree.trait.Traits;
 
 public class GetDataAtCommand {
     public static void init() {

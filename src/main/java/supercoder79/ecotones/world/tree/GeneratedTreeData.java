@@ -1,6 +1,5 @@
 package supercoder79.ecotones.world.tree;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package supercoder79.ecotones.world.features.entity;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;

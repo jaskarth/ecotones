@@ -5,9 +5,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorContext;
-import supercoder79.ecotones.data.DataHolder;
-import supercoder79.ecotones.data.EcotonesData;
-import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.data.DataHolder;
+import supercoder79.ecotones.world.data.EcotonesData;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -11,8 +11,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.blocks.RosemaryBlock;
-import supercoder79.ecotones.data.DataHolder;
-import supercoder79.ecotones.data.EcotonesData;
+import supercoder79.ecotones.world.data.DataHolder;
+import supercoder79.ecotones.world.data.EcotonesData;
 
 import java.util.Random;
 

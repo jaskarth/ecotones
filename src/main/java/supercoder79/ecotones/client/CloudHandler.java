@@ -3,7 +3,6 @@ package supercoder79.ecotones.client;
 import com.google.common.collect.ImmutableList;
 import it.unimi.dsi.fastutil.HashCommon;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import supercoder79.ecotones.client.cloud.ClearSkyCloudsModifier;
 import supercoder79.ecotones.client.cloud.CloudModifier;

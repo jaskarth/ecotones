@@ -6,7 +6,6 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorContext;
-import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 
 import java.util.Random;
 import java.util.stream.Stream;

@@ -1,8 +1,6 @@
 package supercoder79.ecotones.api;
 
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.Ecotones;

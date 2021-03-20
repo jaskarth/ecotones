@@ -13,7 +13,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
-import supercoder79.ecotones.world.structure.gen.CampfireStructureGenerator;
 import supercoder79.ecotones.world.structure.gen.CottageGenerator;
 
 public class CottageStructureFeature extends StructureFeature<DefaultFeatureConfig> {

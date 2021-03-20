@@ -24,7 +24,6 @@ import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.tree.CocoaBeansTreeDecorator;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
-import supercoder79.ecotones.client.sound.EcotonesSounds;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;

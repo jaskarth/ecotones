@@ -7,8 +7,8 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import supercoder79.ecotones.data.DataHolder;
-import supercoder79.ecotones.data.DefaultDataHolder;
+import supercoder79.ecotones.world.data.DataHolder;
+import supercoder79.ecotones.world.data.DefaultDataHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.tree.gen.BarrenTreeGenerator;
 

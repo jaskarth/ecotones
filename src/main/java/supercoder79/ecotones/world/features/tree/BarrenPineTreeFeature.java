@@ -6,22 +6,20 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
-import supercoder79.ecotones.data.DataHolder;
-import supercoder79.ecotones.data.DefaultDataHolder;
+import supercoder79.ecotones.world.data.DataHolder;
+import supercoder79.ecotones.world.data.DefaultDataHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.tree.GeneratedTreeData;
 import supercoder79.ecotones.world.tree.gen.BarrenTreeGenerator;
 import supercoder79.ecotones.world.treedecorator.LeafPileTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
-import java.util.*;
+import java.util.Random;
 
 public class BarrenPineTreeFeature extends Feature<SimpleTreeFeatureConfig> {
     private static final PineconeTreeDecorator PINECONES = new PineconeTreeDecorator(2);

@@ -1,7 +1,6 @@
 package supercoder79.ecotones.world.layers.generation;
 
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerFactory;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
@@ -9,10 +8,6 @@ import net.minecraft.world.biome.layer.util.LayerSampleContext;
 import net.minecraft.world.biome.layer.util.LayerSampler;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
-import supercoder79.ecotones.world.biome.special.BlessedSpringsBiome;
-import supercoder79.ecotones.world.biome.special.HotSpringsBiome;
-import supercoder79.ecotones.world.biome.special.SuperVolcanicBiome;
-import supercoder79.ecotones.world.biome.special.VolcanicBiome;
 import supercoder79.ecotones.world.layers.seed.SeedLayer;
 
 public enum VolcanismLayer implements IdentitySamplingLayer, SeedLayer {

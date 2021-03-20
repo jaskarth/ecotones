@@ -1,7 +1,10 @@
 package supercoder79.ecotones.world.tree.trait;
 
 import com.google.common.collect.ImmutableList;
-import supercoder79.ecotones.world.tree.trait.oak.*;
+import supercoder79.ecotones.world.tree.trait.oak.DefaultOakTrait;
+import supercoder79.ecotones.world.tree.trait.oak.SmallerOakTrait;
+import supercoder79.ecotones.world.tree.trait.oak.ThinOakTrait;
+import supercoder79.ecotones.world.tree.trait.oak.WarpedOakTrait;
 import supercoder79.ecotones.world.tree.trait.poplar.DefaultPoplarTrait;
 import supercoder79.ecotones.world.tree.trait.poplar.ShortPoplarTrait;
 import supercoder79.ecotones.world.tree.trait.poplar.TaperedPoplarTrait;

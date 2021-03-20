@@ -1,11 +1,9 @@
 package supercoder79.ecotones.world.layers.util;
 
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.biome.layer.type.CrossSamplingLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
-import supercoder79.ecotones.world.biome.special.ThePitsBiome;
 
 public enum BiomeEdgeLayer implements CrossSamplingLayer {
     INSTANCE;

@@ -1,6 +1,6 @@
 package supercoder79.ecotones.world.biome;
 
-import supercoder79.ecotones.world.biome.alternative.*;
+import supercoder79.ecotones.world.biome.climatic.*;
 import supercoder79.ecotones.world.biome.base.SwampBiome;
 import supercoder79.ecotones.world.biome.base.hot.*;
 import supercoder79.ecotones.world.biome.base.warm.*;

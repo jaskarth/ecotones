@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
@@ -11,7 +9,6 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class BiomeHelper {
     public static final int WARM_OCEAN_ID = 44;

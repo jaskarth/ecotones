@@ -1,7 +1,6 @@
 package supercoder79.ecotones.client;
 
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
-import net.minecraft.client.MinecraftClient;
 import supercoder79.ecotones.Ecotones;
 
 public final class ClientPacketHandler {

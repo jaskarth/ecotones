@@ -7,7 +7,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import supercoder79.ecotones.data.DataHolder;
+import supercoder79.ecotones.world.data.DataHolder;
 
 import java.util.Random;
 

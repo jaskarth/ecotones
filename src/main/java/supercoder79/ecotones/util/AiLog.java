@@ -2,7 +2,6 @@ package supercoder79.ecotones.util;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
 
 import java.io.File;
 import java.io.FileWriter;

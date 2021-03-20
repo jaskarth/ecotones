@@ -4,14 +4,11 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.DrainageType;
 import supercoder79.ecotones.util.DataPos;
-
-import java.util.Random;
 
 public class DrainageDecorationFeature extends Feature<DefaultFeatureConfig> {
 

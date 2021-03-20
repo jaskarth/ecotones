@@ -7,8 +7,6 @@ import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 
-import java.util.Map;
-
 public enum BiomeVariantLayer implements IdentitySamplingLayer {
     INSTANCE;
 

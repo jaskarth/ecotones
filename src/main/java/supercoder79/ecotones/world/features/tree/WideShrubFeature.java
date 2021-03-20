@@ -7,13 +7,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-
-import java.util.Random;
 
 public class WideShrubFeature extends Feature<SimpleTreeFeatureConfig> {
 

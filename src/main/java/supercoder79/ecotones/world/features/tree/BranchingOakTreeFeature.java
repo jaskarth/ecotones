@@ -14,12 +14,12 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.minecraft.world.gen.tree.TrunkVineTreeDecorator;
 import supercoder79.ecotones.api.TreeGenerationConfig;
-import supercoder79.ecotones.world.tree.trait.OakTrait;
-import supercoder79.ecotones.world.tree.trait.Traits;
-import supercoder79.ecotones.world.tree.trait.oak.DefaultOakTrait;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeHelper;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.tree.trait.OakTrait;
+import supercoder79.ecotones.world.tree.trait.Traits;
+import supercoder79.ecotones.world.tree.trait.oak.DefaultOakTrait;
 import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 
 import java.util.ArrayList;

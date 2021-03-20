@@ -5,11 +5,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
-import supercoder79.ecotones.Ecotones;
-import supercoder79.ecotones.data.DataHolder;
-import supercoder79.ecotones.data.EcotonesData;
+import supercoder79.ecotones.world.data.DataHolder;
+import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.tree.GeneratedTreeData;
 
 import java.util.ArrayList;

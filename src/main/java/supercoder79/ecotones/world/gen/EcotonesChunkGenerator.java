@@ -29,14 +29,14 @@ import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.StructureFeature;
-import supercoder79.ecotones.data.DataHolder;
-import supercoder79.ecotones.data.DataFunction;
-import supercoder79.ecotones.data.EcotonesData;
 import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.LayerRandom;
 import supercoder79.ecotones.util.noise.OctaveNoiseSampler;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
+import supercoder79.ecotones.world.data.DataFunction;
+import supercoder79.ecotones.world.data.DataHolder;
+import supercoder79.ecotones.world.data.EcotonesData;
 
 import java.util.*;
 import java.util.function.Supplier;

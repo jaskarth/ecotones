@@ -1,16 +1,13 @@
 package supercoder79.ecotones.world.layers.util;
 
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BuiltinBiomes;
 import net.minecraft.world.biome.layer.type.MergingLayer;
 import net.minecraft.world.biome.layer.util.IdentityCoordinateTransformer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import net.minecraft.world.biome.layer.util.LayerSampler;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.world.biome.special.ThePitsBiome;
 
 public enum BiomeMerger implements MergingLayer, IdentityCoordinateTransformer {
     INSTANCE;
