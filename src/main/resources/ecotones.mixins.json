@@ -6,7 +6,6 @@
     "BlockPlacerTypeAccessor",
     "FoliagePlacerTypeAccessor",
     "MixinGeneratorOptions",
-    "MixinMinecraftClient",
     "MixinPlayerManager",
     "StructureFeatureAccessor",
     "TreeDecoratorTypeAccessor"
@@ -19,6 +18,8 @@
     "MixinClientWorld",
     "MixinDebugHud",
     "MixinEntityModels",
+    "MixinMinecraftClient",
+    "MixinSkyProperties",
     "MixinWorldRenderer"
   ],
   "injectors": {
