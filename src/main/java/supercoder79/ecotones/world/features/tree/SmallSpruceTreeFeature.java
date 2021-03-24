@@ -42,7 +42,9 @@ public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
         SimpleTreeFeatureConfig config = context.getConfig();
         ChunkGenerator generator = context.getGenerator();
 
-        if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return false;
+        if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) {
+            return false;
+        }
 
         // Trait data
         SmallSpruceTrait trait = DefaultSmallSpruceTrait.INSTANCE;

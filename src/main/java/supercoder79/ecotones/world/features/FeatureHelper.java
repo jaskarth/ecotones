@@ -1,8 +1,12 @@
 package supercoder79.ecotones.world.features;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 import java.util.Random;
 
@@ -22,5 +26,15 @@ public final class FeatureHelper {
 
     public static Direction randomHorizontal(Random random) {
         return HORIZONTAL[random.nextInt(HORIZONTAL.length)];
+    }
+
+    public static void placeLeaves(WorldAccess world, BlockPos pos, BlockState leaves) {
+        if (world.getBlockState(pos).isAir()) {
+            world.setBlockState(pos, leaves, 3);
+        }
+    }
+
+    public static void placeLeaves(FeatureContext<SimpleTreeFeatureConfig> context, BlockPos pos) {
+        placeLeaves(context.getWorld(), pos, context.getConfig().leafState);
     }
 }

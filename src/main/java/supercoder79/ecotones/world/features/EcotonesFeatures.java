@@ -47,6 +47,7 @@ public final class EcotonesFeatures {
     public static Feature<DefaultFeatureConfig> ROSEMARY;
     public static Feature<OakTreeFeatureConfig> STRAIGHT_OAK;
     public static Feature<SimpleTreeFeatureConfig> BARREN_TREE;
+    public static Feature<SimpleTreeFeatureConfig> FAN_TREE;
 
     public static void init() {
         // TODO: cleanup
@@ -82,5 +83,6 @@ public final class EcotonesFeatures {
         ROSEMARY = Registry.register(Registry.FEATURE, new Identifier("ecotones", "rosemary"), new RosemaryFeature(DefaultFeatureConfig.CODEC));
         STRAIGHT_OAK = Registry.register(Registry.FEATURE, new Identifier("ecotones", "straight_oak"), new StraightOakTreeFeature(OakTreeFeatureConfig.CODEC));
         BARREN_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "barren_tree"), new BarrenTreeFeature(SimpleTreeFeatureConfig.CODEC));
+        FAN_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "fan_tree"), new FanTreeFeature(SimpleTreeFeatureConfig.CODEC));
     }
 }
