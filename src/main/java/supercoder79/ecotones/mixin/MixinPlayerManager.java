@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.advancement.EcotonesCriteria;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
 @Mixin(PlayerManager.class)
@@ -23,5 +24,10 @@ public class MixinPlayerManager {
         data.writeLong(Hashing.sha256().hashLong(player.getServerWorld().getSeed()).asLong());
 
         ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, Ecotones.WORLD_TYPE, data);
+
+        // Handle advancement
+        if (player.getServerWorld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator) {
+            EcotonesCriteria.ENTER_ECOTONES_WORLD.trigger(player);
+        }
     }
 }

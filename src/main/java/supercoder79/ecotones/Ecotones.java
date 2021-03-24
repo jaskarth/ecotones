@@ -14,6 +14,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import supercoder79.ecotones.advancement.EcotonesCriteria;
 import supercoder79.ecotones.api.ModCompat;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
@@ -58,6 +59,7 @@ public class Ecotones implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		EcotonesCriteria.init();
 		EcotonesSounds.init();
 
 		EcotonesParticles.init();

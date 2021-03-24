@@ -238,6 +238,17 @@
 
   "generator.ecotones": "§2Ecotones",
 
+  "advancements.ecotones.root": "A whole new world",
+  "advancements.ecotones.root.desc": "Enter an ecotones world",
+  "advancements.ecotones.blueberry": "Life's better in blue",
+  "advancements.ecotones.blueberry.desc": "Obtain blueberries",
+  "advancements.ecotones.sap": "Discount slime",
+  "advancements.ecotones.sap.desc": "Break pinecones to get pine sap and then make a sap ball",
+  "advancements.ecotones.rosemary": "13 herbs and spices",
+  "advancements.ecotones.rosemary.desc": "Obtain rosemary",
+  "advancements.ecotones.coconut": "Nut free",
+  "advancements.ecotones.coconut.desc": "Obtain coconut",
+
   "block.ecotones.cyan_rose": "Cyan Rose",
   "item.ecotones.cyan_rose": "Cyan Rose",
   "tooltip.amelia_rose_1": "Deep within us is the strength to keep moving",

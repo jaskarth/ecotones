@@ -1,0 +1,35 @@
+{
+  "parent": "ecotones:ecotones/root",
+  "display": {
+    "icon": {
+      "item": "ecotones:sap_ball"
+    },
+    "title": {
+      "translate": "advancements.ecotones.sap"
+    },
+    "description": {
+      "translate": "advancements.ecotones.sap.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "sap_ball": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ecotones:sap_ball"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "sap_ball"
+    ]
+  ]
+}

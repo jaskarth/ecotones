@@ -1,0 +1,35 @@
+{
+  "parent": "ecotones:ecotones/root",
+  "display": {
+    "icon": {
+      "item": "ecotones:rosemary"
+    },
+    "title": {
+      "translate": "advancements.ecotones.rosemary"
+    },
+    "description": {
+      "translate": "advancements.ecotones.rosemary.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "rosemary": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ecotones:rosemary"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "rosemary"
+    ]
+  ]
+}

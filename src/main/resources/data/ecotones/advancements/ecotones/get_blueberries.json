@@ -1,0 +1,35 @@
+{
+  "parent": "ecotones:ecotones/root",
+  "display": {
+    "icon": {
+      "item": "ecotones:blueberries"
+    },
+    "title": {
+      "translate": "advancements.ecotones.blueberry"
+    },
+    "description": {
+      "translate": "advancements.ecotones.blueberry.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "blueberries": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ecotones:blueberries"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "blueberries"
+    ]
+  ]
+}
