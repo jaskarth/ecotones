@@ -37,8 +37,6 @@ public class SparseForestBiome extends EcotonesBiomeBuilder {
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sparse_forest_mountainous"), new SparseForestBiome(1.2F, 0.525F, 6, 0.78).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_DRY.add(INSTANCE, 0.1);
-        Climate.HOT_DRY.add(INSTANCE, 0.1);
-        Climate.HOT_MODERATE.add(INSTANCE, 0.1);
         Climate.HOT_MODERATE.add(INSTANCE, 0.1);
     }
 

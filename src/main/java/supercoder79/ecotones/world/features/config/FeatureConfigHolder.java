@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.features.config;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Blocks;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
@@ -17,14 +18,18 @@ import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.tree.CocoaBeansTreeDecorator;
 import net.minecraft.world.gen.tree.LeavesVineTreeDecorator;
 import net.minecraft.world.gen.tree.TrunkVineTreeDecorator;
+import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
 import net.minecraft.world.gen.trunk.MegaJungleTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.util.DoubleOrNormalPlacer;
+import supercoder79.ecotones.world.features.foliage.PlusLeavesFoliagePlacer;
 import supercoder79.ecotones.world.features.foliage.SmallPineFoliagePlacer;
 import supercoder79.ecotones.world.treedecorator.LeafPileTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.LichenTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
+
+import java.util.OptionalInt;
 
 public class FeatureConfigHolder {
     // grass
@@ -237,4 +242,12 @@ public class FeatureConfigHolder {
             new MegaJungleTrunkPlacer(10, 2, 19),
             new TwoLayersFeatureSize(1, 1, 2))
             .decorators(ImmutableList.of(TrunkVineTreeDecorator.INSTANCE, LeavesVineTreeDecorator.INSTANCE)).build();
+
+    public static final TreeFeatureConfig DRY_STEPPE_TREE = new TreeFeatureConfig.Builder(
+            new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
+            new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
+            new PlusLeavesFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
+            new LargeOakTrunkPlacer(8, 6, 0),
+            new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
+            .ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build();
 }

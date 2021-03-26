@@ -32,13 +32,7 @@ import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import java.util.OptionalInt;
 
 public class DrySteppeBiome extends EcotonesBiomeBuilder {
-    private static final TreeFeatureConfig DRY_STEPPE_TREE = new TreeFeatureConfig.Builder(
-            new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
-            new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
-            new PlusLeavesFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
-            new LargeOakTrunkPlacer(8, 6, 0),
-            new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
-            .ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build();
+
 
     public static Biome INSTANCE;
     public static Biome HILLY;
@@ -107,7 +101,7 @@ public class DrySteppeBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 5, 6))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.TREE.configure(DRY_STEPPE_TREE)
+                Feature.TREE.configure(FeatureConfigHolder.DRY_STEPPE_TREE)
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(1.1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
