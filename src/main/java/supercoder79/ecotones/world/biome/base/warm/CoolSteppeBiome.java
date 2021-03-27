@@ -123,6 +123,12 @@ public class CoolSteppeBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.FAN_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.3))));
 
+        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.SMALL_ROCK.configure(FeatureConfig.DEFAULT)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(8));
+
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
         BiomeHelper.addDefaultFeatures(this);
     }

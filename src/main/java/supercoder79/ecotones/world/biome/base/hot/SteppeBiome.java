@@ -123,6 +123,12 @@ public class SteppeBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.ROSEMARY.configure(FeatureConfig.DEFAULT)
                         .decorate(EcotonesDecorators.ROSEMARY.configure(new ShrubDecoratorConfig(0.1))));
 
+        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.SMALL_ROCK.configure(FeatureConfig.DEFAULT)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(8));
+
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
         BiomeHelper.addDefaultFeatures(this);
     }

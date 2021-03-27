@@ -126,6 +126,12 @@ public class DrySteppeBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(20));
 
+        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.SMALL_ROCK.configure(FeatureConfig.DEFAULT)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(8));
+
         BiomeHelper.addDefaultFeatures(this);
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }

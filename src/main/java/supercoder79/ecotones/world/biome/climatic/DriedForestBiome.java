@@ -8,6 +8,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
@@ -51,6 +52,18 @@ public class DriedForestBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);
         this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+
+        DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
+        DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());
+        DefaultBiomeFeatures.addPlainsFeatures(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDungeons(this.getGenerationSettings());
+        DefaultBiomeFeatures.addMineables(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultOres(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultMushrooms(this.getGenerationSettings());
+        DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
+        DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
@@ -106,5 +119,11 @@ public class DriedForestBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(FeatureConfigHolder.DRY_STEPPE_TREE)
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.4))));
+
+        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.SMALL_ROCK.configure(FeatureConfig.DEFAULT)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(8));
     }
 }
