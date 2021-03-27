@@ -63,7 +63,7 @@ public class DryBeachBiome extends EcotonesBiomeBuilder {
                         .repeat(8));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.JUNGLE_PALM_TREE.configure(GreenSpiresBiome.JUNGLE_TREE)
+                EcotonesFeatures.JUNGLE_PALM_TREE.configure(TropicalBeachBiome.JUNGLE_TREE)
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
                         .decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.05F, 1))));

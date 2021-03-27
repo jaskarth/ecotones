@@ -8,6 +8,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.world.features.config.OakTreeFeatureConfig;
+import supercoder79.ecotones.world.features.config.PatchFeatureConfig;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.features.entity.BeehiveFeature;
@@ -38,6 +39,7 @@ public final class EcotonesFeatures {
     public static Feature<TreeGenerationConfig> BRANCHING_DARK_OAK;
     public static Feature<RockFeatureConfig> ROCK;
     public static Feature<SimpleTreeFeatureConfig> DEAD_TREE;
+    @Deprecated
     public static Feature<DefaultFeatureConfig> PODZOL;
     public static Feature<TreeGenerationConfig> MAPLE_TREE;
     public static Feature<DefaultFeatureConfig> BLUEBERRY_BUSH;
@@ -49,6 +51,7 @@ public final class EcotonesFeatures {
     public static Feature<SimpleTreeFeatureConfig> BARREN_TREE;
     public static Feature<SimpleTreeFeatureConfig> FAN_TREE;
     public static Feature<DefaultFeatureConfig> SMALL_ROCK;
+    public static Feature<PatchFeatureConfig> GROUND_PATCH;
 
     public static void init() {
         // TODO: cleanup
@@ -86,5 +89,6 @@ public final class EcotonesFeatures {
         BARREN_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "barren_tree"), new BarrenTreeFeature(SimpleTreeFeatureConfig.CODEC));
         FAN_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "fan_tree"), new FanTreeFeature(SimpleTreeFeatureConfig.CODEC));
         SMALL_ROCK = Registry.register(Registry.FEATURE, new Identifier("ecotones", "small_rock"), new SmallRockFeature(DefaultFeatureConfig.CODEC));
+        GROUND_PATCH = Registry.register(Registry.FEATURE, new Identifier("ecotones", "ground_patch"), new PatchFeature(PatchFeatureConfig.CODEC));
     }
 }
