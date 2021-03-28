@@ -28,19 +28,30 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 public class ClayBasinBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
+    public static Biome LAKEBED;
+    public static Biome WET;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin"), new ClayBasinBiome(0.2f, 0.125f, 2.8, 0.88).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_hilly"), new ClayBasinBiome(0.4f, 0.5f, 4.2, 0.83).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_mountainous"), new ClayBasinBiome(0.75f, 0.8f, 7, 0.75).build());
+        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin"), new ClayBasinBiome(0.2f, 0.125f, 2.8, 0.94).build());
+        LAKEBED = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_lakebed"), new ClayBasinBiome(0.2f, 0.125f, 1.2, 0.98, 8, 1).build());
+        WET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_wet"), new ClayBasinBiome(0.1f, 0.125f, 2.8, 0.94, 3, 10).build());
+        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_hilly"), new ClayBasinBiome(0.4f, 0.5f, 4.2, 0.89).build());
+        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_mountainous"), new ClayBasinBiome(0.75f, 0.8f, 7, 0.82).build());
+
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 4);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, LAKEBED, WET);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_DRY.add(INSTANCE, 0.1);
         Climate.HOT_MODERATE.add(INSTANCE, 0.1);
     }
 
     protected ClayBasinBiome(float depth, float scale, double hilliness, double volatility) {
+        this(depth, scale, hilliness, volatility, 3, 1);
+    }
+
+    protected ClayBasinBiome(float depth, float scale, double hilliness, double volatility, int clayCount, int waterCount) {
         this.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG);
 
         this.depth(depth);
@@ -108,11 +119,12 @@ public class ClayBasinBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.GROUND_PATCH.configure(new PatchFeatureConfig(Blocks.CLAY.getDefaultState(), Blocks.GRASS_BLOCK, UniformIntDistribution.of(2, 4)))
                         .spreadHorizontally()
-                        .repeat(3));
+                        .repeat(clayCount));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 EcotonesFeatures.PLACE_WATER.configure(FeatureConfig.DEFAULT)
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
-                        .spreadHorizontally());
+                        .spreadHorizontally()
+                        .repeat(waterCount));
     }
 }
