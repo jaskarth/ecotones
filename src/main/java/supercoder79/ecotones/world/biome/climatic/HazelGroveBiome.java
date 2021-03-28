@@ -11,10 +11,7 @@ import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountNoiseDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
@@ -53,7 +50,7 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hazel_grove_hilly"), new HazelGroveBiome(false, true).build());
         HILLY_CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hazel_grove_hilly_clearing"), new HazelGroveBiome(true, true).build());
         Climate.HOT_VERY_HUMID.add(INSTANCE, 0.1);
-        Climate.HOT_HUMID.add(INSTANCE, 0.05);
+        Climate.HOT_HUMID.add(INSTANCE, 0.1);
     }
 
 
@@ -107,6 +104,12 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
                         .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 4, 8))));
+
+        this.addFeature(GenerationStep.Feature.LAKES,
+                EcotonesFeatures.SMALL_ROCK.configure(FeatureConfig.DEFAULT)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(8));
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

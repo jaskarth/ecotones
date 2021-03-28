@@ -39,6 +39,7 @@ public class WhiteMesaBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 1);
         BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, PLATEAU);
         Climate.WARM_VERY_DRY.add(INSTANCE, 0.1);
+        Climate.HOT_VERY_DRY.add(INSTANCE, 0.1);
     }
 
     public WhiteMesaBiome(float depth, float scale, double hilliness, double volatility) {

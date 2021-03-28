@@ -39,6 +39,8 @@ public class DarkOakThicketBiome extends EcotonesBiomeBuilder {
         Climate.WARM_MODERATE.add(INSTANCE, 0.1);
         Climate.WARM_MILD.add(INSTANCE, 0.1);
         Climate.WARM_HUMID.add(INSTANCE, 0.2);
+        Climate.HOT_MILD.add(INSTANCE, 0.1);
+        Climate.HOT_HUMID.add(INSTANCE, 0.1);
     }
 
     public DarkOakThicketBiome(float depth, float scale, double hilliness, double volatility) {

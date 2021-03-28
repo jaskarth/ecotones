@@ -36,7 +36,7 @@ public class ClayBasinBiome extends EcotonesBiomeBuilder {
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_hilly"), new ClayBasinBiome(0.4f, 0.5f, 4.2, 0.83).build());
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_mountainous"), new ClayBasinBiome(0.75f, 0.8f, 7, 0.75).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
-        Climate.HOT_DRY.add(INSTANCE, 0.3);
+        Climate.HOT_DRY.add(INSTANCE, 0.1);
         Climate.HOT_MODERATE.add(INSTANCE, 0.1);
     }
 

@@ -42,7 +42,7 @@ public class SunflowerPlainsBiome extends EcotonesBiomeBuilder {
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sunflower_plains_hilly"), new SunflowerPlainsBiome(0.85F, 0.225F).build());
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sunflower_plains_mountainous"), new SunflowerPlainsBiome(1.65F, 0.625F).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
-        Climate.WARM_MODERATE.add(INSTANCE, 0.08);
+        Climate.WARM_MODERATE.add(INSTANCE, 0.1);
     }
 
     public SunflowerPlainsBiome(float depth, float scale) {

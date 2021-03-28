@@ -34,7 +34,7 @@ public class SavannaMesaBiome extends EcotonesBiomeBuilder {
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "savanna_mesa_hilly"), new SavannaMesaBiome(1.2F, 0.325F, 6, 0.87).build());
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "savanna_mesa_mountainous"), new SavannaMesaBiome(1.4F, 0.525F, 8, 0.82).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
-        Climate.HOT_VERY_DRY.add(INSTANCE, 0.2);
+        Climate.HOT_VERY_DRY.add(INSTANCE, 0.3);
         Climate.HOT_DRY.add(INSTANCE, 0.2);
         Climate.WARM_VERY_DRY.add(INSTANCE, 0.1);
     }

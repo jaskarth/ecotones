@@ -40,7 +40,9 @@ public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "temperate_grassland_hilly"), new TemperateGrasslandBiome(1.25F, 0.225F).build());
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "temperate_grassland_mountainous"), new TemperateGrasslandBiome(2F, 0.625F).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
+        Climate.WARM_DRY.add(INSTANCE, 0.2);
         Climate.WARM_MODERATE.add(INSTANCE, 0.4);
+        Climate.HOT_HUMID.add(INSTANCE, 0.1);
     }
 
     public TemperateGrasslandBiome(float depth, float scale) {

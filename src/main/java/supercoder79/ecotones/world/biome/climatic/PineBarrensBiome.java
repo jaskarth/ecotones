@@ -34,7 +34,7 @@ public class PineBarrensBiome extends EcotonesBiomeBuilder {
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "pine_barrens_mountainous"), new PineBarrensBiome(0.45f, 0.9f, 5.2, 0.86).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_DRY.add(INSTANCE, 0.2);
-        Climate.WARM_MODERATE.add(INSTANCE, 0.4);
+        Climate.WARM_MODERATE.add(INSTANCE, 0.3);
     }
 
 
