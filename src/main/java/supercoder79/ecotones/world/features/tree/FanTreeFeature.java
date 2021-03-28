@@ -69,7 +69,7 @@ public class FanTreeFeature extends Feature<SimpleTreeFeatureConfig> {
             } else if (progress > 0.3 && random.nextInt(3) == 0) {
                 Direction axis = FeatureHelper.randomHorizontal(random);
                 BlockPos dir = local.offset(axis);
-                FeatureHelper.placeLeaves(context, dir);
+                world.setBlockState(dir, config.woodState, 3);
 
                 for (Direction direction : Direction.values()) {
                     FeatureHelper.placeLeaves(context, dir.offset(direction));

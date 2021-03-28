@@ -111,9 +111,10 @@ public class SunflowerPlainsBiome extends EcotonesBiomeBuilder {
                 Feature.RANDOM_PATCH.configure((new RandomPatchFeatureConfig.Builder(
                         new SimpleBlockStateProvider(Blocks.SUNFLOWER.getDefaultState()),
                         new DoublePlantPlacer())).tries(64).cannotProject().build())
-                        .repeat(24)
+                        .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
-                        .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE)));
+                        .repeat(24));
 
         DefaultBiomeFeatures.addForestFlowers(this.getGenerationSettings());
 

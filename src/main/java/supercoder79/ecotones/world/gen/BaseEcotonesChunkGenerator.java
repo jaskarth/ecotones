@@ -405,7 +405,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                     double x1z0y1 = noiseData[1][noiseZ][noiseY + 1];
                     double x1z1y1 = noiseData[1][noiseZ + 1][noiseY + 1];
 
-                    // [0, 8] -> y noise pieces
+                    // [0, 8) -> y noise pieces
                     for(int pieceY = this.verticalNoiseResolution - 1; pieceY >= 0; --pieceY) {
                         int realY = noiseY * this.verticalNoiseResolution + pieceY;
                         int localY = realY & 15;
@@ -426,7 +426,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                         double x0z1 = MathHelper.lerp(yLerp, x0z1y0, x0z1y1);
                         double x1z1 = MathHelper.lerp(yLerp, x1z1y0, x1z1y1);
 
-                        // [0, 4] -> x noise pieces
+                        // [0, 4) -> x noise pieces
                         for(int pieceX = 0; pieceX < this.horizontalNoiseResolution; ++pieceX) {
                             int realX = chunkStartX + noiseX * this.horizontalNoiseResolution + pieceX;
                             int localX = realX & 15;
