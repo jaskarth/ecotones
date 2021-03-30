@@ -1,8 +1,8 @@
 package supercoder79.ecotones.world.structure;
 
 import net.minecraft.structure.StructurePieceType;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.world.structure.gen.CampfireStructureGenerator;
 import supercoder79.ecotones.world.structure.gen.CottageGenerator;
 
@@ -18,6 +18,6 @@ public class EcotonesStructurePieces {
     }
 
     private static void register(String name, StructurePieceType piece) {
-        Registry.register(Registry.STRUCTURE_PIECE, new Identifier("ecotones", name), piece);
+        Registry.register(Registry.STRUCTURE_PIECE, Ecotones.id(name), piece);
     }
 }

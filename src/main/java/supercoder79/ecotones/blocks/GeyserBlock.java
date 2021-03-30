@@ -22,11 +22,11 @@ public class GeyserBlock extends Block {
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (world.getBlockState(pos.up()).isOpaque()) {
             world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 6f, Explosion.DestructionType.DESTROY);
-            world.spawnParticles(ParticleTypes.POOF, pos.getX(), pos.getY()+0.125, pos.getZ(), 200, random.nextDouble()*0.005, 0.65, random.nextDouble()*0.005, 0.75f);
+            world.spawnParticles(ParticleTypes.POOF, pos.getX(), pos.getY() + 0.125, pos.getZ(), 200, random.nextDouble() * 0.005, 0.65, random.nextDouble() * 0.005, 0.75f);
         }
 
-        world.spawnParticles(ParticleTypes.POOF, pos.getX(), pos.getY()+0.125, pos.getZ(), 50, random.nextDouble()*0.005, 1, random.nextDouble()*0.005, 0.75f);
-        List<LivingEntity> list = world.getNonSpectatingEntities(LivingEntity.class, new Box(pos.getX()-2, pos.getY()-2, pos.getZ()-2, pos.getX()+2, pos.getY()+2, pos.getZ()+2));
+        world.spawnParticles(ParticleTypes.POOF, pos.getX(), pos.getY() + 0.125, pos.getZ(), 50, random.nextDouble() * 0.005, 1, random.nextDouble() * 0.005, 0.75f);
+        List<LivingEntity> list = world.getNonSpectatingEntities(LivingEntity.class, new Box(pos.add(-2, -2, -2), pos.add(2, 2, 2)));
         for (LivingEntity entity : list) {
             entity.addVelocity(0, 1.25, 0);
             entity.damage(DamageSource.GENERIC, 4);

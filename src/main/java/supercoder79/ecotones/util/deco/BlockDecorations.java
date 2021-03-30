@@ -42,7 +42,7 @@ public final class BlockDecorations {
         List<BlockDecoration> decorations = fromCategory.getOrDefault(category, new ArrayList<>());
 
         if (decorations.size() == 0) {
-            throw new IllegalStateException("No registered blocks for category " + category + " of attachement " + attachment);
+            throw new IllegalStateException("No registered blocks for category " + category + " of attachment " + attachment);
         }
 
         return decorations.get(random.nextInt(decorations.size()));

@@ -1,12 +1,12 @@
 package supercoder79.ecotones.world.structure;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.Ecotones;
 
-public class EcotonesConfiguredStructures {
+public final class EcotonesConfiguredStructures {
     public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_OAK = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.OAK_LOG.getDefaultState()));
     public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_BIRCH = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.BIRCH_LOG.getDefaultState()));
     public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_SPRUCE = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState()));
@@ -23,6 +23,6 @@ public class EcotonesConfiguredStructures {
     }
 
     private static void register(String name, ConfiguredStructureFeature<?, ?> feature) {
-        Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new Identifier("ecotones", name), feature);
+        Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, Ecotones.id(name), feature);
     }
 }

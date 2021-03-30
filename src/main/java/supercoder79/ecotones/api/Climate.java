@@ -7,7 +7,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public enum Climate {
     HOT_DESERT,

@@ -9,7 +9,7 @@ import net.minecraft.util.registry.Registry;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CampfireLogHelper {
+public final class CampfireLogHelper {
     private static final Map<Block, BlockState> LOG_TO_STATE = new HashMap<>();
 
     public static void initVanilla() {

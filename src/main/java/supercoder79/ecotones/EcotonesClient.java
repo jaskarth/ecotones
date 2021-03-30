@@ -21,9 +21,10 @@ import supercoder79.ecotones.client.particle.MapleLeafParticle;
 import supercoder79.ecotones.client.particle.SandParticle;
 import supercoder79.ecotones.client.render.DuckEntityRenderer;
 import supercoder79.ecotones.entity.EcotonesEntities;
+import supercoder79.ecotones.items.EcotonesItems;
 
 @Environment(EnvType.CLIENT)
-public class EcotonesClient implements ClientModInitializer {
+public final class EcotonesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ClientPacketHandler.init();
@@ -38,13 +39,13 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.SHORT_GRASS);
 
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColors.getDefaultColor(),
-                EcotonesBlocks.SHORT_GRASS_ITEM,
-                EcotonesBlocks.WIDE_FERN_ITEM,
-                EcotonesBlocks.HAZEL_LEAVES_ITEM);
+                EcotonesItems.SHORT_GRASS,
+                EcotonesItems.WIDE_FERN,
+                EcotonesItems.HAZEL_LEAVES);
 
         // Maple leaves
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> Colors.maple(),
-                EcotonesBlocks.MAPLE_LEAVES_ITEM);
+                EcotonesItems.MAPLE_LEAVES);
 
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> Colors.maple(pos),

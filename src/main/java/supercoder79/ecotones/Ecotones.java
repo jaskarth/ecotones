@@ -26,6 +26,7 @@ import supercoder79.ecotones.command.MapSoilQualityCommand;
 import supercoder79.ecotones.compat.TerrestriaCompat;
 import supercoder79.ecotones.compat.TraverseCompat;
 import supercoder79.ecotones.entity.EcotonesEntities;
+import supercoder79.ecotones.items.EcotonesItemGroups;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.util.AiLog;
 import supercoder79.ecotones.util.CampfireLogHelper;
@@ -48,7 +49,7 @@ import supercoder79.ecotones.world.structure.EcotonesStructures;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
 
-public class Ecotones implements ModInitializer {
+public final class Ecotones implements ModInitializer {
 	// TODO: split out into it's own class
 	public static final Identifier WORLD_TYPE = new Identifier("ecotones", "world_type");
 
@@ -67,6 +68,8 @@ public class Ecotones implements ModInitializer {
 		EcotonesBlockPlacers.init();
 		EcotonesFoliagePlacers.init();
 		EcotonesTreeDecorators.init();
+
+		EcotonesItemGroups.init();
 
         EcotonesBlocks.init();
 		EcotonesItems.init();
@@ -147,6 +150,10 @@ public class Ecotones implements ModInitializer {
 				}
 			}
 		});
+	}
+
+	public static Identifier id(String name) {
+		return new Identifier("ecotones", name);
 	}
 
 	public static void log(String str) {

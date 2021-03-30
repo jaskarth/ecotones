@@ -10,7 +10,7 @@ import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 
-public class BiomeHelper {
+public final class BiomeHelper {
     public static final int WARM_OCEAN_ID = 44;
     public static final int LUKEWARM_OCEAN_ID = 45;
     public static final int OCEAN_ID = 0;

@@ -1,16 +1,16 @@
 package supercoder79.ecotones.world.biome;
 
-import supercoder79.ecotones.world.biome.climatic.*;
 import supercoder79.ecotones.world.biome.base.SwampBiome;
 import supercoder79.ecotones.world.biome.base.hot.*;
 import supercoder79.ecotones.world.biome.base.warm.*;
+import supercoder79.ecotones.world.biome.climatic.*;
 import supercoder79.ecotones.world.biome.special.*;
 import supercoder79.ecotones.world.biome.technical.DryBeachBiome;
 import supercoder79.ecotones.world.biome.technical.GravelBeachBiome;
 import supercoder79.ecotones.world.biome.technical.RiverBiome;
 import supercoder79.ecotones.world.biome.technical.TropicalBeachBiome;
 
-public class EcotonesBiomes {
+public final class EcotonesBiomes {
     public static void init() {
         // Hot biomes
         DesertBiome.init();

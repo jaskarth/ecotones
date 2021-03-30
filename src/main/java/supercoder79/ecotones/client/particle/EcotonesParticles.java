@@ -2,16 +2,20 @@ package supercoder79.ecotones.client.particle;
 
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.Identifier;
+import net.minecraft.particle.ParticleType;
 import net.minecraft.util.registry.Registry;
+import supercoder79.ecotones.Ecotones;
 
-public class EcotonesParticles {
-    public static DefaultParticleType SAND;
-    public static DefaultParticleType MAPLE_LEAF;
+public final class EcotonesParticles {
+    public static final DefaultParticleType SAND = FabricParticleTypes.simple(false);
+    public static final DefaultParticleType MAPLE_LEAF = FabricParticleTypes.simple(false);
 
     public static void init() {
-        SAND = Registry.register(Registry.PARTICLE_TYPE, new Identifier("ecotones", "sand"), FabricParticleTypes.simple(false));
-        MAPLE_LEAF = Registry.register(Registry.PARTICLE_TYPE, new Identifier("ecotones", "maple_leaf"), FabricParticleTypes.simple(false));
+        register("sand", SAND);
+        register("maple_leaf", MAPLE_LEAF);
     }
 
+    private static void register(String string, ParticleType<?> type) {
+        Registry.register(Registry.PARTICLE_TYPE, Ecotones.id(string), type);
+    }
 }

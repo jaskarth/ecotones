@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class AiLog {
+public final class AiLog {
     private static FileWriter writer;
     private static boolean isDev;
 
