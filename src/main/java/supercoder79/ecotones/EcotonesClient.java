@@ -36,7 +36,11 @@ public final class EcotonesClient implements ClientModInitializer {
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> view != null && pos != null ? BiomeColors.getGrassColor(view, pos) : FoliageColors.getDefaultColor(),
                 EcotonesBlocks.WIDE_FERN,
-                EcotonesBlocks.SHORT_GRASS);
+                EcotonesBlocks.SHORT_GRASS,
+                EcotonesBlocks.WILDFLOWERS,
+                EcotonesBlocks.BLUEBELL,
+                EcotonesBlocks.LAVENDER,
+                EcotonesBlocks.SMALL_LILAC);
 
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColors.getDefaultColor(),
                 EcotonesItems.SHORT_GRASS,
@@ -75,8 +79,8 @@ public final class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.LAVENDER,
                 EcotonesBlocks.SPRUCE_LEAF_PILE);
 
-                BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
-                        EcotonesBlocks.BLUEBERRY_JAM_JAR);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
+                EcotonesBlocks.BLUEBERRY_JAM_JAR);
 
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAND, SandParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.MAPLE_LEAF, MapleLeafParticle.Factory::new);

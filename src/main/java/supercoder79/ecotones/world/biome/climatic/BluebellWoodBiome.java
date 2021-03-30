@@ -93,11 +93,11 @@ public class BluebellWoodBiome extends EcotonesBiomeBuilder {
         if (clearing) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     EcotonesFeatures.STRAIGHT_OAK.configure(new OakTreeFeatureConfig(7, 14).branchCount(4).branchLength(4).randomBranchLength(4))
-                            .decorate(EcotonesDecorators.TREE_DECORATOR.configure(new TreeGenerationConfig.DecorationData(1.3, 0, 0))));
+                            .decorate(EcotonesDecorators.TREE_DECORATOR.configure(new TreeGenerationConfig.DecorationData(0.2, 0, 0))));
         } else {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     EcotonesFeatures.STRAIGHT_OAK.configure(new OakTreeFeatureConfig(7, 4).branchCount(2).branchLength(2).randomBranchLength(3))
-                            .decorate(EcotonesDecorators.TREE_DECORATOR.configure(new TreeGenerationConfig.DecorationData(0.2, 0, 0))));
+                            .decorate(EcotonesDecorators.TREE_DECORATOR.configure(new TreeGenerationConfig.DecorationData(1.3, 0, 0))));
         }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

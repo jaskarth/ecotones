@@ -26,7 +26,6 @@
 * More flower types
 * Aquatic plants
 * Implement curly grass
-* Biome color based clover & wildflowers
 * Sap block
 * Sap mob trap
 * Acorns -> grow large trees

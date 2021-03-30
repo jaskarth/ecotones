@@ -48,8 +48,13 @@ public class TallBarrenTreeFeature extends Feature<SimpleTreeFeatureConfig> {
         }
 
         generateLeafLayer(pos, height, random, context);
+        FeatureHelper.placeLeaves(context, pos.up(height + 1));
         for (Direction direction : FeatureHelper.HORIZONTAL) {
             FeatureHelper.placeLeaves(context, pos.up(height + 1).offset(direction));
+        }
+
+        if (random.nextDouble() > 0.6) {
+            FeatureHelper.placeLeaves(context, pos.up(height + 2));
         }
 
         return true;

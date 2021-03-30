@@ -1,6 +1,7 @@
 {
-    "parent": "block/cross",
+    "parent": "ecotones:block/extends/tinted_normal",
     "textures": {
-        "cross": "ecotones:block/bluebell"
+        "normal": "ecotones:block/bluebell/flower",
+        "tinted": "ecotones:block/bluebell/stem"
     }
 }
