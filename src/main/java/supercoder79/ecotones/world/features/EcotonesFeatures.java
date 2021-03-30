@@ -52,6 +52,7 @@ public final class EcotonesFeatures {
     public static Feature<SimpleTreeFeatureConfig> FAN_TREE;
     public static Feature<DefaultFeatureConfig> SMALL_ROCK;
     public static Feature<PatchFeatureConfig> GROUND_PATCH;
+    public static Feature<SimpleTreeFeatureConfig> TALL_BARREN_TREE;
 
     public static void init() {
         // TODO: cleanup
@@ -90,5 +91,6 @@ public final class EcotonesFeatures {
         FAN_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "fan_tree"), new FanTreeFeature(SimpleTreeFeatureConfig.CODEC));
         SMALL_ROCK = Registry.register(Registry.FEATURE, new Identifier("ecotones", "small_rock"), new SmallRockFeature(DefaultFeatureConfig.CODEC));
         GROUND_PATCH = Registry.register(Registry.FEATURE, new Identifier("ecotones", "ground_patch"), new PatchFeature(PatchFeatureConfig.CODEC));
+        TALL_BARREN_TREE = Registry.register(Registry.FEATURE, new Identifier("ecotones", "tall_barren_tree"), new TallBarrenTreeFeature(SimpleTreeFeatureConfig.CODEC));
     }
 }

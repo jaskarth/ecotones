@@ -17,7 +17,7 @@ public final class SkyboxGenerator {
             double f = (double)(random.nextFloat() * 2.0F - 1.0F);
             double g = getStarSize(random);
             double h = d * d + e * e + f * f;
-            if (h < 1.0D && h > 0.01D) {
+            if (h < 1.0D) {
                 h = 1.0D / Math.sqrt(h);
                 d *= h;
                 e *= h;
