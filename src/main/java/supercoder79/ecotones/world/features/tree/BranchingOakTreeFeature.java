@@ -18,8 +18,7 @@ import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeHelper;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
-import supercoder79.ecotones.world.tree.trait.OakTrait;
-import supercoder79.ecotones.world.tree.trait.Traits;
+import supercoder79.ecotones.world.tree.trait.oak.OakTrait;
 import supercoder79.ecotones.world.tree.trait.oak.DefaultOakTrait;
 import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 

@@ -1,7 +1,5 @@
 package supercoder79.ecotones.world.tree.trait.smallspruce;
 
-import supercoder79.ecotones.world.tree.trait.SmallSpruceTrait;
-
 import java.util.Random;
 
 public class ShortSmallSpruceTrait implements SmallSpruceTrait {

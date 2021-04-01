@@ -9,13 +9,11 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import supercoder79.ecotones.api.TreeType;
 import supercoder79.ecotones.util.Shapes;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
-import supercoder79.ecotones.world.tree.trait.PoplarTrait;
-import supercoder79.ecotones.world.tree.trait.Traits;
+import supercoder79.ecotones.world.tree.trait.poplar.PoplarTrait;
 import supercoder79.ecotones.world.tree.trait.poplar.DefaultPoplarTrait;
 
 import java.util.Random;

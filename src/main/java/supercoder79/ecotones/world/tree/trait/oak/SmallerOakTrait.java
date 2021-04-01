@@ -1,7 +1,5 @@
 package supercoder79.ecotones.world.tree.trait.oak;
 
-import supercoder79.ecotones.world.tree.trait.OakTrait;
-
 import java.util.Random;
 
 // TODO: rename this

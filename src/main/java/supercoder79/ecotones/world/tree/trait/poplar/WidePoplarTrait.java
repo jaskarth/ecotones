@@ -1,7 +1,5 @@
 package supercoder79.ecotones.world.tree.trait.poplar;
 
-import supercoder79.ecotones.world.tree.trait.PoplarTrait;
-
 import java.util.Random;
 
 public class WidePoplarTrait implements PoplarTrait {

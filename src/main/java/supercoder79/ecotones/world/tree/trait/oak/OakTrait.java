@@ -1,9 +1,10 @@
-package supercoder79.ecotones.world.tree.trait;
+package supercoder79.ecotones.world.tree.trait.oak;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
 import supercoder79.ecotones.api.TreeGenerationConfig;
+import supercoder79.ecotones.world.tree.trait.Trait;
 
 import java.util.List;
 import java.util.Random;

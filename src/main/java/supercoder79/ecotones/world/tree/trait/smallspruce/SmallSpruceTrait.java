@@ -1,4 +1,6 @@
-package supercoder79.ecotones.world.tree.trait;
+package supercoder79.ecotones.world.tree.trait.smallspruce;
+
+import supercoder79.ecotones.world.tree.trait.Trait;
 
 import java.util.Random;
 
