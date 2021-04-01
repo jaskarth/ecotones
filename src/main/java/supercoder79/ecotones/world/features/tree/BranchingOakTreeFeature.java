@@ -17,6 +17,7 @@ import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeHelper;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
 import supercoder79.ecotones.world.tree.trait.OakTrait;
 import supercoder79.ecotones.world.tree.trait.Traits;
 import supercoder79.ecotones.world.tree.trait.oak.DefaultOakTrait;
@@ -55,12 +56,9 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
 
             maxHeight = data.maxHeight;
 
-            long traits = 0;
             if (generator instanceof EcotonesChunkGenerator) {
-                traits = ((EcotonesChunkGenerator) generator).getTraits(pos.getX() >> 4, pos.getZ() >> 4, config.traitSalt);
+                trait = EcotonesTreeTraits.OAK.get((EcotonesChunkGenerator) generator, pos);
             }
-
-            trait = Traits.get(Traits.OAK, traits);
         }
 
         // Scale height

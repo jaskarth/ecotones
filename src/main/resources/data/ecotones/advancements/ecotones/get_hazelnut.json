@@ -1,0 +1,35 @@
+{
+  "parent": "ecotones:ecotones/root",
+  "display": {
+    "icon": {
+      "item": "ecotones:hazelnut"
+    },
+    "title": {
+      "translate": "advancements.ecotones.hazelnut"
+    },
+    "description": {
+      "translate": "advancements.ecotones.hazelnut.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "hazelnut": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ecotones:hazelnut"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hazelnut"
+    ]
+  ]
+}

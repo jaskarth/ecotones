@@ -14,6 +14,7 @@ import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.util.Shapes;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
 import supercoder79.ecotones.world.tree.trait.SmallSpruceTrait;
 import supercoder79.ecotones.world.tree.trait.Traits;
 import supercoder79.ecotones.world.tree.trait.smallspruce.DefaultSmallSpruceTrait;
@@ -49,8 +50,7 @@ public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
         // Trait data
         SmallSpruceTrait trait = DefaultSmallSpruceTrait.INSTANCE;
         if (generator instanceof EcotonesChunkGenerator) {
-            long traits = ((EcotonesChunkGenerator) generator).getTraits(pos.getX() >> 4, pos.getZ() >> 4, TreeType.SMALL_SPRUCE_SALT);
-            trait = Traits.get(Traits.SMALL_SPRUCE, traits);
+            trait = EcotonesTreeTraits.SMALL_SPRUCE.get((EcotonesChunkGenerator) generator, pos);
         }
 
         int heightAddition = trait.extraHeight(random);

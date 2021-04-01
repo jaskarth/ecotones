@@ -74,6 +74,8 @@ public class SwampBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
+                        .decorate(Decorator.HEIGHTMAP.configure(DecoratorConfig.DEFAULT))
+                        .spreadHorizontally()
                         .decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(2, 0.5f, 1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

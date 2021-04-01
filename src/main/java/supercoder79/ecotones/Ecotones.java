@@ -19,10 +19,7 @@ import supercoder79.ecotones.api.ModCompat;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.sound.EcotonesSounds;
-import supercoder79.ecotones.command.DumpClimatesCommand;
-import supercoder79.ecotones.command.GetDataAtCommand;
-import supercoder79.ecotones.command.MapSoilPhCommand;
-import supercoder79.ecotones.command.MapSoilQualityCommand;
+import supercoder79.ecotones.command.*;
 import supercoder79.ecotones.compat.TerrestriaCompat;
 import supercoder79.ecotones.compat.TraverseCompat;
 import supercoder79.ecotones.entity.EcotonesEntities;
@@ -47,6 +44,7 @@ import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 import supercoder79.ecotones.world.structure.EcotonesStructurePieces;
 import supercoder79.ecotones.world.structure.EcotonesStructures;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
+import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
 import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
 
 public final class Ecotones implements ModInitializer {
@@ -68,6 +66,8 @@ public final class Ecotones implements ModInitializer {
 		EcotonesBlockPlacers.init();
 		EcotonesFoliagePlacers.init();
 		EcotonesTreeDecorators.init();
+
+		EcotonesTreeTraits.init();
 
 		EcotonesItemGroups.init();
 
@@ -111,6 +111,7 @@ public final class Ecotones implements ModInitializer {
 		AiLog.log("[System] Starting AI log");
 
 		GetDataAtCommand.init();
+		TreeTraitsCommand.init();
 
 		// Dev only commands
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {

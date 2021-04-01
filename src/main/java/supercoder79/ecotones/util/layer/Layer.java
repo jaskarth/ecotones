@@ -1,5 +1,9 @@
 package supercoder79.ecotones.util.layer;
 
+import supercoder79.ecotones.util.ImprovedChunkRandom;
+
+import java.util.Random;
+
 public abstract class Layer {
     private final long seed;
 
@@ -7,7 +11,18 @@ public abstract class Layer {
         this.seed = seed;
     }
 
-    public abstract void operate(int[][] data, int x, int z, int width, int height);
+    protected abstract void operate(int[][] data, Random random, int x, int z, int width, int height);
+
+    public int[][] operate(int x, int z, int width, int height) {
+        int[][] data = new int[width][height];
+
+        ImprovedChunkRandom random = new ImprovedChunkRandom();
+        random.setPopulationSeed(this.seed, x, z);
+
+        operate(data, random, x, z, width, height);
+
+        return data;
+    }
 
     protected int[][] emptyCopy(int[][] data) {
         ensureArray(data);

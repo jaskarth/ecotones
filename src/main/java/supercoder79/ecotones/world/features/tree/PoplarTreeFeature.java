@@ -13,6 +13,7 @@ import supercoder79.ecotones.api.TreeType;
 import supercoder79.ecotones.util.Shapes;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
 import supercoder79.ecotones.world.tree.trait.PoplarTrait;
 import supercoder79.ecotones.world.tree.trait.Traits;
 import supercoder79.ecotones.world.tree.trait.poplar.DefaultPoplarTrait;
@@ -38,8 +39,7 @@ public class PoplarTreeFeature extends Feature<SimpleTreeFeatureConfig> {
         // Trait data
         PoplarTrait trait = DefaultPoplarTrait.INSTANCE;
         if (generator instanceof EcotonesChunkGenerator) {
-            long traits = ((EcotonesChunkGenerator) generator).getTraits(pos.getX() >> 4, pos.getZ() >> 4, TreeType.POPLAR_SALT);
-            trait = Traits.get(Traits.POPLAR, traits);
+            trait = EcotonesTreeTraits.POPLAR.get((EcotonesChunkGenerator) generator, pos);
         }
 
         double maxRadius = trait.maxRadius(random);
@@ -50,6 +50,7 @@ public class PoplarTreeFeature extends Feature<SimpleTreeFeatureConfig> {
         BlockPos.Mutable mutable = pos.mutableCopy();
         for (int y = 0; y < leafHeight; y++) {
             world.setBlockState(mutable, config.woodState, 0);
+
             //add branch blocks
             if (maxRadius * trait.model(y / leafRadius) > 2.3) {
                 Direction.Axis axis = getAxis(random);
@@ -72,6 +73,7 @@ public class PoplarTreeFeature extends Feature<SimpleTreeFeatureConfig> {
                     world.setBlockState(leafPos, config.leafState, 0);
                 }
             });
+
             mutable.move(Direction.UP);
         }
 

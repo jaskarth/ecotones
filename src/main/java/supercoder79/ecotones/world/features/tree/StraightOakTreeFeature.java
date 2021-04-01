@@ -9,6 +9,8 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.world.data.DataHolder;
+import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.features.FeatureHelper;
 import supercoder79.ecotones.world.features.config.OakTreeFeatureConfig;
 
@@ -34,10 +36,16 @@ public class StraightOakTreeFeature extends Feature<OakTreeFeatureConfig> {
             return true;
         }
 
+        // 0.8 to 1.2
+        double scale = 0.8;
+        if (generator instanceof DataHolder) {
+            scale = 0.8 + ((DataHolder)generator).get(EcotonesData.SOIL_QUALITY, pos.getX(), pos.getZ()) * 0.4;
+        }
+
+
         world.setBlockState(pos.down(), Blocks.DIRT.getDefaultState(), 3);
 
-        // TODO scale
-        int height = config.getHeight() + random.nextInt(config.getRandomHeight() + 1);
+        int height = (int) ((config.getHeight() + random.nextInt(config.getRandomHeight() + 1)) * scale);
 
         List<BlockPos> leafNodes = new ArrayList<>();
 
