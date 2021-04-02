@@ -5,7 +5,7 @@ import net.minecraft.world.gen.placer.BlockPlacerType;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.mixin.BlockPlacerTypeAccessor;
 
-public class EcotonesBlockPlacers {
+public final class EcotonesBlockPlacers {
     public static final BlockPlacerType<DoubleOrNormalPlacer> DOUBLE_OR_NORMAL = BlockPlacerTypeAccessor.createBlockPlacerType(DoubleOrNormalPlacer.CODEC);
 
     public static void init() {

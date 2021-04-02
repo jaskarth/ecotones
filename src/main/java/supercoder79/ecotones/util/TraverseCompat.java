@@ -1,4 +1,4 @@
-package supercoder79.ecotones.compat;
+package supercoder79.ecotones.util;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
@@ -6,7 +6,7 @@ import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 
-public class TraverseCompat {
+public final class TraverseCompat {
     private static Identifier id(String path) {
         return new Identifier("traverse", path);
     }

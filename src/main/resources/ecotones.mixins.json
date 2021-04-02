@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BlockPlacerTypeAccessor",
+    "BlockStateProviderTypeAccessor",
     "CriteriaAccessor",
     "FoliagePlacerTypeAccessor",
     "MixinGeneratorOptions",

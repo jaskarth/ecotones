@@ -20,14 +20,10 @@ import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.sound.EcotonesSounds;
 import supercoder79.ecotones.command.*;
-import supercoder79.ecotones.compat.TerrestriaCompat;
-import supercoder79.ecotones.compat.TraverseCompat;
+import supercoder79.ecotones.util.*;
 import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.items.EcotonesItemGroups;
 import supercoder79.ecotones.items.EcotonesItems;
-import supercoder79.ecotones.util.AiLog;
-import supercoder79.ecotones.util.CampfireLogHelper;
-import supercoder79.ecotones.util.EcotonesBlockPlacers;
 import supercoder79.ecotones.util.deco.BlockDecorations;
 import supercoder79.ecotones.world.EcotonesWorldType;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
@@ -63,6 +59,7 @@ public final class Ecotones implements ModInitializer {
 		EcotonesSounds.init();
 
 		EcotonesParticles.init();
+		EcotonesBlockStateProviders.init();
 		EcotonesBlockPlacers.init();
 		EcotonesFoliagePlacers.init();
 		EcotonesTreeDecorators.init();
@@ -82,6 +79,12 @@ public final class Ecotones implements ModInitializer {
 		EcotonesConfiguredStructures.init();
 
 		EcotonesEntities.init();
+
+		// Mod compat handlers that add new blocks that we use
+		if (isModLoaded("floralisia")) {
+			FloralisiaCompat.init();
+			log("Registered Floralisia compat!");
+		}
 
 		EcotonesBiomes.init();
 
@@ -120,6 +123,7 @@ public final class Ecotones implements ModInitializer {
 			DumpClimatesCommand.init();
 		}
 
+		// Biome count summary and biome finalization
 		int ecotonesBiomes = 0;
 		for (Identifier id : BuiltinRegistries.BIOME.getIds()) {
 			if (id.getNamespace().contains("ecotones")) {
@@ -134,6 +138,7 @@ public final class Ecotones implements ModInitializer {
 
 		log("Registering " + ecotonesBiomes + " ecotones biomes!");
 
+		// register chunk generator and world type
 		Registry.register(Registry.BIOME_SOURCE, new Identifier("ecotones", "ecotones"), EcotonesBiomeSource.CODEC);
 		Registry.register(Registry.CHUNK_GENERATOR, new Identifier("ecotones", "ecotones"), EcotonesChunkGenerator.CODEC);
 
