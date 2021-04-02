@@ -188,6 +188,9 @@
   "biome.ecotones.rocky_foothills_plateau": "Rocky Foothills Plateau",
   "biome.ecotones.rocky_foothills_thicket": "Rocky Foothills Thicket",
   "biome.ecotones.rocky_foothills_lake": "Rocky Foothills Lake",
+  "biome.ecotones.lush_shrubland": "Clay Basin",
+  "biome.ecotones.lush_shrubland_hilly": "Hilly Clay Basin",
+  "biome.ecotones.lush_shrubland_mountainous": "Mountainous Clay Basin",
 
 
   "block.ecotones.peat": "Peat Block",
@@ -217,6 +220,7 @@
   "block.ecotones.blueberry_jam_jar": "Blueberry Jam Jar",
   "block.ecotones.spruce_leaf_pile": "Spruce Leaf Pile",
   "block.ecotones.lavender": "Lavender",
+  "block.ecotones.marigold": "Marigold",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -244,6 +248,7 @@
   "item.ecotones.spruce_leaf_pile": "Spruce Leaf Pile",
   "item.ecotones.lavender": "Lavender",
   "item.ecotones.hazelnut": "Hazelnut",
+  "item.ecotones.marigold": "Marigold",
 
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",

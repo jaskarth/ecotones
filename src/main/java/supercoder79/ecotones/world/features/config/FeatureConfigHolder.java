@@ -82,6 +82,13 @@ public class FeatureConfigHolder {
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
                     .addState(EcotonesBlocks.SWITCHGRASS.getDefaultState(), 1), new DoubleOrNormalPlacer())
                     .tries(72).build();
+
+    public static final RandomPatchFeatureConfig LUSH_SHRUBLAND_CONFIG =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.SHORT_GRASS.getDefaultState(), 2)
+                    .addState(EcotonesBlocks.MARIGOLD.getDefaultState(), 2)
+                    .addState(Blocks.TALL_GRASS.getDefaultState(), 4)
+                    .addState(Blocks.GRASS.getDefaultState(), 8), new DoubleOrNormalPlacer()).tries(32).build();
     
 
     public static final RandomPatchFeatureConfig TAIGA_GRASS_CONFIG =

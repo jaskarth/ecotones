@@ -36,6 +36,7 @@ public final class EcotonesItems {
     public static final Item SWITCHGRASS = new BlockItem(EcotonesBlocks.SWITCHGRASS, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item LAVENDER = new BlockItem(EcotonesBlocks.LAVENDER, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item SPRUCE_LEAF_PILE = new BlockItem(EcotonesBlocks.SPRUCE_LEAF_PILE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item MARIGOLD = new BlockItem(EcotonesBlocks.MARIGOLD, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
     // Regular Items
     public static final Item COCONUT = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).build()));
@@ -75,6 +76,7 @@ public final class EcotonesItems {
         register("switchgrass", SWITCHGRASS);
         register("lavender", LAVENDER);
         register("spruce_leaf_pile", SPRUCE_LEAF_PILE);
+        register("marigold", MARIGOLD);
 
         register("coconut", COCONUT);
         register("hazelnut", HAZELNUT);

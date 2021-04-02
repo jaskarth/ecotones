@@ -37,6 +37,7 @@ public final class EcotonesBlocks {
     public static Block LAVENDER = new EcotonesGrassBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block BLUEBERRY_JAM_JAR = new JarBlock(FabricBlockSettings.of(Material.DECORATION).nonOpaque().breakInstantly().sounds(BlockSoundGroup.STONE).build());
     public static Block SPRUCE_LEAF_PILE = new EcotonesLeafPileBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
+    public static Block MARIGOLD = new EcotonesGrassBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
 
 
@@ -68,6 +69,7 @@ public final class EcotonesBlocks {
         register("lavender", LAVENDER);
         register("blueberry_jam_jar", BLUEBERRY_JAM_JAR);
         register("spruce_leaf_pile", SPRUCE_LEAF_PILE);
+        register("marigold", MARIGOLD);
         register("cyan_rose", CYAN_ROSE);
     }
 
