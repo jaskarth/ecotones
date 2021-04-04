@@ -30,9 +30,12 @@ public class FanTreeFeature extends Feature<SimpleTreeFeatureConfig> {
             return false;
         }
 
+        // Generate height
+        // TODO: scale
         int height = 7 + random.nextInt(4);
         List<BlockPos> leafNodes = new ArrayList<>();
 
+        // Generate roots with chance
         for (Direction direction : FeatureHelper.HORIZONTAL) {
             if (random.nextInt(6) > 0) {
                 world.setBlockState(pos.offset(direction), config.woodState, 3);
@@ -50,21 +53,26 @@ public class FanTreeFeature extends Feature<SimpleTreeFeatureConfig> {
 
             double progress = ((double)i / height);
 
+            // If we're about halfway up the tree, generate branches
             if (progress > 0.4 && random.nextInt(2) == 0) {
                 double theta = random.nextDouble() * 2 * Math.PI;
-                int branchLength = (progress > 0.7 ? 3 : 2) + random.nextInt(3);
+                // Make taller branches smaller
+                int branchLength = (progress > 0.7 ? 2 : 3) + random.nextInt(3);
 
+                // Generate branch
                 for (int j = 0; j < branchLength; j++) {
                     int dx = (int) (Math.cos(theta) * j);
                     int dz = (int) (Math.sin(theta) * j);
                     BlockPos branchLocal = local.add(dx, 0, dz);
                     world.setBlockState(branchLocal, config.woodState, 3);
 
+                    // Generate a leaf layer here
                     if (j == branchLength - 1) {
                         leafNodes.add(branchLocal);
                     }
                 }
 
+                // Generate small branches if we're down the tree a bit more
             } else if (progress > 0.3 && random.nextInt(3) == 0) {
                 Direction axis = FeatureHelper.randomHorizontal(random);
                 BlockPos dir = local.offset(axis);
@@ -75,12 +83,15 @@ public class FanTreeFeature extends Feature<SimpleTreeFeatureConfig> {
                 }
             }
 
+            // Generate a leaf layer at the top
             if (i == height - 1) {
                 leafNodes.add(local);
             }
         }
 
+        // Generate leaf layers
         for (BlockPos node : leafNodes) {
+            // Place 5x5 leaf layer
             for(int x = -2; x <= 2; x++) {
                 for(int z = -2; z <= 2; z++) {
                     if (Math.abs(x) == 2 && Math.abs(z) == 2 && random.nextInt(3) != 0) {
@@ -91,6 +102,7 @@ public class FanTreeFeature extends Feature<SimpleTreeFeatureConfig> {
                 }
             }
 
+            // Place 3x3 leaf layer
             for(int x = -1; x <= 1; x++) {
                 for(int z = -1; z <= 1; z++) {
                     if (Math.abs(x) == 1 && Math.abs(z) == 1 && random.nextInt(2) == 0) {
@@ -101,6 +113,7 @@ public class FanTreeFeature extends Feature<SimpleTreeFeatureConfig> {
                 }
             }
 
+            // Place top thin leaf
             FeatureHelper.placeLeaves(context, node.up(2));
         }
 

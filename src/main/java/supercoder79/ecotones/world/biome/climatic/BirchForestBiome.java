@@ -38,7 +38,7 @@ public class BirchForestBiome extends EcotonesBiomeBuilder {
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "birch_forest_mountainous"), new BirchForestBiome(2F, 0.625F, 4.2, 0.8).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_VERY_HUMID.add(INSTANCE, 0.2);
-        Climate.WARM_HUMID.add(INSTANCE, 0.1);
+        Climate.WARM_HUMID.add(INSTANCE, 0.2);
     }
 
     public BirchForestBiome(float depth, float scale, double hilliness, double volatility) {

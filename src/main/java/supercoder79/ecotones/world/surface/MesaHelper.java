@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 // Partially derived from https://github.com/Gegy/Terrarium/blob/1.12-dev/src/main/java/net/gegy1000/earth/server/world/ecology/soil/MesaSoilTexture.java.
 // Used with permission!
-public class MesaHelper {
+public final class MesaHelper {
     private static final BlockState WHITE_TERRACOTTA = Blocks.WHITE_TERRACOTTA.getDefaultState();
     private static final BlockState ORANGE_TERRACOTTA = Blocks.ORANGE_TERRACOTTA.getDefaultState();
     private static final BlockState TERRACOTTA = Blocks.TERRACOTTA.getDefaultState();

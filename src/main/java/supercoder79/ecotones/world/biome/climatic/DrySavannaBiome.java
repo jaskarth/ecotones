@@ -126,6 +126,12 @@ public class DrySavannaBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .applyChance(8));
 
+        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.ROCK_SPIRE.configure(FeatureConfig.DEFAULT)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(12));
+
         BiomeHelper.addDefaultFeatures(this);
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }

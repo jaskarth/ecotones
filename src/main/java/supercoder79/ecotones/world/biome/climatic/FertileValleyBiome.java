@@ -30,6 +30,7 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
     public static Biome CLEARING;
     public static Biome THICKET;
+    public static Biome LAKE;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
 
@@ -37,11 +38,12 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley"), new FertileValleyBiome(0.2F, 0.025F, 0.6, 0.15).build());
         CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley_clearing"), new FertileValleyBiome(0.2F, 0.025F, 0.1, 0.35).build());
         THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley_thicket"), new FertileValleyBiome(0.2F, 0.025F, 1.6, 0.4).build());
+        LAKE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley_lake"), new FertileValleyBiome(-0.25F, 0.025F, 0.8, 1.2).build());
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley_hilly"), new FertileValleyBiome(0.3F, 0.225F, 0.6, 0.15).build());
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley_mountainous"), new FertileValleyBiome(0.5F, 0.625F, 0.6, 0.15).build());
-        BiomeRegistries.registerNoBeachBiomes(INSTANCE, THICKET, CLEARING, HILLY, MOUNTAINOUS);
+        BiomeRegistries.registerNoBeachBiomes(INSTANCE, THICKET, CLEARING, LAKE, HILLY, MOUNTAINOUS);
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
-        BiomeRegistries.registerBiomeVariants(INSTANCE, THICKET, CLEARING);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, THICKET, CLEARING, LAKE);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_MODERATE.add(INSTANCE, 0.2);
         Climate.WARM_MILD.add(INSTANCE, 0.3);

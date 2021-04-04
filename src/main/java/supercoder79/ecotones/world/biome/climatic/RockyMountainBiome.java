@@ -121,6 +121,12 @@ public class RockyMountainBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .applyChance(3));
 
+        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.ROCK_SPIRE.configure(FeatureConfig.DEFAULT)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(4));
+
         if (FloralisiaCompat.isFloralisiaEnabled()) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new DeferredBlockStateProvider(FloralisiaCompat.cymbidium()),

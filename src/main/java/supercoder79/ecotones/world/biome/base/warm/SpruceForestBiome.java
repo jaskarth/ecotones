@@ -32,19 +32,30 @@ import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class SpruceForestBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
+    public static Biome CLEARING;
+    public static Biome LAKE;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
 
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest"), new SpruceForestBiome(0.5f, 0.075f, 2.8, 0.88).build());
+        CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_clearing"), new SpruceForestBiome(0.5f, 0.075f, 2.2, 0.95, 1.25).build());
+        LAKE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_lake"), new SpruceForestBiome(-0.25f, 0.075f, 1.2, 0.97).build());
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_hilly"), new SpruceForestBiome(1f, 0.5f, 4.2, 0.83).build());
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_mountainous"), new SpruceForestBiome(1.75f, 0.8f, 7, 0.75).build());
+
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 4);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, LAKE, CLEARING);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.WARM_HUMID.add(INSTANCE, 1);
     }
 
     protected SpruceForestBiome(float depth, float scale, double hilliness, double volatility) {
+        this(depth, scale, hilliness, volatility, 7.5);
+    }
+
+    protected SpruceForestBiome(float depth, float scale, double hilliness, double volatility, double treeCount) {
         this.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG);
         this.precipitation(Biome.Precipitation.RAIN);
         this.depth(depth);
@@ -140,11 +151,11 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SMALL_SPRUCE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(1.2))));
+                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(treeCount / 7.0))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(FeatureConfigHolder.SPRUCE_TREE_CONFIG)
-                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(7.5))));
+                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(treeCount))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BLUEBERRY_BUSH.configure(FeatureConfig.DEFAULT)

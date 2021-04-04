@@ -124,7 +124,13 @@ public class DriedForestBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.SMALL_ROCK.configure(FeatureConfig.DEFAULT)
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
-                        .applyChance(8));
+                        .applyChance(12));
+
+        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.ROCK_SPIRE.configure(FeatureConfig.DEFAULT)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(12));
 
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }

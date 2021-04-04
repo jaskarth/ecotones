@@ -53,6 +53,7 @@ public final class EcotonesFeatures {
     public static final Feature<DefaultFeatureConfig> SMALL_ROCK = new SmallRockFeature(DefaultFeatureConfig.CODEC);
     public static final Feature<PatchFeatureConfig> GROUND_PATCH = new PatchFeature(PatchFeatureConfig.CODEC);
     public static final Feature<SimpleTreeFeatureConfig> TALL_BARREN_TREE = new TallBarrenTreeFeature(SimpleTreeFeatureConfig.CODEC);
+    public static final Feature<DefaultFeatureConfig> ROCK_SPIRE = new RockSpireFeature(DefaultFeatureConfig.CODEC);
 
     public static void init() {
         register("desertify", DESERTIFY_SOIL);
@@ -91,6 +92,7 @@ public final class EcotonesFeatures {
         register("small_rock", SMALL_ROCK);
         register("ground_patch", GROUND_PATCH);
         register("tall_barren_tree", TALL_BARREN_TREE);
+        register("rock_spire", ROCK_SPIRE);
     }
 
     private static void register(String name, Feature<?> feature) {

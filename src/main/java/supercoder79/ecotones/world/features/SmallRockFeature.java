@@ -39,11 +39,12 @@ public class SmallRockFeature extends Feature<DefaultFeatureConfig> {
                     int gX = x + pos.getX();
                     int gY = y + pos.getY();
                     int gZ = z + pos.getZ();
+
                     double rX = x / radius;
                     double rY = y / radius;
                     double rZ = z / radius;
 
-                    if (rX * rX + rY * rY + rZ * rZ < 1 + sampler.sample(gX / 6.0, gY / 6.0, gZ / 6.0) * 0.3) {
+                    if (rX * rX + rY * rY + rZ * rZ < 1 + sampler.sample(gX / 4.0, gY / 4.0, gZ / 4.0) * 0.4) {
                         world.setBlockState(mutable.set(gX, gY, gZ), selectState(random), 3);
                     }
                 }

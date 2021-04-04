@@ -89,6 +89,13 @@ public class FeatureConfigHolder {
                     .addState(EcotonesBlocks.MARIGOLD.getDefaultState(), 2)
                     .addState(Blocks.TALL_GRASS.getDefaultState(), 4)
                     .addState(Blocks.GRASS.getDefaultState(), 8), new DoubleOrNormalPlacer()).tries(32).build();
+
+    public static final RandomPatchFeatureConfig DRY_STEPPE_CONFIG =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.SHORT_GRASS.getDefaultState(), 4)
+                    .addState(EcotonesBlocks.SMALL_SHRUB.getDefaultState(), 2)
+                    .addState(EcotonesBlocks.SANDY_GRASS.getDefaultState(), 4)
+                    .addState(Blocks.GRASS.getDefaultState(), 2), new SimpleBlockPlacer()).tries(32).build();
     
 
     public static final RandomPatchFeatureConfig TAIGA_GRASS_CONFIG =

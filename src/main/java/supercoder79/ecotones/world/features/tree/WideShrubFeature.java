@@ -27,10 +27,15 @@ public class WideShrubFeature extends Feature<SimpleTreeFeatureConfig> {
         //grab data from the decorator
         if (pos instanceof DataPos) {
             DataPos data = ((DataPos)pos);
-            if (data.isLikelyInvalid) return false;
+            if (data.isLikelyInvalid) {
+                return false;
+            }
         }
 
-        if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
+        if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) {
+            return true;
+        }
+
         world.setBlockState(pos, config.woodState, 0);
         BlockPos up = pos.up();
 
@@ -43,7 +48,9 @@ public class WideShrubFeature extends Feature<SimpleTreeFeatureConfig> {
         // bottom 5x5 leaf layer
         for (int x = -2; x <= 2; x++) {
             for (int z = -2; z <= 2; z++) {
-                if (Math.abs(x) == 2 && Math.abs(z) == 2) continue;
+                if (Math.abs(x) == 2 && Math.abs(z) == 2) {
+                    continue;
+                }
 
                 trySet(world, pos.add(x, 0 , z), config.leafState);
             }
@@ -53,6 +60,8 @@ public class WideShrubFeature extends Feature<SimpleTreeFeatureConfig> {
     }
 
     protected void trySet(WorldAccess world, BlockPos pos, BlockState state) {
-        if (!world.getBlockState(pos).getMaterial().isSolid()) world.setBlockState(pos, state, 2);
+        if (!world.getBlockState(pos).getMaterial().isSolid()) {
+            world.setBlockState(pos, state, 2);
+        }
     }
 }
