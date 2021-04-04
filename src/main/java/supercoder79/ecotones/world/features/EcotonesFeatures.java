@@ -8,12 +8,10 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.RegistryReport;
-import supercoder79.ecotones.world.features.config.OakTreeFeatureConfig;
-import supercoder79.ecotones.world.features.config.PatchFeatureConfig;
-import supercoder79.ecotones.world.features.config.RockFeatureConfig;
-import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.features.config.*;
 import supercoder79.ecotones.world.features.entity.BeehiveFeature;
 import supercoder79.ecotones.world.features.entity.DuckNestFeature;
+import supercoder79.ecotones.world.features.rock.*;
 import supercoder79.ecotones.world.features.tree.*;
 
 public final class EcotonesFeatures {
@@ -33,7 +31,7 @@ public final class EcotonesFeatures {
     public static final Feature<TreeGenerationConfig> BRANCHING_ACACIA = new BranchingAcaciaTreeFeature(TreeGenerationConfig.CODEC);
     public static final Feature<SimpleTreeFeatureConfig> WIDE_SHRUB = new WideShrubFeature(SimpleTreeFeatureConfig.CODEC);
     public static final Feature<SimpleTreeFeatureConfig> ASPEN_TREE = new AspenTreeFeature(SimpleTreeFeatureConfig.CODEC);
-    public static final Feature<DefaultFeatureConfig> PLACE_WATER = new PlaceWaterFeature(DefaultFeatureConfig.CODEC);
+    public static final Feature<WaterFeatureConfig> PLACE_WATER = new PlaceWaterFeature(WaterFeatureConfig.CODEC);
     public static final Feature<DefaultFeatureConfig> FARMLAND = new FarmlandPatchFeature(DefaultFeatureConfig.CODEC);
     public static final Feature<DefaultFeatureConfig> BEEHIVES = new BeehiveFeature(DefaultFeatureConfig.CODEC);
     public static final Feature<TreeGenerationConfig> MANGROVE_TREE = new MangroveTreeFeature(TreeGenerationConfig.CODEC);
@@ -54,7 +52,10 @@ public final class EcotonesFeatures {
     public static final Feature<DefaultFeatureConfig> SMALL_ROCK = new SmallRockFeature(DefaultFeatureConfig.CODEC);
     public static final Feature<PatchFeatureConfig> GROUND_PATCH = new PatchFeature(PatchFeatureConfig.CODEC);
     public static final Feature<SimpleTreeFeatureConfig> TALL_BARREN_TREE = new TallBarrenTreeFeature(SimpleTreeFeatureConfig.CODEC);
-    public static final Feature<DefaultFeatureConfig> ROCK_SPIRE = new RockSpireFeature(DefaultFeatureConfig.CODEC);
+    public static final Feature<RockSpireFeatureConfig> ROCK_SPIRE = new RockSpireFeature(RockSpireFeatureConfig.CODEC);
+    public static final Feature<DefaultFeatureConfig> GRANITE_SPRING = new GraniteSpringFeature(DefaultFeatureConfig.CODEC);
+    public static final Feature<DefaultFeatureConfig> WIDE_GRANITE_SPRING = new WideGraniteSpringFeature(DefaultFeatureConfig.CODEC);
+    public static final Feature<DefaultFeatureConfig> GRANITE_LAVA_SPRING = new GraniteLavaSpringFeature(DefaultFeatureConfig.CODEC);
 
     public static void init() {
         register("desertify", DESERTIFY_SOIL);
@@ -94,6 +95,9 @@ public final class EcotonesFeatures {
         register("ground_patch", GROUND_PATCH);
         register("tall_barren_tree", TALL_BARREN_TREE);
         register("rock_spire", ROCK_SPIRE);
+        register("granite_spring", GRANITE_SPRING);
+        register("wide_granite_spring", WIDE_GRANITE_SPRING);
+        register("granite_lava_spring", GRANITE_LAVA_SPRING);
     }
 
     private static void register(String name, Feature<?> feature) {

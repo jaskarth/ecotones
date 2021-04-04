@@ -1,4 +1,4 @@
-package supercoder79.ecotones.world.features;
+package supercoder79.ecotones.world.features.rock;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;

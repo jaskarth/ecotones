@@ -89,6 +89,7 @@ public final class EcotonesBiomes {
         ClayBasinBiome.init();
         RockyMountainBiome.init();
         LushShrublandBiome.init();
+        GraniteSpringsBiome.init();
 
         // Rose Field biome
         RoseFieldBiome.init();

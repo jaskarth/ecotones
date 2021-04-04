@@ -127,7 +127,7 @@ public class ClayBasinBiome extends EcotonesBiomeBuilder {
                         .repeat(clayCount));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                EcotonesFeatures.PLACE_WATER.configure(FeatureConfig.DEFAULT)
+                EcotonesFeatures.PLACE_WATER.configure(FeatureConfigHolder.GRASS_WATER_PATCH)
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
                         .repeat(waterCount));

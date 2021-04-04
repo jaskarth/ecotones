@@ -31,7 +31,7 @@ import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
 import java.util.OptionalInt;
 
-public class FeatureConfigHolder {
+public final class FeatureConfigHolder {
     // grass
     public static final RandomPatchFeatureConfig REEDS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
@@ -223,6 +223,18 @@ public class FeatureConfigHolder {
                     new ColumnPlacer(1, 2))
                     .tries(32).cannotProject().build();
 
+    public static final WaterFeatureConfig GRASS_WATER_PATCH =
+            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState()));
+
+    public static final WaterFeatureConfig GRANITE_WATER_PATCH =
+            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.GRANITE.getDefaultState()));
+
+    public static final RockSpireFeatureConfig STONE_SPIRE =
+            new RockSpireFeatureConfig(new SimpleBlockStateProvider(Blocks.STONE.getDefaultState()));
+
+    public static final RockSpireFeatureConfig GRANITE_SPIRE =
+            new RockSpireFeatureConfig(new SimpleBlockStateProvider(Blocks.GRANITE.getDefaultState()));
+
     // trees
     public static final TreeFeatureConfig SPRUCE_TREE_CONFIG =
             new TreeFeatureConfig.Builder(
@@ -240,7 +252,7 @@ public class FeatureConfigHolder {
             new StraightTrunkPlacer(9, 6, 0),
             new TwoLayersFeatureSize(2, 0, 2))
             .ignoreVines().build()
-            .setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(2)));
+            .setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(2), new LeafPileTreeDecorator(EcotonesBlocks.SPRUCE_LEAF_PILE.getDefaultState(), 6, 4)));
 
     public static final TreeFeatureConfig JUNGLE = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.JUNGLE_LOG.getDefaultState()),

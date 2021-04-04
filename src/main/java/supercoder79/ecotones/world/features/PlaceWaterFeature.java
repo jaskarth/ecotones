@@ -10,19 +10,21 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.world.features.config.WaterFeatureConfig;
 
 import java.util.Random;
 
-public class PlaceWaterFeature extends Feature<DefaultFeatureConfig> {
-    public PlaceWaterFeature(Codec<DefaultFeatureConfig> codec) {
+public class PlaceWaterFeature extends Feature<WaterFeatureConfig> {
+    public PlaceWaterFeature(Codec<WaterFeatureConfig> codec) {
         super(codec);
     }
 
     @Override
-    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+    public boolean generate(FeatureContext<WaterFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getPos();
         Random random = context.getRandom();
+        WaterFeatureConfig config = context.getConfig();
 
         BlockPos.Mutable mutable = pos.mutableCopy();
 
@@ -32,8 +34,8 @@ public class PlaceWaterFeature extends Feature<DefaultFeatureConfig> {
             int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ()) - 1;
             mutable.setY(y);
 
-            // test for grass and then continue
-            if (world.getBlockState(mutable) == Blocks.GRASS_BLOCK.getDefaultState()) {
+            // test for target and then continue
+            if (config.targets.contains(world.getBlockState(mutable))) {
                 // ensure there is a block under the water
                 if (!world.getBlockState(mutable.down()).isOpaque()) {
                     continue;

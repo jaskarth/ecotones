@@ -78,7 +78,7 @@ public class FloodedSavannaBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 8, 16))));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                EcotonesFeatures.PLACE_WATER.configure(FeatureConfig.DEFAULT)
+                EcotonesFeatures.PLACE_WATER.configure(FeatureConfigHolder.GRASS_WATER_PATCH)
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
                         .repeat(2));

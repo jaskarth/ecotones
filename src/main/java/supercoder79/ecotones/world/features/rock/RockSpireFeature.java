@@ -1,4 +1,4 @@
-package supercoder79.ecotones.world.features;
+package supercoder79.ecotones.world.features.rock;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
@@ -11,20 +11,22 @@ import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.world.features.config.RockSpireFeatureConfig;
 
 import java.util.BitSet;
 import java.util.Random;
 
-public class RockSpireFeature extends Feature<DefaultFeatureConfig> {
-    public RockSpireFeature(Codec<DefaultFeatureConfig> configCodec) {
+public class RockSpireFeature extends Feature<RockSpireFeatureConfig> {
+    public RockSpireFeature(Codec<RockSpireFeatureConfig> configCodec) {
         super(configCodec);
     }
 
     @Override
-    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+    public boolean generate(FeatureContext<RockSpireFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getPos();
         Random random = context.getRandom();
+        RockSpireFeatureConfig config = context.getConfig();
 
         PerlinNoiseSampler sampler = new PerlinNoiseSampler(new ChunkRandom(world.getSeed()));
 
@@ -75,7 +77,9 @@ public class RockSpireFeature extends Feature<DefaultFeatureConfig> {
                     noise += (random.nextDouble() - random.nextDouble()) * 0.3;
 
                     if (current.get(idx) && dx * dx + dz * dz <= radx + noise) {
-                        world.setBlockState(mutable.set(pos, x, y, z), Blocks.STONE.getDefaultState(), 3);
+                        mutable.set(pos, x, y, z);
+
+                        world.setBlockState(mutable, config.provider.getBlockState(random, mutable), 3);
                         next.set(idx);
                     }
                 }

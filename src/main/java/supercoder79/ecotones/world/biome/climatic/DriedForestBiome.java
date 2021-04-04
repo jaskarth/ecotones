@@ -127,7 +127,7 @@ public class DriedForestBiome extends EcotonesBiomeBuilder {
                         .applyChance(12));
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                EcotonesFeatures.ROCK_SPIRE.configure(FeatureConfig.DEFAULT)
+                EcotonesFeatures.ROCK_SPIRE.configure(FeatureConfigHolder.STONE_SPIRE)
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
                         .applyChance(12));
