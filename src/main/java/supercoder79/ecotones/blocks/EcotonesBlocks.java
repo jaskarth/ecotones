@@ -8,6 +8,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.blocks.sapling.HazelSaplingGenerator;
+import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesBlocks {
     public static Block PEAT_BLOCK = new Block(FabricBlockSettings.copy(Blocks.DIRT).breakByTool(FabricToolTags.SHOVELS).hardness(1f).build());
@@ -75,5 +76,6 @@ public final class EcotonesBlocks {
 
     private static void register(String name, Block block) {
         Registry.register(Registry.BLOCK, Ecotones.id(name), block);
+        RegistryReport.increment("Block");
     }
 }

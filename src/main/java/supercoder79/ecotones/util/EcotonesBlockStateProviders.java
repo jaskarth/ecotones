@@ -15,5 +15,6 @@ public final class EcotonesBlockStateProviders {
 
     private static void register(String name, BlockStateProviderType<?> provider) {
         Registry.register(Registry.BLOCK_STATE_PROVIDER_TYPE, Ecotones.id(name), provider);
+        RegistryReport.increment("Blockstate Provider");
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.TreeGenerationConfig;
+import supercoder79.ecotones.util.RegistryReport;
 import supercoder79.ecotones.world.features.config.OakTreeFeatureConfig;
 import supercoder79.ecotones.world.features.config.PatchFeatureConfig;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
@@ -97,5 +98,6 @@ public final class EcotonesFeatures {
 
     private static void register(String name, Feature<?> feature) {
         Registry.register(Registry.FEATURE, Ecotones.id(name), feature);
+        RegistryReport.increment("Feature");
     }
 }

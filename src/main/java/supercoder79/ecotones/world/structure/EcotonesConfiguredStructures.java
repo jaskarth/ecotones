@@ -5,6 +5,7 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesConfiguredStructures {
     public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_OAK = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.OAK_LOG.getDefaultState()));
@@ -24,5 +25,6 @@ public final class EcotonesConfiguredStructures {
 
     private static void register(String name, ConfiguredStructureFeature<?, ?> feature) {
         Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, Ecotones.id(name), feature);
+        RegistryReport.increment("Configured Structures");
     }
 }

@@ -4,6 +4,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.mixin.FoliagePlacerTypeAccessor;
+import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesFoliagePlacers {
     public static final FoliagePlacerType<PlusLeavesFoliagePlacer> PLUS_LEAVES = FoliagePlacerTypeAccessor.createFoliagePlacerType(PlusLeavesFoliagePlacer.CODEC);
@@ -16,5 +17,6 @@ public final class EcotonesFoliagePlacers {
 
     private static void register(String name, FoliagePlacerType<?> type) {
         Registry.register(Registry.FOLIAGE_PLACER_TYPE, Ecotones.id(name), type);
+        RegistryReport.increment("Foliage Placer");
     }
 }

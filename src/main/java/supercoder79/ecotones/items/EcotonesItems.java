@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesItems {
     // Block Items
@@ -96,5 +97,6 @@ public final class EcotonesItems {
 
     private static void register(String name, Item item) {
         Registry.register(Registry.ITEM, Ecotones.id(name), item);
+        RegistryReport.increment("Item");
     }
 }

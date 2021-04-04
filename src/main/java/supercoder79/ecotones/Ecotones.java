@@ -137,6 +137,7 @@ public final class Ecotones implements ModInitializer {
 		}
 
 		log("Registering " + ecotonesBiomes + " ecotones biomes!");
+		RegistryReport.report(ecotonesBiomes);
 
 		// register chunk generator and world type
 		Registry.register(Registry.BIOME_SOURCE, new Identifier("ecotones", "ecotones"), EcotonesBiomeSource.CODEC);

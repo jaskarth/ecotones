@@ -4,6 +4,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.tree.TreeDecoratorType;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.mixin.TreeDecoratorTypeAccessor;
+import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesTreeDecorators {
     public static final TreeDecoratorType<PineconeTreeDecorator> PINECONES = TreeDecoratorTypeAccessor.createTreeDecoratorType(PineconeTreeDecorator.CODEC);
@@ -20,5 +21,6 @@ public final class EcotonesTreeDecorators {
 
     private static void register(String name, TreeDecoratorType<?> type) {
         Registry.register(Registry.TREE_DECORATOR_TYPE, Ecotones.id(name), type);
+        RegistryReport.increment("Tree Decorator");
     }
 }

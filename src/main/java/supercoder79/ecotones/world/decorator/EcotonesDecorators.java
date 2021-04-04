@@ -7,6 +7,7 @@ import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.api.TreeGenerationConfig;
+import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesDecorators {
     public static final Decorator<ShrubDecoratorConfig> SHRUB_PLACEMENT_DECORATOR = new AnalyticShrubPlacementDecorator(ShrubDecoratorConfig.CODEC);
@@ -37,5 +38,6 @@ public final class EcotonesDecorators {
 
     private static void register(String name, Decorator<?> decorator) {
         Registry.register(Registry.DECORATOR, Ecotones.id(name), decorator);
+        RegistryReport.increment("Decorator");
     }
 }

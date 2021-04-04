@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.tree.trait;
 import com.google.common.collect.ImmutableList;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.util.RegistryReport;
 import supercoder79.ecotones.world.tree.trait.aspen.*;
 import supercoder79.ecotones.world.tree.trait.oak.*;
 import supercoder79.ecotones.world.tree.trait.poplar.*;
@@ -23,5 +24,6 @@ public final class EcotonesTreeTraits {
 
     private static void register(String name, TraitContainer<? extends Trait> traits) {
         TreeTraitRegistry.register(Ecotones.id(name), traits);
+        RegistryReport.increment("Tree Traits");
     }
 }

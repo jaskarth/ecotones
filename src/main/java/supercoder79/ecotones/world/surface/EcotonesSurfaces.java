@@ -5,6 +5,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesSurfaces {
     public static final SurfaceBuilder<TernarySurfaceConfig> DESERT_SCRUB_BUILDER = new DesertScrubSurfaceBuilder(TernarySurfaceConfig.CODEC);
@@ -47,5 +48,6 @@ public final class EcotonesSurfaces {
 
     private static void register(String name, SurfaceBuilder<?> builder) {
         Registry.register(Registry.SURFACE_BUILDER, Ecotones.id(name), builder);
+        RegistryReport.increment("Surface Builder");
     }
 }

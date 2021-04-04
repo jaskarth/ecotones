@@ -5,6 +5,7 @@ import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesParticles {
     public static final DefaultParticleType SAND = FabricParticleTypes.simple(false);
@@ -17,5 +18,6 @@ public final class EcotonesParticles {
 
     private static void register(String string, ParticleType<?> type) {
         Registry.register(Registry.PARTICLE_TYPE, Ecotones.id(string), type);
+        RegistryReport.increment("Particle Type");
     }
 }
