@@ -25,6 +25,7 @@ public final class EcotonesSurfaces {
     public static final SurfaceBuilder<TernarySurfaceConfig> MESA = new MesaSurfaceBuilder(TernarySurfaceConfig.CODEC, y -> y < 78, MesaHelper::initializeRegularMesa, Blocks.TERRACOTTA.getDefaultState());
     public static final SurfaceBuilder<TernarySurfaceConfig> WHITE_MESA = new MesaSurfaceBuilder(TernarySurfaceConfig.CODEC, y -> y < 72 || y > 88, MesaHelper::initializeWhiteMesa, Blocks.WHITE_TERRACOTTA.getDefaultState());
     public static final SurfaceBuilder<TernarySurfaceConfig> ABOVE_Y = new StoneAboveYSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> GRAVEL_BANDS = new GravelBandsSurfaceBuilder(TernarySurfaceConfig.CODEC);
 
     public static void init() {
         register("desert_scrub", DESERT_SCRUB_BUILDER);
@@ -44,6 +45,7 @@ public final class EcotonesSurfaces {
         register("mesa", MESA);
         register("white_mesa", WHITE_MESA);
         register("above_y", ABOVE_Y);
+        register("gravel_bands", GRAVEL_BANDS);
     }
 
     private static void register(String name, SurfaceBuilder<?> builder) {
