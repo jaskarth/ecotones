@@ -18,7 +18,7 @@ public final class EcotonesBiomes {
         SteppeBiome.init();
         TropicalGrasslandBiome.init();
         LushSavannaBiome.init();
-        DryForestBiome.init();
+        TropicalWoodlandBiome.init();
         LushForestBiome.init();
         TropicalRainforestBiome.init();
 
