@@ -38,7 +38,7 @@ public class JamItem extends AliasedBlockItem {
     }
 
     public int getMaxUseTime(ItemStack stack) {
-        return 32;
+        return 80;
     }
 
     public UseAction getUseAction(ItemStack stack) {

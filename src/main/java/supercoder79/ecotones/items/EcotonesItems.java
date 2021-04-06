@@ -51,6 +51,9 @@ public final class EcotonesItems {
     public static final Item DUCK_EGG = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item ROSEMARY = new AliasedBlockItem(EcotonesBlocks.ROSEMARY, new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(1).saturationModifier(0.1F).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 6 * 20), 0.75f).snack().build()));
     public static final Item ECOTONES_BOOK = new EcotonesBookItem(new Item.Settings().maxCount(1));
+    public static final Item MAPLE_SAP = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item MAPLE_SAP_JAR = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item MAPLE_SYRUP = new JamItem(EcotonesBlocks.MAPLE_SYRUP_JAR, new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(8).saturationModifier(1.2F).build()));
 
     public static final Item CYAN_ROSE = new BlockItem(EcotonesBlocks.CYAN_ROSE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
@@ -91,6 +94,9 @@ public final class EcotonesItems {
         register("duck_egg", DUCK_EGG);
         register("rosemary", ROSEMARY);
         register("ecotones_book", ECOTONES_BOOK);
+        register("maple_sap", MAPLE_SAP);
+        register("maple_sap_jar", MAPLE_SAP_JAR);
+        register("maple_syrup", MAPLE_SYRUP);
 
         register("cyan_rose", CYAN_ROSE);
 

@@ -29,6 +29,7 @@ import supercoder79.ecotones.world.treedecorator.LeafPileTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.LichenTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
+import java.util.Optional;
 import java.util.OptionalInt;
 
 public final class FeatureConfigHolder {
@@ -224,10 +225,10 @@ public final class FeatureConfigHolder {
                     .tries(32).cannotProject().build();
 
     public static final WaterFeatureConfig GRASS_WATER_PATCH =
-            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState()));
+            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState()), Optional.empty());
 
     public static final WaterFeatureConfig GRANITE_WATER_PATCH =
-            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.GRANITE.getDefaultState()));
+            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.GRANITE.getDefaultState()), Optional.of(new SimpleBlockStateProvider(Blocks.GRANITE.getDefaultState())));
 
     public static final RockSpireFeatureConfig STONE_SPIRE =
             new RockSpireFeatureConfig(new SimpleBlockStateProvider(Blocks.STONE.getDefaultState()));

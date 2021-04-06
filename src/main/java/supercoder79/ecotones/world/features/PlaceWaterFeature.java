@@ -12,6 +12,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.world.features.config.WaterFeatureConfig;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class PlaceWaterFeature extends Feature<WaterFeatureConfig> {
@@ -28,11 +30,15 @@ public class PlaceWaterFeature extends Feature<WaterFeatureConfig> {
 
         BlockPos.Mutable mutable = pos.mutableCopy();
 
+        List<BlockPos> toReplace = new ArrayList<>();
+
         for (int i = 0; i < random.nextInt(4) + 16; i++) {
             //pick random position
             mutable.set(pos, random.nextInt(6) - random.nextInt(6), 0, random.nextInt(6) - random.nextInt(6));
             int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ()) - 1;
             mutable.setY(y);
+
+            toReplace.clear();
 
             // test for target and then continue
             if (config.targets.contains(world.getBlockState(mutable))) {
@@ -55,11 +61,19 @@ public class PlaceWaterFeature extends Feature<WaterFeatureConfig> {
                             break;
                         }
 
+                    } else {
+                        toReplace.add(mutable.toImmutable());
                     }
                 }
 
                 if (canSpawn) {
                     world.setBlockState(mutable.set(origin), Blocks.WATER.getDefaultState(), 3);
+
+                    if (config.surroundings.isPresent()) {
+                        for (BlockPos replacement : toReplace) {
+                            world.setBlockState(replacement, config.surroundings.get().getBlockState(random, replacement), 3);
+                        }
+                    }
                 }
             }
         }
