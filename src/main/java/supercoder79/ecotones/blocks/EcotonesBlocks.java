@@ -8,6 +8,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.blocks.sapling.HazelSaplingGenerator;
+import supercoder79.ecotones.blocks.sapling.MapleSaplingGenerator;
 import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesBlocks {
@@ -39,6 +40,7 @@ public final class EcotonesBlocks {
     public static Block BLUEBERRY_JAM_JAR = new JarBlock(FabricBlockSettings.of(Material.DECORATION).nonOpaque().breakInstantly().sounds(BlockSoundGroup.STONE).build());
     public static Block SPRUCE_LEAF_PILE = new EcotonesLeafPileBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block MARIGOLD = new EcotonesGrassBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
+    public static Block MAPLE_SAPLING = new TerraformSaplingBlock(new MapleSaplingGenerator());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
 
 
@@ -71,6 +73,7 @@ public final class EcotonesBlocks {
         register("blueberry_jam_jar", BLUEBERRY_JAM_JAR);
         register("spruce_leaf_pile", SPRUCE_LEAF_PILE);
         register("marigold", MARIGOLD);
+        register("maple_sapling", MAPLE_SAPLING);
         register("cyan_rose", CYAN_ROSE);
     }
 

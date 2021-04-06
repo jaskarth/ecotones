@@ -63,7 +63,7 @@ public class MapleTreeFeature extends Feature<TreeGenerationConfig> {
 
             //if the tree hits a solid block, stop
             if (TreeHelper.canLogReplace(world, local)) {
-                world.setBlockState(local, config.woodState, 0);
+                world.setBlockState(local, config.woodState, 3);
             } else {
                 break;
             }
@@ -100,7 +100,7 @@ public class MapleTreeFeature extends Feature<TreeGenerationConfig> {
             lastPos = local;
 
             if (TreeHelper.canLogReplace(world, local)) {
-                world.setBlockState(local, config.woodState, 0);
+                world.setBlockState(local, config.woodState, 3);
             } else {
                 break;
             }

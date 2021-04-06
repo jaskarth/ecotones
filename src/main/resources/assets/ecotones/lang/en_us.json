@@ -221,6 +221,7 @@
   "block.ecotones.spruce_leaf_pile": "Spruce Leaf Pile",
   "block.ecotones.lavender": "Lavender",
   "block.ecotones.marigold": "Marigold",
+  "block.ecotones.maple_sapling": "Maple Sapling",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -249,6 +250,7 @@
   "item.ecotones.lavender": "Lavender",
   "item.ecotones.hazelnut": "Hazelnut",
   "item.ecotones.marigold": "Marigold",
+  "item.ecotones.maple_sapling": "Maple Sapling",
 
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",
