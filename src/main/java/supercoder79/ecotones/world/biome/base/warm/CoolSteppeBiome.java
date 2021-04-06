@@ -129,6 +129,12 @@ public class CoolSteppeBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .applyChance(8));
 
+        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.ROCK_SPIRE.configure(FeatureConfigHolder.STONE_SPIRE)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(8));
+
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
         BiomeHelper.addDefaultFeatures(this);
     }
