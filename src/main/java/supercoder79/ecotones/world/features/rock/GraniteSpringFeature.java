@@ -3,9 +3,12 @@ package supercoder79.ecotones.world.features.rock;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
@@ -29,20 +32,30 @@ public class GraniteSpringFeature extends Feature<DefaultFeatureConfig> {
             return false;
         }
 
+        PerlinNoiseSampler sampler = new PerlinNoiseSampler(new ChunkRandom(world.getSeed()));
+
         BlockPos.Mutable mutable = pos.mutableCopy();
 
-        int height = 4 + random.nextInt(3);
-        int waterStart = height - random.nextInt(4);
+        int height = 4 + random.nextInt(4);
+        int waterStart = height - random.nextInt(height - 2);
 
-        int radius = 3 + random.nextInt(2);
-        int centerY = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, pos.getX(), pos.getZ());
+        int radius = 3 + random.nextInt(3);
+        int centerY = world.getTopY(Heightmap.Type.OCEAN_FLOOR, pos.getX(), pos.getZ());
+
+        double[] noise = new double[(radius * 2 + 1) * (radius * 2 + 1)];
 
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
-                if (world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, pos.getX() + x, pos.getZ() + z) < centerY) {
+                int gX = pos.getX() + x;
+                int gZ = pos.getZ() + z;
+
+                if (world.getTopY(Heightmap.Type.OCEAN_FLOOR, gX, gZ) < centerY) {
                     return false;
                 }
+
+                noise[(x + radius) * (radius * 2 + 1) + (z + radius)] = sampler.sample(gX / 4.0, 0, gZ / 4.0) * 0.3;
             }
+
         }
 
         // Radius goes from 1.0 to 0.3
@@ -58,9 +71,12 @@ public class GraniteSpringFeature extends Feature<DefaultFeatureConfig> {
 
                     double r2 = dx * dx + dz * dz;
 
-                    if (r2 <= radx) {
-                        if (y >= waterStart && r2 <= radx - 0.395) {
+                    double scaledRadius = radx + noise[(x + radius) * (radius * 2 + 1) + (z + radius)];
+
+                    if (r2 <= scaledRadius) {
+                        if (y >= waterStart && r2 <= scaledRadius - 0.395) {
                             world.setBlockState(mutable.set(pos, x, y, z), Blocks.WATER.getDefaultState(), 3);
+                            world.getFluidTickScheduler().schedule(mutable.toImmutable(), Fluids.WATER, 0);
                         } else {
                             world.setBlockState(mutable.set(pos, x, y, z), Blocks.GRANITE.getDefaultState(), 3);
                         }

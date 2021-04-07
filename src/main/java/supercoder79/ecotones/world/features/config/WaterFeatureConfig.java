@@ -12,14 +12,17 @@ import java.util.Optional;
 public class WaterFeatureConfig implements FeatureConfig {
     public static final Codec<WaterFeatureConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BlockState.CODEC.listOf().fieldOf("targets").forGetter(config -> config.targets),
-            BlockStateProvider.TYPE_CODEC.optionalFieldOf("surroundings").forGetter(config -> config.surroundings)
+            BlockStateProvider.TYPE_CODEC.optionalFieldOf("surroundings").forGetter(config -> config.surroundings),
+            Codec.INT.fieldOf("spread").forGetter(config -> config.spread)
     ).apply(instance, WaterFeatureConfig::new));
 
     public final List<BlockState> targets;
     public final Optional<BlockStateProvider> surroundings;
+    public final int spread;
 
-    public WaterFeatureConfig(List<BlockState> targets, Optional<BlockStateProvider> surroundings) {
+    public WaterFeatureConfig(List<BlockState> targets, Optional<BlockStateProvider> surroundings, int spread) {
         this.targets = targets;
         this.surroundings = surroundings;
+        this.spread = spread;
     }
 }

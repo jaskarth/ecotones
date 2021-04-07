@@ -12,6 +12,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
@@ -55,6 +56,15 @@ public class GeyserBlock extends Block {
             world.setBlockState(pos, state.with(TRIGGERED, true), 3);
         } else if (!isPowered && isTriggered) {
             world.setBlockState(pos, state.with(TRIGGERED, false), 3);
+        }
+    }
+
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (random.nextInt(16) == 0) {
+            if (world.getBlockState(pos.up()).getFluidState().isIn(FluidTags.WATER)) {
+                world.addParticle(ParticleTypes.BUBBLE, false, pos.getX() + random.nextDouble(), pos.getY() + 1.1, pos.getZ() + random.nextDouble(), 0, 0.1, 0);
+            }
         }
     }
 

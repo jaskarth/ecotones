@@ -102,6 +102,12 @@ public class GraniteSpringsBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.PLACE_WATER.configure(FeatureConfigHolder.GRANITE_WATER_PATCH)
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
+                        .applyChance(2));
+
+        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                EcotonesFeatures.PLACE_WATER.configure(FeatureConfigHolder.GRANITE_WATER_POOL_PATCH)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
                         .repeat(1));
 
         this.addFeature(GenerationStep.Feature.LAKES,

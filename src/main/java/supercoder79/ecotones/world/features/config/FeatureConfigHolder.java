@@ -225,10 +225,13 @@ public final class FeatureConfigHolder {
                     .tries(32).cannotProject().build();
 
     public static final WaterFeatureConfig GRASS_WATER_PATCH =
-            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState()), Optional.empty());
+            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState()), Optional.empty(), 6);
+
+    public static final WaterFeatureConfig GRANITE_WATER_POOL_PATCH =
+            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.GRANITE.getDefaultState()), Optional.of(new SimpleBlockStateProvider(Blocks.GRANITE.getDefaultState())), 3);
 
     public static final WaterFeatureConfig GRANITE_WATER_PATCH =
-            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.GRANITE.getDefaultState()), Optional.of(new SimpleBlockStateProvider(Blocks.GRANITE.getDefaultState())));
+            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.GRANITE.getDefaultState()), Optional.empty(), 12);
 
     public static final RockSpireFeatureConfig STONE_SPIRE =
             new RockSpireFeatureConfig(new SimpleBlockStateProvider(Blocks.STONE.getDefaultState()));

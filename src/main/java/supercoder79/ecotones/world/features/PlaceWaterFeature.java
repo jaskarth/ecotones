@@ -34,7 +34,7 @@ public class PlaceWaterFeature extends Feature<WaterFeatureConfig> {
 
         for (int i = 0; i < random.nextInt(4) + 16; i++) {
             //pick random position
-            mutable.set(pos, random.nextInt(6) - random.nextInt(6), 0, random.nextInt(6) - random.nextInt(6));
+            mutable.set(pos, random.nextInt(config.spread) - random.nextInt(config.spread), 0, random.nextInt(config.spread) - random.nextInt(config.spread));
             int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, mutable.getX(), mutable.getZ()) - 1;
             mutable.setY(y);
 
