@@ -33,7 +33,7 @@ public class EcotonesBiomeLayers {
 
         //Add ocean temperatures and deep oceans
         LayerFactory<T> layerFactory2 = OceanTemperatureLayer.INSTANCE.create(contextProvider.apply(2L));
-        layerFactory2 = stack(2301L, ScaleLayer.NORMAL, layerFactory2, 6, contextProvider);
+        layerFactory2 = stack(2301L, ScaleLayer.NORMAL, layerFactory2, 1, contextProvider);
         layerFactory = ApplyOceanTemperatureLayer.INSTANCE.create(contextProvider.apply(100L), layerFactory, layerFactory2);
         layerFactory = DeepOceanLayer.INSTANCE.create(contextProvider.apply(102L), layerFactory);
 
