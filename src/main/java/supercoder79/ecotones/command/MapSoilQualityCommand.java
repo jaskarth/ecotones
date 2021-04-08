@@ -48,11 +48,13 @@ public class MapSoilQualityCommand {
         Path p = Paths.get("ecotones_soil_quality.png");
         try {
             ImageIO.write(img, "png", p.toAbsolutePath().toFile());
+            source.sendFeedback(new LiteralText("Mapped soil quality!"), false);
         } catch (IOException e) {
+            source.sendFeedback(new LiteralText("Something went wrong, check the log!"), true);
             e.printStackTrace();
         }
 
-        source.sendFeedback(new LiteralText("Mapped soil quality!"), false);
+
 
         return 0;
     }

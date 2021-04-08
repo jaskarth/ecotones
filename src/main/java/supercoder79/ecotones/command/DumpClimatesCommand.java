@@ -31,7 +31,7 @@ public class DumpClimatesCommand {
 
     private static int execute(ServerCommandSource source) {
         Path path = Paths.get("climates.txt");
-        source.sendFeedback(new LiteralText("Dumping climates to " + path.toAbsolutePath()), true);
+        source.sendFeedback(new LiteralText("Dumping climates to " + path.toAbsolutePath()), false);
 
         try {
             File file = new File(path.toString());
@@ -39,7 +39,6 @@ public class DumpClimatesCommand {
 
             for (Climate climate : EnumSet.allOf(Climate.class)) {
                 writer.write("Biomes for climate " + climate + "\n");
-                System.out.println();
                 double totalWeight = climate.getTotalWeight();
 
                 for (Climate.Entry entry : climate.getBiomeEntries()) {
@@ -49,7 +48,9 @@ public class DumpClimatesCommand {
             }
 
             writer.close();
+            source.sendFeedback(new LiteralText("Done."), false);
         } catch (IOException e) {
+            source.sendFeedback(new LiteralText("Something went wrong, check the log!"), true);
             e.printStackTrace();
         }
 
