@@ -27,6 +27,7 @@ public final class EcotonesSurfaces {
     public static final SurfaceBuilder<TernarySurfaceConfig> ABOVE_Y = new StoneAboveYSurfaceBuilder(TernarySurfaceConfig.CODEC);
     public static final SurfaceBuilder<TernarySurfaceConfig> GRAVEL_BANDS = new GravelBandsSurfaceBuilder(TernarySurfaceConfig.CODEC);
     public static final SurfaceBuilder<TernarySurfaceConfig> GRANITE_SPRINGS = new GraniteSpringsSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> STONE_SPLOTCHES = new StoneSplotchesSurfaceBuilder(TernarySurfaceConfig.CODEC);
 
     public static void init() {
         register("desert_scrub", DESERT_SCRUB_BUILDER);
@@ -48,6 +49,7 @@ public final class EcotonesSurfaces {
         register("above_y", ABOVE_Y);
         register("gravel_bands", GRAVEL_BANDS);
         register("granite_springs", GRANITE_SPRINGS);
+        register("stone_splotches", STONE_SPLOTCHES);
     }
 
     private static void register(String name, SurfaceBuilder<?> builder) {

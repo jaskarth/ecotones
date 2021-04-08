@@ -14,6 +14,7 @@ import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
+import supercoder79.ecotones.util.RegistryReport;
 import supercoder79.ecotones.world.gen.BiomeGenData;
 
 import java.util.HashMap;
@@ -123,6 +124,7 @@ public class EcotonesBiomeBuilder {
 
     protected void addFeature(GenerationStep.Feature step, ConfiguredFeature<?, ?> feature) {
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier("ecotones", "ecotones_auto_registered_" + feature.hashCode()), feature);
+        RegistryReport.increment("Configured Feature");
         this.generationSettings.feature(step, feature);
     }
 
@@ -130,6 +132,7 @@ public class EcotonesBiomeBuilder {
         if (BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE.getRawId(structureFeature) == -1) {
             String path = "ecotones_auto_registed_structure_" + HashCommon.mix(structureFeature.hashCode());
             Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new Identifier("ecotones", path), structureFeature);
+            RegistryReport.increment("Configured Structure Feature");
         }
 
         this.generationSettings.structureFeature(structureFeature);

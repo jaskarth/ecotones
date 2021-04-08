@@ -39,6 +39,7 @@ public final class EcotonesItems {
     public static final Item SPRUCE_LEAF_PILE = new BlockItem(EcotonesBlocks.SPRUCE_LEAF_PILE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item MARIGOLD = new BlockItem(EcotonesBlocks.MARIGOLD, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item MAPLE_SAPLING = new BlockItem(EcotonesBlocks.MAPLE_SAPLING, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item LARCH_LEAVES = new BlockItem(EcotonesBlocks.LARCH_LEAVES, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
     // Regular Items
     public static final Item COCONUT = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).build()));
@@ -83,6 +84,7 @@ public final class EcotonesItems {
         register("spruce_leaf_pile", SPRUCE_LEAF_PILE);
         register("marigold", MARIGOLD);
         register("maple_sapling", MAPLE_SAPLING);
+        register("larch_leaves", LARCH_LEAVES);
 
         register("coconut", COCONUT);
         register("hazelnut", HAZELNUT);

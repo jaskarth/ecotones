@@ -55,6 +55,13 @@ public final class EcotonesClient implements ClientModInitializer {
                 (state, view, pos, tintIndex) -> Colors.maple(pos),
                 EcotonesBlocks.MAPLE_LEAVES);
 
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> Colors.larch(),
+                EcotonesItems.LARCH_LEAVES);
+
+        ColorProviderRegistry.BLOCK.register(
+                (state, view, pos, tintIndex) -> Colors.larch(pos),
+                EcotonesBlocks.LARCH_LEAVES);
+
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
                 EcotonesBlocks.SHORT_GRASS,
                 EcotonesBlocks.WILDFLOWERS,
@@ -79,7 +86,8 @@ public final class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.LAVENDER,
                 EcotonesBlocks.SPRUCE_LEAF_PILE,
                 EcotonesBlocks.MARIGOLD,
-                EcotonesBlocks.MAPLE_SAPLING);
+                EcotonesBlocks.MAPLE_SAPLING,
+                EcotonesBlocks.LARCH_LEAVES);
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
                 EcotonesBlocks.BLUEBERRY_JAM_JAR,

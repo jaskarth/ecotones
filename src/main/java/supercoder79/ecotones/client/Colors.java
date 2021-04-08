@@ -14,7 +14,21 @@ public final class Colors {
         double noise = (Biome.FOLIAGE_NOISE.sample(pos.getX() / 80.0, pos.getZ() / 80.0, false) + 1) / 2.0;
         // bottom: 194, 51, 47
         // top: 217, 105, 26
+
         return combine((int) MathHelper.lerp(noise, 194, 217), (int) MathHelper.lerp(noise, 64, 105), (int) MathHelper.lerp(noise, 38, 26));
+    }
+
+    public static int larch() {
+        // top
+        return 0xf2e130;
+    }
+
+    public static int larch(BlockPos pos) {
+        double noise = (Biome.FOLIAGE_NOISE.sample(pos.getX() / 30.0, pos.getZ() / 30.0, false) + 1) / 2.0;
+        // bottom: 242, 190, 48
+        // top: 242, 225, 48
+
+        return combine((int) MathHelper.lerp(noise, 242, 242), (int) MathHelper.lerp(noise, 190, 225), (int) MathHelper.lerp(noise, 48, 48));
     }
 
     private static int combine(int red, int green, int blue) {
@@ -22,6 +36,6 @@ public final class Colors {
         green = (green << 8) & 0x0000FF00; // Shift green 8-bits and mask out other stuff
         blue = blue & 0x000000FF; // Mask out anything not blue.
 
-        return red | green | blue; //Bitwise OR everything together.
+        return red | green | blue; // Bitwise OR everything together.
     }
 }

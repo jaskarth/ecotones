@@ -56,6 +56,9 @@ public final class EcotonesFeatures {
     public static final Feature<DefaultFeatureConfig> GRANITE_SPRING = new GraniteSpringFeature(DefaultFeatureConfig.CODEC);
     public static final Feature<DefaultFeatureConfig> WIDE_GRANITE_SPRING = new WideGraniteSpringFeature(DefaultFeatureConfig.CODEC);
     public static final Feature<DefaultFeatureConfig> GRANITE_LAVA_SPRING = new GraniteLavaSpringFeature(DefaultFeatureConfig.CODEC);
+    public static final Feature<SimpleTreeFeatureConfig> LARCH_TREE = new LarchTreeFeature(SimpleTreeFeatureConfig.CODEC);
+    public static final Feature<DefaultFeatureConfig> PEBBLES = new PebblesFeature(DefaultFeatureConfig.CODEC);
+    public static final Feature<RockFeatureConfig> ROCK_IN_WATER = new RockInWaterFeature(RockFeatureConfig.CODEC);
 
     public static void init() {
         register("desertify", DESERTIFY_SOIL);
@@ -98,6 +101,9 @@ public final class EcotonesFeatures {
         register("granite_spring", GRANITE_SPRING);
         register("wide_granite_spring", WIDE_GRANITE_SPRING);
         register("granite_lava_spring", GRANITE_LAVA_SPRING);
+        register("larch_tree", LARCH_TREE);
+        register("pebbles", PEBBLES);
+        register("rock_in_water", ROCK_IN_WATER);
     }
 
     private static void register(String name, Feature<?> feature) {

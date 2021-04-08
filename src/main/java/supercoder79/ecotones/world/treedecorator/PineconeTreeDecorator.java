@@ -25,7 +25,10 @@ public class PineconeTreeDecorator extends TreeDecorator {
         for (BlockPos pos : leavesPositions) {
             if (world.getBlockState(pos.down()).isAir()) {
                 if (random.nextInt(rarity) == 0) {
-                    world.setBlockState(pos.down(), EcotonesBlocks.PINECONE.getDefaultState(), 3);
+                    BlockPos downPos = pos.down();
+                    if (world.getBlockState(downPos).isAir()) {
+                        world.setBlockState(downPos, EcotonesBlocks.PINECONE.getDefaultState(), 3);
+                    }
                 }
             }
         }

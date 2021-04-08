@@ -188,9 +188,15 @@
   "biome.ecotones.rocky_foothills_plateau": "Rocky Foothills Plateau",
   "biome.ecotones.rocky_foothills_thicket": "Rocky Foothills Thicket",
   "biome.ecotones.rocky_foothills_lake": "Rocky Foothills Lake",
-  "biome.ecotones.lush_shrubland": "Clay Basin",
-  "biome.ecotones.lush_shrubland_hilly": "Hilly Clay Basin",
-  "biome.ecotones.lush_shrubland_mountainous": "Mountainous Clay Basin",
+  "biome.ecotones.lush_shrubland": "Lush Shrubland",
+  "biome.ecotones.lush_shrubland_hilly": "Hilly Lush Shrubland",
+  "biome.ecotones.lush_shrubland_mountainous": "Mountainous Lush Shrubland",
+  "biome.ecotones.granite_springs": "Granite Springs",
+  "biome.ecotones.granite_springs_hilly": "Hilly Granite Springs",
+  "biome.ecotones.granite_springs_mountainous": "Mountainous Granite Springs",
+  "biome.ecotones.larch_forest": "Larch Forest",
+  "biome.ecotones.larch_forest_hilly": "Hilly Larch Forest",
+  "biome.ecotones.larch_forest_mountainous": "Mountainous Larch Forest",
 
 
   "block.ecotones.peat": "Peat Block",
@@ -222,6 +228,7 @@
   "block.ecotones.lavender": "Lavender",
   "block.ecotones.marigold": "Marigold",
   "block.ecotones.maple_sapling": "Maple Sapling",
+  "block.ecotones.larch_leaves": "Larch Leaves",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -254,6 +261,7 @@
   "item.ecotones.maple_sap": "Maple Sap",
   "item.ecotones.maple_sap_jar": "Maple Sap Jar",
   "item.ecotones.maple_syrup": "Maple Syrup",
+  "item.ecotones.larch_leaves": "Larch Leaves",
 
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",

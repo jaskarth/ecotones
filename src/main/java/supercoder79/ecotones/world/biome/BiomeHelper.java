@@ -2,11 +2,13 @@ package supercoder79.ecotones.world.biome;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 
@@ -55,5 +57,13 @@ public final class BiomeHelper {
 
     public static boolean isShallowOcean(int id) {
         return id == WARM_OCEAN_ID || id == LUKEWARM_OCEAN_ID || id == OCEAN_ID || id == COLD_OCEAN_ID || id == FROZEN_OCEAN_ID;
+    }
+
+    // Dev and testing stuff
+
+    public static void fillClimates(Biome biome) {
+        for (Climate climate : Climate.values()) {
+            climate.add(biome, 999);
+        }
     }
 }
