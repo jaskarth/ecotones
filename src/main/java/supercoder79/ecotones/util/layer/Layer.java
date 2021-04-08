@@ -5,13 +5,13 @@ import supercoder79.ecotones.util.ImprovedChunkRandom;
 import java.util.Random;
 
 public abstract class Layer {
-    private final long seed;
+    protected final long seed;
 
     public Layer(long seed) {
         this.seed = seed;
     }
 
-    protected abstract void operate(int[][] data, Random random, int x, int z, int width, int height);
+    protected abstract int[][] operate(int[][] data, Random random, int x, int z, int width, int height);
 
     public int[][] operate(int x, int z, int width, int height) {
         int[][] data = new int[width][height];
@@ -19,9 +19,7 @@ public abstract class Layer {
         ImprovedChunkRandom random = new ImprovedChunkRandom();
         random.setPopulationSeed(this.seed, x, z);
 
-        operate(data, random, x, z, width, height);
-
-        return data;
+        return operate(data, random, x, z, width, height);
     }
 
     protected int[][] emptyCopy(int[][] data) {
@@ -37,6 +35,12 @@ public abstract class Layer {
         }
 
         return copy;
+    }
+
+    protected void checkSize(int[][] data, int width, int height) {
+        if (data.length != width || data[0].length != height) {
+            throw new RuntimeException(this.getClass().getSimpleName() + " requires a dataset size of [" + width + "][" + height + "]");
+        }
     }
 
     protected void ensureArray(int[][] data) {

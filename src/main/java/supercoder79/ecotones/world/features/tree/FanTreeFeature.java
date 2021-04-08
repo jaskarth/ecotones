@@ -7,8 +7,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.util.layer.Layer;
 import supercoder79.ecotones.world.features.FeatureHelper;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.tree.root.RootLayers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,18 +32,19 @@ public class FanTreeFeature extends Feature<SimpleTreeFeatureConfig> {
             return false;
         }
 
+        int[][] roots = RootLayers.create(world.getSeed()).operate(pos.getX(), pos.getZ(), 3, 3);
+
         // Generate height
         // TODO: scale
         int height = 7 + random.nextInt(4);
         List<BlockPos> leafNodes = new ArrayList<>();
 
-        // Generate roots with chance
-        for (Direction direction : FeatureHelper.HORIZONTAL) {
-            if (random.nextInt(6) > 0) {
-                world.setBlockState(pos.offset(direction), config.woodState, 3);
-
-                if (random.nextInt(2) == 0) {
-                    world.setBlockState(pos.offset(direction).up(), config.woodState, 3);
+        // Generate roots
+        for (int x1 = 0; x1 < roots.length; x1++) {
+            for (int z1 = 0; z1 < roots[x1].length; z1++) {
+                for (int y = 0; y < roots[x1][z1]; y++) {
+                    // TODO: mutable
+                    world.setBlockState(pos.add(x1 - 1, y, z1 - 1), config.woodState, 3);
                 }
             }
         }
