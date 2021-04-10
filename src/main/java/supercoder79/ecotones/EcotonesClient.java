@@ -14,12 +14,14 @@ import supercoder79.ecotones.api.client.ModelDataRegistry;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.client.ClientPacketHandler;
 import supercoder79.ecotones.client.Colors;
+import supercoder79.ecotones.client.gui.EcotonesScreens;
 import supercoder79.ecotones.client.model.DuckEntityModel;
 import supercoder79.ecotones.client.model.EcotonesModelLayers;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.particle.MapleLeafParticle;
 import supercoder79.ecotones.client.particle.SandParticle;
-import supercoder79.ecotones.client.render.DuckEntityRenderer;
+import supercoder79.ecotones.client.render.block.EcotonesBlockEntityRenderers;
+import supercoder79.ecotones.client.render.entity.DuckEntityRenderer;
 import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.items.EcotonesItems;
 
@@ -97,6 +99,8 @@ public final class EcotonesClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.MAPLE_LEAF, MapleLeafParticle.Factory::new);
 
         EcotonesModelLayers.init();
+        EcotonesScreens.init();
+        EcotonesBlockEntityRenderers.init();
 
         ModelDataRegistry.register(EcotonesModelLayers.DUCK, DuckEntityModel.getTexturedModelData());
         EntityRendererRegistry.INSTANCE.register(EcotonesEntities.DUCK, DuckEntityRenderer::new);

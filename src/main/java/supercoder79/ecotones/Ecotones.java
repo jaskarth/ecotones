@@ -17,9 +17,11 @@ import org.apache.logging.log4j.Logger;
 import supercoder79.ecotones.advancement.EcotonesCriteria;
 import supercoder79.ecotones.api.ModCompat;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.blocks.entity.EcotonesBlockEntities;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.sound.EcotonesSounds;
 import supercoder79.ecotones.command.*;
+import supercoder79.ecotones.screen.EcotonesScreenHandlers;
 import supercoder79.ecotones.util.*;
 import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.items.EcotonesItemGroups;
@@ -67,8 +69,10 @@ public final class Ecotones implements ModInitializer {
 		EcotonesTreeTraits.init();
 
 		EcotonesItemGroups.init();
+		EcotonesScreenHandlers.init();
 
         EcotonesBlocks.init();
+		EcotonesBlockEntities.init();
 		EcotonesItems.init();
 		EcotonesDecorators.init();
 		EcotonesFeatures.init();

@@ -1,4 +1,4 @@
-package supercoder79.ecotones.client.render;
+package supercoder79.ecotones.client.render.entity;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
