@@ -56,6 +56,7 @@ public final class EcotonesItems {
     public static final Item MAPLE_SAP = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item MAPLE_SAP_JAR = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item MAPLE_SYRUP = new JamItem(EcotonesBlocks.MAPLE_SYRUP_JAR, new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(8).saturationModifier(1.2F).build()));
+    public static final Item PANCAKES = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(10).saturationModifier(1.2F).build()));
 
     public static final Item CYAN_ROSE = new BlockItem(EcotonesBlocks.CYAN_ROSE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
@@ -101,6 +102,7 @@ public final class EcotonesItems {
         register("maple_sap", MAPLE_SAP);
         register("maple_sap_jar", MAPLE_SAP_JAR);
         register("maple_syrup", MAPLE_SYRUP);
+        register("pancakes", PANCAKES);
 
         register("cyan_rose", CYAN_ROSE);
 

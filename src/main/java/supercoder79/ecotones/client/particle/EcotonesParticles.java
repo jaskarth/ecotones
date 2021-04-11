@@ -10,10 +10,12 @@ import supercoder79.ecotones.util.RegistryReport;
 public final class EcotonesParticles {
     public static final DefaultParticleType SAND = FabricParticleTypes.simple(false);
     public static final DefaultParticleType MAPLE_LEAF = FabricParticleTypes.simple(false);
+    public static final DefaultParticleType SYRUP_POP = FabricParticleTypes.simple(false);
 
     public static void init() {
         register("sand", SAND);
         register("maple_leaf", MAPLE_LEAF);
+        register("syrup_pop", SYRUP_POP);
     }
 
     private static void register(String string, ParticleType<?> type) {

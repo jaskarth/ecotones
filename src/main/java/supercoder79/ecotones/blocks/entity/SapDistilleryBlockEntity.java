@@ -3,21 +3,28 @@ package supercoder79.ecotones.blocks.entity;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.screen.SapDistilleryScreenHandler;
+
+import java.util.Random;
 
 public class SapDistilleryBlockEntity extends LockableContainerBlockEntity implements BlockEntityClientSerializable {
     private DefaultedList<ItemStack> inventory;
@@ -111,6 +118,43 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
         }
 
         blockEntity.markDirty();
+    }
+
+    public void onCollision(World world, ItemEntity entity) {
+        // TODO: I implemented this mostly for laughs, but maybe it has some merit? it'd need some sort of recipe system as well
+        if (entity.getStack().isOf(Items.BREAD) && this.syrupAmount >= 500) {
+            world.spawnEntity(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(EcotonesItems.PANCAKES)));
+
+            entity.remove(Entity.RemovalReason.KILLED);
+
+            Random random = world.getRandom();
+            for (int i = 0; i < 50; i++) {
+                double d = (double) pos.getX() + random.nextDouble();
+                double e = (double) pos.getY() + 0.8D;
+                double f = (double) pos.getZ() + random.nextDouble();
+                ((ServerWorld)world).spawnParticles(EcotonesParticles.SYRUP_POP, d, e, f, 1, 0.0D, 0.0D, 0.0D, 1);
+            }
+
+            this.syrupAmount -= 500;
+            sync();
+        }
+
+        if (entity.getStack().isOf(Items.GLASS_BOTTLE) && this.syrupAmount >= 1000) {
+            world.spawnEntity(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(EcotonesItems.MAPLE_SYRUP)));
+
+            entity.remove(Entity.RemovalReason.KILLED);
+
+            Random random = world.getRandom();
+            for (int i = 0; i < 75; i++) {
+                double d = (double) pos.getX() + random.nextDouble();
+                double e = (double) pos.getY() + 0.8D;
+                double f = (double) pos.getZ() + random.nextDouble();
+                ((ServerWorld)world).spawnParticles(EcotonesParticles.SYRUP_POP, d, e, f, 1, 0.0D, 0.0D, 0.0D, 1);
+            }
+
+            this.syrupAmount -= 1000;
+            sync();
+        }
     }
 
     public boolean canFillBottle() {

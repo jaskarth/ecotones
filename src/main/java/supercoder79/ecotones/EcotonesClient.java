@@ -20,6 +20,7 @@ import supercoder79.ecotones.client.model.EcotonesModelLayers;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.particle.MapleLeafParticle;
 import supercoder79.ecotones.client.particle.SandParticle;
+import supercoder79.ecotones.client.particle.SyrupPopParticle;
 import supercoder79.ecotones.client.render.block.EcotonesBlockEntityRenderers;
 import supercoder79.ecotones.client.render.entity.DuckEntityRenderer;
 import supercoder79.ecotones.entity.EcotonesEntities;
@@ -97,6 +98,7 @@ public final class EcotonesClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAND, SandParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.MAPLE_LEAF, MapleLeafParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SYRUP_POP, SyrupPopParticle.Factory::new);
 
         EcotonesModelLayers.init();
         EcotonesScreens.init();
