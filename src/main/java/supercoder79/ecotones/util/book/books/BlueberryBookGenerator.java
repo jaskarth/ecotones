@@ -1,6 +1,7 @@
-package supercoder79.ecotones.util.book;
+package supercoder79.ecotones.util.book.books;
 
 import com.google.common.collect.ImmutableList;
+import supercoder79.ecotones.util.book.BookGenerator;
 
 import java.util.List;
 import java.util.Random;
