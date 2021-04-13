@@ -14,7 +14,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.util.state.DeferredBlockStateProvider;
-import supercoder79.ecotones.util.FloralisiaCompat;
+import supercoder79.ecotones.util.compat.FloralisiaCompat;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -110,7 +110,7 @@ public class LushShrublandBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .applyChance(8));
 
-        if (FloralisiaCompat.isFloralisiaEnabled()) {
+        if (FloralisiaCompat.isEnabled()) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new DeferredBlockStateProvider(FloralisiaCompat.gladiolus()),
                             SimpleBlockPlacer.INSTANCE).tries(12).build())

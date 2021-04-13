@@ -1,4 +1,4 @@
-package supercoder79.ecotones.util;
+package supercoder79.ecotones.util.compat;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Identifier;
@@ -17,7 +17,7 @@ public final class FloralisiaCompat {
         return new Identifier("floralisia", name);
     }
 
-    public static boolean isFloralisiaEnabled() {
+    public static boolean isEnabled() {
         return floralisiaEnabled;
     }
 

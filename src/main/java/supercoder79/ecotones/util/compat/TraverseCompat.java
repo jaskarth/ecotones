@@ -1,4 +1,4 @@
-package supercoder79.ecotones.util;
+package supercoder79.ecotones.util.compat;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;

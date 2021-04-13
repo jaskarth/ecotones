@@ -26,6 +26,10 @@ import supercoder79.ecotones.util.*;
 import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.items.EcotonesItemGroups;
 import supercoder79.ecotones.items.EcotonesItems;
+import supercoder79.ecotones.util.compat.FloralisiaCompat;
+import supercoder79.ecotones.util.compat.LambdaFoxesCompat;
+import supercoder79.ecotones.util.compat.TerrestriaCompat;
+import supercoder79.ecotones.util.compat.TraverseCompat;
 import supercoder79.ecotones.util.deco.BlockDecorations;
 import supercoder79.ecotones.util.state.EcotonesBlockStateProviders;
 import supercoder79.ecotones.world.EcotonesWorldType;
@@ -113,6 +117,11 @@ public final class Ecotones implements ModInitializer {
 		if (isModLoaded("aurorasdeco")) {
 			ModCompat.register(CampfireLogHelper::initAurorasDeco);
 			log("Registered Aurora's Decorations compat!");
+		}
+
+		if (isModLoaded("lambdafoxes")) {
+			LambdaFoxesCompat.init();
+			log("Registered LambdaFoxes compat!");
 		}
 
 		AiLog.init();

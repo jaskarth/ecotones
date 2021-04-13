@@ -9,6 +9,7 @@
     "FoliagePlacerTypeAccessor",
     "MixinGeneratorOptions",
     "MixinPlayerManager",
+    "SpawnSettingsAccessor",
     "StructureFeatureAccessor",
     "TreeDecoratorTypeAccessor"
   ],

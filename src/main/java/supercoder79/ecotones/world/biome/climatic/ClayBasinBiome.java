@@ -21,7 +21,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.util.state.DeferredBlockStateProvider;
-import supercoder79.ecotones.util.FloralisiaCompat;
+import supercoder79.ecotones.util.compat.FloralisiaCompat;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
@@ -132,7 +132,7 @@ public class ClayBasinBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(waterCount));
 
-        if (FloralisiaCompat.isFloralisiaEnabled()) {
+        if (FloralisiaCompat.isEnabled()) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new DeferredBlockStateProvider(FloralisiaCompat.anastasia()),
                             SimpleBlockPlacer.INSTANCE).tries(12).build())

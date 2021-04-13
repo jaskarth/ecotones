@@ -43,6 +43,7 @@
 * Blueberry jam recipe
 * Mason jar item
 * Add fruit tags
+* Add Avocado, name advancement "6.02e23"
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas
