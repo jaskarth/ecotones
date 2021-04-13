@@ -82,6 +82,12 @@ public class LushDesertBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 9, 12))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_CACTUS)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(2));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
                         .decorate(EcotonesDecorators.REVERSE_QUALITY_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.25))));
 

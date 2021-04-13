@@ -108,6 +108,12 @@ public class ScrublandBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.ROCKINESS.configure(DecoratorConfig.DEFAULT)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_CACTUS)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(3));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.ONLY_TALL_GRASS_CONFIG)
                         .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))

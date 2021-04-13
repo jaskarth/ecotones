@@ -20,7 +20,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.util.DeferredBlockStateProvider;
+import supercoder79.ecotones.util.state.DeferredBlockStateProvider;
 import supercoder79.ecotones.util.FloralisiaCompat;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;

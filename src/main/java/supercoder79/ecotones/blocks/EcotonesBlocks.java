@@ -44,6 +44,7 @@ public final class EcotonesBlocks {
     public static Block MAPLE_SYRUP_JAR = new JarBlock(FabricBlockSettings.of(Material.DECORATION).nonOpaque().breakInstantly().sounds(BlockSoundGroup.STONE).build());
     public static Block LARCH_LEAVES = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().build());
     public static Block SAP_DISTILLERY = new SapDistilleryBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(3.5F, 1.0F).sounds(BlockSoundGroup.STONE).build());
+    public static Block SMALL_CACTUS = new SmallCactusBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
 
 
@@ -80,6 +81,7 @@ public final class EcotonesBlocks {
         register("maple_syrup_jar", MAPLE_SYRUP_JAR);
         register("larch_leaves", LARCH_LEAVES);
         register("sap_distillery", SAP_DISTILLERY);
+        register("small_cactus", SMALL_CACTUS);
         register("cyan_rose", CYAN_ROSE);
     }
 

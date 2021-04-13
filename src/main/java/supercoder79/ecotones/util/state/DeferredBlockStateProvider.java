@@ -1,4 +1,4 @@
-package supercoder79.ecotones.util;
+package supercoder79.ecotones.util.state;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

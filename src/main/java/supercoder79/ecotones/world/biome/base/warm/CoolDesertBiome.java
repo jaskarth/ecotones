@@ -88,6 +88,12 @@ public class CoolDesertBiome extends EcotonesBiomeBuilder {
                         .repeat(30));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_CACTUS)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(3));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
                         .decorate(EcotonesDecorators.ROCKINESS.configure(DecoratorConfig.DEFAULT)));
 

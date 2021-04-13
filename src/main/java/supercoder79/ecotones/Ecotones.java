@@ -27,6 +27,7 @@ import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.items.EcotonesItemGroups;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.util.deco.BlockDecorations;
+import supercoder79.ecotones.util.state.EcotonesBlockStateProviders;
 import supercoder79.ecotones.world.EcotonesWorldType;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.biome.EcotonesBiomes;

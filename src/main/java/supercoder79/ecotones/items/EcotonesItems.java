@@ -59,6 +59,7 @@ public final class EcotonesItems {
     public static final Item PANCAKES = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(10).saturationModifier(1.2F).build()));
     public static final Item GRASS_STRAND = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item GRASS_CORD = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item CACTUS_FRUIT = new AliasedBlockItem(EcotonesBlocks.SMALL_CACTUS, new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).snack().build()));
 
     public static final Item CYAN_ROSE = new BlockItem(EcotonesBlocks.CYAN_ROSE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
@@ -107,6 +108,7 @@ public final class EcotonesItems {
         register("pancakes", PANCAKES);
         register("grass_strand", GRASS_STRAND);
         register("grass_cord", GRASS_CORD);
+        register("cactus_fruit", CACTUS_FRUIT);
 
         register("cyan_rose", CYAN_ROSE);
 

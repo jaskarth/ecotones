@@ -23,6 +23,7 @@ import net.minecraft.world.gen.trunk.MegaJungleTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.util.DoubleOrNormalPlacer;
+import supercoder79.ecotones.util.state.SmallCactusBlockStateProvider;
 import supercoder79.ecotones.world.features.foliage.PlusLeavesFoliagePlacer;
 import supercoder79.ecotones.world.features.foliage.SmallPineFoliagePlacer;
 import supercoder79.ecotones.world.treedecorator.LeafPileTreeDecorator;
@@ -131,6 +132,12 @@ public final class FeatureConfigHolder {
                     .spreadX(15)
                     .spreadZ(15)
                     .tries(24).build();
+
+    public static final RandomPatchFeatureConfig SMALL_CACTUS =
+            new RandomPatchFeatureConfig.Builder(SmallCactusBlockStateProvider.INSTANCE, new SimpleBlockPlacer())
+                    .spreadX(15)
+                    .spreadZ(15)
+                    .tries(12).build();
 
     // flowers
     public static final RandomPatchFeatureConfig TAIGA_FLOWERS =
