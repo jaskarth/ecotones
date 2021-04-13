@@ -4,7 +4,6 @@
 * Everglades
 * Steppe -> something unique
 * Forest with balloon-y trees (see misc entry)
-* Lowlands with jungle bush-like shrubs
 * Kauri forest
 * Mixed forest
 * Lake biomes
@@ -12,7 +11,6 @@
 * Inland oceans
 * Coastal biome variants
 * Sequoia forest
-* Larch forest
 * Rice Field
 * Gravelly desert
 * Rocky desert
@@ -40,11 +38,8 @@
 * Fallen logs for every biome
 * Add edge biomes to everything
 * Burned village for dead spruce forests
-* Fix: Water patches in flooded savannas spawn with air on sides
 * Improve the look of a few biomes (remove shrubs, more unique features, etc.)
-* Better mod compat, deferred register system
 * Geodes for all biomes
-* Maple sapling
 * Blueberry jam recipe
 * Mason jar item
 * Add fruit tags

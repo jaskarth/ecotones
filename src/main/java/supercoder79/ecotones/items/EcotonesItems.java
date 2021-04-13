@@ -3,10 +3,7 @@ package supercoder79.ecotones.items;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.AliasedBlockItem;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.FoodComponent;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
@@ -41,6 +38,7 @@ public final class EcotonesItems {
     public static final Item MAPLE_SAPLING = new BlockItem(EcotonesBlocks.MAPLE_SAPLING, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item LARCH_LEAVES = new BlockItem(EcotonesBlocks.LARCH_LEAVES, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item SAP_DISTILLERY = new BlockItem(EcotonesBlocks.SAP_DISTILLERY, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item LARCH_SAPLING = new BlockItem(EcotonesBlocks.LARCH_SAPLING, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
     // Regular Items
     public static final Item COCONUT = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).build()));
@@ -55,7 +53,7 @@ public final class EcotonesItems {
     public static final Item ECOTONES_BOOK = new EcotonesBookItem(new Item.Settings().maxCount(1));
     public static final Item MAPLE_SAP = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item MAPLE_SAP_JAR = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
-    public static final Item MAPLE_SYRUP = new JamItem(EcotonesBlocks.MAPLE_SYRUP_JAR, new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(8).saturationModifier(1.2F).build()));
+    public static final Item MAPLE_SYRUP = new JamItem(EcotonesBlocks.MAPLE_SYRUP_JAR, new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(8).saturationModifier(1.2F).build()).recipeRemainder(Items.GLASS_BOTTLE));
     public static final Item PANCAKES = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(10).saturationModifier(1.2F).build()));
     public static final Item GRASS_STRAND = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item GRASS_CORD = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
@@ -91,6 +89,7 @@ public final class EcotonesItems {
         register("maple_sapling", MAPLE_SAPLING);
         register("larch_leaves", LARCH_LEAVES);
         register("sap_distillery", SAP_DISTILLERY);
+        register("larch_sapling", LARCH_SAPLING);
 
         register("coconut", COCONUT);
         register("hazelnut", HAZELNUT);

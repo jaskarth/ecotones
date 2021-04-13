@@ -8,6 +8,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.blocks.sapling.HazelSaplingGenerator;
+import supercoder79.ecotones.blocks.sapling.LarchSaplingGenerator;
 import supercoder79.ecotones.blocks.sapling.MapleSaplingGenerator;
 import supercoder79.ecotones.util.RegistryReport;
 
@@ -45,6 +46,7 @@ public final class EcotonesBlocks {
     public static Block LARCH_LEAVES = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().build());
     public static Block SAP_DISTILLERY = new SapDistilleryBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(3.5F, 1.0F).sounds(BlockSoundGroup.STONE).build());
     public static Block SMALL_CACTUS = new SmallCactusBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
+    public static Block LARCH_SAPLING = new TerraformSaplingBlock(new LarchSaplingGenerator());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
 
 
@@ -82,6 +84,7 @@ public final class EcotonesBlocks {
         register("larch_leaves", LARCH_LEAVES);
         register("sap_distillery", SAP_DISTILLERY);
         register("small_cactus", SMALL_CACTUS);
+        register("larch_sapling", LARCH_SAPLING);
         register("cyan_rose", CYAN_ROSE);
     }
 

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BJB"
+  ],
+  "key": {
+    "J": {
+      "item": "ecotones:maple_syrup"
+    },
+    "B": {
+      "item": "minecraft:bread"
+    }
+  },
+  "result": {
+    "item": "ecotones:pancakes",
+    "count": 2
+  }
+}
