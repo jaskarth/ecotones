@@ -246,6 +246,7 @@
   "block.ecotones.sap_distillery": "Sap Distillery",
   "block.ecotones.small_cactus": "Small Cactus",
   "block.ecotones.larch_sapling": "Larch Sapling",
+  "block.ecotones.treetap": "Treetap",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -281,6 +282,7 @@
   "item.ecotones.larch_leaves": "Larch Leaves",
   "item.ecotones.sap_distillery": "Sap Distillery",
   "item.ecotones.larch_sapling": "Larch Sapling",
+  "item.ecotones.treetap": "Treetap",
 
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",

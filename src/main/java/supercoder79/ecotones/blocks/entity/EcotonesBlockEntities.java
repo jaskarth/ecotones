@@ -9,9 +9,11 @@ import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesBlockEntities {
     public static final BlockEntityType<SapDistilleryBlockEntity> SAP_DISTILLERY = FabricBlockEntityTypeBuilder.create(SapDistilleryBlockEntity::new, EcotonesBlocks.SAP_DISTILLERY).build();
+    public static final BlockEntityType<TreetapBlockEntity> TREETAP = FabricBlockEntityTypeBuilder.create(TreetapBlockEntity::new, EcotonesBlocks.TREETAP).build();
 
     public static void init() {
         register("sap_distillery", SAP_DISTILLERY);
+        register("treetap", TREETAP);
     }
 
     private static void register(String path, BlockEntityType<?> be) {

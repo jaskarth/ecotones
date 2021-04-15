@@ -10,9 +10,9 @@ public class SyrupPopParticle extends SpriteBillboardParticle {
         super(world, x, y, z, 0.0D, 0.0D, 0.0D);
         this.gravityStrength = 0.75F;
         this.field_28786 = 0.999F;
-        this.velocityX *= 0.800000011920929D;
-        this.velocityY *= 0.800000011920929D;
-        this.velocityZ *= 0.800000011920929D;
+        this.velocityX *= 0.8;
+        this.velocityY *= 0.8;
+        this.velocityZ *= 0.8;
 
         this.colorRed = 0.9F;
         this.colorGreen = 0.5F;

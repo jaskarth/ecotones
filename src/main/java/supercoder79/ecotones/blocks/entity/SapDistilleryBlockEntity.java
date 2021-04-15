@@ -31,7 +31,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
     protected final PropertyDelegate propertyDelegate;
     // 0 .. 600
     private int burnTime;
-    // 0 .. 3000
+    // 0 .. 3,000
     private int heatAmount;
     // 0 .. 40,000
     private int sapAmount;

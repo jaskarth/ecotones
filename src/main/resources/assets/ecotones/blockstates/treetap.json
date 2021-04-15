@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "ecotones:block/treetap",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "ecotones:block/treetap"
+    },
+    "facing=south": {
+      "model": "ecotones:block/treetap",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ecotones:block/treetap",
+      "y": 270
+    }
+  }
+}
