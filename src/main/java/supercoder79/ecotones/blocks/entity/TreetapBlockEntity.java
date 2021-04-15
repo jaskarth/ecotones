@@ -6,31 +6,120 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.blocks.TreetapBlock;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class TreetapBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
     // 0 .. 8,000
     private int sapAmount = 0;
     private Direction direction;
+    private boolean isValid;
+    private boolean needsValidation = true;
+    private long timeOffset;
 
     public TreetapBlockEntity(BlockPos pos, BlockState state) {
         super(EcotonesBlockEntities.TREETAP, pos, state);
         this.direction = state.get(TreetapBlock.FACING);
+
+        // Time offset to make things more random, as well as spread out validation testing.
+        // Uses Math.random because it doesn't need to be deterministic.
+        this.timeOffset = (long) (Math.random() * 300);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, TreetapBlockEntity blockEntity) {
-        if (world.getBlockState(pos.offset(state.get(TreetapBlock.FACING))).isOf(Blocks.OAK_LOG)) {
+        if (blockEntity.isValid) {
             blockEntity.sapAmount++;
             blockEntity.markDirty();
             blockEntity.sync();
 
             // Spawn drip particles every second
-            if (world.getTime() % 40 == 0 && world.getRandom().nextInt(2) == 0) {
+            if ((world.getTime() + blockEntity.timeOffset) % 40 == 0 && world.getRandom().nextInt(2) == 0) {
                 ((ServerWorld)world).spawnParticles(EcotonesParticles.SAP_DRIP, pos.getX() + tapX(blockEntity.getDirection()), pos.getY() + 0.8, pos.getZ() + tapZ(blockEntity.getDirection()), 1, 0.0D, 0.0D, 0.0D, 1);
+            }
+        }
+
+        if ((world.getTime() + blockEntity.timeOffset) % 300 == 0 || blockEntity.needsValidation) {
+            if (blockEntity.needsValidation) {
+                blockEntity.needsValidation = false;
+            }
+
+            blockEntity.checkEnvironment(world, pos, state);
+        }
+    }
+
+    private void checkEnvironment(World world, BlockPos pos, BlockState state) {
+        BlockPos logPos = pos.offset(state.get(TreetapBlock.FACING));
+
+        if (!world.getBlockState(logPos).isOf(Blocks.OAK_LOG)) {
+            this.isValid = false;
+            return;
+        }
+
+        RecursionResults results = new RecursionResults();
+        recursivelyFind(world, logPos, 0, results);
+
+        // Initial validation check
+        if (results.logs.size() >= 6 && results.leaves.size() >= 15 && results.treetaps.size() == 1) {
+            int highestLogY = Integer.MIN_VALUE;
+
+            for (BlockPos log : results.logs) {
+                if (log.getY() > highestLogY) {
+                    highestLogY = log.getY();
+                }
+            }
+
+            // Needs 3 blocks of logs above this treetap
+            if (highestLogY - pos.getY() >= 3) {
+                this.isValid = true;
+                return;
+            }
+        }
+
+        this.isValid = false;
+
+        // TODO: when treetaps > 1 it should slowly kill tree
+        // TODO: notify other treetaps to stop producing when new treetap is placed
+    }
+
+    private void recursivelyFind(World world, BlockPos pos, int depth, RecursionResults results) {
+        BlockState state = world.getBlockState(pos);
+
+        boolean needsRecurse = false;
+        if (state.isOf(Blocks.OAK_LOG)) {
+            results.logs.add(pos);
+
+            needsRecurse = true;
+        }
+
+        if (state.isOf(EcotonesBlocks.MAPLE_LEAVES) && !state.get(Properties.PERSISTENT)) {
+            results.leaves.add(pos);
+        }
+
+        if (state.isOf(EcotonesBlocks.TREETAP)) {
+            results.treetaps.add(pos);
+        }
+
+        results.visited.add(pos);
+
+        if (needsRecurse && depth < 10) {
+            for(int x = -1; x <= 1; x++) {
+                for(int z = -1; z <= 1; z++) {
+                    for(int y = -1; y <= 1; y++) {
+                        BlockPos local = pos.add(x, y, z);
+
+                        if (!results.visited.contains(local)) {
+                            recursivelyFind(world, local, depth + 1, results);
+                        }
+                    }
+                }
             }
         }
     }
@@ -73,12 +162,18 @@ public class TreetapBlockEntity extends BlockEntity implements BlockEntityClient
     public void fromClientTag(CompoundTag tag) {
         this.sapAmount = tag.getInt("sap_amount");
         this.direction = Direction.fromHorizontal(tag.getInt("direction"));
+        this.isValid = tag.getBoolean("is_valid");
+        this.needsValidation = tag.getBoolean("needs_validation");
+        this.timeOffset = tag.getLong("time_offset");
     }
 
     @Override
     public CompoundTag toClientTag(CompoundTag tag) {
         tag.putInt("sap_amount", this.sapAmount);
         tag.putInt("direction", this.direction.getHorizontal());
+        tag.putBoolean("is_valid", this.isValid);
+        tag.putBoolean("needs_validation", this.needsValidation);
+        tag.putLong("time_offset", this.timeOffset);
         return tag;
     }
 
@@ -111,5 +206,12 @@ public class TreetapBlockEntity extends BlockEntity implements BlockEntityClient
             default:
                 throw new RuntimeException("We've got a sticky situation here!");
         }
+    }
+
+    private final class RecursionResults {
+        private final Set<BlockPos> visited = new HashSet<>();
+        private final Set<BlockPos> logs = new HashSet<>();
+        private final Set<BlockPos> leaves = new HashSet<>();
+        private final Set<BlockPos> treetaps = new HashSet<>();
     }
 }
