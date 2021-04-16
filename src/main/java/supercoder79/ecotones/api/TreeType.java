@@ -52,7 +52,7 @@ public class TreeType {
     public static final TreeGenerationConfig STANDARD_DARK_OAK = new TreeGenerationConfig(3.5, Blocks.DARK_OAK_LOG.getDefaultState(), Blocks.DARK_OAK_LEAVES.getDefaultState(), 3, -1, 8, 8, 0.2, 0.2, false, 79);
 
     // Maple Trees
-    public static final TreeGenerationConfig STANDARD_MAPLE = new TreeGenerationConfig(3.25, Blocks.OAK_LOG.getDefaultState(), EcotonesBlocks.MAPLE_LEAVES.getDefaultState(), 4, 3, 6, 5, 0.15, 0.15, false, 79);
+    public static final TreeGenerationConfig STANDARD_MAPLE = new TreeGenerationConfig(5.5, Blocks.OAK_LOG.getDefaultState(), EcotonesBlocks.MAPLE_LEAVES.getDefaultState(), 4, 3, 6, 5, 0.15, 0.15, false, 79);
     public static final TreeGenerationConfig VERY_RARE_MAPLE = new TreeGenerationConfig(0.01, Blocks.OAK_LOG.getDefaultState(), EcotonesBlocks.MAPLE_LEAVES.getDefaultState(), 4, 3, 7, 6, 0.15, 0.15, false, 79);
 
     // Dead trees

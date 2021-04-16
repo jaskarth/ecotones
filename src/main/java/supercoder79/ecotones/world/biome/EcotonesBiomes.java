@@ -91,6 +91,7 @@ public final class EcotonesBiomes {
         LushShrublandBiome.init();
         GraniteSpringsBiome.init();
         LarchForestBiome.init();
+        BirchLakesBiome.init();
 
         // Rose Field biome
         RoseFieldBiome.init();

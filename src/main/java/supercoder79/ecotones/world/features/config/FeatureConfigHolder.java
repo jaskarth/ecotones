@@ -172,6 +172,14 @@ public final class FeatureConfigHolder {
                     .spreadZ(5)
                     .tries(12).build();
 
+    public static final RandomPatchFeatureConfig WILDFLOWERS =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(12)
+                    .spreadZ(12)
+                    .tries(32).build();
+
     public static final RandomPatchFeatureConfig CYAN_ROSE =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
                     .addState(EcotonesBlocks.CYAN_ROSE.getDefaultState(), 1),
@@ -240,11 +248,20 @@ public final class FeatureConfigHolder {
     public static final WaterFeatureConfig GRANITE_WATER_PATCH =
             new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.GRANITE.getDefaultState()), Optional.empty(), 12);
 
+    public static final WaterFeatureConfig DIORITE_WATER_POOL_PATCH =
+            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.DIORITE.getDefaultState()), Optional.of(new SimpleBlockStateProvider(Blocks.DIORITE.getDefaultState())), 4);
+
+    public static final WaterFeatureConfig DIORITE_WATER_PATCH =
+            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.DIORITE.getDefaultState()), Optional.empty(), 12);
+
     public static final RockSpireFeatureConfig STONE_SPIRE =
             new RockSpireFeatureConfig(new SimpleBlockStateProvider(Blocks.STONE.getDefaultState()));
 
     public static final RockSpireFeatureConfig GRANITE_SPIRE =
             new RockSpireFeatureConfig(new SimpleBlockStateProvider(Blocks.GRANITE.getDefaultState()));
+
+    public static final RockSpireFeatureConfig DIORITE_SPIRE =
+            new RockSpireFeatureConfig(new SimpleBlockStateProvider(Blocks.DIORITE.getDefaultState()));
 
     // trees
     public static final TreeFeatureConfig SPRUCE_TREE_CONFIG =

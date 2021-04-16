@@ -5,6 +5,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 
 public class SapDripParticle extends SpriteBillboardParticle {
+    private final double initialY;
     protected SapDripParticle(ClientWorld world, double x, double y, double z) {
         super(world, x, y, z);
         this.gravityStrength = 0;
@@ -20,6 +21,8 @@ public class SapDripParticle extends SpriteBillboardParticle {
         this.velocityY = 0;
         this.velocityX = 0;
         this.velocityZ = 0;
+
+        this.initialY = y;
     }
 
     public float getSize(float tickDelta) {
@@ -34,6 +37,10 @@ public class SapDripParticle extends SpriteBillboardParticle {
         if (this.age == 20) {
             this.velocityY = -0.1;
             this.gravityStrength = 0.75F;
+        }
+
+        if (Math.abs(this.y - this.initialY) > 0.8) {
+            markDead();
         }
     }
 
