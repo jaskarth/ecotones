@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.biome;
 import supercoder79.ecotones.world.biome.base.SwampBiome;
 import supercoder79.ecotones.world.biome.base.hot.*;
 import supercoder79.ecotones.world.biome.base.warm.*;
+import supercoder79.ecotones.world.biome.cave.LimestoneCaveBiome;
 import supercoder79.ecotones.world.biome.climatic.*;
 import supercoder79.ecotones.world.biome.special.*;
 import supercoder79.ecotones.world.biome.technical.DryBeachBiome;
@@ -92,6 +93,9 @@ public final class EcotonesBiomes {
         GraniteSpringsBiome.init();
         LarchForestBiome.init();
         BirchLakesBiome.init();
+
+        // Cave biomes
+        LimestoneCaveBiome.init();
 
         // Rose Field biome
         RoseFieldBiome.init();

@@ -28,7 +28,9 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
+import supercoder79.ecotones.api.CaveBiome;
 import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.LayerRandom;
@@ -294,6 +296,13 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
                     .add("Seed", populationSeed)
                     .add("Biome", biome);
             throw new CrashException(crashReport);
+        }
+
+        if (this.biomeSource instanceof CaveBiomeSource) {
+            CaveBiome caveBiome = ((CaveBiomeSource)this.biomeSource).getCaveBiomeForNoiseGen((chunkPos.x << 2) + 2, (chunkPos.z << 2) + 2);
+            for (ConfiguredFeature<?, ?> feature : caveBiome.getFeatures()) {
+                feature.generate(world, this, random, pos);
+            }
         }
     }
 
