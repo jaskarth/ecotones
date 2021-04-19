@@ -73,6 +73,9 @@ public class PlaceWaterFeature extends Feature<WaterFeatureConfig> {
                         for (BlockPos replacement : toReplace) {
                             world.setBlockState(replacement, config.surroundings.get().getBlockState(random, replacement), 3);
                         }
+
+                        // Set state below
+                        world.setBlockState(mutable.down(), config.surroundings.get().getBlockState(random, mutable.down()), 3);
                     }
                 }
             }

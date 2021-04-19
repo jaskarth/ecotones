@@ -37,7 +37,7 @@ public class BirchLakesBiome extends EcotonesBiomeBuilder {
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "birch_lakes_hilly"), new BirchLakesBiome(0.5F, 0.225F, 7.0, 0.88).build());
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "birch_lakes_mountainous"), new BirchLakesBiome(1.2F, 0.625F, 8.02, 0.84).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
-        Climate.WARM_VERY_HUMID.add(INSTANCE, 0.2);
+        Climate.WARM_VERY_HUMID.add(INSTANCE, 0.3);
         Climate.WARM_HUMID.add(INSTANCE, 0.3);
         Climate.WARM_MILD.add(INSTANCE, 0.2);
     }

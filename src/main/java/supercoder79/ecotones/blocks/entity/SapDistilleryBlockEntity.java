@@ -155,6 +155,21 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
             this.syrupAmount -= 1000;
             sync();
         }
+
+        if (entity.getStack().isOf(EcotonesItems.MAPLE_SAP) && this.sapAmount + 1000 <= 40000) {
+            entity.remove(Entity.RemovalReason.KILLED);
+
+            Random random = world.getRandom();
+            for (int i = 0; i < 25; i++) {
+                double d = (double) pos.getX() + random.nextDouble();
+                double e = (double) pos.getY() + 0.8D;
+                double f = (double) pos.getZ() + random.nextDouble();
+                ((ServerWorld)world).spawnParticles(EcotonesParticles.SYRUP_POP, d, e, f, 1, 0.0D, 0.0D, 0.0D, 1);
+            }
+
+            this.sapAmount += 1000;
+            sync();
+        }
     }
 
     public boolean canFillBottle() {

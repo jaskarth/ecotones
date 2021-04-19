@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
@@ -32,10 +33,11 @@ public class TreetapBlock extends BlockWithEntity {
     private static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(4, 0, 0, 12, 16, 10);
     private static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(4, 0, 6, 12, 16, 16);
     public static final Property<Direction> FACING = Properties.HORIZONTAL_FACING;
+    public static final BooleanProperty TRIGGERED = Properties.TRIGGERED;
 
     public TreetapBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
+        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(TRIGGERED, false));
     }
 
     @Override
@@ -73,6 +75,29 @@ public class TreetapBlock extends BlockWithEntity {
         return ActionResult.CONSUME;
     }
 
+    @Override
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        super.neighborUpdate(state, world, pos, block, fromPos, notify);
+
+        boolean isPowered = world.isReceivingRedstonePower(pos) || world.isReceivingRedstonePower(pos.up());
+        boolean isTriggered = state.get(TRIGGERED);
+
+        if (isPowered && !isTriggered) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof TreetapBlockEntity) {
+                TreetapBlockEntity treetap = (TreetapBlockEntity) blockEntity;
+                if (treetap.canDropSap()) {
+                    treetap.dropSap();
+                    world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.25, pos.getZ() + 0.5, new ItemStack(EcotonesItems.MAPLE_SAP)));
+                }
+            }
+
+            world.setBlockState(pos, state.with(TRIGGERED, true), 3);
+        } else if (!isPowered && isTriggered) {
+            world.setBlockState(pos, state.with(TRIGGERED, false), 3);
+        }
+    }
+
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
@@ -89,7 +114,7 @@ public class TreetapBlock extends BlockWithEntity {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, TRIGGERED);
     }
 
     @Nullable
