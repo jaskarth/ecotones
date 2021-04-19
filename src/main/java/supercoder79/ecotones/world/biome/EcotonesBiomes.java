@@ -1,6 +1,5 @@
 package supercoder79.ecotones.world.biome;
 
-import supercoder79.ecotones.world.biome.base.SwampBiome;
 import supercoder79.ecotones.world.biome.base.hot.*;
 import supercoder79.ecotones.world.biome.base.warm.*;
 import supercoder79.ecotones.world.biome.cave.LimestoneCaveBiome;
@@ -33,8 +32,6 @@ public final class EcotonesBiomes {
         TemperateForestBiome.init();
         TemperateRainforestBiome.init();
 
-        SwampBiome.init();
-
         // technical biomes
         TropicalBeachBiome.init();
         DryBeachBiome.init();
@@ -52,7 +49,6 @@ public final class EcotonesBiomes {
         ThePitsBiome.init();
         GreenSpiresBiome.init();
         UluruBiome.init();
-        WastelandBiome.init();
 
         // Biome replacements
         HazelGroveBiome.init();

@@ -1,4 +1,4 @@
-package supercoder79.ecotones.world.biome.special;
+package supercoder79.ecotones.world.biome.unused;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;

@@ -1,4 +1,4 @@
-package supercoder79.ecotones.world.biome.base;
+package supercoder79.ecotones.world.biome.unused;
 
 import net.minecraft.world.biome.Biome;
 

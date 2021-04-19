@@ -1,4 +1,4 @@
-package supercoder79.ecotones.world.biome.base;
+package supercoder79.ecotones.world.biome.unused;
 
 public class HotBiomes {
 //
