@@ -242,6 +242,9 @@ public final class FeatureConfigHolder {
     public static final WaterFeatureConfig GRASS_WATER_PATCH =
             new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState()), Optional.empty(), 6);
 
+    public static final WaterFeatureConfig PEAT_PATCH =
+            new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState(), EcotonesBlocks.PEAT_BLOCK.getDefaultState()), Optional.of(new SimpleBlockStateProvider(EcotonesBlocks.PEAT_BLOCK.getDefaultState())), 2);
+
     public static final WaterFeatureConfig GRANITE_WATER_POOL_PATCH =
             new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.GRANITE.getDefaultState()), Optional.of(new SimpleBlockStateProvider(Blocks.GRANITE.getDefaultState())), 3);
 
