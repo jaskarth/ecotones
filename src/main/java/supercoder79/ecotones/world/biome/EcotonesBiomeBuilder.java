@@ -37,9 +37,9 @@ public class EcotonesBiomeBuilder {
         this.biomeEffects = new BiomeEffects.Builder();
 
         // Defaults
-        this.biomeEffects.waterColor(4159204);
-        this.biomeEffects.waterFogColor(329011);
-        this.biomeEffects.fogColor(12638463);
+        this.biomeEffects.waterColor(0x3F76E4);
+        this.biomeEffects.waterFogColor(0x050533);
+        this.biomeEffects.fogColor(0xC0D8FF);
 
         // TODO
         this.builder.category(Biome.Category.PLAINS);
