@@ -49,6 +49,7 @@ public final class EcotonesBlocks {
     public static Block LARCH_SAPLING = new TerraformSaplingBlock(new LarchSaplingGenerator());
     public static Block TREETAP = new TreetapBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(3.5F, 1.0F).sounds(BlockSoundGroup.STONE).build());
     public static Block LIMESTONE = new Block(FabricBlockSettings.copy(Blocks.DRIPSTONE_BLOCK).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
+    public static Block POOFY_DANDELION = new PoofyDandelionBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
 
 
@@ -89,6 +90,7 @@ public final class EcotonesBlocks {
         register("larch_sapling", LARCH_SAPLING);
         register("treetap", TREETAP);
         register("limestone", LIMESTONE);
+        register("poofy_dandelion", POOFY_DANDELION);
         register("cyan_rose", CYAN_ROSE);
     }
 

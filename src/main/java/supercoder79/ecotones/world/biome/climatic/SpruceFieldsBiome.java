@@ -43,7 +43,7 @@ public class SpruceFieldsBiome extends EcotonesBiomeBuilder {
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_fields"), new SpruceFieldsBiome(0.5f, 0.05f, 3.6, 0.92).build());
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_fields_hilly"), new SpruceFieldsBiome(0.75f, 0.15f, 4.8, 0.90).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_fields_mountainous"), new SpruceFieldsBiome(0.45f, 0.9f, 5.2, 0.86).build());
+        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_fields_mountainous"), new SpruceFieldsBiome(1.15f, 0.9f, 5.2, 0.86).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_HUMID.add(INSTANCE, 0.2);
         Climate.WARM_MILD.add(INSTANCE, 0.4);

@@ -88,7 +88,8 @@ public final class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.MARIGOLD,
                 EcotonesBlocks.MAPLE_SAPLING,
                 EcotonesBlocks.LARCH_LEAVES,
-                EcotonesBlocks.SMALL_CACTUS);
+                EcotonesBlocks.SMALL_CACTUS,
+                EcotonesBlocks.POOFY_DANDELION);
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
                 EcotonesBlocks.BLUEBERRY_JAM_JAR,

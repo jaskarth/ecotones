@@ -41,6 +41,7 @@ public final class EcotonesItems {
     public static final Item LARCH_SAPLING = new BlockItem(EcotonesBlocks.LARCH_SAPLING, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item TREETAP = new BlockItem(EcotonesBlocks.TREETAP, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item LIMESTONE = new BlockItem(EcotonesBlocks.LIMESTONE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item POOFY_DANDELION = new BlockItem(EcotonesBlocks.POOFY_DANDELION, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
     // Regular Items
     public static final Item COCONUT = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).build()));
@@ -94,6 +95,7 @@ public final class EcotonesItems {
         register("larch_sapling", LARCH_SAPLING);
         register("treetap", TREETAP);
         register("limestone", LIMESTONE);
+        register("poofy_dandelion", POOFY_DANDELION);
 
         register("coconut", COCONUT);
         register("hazelnut", HAZELNUT);

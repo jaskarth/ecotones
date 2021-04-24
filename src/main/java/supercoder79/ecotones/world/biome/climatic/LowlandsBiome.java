@@ -53,7 +53,6 @@ public class LowlandsBiome extends EcotonesBiomeBuilder {
         this.hilliness(hilliness);
         this.volatility(volatility);
 
-//        this.grassColor(0x7A6330);
         this.grassColor(0x8E693E);
         this.foliageColor(0x805218);
         this.waterColor(0x4E52AA);

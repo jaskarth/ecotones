@@ -239,6 +239,16 @@ public final class FeatureConfigHolder {
                     new ColumnPlacer(1, 2))
                     .tries(32).cannotProject().build();
 
+    public static final RandomPatchFeatureConfig DANDELION_FIELD_FLOWERS =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.POOFY_DANDELION.getDefaultState(), 1)
+                    .addState(Blocks.DANDELION.getDefaultState(), 3)
+                    .addState(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(5)
+                    .spreadZ(5)
+                    .tries(32).build();
+
     public static final WaterFeatureConfig GRASS_WATER_PATCH =
             new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState()), Optional.empty(), 6);
 
