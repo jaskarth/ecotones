@@ -189,6 +189,12 @@ public class BirchLakesBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
                         .applyChance(8));
+
+        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.GEYSER_PATCH.configure(FeatureConfig.DEFAULT)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(18));
     }
 
 }

@@ -142,5 +142,11 @@ public class LarchForestBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.ROCK_IN_WATER.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 2))
                         .decorate(EcotonesDecorators.LARGE_ROCK.configure(new ChanceDecoratorConfig(6))));
+
+        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.GEYSER_PATCH.configure(FeatureConfig.DEFAULT)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(18));
     }
 }

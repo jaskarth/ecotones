@@ -12,6 +12,7 @@ import java.util.Random;
 
 public final class FeatureHelper {
     public static final Direction[] HORIZONTAL = new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
+    public static final Direction[] HORIZONTAL_AND_DOWN = new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.DOWN};
 
     private FeatureHelper() {}
 

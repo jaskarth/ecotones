@@ -59,6 +59,7 @@ public final class EcotonesFeatures {
     public static final Feature<SimpleTreeFeatureConfig> LARCH_TREE = new LarchTreeFeature(SimpleTreeFeatureConfig.CODEC);
     public static final Feature<DefaultFeatureConfig> PEBBLES = new PebblesFeature(DefaultFeatureConfig.CODEC);
     public static final Feature<RockFeatureConfig> ROCK_IN_WATER = new RockInWaterFeature(RockFeatureConfig.CODEC);
+    public static final Feature<DefaultFeatureConfig> GEYSER_PATCH = new GeyserPatchFeature(DefaultFeatureConfig.CODEC);
 
     public static void init() {
         register("desertify", DESERTIFY_SOIL);
@@ -104,6 +105,7 @@ public final class EcotonesFeatures {
         register("larch_tree", LARCH_TREE);
         register("pebbles", PEBBLES);
         register("rock_in_water", ROCK_IN_WATER);
+        register("geyser_patch", GEYSER_PATCH);
     }
 
     private static void register(String name, Feature<?> feature) {
