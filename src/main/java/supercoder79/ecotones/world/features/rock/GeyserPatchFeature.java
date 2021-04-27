@@ -12,7 +12,6 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.world.features.FeatureHelper;
-import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 
 import java.util.Random;
 

@@ -151,6 +151,12 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(3));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MUSHROOMS)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(2));
+
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.PODZOL.configure(FeatureConfig.DEFAULT)
                         .spreadHorizontally()
@@ -173,6 +179,12 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(3)
                         .applyChance(72));
+
+        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+                EcotonesFeatures.BEEHIVES.configure(FeatureConfig.DEFAULT)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(96));
 
         if (FloralisiaCompat.isEnabled()) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

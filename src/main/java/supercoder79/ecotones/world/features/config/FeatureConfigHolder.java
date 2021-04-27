@@ -180,6 +180,16 @@ public final class FeatureConfigHolder {
                     .spreadZ(12)
                     .tries(32).build();
 
+    public static final RandomPatchFeatureConfig DANDELION_FIELD_FLOWERS =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
+                    .addState(EcotonesBlocks.POOFY_DANDELION.getDefaultState(), 1)
+                    .addState(Blocks.DANDELION.getDefaultState(), 3)
+                    .addState(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1),
+                    new SimpleBlockPlacer())
+                    .spreadX(5)
+                    .spreadZ(5)
+                    .tries(32).build();
+
     public static final RandomPatchFeatureConfig CYAN_ROSE =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
                     .addState(EcotonesBlocks.CYAN_ROSE.getDefaultState(), 1),
@@ -239,15 +249,14 @@ public final class FeatureConfigHolder {
                     new ColumnPlacer(1, 2))
                     .tries(32).cannotProject().build();
 
-    public static final RandomPatchFeatureConfig DANDELION_FIELD_FLOWERS =
+    public static final RandomPatchFeatureConfig MUSHROOMS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()
-                    .addState(EcotonesBlocks.POOFY_DANDELION.getDefaultState(), 1)
-                    .addState(Blocks.DANDELION.getDefaultState(), 3)
-                    .addState(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1),
+                    .addState(Blocks.BROWN_MUSHROOM.getDefaultState(), 1)
+                    .addState(Blocks.RED_MUSHROOM.getDefaultState(), 1),
                     new SimpleBlockPlacer())
-                    .spreadX(5)
-                    .spreadZ(5)
-                    .tries(32).build();
+                    .spreadX(15)
+                    .spreadZ(15)
+                    .tries(64).build();
 
     public static final WaterFeatureConfig GRASS_WATER_PATCH =
             new WaterFeatureConfig(ImmutableList.of(Blocks.GRASS_BLOCK.getDefaultState()), Optional.empty(), 6);

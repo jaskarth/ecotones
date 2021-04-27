@@ -253,6 +253,8 @@
   "block.ecotones.treetap": "Treetap",
   "block.ecotones.limestone": "Limestone",
   "block.ecotones.poofy_dandelion": "Poofy Dandelion",
+  "block.ecotones.cattail": "Cattail",
+  "block.ecotones.duckweed": "Duckweed",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -291,6 +293,8 @@
   "item.ecotones.treetap": "Treetap",
   "item.ecotones.limestone": "Limestone",
   "item.ecotones.poofy_dandelion": "Poofy Dandelion",
+  "item.ecotones.cattail": "Cattail",
+  "item.ecotones.duckweed": "Duckweed",
 
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",
