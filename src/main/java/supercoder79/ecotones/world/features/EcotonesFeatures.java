@@ -60,6 +60,8 @@ public final class EcotonesFeatures {
     public static final Feature<DefaultFeatureConfig> PEBBLES = new PebblesFeature(DefaultFeatureConfig.CODEC);
     public static final Feature<RockFeatureConfig> ROCK_IN_WATER = new RockInWaterFeature(RockFeatureConfig.CODEC);
     public static final Feature<DefaultFeatureConfig> GEYSER_PATCH = new GeyserPatchFeature(DefaultFeatureConfig.CODEC);
+    public static final Feature<CattailFeatureConfig> CATTAIL = new CattailFeature(CattailFeatureConfig.CODEC);
+    public static final Feature<DuckweedFeatureConfig> DUCKWEED = new DuckweedFeature(DuckweedFeatureConfig.CODEC);
 
     public static void init() {
         register("desertify", DESERTIFY_SOIL);
@@ -106,6 +108,8 @@ public final class EcotonesFeatures {
         register("pebbles", PEBBLES);
         register("rock_in_water", ROCK_IN_WATER);
         register("geyser_patch", GEYSER_PATCH);
+        register("cattail", CATTAIL);
+        register("duckweed", DUCKWEED);
     }
 
     private static void register(String name, Feature<?> feature) {

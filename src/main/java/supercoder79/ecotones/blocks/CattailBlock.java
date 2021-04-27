@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 public class CattailBlock extends PlantBlock implements Fertilizable, FluidFillable {
-    private static final List<Block> PLANTABLE = ImmutableList.of(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.SAND, Blocks.GRAVEL, Blocks.CLAY, Blocks.PODZOL);
+    public static final List<Block> PLANTABLE = ImmutableList.of(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.SAND, Blocks.GRAVEL, Blocks.CLAY, Blocks.PODZOL);
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     protected CattailBlock(Settings settings) {
