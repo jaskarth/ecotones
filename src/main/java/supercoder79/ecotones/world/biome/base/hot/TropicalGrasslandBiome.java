@@ -25,25 +25,36 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 public class TropicalGrasslandBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
+    public static Biome SHRUBS;
+    public static Biome THICKET;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
 
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_grassland"), new TropicalGrasslandBiome(0.5f, 0.15f, 1.8, 0.88).build());
+        SHRUBS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_grassland_shrubs"), new TropicalGrasslandBiome(0.5f, 0.15f, 1.8, 0.88, 2.8, 0.4).build());
+        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_grassland_thicket"), new TropicalGrasslandBiome(0.5f, 0.075f, 1.8, 0.88, 1.4, 2.6).build());
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_grassland_hilly"), new TropicalGrasslandBiome(1f, 0.5f, 4.2, 0.83).build());
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_grassland_mountainous"), new TropicalGrasslandBiome(1.75f, 0.8f, 7, 0.75).build());
+
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, SHRUBS, THICKET);
 
         Climate.HOT_MODERATE.add(INSTANCE, 1);
     }
 
     protected TropicalGrasslandBiome(float depth, float scale, double hilliness, double volatility) {
+        this(depth, scale, hilliness, volatility, 1.2, 0.3);
+    }
+
+    protected TropicalGrasslandBiome(float depth, float scale, double hilliness, double volatility, double shrubCount, double treeCount) {
         this.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG);
         this.precipitation(Biome.Precipitation.RAIN);
         this.depth(depth);
         this.scale(scale);
         this.temperature(1.7F);
-        this.downfall(0.4F);
+        this.downfall(0.225F);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
@@ -65,15 +76,15 @@ public class TropicalGrasslandBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(1.0))));
+                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(shrubCount))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(2.0))));
+                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(shrubCount * 2))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
-                        .decorate(EcotonesDecorators.REVERSE_QUALITY_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.05))));
+                        .decorate(EcotonesDecorators.REVERSE_QUALITY_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.095))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
@@ -90,8 +101,8 @@ public class TropicalGrasslandBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.ROCKINESS.configure(DecoratorConfig.DEFAULT)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.SMALL_ACACIA.configure(TreeType.SMALL_ACACIA)
-                        .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.SMALL_ACACIA.decorationData)));
+                EcotonesFeatures.SMALL_ACACIA.configure(TreeType.RARE_SMALL_ACACIA)
+                        .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_SMALL_ACACIA.decorationData)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BIG_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
@@ -102,7 +113,8 @@ public class TropicalGrasslandBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
-                        .applyChance(2));
+                        .applyChance(2)
+                        .repeat(3));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SWITCHGRASS_CONFIG)
@@ -113,14 +125,14 @@ public class TropicalGrasslandBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.FAN_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.3))));
+                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(treeCount))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG)
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG)
                         .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
-                        .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 8, 12))));
+                        .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 14, 18))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.ROSEMARY.configure(FeatureConfig.DEFAULT)
