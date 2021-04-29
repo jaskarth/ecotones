@@ -161,17 +161,6 @@ public final class Ecotones implements ModInitializer {
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
 			worldType = new EcotonesWorldType();
 		}
-
-		// TODO: fix this
-		ServerTickCallback.EVENT.register(server -> {
-			if (server.getTicks() % 300 == 0) {
-				for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
-					if (player.world.getBiome(new BlockPos(player.getPos())) == BlessedSpringsBiome.INSTANCE) {
-						player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, player.getRandom().nextInt(200) + 60, 0, false, false, true));
-					}
-				}
-			}
-		});
 	}
 
 	public static Identifier id(String name) {

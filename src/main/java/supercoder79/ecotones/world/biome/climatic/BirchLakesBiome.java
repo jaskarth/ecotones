@@ -44,7 +44,6 @@ public class BirchLakesBiome extends EcotonesBiomeBuilder {
         Climate.WARM_VERY_HUMID.add(INSTANCE, 0.3);
         Climate.WARM_HUMID.add(INSTANCE, 0.3);
         Climate.WARM_MILD.add(INSTANCE, 0.2);
-        BiomeHelper.fillClimates(INSTANCE);
     }
 
     public BirchLakesBiome(float depth, float scale, double hilliness, double volatility) {

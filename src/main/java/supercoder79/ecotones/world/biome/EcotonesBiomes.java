@@ -38,12 +38,6 @@ public final class EcotonesBiomes {
         GravelBeachBiome.init();
         RiverBiome.init();
 
-        // volcanic biomes
-        VolcanicBiome.init();
-        SuperVolcanicBiome.init();
-        HotSpringsBiome.init();
-        BlessedSpringsBiome.init();
-
         // special biomes
         OasisBiome.init();
         ThePitsBiome.init();
