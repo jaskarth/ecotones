@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class CattailBlock extends PlantBlock implements Fertilizable, FluidFillable {
+public class CattailBlock extends PlantBlock implements Fertilizable, Waterloggable {
     public static final List<Block> PLANTABLE = ImmutableList.of(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.SAND, Blocks.GRAVEL, Blocks.CLAY, Blocks.PODZOL);
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
@@ -76,16 +76,6 @@ public class CattailBlock extends PlantBlock implements Fertilizable, FluidFilla
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 
-    }
-
-    @Override
-    public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
-        return false;
-    }
-
-    @Override
-    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
-        return false;
     }
 
     @Override

@@ -30,9 +30,7 @@ import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
-import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
-import supercoder79.ecotones.world.features.config.PatchFeatureConfig;
-import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.features.config.*;
 import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 
 public class SpruceMarshBiome extends EcotonesBiomeBuilder {
@@ -50,10 +48,13 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, THICKET);
         BiomeRegistries.registerNoRiverBiome(INSTANCE);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
+
         Climate.WARM_HUMID.add(INSTANCE, 0.3);
         Climate.WARM_MILD.add(INSTANCE, 0.2);
+
         BiomeRegistries.registerNoBeachBiomes(INSTANCE, THICKET, HILLY, MOUNTAINOUS);
         BiomeRegistries.registerNoRiverBiomes(INSTANCE, THICKET, HILLY, MOUNTAINOUS);
+
         TerraformSlimeSpawnBiomes.addSlimeSpawnBiomes(BuiltinRegistries.BIOME.getKey(INSTANCE).get(),
                 BuiltinRegistries.BIOME.getKey(THICKET).get(),
                 BuiltinRegistries.BIOME.getKey(HILLY).get(),
@@ -175,6 +176,50 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .applyChance(2)
                         .repeat(3));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntDistribution.of(64, 32), true, UniformIntDistribution.of(10, 4)))
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(2)
+                        .repeat(3));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntDistribution.of(8, 12), true, UniformIntDistribution.of(3, 3)))
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .repeat(3));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntDistribution.of(8, 8), false, UniformIntDistribution.of(3, 2)))
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(3));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntDistribution.of(16, 48), false, UniformIntDistribution.of(8, 6)))
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(32));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.DUCKWEED.configure(new DuckweedFeatureConfig(UniformIntDistribution.of(64, 32), UniformIntDistribution.of(10, 4)))
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(4)
+                        .repeat(2));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.DUCKWEED.configure(new DuckweedFeatureConfig(UniformIntDistribution.of(8, 8), UniformIntDistribution.of(4, 2)))
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .applyChance(3));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MUSHROOMS)
+                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .spreadHorizontally()
+                        .repeat(2));
 
         //todo refactor
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

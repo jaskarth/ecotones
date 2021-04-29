@@ -42,7 +42,7 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest"), new SpruceForestBiome(0.4f, 0.125f, 2.8, 0.88).build());
+        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest"), new SpruceForestBiome(0.4f, 0.125f, 3.2, 0.88).build());
         CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_clearing"), new SpruceForestBiome(0.5f, 0.125f, 2.2, 0.95, 1.25, SurfaceBuilder.DEFAULT).build());
         GRAVELLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_gravelly"), new SpruceForestBiome(0.4f, 0.125f, 2.8, 0.88, 7.5, EcotonesSurfaces.GRAVEL_BANDS).build());
         LAKE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_lake"), new SpruceForestBiome(-0.25f, 0.075f, 1.2, 0.97).build());

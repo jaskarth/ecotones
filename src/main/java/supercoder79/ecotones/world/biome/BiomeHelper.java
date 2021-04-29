@@ -61,6 +61,8 @@ public final class BiomeHelper {
 
     // Dev and testing stuff
 
+    // "Mom, can we have single biome worlds at home?"
+    // The single biome worlds at home:
     public static void fillClimates(Biome biome) {
         for (Climate climate : Climate.values()) {
             climate.add(biome, 999);
