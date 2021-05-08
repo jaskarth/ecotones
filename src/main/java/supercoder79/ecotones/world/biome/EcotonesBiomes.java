@@ -25,7 +25,7 @@ public final class EcotonesBiomes {
         // Warm biomes
         CoolDesertBiome.init();
         CoolScrublandBiome.init();
-        CoolSteppeBiome.init();
+        RockySteppeBiome.init();
         PrairieBiome.init();
         LichenWoodlandBiome.init();
         SpruceForestBiome.init();

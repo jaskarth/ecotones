@@ -21,18 +21,19 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
-public class CoolSteppeBiome extends EcotonesBiomeBuilder {
+public class RockySteppeBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
     public static Biome THICKET;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_steppe"), new CoolSteppeBiome(0.5f, 0.075f, 2.8, 0.88, false).build());
-        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_steppe_thicket"), new CoolSteppeBiome(0.5f, 0.075f, 2.8, 0.88, true).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_steppe_hilly"), new CoolSteppeBiome(1f, 0.5f, 4.2, 0.83, false).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "cool_steppe_mountainous"), new CoolSteppeBiome(1.75f, 0.8f, 7, 0.75, false).build());
+        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_steppe"), new RockySteppeBiome(0.5f, 0.075f, 2.8, 0.88, false).build());
+        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_steppe_thicket"), new RockySteppeBiome(0.5f, 0.075f, 2.8, 0.88, true).build());
+        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_steppe_hilly"), new RockySteppeBiome(1f, 0.5f, 4.2, 0.83, false).build());
+        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_steppe_mountainous"), new RockySteppeBiome(1.75f, 0.8f, 7, 0.75, false).build());
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
         BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, THICKET);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
@@ -40,13 +41,13 @@ public class CoolSteppeBiome extends EcotonesBiomeBuilder {
         Climate.WARM_DRY.add(INSTANCE, 1);
     }
 
-    protected CoolSteppeBiome(float depth, float scale, double hilliness, double volatility, boolean thicket) {
-        this.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG);
+    protected RockySteppeBiome(float depth, float scale, double hilliness, double volatility, boolean thicket) {
+        this.surfaceBuilder(EcotonesSurfaces.ROCKY_STEPPE, SurfaceBuilder.GRASS_CONFIG);
         this.precipitation(Biome.Precipitation.NONE);
         this.depth(depth);
         this.scale(scale);
         this.temperature(1.2F);
-        this.downfall(0.345F);
+        this.downfall(0.275F);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
@@ -106,14 +107,15 @@ public class CoolSteppeBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
-                        .applyChance(2));
+                        .applyChance(3)
+                        .repeat(3));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG)
                         .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
-                        .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 5, 10))));
+                        .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 12, 16))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.ROSEMARY.configure(FeatureConfig.DEFAULT)
@@ -127,7 +129,7 @@ public class CoolSteppeBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.SMALL_ROCK.configure(FeatureConfig.DEFAULT)
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
-                        .applyChance(8));
+                        .applyChance(6));
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.ROCK_SPIRE.configure(FeatureConfigHolder.STONE_SPIRE)

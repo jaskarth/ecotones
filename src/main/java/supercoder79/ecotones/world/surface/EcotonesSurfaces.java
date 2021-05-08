@@ -30,6 +30,7 @@ public final class EcotonesSurfaces {
     public static final SurfaceBuilder<TernarySurfaceConfig> STONE_SPLOTCHES = new StoneSplotchesSurfaceBuilder(TernarySurfaceConfig.CODEC);
     public static final SurfaceBuilder<TernarySurfaceConfig> BIRCH_LAKES = new BirchLakesSurfaceBuilder(TernarySurfaceConfig.CODEC);
     public static final SurfaceBuilder<TernarySurfaceConfig> COARSE_DIRT_BANDS = new CoarseDirtBandsSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> ROCKY_STEPPE = new RockySteppeSurfaceBuilder(TernarySurfaceConfig.CODEC);
 
     public static void init() {
         register("desert_scrub", DESERT_SCRUB_BUILDER);
@@ -54,6 +55,7 @@ public final class EcotonesSurfaces {
         register("stone_splotches", STONE_SPLOTCHES);
         register("birch_lakes", BIRCH_LAKES);
         register("coarse_dirt_bands", COARSE_DIRT_BANDS);
+        register("rocky_steppe", ROCKY_STEPPE);
     }
 
     private static void register(String name, SurfaceBuilder<?> builder) {

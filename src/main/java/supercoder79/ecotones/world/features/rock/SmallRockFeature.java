@@ -26,7 +26,8 @@ public class SmallRockFeature extends Feature<DefaultFeatureConfig> {
 
         PerlinNoiseSampler sampler = new PerlinNoiseSampler(new ChunkRandom(world.getSeed()));
 
-        if (!world.getBlockState(pos.down()).isOf(Blocks.GRASS_BLOCK)) {
+        BlockState down = world.getBlockState(pos.down());
+        if (!down.isOf(Blocks.GRASS_BLOCK) && !down.isOf(Blocks.STONE)) {
             return false;
         }
 
