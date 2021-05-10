@@ -139,6 +139,12 @@ public final class FeatureConfigHolder {
                     .spreadZ(15)
                     .tries(12).build();
 
+    public static final RandomPatchFeatureConfig THORN_BUSH =
+            new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(EcotonesBlocks.THORN_BUSH.getDefaultState()), new SimpleBlockPlacer())
+                    .spreadX(15)
+                    .spreadZ(15)
+                    .tries(16).build();
+
     // flowers
     public static final RandomPatchFeatureConfig TAIGA_FLOWERS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider()

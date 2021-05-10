@@ -46,7 +46,7 @@ public class RockyMountainBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_VERY_DRY.add(INSTANCE, 0.1);
         Climate.HOT_DRY.add(INSTANCE, 0.2);
-        Climate.HOT_MODERATE.add(INSTANCE, 0.1);
+        Climate.HOT_MODERATE.add(INSTANCE, 0.4);
     }
 
     protected RockyMountainBiome(float depth, float scale, double hilliness, double volatility) {

@@ -215,6 +215,9 @@
   "biome.ecotones.birch_lakes_hilly": "Hilly Birch Lakes",
   "biome.ecotones.birch_lakes_mountainous": "Mountainous Birch Lakes",
   "biome.ecotones.lowlands": "Lowlands",
+  "biome.ecotones.thorn_brush": "Thorn Brush",
+  "biome.ecotones.thorn_brush_hilly": "Hilly Thorn Brush",
+  "biome.ecotones.thorn_brush_mountainous": "Mountainous Thorn Brush",
 
 
   "block.ecotones.peat": "Peat Block",
@@ -255,6 +258,7 @@
   "block.ecotones.poofy_dandelion": "Poofy Dandelion",
   "block.ecotones.cattail": "Cattail",
   "block.ecotones.duckweed": "Duckweed",
+  "block.ecotones.thorn_bush": "Thorn Bush",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -295,6 +299,7 @@
   "item.ecotones.poofy_dandelion": "Poofy Dandelion",
   "item.ecotones.cattail": "Cattail",
   "item.ecotones.duckweed": "Duckweed",
+  "item.ecotones.thorn_bush": "Thorn Bush",
 
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",

@@ -44,6 +44,7 @@ public final class EcotonesItems {
     public static final Item POOFY_DANDELION = new BlockItem(EcotonesBlocks.POOFY_DANDELION, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item CATTAIL = new BlockItem(EcotonesBlocks.CATTAIL, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item DUCKWEED = new PlaceOnFluidItem(EcotonesBlocks.DUCKWEED, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item THORN_BUSH = new BlockItem(EcotonesBlocks.THORN_BUSH, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
     // Regular Items
     public static final Item COCONUT = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).build()));
@@ -100,6 +101,7 @@ public final class EcotonesItems {
         register("poofy_dandelion", POOFY_DANDELION);
         register("cattail", CATTAIL);
         register("duckweed", DUCKWEED);
+        register("thorn_bush", THORN_BUSH);
 
         register("coconut", COCONUT);
         register("hazelnut", HAZELNUT);
