@@ -40,7 +40,7 @@ public final class EcotonesBiomes {
 
         // special biomes
         OasisBiome.init();
-        ThePitsBiome.init();
+        ChasmBiome.init();
         GreenSpiresBiome.init();
         UluruBiome.init();
 

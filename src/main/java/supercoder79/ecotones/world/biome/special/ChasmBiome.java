@@ -20,20 +20,20 @@ import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
-public class ThePitsBiome extends EcotonesBiomeBuilder {
+public class ChasmBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
     public static Biome EDGE;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "the_pits"), new ThePitsBiome(-1.5f, false).build());
-        EDGE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "the_pits_edge"), new ThePitsBiome(0.375f, true).build());
+        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "chasm"), new ChasmBiome(-1.5f, false).build());
+        EDGE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "chasm_edge"), new ChasmBiome(0.375f, true).build());
 
         BiomeRegistries.registerAllSpecial(id -> !BiomeHelper.isOcean(id), INSTANCE, EDGE);
 
         BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 200);
     }
 
-    protected ThePitsBiome(float height, boolean isEdge) {
+    protected ChasmBiome(float height, boolean isEdge) {
         this.surfaceBuilder(EcotonesSurfaces.DELETE_WATER_BUILDER, SurfaceBuilder.GRASS_CONFIG);
 
         this.depth(height);
