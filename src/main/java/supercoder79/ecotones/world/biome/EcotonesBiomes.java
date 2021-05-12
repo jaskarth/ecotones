@@ -86,6 +86,7 @@ public final class EcotonesBiomes {
         LowlandsBiome.init();
         DandelionFieldBiome.init();
         ThornBrushBiome.init();
+        SpruceShrublandBiome.init();
 
         // Cave biomes
         LimestoneCaveBiome.init();
