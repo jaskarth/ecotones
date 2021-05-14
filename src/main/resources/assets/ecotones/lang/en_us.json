@@ -221,6 +221,9 @@
   "biome.ecotones.spruce_shrubland": "Spruce Shrubland",
   "biome.ecotones.spruce_shrubland_hilly": "Hilly Spruce Shrubland",
   "biome.ecotones.spruce_shrubland_mountainous": "Mountainous Spruce Shrubland",
+  "biome.ecotones.hot_pine_forest": "Hot Pine Forest",
+  "biome.ecotones.hot_pine_forest_hilly": "Hilly Hot Pine Forest",
+  "biome.ecotones.hot_pine_forest_mountainous": "Mountainous Hot Pine Forest",
 
 
   "block.ecotones.peat": "Peat Block",

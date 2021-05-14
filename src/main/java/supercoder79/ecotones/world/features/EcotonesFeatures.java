@@ -63,6 +63,7 @@ public final class EcotonesFeatures {
     public static final Feature<CattailFeatureConfig> CATTAIL = new CattailFeature(CattailFeatureConfig.CODEC);
     public static final Feature<DuckweedFeatureConfig> DUCKWEED = new DuckweedFeature(DuckweedFeatureConfig.CODEC);
     public static final Feature<SimpleTreeFeatureConfig> BRUSH_TREE = new BrushTreeFeature(SimpleTreeFeatureConfig.CODEC);
+    public static final Feature<SimpleTreeFeatureConfig> TALL_PINE = new TallPineTree(SimpleTreeFeatureConfig.CODEC);
 
     public static void init() {
         register("desertify", DESERTIFY_SOIL);
@@ -112,6 +113,7 @@ public final class EcotonesFeatures {
         register("cattail", CATTAIL);
         register("duckweed", DUCKWEED);
         register("brush_tree", BRUSH_TREE);
+        register("tall_pine", TALL_PINE);
     }
 
     private static void register(String name, Feature<?> feature) {
