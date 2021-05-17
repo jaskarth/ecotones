@@ -11,6 +11,7 @@ import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.world.features.config.RockSpireFeatureConfig;
 
 import java.util.BitSet;
@@ -31,7 +32,7 @@ public class RockSpireFeature extends Feature<RockSpireFeatureConfig> {
         PerlinNoiseSampler sampler = new PerlinNoiseSampler(new ChunkRandom(world.getSeed()));
 
         BlockState down = world.getBlockState(pos.down());
-        if (!(down.isOf(Blocks.GRASS_BLOCK) || down.isOf(Blocks.STONE))) {
+        if (!(down.isOf(Blocks.GRASS_BLOCK) || down.isOf(Blocks.STONE) || down.isOf(EcotonesBlocks.RED_ROCK))) {
             return false;
         }
 

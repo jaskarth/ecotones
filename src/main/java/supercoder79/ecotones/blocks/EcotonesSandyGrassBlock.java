@@ -13,6 +13,6 @@ public class EcotonesSandyGrassBlock extends EcotonesGrassBlock {
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockState downState = world.getBlockState(pos.down());
-        return (downState == Blocks.SAND.getDefaultState() || downState == Blocks.RED_SAND.getDefaultState());
+        return (downState.isOf(Blocks.SAND) || downState.isOf(Blocks.RED_SAND) || downState.isOf(EcotonesBlocks.RED_ROCK));
     }
 }

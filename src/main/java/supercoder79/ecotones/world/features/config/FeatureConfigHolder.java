@@ -291,6 +291,9 @@ public final class FeatureConfigHolder {
     public static final RockSpireFeatureConfig DIORITE_SPIRE =
             new RockSpireFeatureConfig(new SimpleBlockStateProvider(Blocks.DIORITE.getDefaultState()));
 
+    public static final RockSpireFeatureConfig RED_ROCK_SPIRE =
+            new RockSpireFeatureConfig(new SimpleBlockStateProvider(EcotonesBlocks.RED_ROCK.getDefaultState()));
+
     // trees
     public static final TreeFeatureConfig SPRUCE_TREE_CONFIG =
             new TreeFeatureConfig.Builder(

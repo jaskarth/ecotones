@@ -53,6 +53,7 @@ public final class EcotonesBlocks {
     public static Block CATTAIL = new CattailBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block DUCKWEED = new DuckweedBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block THORN_BUSH = new ThornBushBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
+    public static Block RED_ROCK = new Block(FabricBlockSettings.copy(Blocks.STONE).build());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
 
 
@@ -97,6 +98,7 @@ public final class EcotonesBlocks {
         register("cattail", CATTAIL);
         register("duckweed", DUCKWEED);
         register("thorn_bush", THORN_BUSH);
+        register("red_rock", RED_ROCK);
         register("cyan_rose", CYAN_ROSE);
     }
 

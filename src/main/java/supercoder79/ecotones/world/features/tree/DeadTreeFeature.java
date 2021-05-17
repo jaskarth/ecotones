@@ -2,6 +2,7 @@ package supercoder79.ecotones.world.features.tree;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +14,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 import java.util.List;
@@ -32,8 +34,16 @@ public class DeadTreeFeature extends Feature<SimpleTreeFeatureConfig> {
 		Random random = context.getRandom();
 		SimpleTreeFeatureConfig config = context.getConfig();
 
-		if (!(world.getBlockState(pos).isAir() && (world.getBlockState(pos.down()).isOf(Blocks.SAND) || world.getBlockState(pos.down()).isOf(Blocks.GRASS_BLOCK)))) {
-			return false;
+		BlockState downState = world.getBlockState(pos.down());
+		if (!(world.getBlockState(pos).isAir() && (downState.isOf(Blocks.SAND) || downState.isOf(Blocks.GRASS_BLOCK)))) {
+			// Spawn 1/2 as often in red rock biomes, TODO: extract this out
+			if (downState.isOf(EcotonesBlocks.RED_ROCK) && world.getBlockState(pos).isAir()) {
+				if (random.nextBoolean()) {
+					return false;
+				}
+			} else {
+				return false;
+			}
 		}
 
 		int trunkHeight = random.nextInt(8) + 9;

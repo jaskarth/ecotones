@@ -21,6 +21,5 @@ public class GrassMountainSurfaceBuilder extends SurfaceBuilder<TernarySurfaceCo
         } else {
             SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRASS_CONFIG);
         }
-
     }
 }
