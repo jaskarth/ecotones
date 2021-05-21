@@ -13,8 +13,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import supercoder79.ecotones.util.DynamicEatTimeItem;
 
-public class JamItem extends AliasedBlockItem {
+public class JamItem extends AliasedBlockItem implements DynamicEatTimeItem {
     public JamItem(Block block, Settings settings) {
         super(block, settings);
     }

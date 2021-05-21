@@ -21,6 +21,7 @@
     "MixinClientWorld",
     "MixinDebugHud",
     "MixinEntityModels",
+    "MixinHeldItemRenderer",
     "MixinMinecraftClient",
     "MixinSkyProperties",
     "MixinWorldRenderer"
