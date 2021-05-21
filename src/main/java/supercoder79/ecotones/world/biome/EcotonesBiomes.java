@@ -89,6 +89,7 @@ public final class EcotonesBiomes {
         SpruceShrublandBiome.init();
         HotPineForestBiome.init();
         RedRockRidgeBiome.init();
+        SpruceGlenBiome.init();
 
         // Cave biomes
         LimestoneCaveBiome.init();

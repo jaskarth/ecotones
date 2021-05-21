@@ -224,6 +224,12 @@
   "biome.ecotones.hot_pine_forest": "Hot Pine Forest",
   "biome.ecotones.hot_pine_forest_hilly": "Hilly Hot Pine Forest",
   "biome.ecotones.hot_pine_forest_mountainous": "Mountainous Hot Pine Forest",
+  "biome.ecotones.red_rock_ridge": "Red Rock Ridge",
+  "biome.ecotones.red_rock_ridge_hilly": "Hilly Red Rock Ridge",
+  "biome.ecotones.red_rock_ridge_mountainous": "Mountainous Red Rock Ridge",
+  "biome.ecotones.spruce_glen": "Spruce Glen",
+  "biome.ecotones.spruce_glen_hilly": "Hilly Spruce Glen",
+  "biome.ecotones.spruce_glen_mountainous": "Mountainous Spruce Glen",
 
 
   "block.ecotones.peat": "Peat Block",
