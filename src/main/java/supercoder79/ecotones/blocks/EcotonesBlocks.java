@@ -1,6 +1,5 @@
 package supercoder79.ecotones.blocks;
 
-import com.terraformersmc.terraform.tree.block.TerraformSaplingBlock;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tools.FabricToolTags;
 import net.minecraft.block.*;
@@ -21,7 +20,7 @@ public final class EcotonesBlocks {
     public static Block GEYSER = new GeyserBlock(FabricBlockSettings.of(Material.STONE).strength(2.5F, 8.0F).ticksRandomly().build());
     public static Block COCONUT = new CoconutBlock(FabricBlockSettings.of(Material.PLANT).strength(0.2F, 3.0F).sounds(BlockSoundGroup.WOOD).nonOpaque().build());
     public static Block HAZEL_LEAVES = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().build());
-    public static Block HAZEL_SAPLING = new TerraformSaplingBlock(new HazelSaplingGenerator());
+    public static Block HAZEL_SAPLING = new SimpleSaplingBlock(new HazelSaplingGenerator());
     public static Block SANDY_GRASS = new EcotonesSandyGrassBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block SURFACE_ROCK = new SurfaceRockBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.STONE).build());
     public static Block CLOVER = new EcotonesLeafPileBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
@@ -41,12 +40,12 @@ public final class EcotonesBlocks {
     public static Block BLUEBERRY_JAM_JAR = new JarBlock(FabricBlockSettings.of(Material.DECORATION).nonOpaque().breakInstantly().sounds(BlockSoundGroup.STONE).build());
     public static Block SPRUCE_LEAF_PILE = new EcotonesLeafPileBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block MARIGOLD = new EcotonesGrassBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
-    public static Block MAPLE_SAPLING = new TerraformSaplingBlock(new MapleSaplingGenerator());
+    public static Block MAPLE_SAPLING = new SimpleSaplingBlock(new MapleSaplingGenerator());
     public static Block MAPLE_SYRUP_JAR = new JarBlock(FabricBlockSettings.of(Material.DECORATION).nonOpaque().breakInstantly().sounds(BlockSoundGroup.STONE).build());
     public static Block LARCH_LEAVES = new LeavesBlock(FabricBlockSettings.of(Material.LEAVES).strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().build());
     public static Block SAP_DISTILLERY = new SapDistilleryBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(3.5F, 1.0F).sounds(BlockSoundGroup.STONE).build());
     public static Block SMALL_CACTUS = new SmallCactusBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
-    public static Block LARCH_SAPLING = new TerraformSaplingBlock(new LarchSaplingGenerator());
+    public static Block LARCH_SAPLING = new SimpleSaplingBlock(new LarchSaplingGenerator());
     public static Block TREETAP = new TreetapBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(3.5F, 1.0F).sounds(BlockSoundGroup.STONE).build());
     public static Block LIMESTONE = new Block(FabricBlockSettings.copy(Blocks.DRIPSTONE_BLOCK).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
     public static Block POOFY_DANDELION = new PoofyDandelionBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());

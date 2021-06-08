@@ -26,21 +26,6 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// You're going to get a compile error here. That's expected! You need to clone https://github.com/SuperCoder7979/Terraform, check out the 1.17 branch, and then run ./gradlew.bat publishToMavenLocal.
-	// After that it should work fine.
-
-	modCompile "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_version}"
-	include "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_version}"
-
-	modCompile "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biomes_version}"
-	include "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biomes_version}"
-
-	modCompile "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_trees_version}"
-	include "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_trees_version}"
-
-	modCompile "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_version}"
-	include "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_version}"
-
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 
 	modRuntime ("com.github.SuperCoder7979:databreaker:0.2.6") {

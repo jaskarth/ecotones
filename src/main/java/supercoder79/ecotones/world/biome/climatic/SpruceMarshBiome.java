@@ -1,7 +1,6 @@
 package supercoder79.ecotones.world.biome.climatic;
 
 import com.google.common.collect.ImmutableSet;
-import com.terraformersmc.terraform.biomebuilder.TerraformSlimeSpawnBiomes;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.util.Identifier;
@@ -55,10 +54,10 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerNoBeachBiomes(INSTANCE, THICKET, HILLY, MOUNTAINOUS);
         BiomeRegistries.registerNoRiverBiomes(INSTANCE, THICKET, HILLY, MOUNTAINOUS);
 
-        TerraformSlimeSpawnBiomes.addSlimeSpawnBiomes(BuiltinRegistries.BIOME.getKey(INSTANCE).get(),
-                BuiltinRegistries.BIOME.getKey(THICKET).get(),
-                BuiltinRegistries.BIOME.getKey(HILLY).get(),
-                BuiltinRegistries.BIOME.getKey(MOUNTAINOUS).get());
+//        TerraformSlimeSpawnBiomes.addSlimeSpawnBiomes(BuiltinRegistries.BIOME.getKey(INSTANCE).get(),
+//                BuiltinRegistries.BIOME.getKey(THICKET).get(),
+//                BuiltinRegistries.BIOME.getKey(HILLY).get(),
+//                BuiltinRegistries.BIOME.getKey(MOUNTAINOUS).get());
     }
 
     public SpruceMarshBiome(float depth, float scale, boolean thicket) {

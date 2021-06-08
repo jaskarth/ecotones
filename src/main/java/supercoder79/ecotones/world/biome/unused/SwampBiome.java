@@ -1,6 +1,5 @@
 package supercoder79.ecotones.world.biome.unused;
 
-import com.terraformersmc.terraform.biomebuilder.TerraformSlimeSpawnBiomes;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -29,7 +28,7 @@ public class SwampBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "swamp"), new SwampBiome(0.5f, 0.075f).build());
-        TerraformSlimeSpawnBiomes.addSlimeSpawnBiomes(BuiltinRegistries.BIOME.getKey(INSTANCE).get());
+//        TerraformSlimeSpawnBiomes.addSlimeSpawnBiomes(BuiltinRegistries.BIOME.getKey(INSTANCE).get());
         Climate.WARM_HUMID.add(INSTANCE, 0.1);
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
         BiomeRegistries.registerNoRiverBiome(INSTANCE);

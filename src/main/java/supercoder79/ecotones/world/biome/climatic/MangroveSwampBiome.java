@@ -1,6 +1,5 @@
 package supercoder79.ecotones.world.biome.climatic;
 
-import com.terraformersmc.terraform.biomebuilder.TerraformSlimeSpawnBiomes;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -36,7 +35,7 @@ public class MangroveSwampBiome extends EcotonesBiomeBuilder {
         Climate.HOT_DRY.add(INSTANCE, 0.2);
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
         BiomeRegistries.registerNoRiverBiome(INSTANCE);
-        TerraformSlimeSpawnBiomes.addSlimeSpawnBiomes(BuiltinRegistries.BIOME.getKey(INSTANCE).get());
+//        TerraformSlimeSpawnBiomes.addSlimeSpawnBiomes(BuiltinRegistries.BIOME.getKey(INSTANCE).get());
     }
 
     protected MangroveSwampBiome() {
