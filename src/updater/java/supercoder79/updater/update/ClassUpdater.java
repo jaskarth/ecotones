@@ -26,15 +26,21 @@ public final class ClassUpdater {
         for (int i = data.startIdx(); i < data.lines().size(); i++) {
             String curr = data.lines().get(i);
 
-            loop: {
+            while (true) {
                 List<Integer> points = matcher.match(curr);
 
+                boolean updated = false;
                 for (Integer point : points) {
                     UpdateResult res = update.update(curr, i, point, data.lines(), data);
                     if (res.updated()) {
                         curr = res.result();
-                        break loop;
+                        updated = true;
+                        break;
                     }
+                }
+
+                if (!updated) {
+                    break;
                 }
             }
 
