@@ -40,7 +40,7 @@ public final class Updater {
 
             for (File file : this.files) {
                 ClassData data = ClassProcessor.process(file);
-                ClassUpdater.update(data, update);
+                ClassUpdater.update(update, data, file);
             }
 
             System.out.println("Done.");

@@ -14,7 +14,9 @@ public final class UniformIntUpdate extends Update {
     }
 
     @Override
-    public void update(String line, int lineIdx, int idx, List<String> lines, ClassData data) {
+    public String update(String line, int lineIdx, int idx, List<String> lines, ClassData data) {
         System.out.println(line);
+
+        return line;
     }
 }
