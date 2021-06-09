@@ -9,4 +9,6 @@ public abstract class Update {
     public abstract Matcher when();
 
     public abstract UpdateResult update(String line, int lineIdx, int idx, List<String> lines, ClassData data);
+
+    public abstract void finalize(ClassData data);
 }
