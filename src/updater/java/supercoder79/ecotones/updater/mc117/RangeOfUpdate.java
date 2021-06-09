@@ -28,7 +28,7 @@ public final class RangeOfUpdate extends Update {
         String updated = line.substring(0, idx);
 
         // Add new ref
-        updated += UPDATED + "(YOffset.fixed(" + params.get(0) + "))";
+        updated += UPDATED + "(YOffset.fixed(0), YOffset.fixed(" + params.get(0) + "))";
 
         updated += line.substring(idx + PATTERN.length() + paramsLength);
 
