@@ -29,7 +29,7 @@ public final class ClassUpdater {
             List<Integer> points = matcher.match(line);
 
             String curr = line;
-            for (int point = 0; point < points.size(); point++) {
+            for (Integer point : points) {
                 curr = update.update(curr, i, point, data.lines(), data);
             }
 
