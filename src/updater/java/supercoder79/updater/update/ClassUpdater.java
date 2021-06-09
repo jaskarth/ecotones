@@ -47,6 +47,9 @@ public final class ClassUpdater {
         // Finalize if we've updated this class at all
         if (appliedUpdate) {
             update.finalize(data);
+        } else {
+            // Don't write classes if we haven't updated
+            return;
         }
 
         List<String> newLines = new ArrayList<>();
@@ -63,7 +66,6 @@ public final class ClassUpdater {
 
                 importCount++;
 
-                newLines.add("");
                 continue;
             }
 
@@ -71,37 +73,41 @@ public final class ClassUpdater {
         }
 
         // Process imports
-        int emptyLines = 0;
+        boolean foundJava = false;
+        int javaStart = -1;
         if (importsStart > -1) {
             // Should match import count of data.imports()
             for (int i = 0; i < data.imports().size(); i++) {
                 String imp = "import " + data.imports().getQualified(i) + ";";
 
-                if (data.lines().get(i + importsStart).equals("")) {
-                    newLines.add(importsStart + i - 1, "");
-                    emptyLines++;
-                }
-
-                // More than before- add
-                if (i > importCount) {
+                if (!data.imports().getQualified(i).startsWith("java")) {
                     newLines.add(importsStart + i, imp);
                 } else {
-                    // Within old lines, set
-                    newLines.set(importsStart + i, imp);
+                    if (javaStart == -1) {
+                        javaStart = i;
+                    }
+                    foundJava = true;
                 }
+            }
+
+            if (foundJava) {
+                newLines.add(importsStart + javaStart, "");
+
+                int j = 1;
+                for (int i = 0; i < data.imports().size(); i++) {
+                    String imp = "import " + data.imports().getQualified(i) + ";";
+
+                    if (data.imports().getQualified(i).startsWith("java")) {
+                        newLines.add(importsStart + javaStart + j, imp);
+                        j++;
+                    }
+                }
+
+                newLines.remove(newLines.size() - 1);
             }
         }
 
-        // TODO: why is this needed???
-        if (emptyLines > 0) {
-            emptyLines++;
-        }
-
-        // Pop off empty lines we may have added
-        for (int i = 0; i < emptyLines; i++) {
-            newLines.remove(newLines.size() - 1);
-        }
-
+        // Off by 1 error- TODO figure out why this happens
         newLines.addAll(updatedLines);
 
         try {
