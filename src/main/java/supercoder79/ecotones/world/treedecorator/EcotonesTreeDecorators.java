@@ -1,7 +1,7 @@
 package supercoder79.ecotones.world.treedecorator;
 
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.tree.TreeDecoratorType;
+import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.mixin.TreeDecoratorTypeAccessor;
 import supercoder79.ecotones.util.RegistryReport;

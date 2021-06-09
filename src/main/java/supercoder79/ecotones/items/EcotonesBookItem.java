@@ -7,7 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.WrittenBookItem;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.OpenWrittenBookS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
@@ -44,7 +44,7 @@ public class EcotonesBookItem extends WrittenBookItem {
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         if (stack.hasTag()) {
-            CompoundTag compoundTag = stack.getTag();
+            NbtCompound compoundTag = stack.getTag();
             String string = compoundTag.getString("author");
             if (!ChatUtil.isEmpty(string)) {
                 tooltip.add((new TranslatableText("book.byAuthor", new Object[]{string})).formatted(Formatting.GRAY));

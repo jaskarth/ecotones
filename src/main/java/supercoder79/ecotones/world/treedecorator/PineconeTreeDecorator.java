@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.tree.TreeDecorator;
-import net.minecraft.world.gen.tree.TreeDecoratorType;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
+import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 import java.util.List;

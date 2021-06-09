@@ -10,7 +10,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
@@ -197,10 +197,10 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
     }
 
     @Override
-    public void fromTag(CompoundTag tag) {
-        super.fromTag(tag);
+    public void readNbt(NbtCompound tag) {
+        super.readNbt(tag);
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        Inventories.fromTag(tag, this.inventory);
+        Inventories.readNbt(tag, this.inventory);
         this.burnTime = tag.getShort("burn_time");
         this.heatAmount = tag.getShort("heat_amt");
         this.sapAmount = tag.getInt("sap_amt");
@@ -208,9 +208,9 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
     }
 
     @Override
-    public CompoundTag toTag(CompoundTag tag) {
-        super.toTag(tag);
-        Inventories.toTag(tag, this.inventory);
+    public NbtCompound writeNbt(NbtCompound tag) {
+        super.writeNbt(tag);
+        Inventories.writeNbt(tag, this.inventory);
         tag.putShort("burn_time", (short) this.burnTime);
         tag.putShort("heat_amt", (short) this.heatAmount);
         tag.putInt("sap_amt", this.sapAmount);
@@ -280,12 +280,12 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
     }
 
     @Override
-    public void fromClientTag(CompoundTag tag) {
+    public void fromClientTag(NbtCompound tag) {
         this.syrupAmount = tag.getShort("syrup");
     }
 
     @Override
-    public CompoundTag toClientTag(CompoundTag tag) {
+    public NbtCompound toClientTag(NbtCompound tag) {
         tag.putShort("syrup", (short) this.syrupAmount);
         return tag;
     }

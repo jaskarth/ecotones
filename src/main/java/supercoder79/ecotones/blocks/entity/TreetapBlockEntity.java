@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
@@ -146,20 +146,20 @@ public class TreetapBlockEntity extends BlockEntity implements BlockEntityClient
     }
 
     @Override
-    public void fromTag(CompoundTag tag) {
-        super.fromTag(tag);
+    public void readNbt(NbtCompound tag) {
+        super.readNbt(tag);
         this.sapAmount = tag.getInt("sap_amount");
     }
 
     @Override
-    public CompoundTag toTag(CompoundTag tag) {
-        super.toTag(tag);
+    public NbtCompound writeNbt(NbtCompound tag) {
+        super.writeNbt(tag);
         tag.putInt("sap_amount", this.sapAmount);
         return tag;
     }
 
     @Override
-    public void fromClientTag(CompoundTag tag) {
+    public void fromClientTag(NbtCompound tag) {
         this.sapAmount = tag.getInt("sap_amount");
         this.direction = Direction.fromHorizontal(tag.getInt("direction"));
         this.isValid = tag.getBoolean("is_valid");
@@ -168,7 +168,7 @@ public class TreetapBlockEntity extends BlockEntity implements BlockEntityClient
     }
 
     @Override
-    public CompoundTag toClientTag(CompoundTag tag) {
+    public NbtCompound toClientTag(NbtCompound tag) {
         tag.putInt("sap_amount", this.sapAmount);
         tag.putInt("direction", this.direction.getHorizontal());
         tag.putBoolean("is_valid", this.isValid);

@@ -8,12 +8,14 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.tree.TreeDecorator;
-import net.minecraft.world.gen.tree.TreeDecoratorType;
+import net.minecraft.world.TestableWorld;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
+import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class LeafPileTreeDecorator extends TreeDecorator {
     public static final Codec<LeafPileTreeDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -38,14 +40,14 @@ public class LeafPileTreeDecorator extends TreeDecorator {
     }
 
     @Override
-    public void generate(StructureWorldAccess world, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> placedStates, BlockBox box) {
+    public void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions) {
         for (BlockPos pos : leavesPositions) {
             if (random.nextInt(this.chance) == 0) {
                 BlockPos localPos = pos.add(random.nextInt(this.offset) - random.nextInt(this.offset), 0, random.nextInt(this.offset) - random.nextInt(this.offset));
                 BlockPos topPos = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR_WG, localPos);
 
-                if (topPos.getY() <= pos.getY() && world.getBlockState(topPos).getMaterial().isReplaceable() && world.getBlockState(topPos.down()).isOf(Blocks.GRASS_BLOCK)) {
-                    world.setBlockState(topPos, this.state, 3);
+                if (topPos.getY() <= pos.getY() && world.testBlockState(topPos, s -> s.getMaterial().isReplaceable()) && world.testBlockState(topPos.down(), s -> s.isOf(Blocks.GRASS_BLOCK))) {
+                    replacer.accept(topPos, this.state);
                 }
             }
         }
