@@ -46,4 +46,30 @@ public final class ParseInvoc {
 
         return ret;
     }
+
+    // Includes parentheses!
+    public static int invocationLength(String line, int start) {
+        int depth = 0;
+        boolean found = false;
+        int len = 0;
+
+        for (int i = start; i < line.toCharArray().length; i++) {
+            len++;
+            char c = line.toCharArray()[i];
+            if (c == '(') {
+                found = true;
+                depth++;
+                continue;
+            }
+
+            if (c == ')') {
+                depth--;
+                if (found && depth == 0) {
+                    break;
+                }
+            }
+        }
+
+        return len;
+    }
 }
