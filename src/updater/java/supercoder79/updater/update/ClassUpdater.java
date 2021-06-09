@@ -42,6 +42,8 @@ public final class ClassUpdater {
             for (String line : newLines) {
                 writer.println(line);
             }
+
+            writer.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error writing file " + file.getAbsolutePath());
