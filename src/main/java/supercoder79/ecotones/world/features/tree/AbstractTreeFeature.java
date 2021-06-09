@@ -122,7 +122,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
     @Override
     public boolean generate(FeatureContext<T> context) {
         StructureWorldAccess world = context.getWorld();
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
         T config = context.getConfig();
 

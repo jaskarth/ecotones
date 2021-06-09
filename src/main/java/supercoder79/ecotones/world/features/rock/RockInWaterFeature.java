@@ -11,7 +11,7 @@ public class RockInWaterFeature extends RockFeature {
 
     @Override
     public boolean generate(FeatureContext<RockFeatureConfig> context) {
-        if (context.getPos().getY() <= context.getGenerator().getSeaLevel()) {
+        if (context.getOrigin().getY() <= context.getGenerator().getSeaLevel()) {
             return super.generate(context);
         } else {
             return false;

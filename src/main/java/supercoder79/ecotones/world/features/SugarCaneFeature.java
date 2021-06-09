@@ -20,7 +20,7 @@ public class SugarCaneFeature extends Feature<DefaultFeatureConfig> {
     @Override
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
 
         // Check the position for a 3x3 of grass underneath to grow the sugarcane

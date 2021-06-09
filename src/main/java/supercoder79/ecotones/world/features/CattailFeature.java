@@ -22,7 +22,7 @@ public class CattailFeature extends Feature<CattailFeatureConfig> {
     @Override
     public boolean generate(FeatureContext<CattailFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
         CattailFeatureConfig config = context.getConfig();
 

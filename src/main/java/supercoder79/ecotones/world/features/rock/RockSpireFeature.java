@@ -25,7 +25,7 @@ public class RockSpireFeature extends Feature<RockSpireFeatureConfig> {
     @Override
     public boolean generate(FeatureContext<RockSpireFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
         RockSpireFeatureConfig config = context.getConfig();
 

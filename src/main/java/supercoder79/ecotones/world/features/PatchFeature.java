@@ -20,7 +20,7 @@ public class PatchFeature extends Feature<PatchFeatureConfig> {
     @Override
     public boolean generate(FeatureContext<PatchFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
         PatchFeatureConfig config = context.getConfig();
 

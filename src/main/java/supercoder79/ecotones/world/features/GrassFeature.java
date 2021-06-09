@@ -18,7 +18,7 @@ public class GrassFeature extends Feature<GrassFeatureConfig> {
 
     @Override
     public boolean generate(FeatureContext<GrassFeatureConfig> context) {
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
         GrassFeatureConfig config = context.getConfig();
         StructureWorldAccess world = context.getWorld();

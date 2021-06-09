@@ -24,7 +24,7 @@ public class PlaceWaterFeature extends Feature<WaterFeatureConfig> {
     @Override
     public boolean generate(FeatureContext<WaterFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
         WaterFeatureConfig config = context.getConfig();
 

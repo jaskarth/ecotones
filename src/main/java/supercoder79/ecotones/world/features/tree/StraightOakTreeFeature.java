@@ -26,7 +26,7 @@ public class StraightOakTreeFeature extends Feature<OakTreeFeatureConfig> {
     @Override
     public boolean generate(FeatureContext<OakTreeFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
         ChunkGenerator generator = context.getGenerator();
         OakTreeFeatureConfig config = context.getConfig();

@@ -27,7 +27,7 @@ public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
     @Override
     public boolean generate(FeatureContext<TreeGenerationConfig> context) {
         StructureWorldAccess world = context.getWorld();
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
         TreeGenerationConfig config = context.getConfig();
 

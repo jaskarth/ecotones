@@ -37,7 +37,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
     @Override
     public boolean generate(FeatureContext<TreeGenerationConfig> context) {
         StructureWorldAccess world = context.getWorld();
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
         ChunkGenerator generator = context.getGenerator();
         TreeGenerationConfig config = context.getConfig();

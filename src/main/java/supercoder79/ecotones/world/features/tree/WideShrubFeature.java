@@ -21,7 +21,7 @@ public class WideShrubFeature extends Feature<SimpleTreeFeatureConfig> {
     @Override
     public boolean generate(FeatureContext<SimpleTreeFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         SimpleTreeFeatureConfig config = context.getConfig();
 
         //grab data from the decorator

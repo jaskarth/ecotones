@@ -29,7 +29,7 @@ public class LarchTreeFeature extends Feature<SimpleTreeFeatureConfig> {
     @Override
     public boolean generate(FeatureContext<SimpleTreeFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
-        BlockPos pos = context.getPos();
+        BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
         SimpleTreeFeatureConfig config = context.getConfig();
 
