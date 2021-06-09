@@ -105,7 +105,7 @@ public class BlueberryBushBlock extends PlantBlock implements Fertilizable {
             // Get berries and ensure that at least one is dropped
             int berries = Math.max(1, baseCount + world.random.nextInt(randomCount));
             dropStack(world, pos, new ItemStack(EcotonesItems.BLUEBERRIES, berries));
-            world.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+            world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 
             // Reset to grown
             world.setBlockState(pos, state.with(AGE, 2), 2);

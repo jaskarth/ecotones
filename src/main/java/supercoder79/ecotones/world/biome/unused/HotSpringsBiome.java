@@ -4,6 +4,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
@@ -63,7 +64,7 @@ public class HotSpringsBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG)
                         .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
-                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
                         .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 6, 8))));
 
@@ -75,7 +76,7 @@ public class HotSpringsBiome extends EcotonesBiomeBuilder {
                 Feature.TREE.configure(FeatureConfigHolder.SPRUCE_TREE_CONFIG)
                         .decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.33f, 1)))
                         .spreadHorizontally()
-                        .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE)));
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
@@ -85,9 +86,9 @@ public class HotSpringsBiome extends EcotonesBiomeBuilder {
                 Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.LAVA.getDefaultState()))
                         .decorate(Decorator.LAVA_LAKE.configure(new ChanceDecoratorConfig(30))));
 
-        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.WATER.getDefaultState()))
-                        .decorate(Decorator.WATER_LAKE.configure(new ChanceDecoratorConfig(1))));
+//        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+//                Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.WATER.getDefaultState()))
+//                        .decorate(Decorator.WATER_LAKE.configure(new ChanceDecoratorConfig(1))));
 
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }

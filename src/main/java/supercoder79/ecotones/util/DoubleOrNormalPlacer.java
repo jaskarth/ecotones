@@ -17,7 +17,7 @@ public class DoubleOrNormalPlacer extends BlockPlacer {
     @Override
     public void generate(WorldAccess world, BlockPos pos, BlockState state, Random random) {
         if (state.getBlock() instanceof TallPlantBlock) {
-            ((TallPlantBlock)state.getBlock()).placeAt(world, pos, 2);
+            ((TallPlantBlock)state.getBlock()).placeAt(world, state, pos, 2);
         } else {
             world.setBlockState(pos, state, 2);
         }

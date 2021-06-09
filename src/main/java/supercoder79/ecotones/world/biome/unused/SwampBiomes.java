@@ -62,7 +62,7 @@ public class SwampBiomes {
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(6))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SEAGRASS.configure(new SeagrassFeatureConfig(20, 0.3D))
-//                        .decorate(Decorator.TOP_SOLID_HEIGHTMAP.configure(DecoratorConfig.DEFAULT)))
+//                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.OCEAN_FLOOR_WG))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
