@@ -22,6 +22,7 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
+import net.minecraft.world.gen.YOffset;
 
 public class VolcanicBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -62,12 +63,12 @@ public class VolcanicBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 9))
                 .repeat(30)
                 .spreadHorizontally()
-                .rangeOf(64));
+                .uniformRange(YOffset.fixed(0), YOffset.fixed(64)));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 9))
                 .repeat(6)
                 .spreadHorizontally()
-                .rangeOf(32));
+                .uniformRange(YOffset.fixed(0), YOffset.fixed(32)));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.LAVA.getDefaultState()))

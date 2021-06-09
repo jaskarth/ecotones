@@ -23,6 +23,7 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
+import net.minecraft.world.gen.YOffset;
 
 public class SuperVolcanicBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -63,17 +64,17 @@ public class SuperVolcanicBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 12))
                 .repeat(30)
                 .spreadHorizontally()
-                .rangeOf(96));
+                .uniformRange(YOffset.fixed(0), YOffset.fixed(96)));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 12))
                 .repeat(6)
                 .spreadHorizontally()
-                .rangeOf(48));
+                .uniformRange(YOffset.fixed(0), YOffset.fixed(48)));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, Blocks.DIAMOND_ORE.getDefaultState(), 11))
                 .repeat(2)
                 .spreadHorizontally()
-                .rangeOf(24));
+                .uniformRange(YOffset.fixed(0), YOffset.fixed(24)));
 
 //        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
 //                Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.LAVA.getDefaultState()))

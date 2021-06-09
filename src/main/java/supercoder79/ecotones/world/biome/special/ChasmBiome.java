@@ -21,6 +21,7 @@ import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
+import net.minecraft.world.gen.YOffset;
 
 public class ChasmBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -77,13 +78,13 @@ public class ChasmBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
                 Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 9))
-                        .rangeOf(64)
+                        .uniformRange(YOffset.fixed(0), YOffset.fixed(64))
                         .spreadHorizontally()
                         .repeat(30));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
                 Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 9))
-                        .rangeOf(32)
+                        .uniformRange(YOffset.fixed(0), YOffset.fixed(32))
                         .spreadHorizontally()
                         .repeat(6));
 

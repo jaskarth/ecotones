@@ -27,6 +27,7 @@ import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
+import net.minecraft.world.gen.YOffset;
 
 // TODO: needs rename?
 public class BirchLakesBiome extends EcotonesBiomeBuilder {
@@ -71,31 +72,31 @@ public class BirchLakesBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.ORE.configure(
                 new OreFeatureConfig(new BlockMatchRuleTest(Blocks.STONE), Blocks.DIRT.getDefaultState(), 33))
-                .rangeOf(256)
+                .uniformRange(YOffset.fixed(0), YOffset.fixed(256))
                 .spreadHorizontally()
                 .repeat(10));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.ORE.configure(
                 new OreFeatureConfig(new BlockMatchRuleTest(Blocks.STONE), Blocks.GRAVEL.getDefaultState(), 33))
-                .rangeOf(256)
+                .uniformRange(YOffset.fixed(0), YOffset.fixed(256))
                 .spreadHorizontally()
                 .repeat(8));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.ORE.configure(
                 new OreFeatureConfig(new BlockMatchRuleTest(Blocks.STONE), Blocks.ANDESITE.getDefaultState(), 33))
-                .rangeOf(80)
+                .uniformRange(YOffset.fixed(0), YOffset.fixed(80))
                 .spreadHorizontally()
                 .repeat(10));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.ORE.configure(
                 new OreFeatureConfig(new BlockMatchRuleTest(Blocks.STONE), Blocks.GRANITE.getDefaultState(), 33))
-                .rangeOf(80)
+                .uniformRange(YOffset.fixed(0), YOffset.fixed(80))
                 .spreadHorizontally()
                 .repeat(10));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.ORE.configure(
                 new OreFeatureConfig(new BlockMatchRuleTest(Blocks.STONE), Blocks.DIORITE.getDefaultState(), 33))
-                .rangeOf(80)
+                .uniformRange(YOffset.fixed(0), YOffset.fixed(80))
                 .spreadHorizontally()
                 .repeat(10));
 
