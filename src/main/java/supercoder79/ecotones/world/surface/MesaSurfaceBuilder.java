@@ -34,7 +34,7 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
     }
 
     @Override
-    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState stone, BlockState water, int seaLevel, long seed, TernarySurfaceConfig config) {
+    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState stone, BlockState water, int seaLevel, int start, long seed, TernarySurfaceConfig config) {
         int localX = x & 15;
         int localZ = z & 15;
         BlockState blockState3 = WHITE_TERRACOTTA;

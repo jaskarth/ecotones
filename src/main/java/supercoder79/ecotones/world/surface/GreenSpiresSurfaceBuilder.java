@@ -20,12 +20,12 @@ public class GreenSpiresSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConf
     }
 
     @Override
-    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, TernarySurfaceConfig config) {
+    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, int start, long seed, TernarySurfaceConfig config) {
         int rand = random.nextInt(1024);
         if (rand == 1) {
-            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, GEYSER_CONFIG);
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, start, seed, GEYSER_CONFIG);
         } else if (rand == 2) {
-            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, config);
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, start, seed, config);
             boolean n = chunk.getBlockState(new BlockPos(x-1, height-1, z)).isAir();
             boolean s = chunk.getBlockState(new BlockPos(x+1, height-1, z)).isAir();
             boolean e = chunk.getBlockState(new BlockPos(x, height-1, z+1)).isAir();
@@ -34,7 +34,7 @@ public class GreenSpiresSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConf
                 chunk.setBlockState(new BlockPos(x, height-1, z), Blocks.WATER.getDefaultState(), false);
             }
         } else {
-            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, config);
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, start, seed, config);
         }
     }
 }

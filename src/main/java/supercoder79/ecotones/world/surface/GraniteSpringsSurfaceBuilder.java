@@ -18,7 +18,7 @@ public class GraniteSpringsSurfaceBuilder extends SurfaceBuilder<TernarySurfaceC
     }
 
     @Override
-    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, TernarySurfaceConfig surfaceBlocks) {
+    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, int start, long seed, TernarySurfaceConfig surfaceBlocks) {
         int scaledHeight = (int) (height + ((noise + (random.nextDouble() - random.nextDouble())) / 3.0));
 
         int layerSelector = scaledHeight % 8;
@@ -26,9 +26,9 @@ public class GraniteSpringsSurfaceBuilder extends SurfaceBuilder<TernarySurfaceC
         double extra = (noise / 10.0) + random.nextDouble() * 0.15;
 
         if ((layerSelector <= 1 || layerSelector >= 6) && !(extra > 0.5)) {
-            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRASS_CONFIG);
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, start, seed, SurfaceBuilder.GRASS_CONFIG);
         } else {
-            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, GRANITE_CONFIG);
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, start, seed, GRANITE_CONFIG);
         }
     }
 }

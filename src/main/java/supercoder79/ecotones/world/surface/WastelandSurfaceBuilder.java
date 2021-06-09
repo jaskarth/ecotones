@@ -19,7 +19,7 @@ public class WastelandSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig
     }
 
     @Override
-    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, TernarySurfaceConfig config) {
+    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, int start, long seed, TernarySurfaceConfig config) {
         // yes, this is all waaaaay overcomplicated, but it's cool
         double noiseAddition = noise * (random.nextDouble() / 2);
 
@@ -30,9 +30,9 @@ public class WastelandSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig
         double gradientNoise = noise + noiseAddition + (((random.nextDouble() + randomAfterAddition) * coefficient));
 
         if (gradientNoise > 1.0D) {
-            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, WASTELAND_GRASS);
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, start, seed, WASTELAND_GRASS);
         } else {
-            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, config);
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, start, seed, config);
         }
     }
 }

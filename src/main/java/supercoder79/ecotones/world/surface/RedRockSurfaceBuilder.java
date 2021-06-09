@@ -19,7 +19,7 @@ public class RedRockSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> 
     }
 
     @Override
-    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, TernarySurfaceConfig surfaceBlocks) {
+    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, int start, long seed, TernarySurfaceConfig surfaceBlocks) {
         double scaledNoise = noise / 6;
         scaledNoise += random.nextDouble() * 0.1;
         scaledNoise += (noise > 0.2 && noise < 1.2) ? 0.2 : 0;
@@ -30,9 +30,9 @@ public class RedRockSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> 
         }
 
         if (scaledNoise > 0.6) {
-            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, SurfaceBuilder.GRASS_CONFIG);
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, start, seed, SurfaceBuilder.GRASS_CONFIG);
         } else {
-            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, seed, RED_ROCK_CONFIG);
+            SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, start, seed, RED_ROCK_CONFIG);
         }
     }
 }
