@@ -24,13 +24,18 @@ public final class ClassUpdater {
         }
 
         for (int i = data.startIdx(); i < data.lines().size(); i++) {
-            String line = data.lines().get(i);
+            String curr = data.lines().get(i);
 
-            List<Integer> points = matcher.match(line);
+            loop: {
+                List<Integer> points = matcher.match(curr);
 
-            String curr = line;
-            for (Integer point : points) {
-                curr = update.update(curr, i, point, data.lines(), data);
+                for (Integer point : points) {
+                    UpdateResult res = update.update(curr, i, point, data.lines(), data);
+                    if (res.updated()) {
+                        curr = res.result();
+                        break loop;
+                    }
+                }
             }
 
             newLines.add(curr);
