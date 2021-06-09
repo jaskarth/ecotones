@@ -16,7 +16,7 @@ public final class ClassUpdater {
         }
 
         Matcher matcher = update.when();
-        List<String> newLines = new ArrayList<>();
+        List<String> updatedLines = new ArrayList<>();
 
         boolean appliedUpdate = false;
         for (int i = data.startIdx(); i < data.lines().size(); i++) {
@@ -41,7 +41,7 @@ public final class ClassUpdater {
                 }
             }
 
-            newLines.add(curr);
+            updatedLines.add(curr);
         }
 
         // Finalize if we've updated this class at all
@@ -49,6 +49,7 @@ public final class ClassUpdater {
             update.finalize(data);
         }
 
+        List<String> newLines = new ArrayList<>();
         int importsStart = -1;
         int importCount = 0;
         // Add the lines above the class definition
@@ -70,10 +71,16 @@ public final class ClassUpdater {
         }
 
         // Process imports
+        int emptyLines = 0;
         if (importsStart > -1) {
             // Should match import count of data.imports()
             for (int i = 0; i < data.imports().size(); i++) {
-                String imp = "import " + data.imports().getQualified(i);
+                String imp = "import " + data.imports().getQualified(i) + ";";
+
+                if (data.lines().get(i + importsStart).equals("")) {
+                    newLines.add(importsStart + i - 1, "");
+                    emptyLines++;
+                }
 
                 // More than before- add
                 if (i > importCount) {
@@ -84,6 +91,18 @@ public final class ClassUpdater {
                 }
             }
         }
+
+        // TODO: why is this needed???
+        if (emptyLines > 0) {
+            emptyLines++;
+        }
+
+        // Pop off empty lines we may have added
+        for (int i = 0; i < emptyLines; i++) {
+            newLines.remove(newLines.size() - 1);
+        }
+
+        newLines.addAll(updatedLines);
 
         try {
             PrintWriter writer = new PrintWriter(new FileOutputStream(file));
