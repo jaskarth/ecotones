@@ -6,7 +6,7 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.UniformIntDistribution;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.decorator.CountNoiseDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
@@ -123,7 +123,7 @@ public class ClayBasinBiome extends EcotonesBiomeBuilder {
                         .applyChance(8));
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                EcotonesFeatures.GROUND_PATCH.configure(new PatchFeatureConfig(Blocks.CLAY.getDefaultState(), Blocks.GRASS_BLOCK, UniformIntDistribution.of(2, 4)))
+                EcotonesFeatures.GROUND_PATCH.configure(new PatchFeatureConfig(Blocks.CLAY.getDefaultState(), Blocks.GRASS_BLOCK, UniformIntProvider.create(2, 6)))
                         .spreadHorizontally()
                         .repeat(clayCount));
 
@@ -134,14 +134,14 @@ public class ClayBasinBiome extends EcotonesBiomeBuilder {
                         .repeat(waterCount));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.DUCKWEED.configure(new DuckweedFeatureConfig(UniformIntDistribution.of(64, 32), UniformIntDistribution.of(10, 4)))
+                EcotonesFeatures.DUCKWEED.configure(new DuckweedFeatureConfig(UniformIntProvider.create(64, 96), UniformIntProvider.create(10, 14)))
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
                         .applyChance(4)
                         .repeat(2));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.DUCKWEED.configure(new DuckweedFeatureConfig(UniformIntDistribution.of(8, 8), UniformIntDistribution.of(4, 2)))
+                EcotonesFeatures.DUCKWEED.configure(new DuckweedFeatureConfig(UniformIntProvider.create(8, 16), UniformIntProvider.create(4, 6)))
                         .decorate(Decorator.HEIGHTMAP.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
                         .applyChance(4));

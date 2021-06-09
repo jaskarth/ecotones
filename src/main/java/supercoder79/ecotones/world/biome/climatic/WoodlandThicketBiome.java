@@ -7,7 +7,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.UniformIntDistribution;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.decorator.CountNoiseDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
@@ -98,7 +98,7 @@ public class WoodlandThicketBiome extends EcotonesBiomeBuilder {
                 Feature.TREE.configure(new TreeFeatureConfig.Builder(
                         new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
                         new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
-                        new LargeOakFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(4), 4),
+                        new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4),
                         new LargeOakTrunkPlacer(3, 11, 0),
                         new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
                         .ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build())

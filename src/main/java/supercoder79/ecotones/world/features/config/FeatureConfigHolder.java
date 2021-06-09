@@ -4,7 +4,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.UniformIntDistribution;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
@@ -299,7 +300,7 @@ public final class FeatureConfigHolder {
             new TreeFeatureConfig.Builder(
                     new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
                     new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
-                    new SpruceFoliagePlacer(UniformIntDistribution.of(2, 1), UniformIntDistribution.of(0, 2), UniformIntDistribution.of(1, 1)),
+                    new SpruceFoliagePlacer(UniformIntProvider.create(2, 3), UniformIntProvider.create(0, 2), UniformIntProvider.create(1, 2)),
                     new StraightTrunkPlacer(6, 4, 3),
                     new TwoLayersFeatureSize(2, 0, 2))
                     .ignoreVines().build().setTreeDecorators(ImmutableList.of(new PineconeTreeDecorator(6), new LichenTreeDecorator(12), new LeafPileTreeDecorator(EcotonesBlocks.SPRUCE_LEAF_PILE.getDefaultState(), 12, 4)));
@@ -307,7 +308,7 @@ public final class FeatureConfigHolder {
     public static final TreeFeatureConfig SMALL_PINE_CONFIG = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.SPRUCE_LEAVES.getDefaultState()),
-            new SmallPineFoliagePlacer(UniformIntDistribution.of(1, 0), UniformIntDistribution.of(0, 1), UniformIntDistribution.of(4, 2)),
+            new SmallPineFoliagePlacer(UniformIntProvider.create(1, 1), UniformIntProvider.create(0, 1), UniformIntProvider.create(4, 6)),
             new StraightTrunkPlacer(9, 6, 0),
             new TwoLayersFeatureSize(2, 0, 2))
             .ignoreVines().build()
@@ -316,14 +317,14 @@ public final class FeatureConfigHolder {
     public static final TreeFeatureConfig JUNGLE = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.JUNGLE_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.JUNGLE_LEAVES.getDefaultState()),
-            new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3),
+            new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
             new StraightTrunkPlacer(4, 8, 0), new TwoLayersFeatureSize(1, 0, 1))
             .decorators(ImmutableList.of(new CocoaBeansTreeDecorator(0.2F), TrunkVineTreeDecorator.INSTANCE, LeavesVineTreeDecorator.INSTANCE)).ignoreVines().build();
 
     public static final TreeFeatureConfig MEGA_JUNGLE = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.JUNGLE_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.JUNGLE_LEAVES.getDefaultState()),
-            new JungleFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 2),
+            new JungleFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 2),
             new MegaJungleTrunkPlacer(10, 2, 19),
             new TwoLayersFeatureSize(1, 1, 2))
             .decorators(ImmutableList.of(TrunkVineTreeDecorator.INSTANCE, LeavesVineTreeDecorator.INSTANCE)).build();
@@ -331,7 +332,7 @@ public final class FeatureConfigHolder {
     public static final TreeFeatureConfig DRY_STEPPE_TREE = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
-            new PlusLeavesFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
+            new PlusLeavesFoliagePlacer(ConstantIntProvider.create(0), ConstantIntProvider.create(0)),
             new LargeOakTrunkPlacer(8, 6, 0),
             new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
             .ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build();

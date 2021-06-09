@@ -7,7 +7,7 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.UniformIntDistribution;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
@@ -35,7 +35,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
     public static final TreeFeatureConfig JUNGLE_TREE = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.JUNGLE_LOG.getDefaultState()),
             new SimpleBlockStateProvider(Blocks.JUNGLE_LEAVES.getDefaultState()),
-            new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3),
+            new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
             new StraightTrunkPlacer(4, 8, 0), new TwoLayersFeatureSize(1, 0, 1))
             .decorators(ImmutableList.of(
                     new CocoaBeansTreeDecorator(0.2F),

@@ -6,7 +6,7 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.UniformIntDistribution;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountNoiseDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
@@ -39,7 +39,7 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
             new TreeFeatureConfig.Builder(
                     new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
                     new SimpleBlockStateProvider(EcotonesBlocks.HAZEL_LEAVES.getDefaultState()),
-                    new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 4),
+                    new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 4),
                     new StraightTrunkPlacer(6, 2, 0),
                     new TwoLayersFeatureSize(2, 0, 2))
         .ignoreVines().build();
