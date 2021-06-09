@@ -1,10 +1,10 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.8-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
@@ -12,7 +12,7 @@ group = project.maven_group
 
 repositories {
 	mavenLocal()
-	maven { url = "https://jitpack.io" }
+	maven { url = "https://maven.gegy.dev" }
 }
 
 minecraft {
@@ -23,12 +23,12 @@ dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
-	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 
-	modRuntime ("com.github.SuperCoder7979:databreaker:0.2.6") {
+	modRuntime ("supercoder79:databreaker:0.2.7") {
 		exclude module : "fabric-loader"
 	}
 
@@ -39,14 +39,11 @@ dependencies {
 processResources {
 	inputs.property "version", project.version
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
+	filesMatching("fabric.mod.json") {
 		expand "version": project.version
 	}
 
 	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
-
 		// Exclude unused textures
 		exclude 'assets/ecotones/textures/unused/**'
 
