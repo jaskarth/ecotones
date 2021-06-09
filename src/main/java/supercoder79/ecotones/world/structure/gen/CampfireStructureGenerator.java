@@ -6,9 +6,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtString;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.Identifier;
@@ -22,6 +23,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import supercoder79.ecotones.items.EcotonesItems;
+import supercoder79.ecotones.util.BoxHelper;
 import supercoder79.ecotones.util.CampfireLogHelper;
 import supercoder79.ecotones.util.book.*;
 import supercoder79.ecotones.world.features.FeatureHelper;
@@ -40,20 +42,19 @@ public class CampfireStructureGenerator {
         private final Block logSource;
 
         protected Piece(BlockPos pos, Block logSource) {
-            super(EcotonesStructurePieces.CAMPFIRE, 0);
+            super(EcotonesStructurePieces.CAMPFIRE, 0, BoxHelper.box(pos.add(-3, -3, -3), pos.add(3, 3, 3)));
             this.pos = pos;
             this.logSource = logSource;
-            this.boundingBox = new BlockBox(pos.add(-3, -3, -3), pos.add(3, 3, 3));
         }
 
-        public Piece(StructureManager manager, CompoundTag nbt) {
+        public Piece(ServerWorld world, NbtCompound nbt) {
             super(EcotonesStructurePieces.CAMPFIRE, nbt);
             this.pos = new BlockPos(nbt.getInt("x"), nbt.getInt("y"), nbt.getInt("z"));
             this.logSource = Registry.BLOCK.get(new Identifier(nbt.getString("log_source")));
         }
 
         @Override
-        protected void toNbt(CompoundTag tag) {
+        protected void writeNbt(ServerWorld world, NbtCompound tag) {
             tag.putInt("x", this.pos.getX());
             tag.putInt("y", this.pos.getY());
             tag.putInt("z", this.pos.getZ());
@@ -102,17 +103,17 @@ public class CampfireStructureGenerator {
 
         private ItemStack generateBook(Random random) {
             ItemStack stack = new ItemStack(EcotonesItems.ECOTONES_BOOK);
-            CompoundTag tag = new CompoundTag();
+            NbtCompound tag = new NbtCompound();
 
             BookGenerator generator = BookList.get(random);
             tag.putString("title", TitleGenerator.generate(generator, random));
             tag.putString("author", AuthorGenerator.generate(random));
 
-            ListTag pages = new ListTag();
+            NbtList pages = new NbtList();
             List<String> pageList = PageGenerator.generate(generator, random);
 
             for (String page : pageList) {
-                pages.add(StringTag.of(page));
+                pages.add(NbtString.of(page));
             }
 
             tag.put("pages", pages);

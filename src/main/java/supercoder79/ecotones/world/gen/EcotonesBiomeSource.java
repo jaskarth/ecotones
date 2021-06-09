@@ -2,8 +2,8 @@ package supercoder79.ecotones.world.gen;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.dynamic.RegistryLookupCodec;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryLookupCodec;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.BuiltinBiomes;

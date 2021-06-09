@@ -2,7 +2,6 @@ package supercoder79.ecotones.world.gen;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.class_5742;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;

@@ -4,7 +4,8 @@ import net.minecraft.block.*;
 import net.minecraft.block.enums.BedPart;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.block.enums.SlabType;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.structure.StructurePieceType;
@@ -15,6 +16,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import supercoder79.ecotones.util.BoxHelper;
 import supercoder79.ecotones.util.deco.BlockAttachment;
 import supercoder79.ecotones.util.deco.BlockDecorations;
 import supercoder79.ecotones.util.deco.DecorationCategory;
@@ -34,19 +36,19 @@ public class CottageGenerator {
     private static abstract class CottagePiece extends StructurePiece {
         protected final BlockPos pos;
 
-        protected CottagePiece(StructurePieceType type, BlockPos pos) {
-            super(type, 0);
+        protected CottagePiece(StructurePieceType type, BlockPos pos, BlockBox box) {
+            super(type, 0, box);
 
             this.pos = pos;
         }
 
-        public CottagePiece(StructurePieceType type, CompoundTag nbt) {
+        public CottagePiece(StructurePieceType type, NbtCompound nbt) {
             super(type, nbt);
             this.pos = new BlockPos(nbt.getInt("x"), nbt.getInt("y"), nbt.getInt("z"));
         }
 
         @Override
-        protected void toNbt(CompoundTag nbt) {
+        protected void writeNbt(ServerWorld world, NbtCompound nbt) {
             nbt.putInt("x", this.pos.getX());
             nbt.putInt("y", this.pos.getY());
             nbt.putInt("z", this.pos.getZ());
@@ -60,11 +62,10 @@ public class CottageGenerator {
 
     public static class CenterRoom extends CottagePiece {
         public CenterRoom(BlockPos pos) {
-            super(EcotonesStructurePieces.COTTAGE_CENTER, pos);
-            this.boundingBox = new BlockBox(pos.add(-5, 0, -5), pos.add(6, 8, 10));
+            super(EcotonesStructurePieces.COTTAGE_CENTER, pos, BoxHelper.box(pos.add(-5, 0, -5), pos.add(6, 8, 10)));
         }
 
-        public CenterRoom(StructureManager structureManager, CompoundTag nbt) {
+        public CenterRoom(ServerWorld world, NbtCompound nbt) {
             super(EcotonesStructurePieces.COTTAGE_CENTER, nbt);
         }
 
@@ -205,11 +206,10 @@ public class CottageGenerator {
 
     public static class Porch extends CottagePiece {
         public Porch(BlockPos pos) {
-            super(EcotonesStructurePieces.COTTAGE_PORCH, pos);
-            this.boundingBox = new BlockBox(pos.add(-5, 0, -5), pos.add(6, 6, 6));
+            super(EcotonesStructurePieces.COTTAGE_PORCH, pos, BoxHelper.box(pos.add(-5, 0, -5), pos.add(6, 6, 6)));
         }
 
-        public Porch(StructureManager structureManager, CompoundTag nbt) {
+        public Porch(ServerWorld world, NbtCompound nbt) {
             super(EcotonesStructurePieces.COTTAGE_PORCH, nbt);
         }
 

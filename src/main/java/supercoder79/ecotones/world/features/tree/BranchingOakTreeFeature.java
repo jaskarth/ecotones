@@ -12,7 +12,7 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import net.minecraft.world.gen.tree.TrunkVineTreeDecorator;
+import net.minecraft.world.gen.treedecorator.TrunkVineTreeDecorator;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeHelper;

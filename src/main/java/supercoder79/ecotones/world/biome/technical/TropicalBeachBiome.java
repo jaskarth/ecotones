@@ -22,7 +22,7 @@ import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import net.minecraft.world.gen.tree.CocoaBeansTreeDecorator;
+import net.minecraft.world.gen.treedecorator.CocoaBeansTreeDecorator;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
