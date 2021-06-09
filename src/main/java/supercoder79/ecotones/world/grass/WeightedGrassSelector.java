@@ -21,7 +21,8 @@ public class WeightedGrassSelector extends GrassSelector {
 
     @Override
     public Selection select(int x, int z, Random random, DataHolder data) {
-        BlockState state = this.list.pickRandom(random);
-        return new Selection(state, this.weights.get(state));
+//        BlockState state = this.list.pickRandom(random);
+//        return new Selection(state, this.weights.get(state));
+        return null;
     }
 }

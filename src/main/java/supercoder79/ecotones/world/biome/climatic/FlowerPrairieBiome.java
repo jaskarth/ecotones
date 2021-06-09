@@ -111,8 +111,9 @@ public class FlowerPrairieBiome extends EcotonesBiomeBuilder {
                 Feature.FLOWER.configure(
                         (new RandomPatchFeatureConfig.Builder(ForestFlowerBlockStateProvider.INSTANCE, SimpleBlockPlacer.INSTANCE))
                                 .tries(64).build())
-                        .decorate(ConfiguredFeatures.Decorators.SPREAD_32_ABOVE)
-                        .decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP)
+                        .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .spreadHorizontally()
                         .repeat(100));
 
         // TODO

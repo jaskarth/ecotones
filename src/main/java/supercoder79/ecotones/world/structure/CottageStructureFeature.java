@@ -5,6 +5,7 @@ import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.world.HeightLimitView;
@@ -26,16 +27,16 @@ public class CottageStructureFeature extends StructureFeature<DefaultFeatureConf
     }
 
     public static class Start extends StructureStart<DefaultFeatureConfig> {
-        public Start(StructureFeature<DefaultFeatureConfig> feature, int chunkX, int chunkZ, BlockBox box, int references, long seed) {
-            super(feature, chunkX, chunkZ, box, references, seed);
+        public Start(StructureFeature<DefaultFeatureConfig> feature, ChunkPos pos, int references, long seed) {
+            super(feature, pos, references, seed);
         }
 
         @Override
-        public void init(DynamicRegistryManager registryManager, ChunkGenerator generator, StructureManager manager, int chunkX, int chunkZ, Biome biome, DefaultFeatureConfig config, HeightLimitView height) {
-            int x = ChunkSectionPos.getBlockCoord(chunkX) + this.random.nextInt(16);
-            int z = ChunkSectionPos.getBlockCoord(chunkZ) + this.random.nextInt(16);
+        public void init(DynamicRegistryManager registryManager, ChunkGenerator chunkGenerator, StructureManager manager, ChunkPos pos, Biome biome, DefaultFeatureConfig config, HeightLimitView world) {
+            int x = ChunkSectionPos.getBlockCoord(pos.x) + this.random.nextInt(16);
+            int z = ChunkSectionPos.getBlockCoord(pos.z) + this.random.nextInt(16);
 
-            CottageGenerator.generate(new BlockPos(x, generator.getHeightOnGround(x, z, Heightmap.Type.WORLD_SURFACE_WG, height), z), this.children, this.random);
+            CottageGenerator.generate(new BlockPos(x, chunkGenerator.getHeightOnGround(x, z, Heightmap.Type.WORLD_SURFACE_WG, world), z), this.children, this.random);
             this.setBoundingBoxFromChildren();
         }
     }

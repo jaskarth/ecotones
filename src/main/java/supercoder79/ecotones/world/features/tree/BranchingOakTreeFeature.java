@@ -2,6 +2,7 @@ package supercoder79.ecotones.world.features.tree;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.function.BiConsumer;
 
 //creates a branching trunk then places leaves
 public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
@@ -79,8 +81,10 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
         }
 
         if (config.generateVines) {
-            new LeafVineTreeDecorator(3, 4, 2).generate(world, random, ImmutableList.of(), leaves, new HashSet<>(), BlockBox.empty());
-            new TrunkVineTreeDecorator().generate(world, random, ImmutableList.of(), leaves, new HashSet<>(), BlockBox.empty());
+            BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
+
+            new LeafVineTreeDecorator(3, 4, 2).generate(world, replacer, random, ImmutableList.of(), leaves);
+            new TrunkVineTreeDecorator().generate(world, replacer, random, ImmutableList.of(), leaves);
         }
     }
 

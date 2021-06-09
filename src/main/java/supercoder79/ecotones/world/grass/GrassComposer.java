@@ -22,13 +22,15 @@ public final class GrassComposer {
     }
 
     public BlockState select(int x, int z, Random random, DataHolder data) {
-        WeightedList<BlockState> states = new WeightedList<>();
+//        WeightedList<BlockState> states = new WeightedList<>();
+//
+//        for (GrassSelector selector : this.selectors) {
+//            GrassSelector.Selection selection = selector.select(x, z, random, data);
+//            states.add(selection.state, selection.weight);
+//        }
+//
+//        return states.pickRandom(random);
 
-        for (GrassSelector selector : this.selectors) {
-            GrassSelector.Selection selection = selector.select(x, z, random, data);
-            states.add(selection.state, selection.weight);
-        }
-
-        return states.pickRandom(random);
+        return null;
     }
 }

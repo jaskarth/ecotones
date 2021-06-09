@@ -98,11 +98,12 @@ public class WoodlandThicketBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(new TreeFeatureConfig.Builder(
                         new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
-                        new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
-                        new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4),
                         new LargeOakTrunkPlacer(3, 11, 0),
+                        new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
+                        new SimpleBlockStateProvider(Blocks.OAK_SAPLING.getDefaultState()),
+                        new LargeOakFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 4),
                         new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))
-                        .ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build())
+                        .ignoreVines().build())
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(treeAmt + 0.5))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

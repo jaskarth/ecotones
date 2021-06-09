@@ -26,8 +26,8 @@ public class CattailFeature extends Feature<CattailFeatureConfig> {
         Random random = context.getRandom();
         CattailFeatureConfig config = context.getConfig();
 
-        int count = config.count.getValue(random);
-        int spread = config.spread.getValue(random);
+        int count = config.count.get(random);
+        int spread = config.spread.get(random);
 
         if (config.needsWater) {
             int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, pos.getX(), pos.getZ());

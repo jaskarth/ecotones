@@ -24,7 +24,7 @@ public class PatchFeature extends Feature<PatchFeatureConfig> {
         Random random = context.getRandom();
         PatchFeatureConfig config = context.getConfig();
 
-        int radius = config.radius.getValue(random);
+        int radius = config.radius.get(random);
         DoublePerlinNoiseSampler noise = DoublePerlinNoiseSampler.create(new ChunkRandom(random.nextLong()), -4, 1.0);
 
         for(int x = -radius; x <= radius; x++) {

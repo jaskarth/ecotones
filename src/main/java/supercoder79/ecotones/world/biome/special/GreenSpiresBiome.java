@@ -35,9 +35,11 @@ import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 public class GreenSpiresBiome extends EcotonesBiomeBuilder {
     public static final TreeFeatureConfig JUNGLE_TREE = new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(Blocks.JUNGLE_LOG.getDefaultState()),
+            new StraightTrunkPlacer(4, 8, 0),
             new SimpleBlockStateProvider(Blocks.JUNGLE_LEAVES.getDefaultState()),
+            new SimpleBlockStateProvider(Blocks.JUNGLE_SAPLING.getDefaultState()),
             new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
-            new StraightTrunkPlacer(4, 8, 0), new TwoLayersFeatureSize(1, 0, 1))
+            new TwoLayersFeatureSize(1, 0, 1))
             .decorators(ImmutableList.of(
                     new CocoaBeansTreeDecorator(0.2F),
                     TrunkVineTreeDecorator.INSTANCE,

@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.structure.DesertVillageData;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
@@ -91,7 +92,7 @@ public class ScrublandBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
                         new SimpleBlockStateProvider(Blocks.CACTUS.getDefaultState()),
-                        new ColumnPlacer(1, 2)).tries(10).cannotProject().build())
+                        new ColumnPlacer(UniformIntProvider.create(1, 3))).tries(10).cannotProject().build())
                         .decorate(Decorator.HEIGHTMAP_SPREAD_DOUBLE.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
                         .repeat(40));

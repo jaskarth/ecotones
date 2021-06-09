@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.features.tree;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
@@ -12,6 +13,7 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.util.BoxHelper;
 import supercoder79.ecotones.world.features.FeatureHelper;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.treedecorator.LeafPileTreeDecorator;
@@ -20,6 +22,7 @@ import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.BiConsumer;
 
 public class TallPineTree extends Feature<SimpleTreeFeatureConfig> {
     private static final PineconeTreeDecorator PINECONES = new PineconeTreeDecorator(2);
@@ -66,8 +69,10 @@ public class TallPineTree extends Feature<SimpleTreeFeatureConfig> {
         FeatureHelper.placeLeaves(context, pos.up(height + 1));
         leaves.add(pos.up(height + 1));
 
-        PINECONES.generate(world, random, ImmutableList.of(), leaves, ImmutableSet.of(), new BlockBox());
-        LEAF_PILES.generate(world, random, ImmutableList.of(), leaves, ImmutableSet.of(), new BlockBox());
+        BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
+
+        PINECONES.generate(world, replacer, random, ImmutableList.of(), leaves);
+        LEAF_PILES.generate(world, replacer, random, ImmutableList.of(), leaves);
 
         return false;
     }

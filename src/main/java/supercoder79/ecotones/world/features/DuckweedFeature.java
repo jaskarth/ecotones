@@ -26,8 +26,8 @@ public class DuckweedFeature extends Feature<DuckweedFeatureConfig> {
         ChunkGenerator generator = context.getGenerator();
         DuckweedFeatureConfig config = context.getConfig();
 
-        int count = config.count.getValue(random);
-        int spread = config.spread.getValue(random);
+        int count = config.count.get(random);
+        int spread = config.spread.get(random);
 
         BlockPos.Mutable mutable = pos.mutableCopy();
         for (int i = 0; i < count; i++) {

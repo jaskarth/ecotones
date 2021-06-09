@@ -39,6 +39,8 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
@@ -294,7 +296,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                 int localZ = chunkStartZ + z;
                 int y = chunk.sampleHeightmap(Type.WORLD_SURFACE_WG, x, z) + 1;
                 double e = this.surfaceDepthNoise.sample((double) localX * 0.0625D, (double) localZ * 0.0625D, 0.0625D, (double) x * 0.0625D) * 15.0D;
-                region.getBiome(mutable.set(localX, y, localZ)).buildSurface(random, chunk, localX, localZ, y, e, this.defaultBlock, this.defaultFluid, this.getSeaLevel(), region.getSeed());
+                region.getBiome(mutable.set(localX, y, localZ)).buildSurface(random, chunk, localX, localZ, y, e, this.defaultBlock, this.defaultFluid, this.getSeaLevel(), 0, region.getSeed());
             }
         }
 
@@ -315,7 +317,15 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         }
     }
 
-    public void populateNoise(WorldAccess world, StructureAccessor accessor, Chunk chunk) {
+    @Override
+    public CompletableFuture<Chunk> populateNoise(Executor executor, StructureAccessor accessor, Chunk chunk) {
+        // TODO: proper multithreading
+        populateNoise(accessor, chunk);
+
+        return CompletableFuture.completedFuture(chunk);
+    }
+
+    public void populateNoise(StructureAccessor accessor, Chunk chunk) {
         ObjectList<StructurePiece> structurePieces = new ObjectArrayList<>(10);
         ObjectList<JigsawJunction> jigsaws = new ObjectArrayList<>(32);
         ChunkPos pos = chunk.getPos();
@@ -452,9 +462,9 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                                 for(density = density / 2.0D - density * density * density / 24.0D; structurePieceIterator.hasNext(); density += getNoiseWeight(structureX, structureY, structureZ) * 0.8D) {
                                     StructurePiece structurePiece = structurePieceIterator.next();
                                     BlockBox box = structurePiece.getBoundingBox();
-                                    structureX = Math.max(0, Math.max(box.minX - realX, realX - box.maxX));
-                                    structureY = realY - (box.minY + (structurePiece instanceof PoolStructurePiece ? ((PoolStructurePiece)structurePiece).getGroundLevelDelta() : 0));
-                                    structureZ = Math.max(0, Math.max(box.minZ - realZ, realZ - box.maxZ));
+                                    structureX = Math.max(0, Math.max(box.getMinX() - realX, realX - box.getMaxX()));
+                                    structureY = realY - (box.getMinY() + (structurePiece instanceof PoolStructurePiece ? ((PoolStructurePiece)structurePiece).getGroundLevelDelta() : 0));
+                                    structureZ = Math.max(0, Math.max(box.getMinZ() - realZ, realZ - box.getMaxZ()));
                                 }
                                 structurePieceIterator.back(structurePieces.size());
 

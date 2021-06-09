@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.function.BiConsumer;
 
 public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
     private static final LeafVineTreeDecorator DECORATOR = new LeafVineTreeDecorator(3, 5, 3);
@@ -80,7 +81,9 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
             generateMainLeafLayer(world, node, leaves, config);
         }
 
-        DECORATOR.generate(world, random, ImmutableList.of(), leaves, new HashSet<>(), BlockBox.empty());
+        BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
+
+        DECORATOR.generate(world, replacer, random, ImmutableList.of(), leaves);
     }
 
     private void root(WorldAccess world, BlockPos startPos, Random random, float yaw, float pitch, TreeGenerationConfig config) {

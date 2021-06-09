@@ -5,6 +5,7 @@ import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.world.HeightLimitView;
@@ -25,13 +26,13 @@ public class CampfireStructureFeature extends StructureFeature<SingleStateFeatur
     }
 
     public static final class Start extends StructureStart<SingleStateFeatureConfig> {
-        public Start(StructureFeature<SingleStateFeatureConfig> feature, int chunkX, int chunkZ, BlockBox box, int references, long seed) {
-            super(feature, chunkX, chunkZ, box, references, seed);
+        public Start(StructureFeature<SingleStateFeatureConfig> feature, ChunkPos pos, int references, long seed) {
+            super(feature, pos, references, seed);
         }
 
         @Override
-        public void init(DynamicRegistryManager registryManager, ChunkGenerator chunkGenerator, StructureManager manager, int chunkX, int chunkZ, Biome biome, SingleStateFeatureConfig config, HeightLimitView heightLimitView) {
-            CampfireStructureGenerator.generate(new BlockPos(ChunkSectionPos.getBlockCoord(chunkX), 64, ChunkSectionPos.getBlockCoord(chunkZ)), this.children, this.random, config.state.getBlock());
+        public void init(DynamicRegistryManager registryManager, ChunkGenerator chunkGenerator, StructureManager manager, ChunkPos pos, Biome biome, SingleStateFeatureConfig config, HeightLimitView world) {
+            CampfireStructureGenerator.generate(new BlockPos(ChunkSectionPos.getBlockCoord(pos.x), 64, ChunkSectionPos.getBlockCoord(pos.z)), this.children, this.random, config.state.getBlock());
             this.setBoundingBoxFromChildren();
         }
     }

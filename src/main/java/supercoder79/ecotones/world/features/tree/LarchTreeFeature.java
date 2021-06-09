@@ -2,6 +2,7 @@ package supercoder79.ecotones.world.features.tree;
 
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
@@ -11,6 +12,7 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.util.BoxHelper;
 import supercoder79.ecotones.util.Shapes;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
@@ -18,6 +20,7 @@ import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.BiConsumer;
 
 public class LarchTreeFeature extends Feature<SimpleTreeFeatureConfig> {
     private static final PineconeTreeDecorator PINECONES = new PineconeTreeDecorator(2);
@@ -64,7 +67,9 @@ public class LarchTreeFeature extends Feature<SimpleTreeFeatureConfig> {
             mutable.move(Direction.UP);
         }
 
-        PINECONES.generate(world, random, logs, leaves, ImmutableSet.of(), new BlockBox());
+        BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
+
+        PINECONES.generate(world, replacer, random, logs, leaves);
 
         return true;
     }

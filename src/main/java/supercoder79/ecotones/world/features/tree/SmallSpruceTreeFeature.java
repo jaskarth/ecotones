@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.features.tree;
 
 import com.google.common.collect.ImmutableSet;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
@@ -10,6 +11,7 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.util.BoxHelper;
 import supercoder79.ecotones.util.Shapes;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
@@ -23,6 +25,7 @@ import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.BiConsumer;
 
 public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
     private static final PineconeTreeDecorator PINECONES = new PineconeTreeDecorator(2);
@@ -78,14 +81,16 @@ public class SmallSpruceTreeFeature extends Feature<SimpleTreeFeatureConfig> {
             mutable.move(Direction.UP);
         }
 
+        BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
+
         // Generate pinecones
-        PINECONES.generate(world, random, logs, leaves, ImmutableSet.of(), new BlockBox());
+        PINECONES.generate(world, replacer, random, logs, leaves);
 
         // Generate lichen
-        LICHEN.generate(world, random, logs, leaves, ImmutableSet.of(), new BlockBox());
+        LICHEN.generate(world, replacer, random, logs, leaves);
 
         // Generate leaf piles
-        LEAF_PILES.generate(world, random, logs, leaves, ImmutableSet.of(), new BlockBox());
+        LEAF_PILES.generate(world, replacer, random, logs, leaves);
 
         return false;
     }

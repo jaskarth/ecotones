@@ -103,9 +103,11 @@ public class PalmForestBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.JUNGLE_PALM_TREE.configure(new TreeFeatureConfig.Builder(
                         new SimpleBlockStateProvider(Blocks.JUNGLE_LOG.getDefaultState()),
+                        new StraightTrunkPlacer(4, 8, 0),
+                        new SimpleBlockStateProvider(Blocks.JUNGLE_LEAVES.getDefaultState()),
                         new SimpleBlockStateProvider(Blocks.JUNGLE_LEAVES.getDefaultState()),
                         new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
-                        new StraightTrunkPlacer(4, 8, 0), new TwoLayersFeatureSize(1, 0, 1))
+                        new TwoLayersFeatureSize(1, 0, 1))
                         .decorators(ImmutableList.of(
                                 new CocoaBeansTreeDecorator(0.2F),
                                 TrunkVineTreeDecorator.INSTANCE,

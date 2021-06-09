@@ -21,9 +21,9 @@ public class MixinBackgroundRenderer {
             long time = client.world.getTime();
 
             // TODO: biome humidity
-            RenderSystem.fogStart(Math.min(start, (float) (start * FogHandler.multiplierFor(time))) * heightMultiplier);
+            RenderSystem.setShaderFogStart(Math.min(start, (float) (start * FogHandler.multiplierFor(time))) * heightMultiplier);
         } else {
-            RenderSystem.fogStart(start);
+            RenderSystem.setShaderFogStart(start);
         }
     }
 }

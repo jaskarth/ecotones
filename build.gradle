@@ -43,13 +43,13 @@ processResources {
 		expand "version": project.version
 	}
 
-	from(sourceSets.main.resources.srcDirs) {
-		// Exclude unused textures
-		exclude 'assets/ecotones/textures/unused/**'
-
-		// Exclude template textures
-		exclude 'assets/ecotones/textures/template/**'
-	}
+//	from(sourceSets.main.resources.srcDirs) {
+//		// Exclude unused textures
+//		exclude 'assets/ecotones/textures/unused/**'
+//
+//		// Exclude template textures
+//		exclude 'assets/ecotones/textures/template/**'
+//	}
 
 }
 

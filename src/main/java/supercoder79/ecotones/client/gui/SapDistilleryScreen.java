@@ -40,7 +40,7 @@ public class SapDistilleryScreen extends HandledScreen<SapDistilleryScreenHandle
 
     @Override
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         this.client.getTextureManager().bindTexture(TEXTURE);
         int x = (this.width - this.backgroundWidth) / 2;
         int y = (this.height - this.backgroundHeight) / 2;
@@ -59,17 +59,17 @@ public class SapDistilleryScreen extends HandledScreen<SapDistilleryScreenHandle
         // Render overlay with alpha based on how much heat there is
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, this.handler.getHeat() / 3000.f);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, this.handler.getHeat() / 3000.f);
         this.drawTexture(matrices, x + 50, y + 23, 176, 14, 76, 38);
 
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         // Syrup cauldron
         int syrupAmt = this.handler.getSyrupAmount();
         int scaledSyrupAmt = (syrupAmt * 34) / 5000;
         this.drawTexture(matrices, x + 52, y + 26 + (33 - scaledSyrupAmt), 176, 88 - scaledSyrupAmt, 72, scaledSyrupAmt);
 
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         for (ParticleState particle : this.particles) {
             this.drawTexture(matrices, x + particle.pos.x, y + particle.pos.y, particle.getU(), 0, 3, 3);

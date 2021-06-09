@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.math.BlockPos;
@@ -19,13 +20,16 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.biome.source.BiomeAccess;
+import net.minecraft.world.biome.source.BiomeCoords;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ProtoChunk;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
+import net.minecraft.world.gen.carver.CarverContext;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
+import net.minecraft.world.gen.chunk.AquiferSampler;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
@@ -210,11 +214,6 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         SpawnHelper.populateEntities(region, biome, chunkPos, chunkRandom);
     }
 
-    @Override
-    public int getSpawnHeight() {
-        return 63;
-    }
-
     //height additions - makes the terrain a bit hillier
     private double sampleHilliness(int x, int y) {
         double noise = this.hillinessNoise.sample((x * 200), 10.0D, (y * 200), 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
@@ -236,7 +235,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         return noise;
     }
 
-    public List<SpawnSettings.SpawnEntry> getEntitySpawnList(Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos) {
+    public Pool<SpawnSettings.SpawnEntry> getEntitySpawnList(Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos) {
         if (accessor.getStructureAt(pos, true, StructureFeature.SWAMP_HUT).hasChildren()) {
             if (group == SpawnGroup.MONSTER) {
                 return StructureFeature.SWAMP_HUT.getMonsterSpawns();
@@ -312,11 +311,17 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         ChunkPos chunkPos = chunk.getPos();
         int j = chunkPos.x;
         int k = chunkPos.z;
-        GenerationSettings generationSettings = this.populationSource.getBiomeForNoiseGen(class_5742.method_33100(chunkPos.getStartX()), 0, class_5742.method_33100(chunkPos.getStartZ())).getGenerationSettings();
+        GenerationSettings generationSettings = this.populationSource.getBiomeForNoiseGen(BiomeCoords.fromBlock(chunkPos.getStartX()), 0, BiomeCoords.fromBlock(chunkPos.getStartZ())).getGenerationSettings();
         BitSet bitSet = ((ProtoChunk)chunk).getOrCreateCarvingMask(carver);
 
+        CarverContext carverContext = new CarverContext(this);
+        AquiferSampler aquiferSampler = AquiferSampler.seaLevel(this.getSeaLevel(), this.defaultFluid);
+
+        // TODO: clean up, 1.17 made it so
         for(int l = j - 8; l <= j + 8; ++l) {
             for(int m = k - 8; m <= k + 8; ++m) {
+                ChunkPos chunkPos2 = new ChunkPos(l, m);
+
                 List<Supplier<ConfiguredCarver<?>>> list = generationSettings.getCarversForStep(carver);
                 ListIterator listIterator = list.listIterator();
 
@@ -324,8 +329,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
                     int n = listIterator.nextIndex();
                     ConfiguredCarver<?> configuredCarver = (ConfiguredCarver)((Supplier)listIterator.next()).get();
                     chunkRandom.setCarverSeed(seed + (long)n, l, m);
-                    if (configuredCarver.shouldCarve(chunkRandom, l, m)) {
-                        configuredCarver.carve(chunk, biomeAccess::getBiome, chunkRandom, this.getSeaLevel(), l, m, j, k, bitSet);
+                    if (configuredCarver.shouldCarve(chunkRandom)) {
+                        configuredCarver.carve(carverContext, chunk, biomeAccess::getBiome, chunkRandom, aquiferSampler, chunkPos2, bitSet);
                     }
                 }
             }

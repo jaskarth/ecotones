@@ -15,7 +15,6 @@
   ],
   "client": [
     "EntityModelLayersAccessor",
-    "MixinBackgroundRenderer",
     "MixinBiomeColors",
     "MixinClientPlayNetworkHandler",
     "MixinClientWorld",
@@ -23,8 +22,7 @@
     "MixinEntityModels",
     "MixinHeldItemRenderer",
     "MixinMinecraftClient",
-    "MixinSkyProperties",
-    "MixinWorldRenderer"
+    "MixinSkyProperties"
   ],
   "injectors": {
     "defaultRequire": 1
