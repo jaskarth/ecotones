@@ -25,22 +25,21 @@ public final class UniformIntUpdate extends Update {
         List<String> params = ParseInvoc.parseInvocation(line, idx + PATTERN.length());
 
         String updated = line.substring(0, idx);
-        if (params.size() == 0) {
+
+        if (params.size() == 1) {
             // Constant int, simply rename ref
             updated += CONSTANT;
             // Add the end of the line
-            updated += line.substring(idx + PATTERN.length() + (CONSTANT.length() - PATTERN.length()));
+            updated += line.substring(idx + PATTERN.length());
         } else {
             // Get list of params
             int paramsLength = ParseInvoc.invocationLength(line, idx + PATTERN.length());
-            // Capture the total list of params
-            String paramsString = line.substring(idx + PATTERN.length() + paramsLength);
             // Add uniform ref
             updated += UNIFORM;
             // Update the (base, spread) to (min, max)
             updated += "(" + params.get(0) + ", " + (Integer.parseInt(params.get(0)) + Integer.parseInt(params.get(1))) + ")";
-            // Add the rest of the string, but replace the old parameters
-            updated += line.substring(idx + PATTERN.length()).replace(paramsString, "");
+            // Add the rest of the string, but skipping over the existing params length
+            updated += line.substring(idx + PATTERN.length() + paramsLength);
         }
 
         return new UpdateResult(updated, true);
