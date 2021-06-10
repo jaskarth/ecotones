@@ -21,7 +21,9 @@
       "conditions": {
         "items": [
           {
-            "item": "ecotones:sap_ball"
+            "items": [
+              "ecotones:sap_ball"
+            ]
           }
         ]
       }

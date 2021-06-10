@@ -21,7 +21,9 @@
       "conditions": {
         "items": [
           {
-            "item": "ecotones:rosemary"
+            "items": [
+              "ecotones:rosemary"
+            ]
           }
         ]
       }

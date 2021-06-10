@@ -136,20 +136,20 @@ public final class FeatureConfigHolder {
     public static final RandomPatchFeatureConfig DESERT_GRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.SANDY_GRASS.getDefaultState(), 1)), new SimpleBlockPlacer())
-                    .spreadX(15)
-                    .spreadZ(15)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .tries(24).build();
 
     public static final RandomPatchFeatureConfig SMALL_CACTUS =
             new RandomPatchFeatureConfig.Builder(SmallCactusBlockStateProvider.INSTANCE, new SimpleBlockPlacer())
-                    .spreadX(15)
-                    .spreadZ(15)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .tries(12).build();
 
     public static final RandomPatchFeatureConfig THORN_BUSH =
             new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(EcotonesBlocks.THORN_BUSH.getDefaultState()), new SimpleBlockPlacer())
-                    .spreadX(15)
-                    .spreadZ(15)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .tries(16).build();
 
     // flowers
@@ -157,24 +157,24 @@ public final class FeatureConfigHolder {
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1)),
                     new SimpleBlockPlacer())
-                    .spreadX(15)
-                    .spreadZ(15)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .tries(64).build();
 
     public static final RandomPatchFeatureConfig WIDE_FERNS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.WIDE_FERN.getDefaultState(), 1)),
                     new SimpleBlockPlacer())
-                    .spreadX(11)
-                    .spreadZ(11)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .tries(48).build();
 
     public static final RandomPatchFeatureConfig SMALL_LILAC =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.SMALL_LILAC.getDefaultState(), 1)),
                     new SimpleBlockPlacer())
-                    .spreadX(15)
-                    .spreadZ(15)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .tries(12).build();
 
     public static final RandomPatchFeatureConfig LAVENDER =
@@ -189,8 +189,8 @@ public final class FeatureConfigHolder {
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1)),
                     new SimpleBlockPlacer())
-                    .spreadX(12)
-                    .spreadZ(12)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .tries(32).build();
 
     public static final RandomPatchFeatureConfig DANDELION_FIELD_FLOWERS =
@@ -207,8 +207,8 @@ public final class FeatureConfigHolder {
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.CYAN_ROSE.getDefaultState(), 1)),
                     new SimpleBlockPlacer())
-                    .spreadX(15)
-                    .spreadZ(15)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .tries(32).build();
 
     // misc
@@ -216,16 +216,16 @@ public final class FeatureConfigHolder {
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.SURFACE_ROCK.getDefaultState(), 1)),
                     new SimpleBlockPlacer())
-                    .spreadX(15)
-                    .spreadZ(15)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .tries(4).build();
 
     public static final RandomPatchFeatureConfig CLOVER =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.CLOVER.getDefaultState(), 1)),
                     new SimpleBlockPlacer())
-                    .spreadX(15)
-                    .spreadZ(15)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK))
                     .tries(12).build();
 
@@ -233,8 +233,8 @@ public final class FeatureConfigHolder {
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.MOSS.getDefaultState(), 1)),
                     new SimpleBlockPlacer())
-                    .spreadX(23)
-                    .spreadZ(23)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK))
                     .tries(16).build();
 
@@ -242,8 +242,8 @@ public final class FeatureConfigHolder {
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(Blocks.PUMPKIN.getDefaultState(), 1)),
                     new SimpleBlockPlacer())
-                    .spreadX(12)
-                    .spreadZ(12)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK))
                     .tries(64).build();
 
@@ -251,8 +251,8 @@ public final class FeatureConfigHolder {
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(Blocks.COBWEB.getDefaultState(), 1)),
                     new SimpleBlockPlacer())
-                    .spreadX(8)
-                    .spreadZ(8)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK))
                     .tries(12).build();
 
@@ -267,8 +267,8 @@ public final class FeatureConfigHolder {
                     .add(Blocks.BROWN_MUSHROOM.getDefaultState(), 1)
                     .add(Blocks.RED_MUSHROOM.getDefaultState(), 1)),
                     new SimpleBlockPlacer())
-                    .spreadX(15)
-                    .spreadZ(15)
+                    .spreadX(7)
+                    .spreadZ(7)
                     .tries(64).build();
 
     public static final WaterFeatureConfig GRASS_WATER_PATCH =

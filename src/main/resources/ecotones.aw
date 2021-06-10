@@ -8,3 +8,4 @@ accessible method net/minecraft/client/render/RenderLayer of (Ljava/lang/String;
 
 accessible field net/minecraft/world/gen/decorator/DecoratorContext generator Lnet/minecraft/world/gen/chunk/ChunkGenerator;
 accessible field net/minecraft/world/biome/BuiltinBiomes BY_RAW_ID Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+accessible field net/minecraft/client/render/RenderPhase POSITION_COLOR_TEXTURE_SHADER Lnet/minecraft/client/render/RenderPhase$Shader;
