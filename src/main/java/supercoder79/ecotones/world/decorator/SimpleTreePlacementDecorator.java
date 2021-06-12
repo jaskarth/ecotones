@@ -40,6 +40,10 @@ public class SimpleTreePlacementDecorator extends Decorator<SimpleTreeDecoration
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
             int y = context.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
+            if (y < context.generator.getSeaLevel()) {
+                continue;
+            }
+
 
             //just go with the position if the ground check can be ignored
             if (config.ignoreGroundCheck) {

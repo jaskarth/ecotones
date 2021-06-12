@@ -12,9 +12,8 @@ import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-//stupid name but i had to make it sound cool :P
-public class AnalyticShrubPlacementDecorator extends Decorator<ShrubDecoratorConfig> {
-    public AnalyticShrubPlacementDecorator(Codec<ShrubDecoratorConfig> codec) {
+public class ShrubPlacementDecorator extends Decorator<ShrubDecoratorConfig> {
+    public ShrubPlacementDecorator(Codec<ShrubDecoratorConfig> codec) {
         super(codec);
     }
 

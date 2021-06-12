@@ -10,9 +10,9 @@ import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesDecorators {
-    public static final Decorator<ShrubDecoratorConfig> SHRUB_PLACEMENT_DECORATOR = new AnalyticShrubPlacementDecorator(ShrubDecoratorConfig.CODEC);
+    public static final Decorator<ShrubDecoratorConfig> SHRUB_PLACEMENT_DECORATOR = new ShrubPlacementDecorator(ShrubDecoratorConfig.CODEC);
     public static final Decorator<NopeDecoratorConfig> DRAINAGE_DECORATOR = new DrainageSurfaceDecorator(NopeDecoratorConfig.CODEC);
-    public static final Decorator<TreeGenerationConfig.DecorationData> TREE_DECORATOR = new AnalyticTreePlacementDecorator(TreeGenerationConfig.DecorationData.CODEC);
+    public static final Decorator<TreeGenerationConfig.DecorationData> TREE_DECORATOR = new TreePlacementDecorator(TreeGenerationConfig.DecorationData.CODEC);
     public static final Decorator<SimpleTreeDecorationData> SIMPLE_TREE_DECORATOR = new SimpleTreePlacementDecorator(SimpleTreeDecorationData.CODEC);
     public static final Decorator<SimpleTreeDecorationData> REVERSE_QUALITY_TREE_DECORATOR = new ReverseTreePlacementDecorator(SimpleTreeDecorationData.CODEC);
     public static final Decorator<NopeDecoratorConfig> ABOVE_QUALITY = new AboveQualityDecorator(NopeDecoratorConfig.CODEC);

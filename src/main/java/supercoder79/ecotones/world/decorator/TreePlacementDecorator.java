@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConfig.DecorationData> {
-    public AnalyticTreePlacementDecorator(Codec<TreeGenerationConfig.DecorationData> codec) {
+public class TreePlacementDecorator extends Decorator<TreeGenerationConfig.DecorationData> {
+    public TreePlacementDecorator(Codec<TreeGenerationConfig.DecorationData> codec) {
         super(codec);
     }
 
@@ -39,6 +39,9 @@ public class AnalyticTreePlacementDecorator extends Decorator<TreeGenerationConf
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
             int y = context.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
+            if (y < context.generator.getSeaLevel()) {
+                continue;
+            }
 
             //make trees smaller as the height increases
             int maxFinal = maxHeight;

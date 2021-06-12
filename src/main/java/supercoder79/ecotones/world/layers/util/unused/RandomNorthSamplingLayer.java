@@ -1,4 +1,4 @@
-package supercoder79.ecotones.world.layers.util.cursed;
+package supercoder79.ecotones.world.layers.util.unused;
 
 import net.minecraft.world.biome.layer.type.ParentedLayer;
 import net.minecraft.world.biome.layer.util.IdentityCoordinateTransformer;
