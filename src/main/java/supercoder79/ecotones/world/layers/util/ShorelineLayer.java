@@ -8,7 +8,7 @@ import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
 import supercoder79.ecotones.world.biome.BiomeHelper;
-import supercoder79.ecotones.world.layers.generation.ClimateLayers;
+import supercoder79.ecotones.world.layers.generation.ClimateLayer;
 import supercoder79.ecotones.world.layers.seed.SeedLayer;
 
 import java.util.Random;
@@ -31,7 +31,7 @@ public enum ShorelineLayer implements ParentedLayer, IdentityCoordinateTransform
 
         if (!BiomeHelper.isOcean(center)) {
             if (BiomeHelper.isOcean(n) || BiomeHelper.isOcean(e) || BiomeHelper.isOcean(s) || BiomeHelper.isOcean(w)) {
-                double humidity = MathHelper.clamp(ClimateLayers.humidityNoise.sample(((x >> 4) + ClimateLayers.INSTANCE.humidityOffsetX) / 2.5, ((z >> 4) + ClimateLayers.INSTANCE.humidityOffsetZ) / 2.5) * 1.25, -1, 1);
+                double humidity = MathHelper.clamp(ClimateLayer.humidityNoise.sample(((x >> 4) + ClimateLayer.INSTANCE.humidityOffsetX) / 2.5, ((z >> 4) + ClimateLayer.INSTANCE.humidityOffsetZ) / 2.5) * 1.25, -1, 1);
                 if (humidity < -0.5) {
                     return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(DRY));
                 } else {

@@ -130,6 +130,8 @@ public final class Ecotones implements ModInitializer {
 			MapSoilPhCommand.init();
 			DumpClimatesCommand.init();
 			TestTranslationKeysCommand.init();
+			MapClimatesCommand.init();
+			MapMountainsCommand.init();
 		}
 
 		// Biome count summary and biome finalization

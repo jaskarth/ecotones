@@ -12,7 +12,7 @@ import supercoder79.ecotones.world.layers.seed.SeedInitLayer;
 
 import java.util.Random;
 
-public enum ClimateLayers implements InitLayer, SeedInitLayer {
+public enum ClimateLayer implements InitLayer, SeedInitLayer {
     INSTANCE;
 
     public static OpenSimplexNoise humidityNoise;
@@ -25,8 +25,8 @@ public enum ClimateLayers implements InitLayer, SeedInitLayer {
 
     @Override
     public int sample(LayerRandomnessSource context, int x, int z) {
-        double humidity = MathHelper.clamp(humidityNoise.sample((x + humidityOffsetX) / 2.5f, (z + humidityOffsetZ) / 2.5f)*1.25, -1, 1);
-        double temperature = temperatureNoise.sample((x + temperatureOffsetX) / 6f, (z + temperatureOffsetZ) / 6f);
+        double humidity = MathHelper.clamp(ClimateLayer.humidityNoise.sample((x + ClimateLayer.INSTANCE.humidityOffsetX) / 6.0, (z + ClimateLayer.INSTANCE.humidityOffsetZ) / 6.0) * 1.1, -1, 1);
+        double temperature = ClimateLayer.temperatureNoise.sample((x + ClimateLayer.INSTANCE.temperatureOffsetX) / 8.0, (z + ClimateLayer.INSTANCE.temperatureOffsetZ) / 8.0);
         if (temperature > 0) {
             // === Hot Biomes ===
             if (humidity > 0.8) {

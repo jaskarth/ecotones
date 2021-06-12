@@ -28,7 +28,7 @@ public class UluruBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerSpecialBiome(INSTANCE, id ->
                 BiomeHelper.contains(id, "desert") || BiomeHelper.contains(id, "scrub"));
 
-        BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 150);
+        BiomeRegistries.registerSmallSpecialBiome(INSTANCE, 250);
     }
 
 

@@ -62,10 +62,5 @@
 * Fix disks
 * Skip analysis when good soil quality
 
-# 1.17
-* Smaller biome sizes
-* Increase biome smoothing radius
-* Rename Dry Forest
-
 # Automation
 * Testing suite to find errors within biomes (no strongholds, etc.)
