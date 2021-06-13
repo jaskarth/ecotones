@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class ClassUpdater {
-    public static void update(Update update, ClassData data, File file) {
+    public static boolean update(Update update, ClassData data, File file) {
         if (data == null) {
-            return;
+            return false;
         }
 
         Matcher matcher = update.when();
@@ -65,7 +65,7 @@ public final class ClassUpdater {
             update.finalize(data);
         } else {
             // Don't write classes if we haven't updated
-            return;
+            return false;
         }
 
         List<String> newLines = new ArrayList<>();
@@ -138,5 +138,7 @@ public final class ClassUpdater {
             e.printStackTrace();
             System.out.println("Error writing file " + file.getAbsolutePath());
         }
+
+        return true;
     }
 }

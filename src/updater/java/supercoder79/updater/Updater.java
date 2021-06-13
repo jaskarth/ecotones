@@ -38,12 +38,16 @@ public final class Updater {
         for (Update update : this.updates) {
             System.out.println("Starting update " + update.getClass().getSimpleName() + "...");
 
+            int i = 0;
             for (File file : this.files) {
                 ClassData data = ClassProcessor.process(file);
-                ClassUpdater.update(update, data, file);
+                boolean updated = ClassUpdater.update(update, data, file);
+                if (updated) {
+                    i++;
+                }
             }
 
-            System.out.println("Done.");
+            System.out.println("Done. Updated " + i + " files.");
         }
     }
 }
