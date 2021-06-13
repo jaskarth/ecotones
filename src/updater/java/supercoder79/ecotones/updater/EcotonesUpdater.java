@@ -1,5 +1,6 @@
 package supercoder79.ecotones.updater;
 
+import supercoder79.ecotones.updater.mc117.AddAmethystGeodesUpdate;
 import supercoder79.ecotones.updater.mc117.RangeOfUpdate;
 import supercoder79.ecotones.updater.mc117.UniformIntUpdate;
 import supercoder79.updater.Updater;
@@ -10,7 +11,7 @@ public class EcotonesUpdater {
     public static void main(String[] args) {
         Updater updater = new Updater();
         updater.loadPath(Paths.get(args[0]));
-        updater.register(new UniformIntUpdate(), new RangeOfUpdate());
+        updater.register(new UniformIntUpdate(), new RangeOfUpdate(), new AddAmethystGeodesUpdate());
         updater.run();
     }
 }
