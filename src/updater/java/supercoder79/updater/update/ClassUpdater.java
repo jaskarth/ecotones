@@ -2,6 +2,7 @@ package supercoder79.updater.update;
 
 import supercoder79.updater.code.ClassData;
 import supercoder79.updater.match.Matcher;
+import supercoder79.updater.util.LineResult;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,17 +23,32 @@ public final class ClassUpdater {
         for (int i = data.startIdx(); i < data.lines().size(); i++) {
             String curr = data.lines().get(i);
 
+            int indent = 0;
+            // Calculate indent
+            for (char c : curr.toCharArray()) {
+                if (c == ' ') {
+                    indent++;
+                } else {
+                    break;
+                }
+            }
+
             while (true) {
                 List<Integer> points = matcher.match(curr);
 
                 boolean updated = false;
                 for (Integer point : points) {
                     UpdateResult res = update.update(curr, i, point, data.lines(), data);
-                    if (res.updated()) {
+                    if (res.recurse()) {
                         curr = res.result();
                         updated = true;
                         appliedUpdate = true;
                         break;
+                    }
+
+                    for (LineResult lineResult : res.addedLinesAfter()) {
+                        // Calculate indent if we need to auto indent, otherwise just add line
+                        data.lines().add(i + lineResult.offset() + 1, lineResult.autoIndent() ? " ".repeat(indent) + lineResult.content() : lineResult.content());
                     }
                 }
 
