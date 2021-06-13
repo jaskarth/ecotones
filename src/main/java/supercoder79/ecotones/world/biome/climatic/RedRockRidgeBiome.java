@@ -8,6 +8,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -54,6 +55,17 @@ public class RedRockRidgeBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+
+        DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
+        DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDungeons(this.getGenerationSettings());
+        DefaultBiomeFeatures.addMineables(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultOres(this.getGenerationSettings());
+        DefaultBiomeFeatures.addAmethystGeodes(this.getGenerationSettings());
+        DefaultBiomeFeatures.addDefaultMushrooms(this.getGenerationSettings());
+        DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
+        DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))

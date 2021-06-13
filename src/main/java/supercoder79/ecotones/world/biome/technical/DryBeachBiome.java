@@ -49,6 +49,7 @@ public class DryBeachBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addDungeons(this.getGenerationSettings());
         DefaultBiomeFeatures.addMineables(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultOres(this.getGenerationSettings());
+        DefaultBiomeFeatures.addAmethystGeodes(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultFlowers(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultGrass(this.getGenerationSettings());

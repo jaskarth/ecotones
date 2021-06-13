@@ -62,6 +62,7 @@ public class RoseFieldBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addDungeons(this.getGenerationSettings());
         DefaultBiomeFeatures.addMineables(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultOres(this.getGenerationSettings());
+        DefaultBiomeFeatures.addAmethystGeodes(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultMushrooms(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
