@@ -1,4 +1,4 @@
-package supercoder79.ecotones.mixin;
+package supercoder79.ecotones.mixin.client;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.client.model.TexturedModelData;

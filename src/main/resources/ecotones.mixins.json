@@ -11,18 +11,21 @@
     "MixinPlayerManager",
     "SpawnSettingsAccessor",
     "StructureFeatureAccessor",
-    "TreeDecoratorTypeAccessor"
+    "TreeDecoratorTypeAccessor",
+    ,
+    "client.MixinBackgroundRenderer"
   ],
   "client": [
-    "EntityModelLayersAccessor",
-    "MixinBiomeColors",
-    "MixinClientPlayNetworkHandler",
-    "MixinClientWorld",
-    "MixinDebugHud",
-    "MixinEntityModels",
-    "MixinHeldItemRenderer",
-    "MixinMinecraftClient",
-    "MixinSkyProperties"
+    "client.EntityModelLayersAccessor",
+    "client.MixinBiomeColors",
+    "client.MixinClientPlayNetworkHandler",
+    "client.MixinClientWorld",
+    "client.MixinDebugHud",
+    "client.MixinEntityModels",
+    "client.MixinHeldItemRenderer",
+    "client.MixinMinecraftClient",
+    "client.MixinSkyProperties",
+    "client.MixinWorldRenderer"
   ],
   "injectors": {
     "defaultRequire": 1

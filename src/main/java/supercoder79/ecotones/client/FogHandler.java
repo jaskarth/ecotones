@@ -41,6 +41,6 @@ public final class FogHandler {
     }
 
     public static double multiplierFor(double noise, double offset) {
-        return Math.max(0.05, Math.min(1, 1 - (Math.max(0, noise + offset) * 0.85)));
+        return Math.max(0.45, Math.min(1, 1 - (Math.max(0, noise + offset) * 0.85)));
     }
 }

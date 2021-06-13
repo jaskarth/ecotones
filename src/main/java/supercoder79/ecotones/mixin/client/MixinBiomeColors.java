@@ -1,4 +1,4 @@
-package supercoder79.ecotones.mixin;
+package supercoder79.ecotones.mixin.client;
 
 import net.minecraft.client.color.world.BiomeColors;
 import org.spongepowered.asm.mixin.Mixin;

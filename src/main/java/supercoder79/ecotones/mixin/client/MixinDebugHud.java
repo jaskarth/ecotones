@@ -1,8 +1,10 @@
-package supercoder79.ecotones.mixin;
+package supercoder79.ecotones.mixin.client;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.DebugHud;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;
@@ -31,7 +33,7 @@ public class MixinDebugHud {
     @Inject(method = "getLeftText", at = @At("TAIL"))
     private void addFogData(CallbackInfoReturnable<List<String>> cir) {
         if (ClientSidedServerData.isInEcotonesWorld) {
-            long time = this.client.world.getTime();
+            long time = this.client.world.getLunarTime();
             double noise = FogHandler.noiseFor(time);
             double offset = FogHandler.offsetFor(time);
             List<String> list = cir.getReturnValue();
@@ -42,10 +44,11 @@ public class MixinDebugHud {
         }
     }
 
-    @Inject(method = "render", at = @At("TAIL"))
+    @Inject(method = "render", at = @At("HEAD"))
     private void renderCloudTex(MatrixStack matrices, CallbackInfo ci) {
         if (ClientSidedServerData.isInEcotonesWorld && EcotonesClientDebug.RENDER_CLOUDS_TEX && !this.client.options.debugProfilerEnabled) {
-            MinecraftClient.getInstance().getTextureManager().bindTexture(CLOUDS);
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.setShaderTexture(0, CLOUDS);
             DrawableHelper.drawTexture(matrices, this.client.getWindow().getScaledWidth() - 128, this.client.getWindow().getScaledHeight() - 128, 0.0F, 0.0F, 128, 128, 128, 128);
         }
     }

@@ -7,7 +7,7 @@ import net.minecraft.world.biome.layer.util.LayerSampleContext;
 import net.minecraft.world.biome.layer.util.LayerSampler;
 
 /**
- * Samples randomly in a 2x2 square. This is good for.... something? I don't even fucking know at this point, have fun
+ * Samples randomly in a 2x2 square. This is good for.... something? I don't even know at this point, have fun
  *
  * @author SuperCoder79
  */

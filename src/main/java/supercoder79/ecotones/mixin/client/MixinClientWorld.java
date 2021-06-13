@@ -1,4 +1,4 @@
-package supercoder79.ecotones.mixin;
+package supercoder79.ecotones.mixin.client;
 
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.MathHelper;

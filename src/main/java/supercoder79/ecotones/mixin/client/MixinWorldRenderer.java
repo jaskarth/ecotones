@@ -1,5 +1,7 @@
-package supercoder79.ecotones.mixin;
+package supercoder79.ecotones.mixin.client;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
@@ -9,6 +11,7 @@ import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.world.gen.SimpleRandom;
 import org.jetbrains.annotations.Nullable;
@@ -41,18 +44,20 @@ public class MixinWorldRenderer {
 
     @Shadow @Nullable private VertexBuffer starsBuffer;
 
-    @Redirect(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;FDDD)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/texture/TextureManager;bindTexture(Lnet/minecraft/util/Identifier;)V"))
-    private void bindEcotonesFancyClouds(TextureManager textureManager, Identifier id) {
-        if (ClientSidedServerData.isInEcotonesWorld) {
-            if (!this.initializedClouds) {
-                registerClouds(textureManager);
-                this.initializedClouds = true;
-            }
+    @Redirect(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FDDD)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/util/Identifier;)V"))
+    private void bindEcotonesFancyClouds(int i, Identifier id) {
+        // TODO: disabled
+//        TextureManager textureManager = MinecraftClient.getInstance().getTextureManager();
+//        if (ClientSidedServerData.isInEcotonesWorld) {
+//            if (!this.initializedClouds) {
+//                registerClouds(textureManager);
+//                this.initializedClouds = true;
+//            }
+//
+//            CloudHandler.update();
+//        }
 
-            CloudHandler.update();
-        }
-
-        textureManager.bindTexture(id);
+        RenderSystem._setShaderTexture(i, id);
     }
 
     private void registerClouds(TextureManager textureManager) {
@@ -74,8 +79,8 @@ public class MixinWorldRenderer {
         CloudHandler.setTexture(texture);
     }
 
-    @Inject(method = "renderSky", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/VertexBuffer;bind()V", ordinal = 1, shift = At.Shift.BEFORE), cancellable = true)
-    private void renderEcotonesFancyStars(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+    @Inject(method = "renderSky", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/VertexBuffer;setShader(Lnet/minecraft/util/math/Matrix4f;Lnet/minecraft/util/math/Matrix4f;Lnet/minecraft/client/render/Shader;)V", ordinal = 1, shift = At.Shift.BEFORE), cancellable = true)
+    private void renderEcotonesFancyStars(MatrixStack matrices, Matrix4f matrix4f, float f, Runnable runnable, CallbackInfo ci) {
         if (ClientSidedServerData.isInEcotonesWorld) {
             if (!this.initializedStars) {
                 this.starsBuffer.close();

@@ -17,8 +17,8 @@ public enum Div3ScaleLayer implements ParentedLayer {
       return x / 3;
    }
 
-   public int transformZ(int y) {
-      return y / 3;
+   public int transformZ(int z) {
+      return z / 3;
    }
 
    public int sample(LayerSampleContext<?> context, LayerSampler parent, int x, int z) {
