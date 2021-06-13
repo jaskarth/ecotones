@@ -16,7 +16,7 @@ public final class SimpleMatcher extends Matcher {
     public List<Integer> match(String line) {
         List<Integer> points = new ArrayList<>();
 
-        for (int i = 0; i < line.length() - this.length; i++) {
+        for (int i = 0; i <= line.length() - this.length; i++) {
             if (line.substring(i, i + this.length).equals(this.pattern)) {
                 points.add(i);
             }
