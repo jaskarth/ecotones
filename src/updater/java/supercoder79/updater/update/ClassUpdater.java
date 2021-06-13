@@ -39,6 +39,10 @@ public final class ClassUpdater {
                 boolean updated = false;
                 for (Integer point : points) {
                     UpdateResult res = update.update(curr, i, point, data.lines(), data);
+                    if (res.updated()) {
+                        appliedUpdate = true;
+                    }
+                    
                     if (res.recurse()) {
                         curr = res.result();
                         updated = true;

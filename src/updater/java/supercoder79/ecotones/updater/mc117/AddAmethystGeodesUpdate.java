@@ -22,7 +22,7 @@ public final class AddAmethystGeodesUpdate extends Update {
 
         updatedLines.add(new LineResult("DefaultBiomeFeatures.addAmethystGeodes(this.getGenerationSettings());"));
 
-        return new UpdateResult(line, false, updatedLines);
+        return new UpdateResult(line, false, true, updatedLines);
     }
 
     @Override
