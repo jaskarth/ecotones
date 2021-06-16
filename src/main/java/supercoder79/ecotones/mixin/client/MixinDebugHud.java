@@ -33,14 +33,14 @@ public class MixinDebugHud {
     @Inject(method = "getLeftText", at = @At("TAIL"))
     private void addFogData(CallbackInfoReturnable<List<String>> cir) {
         if (ClientSidedServerData.isInEcotonesWorld) {
-            long time = this.client.world.getLunarTime();
-            double noise = FogHandler.noiseFor(time);
-            double offset = FogHandler.offsetFor(time);
-            List<String> list = cir.getReturnValue();
+//            long time = this.client.world.getLunarTime();
+//            double noise = FogHandler.noiseFor(time);
+//            double offset = FogHandler.offsetFor(time);
+//            List<String> list = cir.getReturnValue();
 
-            list.add("FN: " + FORMAT.format(noise));
-            list.add("FO: " + FORMAT.format(offset));
-            list.add("FM: " + FORMAT.format((FogHandler.multiplierFor(noise, offset))));
+//            list.add("FN: " + FORMAT.format(noise));
+//            list.add("FO: " + FORMAT.format(offset));
+//            list.add("FM: " + FORMAT.format((FogHandler.multiplierFor(noise, offset))));
         }
     }
 

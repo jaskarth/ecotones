@@ -13,7 +13,7 @@ public final class FogHandler {
     // TODO: fix problems with time sync
 
     public static double noiseFor(double time) {
-        return noise.sample(time / 1200.0, 0);
+        return noise.sample(time / 1200.0, 0) * 0.9;
     }
 
     public static double offsetFor(long time) {
@@ -33,7 +33,7 @@ public final class FogHandler {
             o = MathHelper.clampedLerp(0, o, (24000 - rawLocalTime) / 2000.0);
         }
 
-        return Math.max(0, (-(offset * offset) + 1) * 0.65) + o;
+        return Math.max(0, (-(offset * offset) + 1) * 0.55) + o;
     }
 
     public static double multiplierFor(long time) {
@@ -41,6 +41,6 @@ public final class FogHandler {
     }
 
     public static double multiplierFor(double noise, double offset) {
-        return Math.max(0.45, Math.min(1, 1 - (Math.max(0, noise + offset) * 0.85)));
+        return Math.max(0.45, Math.min(1, 1 - (Math.max(0, noise + offset) * 0.6)));
     }
 }
