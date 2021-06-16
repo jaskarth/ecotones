@@ -32,23 +32,25 @@ public abstract class MixinClientWorld extends World {
             double green = color.y;
             double blue = color.z;
 
-            double cloudCount = CloudHandler.getCloudTexCount() / 65536.0; // 256^2
-            cloudCount -= 0.75;
-            cloudCount *= 4;
+            // TODO: implement this
+//            double cloudCount = CloudHandler.getCloudTexCount() / 65536.0; // 256^2
+//            cloudCount -= 0.75;
+//            cloudCount *= 4;
 
-            // TODO: lerp based on time
             long time = this.getLunarTime();
             time += 2000;
             time %= 24000;
             double delta = time / 24000.0;
+            double lerp = MathHelper.clampedLerpFromProgress(delta, 0.5, 0.55, 0, 1);
+            lerp *= MathHelper.clampedLerpFromProgress(delta, 0.95, 1, 1, 0);
             if (delta > 0.5) {
-                red += 0.05;
-                green += 0.025;
-                blue += 0.1;
+                red += 0.05 * lerp;
+                green += 0.025 * lerp;
+                blue += 0.1 * lerp;
             } else {
-                red = MathHelper.clampedLerp(red, 0.9, cloudCount);
-                green = MathHelper.clampedLerp(green, 0.9, cloudCount);
-                blue = MathHelper.clampedLerp(blue, 0.9, cloudCount);
+//                red = MathHelper.clampedLerp(red, 0.9, cloudCount);
+//                green = MathHelper.clampedLerp(green, 0.9, cloudCount);
+//                blue = MathHelper.clampedLerp(blue, 0.9, cloudCount);
             }
 
             cir.setReturnValue(new Vec3d(red, green, blue));

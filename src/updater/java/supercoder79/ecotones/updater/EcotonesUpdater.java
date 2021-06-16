@@ -11,7 +11,9 @@ public class EcotonesUpdater {
     public static void main(String[] args) {
         Updater updater = new Updater();
         updater.loadPath(Paths.get(args[0]));
-        updater.register(new UniformIntUpdate(), new RangeOfUpdate(), new AddAmethystGeodesUpdate());
+//        updater.register(new UniformIntUpdate());
+//        updater.register(new RangeOfUpdate());
+//        updater.register(new AddAmethystGeodesUpdate());
         updater.run();
     }
 }
