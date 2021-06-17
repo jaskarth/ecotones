@@ -33,6 +33,7 @@ public class TreeType {
     public static final TreeGenerationConfig LUSH_BIRCH = new TreeGenerationConfig(1, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), 4, -1, 12, 16, 0.15, 0.15, false, 79);
     public static final TreeGenerationConfig RARE_VARYING_BIRCH = new TreeGenerationConfig(0.3, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), 3, -1, 5, 12, 0.2, 0.2, false, 79);
     public static final TreeGenerationConfig FOREST_BIRCH = new TreeGenerationConfig(3, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), 6, -1, 8, 24, 0.35, 0.35, false, 79);
+    public static final TreeGenerationConfig RARE_BIRCH = new TreeGenerationConfig(0.35, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), 5, -1, 8, 20, 0.25, 0.25, false, 79);
 
     // Acacia trees
     public static final TreeGenerationConfig ACACIA = new TreeGenerationConfig(0.8, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.45, 0.35, false, 79);
@@ -41,6 +42,7 @@ public class TreeType {
     public static final TreeGenerationConfig COMMON_ACACIA = new TreeGenerationConfig(1, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 12, 6, 6, 0.55, 0.425, false, 79);
     public static final TreeGenerationConfig RARE_ACACIA = new TreeGenerationConfig(0.1, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.45, 0.35, false, 79);
     public static final TreeGenerationConfig MEDIUM_RARE_ACACIA = new TreeGenerationConfig(0.4, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.45, 0.35, false, 79);
+    public static final TreeGenerationConfig LUSH_ACACIA = new TreeGenerationConfig(1.8, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.35, 0.2, false, 79);
 
     // Jungle trees
     public static final TreeGenerationConfig LUSH_JUNGLE = new TreeGenerationConfig(0.2, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.JUNGLE_LEAVES.getDefaultState(), 4, 4, 14, 8, 0.45, 0.45, true, 79);

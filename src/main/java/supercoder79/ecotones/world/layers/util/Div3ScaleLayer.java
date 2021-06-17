@@ -42,7 +42,7 @@ public enum Div3ScaleLayer implements ParentedLayer {
       int id = -1;
       int count = -1;
       for (Short2ByteMap.Entry entry : map.short2ByteEntrySet()) {
-         if (entry.getShortKey() > count) {
+         if (entry.getByteValue() > count) {
             count = entry.getByteValue();
             id = entry.getShortKey();
          }

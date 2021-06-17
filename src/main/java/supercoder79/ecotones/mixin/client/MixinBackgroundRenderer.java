@@ -16,7 +16,7 @@ public class MixinBackgroundRenderer {
     private static void applyEcotonesFancyFog(float start) {
         MinecraftClient client = MinecraftClient.getInstance();
         RenderSystem.setShaderFogStart(start);
-        
+
 //        if (ClientSidedServerData.isInEcotonesWorld) {
 //            float heightMultiplier = (float) (MathHelper.clamp(client.player.getY() - 124, 0, 8) / 8);
 //

@@ -7,12 +7,12 @@
     "BlockStateProviderTypeAccessor",
     "CriteriaAccessor",
     "FoliagePlacerTypeAccessor",
+    "MixinChunkRegion",
     "MixinGeneratorOptions",
     "MixinPlayerManager",
     "SpawnSettingsAccessor",
     "StructureFeatureAccessor",
     "TreeDecoratorTypeAccessor",
-    ,
     "client.MixinBackgroundRenderer"
   ],
   "client": [
