@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.decorator;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorContext;
 import supercoder79.ecotones.world.data.DataHolder;
@@ -23,8 +24,9 @@ public class RosemaryDecorator extends Decorator<ShrubDecoratorConfig> {
         List<BlockPos> positions = new ArrayList<>();
 
         double soilQuality = 0.5;
-        if (context.generator instanceof DataHolder) {
-            soilQuality = ((DataHolder)context.generator).get(EcotonesData.SOIL_DRAINAGE, pos.getX() + 8, pos.getZ() + 8);
+        ChunkGenerator generator = context.getWorld().toServerWorld().getChunkManager().getChunkGenerator();
+        if (generator instanceof DataHolder) {
+            soilQuality = ((DataHolder)generator).get(EcotonesData.SOIL_DRAINAGE, pos.getX() + 8, pos.getZ() + 8);
         }
 
         double rawCount = config.targetCount;

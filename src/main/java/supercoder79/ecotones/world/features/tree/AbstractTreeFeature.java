@@ -130,7 +130,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends F
         Set<BlockPos> set = Sets.newHashSet();
         Set<BlockPos> set2 = Sets.newHashSet();
         Set<BlockPos> set3 = Sets.newHashSet();
-        BlockBox blockBox = BlockBox.empty();
+        BlockBox blockBox = new BlockBox(0, 0, 0, 0, 0, 0);
         boolean bl = this.generate(world, random, pos, set, set2, blockBox, config);
         if (blockBox.getMinX() <= blockBox.getMaxX() && bl && !set.isEmpty()) {
             if (!config.decorators.isEmpty()) {

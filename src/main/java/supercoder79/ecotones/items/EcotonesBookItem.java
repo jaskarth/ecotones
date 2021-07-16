@@ -43,8 +43,8 @@ public class EcotonesBookItem extends WrittenBookItem {
 
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if (stack.hasTag()) {
-            NbtCompound compoundTag = stack.getTag();
+        if (stack.hasNbt()) {
+            NbtCompound compoundTag = stack.getNbt();
             String string = compoundTag.getString("author");
             if (!ChatUtil.isEmpty(string)) {
                 tooltip.add((new TranslatableText("book.byAuthor", new Object[]{string})).formatted(Formatting.GRAY));

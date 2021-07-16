@@ -314,7 +314,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         GenerationSettings generationSettings = this.populationSource.getBiomeForNoiseGen(BiomeCoords.fromBlock(chunkPos.getStartX()), 0, BiomeCoords.fromBlock(chunkPos.getStartZ())).getGenerationSettings();
         BitSet bitSet = ((ProtoChunk)chunk).getOrCreateCarvingMask(carver);
 
-        CarverContext carverContext = new CarverContext(this);
+        CarverContext carverContext = new CarverContext(this, chunk);
         AquiferSampler aquiferSampler = AquiferSampler.seaLevel(this.getSeaLevel(), this.defaultFluid);
 
         // TODO: clean up, 1.17 made it so

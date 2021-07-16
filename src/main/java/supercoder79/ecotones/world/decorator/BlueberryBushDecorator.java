@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.decorator;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorContext;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
@@ -23,9 +24,10 @@ public class BlueberryBushDecorator extends Decorator<ShrubDecoratorConfig> {
 
         double soilQuality = 0.5;
         double soilPh = 0;
-        if (context.generator instanceof EcotonesChunkGenerator) {
-            soilQuality = ((EcotonesChunkGenerator)context.generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
-            soilPh = ((EcotonesChunkGenerator)context.generator).getSoilPhAt(pos.getX() + 8, pos.getZ() + 8);
+        ChunkGenerator generator = context.getWorld().toServerWorld().getChunkManager().getChunkGenerator();
+        if (generator instanceof EcotonesChunkGenerator) {
+            soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
+            soilPh = ((EcotonesChunkGenerator)generator).getSoilPhAt(pos.getX() + 8, pos.getZ() + 8);
         }
 
         double rawCount = config.targetCount;

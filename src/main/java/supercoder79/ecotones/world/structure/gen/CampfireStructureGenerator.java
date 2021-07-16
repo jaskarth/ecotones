@@ -146,7 +146,7 @@ public class CampfireStructureGenerator {
             }
 
             tag.put("pages", pages);
-            stack.setTag(tag);
+            stack.setNbt(tag);
 
             return stack;
         }

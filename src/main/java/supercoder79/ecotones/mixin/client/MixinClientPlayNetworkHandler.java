@@ -25,7 +25,7 @@ public abstract class MixinClientPlayNetworkHandler implements ClientPlayPacketL
         NetworkThreadUtils.forceMainThread(packet, this, this.client);
         ItemStack itemStack = this.client.player.getStackInHand(packet.getHand());
         if (itemStack.isOf(EcotonesItems.ECOTONES_BOOK)) {
-            this.client.openScreen(new BookScreen(new BookScreen.WrittenBookContents(itemStack)));
+            this.client.setScreen(new BookScreen(new BookScreen.WrittenBookContents(itemStack)));
             ci.cancel();
         }
     }

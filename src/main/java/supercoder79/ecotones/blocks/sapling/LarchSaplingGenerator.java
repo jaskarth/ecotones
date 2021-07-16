@@ -18,7 +18,7 @@ import java.util.Random;
 public class LarchSaplingGenerator extends SaplingGenerator {
     @Nullable
     @Override
-    protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bees) {
+    protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random random, boolean bees) {
         return null;
     }
 

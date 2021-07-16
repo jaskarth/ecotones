@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.decorator;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorContext;
 import supercoder79.ecotones.api.TreeGenerationConfig;
@@ -22,8 +23,9 @@ public class TreePlacementDecorator extends Decorator<TreeGenerationConfig.Decor
     @Override
     public Stream<BlockPos> getPositions(DecoratorContext context, Random random, TreeGenerationConfig.DecorationData config, BlockPos pos) {
         double soilQuality = 0.0; // default for if the chunk generator is not ours
-        if (context.generator instanceof EcotonesChunkGenerator) {
-            soilQuality = ((EcotonesChunkGenerator)context.generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
+        ChunkGenerator generator = context.getWorld().toServerWorld().getChunkManager().getChunkGenerator();
+        if (generator instanceof EcotonesChunkGenerator) {
+            soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
         }
 
         //get the height from minSize to minSize + noiseCoefficient (can be more because of noise map)
@@ -39,7 +41,7 @@ public class TreePlacementDecorator extends Decorator<TreeGenerationConfig.Decor
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
             int y = context.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
-            if (y < context.generator.getSeaLevel()) {
+            if (y < generator.getSeaLevel()) {
                 continue;
             }
 

@@ -334,7 +334,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         int chunkStartX = chunkX << 4;
         int chunkStartZ = chunkZ << 4;
 
-        for (StructureFeature<?> feature : StructureFeature.JIGSAW_STRUCTURES) {
+        for (StructureFeature<?> feature : StructureFeature.LAND_MODIFYING_STRUCTURES) {
             accessor.getStructuresWithChildren(ChunkSectionPos.from(pos, 0), feature).forEach(start -> {
                 Iterator<StructurePiece> pieces = start.getChildren().iterator();
                 

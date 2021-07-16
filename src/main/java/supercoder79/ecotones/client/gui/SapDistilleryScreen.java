@@ -82,8 +82,8 @@ public class SapDistilleryScreen extends HandledScreen<SapDistilleryScreenHandle
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public void handledScreenTick() {
+        super.handledScreenTick();
 
         if (this.client != null && this.client.world != null) {
             if (this.client.world.getTime() % 10 == 0) {
