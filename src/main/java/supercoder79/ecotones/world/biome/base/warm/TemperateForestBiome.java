@@ -14,6 +14,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.api.TreeType;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
@@ -82,7 +83,7 @@ public class TemperateForestBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BRANCHING_OAK.configure(TreeType.LARGE_OAK)
-                        .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.LARGE_OAK.decorationData)));
+                        .decorate(EcotonesDecorators.TREE_DECORATOR.configure(new TreeGenerationConfig.DecorationData(TreeType.LARGE_OAK.decorationData.targetCount, TreeType.LARGE_OAK.decorationData.minSize, TreeType.LARGE_OAK.decorationData.noiseCoefficient, true))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.STANDARD_BIRCH)

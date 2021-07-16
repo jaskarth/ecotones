@@ -49,6 +49,11 @@ public class TreePlacementDecorator extends Decorator<TreeGenerationConfig.Decor
                 maxFinal = Math.max(maxHeight, maxHeight - ((y - 80) / 15));
             }
 
+            if (config.ignoreGroundCheck) {
+                positions.add(new DataPos(x, y, z).setMaxHeight(maxFinal + random.nextInt(4)));
+                continue;
+            }
+
             int solidAround = 0;
             int solidBase = 0;
             for (int x1 = -1; x1 <= 1; x1++) {

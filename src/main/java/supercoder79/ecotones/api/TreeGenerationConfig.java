@@ -39,7 +39,7 @@ public class TreeGenerationConfig implements FeatureConfig {
 
     public TreeGenerationConfig(double targetCount, BlockState woodState, BlockState leafState, int branchingFactor, int thickTrunkDepth, int minSize, int noiseCoefficient, double yawChange, double pitchChange, boolean generateVines, int traitSalt) {
         this.generateVines = generateVines;
-        this.decorationData = new DecorationData(targetCount, minSize, noiseCoefficient);
+        this.decorationData = new DecorationData(targetCount, minSize, noiseCoefficient, false);
         this.targetCount = targetCount;
         this.woodState = woodState;
         if (leafState.getProperties().contains(Properties.DISTANCE_1_7)) {
@@ -60,17 +60,20 @@ public class TreeGenerationConfig implements FeatureConfig {
         public static final Codec<DecorationData> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
                 Codec.DOUBLE.fieldOf("target_count").forGetter(config -> config.targetCount),
                 Codec.INT.fieldOf("min_size").forGetter(config -> config.minSize),
-                Codec.INT.fieldOf("noise_coefficient").forGetter(config -> config.noiseCoefficient))
+                Codec.INT.fieldOf("noise_coefficient").forGetter(config -> config.noiseCoefficient),
+                Codec.BOOL.fieldOf("ignore_ground_check").forGetter(config -> config.ignoreGroundCheck))
                 .apply(instance, DecorationData::new));
 
         public final double targetCount;
         public final int minSize;
         public final int noiseCoefficient;
+        public final boolean ignoreGroundCheck;
 
-        public DecorationData(double targetCount, int minSize, int noiseCoefficient) {
+        public DecorationData(double targetCount, int minSize, int noiseCoefficient, boolean ignoreGroundCheck) {
             this.targetCount = targetCount;
             this.minSize = minSize;
             this.noiseCoefficient = noiseCoefficient;
+            this.ignoreGroundCheck = ignoreGroundCheck;
         }
     }
 }
