@@ -14,7 +14,6 @@ import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import supercoder79.ecotones.client.sound.EcotonesSounds;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 
@@ -36,7 +35,6 @@ public class GravelBeachBiome extends EcotonesBiomeBuilder {
         this.precipitation(Biome.Precipitation.RAIN);
 
         this.category(Biome.Category.BEACH);
-        this.loopSound(EcotonesSounds.BEACH_LOOP);
 
         this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
         this.addStructureFeature(ConfiguredStructureFeatures.BURIED_TREASURE);
@@ -47,6 +45,7 @@ public class GravelBeachBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addDungeons(this.getGenerationSettings());
         DefaultBiomeFeatures.addMineables(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultOres(this.getGenerationSettings());
+        DefaultBiomeFeatures.addAmethystGeodes(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultFlowers(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultGrass(this.getGenerationSettings());

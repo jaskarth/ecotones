@@ -8,13 +8,13 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
-import supercoder79.ecotones.api.TreeType;
-import supercoder79.ecotones.tree.PoplarTrait;
-import supercoder79.ecotones.tree.Traits;
-import supercoder79.ecotones.tree.poplar.DefaultPoplarTrait;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.util.Shapes;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
+import supercoder79.ecotones.world.tree.trait.poplar.PoplarTrait;
+import supercoder79.ecotones.world.tree.trait.poplar.DefaultPoplarTrait;
 
 import java.util.Random;
 
@@ -25,14 +25,19 @@ public class PoplarTreeFeature extends Feature<SimpleTreeFeatureConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
+    public boolean generate(FeatureContext<SimpleTreeFeatureConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getOrigin();
+        Random random = context.getRandom();
+        SimpleTreeFeatureConfig config = context.getConfig();
+        ChunkGenerator generator = context.getGenerator();
+
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return false;
 
         // Trait data
         PoplarTrait trait = DefaultPoplarTrait.INSTANCE;
         if (generator instanceof EcotonesChunkGenerator) {
-            long traits = ((EcotonesChunkGenerator) generator).getTraits(pos.getX() >> 4, pos.getZ() >> 4, TreeType.POPLAR_SALT);
-            trait = Traits.get(Traits.POPLAR, traits);
+            trait = EcotonesTreeTraits.POPLAR.get((EcotonesChunkGenerator) generator, pos);
         }
 
         double maxRadius = trait.maxRadius(random);
@@ -43,6 +48,7 @@ public class PoplarTreeFeature extends Feature<SimpleTreeFeatureConfig> {
         BlockPos.Mutable mutable = pos.mutableCopy();
         for (int y = 0; y < leafHeight; y++) {
             world.setBlockState(mutable, config.woodState, 0);
+
             //add branch blocks
             if (maxRadius * trait.model(y / leafRadius) > 2.3) {
                 Direction.Axis axis = getAxis(random);
@@ -65,6 +71,7 @@ public class PoplarTreeFeature extends Feature<SimpleTreeFeatureConfig> {
                     world.setBlockState(leafPos, config.leafState, 0);
                 }
             });
+
             mutable.move(Direction.UP);
         }
 

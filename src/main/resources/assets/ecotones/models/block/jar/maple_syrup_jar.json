@@ -1,0 +1,47 @@
+{
+	"textures": {
+		"0": "ecotones:block/maple_syrup_jar",
+		"particle": "ecotones:block/maple_syrup_jar"
+	},
+	"elements": [
+		{
+			"name": "Jar",
+			"from": [4, 0, 4],
+			"to": [12, 9, 12],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 4.5], "texture": "#0"},
+				"east": {"uv": [0, 0, 4, 4.5], "texture": "#0"},
+				"south": {"uv": [0, 0, 4, 4.5], "texture": "#0"},
+				"west": {"uv": [0, 0, 4, 4.5], "texture": "#0"},
+				"up": {"uv": [0, 5, 4, 9], "texture": "#0"},
+				"down": {"uv": [0, 5, 4, 9], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Jam",
+			"from": [5, 1, 5],
+			"to": [11, 5, 11],
+			"faces": {
+				"north": {"uv": [6, 3.5, 9, 5.5], "texture": "#0"},
+				"east": {"uv": [6, 3.5, 9, 5.5], "texture": "#0"},
+				"south": {"uv": [6, 3.5, 9, 5.5], "texture": "#0"},
+				"west": {"uv": [6, 3.5, 9, 5.5], "texture": "#0"},
+				"up": {"uv": [6, 0, 9, 3], "texture": "#0"},
+				"down": {"uv": [6, 0, 9, 3], "texture": "#0"}
+			}
+		},
+		{
+			"name": "Lid",
+			"from": [5, 9, 5],
+			"to": [11, 11, 11],
+			"faces": {
+				"north": {"uv": [0, 9.5, 3, 10.5], "texture": "#0"},
+				"east": {"uv": [0, 9.5, 3, 10.5], "texture": "#0"},
+				"south": {"uv": [0, 9.5, 3, 10.5], "texture": "#0"},
+				"west": {"uv": [0, 9.5, 3, 10.5], "texture": "#0"},
+				"up": {"uv": [0, 11.5, 3, 14.5], "texture": "#0"},
+				"down": {"uv": [0, 11.5, 3, 14.5], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.decorator;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorContext;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
@@ -20,8 +21,9 @@ public class AboveQualityDecorator extends Decorator<NopeDecoratorConfig> {
     public Stream<BlockPos> getPositions(DecoratorContext context, Random random, NopeDecoratorConfig config, BlockPos pos) {
         double noise = 0.5; // default for if the chunk generator is not ours
         //get noise at position (this is fairly inaccurate because the pos is at the top left of the chunk and we center it
-        if (context.generator instanceof EcotonesChunkGenerator) {
-            noise = ((EcotonesChunkGenerator)context.generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
+        ChunkGenerator generator = context.getWorld().toServerWorld().getChunkManager().getChunkGenerator();
+        if (generator instanceof EcotonesChunkGenerator) {
+            noise = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
         }
 
         if (noise > 0.5) {

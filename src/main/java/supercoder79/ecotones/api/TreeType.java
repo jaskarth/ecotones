@@ -1,6 +1,7 @@
 package supercoder79.ecotones.api;
 
 import net.minecraft.block.Blocks;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 public class TreeType {
     // Salts
@@ -32,13 +33,16 @@ public class TreeType {
     public static final TreeGenerationConfig LUSH_BIRCH = new TreeGenerationConfig(1, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), 4, -1, 12, 16, 0.15, 0.15, false, 79);
     public static final TreeGenerationConfig RARE_VARYING_BIRCH = new TreeGenerationConfig(0.3, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), 3, -1, 5, 12, 0.2, 0.2, false, 79);
     public static final TreeGenerationConfig FOREST_BIRCH = new TreeGenerationConfig(3, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), 6, -1, 8, 24, 0.35, 0.35, false, 79);
+    public static final TreeGenerationConfig RARE_BIRCH = new TreeGenerationConfig(0.35, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), 5, -1, 8, 20, 0.25, 0.25, false, 79);
 
     // Acacia trees
     public static final TreeGenerationConfig ACACIA = new TreeGenerationConfig(0.8, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.45, 0.35, false, 79);
     public static final TreeGenerationConfig SMALL_ACACIA = new TreeGenerationConfig(0.6, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 2, 8, 3, 2, 0.5, 0.45, false, 79);
+    public static final TreeGenerationConfig RARE_SMALL_ACACIA = new TreeGenerationConfig(0.2, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 4, 0.35, 0.25, false, 79);
     public static final TreeGenerationConfig COMMON_ACACIA = new TreeGenerationConfig(1, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 12, 6, 6, 0.55, 0.425, false, 79);
     public static final TreeGenerationConfig RARE_ACACIA = new TreeGenerationConfig(0.1, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.45, 0.35, false, 79);
     public static final TreeGenerationConfig MEDIUM_RARE_ACACIA = new TreeGenerationConfig(0.4, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.45, 0.35, false, 79);
+    public static final TreeGenerationConfig LUSH_ACACIA = new TreeGenerationConfig(1.8, Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), 3, 8, 6, 6, 0.35, 0.2, false, 79);
 
     // Jungle trees
     public static final TreeGenerationConfig LUSH_JUNGLE = new TreeGenerationConfig(0.2, Blocks.JUNGLE_LOG.getDefaultState(), Blocks.JUNGLE_LEAVES.getDefaultState(), 4, 4, 14, 8, 0.45, 0.45, true, 79);
@@ -50,9 +54,14 @@ public class TreeType {
     public static final TreeGenerationConfig RARE_DARK_OAK = new TreeGenerationConfig(0.3, Blocks.DARK_OAK_LOG.getDefaultState(), Blocks.DARK_OAK_LEAVES.getDefaultState(), 3, -1, 6, 4, 0.2, 0.2, false, 79);
     public static final TreeGenerationConfig STANDARD_DARK_OAK = new TreeGenerationConfig(3.5, Blocks.DARK_OAK_LOG.getDefaultState(), Blocks.DARK_OAK_LEAVES.getDefaultState(), 3, -1, 8, 8, 0.2, 0.2, false, 79);
 
+    // Maple Trees
+    public static final TreeGenerationConfig STANDARD_MAPLE = new TreeGenerationConfig(5.5, Blocks.OAK_LOG.getDefaultState(), EcotonesBlocks.MAPLE_LEAVES.getDefaultState(), 4, 3, 6, 5, 0.15, 0.15, false, 79);
+    public static final TreeGenerationConfig VERY_RARE_MAPLE = new TreeGenerationConfig(0.01, Blocks.OAK_LOG.getDefaultState(), EcotonesBlocks.MAPLE_LEAVES.getDefaultState(), 4, 3, 7, 6, 0.15, 0.15, false, 79);
+
     // Dead trees
     public static final TreeGenerationConfig DEAD_SPRUCE = new TreeGenerationConfig(3, Blocks.SPRUCE_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 4, -1, 10, 10, 0.5, 0.5, false, 79);
     public static final TreeGenerationConfig RARE_DEAD_SPRUCE = new TreeGenerationConfig(0.06, Blocks.SPRUCE_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 4, -1, 6, 14, 0.5, 0.5, false, 79);
     public static final TreeGenerationConfig RARE_DEAD_BIRCH = new TreeGenerationConfig(0.08, Blocks.BIRCH_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 6, -1, 16, 6, 0.45, 0.45, false, 79);
     public static final TreeGenerationConfig RARER_DEAD_BIRCH = new TreeGenerationConfig(0.03, Blocks.BIRCH_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 6, -1, 12, 6, 0.45, 0.45, false, 79);
+    public static final TreeGenerationConfig DEAD_MAPLE = new TreeGenerationConfig(0.05, Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState(), 4, 3, 7, 6, 0.15, 0.15, false, 79);
 }

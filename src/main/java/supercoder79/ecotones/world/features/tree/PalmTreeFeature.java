@@ -12,6 +12,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.util.BoxHelper;
 
 import java.util.Random;
 import java.util.Set;
@@ -187,14 +188,14 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
         } else {
             blocks.add(pos.toImmutable());
             world.setBlockState(pos, state, 19);
-            box.encompass(new BlockBox(pos, pos));
+            box.encompass(BoxHelper.box(pos, pos));
 
             return true;
         }
     }
 
     public static boolean setLeavesWithDistance(ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> blocks, BlockBox box, TreeFeatureConfig config, int distance) {
-        BlockState state = config.leavesProvider.getBlockState(random, pos);
+        BlockState state = config.foliageProvider.getBlockState(random, pos);
 
         if(state.contains(Properties.DISTANCE_1_7)) {
             state = state.with(Properties.DISTANCE_1_7, Math.min(distance, 7));

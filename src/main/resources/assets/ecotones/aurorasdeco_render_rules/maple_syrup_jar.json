@@ -1,0 +1,8 @@
+{
+  "match": {
+    "item": "ecotones:maple_syrup"
+  },
+  "models": [
+    "ecotones:inherited/maple_syrup_jar"
+  ]
+}

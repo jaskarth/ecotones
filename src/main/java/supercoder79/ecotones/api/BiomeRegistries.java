@@ -1,8 +1,6 @@
 package supercoder79.ecotones.api;
 
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.Ecotones;
@@ -74,10 +72,10 @@ public class BiomeRegistries {
     public static void registerNoRiverBiome(Biome biome) {
         NO_RIVER_BIOMES.add(key(biome));
     }
-    
+
     private static RegistryKey<Biome> key(Biome biome) {
         Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
-        
+
         return optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome).get());
     }
 }

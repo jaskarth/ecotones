@@ -12,7 +12,7 @@ import net.minecraft.world.WorldView;
 
 import java.util.Random;
 
-public class EcotonesGrassBlock extends Block implements Fertilizable {
+public class EcotonesGrassBlock extends PlantBlock implements Fertilizable {
     protected static final VoxelShape SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 
     protected EcotonesGrassBlock(Block.Settings settings) {
@@ -36,10 +36,6 @@ public class EcotonesGrassBlock extends Block implements Fertilizable {
     }
 
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        TallPlantBlock tallPlantBlock = (TallPlantBlock) (this == Blocks.FERN ? Blocks.LARGE_FERN : Blocks.TALL_GRASS);
-        if (tallPlantBlock.getDefaultState().canPlaceAt(world, pos) && world.isAir(pos.up())) {
-            tallPlantBlock.placeAt(world, pos, 2);
-        }
 
     }
 

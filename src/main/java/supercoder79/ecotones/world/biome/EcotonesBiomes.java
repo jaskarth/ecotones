@@ -1,16 +1,16 @@
 package supercoder79.ecotones.world.biome;
 
-import supercoder79.ecotones.world.biome.alternative.*;
-import supercoder79.ecotones.world.biome.base.SwampBiome;
 import supercoder79.ecotones.world.biome.base.hot.*;
 import supercoder79.ecotones.world.biome.base.warm.*;
+import supercoder79.ecotones.world.biome.cave.LimestoneCaveBiome;
+import supercoder79.ecotones.world.biome.climatic.*;
 import supercoder79.ecotones.world.biome.special.*;
 import supercoder79.ecotones.world.biome.technical.DryBeachBiome;
 import supercoder79.ecotones.world.biome.technical.GravelBeachBiome;
 import supercoder79.ecotones.world.biome.technical.RiverBiome;
 import supercoder79.ecotones.world.biome.technical.TropicalBeachBiome;
 
-public class EcotonesBiomes {
+public final class EcotonesBiomes {
     public static void init() {
         // Hot biomes
         DesertBiome.init();
@@ -18,24 +18,19 @@ public class EcotonesBiomes {
         SteppeBiome.init();
         TropicalGrasslandBiome.init();
         LushSavannaBiome.init();
-        DryForestBiome.init();
+        TropicalWoodlandBiome.init();
         LushForestBiome.init();
         TropicalRainforestBiome.init();
 
         // Warm biomes
         CoolDesertBiome.init();
         CoolScrublandBiome.init();
-        CoolSteppeBiome.init();
+        RockySteppeBiome.init();
         PrairieBiome.init();
         LichenWoodlandBiome.init();
         SpruceForestBiome.init();
         TemperateForestBiome.init();
         TemperateRainforestBiome.init();
-
-        SwampBiome.init();
-//        HotBiomes.init();
-//        WarmBiomes.init();
-//        SwampBiomes.init();
 
         // technical biomes
         TropicalBeachBiome.init();
@@ -43,18 +38,11 @@ public class EcotonesBiomes {
         GravelBeachBiome.init();
         RiverBiome.init();
 
-        // volcanic biomes
-        VolcanicBiome.init();
-        SuperVolcanicBiome.init();
-        HotSpringsBiome.init();
-        BlessedSpringsBiome.init();
-
         // special biomes
         OasisBiome.init();
-        ThePitsBiome.init();
+        ChasmBiome.init();
         GreenSpiresBiome.init();
         UluruBiome.init();
-        WastelandBiome.init();
 
         // Biome replacements
         HazelGroveBiome.init();
@@ -83,6 +71,28 @@ public class EcotonesBiomes {
         SunflowerPlainsBiome.init();
         SavannaMesaBiome.init();
         WhiteMesaBiome.init();
+        MapleForestBiome.init();
+        PineForestBiome.init();
+        SpruceFieldsBiome.init();
+        PineBarrensBiome.init();
+        PumpkinPatchBiome.init();
+        DriedForestBiome.init();
+        ClayBasinBiome.init();
+        RockyMountainBiome.init();
+        LushShrublandBiome.init();
+        GraniteSpringsBiome.init();
+        LarchForestBiome.init();
+        BirchLakesBiome.init();
+        LowlandsBiome.init();
+        DandelionFieldBiome.init();
+        ThornBrushBiome.init();
+        SpruceShrublandBiome.init();
+        HotPineForestBiome.init();
+        RedRockRidgeBiome.init();
+        SpruceGlenBiome.init();
+
+        // Cave biomes
+        LimestoneCaveBiome.init();
 
         // Rose Field biome
         RoseFieldBiome.init();

@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.decorator;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorContext;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
@@ -24,8 +25,9 @@ public class SimpleTreePlacementDecorator extends Decorator<SimpleTreeDecoration
 
         double soilQuality = 0.5; // default for if the chunk generator is not ours
         //get noise at position (this is fairly inaccurate because the pos is at the top left of the chunk and we center it)
-        if (context.generator instanceof EcotonesChunkGenerator) {
-            soilQuality = ((EcotonesChunkGenerator)context.generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
+        ChunkGenerator generator = context.getWorld().toServerWorld().getChunkManager().getChunkGenerator();
+        if (generator instanceof EcotonesChunkGenerator) {
+            soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX() + 8, pos.getZ() + 8);
         }
 
         //basic amount modulation
@@ -40,6 +42,10 @@ public class SimpleTreePlacementDecorator extends Decorator<SimpleTreeDecoration
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
             int y = context.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
+            if (y < generator.getSeaLevel()) {
+                continue;
+            }
+
 
             //just go with the position if the ground check can be ignored
             if (config.ignoreGroundCheck) {

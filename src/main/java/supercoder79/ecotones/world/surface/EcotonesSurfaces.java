@@ -1,45 +1,69 @@
 package supercoder79.ecotones.world.surface;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
+import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.util.RegistryReport;
 
-public class EcotonesSurfaces {
-    public static SurfaceBuilder<TernarySurfaceConfig> DESERT_SCRUB_BUILDER;
-    public static SurfaceBuilder<TernarySurfaceConfig> PEAT_SWAMP_BUILDER;
-    public static SurfaceBuilder<TernarySurfaceConfig> VOLCANIC_BUILDER;
-    public static SurfaceBuilder<TernarySurfaceConfig> SUPERVOLCANIC_BUILDER;
-    public static SurfaceBuilder<TernarySurfaceConfig> HOT_SPRINGS_BUILDER;
-    public static SurfaceBuilder<TernarySurfaceConfig> BLESSED_SPRINGS_BUILDER;
-    public static SurfaceBuilder<TernarySurfaceConfig> DELETE_WATER_BUILDER;
-    public static SurfaceBuilder<TernarySurfaceConfig> GREEN_SPIRES_BUILDER;
-    public static SurfaceBuilder<TernarySurfaceConfig> ULURU_BUILDER;
-    public static SurfaceBuilder<TernarySurfaceConfig> WASTELAND_BUILDER;
-    public static SurfaceBuilder<TernarySurfaceConfig> GRASS_MOUNTAIN;
-    public static SurfaceBuilder<TernarySurfaceConfig> DRY_STEPPE;
-    public static SurfaceBuilder<TernarySurfaceConfig> SHIELD;
-    public static SurfaceBuilder<TernarySurfaceConfig> BEACH;
-    public static SurfaceBuilder<TernarySurfaceConfig> MESA;
-    public static SurfaceBuilder<TernarySurfaceConfig> WHITE_MESA;
+public final class EcotonesSurfaces {
+    public static final SurfaceBuilder<TernarySurfaceConfig> DESERT_SCRUB_BUILDER = new DesertScrubSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> PEAT_SWAMP_BUILDER = new PeatSwampSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> VOLCANIC_BUILDER = new VolcanicSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> SUPERVOLCANIC_BUILDER = new SuperVolcanicSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> HOT_SPRINGS_BUILDER = new HotSpringsSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> BLESSED_SPRINGS_BUILDER = new BlessedSpringsSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> DELETE_WATER_BUILDER = new DeleteWaterSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> GREEN_SPIRES_BUILDER = new GreenSpiresSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> ULURU_BUILDER = new UluruSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> WASTELAND_BUILDER = new WastelandSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> GRASS_MOUNTAIN = new GrassMountainSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> DRY_STEPPE = new DrySteppeSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> SHIELD = new ShieldSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> BEACH = new BeachSurfaceBuilder(TernarySurfaceConfig.CODEC, 66);
+    public static final SurfaceBuilder<TernarySurfaceConfig> MESA = new MesaSurfaceBuilder(TernarySurfaceConfig.CODEC, y -> y < 78, MesaHelper::initializeRegularMesa, Blocks.TERRACOTTA.getDefaultState());
+    public static final SurfaceBuilder<TernarySurfaceConfig> WHITE_MESA = new MesaSurfaceBuilder(TernarySurfaceConfig.CODEC, y -> y < 72 || y > 88, MesaHelper::initializeWhiteMesa, Blocks.WHITE_TERRACOTTA.getDefaultState());
+    public static final SurfaceBuilder<TernarySurfaceConfig> ABOVE_Y = new StoneAboveYSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> GRAVEL_BANDS = new GravelBandsSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> GRANITE_SPRINGS = new GraniteSpringsSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> STONE_SPLOTCHES = new StoneSplotchesSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> BIRCH_LAKES = new BirchLakesSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> COARSE_DIRT_BANDS = new CoarseDirtBandsSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> ROCKY_STEPPE = new RockySteppeSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> THORN_BRUSH = new ThornBrushSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<TernarySurfaceConfig> RED_ROCK = new RedRockSurfaceBuilder(TernarySurfaceConfig.CODEC);
 
     public static void init() {
-        DESERT_SCRUB_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "desert_scrub_builder"), new DesertScrubSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        PEAT_SWAMP_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "peat_swamp_builder"), new PeatSwampSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        VOLCANIC_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "volcanic_builder"), new VolcanicSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        SUPERVOLCANIC_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "supervolcanic_builder"), new SuperVolcanicSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        HOT_SPRINGS_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "hot_springs_builder"), new HotSpringsSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        BLESSED_SPRINGS_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "blessed_springs_builder"), new BlessedSpringsSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        DELETE_WATER_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "delete_water_builder"), new DeleteWaterSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        GREEN_SPIRES_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "green_spires_builder"), new GreenSpiresSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        ULURU_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "uluru_builder"), new UluruSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        WASTELAND_BUILDER = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "wasteland_builder"), new WastelandSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        GRASS_MOUNTAIN = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "grass_mountain_builder"), new GrassMountainSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        DRY_STEPPE = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "dry_steppe_builder"), new DrySteppeSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        SHIELD = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "shield"), new ShieldSurfaceBuilder(TernarySurfaceConfig.CODEC));
-        BEACH = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "beach"), new BeachSurfaceBuilder(TernarySurfaceConfig.CODEC, 66));
-        MESA = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "mesa"), new MesaSurfaceBuilder(TernarySurfaceConfig.CODEC, y -> y < 78, MesaHelper::initializeRegularMesa, Blocks.TERRACOTTA.getDefaultState()));
-        WHITE_MESA = Registry.register(Registry.SURFACE_BUILDER, new Identifier("ecotones", "white_mesa"), new MesaSurfaceBuilder(TernarySurfaceConfig.CODEC, y -> y < 72 || y > 88, MesaHelper::initializeWhiteMesa, Blocks.WHITE_TERRACOTTA.getDefaultState()));
+        register("desert_scrub", DESERT_SCRUB_BUILDER);
+        register("peat_swamp", PEAT_SWAMP_BUILDER);
+        register("volcanic", VOLCANIC_BUILDER);
+        register("supervolcanic", SUPERVOLCANIC_BUILDER);
+        register("hot_springs", HOT_SPRINGS_BUILDER);
+        register("blessed_springs", BLESSED_SPRINGS_BUILDER);
+        register("delete_water", DELETE_WATER_BUILDER);
+        register("green_spires", GREEN_SPIRES_BUILDER);
+        register("uluru", ULURU_BUILDER);
+        register("wasteland", WASTELAND_BUILDER);
+        register("grass_mountain", GRASS_MOUNTAIN);
+        register("dry_steppe", DRY_STEPPE);
+        register("shield", SHIELD);
+        register("beach", BEACH);
+        register("mesa", MESA);
+        register("white_mesa", WHITE_MESA);
+        register("above_y", ABOVE_Y);
+        register("gravel_bands", GRAVEL_BANDS);
+        register("granite_springs", GRANITE_SPRINGS);
+        register("stone_splotches", STONE_SPLOTCHES);
+        register("birch_lakes", BIRCH_LAKES);
+        register("coarse_dirt_bands", COARSE_DIRT_BANDS);
+        register("rocky_steppe", ROCKY_STEPPE);
+        register("thorn_brush", THORN_BRUSH);
+        register("red_rock", RED_ROCK);
+    }
+
+    private static void register(String name, SurfaceBuilder<?> builder) {
+        Registry.register(Registry.SURFACE_BUILDER, Ecotones.id(name), builder);
+        RegistryReport.increment("Surface Builder");
     }
 }

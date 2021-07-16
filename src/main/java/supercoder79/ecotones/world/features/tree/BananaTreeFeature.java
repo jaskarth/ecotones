@@ -24,8 +24,6 @@ public class BananaTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
         if (!AbstractTreeFeature.isDirtOrGrass(world, pos.down())) return false;
         setToDirt(world, pos.down());
 
-//        System.out.println("Generated at " + "" + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
-
         generateTrunk(world, random, mutable, logPositions, box, config);
         generateLeaves(world, random, mutable.toImmutable().up(8), leavesPositions, box, config);
 
@@ -35,6 +33,7 @@ public class BananaTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
     private void generateTrunk(ModifiableTestableWorld world, Random random, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, TreeFeatureConfig config) {
         int height = 8;
         BlockPos pos1 = pos.toImmutable();
+
         for (int y = 0; y < height; y++) {
             setLogBlockState(world, random, pos1.up(y), logs, box, config);
         }
@@ -53,7 +52,7 @@ public class BananaTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
         for (int i = 0; i < 3; i++) {
             this.setLeavesBlockState(world, random, pos.offset(direction, i), leaves, box, config);
         }
-        pos.up();
+
         for (int i = 0; i < 3; i++) {
             this.setLeavesBlockState(world, random, pos.offset(direction, i + 2).up(), leaves, box, config);
         }

@@ -1,10 +1,10 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.8-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
@@ -12,7 +12,7 @@ group = project.maven_group
 
 repositories {
 	mavenLocal()
-	maven { url = "https://jitpack.io" }
+	maven { url = "https://maven.gegy.dev" }
 }
 
 minecraft {
@@ -23,34 +23,14 @@ dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
-	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-//	modCompile "com.terraformersmc:terraform:${project.terraform_version}"
-
-	modCompile "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_version}"
-	include "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_version}"
-
-	modCompile "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biomes_version}"
-	include "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biomes_version}"
-
-	modCompile "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_trees_version}"
-	include "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_trees_version}"
-
-	modCompile "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_version}"
-	include "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 
-	modRuntime ("com.github.SuperCoder7979:databreaker:0.2.6") {
+	modRuntime ("supercoder79:databreaker:0.2.7") {
 		exclude module : "fabric-loader"
 	}
-
-//	modRuntime ("com.github.jellysquid3:sodium-fabric:b9c2ad3c38b16275cf2f1a81dcfb2fee1563905b")
-//	modRuntime ("com.github.jellysquid3:phosphor-fabric:0749029a498e8f6574643285bae7aecb2eda76b8")
-//	modRuntime ("com.github.jellysquid3:lithium-fabric:6e33b68cd309ca13c661dedd98670729419ff56c")
-
-//	include "com.terraformersmc:terraform:${project.terraform_version}"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
@@ -59,14 +39,18 @@ dependencies {
 processResources {
 	inputs.property "version", project.version
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
+	filesMatching("fabric.mod.json") {
 		expand "version": project.version
 	}
 
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
-	}
+//	from(sourceSets.main.resources.srcDirs) {
+//		// Exclude unused textures
+//		exclude 'assets/ecotones/textures/unused/**'
+//
+//		// Exclude template textures
+//		exclude 'assets/ecotones/textures/template/**'
+//	}
+
 }
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is
@@ -109,7 +93,6 @@ publishing {
 	}
 }
 
-// TODO: for testing, remove after porting is done
 afterEvaluate {
 	tasks.withType(JavaCompile) {
 		options.compilerArgs << "-Xmaxerrs" << "5000"

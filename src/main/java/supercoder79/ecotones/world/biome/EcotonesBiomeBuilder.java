@@ -9,15 +9,17 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
+import supercoder79.ecotones.util.RegistryReport;
 import supercoder79.ecotones.world.gen.BiomeGenData;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class EcotonesBiomeBuilder {
     public static final Map<Biome, BiomeGenData> OBJ2DATA = new HashMap<>();
@@ -36,9 +38,9 @@ public class EcotonesBiomeBuilder {
         this.biomeEffects = new BiomeEffects.Builder();
 
         // Defaults
-        this.biomeEffects.waterColor(4159204);
-        this.biomeEffects.waterFogColor(329011);
-        this.biomeEffects.fogColor(12638463);
+        this.biomeEffects.waterColor(0x3F76E4);
+        this.biomeEffects.waterFogColor(0x050533);
+        this.biomeEffects.fogColor(0xC0D8FF);
 
         // TODO
         this.builder.category(Biome.Category.PLAINS);
@@ -122,7 +124,20 @@ public class EcotonesBiomeBuilder {
     }
 
     protected void addFeature(GenerationStep.Feature step, ConfiguredFeature<?, ?> feature) {
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier("ecotones", "ecotones_auto_registered_" + feature.hashCode()), feature);
+        ConfiguredFeature<?, ?> wrapper = feature;
+        while (wrapper.feature instanceof DecoratedFeature) {
+            wrapper = ((DecoratedFeatureConfig)wrapper.config).feature.get();
+        }
+
+        String name = wrapper.feature.getClass().getSimpleName();
+        String biomeName = Thread.currentThread().getStackTrace()[3].getClassName();
+        biomeName = biomeName.substring(biomeName.lastIndexOf(".") + 1).toLowerCase(Locale.ROOT);
+        // TODO: refactor this mess into actually putting the biome name in the super call
+
+        Identifier id = new Identifier("ecotones", "ecotones_auto_registered_" + biomeName + "_" + name.toLowerCase(Locale.ROOT) + "_" + feature.hashCode());
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, id, feature);
+
+        RegistryReport.increment("Configured Feature");
         this.generationSettings.feature(step, feature);
     }
 
@@ -130,6 +145,7 @@ public class EcotonesBiomeBuilder {
         if (BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE.getRawId(structureFeature) == -1) {
             String path = "ecotones_auto_registed_structure_" + HashCommon.mix(structureFeature.hashCode());
             Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new Identifier("ecotones", path), structureFeature);
+            RegistryReport.increment("Configured Structure Feature");
         }
 
         this.generationSettings.structureFeature(structureFeature);

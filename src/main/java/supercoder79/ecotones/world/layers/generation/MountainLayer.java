@@ -18,11 +18,11 @@ import java.util.Random;
 public enum MountainLayer implements ParentedLayer, IdentityCoordinateTransformer, SeedLayer {
     INSTANCE;
 
-    private OpenSimplexNoise mountainNoise;
+    public OpenSimplexNoise mountainNoise;
     public static final Map<RegistryKey<Biome>, RegistryKey<Biome>[]> BIOME_TO_MOUNTAINS = new LinkedHashMap<>();
 
-    private double mountainOffsetX = 0;
-    private double mountainOffsetZ = 0;
+    public double mountainOffsetX = 0;
+    public double mountainOffsetZ = 0;
 
     @Override
     public int sample(LayerSampleContext<?> context, LayerSampler parent, int x, int z) {
@@ -34,7 +34,10 @@ public enum MountainLayer implements ParentedLayer, IdentityCoordinateTransforme
             return sample;
         }
 
-        double mountain = mountainNoise.sample((x + mountainOffsetX) / 3f, (z + mountainOffsetZ) / 3f)*1.25;
+        double mountain = mountainNoise.sample((x + mountainOffsetX) / 3f, (z + mountainOffsetZ) / 3f) * 1.25;
+        // Make mountains spawn less frequently near the spawn
+        mountain *= distFactor(x, z);
+
         if (mountain > 0.75) {
             return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(BIOME_TO_MOUNTAINS.get(key)[1]));
         }
@@ -53,5 +56,9 @@ public enum MountainLayer implements ParentedLayer, IdentityCoordinateTransforme
         mountainOffsetZ = (random.nextDouble() - 0.5) * 10000;
         mountainNoise = new OpenSimplexNoise(seed + 90);
         return this.create(context, parent);
+    }
+
+    public static double distFactor(int x, int z) {
+        return Math.max(0, 1 - (4.0 / (x * x + z * z)));
     }
 }

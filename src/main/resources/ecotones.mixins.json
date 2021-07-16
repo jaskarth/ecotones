@@ -4,14 +4,29 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BlockPlacerTypeAccessor",
+    "BlockStateProviderTypeAccessor",
+    "CriteriaAccessor",
     "FoliagePlacerTypeAccessor",
     "MixinBiomeSelectors",
+    "MixinChunkRegion",
     "MixinGeneratorOptions",
-    "TreeDecoratorTypeAccessor"
+    "MixinPlayerManager",
+    "SpawnSettingsAccessor",
+    "StructureFeatureAccessor",
+    "TreeDecoratorTypeAccessor",
+    "client.MixinBackgroundRenderer"
   ],
   "client": [
-    "MixinBiomeColors",
-    "MixinMinecraftClient"
+    "client.EntityModelLayersAccessor",
+    "client.MixinBiomeColors",
+    "client.MixinClientPlayNetworkHandler",
+    "client.MixinClientWorld",
+    "client.MixinDebugHud",
+    "client.MixinEntityModels",
+    "client.MixinHeldItemRenderer",
+    "client.MixinMinecraftClient",
+    "client.MixinSkyProperties",
+    "client.MixinWorldRenderer"
   ],
   "injectors": {
     "defaultRequire": 1

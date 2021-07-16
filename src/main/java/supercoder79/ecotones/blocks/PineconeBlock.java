@@ -35,6 +35,9 @@ public class PineconeBlock extends Block {
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockState upState = world.getBlockState(pos.up());
-        return upState.getBlock() == Blocks.SPRUCE_LEAVES.getDefaultState().getBlock();
+        Block block = upState.getBlock();
+
+        // TODO: block tag
+        return block == Blocks.SPRUCE_LEAVES || block == EcotonesBlocks.LARCH_LEAVES;
     }
 }

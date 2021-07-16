@@ -24,17 +24,17 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
 
     private final Predicate<Integer> grassPlacement;
     private final Function<Long, BlockState[]> layerSetup;
-    private final BlockState cosineState;
+    private final BlockState topState;
 
-    public MesaSurfaceBuilder(Codec<TernarySurfaceConfig> codec, Predicate<Integer> grassPlacement, Function<Long, BlockState[]> layerSetup, BlockState cosineState) {
+    public MesaSurfaceBuilder(Codec<TernarySurfaceConfig> codec, Predicate<Integer> grassPlacement, Function<Long, BlockState[]> layerSetup, BlockState topState) {
         super(codec);
         this.grassPlacement = grassPlacement;
         this.layerSetup = layerSetup;
-        this.cosineState = cosineState;
+        this.topState = topState;
     }
 
     @Override
-    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState stone, BlockState water, int seaLevel, long seed, TernarySurfaceConfig config) {
+    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState stone, BlockState water, int seaLevel, int start, long seed, TernarySurfaceConfig config) {
         int localX = x & 15;
         int localZ = z & 15;
         BlockState blockState3 = WHITE_TERRACOTTA;
@@ -43,11 +43,11 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
         boolean cosineNoise = Math.cos(noise / 3.0D * 3.141592653589793D) > 0.0D;
         int placedDirtDepth = -1;
         boolean setTop = false;
-        int r = 0;
+        int placedTotal = 0;
         BlockPos.Mutable mutable = new BlockPos.Mutable();
 
         for(int y = height; y >= 0; --y) {
-            if (r < 15) {
+            if (placedTotal < 15) {
                 mutable.set(localX, y, localZ);
                 BlockState stateHere = chunk.getBlockState(mutable);
                 if (stateHere.isAir()) {
@@ -75,7 +75,7 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
                                 BlockState placeLayer;
                                 if (y >= 64 && y <= 127) {
                                     if (cosineNoise) {
-                                        placeLayer = this.cosineState;
+                                        placeLayer = this.topState;
                                     } else {
                                         placeLayer = this.calculateLayerBlockState(x, y, z);
                                     }
@@ -103,7 +103,7 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
                         }
                     }
 
-                    ++r;
+                    ++placedTotal;
                 }
             }
         }

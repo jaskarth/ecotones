@@ -3,12 +3,13 @@ package supercoder79.ecotones.world.gen;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.registry.Registry;
@@ -19,30 +20,34 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.biome.source.BiomeAccess;
+import net.minecraft.world.biome.source.BiomeCoords;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ProtoChunk;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
+import net.minecraft.world.gen.carver.CarverContext;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
+import net.minecraft.world.gen.chunk.AquiferSampler;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
+import supercoder79.ecotones.api.CaveBiome;
 import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.LayerRandom;
 import supercoder79.ecotones.util.noise.OctaveNoiseSampler;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
+import supercoder79.ecotones.world.data.DataFunction;
+import supercoder79.ecotones.world.data.DataHolder;
+import supercoder79.ecotones.world.data.EcotonesData;
 
-import java.util.BitSet;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
+public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implements DataHolder {
     public static final Codec<EcotonesChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(
                     BiomeSource.CODEC.fieldOf("biome_source").forGetter((generator) -> generator.biomeSource),
@@ -59,6 +64,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     });
 
     private final OctaveNoiseSampler<OpenSimplexNoise> soilDrainageNoise;
+    private final OctaveNoiseSampler<OpenSimplexNoise> soilPhNoise;
+    private final OctaveNoiseSampler<OpenSimplexNoise> grassNoise;
 
     //TODO: convert this to soil depth somehow
     private final OctaveNoiseSampler<OpenSimplexNoise> soilRockinessNoise;
@@ -67,6 +74,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     private final OctaveNoiseSampler<OpenSimplexNoise> scaleNoise;
     private final long seed;
     private final Optional<Registry<Biome>> registry;
+    private final Map<Identifier, DataFunction> data = new HashMap<>();
 
     public EcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
         super(biomeSource, seed);
@@ -81,6 +89,14 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 256, 0.2, -0.2);
         this.soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 1.75, 0.75);
         this.soilRockinessNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1024, 2, -2);
+        this.soilPhNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 0.9, 0.9);
+        this.grassNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 800, 0.9, 0.9);
+
+        this.data.put(EcotonesData.SOIL_QUALITY, (x, z) -> MathHelper.clamp((this.soilDrainageNoise.sample(x, z) / 2) + 0.5, 0, 1));
+        this.data.put(EcotonesData.SOIL_DRAINAGE, this.soilDrainageNoise::sample);
+        this.data.put(EcotonesData.SOIL_ROCKINESS, this.soilRockinessNoise::sample);
+        this.data.put(EcotonesData.SOIL_PH, this.soilPhNoise::sample);
+        this.data.put(EcotonesData.GRASS_NOISE, this.grassNoise::sample);
     }
 
     @Override
@@ -191,17 +207,11 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
 
     @Override
     public void populateEntities(ChunkRegion region) {
-        int chunkX = region.getCenterChunkX();
-        int chunkZ = region.getCenterChunkZ();
-        Biome biome = region.getBiome((new ChunkPos(chunkX, chunkZ)).getStartPos());
+        ChunkPos chunkPos = region.getCenterPos();
+        Biome biome = region.getBiome(chunkPos.getStartPos());
         ChunkRandom chunkRandom = new ChunkRandom();
-        chunkRandom.setPopulationSeed(region.getSeed(), chunkX << 4, chunkZ << 4);
-        SpawnHelper.populateEntities(region, biome, chunkX, chunkZ, chunkRandom);
-    }
-
-    @Override
-    public int getSpawnHeight() {
-        return 63;
+        chunkRandom.setPopulationSeed(region.getSeed(), chunkPos.getStartX(), chunkPos.getStartZ());
+        SpawnHelper.populateEntities(region, biome, chunkPos, chunkRandom);
     }
 
     //height additions - makes the terrain a bit hillier
@@ -225,7 +235,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         return noise;
     }
 
-    public List<SpawnSettings.SpawnEntry> getEntitySpawnList(Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos) {
+    public Pool<SpawnSettings.SpawnEntry> getEntitySpawnList(Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos) {
         if (accessor.getStructureAt(pos, true, StructureFeature.SWAMP_HUT).hasChildren()) {
             if (group == SpawnGroup.MONSTER) {
                 return StructureFeature.SWAMP_HUT.getMonsterSpawns();
@@ -266,25 +276,31 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     // Vanilla random improvements
     @Override
     public void generateFeatures(ChunkRegion world, StructureAccessor structureAccessor) {
-        int centerX = world.getCenterChunkX();
-        int centerZ = world.getCenterChunkZ();
-        int topX = centerX * 16;
-        int topZ = centerZ * 16;
-        BlockPos pos = new BlockPos(topX, 0, topZ);
-        Biome biome = this.biomeSource.getBiomeForNoiseGen((centerX << 2) + 2, 2, (centerZ << 2) + 2);
+        ChunkPos chunkPos = world.getCenterPos();
+        int centerX = chunkPos.getStartX();
+        int centerZ = chunkPos.getStartZ();
+        BlockPos pos = new BlockPos(centerX, 0, centerZ);
+        Biome biome = this.biomeSource.getBiomeForNoiseGen((chunkPos.x << 2) + 2, 2, (chunkPos.z << 2) + 2);
         ImprovedChunkRandom random = new ImprovedChunkRandom();
-        long populationSeed = random.setPopulationSeed(world.getSeed(), topX, topZ, biome.getScale() + scaleNoise.sample(topX + 8, topZ + 8));
+        long populationSeed = random.setPopulationSeed(world.getSeed(), centerX, centerZ, biome.getScale() + scaleNoise.sample(centerX + 8, centerZ + 8));
 
         try {
             biome.generateFeatureStep(structureAccessor, this, world, populationSeed, random, pos);
         } catch (Exception ex) {
             CrashReport crashReport = CrashReport.create(ex, "Biome decoration");
             crashReport.addElement("Generation")
-                    .add("CenterX", centerX)
-                    .add("CenterZ", centerZ)
+                    .add("CenterX", chunkPos.x)
+                    .add("CenterZ", chunkPos.x)
                     .add("Seed", populationSeed)
                     .add("Biome", biome);
             throw new CrashException(crashReport);
+        }
+
+        if (this.biomeSource instanceof CaveBiomeSource) {
+            CaveBiome caveBiome = ((CaveBiomeSource)this.biomeSource).getCaveBiomeForNoiseGen((chunkPos.x << 2) + 2, (chunkPos.z << 2) + 2);
+            for (ConfiguredFeature<?, ?> feature : caveBiome.getFeatures()) {
+                feature.generate(world, this, random, pos);
+            }
         }
     }
 
@@ -295,11 +311,17 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
         ChunkPos chunkPos = chunk.getPos();
         int j = chunkPos.x;
         int k = chunkPos.z;
-        GenerationSettings generationSettings = this.populationSource.getBiomeForNoiseGen(chunkPos.x << 2, 0, chunkPos.z << 2).getGenerationSettings();
+        GenerationSettings generationSettings = this.populationSource.getBiomeForNoiseGen(BiomeCoords.fromBlock(chunkPos.getStartX()), 0, BiomeCoords.fromBlock(chunkPos.getStartZ())).getGenerationSettings();
         BitSet bitSet = ((ProtoChunk)chunk).getOrCreateCarvingMask(carver);
 
+        CarverContext carverContext = new CarverContext(this, chunk);
+        AquiferSampler aquiferSampler = AquiferSampler.seaLevel(this.getSeaLevel(), this.defaultFluid);
+
+        // TODO: clean up, 1.17 made it so
         for(int l = j - 8; l <= j + 8; ++l) {
             for(int m = k - 8; m <= k + 8; ++m) {
+                ChunkPos chunkPos2 = new ChunkPos(l, m);
+
                 List<Supplier<ConfiguredCarver<?>>> list = generationSettings.getCarversForStep(carver);
                 ListIterator listIterator = list.listIterator();
 
@@ -307,8 +329,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
                     int n = listIterator.nextIndex();
                     ConfiguredCarver<?> configuredCarver = (ConfiguredCarver)((Supplier)listIterator.next()).get();
                     chunkRandom.setCarverSeed(seed + (long)n, l, m);
-                    if (configuredCarver.shouldCarve(chunkRandom, l, m)) {
-                        configuredCarver.carve(chunk, biomeAccess::getBiome, chunkRandom, this.getSeaLevel(), l, m, j, k, bitSet);
+                    if (configuredCarver.shouldCarve(chunkRandom)) {
+                        configuredCarver.carve(carverContext, chunk, biomeAccess::getBiome, chunkRandom, aquiferSampler, chunkPos2, bitSet);
                     }
                 }
             }
@@ -317,17 +339,29 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator {
     }
 
     // data getters
-
+    @Deprecated
     public OctaveNoiseSampler<OpenSimplexNoise> getSoilDrainageNoise() {
-        return soilDrainageNoise;
+        return this.soilDrainageNoise;
     }
 
+    @Deprecated
     public OctaveNoiseSampler<OpenSimplexNoise> getSoilRockinessNoise() {
-        return soilRockinessNoise;
+        return this.soilRockinessNoise;
     }
 
+    @Deprecated
     public double getSoilQualityAt(double x, double z) {
-        return MathHelper.clamp((soilDrainageNoise.sample(x, z) / 2) + 0.5, 0, 1);
+        return MathHelper.clamp((this.soilDrainageNoise.sample(x, z) / 2) + 0.5, 0, 1);
+    }
+
+    @Deprecated
+    public double getSoilPhAt(double x, double z) {
+        return this.soilPhNoise.sample(x, z);
+    }
+
+    @Override
+    public DataFunction get(Identifier id) {
+        return this.data.getOrDefault(id, DataFunction.NOOP);
     }
 
     // Tree trait data

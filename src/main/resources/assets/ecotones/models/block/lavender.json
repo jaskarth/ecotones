@@ -1,0 +1,7 @@
+{
+    "parent": "ecotones:block/extends/tinted_normal",
+    "textures": {
+        "normal": "ecotones:block/lavender/flower",
+        "tinted": "ecotones:block/lavender/stem"
+    }
+}

@@ -18,6 +18,7 @@ import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.Heightmap.Type;
 import net.minecraft.world.WorldAccess;
@@ -38,6 +39,8 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
@@ -112,7 +115,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         }
 
         // This uses 16.0 while vanilla uses 10.0, to get better looking terrain.
-        double clampedInterpolation = (interpolationValue / 16.0 + 1.0) / 2.0;
+        double clampedInterpolation = (interpolationValue / 32.0 + 1.0) / 2.0;
 
         if (clampedInterpolation >= 1) {
             // Sample only upper noise, as the lower noise will be interpolated out.
@@ -197,11 +200,11 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         return 0.0D;
     }
 
-    public int getHeight(int x, int z, Type heightmapType) {
+    public int getHeight(int x, int z, Type heightmapType, HeightLimitView world) {
         return this.sampleHeightmap(x, z, null, heightmapType.getBlockPredicate());
     }
 
-    public VerticalBlockSample getColumnSample(int x, int z) {
+    public VerticalBlockSample getColumnSample(int x, int z, HeightLimitView world) {
         BlockState[] states = new BlockState[this.noiseSizeY * this.verticalNoiseResolution];
         this.sampleHeightmap(x, z, states, null);
         // TODO: custom min y, using 0 for now
@@ -293,7 +296,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                 int localZ = chunkStartZ + z;
                 int y = chunk.sampleHeightmap(Type.WORLD_SURFACE_WG, x, z) + 1;
                 double e = this.surfaceDepthNoise.sample((double) localX * 0.0625D, (double) localZ * 0.0625D, 0.0625D, (double) x * 0.0625D) * 15.0D;
-                region.getBiome(mutable.set(localX, y, localZ)).buildSurface(random, chunk, localX, localZ, y, e, this.defaultBlock, this.defaultFluid, this.getSeaLevel(), region.getSeed());
+                region.getBiome(mutable.set(localX, y, localZ)).buildSurface(random, chunk, localX, localZ, y, e, this.defaultBlock, this.defaultFluid, this.getSeaLevel(), 0, region.getSeed());
             }
         }
 
@@ -314,7 +317,15 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         }
     }
 
-    public void populateNoise(WorldAccess world, StructureAccessor accessor, Chunk chunk) {
+    @Override
+    public CompletableFuture<Chunk> populateNoise(Executor executor, StructureAccessor accessor, Chunk chunk) {
+        // TODO: proper multithreading
+        populateNoise(accessor, chunk);
+
+        return CompletableFuture.completedFuture(chunk);
+    }
+
+    public void populateNoise(StructureAccessor accessor, Chunk chunk) {
         ObjectList<StructurePiece> structurePieces = new ObjectArrayList<>(10);
         ObjectList<JigsawJunction> jigsaws = new ObjectArrayList<>(32);
         ChunkPos pos = chunk.getPos();
@@ -323,7 +334,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         int chunkStartX = chunkX << 4;
         int chunkStartZ = chunkZ << 4;
 
-        for (StructureFeature<?> feature : StructureFeature.JIGSAW_STRUCTURES) {
+        for (StructureFeature<?> feature : StructureFeature.LAND_MODIFYING_STRUCTURES) {
             accessor.getStructuresWithChildren(ChunkSectionPos.from(pos, 0), feature).forEach(start -> {
                 Iterator<StructurePiece> pieces = start.getChildren().iterator();
                 
@@ -404,7 +415,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                     double x1z0y1 = noiseData[1][noiseZ][noiseY + 1];
                     double x1z1y1 = noiseData[1][noiseZ + 1][noiseY + 1];
 
-                    // [0, 8] -> y noise pieces
+                    // [0, 8) -> y noise pieces
                     for(int pieceY = this.verticalNoiseResolution - 1; pieceY >= 0; --pieceY) {
                         int realY = noiseY * this.verticalNoiseResolution + pieceY;
                         int localY = realY & 15;
@@ -425,7 +436,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                         double x0z1 = MathHelper.lerp(yLerp, x0z1y0, x0z1y1);
                         double x1z1 = MathHelper.lerp(yLerp, x1z1y0, x1z1y1);
 
-                        // [0, 4] -> x noise pieces
+                        // [0, 4) -> x noise pieces
                         for(int pieceX = 0; pieceX < this.horizontalNoiseResolution; ++pieceX) {
                             int realX = chunkStartX + noiseX * this.horizontalNoiseResolution + pieceX;
                             int localX = realX & 15;
@@ -451,9 +462,9 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                                 for(density = density / 2.0D - density * density * density / 24.0D; structurePieceIterator.hasNext(); density += getNoiseWeight(structureX, structureY, structureZ) * 0.8D) {
                                     StructurePiece structurePiece = structurePieceIterator.next();
                                     BlockBox box = structurePiece.getBoundingBox();
-                                    structureX = Math.max(0, Math.max(box.minX - realX, realX - box.maxX));
-                                    structureY = realY - (box.minY + (structurePiece instanceof PoolStructurePiece ? ((PoolStructurePiece)structurePiece).getGroundLevelDelta() : 0));
-                                    structureZ = Math.max(0, Math.max(box.minZ - realZ, realZ - box.maxZ));
+                                    structureX = Math.max(0, Math.max(box.getMinX() - realX, realX - box.getMaxX()));
+                                    structureY = realY - (box.getMinY() + (structurePiece instanceof PoolStructurePiece ? ((PoolStructurePiece)structurePiece).getGroundLevelDelta() : 0));
+                                    structureZ = Math.max(0, Math.max(box.getMinZ() - realZ, realZ - box.getMaxZ()));
                                 }
                                 structurePieceIterator.back(structurePieces.size());
 

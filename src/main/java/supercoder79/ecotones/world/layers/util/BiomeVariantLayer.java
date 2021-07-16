@@ -7,8 +7,6 @@ import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 
-import java.util.Map;
-
 public enum BiomeVariantLayer implements IdentitySamplingLayer {
     INSTANCE;
 
@@ -16,7 +14,7 @@ public enum BiomeVariantLayer implements IdentitySamplingLayer {
     public int sample(LayerRandomnessSource context, int sample) {
         RegistryKey<Biome> key = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(sample)).get();
         Integer chance = BiomeRegistries.BIOME_VARANT_CHANCE.get(key);
-        if (chance != null) {
+        if (chance != null && context.nextInt(chance) == 0) {
             RegistryKey<Biome>[] variants = BiomeRegistries.BIOME_VARIANTS.get(key);
             return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(variants[context.nextInt(variants.length)]));
         }

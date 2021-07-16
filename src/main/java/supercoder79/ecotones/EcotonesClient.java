@@ -5,20 +5,29 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.render.RenderLayer;
+import supercoder79.ecotones.api.client.ModelDataRegistry;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
-import supercoder79.ecotones.client.GoVote;
-import supercoder79.ecotones.client.particle.EcotonesParticles;
-import supercoder79.ecotones.client.particle.SandParticle;
+import supercoder79.ecotones.client.ClientPacketHandler;
+import supercoder79.ecotones.client.Colors;
+import supercoder79.ecotones.client.gui.EcotonesScreens;
+import supercoder79.ecotones.client.model.DuckEntityModel;
+import supercoder79.ecotones.client.model.EcotonesModelLayers;
+import supercoder79.ecotones.client.particle.*;
+import supercoder79.ecotones.client.render.block.EcotonesBlockEntityRenderers;
+import supercoder79.ecotones.client.render.entity.DuckEntityRenderer;
+import supercoder79.ecotones.entity.EcotonesEntities;
+import supercoder79.ecotones.items.EcotonesItems;
 
 @Environment(EnvType.CLIENT)
-public class EcotonesClient implements ClientModInitializer {
+public final class EcotonesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        GoVote.init();
+        ClientPacketHandler.init();
 
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> view != null && pos != null ? BiomeColors.getFoliageColor(view, pos) : FoliageColors.getDefaultColor(),
@@ -27,12 +36,31 @@ public class EcotonesClient implements ClientModInitializer {
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> view != null && pos != null ? BiomeColors.getGrassColor(view, pos) : FoliageColors.getDefaultColor(),
                 EcotonesBlocks.WIDE_FERN,
-                EcotonesBlocks.SHORT_GRASS);
+                EcotonesBlocks.SHORT_GRASS,
+                EcotonesBlocks.WILDFLOWERS,
+                EcotonesBlocks.BLUEBELL,
+                EcotonesBlocks.LAVENDER,
+                EcotonesBlocks.SMALL_LILAC);
 
-        ColorProviderRegistry.ITEM.register(((stack, tintIndex) -> FoliageColors.getDefaultColor()),
-                EcotonesBlocks.SHORT_GRASS_ITEM,
-                EcotonesBlocks.WIDE_FERN_ITEM,
-                EcotonesBlocks.HAZEL_LEAVES_ITEM);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColors.getDefaultColor(),
+                EcotonesItems.SHORT_GRASS,
+                EcotonesItems.WIDE_FERN,
+                EcotonesItems.HAZEL_LEAVES);
+
+        // Maple leaves
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> Colors.maple(),
+                EcotonesItems.MAPLE_LEAVES);
+
+        ColorProviderRegistry.BLOCK.register(
+                (state, view, pos, tintIndex) -> Colors.maple(pos),
+                EcotonesBlocks.MAPLE_LEAVES);
+
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> Colors.larch(),
+                EcotonesItems.LARCH_LEAVES);
+
+        ColorProviderRegistry.BLOCK.register(
+                (state, view, pos, tintIndex) -> Colors.larch(pos),
+                EcotonesBlocks.LARCH_LEAVES);
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
                 EcotonesBlocks.SHORT_GRASS,
@@ -50,8 +78,36 @@ public class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.CYAN_ROSE,
                 EcotonesBlocks.LICHEN,
                 EcotonesBlocks.MOSS,
-                EcotonesBlocks.PINECONE);
+                EcotonesBlocks.PINECONE,
+                EcotonesBlocks.MAPLE_LEAVES,
+                EcotonesBlocks.BLUEBERRY_BUSH,
+                EcotonesBlocks.SWITCHGRASS,
+                EcotonesBlocks.ROSEMARY,
+                EcotonesBlocks.LAVENDER,
+                EcotonesBlocks.SPRUCE_LEAF_PILE,
+                EcotonesBlocks.MARIGOLD,
+                EcotonesBlocks.MAPLE_SAPLING,
+                EcotonesBlocks.LARCH_LEAVES,
+                EcotonesBlocks.SMALL_CACTUS,
+                EcotonesBlocks.POOFY_DANDELION,
+                EcotonesBlocks.CATTAIL,
+                EcotonesBlocks.DUCKWEED,
+                EcotonesBlocks.THORN_BUSH);
+
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
+                EcotonesBlocks.BLUEBERRY_JAM_JAR,
+                EcotonesBlocks.MAPLE_SYRUP_JAR);
 
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAND, SandParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(EcotonesParticles.MAPLE_LEAF, MapleLeafParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SYRUP_POP, SyrupPopParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAP_DRIP, SapDripParticle.Factory::new);
+
+        EcotonesModelLayers.init();
+        EcotonesScreens.init();
+        EcotonesBlockEntityRenderers.init();
+
+        ModelDataRegistry.register(EcotonesModelLayers.DUCK, DuckEntityModel.getTexturedModelData());
+        EntityRendererRegistry.INSTANCE.register(EcotonesEntities.DUCK, DuckEntityRenderer::new);
     }
 }

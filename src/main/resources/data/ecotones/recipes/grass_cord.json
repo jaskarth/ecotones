@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AA",
+    "AA"
+  ],
+  "key": {
+    "A": {
+      "item": "ecotones:grass_strand"
+    }
+  },
+  "result": {
+    "item": "ecotones:grass_cord"
+  }
+}

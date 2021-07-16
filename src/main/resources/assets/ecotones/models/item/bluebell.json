@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "ecotones:block/bluebell"
+    "layer0": "ecotones:block/bluebell/inv"
   }
 }

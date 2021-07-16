@@ -5,8 +5,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.util.Shapes;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
@@ -18,7 +18,12 @@ public class BigShrubFeature extends Feature<SimpleTreeFeatureConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world,  ChunkGenerator generator, Random random, BlockPos pos, SimpleTreeFeatureConfig config) {
+    public boolean generate(FeatureContext<SimpleTreeFeatureConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getOrigin();
+        Random random = context.getRandom();
+        SimpleTreeFeatureConfig config = context.getConfig();
+
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return false;
 
         double maxRadius = 1.75 + ((random.nextDouble() - 0.5) * 0.2);

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "ecotones:ecotones_book"
+    },
+    "title": {
+      "translate": "advancements.ecotones.root"
+    },
+    "description": {
+      "translate": "advancements.ecotones.root.desc"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "ecotones:textures/gui/grass_block_colorized.png"
+  },
+  "criteria": {
+    "enter_world": {
+      "trigger": "ecotones:enter_world"
+    }
+  },
+  "requirements": [
+    [
+      "enter_world"
+    ]
+  ]
+}

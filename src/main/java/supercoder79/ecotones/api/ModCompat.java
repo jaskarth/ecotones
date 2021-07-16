@@ -3,7 +3,7 @@ package supercoder79.ecotones.api;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModCompat {
+public final class ModCompat {
     private static boolean initialized = false;
     private static final List<Runnable> COMPAT_ACTIONS = new ArrayList<>();
 

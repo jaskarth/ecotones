@@ -12,17 +12,18 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
-import supercoder79.ecotones.util.TreeUtil;
+import supercoder79.ecotones.util.TreeHelper;
 import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.function.BiConsumer;
 
 public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
     private static final LeafVineTreeDecorator DECORATOR = new LeafVineTreeDecorator(3, 5, 3);
@@ -31,7 +32,12 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, TreeGenerationConfig config) {
+    public boolean generate(FeatureContext<TreeGenerationConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getOrigin();
+        Random random = context.getRandom();
+        TreeGenerationConfig config = context.getConfig();
+
         BlockState downState = world.getBlockState(pos.down());
         if (downState != Blocks.GRASS_BLOCK.getDefaultState() && downState != Blocks.DIRT.getDefaultState()) return true;
         int maxHeight = 4;
@@ -75,7 +81,9 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
             generateMainLeafLayer(world, node, leaves, config);
         }
 
-        DECORATOR.generate(world, random, ImmutableList.of(), leaves, new HashSet<>(), BlockBox.empty());
+        BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
+
+        DECORATOR.generate(world, replacer, random, ImmutableList.of(), leaves);
     }
 
     private void root(WorldAccess world, BlockPos startPos, Random random, float yaw, float pitch, TreeGenerationConfig config) {
@@ -89,7 +97,7 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
             i++;
             if (i > 25) break;
 
-            if (TreeUtil.canLogReplace(world, local)) {
+            if (TreeHelper.canLogReplace(world, local)) {
                 world.setBlockState(local, config.woodState, 0);
             }
         }
@@ -104,7 +112,7 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
                     MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
 
             //if the tree hits a solid block, stop
-            if (TreeUtil.canLogReplace(world, local)) {
+            if (TreeHelper.canLogReplace(world, local)) {
                 world.setBlockState(local, config.woodState, 0);
             } else {
                 break;
@@ -141,7 +149,7 @@ public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
     private void branch(WorldAccess world, BlockPos trunkPos, Random random, List<BlockPos> leaves, TreeGenerationConfig config) {
         BlockPos pos = trunkPos.offset(Direction.Type.HORIZONTAL.random(random));
 
-        if (TreeUtil.canLogReplace(world, pos)) {
+        if (TreeHelper.canLogReplace(world, pos)) {
             world.setBlockState(pos, config.woodState, 0);
 
             pos = pos.up();

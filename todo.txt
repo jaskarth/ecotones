@@ -4,7 +4,6 @@
 * Everglades
 * Steppe -> something unique
 * Forest with balloon-y trees (see misc entry)
-* Lowlands with jungle bush-like shrubs
 * Kauri forest
 * Mixed forest
 * Lake biomes
@@ -12,12 +11,10 @@
 * Inland oceans
 * Coastal biome variants
 * Sequoia forest
-* Larch forest
 * Rice Field
 * Gravelly desert
 * Rocky desert
 * Stone Spires (basically the ending fight area of Avatar lmao)
-* Maple forest
 * Cherry forest
 * Floodplains
 * Birch forest style with oak trees
@@ -27,8 +24,6 @@
 * More flower types
 * Aquatic plants
 * Implement curly grass
-* Biome color based clover & wildflowers
-* Berry Bushes
 * Sap block
 * Sap mob trap
 * Acorns -> grow large trees
@@ -43,9 +38,12 @@
 * Fallen logs for every biome
 * Add edge biomes to everything
 * Burned village for dead spruce forests
-* Fix: Water patches in flooded savannas spawn with air on sides
 * Improve the look of a few biomes (remove shrubs, more unique features, etc.)
-* Better mod compat, deferred register system
+* Geodes for all biomes
+* Blueberry jam recipe
+* Mason jar item
+* Add fruit tags
+* Add Avocado, name advancement "6.02e23"
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas
@@ -58,19 +56,11 @@
 * Different tree species
 * Fruit trees
 * Leaf generation variations
-* Abstract the shit out of tree gen
+* Abstract out tree gen
 * Special tree generation items (acorn, birch seed)
 * Trees don't set block to dirt
 * Fix disks
 * Skip analysis when good soil quality
-
-# 1.17
-* flooded_savannah -> flooded_savanna
-* beach -> tropical_beach
-* Smaller biome sizes
-* Smoother worldgen
-* Increase biome smoothing radius
-* Rename Dry Forest
 
 # Automation
 * Testing suite to find errors within biomes (no strongholds, etc.)

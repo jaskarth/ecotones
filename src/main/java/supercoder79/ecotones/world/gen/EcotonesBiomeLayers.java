@@ -33,7 +33,7 @@ public class EcotonesBiomeLayers {
 
         //Add ocean temperatures and deep oceans
         LayerFactory<T> layerFactory2 = OceanTemperatureLayer.INSTANCE.create(contextProvider.apply(2L));
-        layerFactory2 = stack(2301L, ScaleLayer.NORMAL, layerFactory2, 6, contextProvider);
+        layerFactory2 = stack(2301L, ScaleLayer.NORMAL, layerFactory2, 1, contextProvider);
         layerFactory = ApplyOceanTemperatureLayer.INSTANCE.create(contextProvider.apply(100L), layerFactory, layerFactory2);
         layerFactory = DeepOceanLayer.INSTANCE.create(contextProvider.apply(102L), layerFactory);
 
@@ -44,12 +44,14 @@ public class EcotonesBiomeLayers {
         layerFactory = stack(2081L, ScaleLayer.NORMAL, layerFactory, 3, contextProvider);
 
         //Add our biomes
-        LayerFactory<T> biomeLayer = ClimateLayers.INSTANCE.create(contextProvider.apply(2L), seed + 79);
+        LayerFactory<T> biomeLayer = ClimateLayer.INSTANCE.create(contextProvider.apply(2L), seed + 79);
         biomeLayer = MountainLayer.INSTANCE.create(contextProvider.apply(49L), biomeLayer, seed + 1337);
 
         biomeLayer = stack(7970L, ScaleLayer.NORMAL, biomeLayer, 2, contextProvider);
+        biomeLayer = SmoothLayer.INSTANCE.create(contextProvider.apply(402), biomeLayer);
         biomeLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), biomeLayer);
-        biomeLayer = stack(7979L, ScaleLayer.NORMAL, biomeLayer, 5, contextProvider);
+        biomeLayer = stack(7979L, ScaleLayer.NORMAL, biomeLayer, 3, contextProvider);
+        biomeLayer = Div3ScaleLayer.INSTANCE.create(contextProvider.apply(32), biomeLayer);
 
         //Initialize special biomes (smaller biomes with c o o l effects)
         LayerFactory<T> specialBiomesLayer = PlainsOnlyLayer.INSTANCE.create(contextProvider.apply(3L));
@@ -59,7 +61,6 @@ public class EcotonesBiomeLayers {
 
         specialBiomesLayer = SmallSpecialBiomesLayer.INSTANCE.create(contextProvider.apply(32L), specialBiomesLayer, biomeLayer);
         specialBiomesLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), specialBiomesLayer);
-        specialBiomesLayer = VolcanismLayer.INSTANCE.create(contextProvider.apply(24L), specialBiomesLayer, seed - 30);
 
         specialBiomesLayer = stack(3080L, ScaleLayer.NORMAL, specialBiomesLayer, 5, contextProvider);
 

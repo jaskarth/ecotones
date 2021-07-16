@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BOB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "ecotones:blueberries"
+    },
+    "O": {
+      "item": "minecraft:bread"
+    }
+  },
+  "result": {
+    "item": "ecotones:blueberry_jam"
+  }
+}

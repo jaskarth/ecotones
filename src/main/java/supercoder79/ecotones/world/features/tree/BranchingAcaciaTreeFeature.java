@@ -7,11 +7,11 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
-import supercoder79.ecotones.util.TreeUtil;
+import supercoder79.ecotones.util.TreeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,12 @@ public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, TreeGenerationConfig config) {
+    public boolean generate(FeatureContext<TreeGenerationConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getOrigin();
+        Random random = context.getRandom();
+        TreeGenerationConfig config = context.getConfig();
+
         //ensure spawn
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
 
@@ -79,7 +84,7 @@ public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
                     MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
 
             //if the tree hits a solid block, stop the branch
-            if (TreeUtil.canLogReplace(world, local)) {
+            if (TreeHelper.canLogReplace(world, local)) {
                 world.setBlockState(local, config.woodState, 0);
             } else {
                 break;
@@ -97,7 +102,7 @@ public class BranchingAcaciaTreeFeature extends Feature<TreeGenerationConfig> {
                 boolean shouldNotBranch = false;
                 for (int y = local.getY() + 1; y < 256; y++) {
                     mutable.setY(y);
-                    if (!TreeUtil.canLogReplace(world, mutable)) {
+                    if (!TreeHelper.canLogReplace(world, mutable)) {
                         shouldNotBranch = true;
                         break;
                     }

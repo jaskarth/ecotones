@@ -1,9 +1,7 @@
 package supercoder79.ecotones.api;
 
 import com.google.common.collect.Lists;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
@@ -11,7 +9,6 @@ import supercoder79.ecotones.Ecotones;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalLong;
 
 public enum Climate {
     HOT_DESERT,
@@ -51,7 +48,7 @@ public enum Climate {
     COLD_RAINFOREST;
 
     private final List<Entry> biomeEntries = Lists.newArrayList();
-    private double weightTotal;
+    private double totalWeight;
 
     Climate() {
 
@@ -73,21 +70,28 @@ public enum Climate {
         Biome biome = Ecotones.REGISTRY.get(this.biomeEntries.get(i).biome);
 
         int id = Ecotones.REGISTRY.getRawId(biome);
-//        System.out.println(id);
 
         return id;
     }
 
     public void add(Biome biome, double weight) {
         this.biomeEntries.add(new Entry(biome, weight));
-        this.weightTotal += weight;
+        this.totalWeight += weight;
     }
 
     private double target(LayerRandomnessSource random) {
-        return (double) random.nextInt(Integer.MAX_VALUE) * this.weightTotal / Integer.MAX_VALUE;
+        return (double) random.nextInt(Integer.MAX_VALUE) * this.totalWeight / Integer.MAX_VALUE;
     }
 
-    private static class Entry {
+    public List<Entry> getBiomeEntries() {
+        return biomeEntries;
+    }
+
+    public double getTotalWeight() {
+        return totalWeight;
+    }
+
+    public static class Entry {
         private final RegistryKey<Biome> biome;
         private final double weight;
         private Entry(Biome biome, double weight) {
@@ -97,8 +101,14 @@ public enum Climate {
             // Mod compat mode: use dynamic registry
             this.biome = optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome).get());
             this.weight = weight;
+        }
 
-//            System.out.println(this.biome);
+        public RegistryKey<Biome> getBiome() {
+            return biome;
+        }
+
+        public double getWeight() {
+            return weight;
         }
     }
 }

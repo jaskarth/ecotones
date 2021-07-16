@@ -2,6 +2,7 @@ package supercoder79.ecotones.world.features.tree;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
@@ -11,20 +12,22 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.tree.TrunkVineTreeDecorator;
+import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.world.gen.treedecorator.TrunkVineTreeDecorator;
 import supercoder79.ecotones.api.TreeGenerationConfig;
-import supercoder79.ecotones.tree.OakTrait;
-import supercoder79.ecotones.tree.Traits;
-import supercoder79.ecotones.tree.oak.DefaultOakTrait;
 import supercoder79.ecotones.util.DataPos;
-import supercoder79.ecotones.util.TreeUtil;
+import supercoder79.ecotones.util.TreeHelper;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
+import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
+import supercoder79.ecotones.world.tree.trait.oak.OakTrait;
+import supercoder79.ecotones.world.tree.trait.oak.DefaultOakTrait;
 import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.function.BiConsumer;
 
 //creates a branching trunk then places leaves
 public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
@@ -34,7 +37,13 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
     }
 
     @Override
-    public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos pos, TreeGenerationConfig config) {
+    public boolean generate(FeatureContext<TreeGenerationConfig> context) {
+        StructureWorldAccess world = context.getWorld();
+        BlockPos pos = context.getOrigin();
+        Random random = context.getRandom();
+        ChunkGenerator generator = context.getGenerator();
+        TreeGenerationConfig config = context.getConfig();
+
         //ensure spawn
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return true;
 
@@ -48,12 +57,9 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
 
             maxHeight = data.maxHeight;
 
-            long traits = 0;
             if (generator instanceof EcotonesChunkGenerator) {
-                traits = ((EcotonesChunkGenerator) generator).getTraits(pos.getX() >> 4, pos.getZ() >> 4, config.traitSalt);
+                trait = EcotonesTreeTraits.OAK.get((EcotonesChunkGenerator) generator, pos);
             }
-
-            trait = Traits.get(Traits.OAK, traits);
         }
 
         // Scale height
@@ -75,8 +81,10 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
         }
 
         if (config.generateVines) {
-            new LeafVineTreeDecorator(3, 4, 2).generate(world, random, ImmutableList.of(), leaves, new HashSet<>(), BlockBox.empty());
-            new TrunkVineTreeDecorator().generate(world, random, ImmutableList.of(), leaves, new HashSet<>(), BlockBox.empty());
+            BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
+
+            new LeafVineTreeDecorator(3, 4, 2).generate(world, replacer, random, ImmutableList.of(), leaves);
+            new TrunkVineTreeDecorator().generate(world, replacer, random, ImmutableList.of(), leaves);
         }
     }
 
@@ -95,7 +103,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                     MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
 
             //if the tree hits a solid block, stop the branch
-            if (TreeUtil.canLogReplace(world, local)) {
+            if (TreeHelper.canLogReplace(world, local)) {
                 world.setBlockState(local, config.woodState, 0);
             } else {
                 break;
@@ -122,7 +130,7 @@ public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
                 boolean shouldNotBranch = false;
                 for (int y = local.getY() + 1; y < 256; y++) {
                     mutable.setY(y);
-                    if (!TreeUtil.canLogReplace(world, mutable)) {
+                    if (!TreeHelper.canLogReplace(world, mutable)) {
                         shouldNotBranch = true;
                         break;
                     }
