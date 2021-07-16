@@ -82,7 +82,8 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, SapDistilleryBlockEntity blockEntity) {
-        if (blockEntity.getStack(1).getCount() > 0 && blockEntity.burnTime == 0) {
+        // TODO: better detection of when to stop burning logs
+        if (blockEntity.getStack(1).getCount() > 0 && blockEntity.burnTime == 0 && blockEntity.syrupAmount < 5000) {
             blockEntity.getStack(1).decrement(1);
 
             blockEntity.burnTime = 600;
