@@ -35,7 +35,7 @@ public class LushSavannaBiome extends EcotonesBiomeBuilder {
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_savanna_mountainous"), new LushSavannaBiome(1.75f, 0.6f, 7, 0.82).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
-        Climate.HOT_MILD.add(INSTANCE, 1);
+        Climate.HOT_MILD.add(INSTANCE, 0.5);
     }
 
     protected LushSavannaBiome(float depth, float scale, double hilliness, double volatility) {

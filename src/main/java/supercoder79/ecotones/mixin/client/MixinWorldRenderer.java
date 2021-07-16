@@ -44,21 +44,21 @@ public class MixinWorldRenderer {
 
     @Shadow @Nullable private VertexBuffer starsBuffer;
 
-    @Redirect(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FDDD)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/util/Identifier;)V"))
-    private void bindEcotonesFancyClouds(int i, Identifier id) {
-        // TODO: disabled
-//        TextureManager textureManager = MinecraftClient.getInstance().getTextureManager();
-//        if (ClientSidedServerData.isInEcotonesWorld) {
-//            if (!this.initializedClouds) {
-//                registerClouds(textureManager);
-//                this.initializedClouds = true;
-//            }
+//    @Redirect(method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FDDD)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/util/Identifier;)V"))
+//    private void bindEcotonesFancyClouds(int i, Identifier id) {
+//        // TODO: disabled
+////        TextureManager textureManager = MinecraftClient.getInstance().getTextureManager();
+////        if (ClientSidedServerData.isInEcotonesWorld) {
+////            if (!this.initializedClouds) {
+////                registerClouds(textureManager);
+////                this.initializedClouds = true;
+////            }
+////
+////            CloudHandler.update();
+////        }
 //
-//            CloudHandler.update();
-//        }
-
-        RenderSystem._setShaderTexture(i, id);
-    }
+//        RenderSystem._setShaderTexture(i, id);
+//    }
 
     private void registerClouds(TextureManager textureManager) {
         NativeImage image = new NativeImage(256, 256, false);

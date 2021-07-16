@@ -36,7 +36,7 @@ public class TemperateForestBiome extends EcotonesBiomeBuilder {
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "temperate_forest_mountainous"), new TemperateForestBiome(1.75f, 0.9f, 6, 0.84).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
-        Climate.WARM_VERY_HUMID.add(INSTANCE, 1);
+        Climate.WARM_VERY_HUMID.add(INSTANCE, 0.5);
     }
 
     protected TemperateForestBiome(float depth, float scale, double hilliness, double volatility) {
