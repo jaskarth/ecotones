@@ -5,7 +5,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
@@ -29,6 +31,7 @@ import supercoder79.ecotones.util.book.*;
 import supercoder79.ecotones.world.features.FeatureHelper;
 import supercoder79.ecotones.world.structure.EcotonesStructurePieces;
 
+import java.util.BitSet;
 import java.util.List;
 import java.util.Random;
 
@@ -87,9 +90,35 @@ public class CampfireStructureGenerator {
 
                             // "We have loot tables at home"
                             ChestBlockEntity be = (ChestBlockEntity) world.getBlockEntity(local);
+                            BitSet chest = new BitSet(27);
+
+                            int stickStacks = 3 + random.nextInt(4);
+                            int foodStacks = 3 + random.nextInt(4);
 
                             if (be != null) {
-                                be.setStack(random.nextInt(27), generateBook(random));
+                                int idx = random.nextInt(27);
+                                be.setStack(idx, generateBook(random));
+                                chest.set(idx);
+
+                                for (int i = 0; i < foodStacks; i++) {
+                                    idx = random.nextInt(27);
+
+                                    if (!chest.get(idx)) {
+                                        Item item = Items.COOKED_BEEF;
+                                        if (random.nextBoolean()) {
+                                            item = random.nextBoolean() ? Items.COOKED_PORKCHOP : Items.COOKED_MUTTON;
+                                        }
+                                        be.setStack(idx, new ItemStack(item, 1 + random.nextInt(8)));
+                                    }
+                                }
+
+                                for (int i = 0; i < stickStacks; i++) {
+                                    idx = random.nextInt(27);
+
+                                    if (!chest.get(idx)) {
+                                        be.setStack(idx, new ItemStack(Items.STICK, 1 + random.nextInt(8)));
+                                    }
+                                }
                             }
 
                             placedChest = true;
