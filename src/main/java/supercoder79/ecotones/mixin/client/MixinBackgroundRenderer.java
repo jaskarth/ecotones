@@ -11,20 +11,20 @@ import supercoder79.ecotones.client.FogHandler;
 
 @Mixin(BackgroundRenderer.class)
 public class MixinBackgroundRenderer {
-    @ModifyArg(method = "applyFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V", ordinal = 1))
-    private static float applyEcotonesFancyFog(float start) {
-        if (ClientSidedServerData.isInEcotonesWorld) {
-            MinecraftClient client = MinecraftClient.getInstance();
-            
-            assert client.player != null;
-            float heightMultiplier = (float) (MathHelper.clamp(client.player.getY() - 124, 0, 8) / 8);
-            
-            assert client.world != null;
-            long time = client.world.getLunarTime();
-            
-            return Math.min(start, (float) (start * FogHandler.multiplierFor(time)) * heightMultiplier);
-        } else {
-            return start;
-        }
-    }
+//    @ModifyArg(method = "applyFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V", ordinal = 1))
+//    private static float applyEcotonesFancyFog(float start) {
+//        if (ClientSidedServerData.isInEcotonesWorld) {
+//            MinecraftClient client = MinecraftClient.getInstance();
+//
+//            assert client.player != null;
+//            float heightMultiplier = (float) (MathHelper.clamp(client.player.getY() - 124, 0, 8) / 8);
+//
+//            assert client.world != null;
+//            long time = client.world.getLunarTime();
+//
+//            return Math.min(start, (float) (start * FogHandler.multiplierFor(time)) * heightMultiplier);
+//        } else {
+//            return start;
+//        }
+//    }
 }
