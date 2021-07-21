@@ -6,17 +6,18 @@ import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import supercoder79.ecotones.client.ClientSidedServerData;
 import supercoder79.ecotones.client.FogHandler;
 
-@Mixin(BackgroundRenderer.class)
+@Mixin(value = BackgroundRenderer.class)
 public class MixinBackgroundRenderer {
-    @Redirect(method = "applyFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V", ordinal = 1))
-    private static void applyEcotonesFancyFog(float start) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        RenderSystem.setShaderFogStart(start);
-
+//    @Redirect(method = "applyFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V", ordinal = 1))
+//    private static void applyEcotonesFancyFog(float start) {
+//        MinecraftClient client = MinecraftClient.getInstance();
+//        RenderSystem.setShaderFogStart(start);
+//
 //        if (ClientSidedServerData.isInEcotonesWorld) {
 //            float heightMultiplier = (float) (MathHelper.clamp(client.player.getY() - 124, 0, 8) / 8);
 //
@@ -27,5 +28,22 @@ public class MixinBackgroundRenderer {
 //        } else {
 //            RenderSystem.setShaderFogStart(start);
 //        }
+//    }
+    
+    @ModifyArg(method = "applyFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V", ordinal = 1))
+    private static float applyEcotonesFancyFog(float start) {
+        if (ClientSidedServerData.isInEcotonesWorld) {
+            MinecraftClient client = MinecraftClient.getInstance();
+    
+            assert client.player != null;
+            float heightMultiplier = (float) (MathHelper.clamp(client.player.getY() - 124, 0, 8) / 8);
+    
+            assert client.world != null;
+            long time = client.world.getLunarTime();
+            
+            return Math.min(start, (float) (start * FogHandler.multiplierFor(time)) * heightMultiplier);
+        } else {
+            return start;
+        }
     }
 }
