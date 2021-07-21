@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import supercoder79.ecotones.client.ClientSidedServerData;
 import supercoder79.ecotones.client.FogHandler;
 
-@Mixin(value = BackgroundRenderer.class)
+@Mixin(BackgroundRenderer.class)
 public class MixinBackgroundRenderer {
 //    @Redirect(method = "applyFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V", ordinal = 1))
 //    private static void applyEcotonesFancyFog(float start) {
