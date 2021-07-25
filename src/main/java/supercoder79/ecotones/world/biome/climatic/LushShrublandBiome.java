@@ -16,6 +16,7 @@ import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.util.state.DeferredBlockStateProvider;
 import supercoder79.ecotones.util.compat.FloralisiaCompat;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -125,5 +126,7 @@ public class LushShrublandBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
                         .decorate(EcotonesDecorators.ROCKINESS.configure(DecoratorConfig.DEFAULT)));
+
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }
 }

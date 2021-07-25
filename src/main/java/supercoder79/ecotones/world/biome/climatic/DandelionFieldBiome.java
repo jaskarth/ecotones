@@ -131,5 +131,7 @@ public class DandelionFieldBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(3)
                         .applyChance(64));
+
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }
 }

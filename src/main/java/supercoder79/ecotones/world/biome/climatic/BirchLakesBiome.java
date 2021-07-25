@@ -219,6 +219,8 @@ public class BirchLakesBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
                         .applyChance(18));
+
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }
 
 }

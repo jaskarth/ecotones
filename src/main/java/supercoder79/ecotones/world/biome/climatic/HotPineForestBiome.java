@@ -167,5 +167,7 @@ public class HotPineForestBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
                         .applyChance(10));
+
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }
 }

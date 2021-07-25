@@ -117,5 +117,7 @@ public class RedRockRidgeBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
                         .applyChance(4));
+
+        BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }
 }

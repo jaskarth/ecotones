@@ -20,10 +20,7 @@ import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.items.EcotonesItemGroups;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.screen.EcotonesScreenHandlers;
-import supercoder79.ecotones.util.AiLog;
-import supercoder79.ecotones.util.CampfireLogHelper;
-import supercoder79.ecotones.util.EcotonesBlockPlacers;
-import supercoder79.ecotones.util.RegistryReport;
+import supercoder79.ecotones.util.*;
 import supercoder79.ecotones.util.compat.FloralisiaCompat;
 import supercoder79.ecotones.util.compat.LambdaFoxesCompat;
 import supercoder79.ecotones.util.compat.TerrestriaCompat;
@@ -146,6 +143,7 @@ public final class Ecotones implements ModInitializer {
 				BiomeGenData data = EcotonesBiomeBuilder.OBJ2DATA.get(biome);
 
 				BiomeGenData.LOOKUP.put(BuiltinRegistries.BIOME.getKey(biome).get(), data);
+				BiomeChecker.check(biome);
 
 				ecotonesBiomes++;
 			}
