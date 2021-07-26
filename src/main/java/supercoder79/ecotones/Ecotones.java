@@ -93,6 +93,8 @@ public final class Ecotones implements ModInitializer {
 
 		EcotonesData.init();
 
+		EcotonesComposting.init();
+
 		CampfireLogHelper.initVanilla();
 		BlockDecorations.init();
 

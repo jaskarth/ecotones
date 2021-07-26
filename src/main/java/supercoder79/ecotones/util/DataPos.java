@@ -26,7 +26,7 @@ public class DataPos extends BlockPos {
     }
 
     public DataPos setDrainageType(DrainageType type) {
-        drainageType = type;
+        this.drainageType = type;
         return this;
     }
 

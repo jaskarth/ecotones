@@ -39,7 +39,6 @@
 * Add edge biomes to everything
 * Burned village for dead spruce forests
 * Improve the look of a few biomes (remove shrubs, more unique features, etc.)
-* Geodes for all biomes
 * Blueberry jam recipe
 * Mason jar item
 * Add fruit tags
@@ -61,6 +60,9 @@
 * Trees don't set block to dirt
 * Fix disks
 * Skip analysis when good soil quality
+
+* Add flowers to bonemeal
+* More clover variation
 
 # Automation
 * Testing suite to find errors within biomes (no strongholds, etc.)
