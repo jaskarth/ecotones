@@ -46,13 +46,13 @@ public final class EcotonesBlocks {
     public static Block SAP_DISTILLERY = new SapDistilleryBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(3.5F, 1.0F).sounds(BlockSoundGroup.STONE).build());
     public static Block SMALL_CACTUS = new SmallCactusBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block LARCH_SAPLING = new SimpleSaplingBlock(new LarchSaplingGenerator());
-    public static Block TREETAP = new TreetapBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(3.5F, 1.0F).sounds(BlockSoundGroup.STONE).build());
+    public static Block TREETAP = new TreetapBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(2.5F, 1.0F).sounds(BlockSoundGroup.STONE).build());
     public static Block LIMESTONE = new Block(FabricBlockSettings.copy(Blocks.DRIPSTONE_BLOCK).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
     public static Block POOFY_DANDELION = new PoofyDandelionBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block CATTAIL = new CattailBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block DUCKWEED = new DuckweedBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block THORN_BUSH = new ThornBushBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
-    public static Block RED_ROCK = new Block(FabricBlockSettings.copy(Blocks.STONE).build());
+    public static Block RED_ROCK = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
 
 
