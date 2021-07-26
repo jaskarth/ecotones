@@ -62,6 +62,7 @@ public class RockyMountainBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(1.6F);
         this.downfall(0.15F);
+        this.category(Biome.Category.EXTREME_HILLS);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

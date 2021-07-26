@@ -69,6 +69,7 @@ public class PoplarForestBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(0.7F);
         this.downfall(0.6F);
+        this.category(Biome.Category.FOREST);
 
         this.precipitation(Biome.Precipitation.RAIN);
 

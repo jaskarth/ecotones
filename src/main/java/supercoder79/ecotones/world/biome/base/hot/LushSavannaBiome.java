@@ -59,6 +59,7 @@ public class LushSavannaBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addDefaultMushrooms(this.getGenerationSettings());
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
+        this.category(Biome.Category.SAVANNA);
 
         this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);
         this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);

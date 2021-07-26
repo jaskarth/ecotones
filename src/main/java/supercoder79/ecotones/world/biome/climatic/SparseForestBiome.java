@@ -49,6 +49,7 @@ public class SparseForestBiome extends EcotonesBiomeBuilder {
         this.downfall(0.3F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.FOREST);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

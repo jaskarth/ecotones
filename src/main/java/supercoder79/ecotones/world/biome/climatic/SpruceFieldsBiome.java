@@ -54,6 +54,7 @@ public class SpruceFieldsBiome extends EcotonesBiomeBuilder {
         this.downfall(0.7F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.PLAINS);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

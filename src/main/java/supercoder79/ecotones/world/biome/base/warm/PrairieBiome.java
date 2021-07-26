@@ -52,6 +52,7 @@ public class PrairieBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.category(Biome.Category.PLAINS);
 
         this.foliageColor(0xabcf59);
         this.grassColor(0xabcf59);

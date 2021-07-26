@@ -57,6 +57,7 @@ public class DeadSpruceForestBiome extends EcotonesBiomeBuilder {
         this.temperature(0.8f);
         this.downfall(0.6f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.TAIGA);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

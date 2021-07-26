@@ -49,6 +49,7 @@ public class SavannaMesaBiome extends EcotonesBiomeBuilder {
         this.downfall(0.225F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.MESA);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

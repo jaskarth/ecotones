@@ -60,6 +60,7 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
         this.scale(hilly ? 0.6f : 0.05f);
         this.temperature(1F);
         this.downfall(1F);
+        this.category(Biome.Category.FOREST);
 
         this.precipitation(Biome.Precipitation.RAIN);
 

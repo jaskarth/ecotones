@@ -52,6 +52,7 @@ public class PineBarrensBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(0.55F);
         this.downfall(0.3F);
+        this.category(Biome.Category.TAIGA);
 
         this.precipitation(Biome.Precipitation.RAIN);
 

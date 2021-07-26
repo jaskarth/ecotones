@@ -54,6 +54,7 @@ public class LushDesertBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(2F);
         this.downfall(0.3F);
+        this.category(Biome.Category.DESERT);
 
         this.precipitation(Biome.Precipitation.NONE);
 

@@ -62,6 +62,7 @@ public class WoodlandThicketBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.category(Biome.Category.FOREST);
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);

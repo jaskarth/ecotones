@@ -60,6 +60,7 @@ public class CoolDesertBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.category(Biome.Category.DESERT);
 
         this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT);
         this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);

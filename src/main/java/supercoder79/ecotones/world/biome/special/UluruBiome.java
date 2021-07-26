@@ -41,6 +41,7 @@ public class UluruBiome extends EcotonesBiomeBuilder {
         this.downfall(0.2F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.DESERT);
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
 

@@ -65,6 +65,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
         this.downfall(1F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.JUNGLE);
 
         this.skyColor(0xadc1cc);
         this.grassColor(0x73a859);

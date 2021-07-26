@@ -56,6 +56,7 @@ public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
         this.downfall(0.5F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.PLAINS);
 
         // TODO: customize
         this.hilliness(4.0);

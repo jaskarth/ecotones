@@ -47,6 +47,7 @@ public class BirchForestBiome extends EcotonesBiomeBuilder {
         this.temperature(0.7f);
         this.downfall(0.7f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.FOREST);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

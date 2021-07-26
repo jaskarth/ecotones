@@ -67,6 +67,7 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
         this.temperature(0.9F);
         this.downfall(0.5f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.PLAINS);
 
         this.grassColor(0x5db85a);
         this.foliageColor(0x44a341);

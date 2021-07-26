@@ -51,6 +51,7 @@ public class DandelionFieldBiome extends EcotonesBiomeBuilder {
         this.downfall(0.75F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.PLAINS);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

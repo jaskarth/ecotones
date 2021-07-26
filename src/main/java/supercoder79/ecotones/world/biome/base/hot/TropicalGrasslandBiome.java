@@ -59,6 +59,7 @@ public class TropicalGrasslandBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.category(Biome.Category.SAVANNA);
 
         this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);
         this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);

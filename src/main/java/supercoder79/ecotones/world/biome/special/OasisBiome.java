@@ -41,6 +41,7 @@ public class OasisBiome extends EcotonesBiomeBuilder {
         this.downfall(1F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.JUNGLE);
 
         this.waterColor(4445678);
         this.waterFogColor(329011);

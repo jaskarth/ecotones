@@ -62,6 +62,7 @@ public class AspenFoothillsBiome extends EcotonesBiomeBuilder {
         this.hilliness(hilliness);
         this.volatility(volatility);
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_BIRCH);
+        this.category(Biome.Category.EXTREME_HILLS);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

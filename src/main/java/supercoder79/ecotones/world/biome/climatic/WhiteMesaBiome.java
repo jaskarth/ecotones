@@ -55,6 +55,7 @@ public class WhiteMesaBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.category(Biome.Category.MESA);
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
 

@@ -54,6 +54,7 @@ public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
         this.downfall(0.55F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.TAIGA);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

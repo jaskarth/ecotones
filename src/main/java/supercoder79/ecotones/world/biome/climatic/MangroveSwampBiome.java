@@ -46,6 +46,7 @@ public class MangroveSwampBiome extends EcotonesBiomeBuilder {
         this.scale(0.0F);
         this.temperature(0.8F);
         this.downfall(0.65F);
+        this.category(Biome.Category.SWAMP);
 
         this.precipitation(Biome.Precipitation.RAIN);
 

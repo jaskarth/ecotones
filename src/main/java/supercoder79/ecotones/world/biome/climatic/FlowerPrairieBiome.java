@@ -56,6 +56,7 @@ public class FlowerPrairieBiome extends EcotonesBiomeBuilder {
         this.volatility(1.1);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.PLAINS);
 
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 7)));
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);

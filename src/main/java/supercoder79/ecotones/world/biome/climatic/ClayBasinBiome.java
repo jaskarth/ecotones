@@ -63,6 +63,7 @@ public class ClayBasinBiome extends EcotonesBiomeBuilder {
         this.temperature(1.2f);
         this.downfall(0.065f);
         this.precipitation(Biome.Precipitation.NONE);
+        this.category(Biome.Category.SAVANNA);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

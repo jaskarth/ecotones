@@ -53,6 +53,7 @@ public class SunflowerPlainsBiome extends EcotonesBiomeBuilder {
         this.downfall(0.525F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.PLAINS);
 
         this.hilliness(4.0);
         this.volatility(0.88);

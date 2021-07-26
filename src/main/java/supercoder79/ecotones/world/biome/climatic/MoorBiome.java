@@ -54,6 +54,7 @@ public class MoorBiome extends EcotonesBiomeBuilder {
         this.downfall(0.4F);
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.category(Biome.Category.PLAINS);
 
         this.precipitation(Biome.Precipitation.RAIN);
 

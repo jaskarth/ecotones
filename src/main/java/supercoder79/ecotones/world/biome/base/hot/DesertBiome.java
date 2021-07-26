@@ -57,6 +57,7 @@ public class DesertBiome extends EcotonesBiomeBuilder {
         this.temperature(2F);
         this.downfall(0F);
         this.particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00325F));
+        this.category(Biome.Category.DESERT);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

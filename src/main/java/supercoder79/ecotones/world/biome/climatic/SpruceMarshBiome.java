@@ -76,6 +76,7 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
 
         this.waterColor(0x5c5214);
         this.waterFogColor(0x5c5214);
+        this.category(Biome.Category.SWAMP);
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);

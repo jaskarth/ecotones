@@ -55,6 +55,7 @@ public class DrySteppeBiome extends EcotonesBiomeBuilder {
         this.temperature(1.5f);
         this.downfall(0.05f);
         this.precipitation(Biome.Precipitation.NONE);
+        this.category(Biome.Category.SAVANNA);
 
         this.grassColor(0xc4b956);
         this.foliageColor(0xaba252);

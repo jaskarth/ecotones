@@ -49,6 +49,7 @@ public class FloodedSavannaBiome extends EcotonesBiomeBuilder {
         this.volatility(1.2);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.SAVANNA);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))

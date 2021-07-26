@@ -62,6 +62,7 @@ public class PalmForestBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(1.6F);
         this.downfall(0.8F);
+        this.category(Biome.Category.JUNGLE);
 
         this.precipitation(Biome.Precipitation.RAIN);
 

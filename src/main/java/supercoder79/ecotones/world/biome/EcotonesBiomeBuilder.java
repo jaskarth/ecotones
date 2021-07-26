@@ -21,7 +21,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class EcotonesBiomeBuilder {
+public abstract class EcotonesBiomeBuilder {
     public static final Map<Biome, BiomeGenData> OBJ2DATA = new HashMap<>();
     private final Biome.Builder builder;
     private final SpawnSettings.Builder spawnSettings;
@@ -41,9 +41,6 @@ public class EcotonesBiomeBuilder {
         this.biomeEffects.waterColor(0x3F76E4);
         this.biomeEffects.waterFogColor(0x050533);
         this.biomeEffects.fogColor(0xC0D8FF);
-
-        // TODO
-        this.builder.category(Biome.Category.PLAINS);
     }
 
     protected void category(Biome.Category category) {

@@ -50,6 +50,7 @@ public class RoseFieldBiome extends EcotonesBiomeBuilder {
         this.downfall(0.725f);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.PLAINS);
 
         this.hilliness(2.0);
         this.volatility(0.95);

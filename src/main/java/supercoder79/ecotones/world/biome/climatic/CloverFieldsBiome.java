@@ -60,6 +60,7 @@ public class CloverFieldsBiome extends EcotonesBiomeBuilder {
 
         this.grassColor(0x308046);
         this.foliageColor(0x308046);
+        this.category(Biome.Category.PLAINS);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

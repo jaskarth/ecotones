@@ -36,6 +36,7 @@ public class RiverBiome extends EcotonesBiomeBuilder {
         this.downfall(0.9F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.RIVER);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());

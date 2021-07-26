@@ -55,6 +55,7 @@ public class PinePeaksBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(3);
         this.volatility(0.73);
+        this.category(Biome.Category.TAIGA);
 
         this.precipitation(Biome.Precipitation.RAIN);
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);

@@ -54,6 +54,7 @@ public class CoolScrublandBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.category(Biome.Category.SAVANNA);
 
         this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT);
         this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);

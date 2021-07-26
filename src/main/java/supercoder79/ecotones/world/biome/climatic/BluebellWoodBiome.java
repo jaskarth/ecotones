@@ -56,6 +56,7 @@ public class BluebellWoodBiome extends EcotonesBiomeBuilder {
         this.temperature(0.9f);
         this.downfall(0.7f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.FOREST);
 
         this.hilliness(flat ? 1 : 3);
         this.volatility(flat ? 1.1 : 0.9);

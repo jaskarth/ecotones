@@ -55,6 +55,7 @@ public class ThornBrushBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.category(Biome.Category.SAVANNA);
 
         this.particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.001F));
         this.grassColor(0xc9c665);

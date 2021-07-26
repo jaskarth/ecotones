@@ -52,6 +52,7 @@ public class DarkOakThicketBiome extends EcotonesBiomeBuilder {
         this.temperature(0.8f);
         this.downfall(0.45f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.category(Biome.Category.FOREST);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
