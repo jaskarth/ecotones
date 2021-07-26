@@ -9,6 +9,7 @@
     "FoliagePlacerTypeAccessor",
     "MixinBiomeSelectors",
     "MixinChunkRegion",
+    "MixinCocoaBeansTreeDecorator",
     "MixinGeneratorOptions",
     "MixinPlayerManager",
     "SpawnSettingsAccessor",
