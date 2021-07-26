@@ -80,7 +80,7 @@ public class EcotonesBiomeLayers {
         biomeLayer = SpecialBiomeMerger.INSTANCE.create(contextProvider.apply(65L), biomeLayer, specialBiomesLayer);
 
         //Merge biomes onto the continent
-        layerFactory = BiomeMerger.INSTANCE.create(contextProvider.apply(84L), layerFactory, biomeLayer);
+        layerFactory = BiomeMergeLayer.INSTANCE.create(contextProvider.apply(84L), layerFactory, biomeLayer);
         return layerFactory;
     }
 
