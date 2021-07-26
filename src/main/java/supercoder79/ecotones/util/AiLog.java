@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+// Split into 2 classes to reduce the jar size with DevOnly
 public final class AiLog {
     private static FileWriter writer;
     private static boolean isDev;

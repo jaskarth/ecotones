@@ -6,6 +6,7 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.MathHelper;
+import supercoder79.ecotones.api.DevOnly;
 import supercoder79.ecotones.world.layers.generation.ClimateLayer;
 
 import javax.imageio.ImageIO;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@DevOnly
 public class MapClimatesCommand {
     public static void init() {
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {

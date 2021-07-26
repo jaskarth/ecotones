@@ -6,6 +6,7 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.DevOnly;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,6 +16,7 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.EnumSet;
 
+@DevOnly
 public class DumpClimatesCommand {
     private static final DecimalFormat FORMAT = new DecimalFormat("#.##");
 

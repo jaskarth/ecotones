@@ -10,6 +10,7 @@ import net.minecraft.util.Language;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import supercoder79.ecotones.api.DevOnly;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,6 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@DevOnly
 public class TestTranslationKeysCommand {
     public static void init() {
         CommandRegistry.INSTANCE.register(false, dispatcher -> {

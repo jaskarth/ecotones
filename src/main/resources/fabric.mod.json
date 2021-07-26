@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "ecotones",
-  "version": "0.8.0",
+  "version": "${version}",
 
   "name": "Ecotones",
   "description": "A biome overhaul mod with realistic and expansive biomes filled with life!",

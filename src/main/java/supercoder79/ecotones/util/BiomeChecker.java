@@ -6,16 +6,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.StructureFeature;
+import supercoder79.ecotones.api.DevOnly;
 
+@DevOnly
 public final class BiomeChecker {
     public static void check(Biome biome) {
-        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-            checkBiome(biome);
-        }
-    }
-
-    // Only runs in dev
-    private static void checkBiome(Biome biome) {
         Identifier id = BuiltinRegistries.BIOME.getId(biome);
         boolean hasSpawns = false;
         for (SpawnGroup value : SpawnGroup.values()) {

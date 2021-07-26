@@ -146,7 +146,9 @@ public final class Ecotones implements ModInitializer {
 				BiomeGenData data = EcotonesBiomeBuilder.OBJ2DATA.get(biome);
 
 				BiomeGenData.LOOKUP.put(BuiltinRegistries.BIOME.getKey(biome).get(), data);
-				BiomeChecker.check(biome);
+				if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+					BiomeChecker.check(biome);
+				}
 
 				ecotonesBiomes++;
 			}

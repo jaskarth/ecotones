@@ -1,10 +1,12 @@
 package supercoder79.ecotones.test;
 
+import supercoder79.ecotones.api.DevOnly;
 import supercoder79.ecotones.util.layer.Layer;
 import supercoder79.ecotones.world.tree.root.RootLayers;
 
 import java.util.Random;
 
+@DevOnly
 public class TestRootLayers {
     public static void main(String[] args) {
         Layer layer = RootLayers.create(new Random().nextLong());

@@ -9,7 +9,9 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import supercoder79.ecotones.api.DevOnly;
 
+@DevOnly
 public class TestLootTablesCommand {
     public static void init() {
         CommandRegistry.INSTANCE.register(false, dispatcher -> {
