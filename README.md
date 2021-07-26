@@ -1,12 +1,15 @@
-Ecotones creates biomes based on factors such as humidity, temperature, elevation, and soil drainage. When put together, these factors create a lot of unique biomes! Ecotones currently adds 27 biomes with many variants. It replaces the vanilla generator so it's currently not compatible with any other biome mod.
+# Ecotones
 
+Ecotones is an overhaul mod for Minecraft that adds over 70 unique biomes and over 200 in total in a custom world type, as well as many things to do.
+Ecotones aims to improve the natural feeling of the world by taking inspiration from the real world, so no matter where you go in a world it'll always feel different,
+even if it's within the same biome.
  
 # Discord Server
 
-https://discord.gg/BuBGds9
+https://discord.gg/EwQmvQtshV
 
 Join to talk about Ecotones and get information about the next updates! 
 
-# WARNING
+## Warning
 
-This mod is highly in development and things will change with or without notice! Don't use this mod unless you're fine with a lot of changes to your world!
+Ecotones is still in development, and large parts of it is unfinished. The mod is in a playable state, but things like the biome layout will change a lot!
