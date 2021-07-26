@@ -50,7 +50,29 @@ public class TestTranslationKeysCommand {
             }
         }
 
-        source.sendFeedback(new LiteralText("Found " + count + " biomes with missing translation keys."), false);
+        for (Identifier id : Registry.BLOCK.getIds()) {
+            if (id.getNamespace().equals("ecotones")) {
+                String key = Util.createTranslationKey("block", id);
+
+                if (!language.hasTranslation(key)) {
+                    set.add(key);
+                    count++;
+                }
+            }
+        }
+
+        for (Identifier id : Registry.ITEM.getIds()) {
+            if (id.getNamespace().equals("ecotones")) {
+                String key = Util.createTranslationKey("item", id);
+
+                if (!language.hasTranslation(key)) {
+                    set.add(key);
+                    count++;
+                }
+            }
+        }
+
+        source.sendFeedback(new LiteralText("Found " + count + " missing translation keys."), false);
         if (count == 0) {
             // Congratulating myself moment
             source.sendFeedback(new LiteralText("Nice job!"), false);
