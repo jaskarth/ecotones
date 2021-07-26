@@ -18,6 +18,8 @@
   "biome.ecotones.tropical_grassland": "Tropical Grassland",
   "biome.ecotones.tropical_grassland_hilly": "Hilly Tropical Grassland",
   "biome.ecotones.tropical_grassland_mountainous": "Mountainous Tropical Grassland",
+  "biome.ecotones.tropical_grassland_shrubs": "Tropical Grassland Shrubs",
+  "biome.ecotones.tropical_grassland_thicket": "Tropical Grassland Thicket",
   "biome.ecotones.tropical_rainforest": "Tropical Rainforest",
   "biome.ecotones.tropical_rainforest_hilly": "Hilly Tropical Rainforest",
   "biome.ecotones.tropical_rainforest_mountainous": "Mountainous Tropical Rainforest",
@@ -227,9 +229,14 @@
   "biome.ecotones.red_rock_ridge": "Red Rock Ridge",
   "biome.ecotones.red_rock_ridge_hilly": "Hilly Red Rock Ridge",
   "biome.ecotones.red_rock_ridge_mountainous": "Mountainous Red Rock Ridge",
+  "biome.ecotones.red_rock_ridge_hills": "Red Rock Ridge Hills",
   "biome.ecotones.spruce_glen": "Spruce Glen",
   "biome.ecotones.spruce_glen_hilly": "Hilly Spruce Glen",
   "biome.ecotones.spruce_glen_mountainous": "Mountainous Spruce Glen",
+  "biome.ecotones.dandelion_field": "Dandelion Field",
+  "biome.ecotones.dandelion_field_hilly": "Hilly Dandelion Field",
+  "biome.ecotones.dandelion_field_mountainous": "Mountainous Dandelion Field",
+
 
 
   "block.ecotones.peat": "Peat Block",
