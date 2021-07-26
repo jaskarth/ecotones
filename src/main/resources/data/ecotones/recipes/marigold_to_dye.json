@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ecotones:marigold"
+    }
+  ],
+  "result": {
+    "item": "minecraft:orange_dye"
+  }
+}
