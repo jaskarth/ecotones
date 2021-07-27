@@ -14,7 +14,7 @@
     "MixinPlayerManager",
     "SpawnSettingsAccessor",
     "StructureFeatureAccessor",
-    "TreeDecoratorTypeAccessor",
+    "TreeDecoratorTypeAccessor"
   ],
   "client": [
     "client.EntityModelLayersAccessor",
