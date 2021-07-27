@@ -26,7 +26,7 @@
     "client.MixinHeldItemRenderer",
     "client.MixinMinecraftClient",
     "client.MixinSkyProperties",
-    "client.MixinWorldRenderer"
+    "client.MixinWorldRenderer",
     "client.MixinBackgroundRenderer"
   ],
   "injectors": {
