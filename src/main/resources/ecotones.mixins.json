@@ -15,7 +15,6 @@
     "SpawnSettingsAccessor",
     "StructureFeatureAccessor",
     "TreeDecoratorTypeAccessor",
-    "client.MixinBackgroundRenderer"
   ],
   "client": [
     "client.EntityModelLayersAccessor",
@@ -28,6 +27,7 @@
     "client.MixinMinecraftClient",
     "client.MixinSkyProperties",
     "client.MixinWorldRenderer"
+    "client.MixinBackgroundRenderer"
   ],
   "injectors": {
     "defaultRequire": 1
