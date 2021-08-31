@@ -8,7 +8,7 @@ import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesSurfaces {
-    public static final SurfaceBuilder<TernarySurfaceConfig> DESERT_SCRUB_BUILDER = new DesertScrubSurfaceBuilder(TernarySurfaceConfig.CODEC);
+    public static final SurfaceBuilder<DesertScrubSurfaceBuilder.Config> DESERT_SCRUB_BUILDER = new DesertScrubSurfaceBuilder(DesertScrubSurfaceBuilder.Config.CODEC);
     public static final SurfaceBuilder<TernarySurfaceConfig> PEAT_SWAMP_BUILDER = new PeatSwampSurfaceBuilder(TernarySurfaceConfig.CODEC);
     public static final SurfaceBuilder<TernarySurfaceConfig> VOLCANIC_BUILDER = new VolcanicSurfaceBuilder(TernarySurfaceConfig.CODEC);
     public static final SurfaceBuilder<TernarySurfaceConfig> SUPERVOLCANIC_BUILDER = new SuperVolcanicSurfaceBuilder(TernarySurfaceConfig.CODEC);

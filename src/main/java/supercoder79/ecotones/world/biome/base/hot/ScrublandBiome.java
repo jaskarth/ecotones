@@ -33,6 +33,7 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.surface.DesertScrubSurfaceBuilder;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class ScrublandBiome extends EcotonesBiomeBuilder {
@@ -50,7 +51,7 @@ public class ScrublandBiome extends EcotonesBiomeBuilder {
     }
 
     protected ScrublandBiome(float depth, float scale, double hilliness, double volatility) {
-        this.surfaceBuilder(EcotonesSurfaces.DESERT_SCRUB_BUILDER, SurfaceBuilder.GRASS_CONFIG);
+        this.surfaceBuilder(EcotonesSurfaces.DESERT_SCRUB_BUILDER, DesertScrubSurfaceBuilder.SCRUB_CONFIG);
         this.precipitation(Biome.Precipitation.NONE);
         this.depth(depth);
         this.scale(scale);
