@@ -5,10 +5,13 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.HeightmapDecoratorConfig;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
@@ -59,6 +62,11 @@ public class GravelBeachBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
                         .spreadHorizontally()
                         .repeat(24));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SEAGRASS.configure(new ProbabilityConfig(0.6f))
+                .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.OCEAN_FLOOR_WG)))
+                .spreadHorizontally()
+                .repeat(64));
 
         this.addSpawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.TURTLE, 5, 2, 5));
         this.addSpawn(SpawnGroup.AMBIENT, new SpawnSettings.SpawnEntry(EntityType.BAT, 10, 8, 8));

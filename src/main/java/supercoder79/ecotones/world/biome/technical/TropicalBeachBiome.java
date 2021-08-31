@@ -12,6 +12,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.HeightmapDecoratorConfig;
@@ -103,6 +104,11 @@ public class TropicalBeachBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
                         .repeat(6));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SEAGRASS.configure(new ProbabilityConfig(0.6f))
+                .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.OCEAN_FLOOR_WG)))
+                .spreadHorizontally()
+                .repeat(64));
 
         this.addSpawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.TURTLE, 5, 2, 5));
         this.addSpawn(SpawnGroup.AMBIENT, new SpawnSettings.SpawnEntry(EntityType.BAT, 10, 8, 8));
