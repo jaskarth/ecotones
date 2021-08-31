@@ -208,7 +208,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         BlockState[] states = new BlockState[this.noiseSizeY * this.verticalNoiseResolution];
         this.sampleHeightmap(x, z, states, null);
         // TODO: custom min y, using 0 for now
-        return new VerticalBlockSample( 0, states);
+        return new VerticalBlockSample(0, states);
     }
 
     private int sampleHeightmap(int x, int z, @Nullable BlockState[] blockStates, @Nullable Predicate<BlockState> predicate) {
@@ -399,7 +399,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
             // [0, 4] -> z noise chunks
             for(noiseZ = 0; noiseZ < this.noiseSizeZ; ++noiseZ) {
-                ChunkSection section = protoChunk.getSection(15);
+                ChunkSection section = protoChunk.getSection(chunk.getSectionIndex(255));
                 section.lock();
 
                 // [0, 32] -> y noise chunks
@@ -419,7 +419,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                     for(int pieceY = this.verticalNoiseResolution - 1; pieceY >= 0; --pieceY) {
                         int realY = noiseY * this.verticalNoiseResolution + pieceY;
                         int localY = realY & 15;
-                        int sectionY = realY >> 4;
+                        int sectionY = chunk.getSectionIndex(realY);
                         // Get the chunk section
                         if (section.getYOffset() >> 4 != sectionY) {
                             section.unlock();
