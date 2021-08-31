@@ -86,6 +86,13 @@ public final class FeatureConfigHolder {
                     .add(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1)
                     .add(Blocks.GRASS.getDefaultState(), 4)
                     .add(Blocks.TALL_GRASS.getDefaultState(), 1)), new DoubleOrNormalPlacer()).tries(32).build();
+
+    public static final RandomPatchFeatureConfig BIRCH_GROVE_CONFIG =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
+                    .add(EcotonesBlocks.SHORT_GRASS.getDefaultState(), 2)
+                    .add(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1)
+                    .add(Blocks.GRASS.getDefaultState(), 8)
+                    .add(Blocks.TALL_GRASS.getDefaultState(), 2)), new DoubleOrNormalPlacer()).tries(32).build();
     
     public static final RandomPatchFeatureConfig SWITCHGRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
