@@ -92,6 +92,10 @@ public final class EcotonesBiomes {
         SpruceGlenBiome.init();
         BirchGroveBiome.init();
         DesertShrublandBiome.init();
+        MountainPeaksBiome.init();
+        LushFoothillsBiome.init();
+        SparseAlpineForestBiome.init();
+        MontaneFieldsBiome.init();
 
         // Cave biomes
         LimestoneCaveBiome.init();

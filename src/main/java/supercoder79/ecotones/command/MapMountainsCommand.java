@@ -68,6 +68,10 @@ public class MapMountainsCommand {
             return getIntFromColor(150, 150, 150);
         }
 
+        if (mountain < -0.8) {
+            return getIntFromColor(50, 50, 170);
+        }
+
         return getIntFromColor(255, 255, 255);
     }
 

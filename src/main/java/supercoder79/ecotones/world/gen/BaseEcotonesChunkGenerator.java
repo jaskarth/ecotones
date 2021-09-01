@@ -86,7 +86,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         this.interpolationNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-7, 0));
         this.surfaceDepthNoise = new OctaveSimplexNoiseSampler(this.random, IntStream.rangeClosed(-3, 0));
 
-        this.biomeCache = ThreadLocal.withInitial(() -> new BiomeCache(256, biomeSource));
+        this.biomeCache = ThreadLocal.withInitial(() -> new BiomeCache(1024, biomeSource));
         this.noiseCache = ThreadLocal.withInitial(() -> new NoiseCache(128, this.noiseSizeY + 1));
     }
 

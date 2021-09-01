@@ -15,6 +15,7 @@ public class BiomeRegistries {
     public static final Map<RegistryKey<Biome>, Integer> SMALL_SPECIAL_BIOMES = new HashMap<>();
     public static final List<RegistryKey<Biome>> NO_BEACH_BIOMES = new ArrayList<>();
     public static final List<RegistryKey<Biome>> NO_RIVER_BIOMES = new ArrayList<>();
+    public static final List<RegistryKey<Biome>> MOUNTAIN_BIOMES = new ArrayList<>();
 
     public static final Map<RegistryKey<Biome>, Integer> BIOME_VARANT_CHANCE = new HashMap<>();
     public static final Map<RegistryKey<Biome>, RegistryKey<Biome>[]> BIOME_VARIANTS = new HashMap<>();
@@ -51,6 +52,10 @@ public class BiomeRegistries {
 
     public static void registerMountains(Biome base, Biome hilly, Biome mountainous) {
         MountainLayer.BIOME_TO_MOUNTAINS.put(key(base), new RegistryKey[]{key(hilly), key(mountainous)});
+    }
+
+    public static void addMountainBiome(Biome biome) {
+        MOUNTAIN_BIOMES.add(key(biome));
     }
 
     public static void registerNoBeachBiome(Biome biome) {

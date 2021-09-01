@@ -9,7 +9,7 @@ import supercoder79.ecotones.world.layers.util.*;
 
 import java.util.function.LongFunction;
 
-public class EcotonesBiomeLayers {
+public final class EcotonesBiomeLayers {
     private static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> stack(long seed, ParentedLayer layer, LayerFactory<T> parent, int count, LongFunction<C> contextProvider) {
         LayerFactory<T> layerFactory = parent;
 
@@ -27,6 +27,7 @@ public class EcotonesBiomeLayers {
         layerFactory = ScaleLayer.FUZZY.create(contextProvider.apply(2000L), layerFactory);
         layerFactory = ScaleLayer.NORMAL.create(contextProvider.apply(2001L), layerFactory);
 
+        // RemoveTooMuchOcean- do we need it?
         layerFactory = AddIslandLayer.INSTANCE.create(contextProvider.apply(2L), layerFactory);
 
         layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 2, contextProvider);
@@ -42,16 +43,25 @@ public class EcotonesBiomeLayers {
         //add beaches
         layerFactory = ShorelineLayer.INSTANCE.create(contextProvider.apply(54L), layerFactory, seed + 43);
         layerFactory = stack(2081L, ScaleLayer.NORMAL, layerFactory, 3, contextProvider);
+        // Total: 2^7 (2 + 2 + 3)
 
         //Add our biomes
         LayerFactory<T> biomeLayer = ClimateLayer.INSTANCE.create(contextProvider.apply(2L), seed + 79);
         biomeLayer = MountainLayer.INSTANCE.create(contextProvider.apply(49L), biomeLayer, seed + 1337);
 
-        biomeLayer = stack(7970L, ScaleLayer.NORMAL, biomeLayer, 2, contextProvider);
+        biomeLayer = stack(7970L, ScaleLayer.NORMAL, biomeLayer, 1, contextProvider);
+        biomeLayer = MountainBigEdgeLayer.INSTANCE.create(contextProvider.apply(1001L), biomeLayer);
+//        biomeLayer = MountainSmallEdgeLayer.INSTANCE.create(contextProvider.apply(1002L), biomeLayer);
+        biomeLayer = stack(7975L, ScaleLayer.NORMAL, biomeLayer, 1, contextProvider);
+
         biomeLayer = SmoothLayer.INSTANCE.create(contextProvider.apply(402), biomeLayer);
         biomeLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), biomeLayer);
+        biomeLayer = MountainSmallEdgeLayer.INSTANCE.create(contextProvider.apply(1002L), biomeLayer);
         biomeLayer = stack(7979L, ScaleLayer.NORMAL, biomeLayer, 3, contextProvider);
+
+        // 1.5x zoom
         biomeLayer = Div3ScaleLayer.INSTANCE.create(contextProvider.apply(32), biomeLayer);
+        // Total: 2^6.5 (1 + 1 + 1 + 2 + 1.5)
 
         //Initialize special biomes (smaller biomes with c o o l effects)
         LayerFactory<T> specialBiomesLayer = PlainsOnlyLayer.INSTANCE.create(contextProvider.apply(3L));

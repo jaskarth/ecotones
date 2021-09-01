@@ -2,6 +2,7 @@ package supercoder79.ecotones.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.minecraft.entity.Entity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
@@ -30,6 +31,7 @@ public class MapBiomeColorsCommand {
     }
 
     private static int execute(ServerCommandSource source) {
+        Entity src = source.getEntity();
         BufferedImage img = new BufferedImage(4096, 4096, BufferedImage.TYPE_INT_RGB);
 
         BlockPos.Mutable mutable = new BlockPos.Mutable();
@@ -41,7 +43,8 @@ public class MapBiomeColorsCommand {
             for (int z = -2048; z < 2048; z++) {
                 mutable.set(x, 0, z);
 
-                img.setRGB(x + 2048, z + 2048, source.getWorld().getBiome(mutable).getGrassColorAt(x, z));
+//                img.setRGB(x + 2048, z + 2048, source.getWorld().getBiome(mutable).getGrassColorAt(x, z)); // Centered on origin
+                img.setRGB(x + 2048, z + 2048, source.getWorld().getBiome(mutable.add(src.getBlockX(), 0, src.getBlockZ())).getGrassColorAt(x, z)); // Centered on player
             }
         }
 

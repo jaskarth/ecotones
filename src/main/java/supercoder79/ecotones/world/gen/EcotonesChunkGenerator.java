@@ -33,12 +33,15 @@ import net.minecraft.world.gen.chunk.AquiferSampler;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
+import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.CaveBiome;
 import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.LayerRandom;
 import supercoder79.ecotones.util.noise.OctaveNoiseSampler;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
+import supercoder79.ecotones.world.blend.CachingBlender;
+import supercoder79.ecotones.world.blend.LinkedBiomeWeightMap;
 import supercoder79.ecotones.world.data.DataFunction;
 import supercoder79.ecotones.world.data.DataHolder;
 import supercoder79.ecotones.world.data.EcotonesData;
@@ -75,6 +78,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
     private final long seed;
     private final Optional<Registry<Biome>> registry;
     private final Map<Identifier, DataFunction> data = new HashMap<>();
+    private final CachingBlender blender = new CachingBlender(0.24, 6, 4);
 
     public EcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
         super(biomeSource, seed);
@@ -102,8 +106,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
     @Override
     protected double[] computeNoiseData(int x, int z) {
         double[] buffer = new double[3];
-        float weightedScale = 0.0F;
-        float weightedDepth = 0.0F;
+        double weightedScale = 0.0F;
+        double weightedDepth = 0.0F;
         double weightedHilliness = 0.0F;
         double weightedVolatility = 0.0F;
         float weights = 0.0F;
@@ -112,6 +116,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 
         float centerDepth = cache.get(x, z).getDepth();
 
+        boolean isMountain = false;
         for (int x1 = -2; x1 <= 2; ++x1) {
             for (int z1 = -2; z1 <= 2; ++z1) {
                 Biome biome = cache.get(x + x1, z + z1);
@@ -125,6 +130,9 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 
                 if (this.registry.isPresent()) {
                     RegistryKey<Biome> key = this.registry.get().getKey(biome).get();
+                    if (BiomeRegistries.MOUNTAIN_BIOMES.contains(key)) {
+                        isMountain = true;
+                    }
                     BiomeGenData data = BiomeGenData.LOOKUP.getOrDefault(key, BiomeGenData.DEFAULT);
 
                     hilliness = data.hilliness;
@@ -149,9 +157,56 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         weightedHilliness /= weights;
         weightedVolatility /= weights;
 
+        // Scattered blender for mountains- makes it much much smoother
+        if (isMountain) {
+            int rad = (int) Math.ceil(this.blender.getInternal().getInternalBlendRadius());
+            double count = 0;
+
+            // TODO: rivers are still broken
+            for (int x1 = -2; x1 <= 2; x1++) {
+                for (int z1 = -2; z1 <= 2; z1++) {
+                    RegistryKey<Biome> key = this.registry.get().getKey(cache.get(x + x1, z + z1)).get();
+
+                    if (BiomeRegistries.MOUNTAIN_BIOMES.contains(key)) {
+                        count++;
+                    }
+                }
+            }
+
+            double amt = count / (5 * 5);
+
+            LinkedBiomeWeightMap weightMap = this.blender.blend(this.seed, (x >> 2) << 2, (z >> 2) << 2, (x0, z0) -> biomeSource.getBiomeForNoiseGen((int) x0, 0, (int) z0));
+            int idx = ((z & 3) * 4) + (x & 3);
+
+            double nWeightedScale = 0;
+            double nWeightedDepth = 0;
+            double nWeightedHilliness = 0;
+            double nWeightedVolatility = 0;
+
+            for (LinkedBiomeWeightMap entry = weightMap; entry != null; entry = entry.getNext()) {
+                double weight = entry.getWeights()[idx];
+                Biome biome = entry.getBiome();
+
+                nWeightedScale += biome.getScale() * weight;
+                nWeightedDepth += biome.getDepth() * weight;
+
+                RegistryKey<Biome> key = this.registry.get().getKey(biome).get();
+                BiomeGenData data = BiomeGenData.LOOKUP.getOrDefault(key, BiomeGenData.DEFAULT);
+
+                nWeightedHilliness += data.hilliness * weight;
+                nWeightedVolatility += data.volatility * weight;
+            }
+
+            // Interpolate the 2 interpolated weights. Yes, I know.
+            weightedScale = MathHelper.clampedLerp(weightedScale, nWeightedScale, amt);
+            weightedDepth = MathHelper.clampedLerp(weightedDepth, nWeightedDepth, amt);
+            weightedHilliness = MathHelper.clampedLerp(weightedHilliness, nWeightedHilliness, amt);
+            weightedVolatility = MathHelper.clampedLerp(weightedVolatility, nWeightedVolatility, amt);
+        }
+
         weightedScale = weightedScale * 0.9F + 0.1F;
         weightedDepth = (weightedDepth * 4.0F - 1.0F) / 8.0F;
-        buffer[0] = (double)weightedDepth + (this.sampleHilliness(x, z) * weightedHilliness);
+        buffer[0] = weightedDepth + (this.sampleHilliness(x, z) * weightedHilliness);
         buffer[1] = weightedScale + scaleNoise.sample(x, z);
         buffer[2] = weightedVolatility;
         return buffer;

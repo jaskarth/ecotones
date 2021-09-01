@@ -1,5 +1,6 @@
 package supercoder79.ecotones.world.layers.generation;
 
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.layer.type.ParentedLayer;
@@ -17,6 +18,8 @@ import java.util.Random;
 
 public enum MountainLayer implements ParentedLayer, IdentityCoordinateTransformer, SeedLayer {
     INSTANCE;
+
+    public static final Identifier ID = new Identifier("ecotones", "mountain_peaks");
 
     public OpenSimplexNoise mountainNoise;
     public static final Map<RegistryKey<Biome>, RegistryKey<Biome>[]> BIOME_TO_MOUNTAINS = new LinkedHashMap<>();
@@ -44,6 +47,10 @@ public enum MountainLayer implements ParentedLayer, IdentityCoordinateTransforme
 
         if (mountain > 0.5) {
             return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(BIOME_TO_MOUNTAINS.get(key)[0]));
+        }
+
+        if (mountain < -0.8) {
+            return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(ID));
         }
 
         return sample;
