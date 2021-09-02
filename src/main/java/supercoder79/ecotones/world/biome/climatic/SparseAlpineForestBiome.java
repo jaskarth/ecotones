@@ -15,6 +15,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.ClimateType;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.world.biome.BiomeHelper;
@@ -30,6 +31,21 @@ public class SparseAlpineForestBiome extends EcotonesBiomeBuilder {
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sparse_alpine_forest"), new SparseAlpineForestBiome(3f, 0.125f, 2.2, 0.98).build());
         BiomeRegistries.addMountainBiome(INSTANCE);
+        BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE);
+
+        Climate.HOT_MILD.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
+        Climate.HOT_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
+        Climate.HOT_VERY_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
+        Climate.HOT_RAINFOREST.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
+
+        Climate.WARM_DESERT.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
+        Climate.WARM_VERY_DRY.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
+        Climate.WARM_DRY.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
+        Climate.WARM_MODERATE.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
+        Climate.WARM_MILD.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
+        Climate.WARM_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
+        Climate.WARM_VERY_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
+        Climate.WARM_RAINFOREST.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
     }
 
     protected SparseAlpineForestBiome(float depth, float scale, double hilliness, double volatility) {

@@ -14,10 +14,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.api.Climate;
-import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.api.*;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
@@ -36,6 +33,21 @@ public class LushFoothillsBiome extends EcotonesBiomeBuilder {
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_foothills"), new LushFoothillsBiome(1.5F, 0.15F, 2, 0.94).build());
         BiomeRegistries.addMountainBiome(INSTANCE);
+        BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE);
+
+        Climate.HOT_MILD.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
+        Climate.HOT_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
+        Climate.HOT_VERY_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
+        Climate.HOT_RAINFOREST.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
+
+        Climate.WARM_DESERT.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
+        Climate.WARM_VERY_DRY.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
+        Climate.WARM_DRY.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
+        Climate.WARM_MODERATE.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
+        Climate.WARM_MILD.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
+        Climate.WARM_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
+        Climate.WARM_VERY_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
+        Climate.WARM_RAINFOREST.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
     }
 
     public LushFoothillsBiome(float depth, float scale, double hilliness, double volatility) {

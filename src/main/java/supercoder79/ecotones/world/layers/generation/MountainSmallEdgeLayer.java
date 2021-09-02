@@ -1,30 +1,38 @@
 package supercoder79.ecotones.world.layers.generation;
 
 import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.layer.type.CrossSamplingLayer;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.ClimateType;
+import supercoder79.ecotones.world.layers.util.MergingCrossSamplingLayer;
 
-public enum MountainSmallEdgeLayer implements CrossSamplingLayer {
+import java.util.List;
+
+public enum MountainSmallEdgeLayer implements MergingCrossSamplingLayer {
     INSTANCE;
 
-    public static final Identifier PEAKS = new Identifier("ecotones", "mountain_peaks");
-    public static final Identifier MONTANE_FIELDS = new Identifier("ecotones", "montane_fields");
-    public static final Identifier SPARSE_APLINE_FOREST = new Identifier("ecotones", "sparse_alpine_forest");
-    public static final Identifier FOOTHILLS = new Identifier("ecotones", "lush_foothills");
-
     @Override
-    public int sample(LayerRandomnessSource context, int n, int e, int s, int w, int center) {
-        int peaks = Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(PEAKS));
-        int foothills = Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(FOOTHILLS));
+    public int sample(LayerRandomnessSource context, int n, int e, int s, int w, int center, int climate) {
+        List<RegistryKey<Biome>> peaks = BiomeRegistries.TYPED_MOUNTAIN_BIOMES.get(ClimateType.MOUNTAIN_PEAKS);
+        List<RegistryKey<Biome>> foothills = BiomeRegistries.TYPED_MOUNTAIN_BIOMES.get(ClimateType.MOUNTAIN_FOOTHILLS);
 
-        if (center == peaks) {
-            if (n == foothills || e == foothills || s == foothills || w == foothills) {
-                return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(MONTANE_FIELDS));
+        RegistryKey<Biome> centerKey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(center)).get();
+        RegistryKey<Biome> nkey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(n)).get();
+        RegistryKey<Biome> ekey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(e)).get();
+        RegistryKey<Biome> skey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(s)).get();
+        RegistryKey<Biome> wkey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(w)).get();
+
+        if (peaks.contains(centerKey)) {
+            if (foothills.contains(nkey) || foothills.contains(ekey) || foothills.contains(skey) || foothills.contains(wkey)) {
+                return Climate.VALUES[climate].pickerFor(ClimateType.MOUNTAIN_PLAINS).choose(context);
             }
-        } else if (center == foothills) {
-            if (n == peaks || e == peaks || s == peaks || w == peaks) {
-                return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(SPARSE_APLINE_FOREST));
+        } else if (foothills.contains(centerKey)) {
+            if (peaks.contains(nkey) || peaks.contains(ekey) || peaks.contains(skey) || peaks.contains(wkey)) {
+                return Climate.VALUES[climate].pickerFor(ClimateType.MOUNTAIN_FOOTHILLS_UPPER).choose(context);
             }
         }
 

@@ -7,8 +7,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public enum Climate {
     HOT_DESERT,
@@ -47,68 +46,31 @@ public enum Climate {
     COLD_VERY_HUMID,
     COLD_RAINFOREST;
 
-    private final List<Entry> biomeEntries = Lists.newArrayList();
-    private double totalWeight;
+    public static final Climate[] VALUES = Arrays.copyOf(values(), values().length);
+
+    final Map<ClimateType, BiomePicker> pickers = new HashMap<>();
 
     Climate() {
-
+        for (ClimateType value : ClimateType.values()) {
+            BiomePicker picker = new BiomePicker();
+            picker.owner = this + " | " + value; // So that it shows up in crashes as "CLIMATE | TYPE"
+            this.pickers.put(value, picker);
+        }
     }
 
     public Integer choose(LayerRandomnessSource rand) {
-        if (this.biomeEntries.size() == 0) {
-            throw new UnsupportedOperationException("No biomes registered for climate " + this + "!!! This is a problem!");
-        }
-
-        double randVal = target(rand);
-        int i = -1;
-
-        while (randVal >= 0) {
-            ++i;
-            randVal -= this.biomeEntries.get(i).weight;
-        }
-
-        Biome biome = Ecotones.REGISTRY.get(this.biomeEntries.get(i).biome);
-
-        int id = Ecotones.REGISTRY.getRawId(biome);
-
-        return id;
+        return pickerFor(ClimateType.REGULAR).choose(rand);
     }
 
     public void add(Biome biome, double weight) {
-        this.biomeEntries.add(new Entry(biome, weight));
-        this.totalWeight += weight;
+        add(ClimateType.REGULAR, biome, weight);
     }
 
-    private double target(LayerRandomnessSource random) {
-        return (double) random.nextInt(Integer.MAX_VALUE) * this.totalWeight / Integer.MAX_VALUE;
+    public void add(ClimateType type, Biome biome, double weight) {
+        pickerFor(type).add(biome, weight);
     }
 
-    public List<Entry> getBiomeEntries() {
-        return biomeEntries;
-    }
-
-    public double getTotalWeight() {
-        return totalWeight;
-    }
-
-    public static class Entry {
-        private final RegistryKey<Biome> biome;
-        private final double weight;
-        private Entry(Biome biome, double weight) {
-            // Attempt from builtin
-            Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
-
-            // Mod compat mode: use dynamic registry
-            this.biome = optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome).get());
-            this.weight = weight;
-        }
-
-        public RegistryKey<Biome> getBiome() {
-            return biome;
-        }
-
-        public double getWeight() {
-            return weight;
-        }
+    public BiomePicker pickerFor(ClimateType type) {
+        return this.pickers.get(type);
     }
 }

@@ -13,6 +13,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.ClimateType;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.world.biome.BiomeHelper;
@@ -26,7 +27,8 @@ public class SpruceShrublandBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
-    
+    public static Biome FOOTHILLS;
+
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_shrubland"), new SpruceShrublandBiome(0.3f, 0.075f, 2.2, 0.96).build());
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_shrubland_hilly"), new SpruceShrublandBiome(1f, 0.5f, 4.2, 0.92).build());
@@ -40,6 +42,15 @@ public class SpruceShrublandBiome extends EcotonesBiomeBuilder {
         Climate.WARM_VERY_DRY.add(INSTANCE, 0.5);
         Climate.WARM_DRY.add(INSTANCE, 0.3);
         Climate.WARM_MODERATE.add(INSTANCE, 0.3);
+
+        FOOTHILLS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_shrubland_foothills"), new SpruceShrublandBiome(1.5f, 0.175f, 2.2, 0.96).build());
+        BiomeRegistries.addMountainBiome(FOOTHILLS);
+        BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS, FOOTHILLS);
+
+        Climate.HOT_DESERT.add(ClimateType.MOUNTAIN_FOOTHILLS, FOOTHILLS, 1.0);
+        Climate.HOT_VERY_DRY.add(ClimateType.MOUNTAIN_FOOTHILLS, FOOTHILLS, 1.0);
+        Climate.HOT_DRY.add(ClimateType.MOUNTAIN_FOOTHILLS, FOOTHILLS, 1.0);
+        Climate.HOT_MODERATE.add(ClimateType.MOUNTAIN_FOOTHILLS, FOOTHILLS, 1.0);
     }
 
     protected SpruceShrublandBiome(float depth, float scale, double hilliness, double volatility) {

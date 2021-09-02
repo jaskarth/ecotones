@@ -30,53 +30,53 @@ public enum ClimateLayer implements InitLayer, SeedInitLayer {
         if (temperature > 0) {
             // === Hot Biomes ===
             if (humidity > 0.8) {
-                return Climate.HOT_RAINFOREST.choose(context);
+                return Climate.HOT_RAINFOREST.ordinal();
             }
             if (humidity > 0.6) {
-                return Climate.HOT_VERY_HUMID.choose(context);
+                return Climate.HOT_VERY_HUMID.ordinal();
             }
             if (humidity > 0.4) {
-                return Climate.HOT_HUMID.choose(context);
+                return Climate.HOT_HUMID.ordinal();
             }
             if (humidity > 0.2) {
-                return Climate.HOT_MILD.choose(context);
+                return Climate.HOT_MILD.ordinal();
             }
             if (humidity > -0.2) {
-                return Climate.HOT_MODERATE.choose(context);
+                return Climate.HOT_MODERATE.ordinal();
             }
             if (humidity > -0.4) {
-                return Climate.HOT_DRY.choose(context);
+                return Climate.HOT_DRY.ordinal();
             }
             if (humidity > -0.6) {
-                return Climate.HOT_VERY_DRY.choose(context);
+                return Climate.HOT_VERY_DRY.ordinal();
             }
 
-            return Climate.HOT_DESERT.choose(context);
+            return Climate.HOT_DESERT.ordinal();
         } else {
             // === Warm Biomes ===
             if (humidity > 0.8) {
-                return Climate.WARM_RAINFOREST.choose(context);
+                return Climate.WARM_RAINFOREST.ordinal();
             }
             if (humidity > 0.6) {
-                return Climate.WARM_VERY_HUMID.choose(context);
+                return Climate.WARM_VERY_HUMID.ordinal();
             }
             if (humidity > 0.4) {
-                return Climate.WARM_HUMID.choose(context);
+                return Climate.WARM_HUMID.ordinal();
             }
             if (humidity > 0.2) {
-                return Climate.WARM_MILD.choose(context);
+                return Climate.WARM_MILD.ordinal();
             }
             if (humidity > -0.2) {
-                return Climate.WARM_MODERATE.choose(context);
+                return Climate.WARM_MODERATE.ordinal();
             }
             if (humidity > -0.4) {
-                return Climate.WARM_DRY.choose(context);
+                return Climate.WARM_DRY.ordinal();
             }
             if (humidity > -0.6) {
-                return Climate.WARM_VERY_DRY.choose(context);
+                return Climate.WARM_VERY_DRY.ordinal();
             }
 
-            return Climate.WARM_DESERT.choose(context);
+            return Climate.WARM_DESERT.ordinal();
         }
     }
 

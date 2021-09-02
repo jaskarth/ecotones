@@ -9,15 +9,22 @@ import supercoder79.ecotones.world.layers.generation.MountainLayer;
 import java.util.*;
 import java.util.function.IntFunction;
 
-public class BiomeRegistries {
+public final class BiomeRegistries {
     public static final Map<RegistryKey<Biome>, IntFunction<Boolean>> SPECIAL_BIOMES = new HashMap<>();
     public static final Map<RegistryKey<Biome>, Integer> BIG_SPECIAL_BIOMES = new HashMap<>();
     public static final Map<RegistryKey<Biome>, Integer> SMALL_SPECIAL_BIOMES = new HashMap<>();
     public static final List<RegistryKey<Biome>> NO_BEACH_BIOMES = new ArrayList<>();
     public static final List<RegistryKey<Biome>> NO_RIVER_BIOMES = new ArrayList<>();
     public static final List<RegistryKey<Biome>> MOUNTAIN_BIOMES = new ArrayList<>();
+    public static final Map<ClimateType, List<RegistryKey<Biome>>> TYPED_MOUNTAIN_BIOMES = new HashMap<>();
+    static {
+        TYPED_MOUNTAIN_BIOMES.put(ClimateType.MOUNTAIN_FOOTHILLS, new ArrayList<>());
+        TYPED_MOUNTAIN_BIOMES.put(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, new ArrayList<>());
+        TYPED_MOUNTAIN_BIOMES.put(ClimateType.MOUNTAIN_PLAINS, new ArrayList<>());
+        TYPED_MOUNTAIN_BIOMES.put(ClimateType.MOUNTAIN_PEAKS, new ArrayList<>());
+    }
 
-    public static final Map<RegistryKey<Biome>, Integer> BIOME_VARANT_CHANCE = new HashMap<>();
+    public static final Map<RegistryKey<Biome>, Integer> BIOME_VARIANT_CHANCE = new HashMap<>();
     public static final Map<RegistryKey<Biome>, RegistryKey<Biome>[]> BIOME_VARIANTS = new HashMap<>();
 
     public static void registerSpecialBiome(Biome biome, IntFunction<Boolean> rule) {
@@ -38,7 +45,7 @@ public class BiomeRegistries {
     }
 
     public static void registerBiomeVariantChance(Biome biome, int chance) {
-        BIOME_VARANT_CHANCE.put(key(biome), chance);
+        BIOME_VARIANT_CHANCE.put(key(biome), chance);
     }
 
     public static void registerBiomeVariants(Biome parent, Biome... variants) {
@@ -56,6 +63,14 @@ public class BiomeRegistries {
 
     public static void addMountainBiome(Biome biome) {
         MOUNTAIN_BIOMES.add(key(biome));
+    }
+
+    public static void addMountainType(ClimateType type, Biome biome) {
+        if (type == ClimateType.REGULAR) {
+            throw new IllegalArgumentException("Can't add mountain type of regular!");
+        }
+
+        TYPED_MOUNTAIN_BIOMES.get(type).add(key(biome));
     }
 
     public static void registerNoBeachBiome(Biome biome) {
@@ -81,6 +96,6 @@ public class BiomeRegistries {
     private static RegistryKey<Biome> key(Biome biome) {
         Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
 
-        return optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome).get());
+        return optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome).orElseThrow(() -> new IllegalStateException("Impossible state when trying to get biome key")));
     }
 }

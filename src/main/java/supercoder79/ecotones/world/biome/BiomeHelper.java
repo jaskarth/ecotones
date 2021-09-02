@@ -53,6 +53,8 @@ public final class BiomeHelper {
                         .decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure(DecoratorConfig.DEFAULT)));
     }
 
+    @Deprecated
+    // Why I thought this was a good idea is beyond me. TODO remove
     public static boolean contains(int id, String name) {
         return Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(id)).get().toString().contains(name);
     }

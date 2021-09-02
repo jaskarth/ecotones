@@ -16,6 +16,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.ClimateType;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
@@ -36,9 +37,9 @@ public class AspenFoothillsBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "aspen_foothills"), new AspenFoothillsBiome(1F, 0.025F, 8, 0.95, false).build());
-        CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "aspen_foothills_clearing"), new AspenFoothillsBiome(1F, 0.025F, 8, 0.95, true).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "aspen_hills"), new AspenFoothillsBiome(1.5F, 0.225F, 9, 0.85, false).build());
+        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "aspen_foothills"), new AspenFoothillsBiome(1.5F, 0.075F, 5, 0.95, false).build());
+        CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "aspen_foothills_clearing"), new AspenFoothillsBiome(1.5F, 0.025F, 5, 0.95, true).build());
+        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "aspen_hills"), new AspenFoothillsBiome(1.85F, 0.225F, 9, 0.85, false).build());
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "aspen_mountains"), new AspenFoothillsBiome(2.5F, 0.625F, 10, 0.8, false).build());
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
         BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, CLEARING);
@@ -46,6 +47,15 @@ public class AspenFoothillsBiome extends EcotonesBiomeBuilder {
         Climate.WARM_VERY_HUMID.add(INSTANCE, 0.1);
         Climate.WARM_HUMID.add(INSTANCE, 0.2);
         Climate.WARM_MILD.add(INSTANCE, 0.1);
+
+        BiomeRegistries.addMountainBiome(INSTANCE);
+        BiomeRegistries.addMountainBiome(CLEARING);
+        BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE);
+        BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS, CLEARING);
+
+        Climate.WARM_MILD.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 0.3);
+        Climate.WARM_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 0.3);
+        Climate.WARM_VERY_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 0.3);
     }
 
     public AspenFoothillsBiome(float depth, float scale, double hilliness, double volatility, boolean clearing) {

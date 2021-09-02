@@ -16,6 +16,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.ClimateType;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
@@ -35,6 +36,25 @@ public class MountainPeaksBiome extends EcotonesBiomeBuilder {
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "mountain_peaks"), new MountainPeaksBiome(6.5F, 0.175F, 6, 0.93).build());
         BiomeRegistries.addMountainBiome(INSTANCE);
+        BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_PEAKS, INSTANCE);
+
+        Climate.HOT_DESERT.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.HOT_VERY_DRY.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.HOT_DRY.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.HOT_MODERATE.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.HOT_MILD.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.HOT_HUMID.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.HOT_VERY_HUMID.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.HOT_RAINFOREST.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+
+        Climate.WARM_DESERT.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.WARM_VERY_DRY.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.WARM_DRY.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.WARM_MODERATE.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.WARM_MILD.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.WARM_HUMID.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.WARM_VERY_HUMID.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
+        Climate.WARM_RAINFOREST.add(ClimateType.MOUNTAIN_PEAKS, INSTANCE, 1.0);
     }
 
     public MountainPeaksBiome(float depth, float scale, double hilliness, double volatility) {

@@ -15,10 +15,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.api.Climate;
-import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.api.*;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.util.compat.FloralisiaCompat;
 import supercoder79.ecotones.util.state.DeferredBlockStateProvider;
@@ -36,6 +33,21 @@ public class MontaneFieldsBiome extends EcotonesBiomeBuilder {
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "montane_fields"), new MontaneFieldsBiome(4.5f, 0.09f, 2.6, 0.94).build());
         BiomeRegistries.addMountainBiome(INSTANCE);
+        BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_PLAINS, INSTANCE);
+
+        Climate.HOT_MILD.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
+        Climate.HOT_HUMID.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
+        Climate.HOT_VERY_HUMID.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
+        Climate.HOT_RAINFOREST.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
+
+        Climate.WARM_DESERT.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
+        Climate.WARM_VERY_DRY.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
+        Climate.WARM_DRY.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
+        Climate.WARM_MODERATE.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
+        Climate.WARM_MILD.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
+        Climate.WARM_HUMID.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
+        Climate.WARM_VERY_HUMID.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
+        Climate.WARM_RAINFOREST.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
     }
 
     protected MontaneFieldsBiome(float depth, float scale, double hilliness, double volatility) {

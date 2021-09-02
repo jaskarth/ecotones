@@ -16,6 +16,7 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.ClimateType;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.world.biome.BiomeHelper;
@@ -29,6 +30,7 @@ public class HotPineForestBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
+    public static Biome MONTANE;
 
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hot_pine_forest"), new HotPineForestBiome(0.3f, 0.075f, 2.2, 0.96).build());
@@ -43,6 +45,15 @@ public class HotPineForestBiome extends EcotonesBiomeBuilder {
 
         Climate.WARM_VERY_DRY.add(INSTANCE, 0.4);
         Climate.WARM_DRY.add(INSTANCE, 0.2);
+
+        MONTANE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "montane_hot_pine_forest"), new HotPineForestBiome(3.0f, 0.125f, 2.2, 0.96).build());
+        BiomeRegistries.addMountainBiome(MONTANE);
+        BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, MONTANE);
+
+        Climate.HOT_DESERT.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, MONTANE, 1.0);
+        Climate.HOT_VERY_DRY.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, MONTANE, 1.0);
+        Climate.HOT_DRY.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, MONTANE, 1.0);
+        Climate.HOT_MODERATE.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, MONTANE, 1.0);
     }
 
     protected HotPineForestBiome(float depth, float scale, double hilliness, double volatility) {

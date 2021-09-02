@@ -5,7 +5,9 @@ import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
+import supercoder79.ecotones.api.BiomePicker;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.api.ClimateType;
 import supercoder79.ecotones.api.DevOnly;
 
 import java.io.File;
@@ -41,9 +43,9 @@ public class DumpClimatesCommand {
 
             for (Climate climate : EnumSet.allOf(Climate.class)) {
                 writer.write("Biomes for climate " + climate + "\n");
-                double totalWeight = climate.getTotalWeight();
+                double totalWeight = climate.pickerFor(ClimateType.REGULAR).getTotalWeight();
 
-                for (Climate.Entry entry : climate.getBiomeEntries()) {
+                for (BiomePicker.Entry entry : climate.pickerFor(ClimateType.REGULAR).getBiomeEntries()) {
                     double weight = entry.getWeight();
                     writer.write("\t" + entry.getBiome().getValue() + " -> " + weight + " (" +FORMAT.format ((weight / totalWeight) * 100) + "%)" + "\n");
                 }

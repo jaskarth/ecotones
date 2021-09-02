@@ -11,10 +11,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import supercoder79.ecotones.api.BiomeRegistries;
-import supercoder79.ecotones.api.Climate;
-import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.api.*;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
@@ -30,6 +27,7 @@ public class TropicalGrasslandBiome extends EcotonesBiomeBuilder {
     public static Biome THICKET;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
+    public static Biome MONTANE;
 
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_grassland"), new TropicalGrasslandBiome(0.5f, 0.15f, 1.8, 0.88).build());
@@ -43,6 +41,15 @@ public class TropicalGrasslandBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, SHRUBS, THICKET);
 
         Climate.HOT_MODERATE.add(INSTANCE, 1);
+
+        MONTANE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "montane_tropical_grassland"), new TropicalGrasslandBiome(4.5f, 0.15f, 1.8, 0.97, 1.4, 0.1).build());
+        BiomeRegistries.addMountainBiome(MONTANE);
+        BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_PLAINS, MONTANE);
+
+        Climate.HOT_DESERT.add(ClimateType.MOUNTAIN_PLAINS, MONTANE, 1.0);
+        Climate.HOT_VERY_DRY.add(ClimateType.MOUNTAIN_PLAINS, MONTANE, 1.0);
+        Climate.HOT_DRY.add(ClimateType.MOUNTAIN_PLAINS, MONTANE, 1.0);
+        Climate.HOT_MODERATE.add(ClimateType.MOUNTAIN_PLAINS, MONTANE, 1.0);
     }
 
     protected TropicalGrasslandBiome(float depth, float scale, double hilliness, double volatility) {
