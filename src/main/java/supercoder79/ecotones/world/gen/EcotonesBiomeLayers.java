@@ -47,20 +47,20 @@ public final class EcotonesBiomeLayers {
 
         //Add our biomes
         LayerFactory<T> climateLayer = ClimateLayer.INSTANCE.create(contextProvider.apply(2L), seed + 79);
-        LayerFactory<T> biomeLayer = PickFromClimateLayer.INSTANCE.create(contextProvider.apply(2L), climateLayer);
-        biomeLayer = MountainLayer.INSTANCE.create(contextProvider.apply(49L), biomeLayer, climateLayer, seed + 1337);
+        LayerFactory<T> initialBiomeLayer = PickFromClimateLayer.INSTANCE.create(contextProvider.apply(2L), climateLayer);
+        LayerFactory<T> biomeLayer = MountainLayer.INSTANCE.create(contextProvider.apply(49L), initialBiomeLayer, climateLayer, seed + 1337);
 
         biomeLayer = stack(7970L, ScaleLayer.NORMAL, biomeLayer, 1, contextProvider);
         climateLayer = stack(7970L, ScaleLayer.NORMAL, climateLayer, 1, contextProvider);
 
         biomeLayer = MountainBigEdgeLayer.INSTANCE.create(contextProvider.apply(1001L), biomeLayer, climateLayer);
 
-        biomeLayer = stack(7975L, ScaleLayer.NORMAL, biomeLayer, 1, contextProvider);
+        LayerFactory<T> zoom2BiomeLayer = stack(7975L, ScaleLayer.NORMAL, biomeLayer, 1, contextProvider);
         climateLayer = stack(7975L, ScaleLayer.NORMAL, climateLayer, 1, contextProvider);
 
-        biomeLayer = SmoothLayer.INSTANCE.create(contextProvider.apply(402), biomeLayer);
-        biomeLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), biomeLayer);
+        biomeLayer = SmoothLayer.INSTANCE.create(contextProvider.apply(402), zoom2BiomeLayer);
         biomeLayer = MountainSmallEdgeLayer.INSTANCE.create(contextProvider.apply(1002L), biomeLayer, climateLayer);
+        biomeLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), biomeLayer);
         biomeLayer = stack(7979L, ScaleLayer.NORMAL, biomeLayer, 3, contextProvider);
 
         // 1.5x zoom
@@ -70,11 +70,10 @@ public final class EcotonesBiomeLayers {
         //Initialize special biomes (smaller biomes with c o o l effects)
         LayerFactory<T> specialBiomesLayer = PlainsOnlyLayer.INSTANCE.create(contextProvider.apply(3L));
 
-        // TODO: use prezoomed biome layer!!
-        specialBiomesLayer = BigSpecialBiomesLayer.INSTANCE.create(contextProvider.apply(38L), specialBiomesLayer, biomeLayer);
+        specialBiomesLayer = BigSpecialBiomesLayer.INSTANCE.create(contextProvider.apply(38L), specialBiomesLayer, initialBiomeLayer);
         specialBiomesLayer = stack(3043L, ScaleLayer.NORMAL, specialBiomesLayer, 2, contextProvider);
 
-        specialBiomesLayer = SmallSpecialBiomesLayer.INSTANCE.create(contextProvider.apply(32L), specialBiomesLayer, biomeLayer);
+        specialBiomesLayer = SmallSpecialBiomesLayer.INSTANCE.create(contextProvider.apply(32L), specialBiomesLayer, zoom2BiomeLayer);
         specialBiomesLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), specialBiomesLayer);
 
         specialBiomesLayer = stack(3080L, ScaleLayer.NORMAL, specialBiomesLayer, 5, contextProvider);
