@@ -130,7 +130,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 
                 if (this.registry.isPresent()) {
                     RegistryKey<Biome> key = this.registry.get().getKey(biome).get();
-                    if (BiomeRegistries.MOUNTAIN_BIOMES.contains(key)) {
+                    if (BiomeRegistries.MOUNTAIN_BIOMES.containsKey(key)) {
                         isMountain = true;
                     }
                     BiomeGenData data = BiomeGenData.LOOKUP.getOrDefault(key, BiomeGenData.DEFAULT);
@@ -167,7 +167,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
                 for (int z1 = -2; z1 <= 2; z1++) {
                     RegistryKey<Biome> key = this.registry.get().getKey(cache.get(x + x1, z + z1)).get();
 
-                    if (BiomeRegistries.MOUNTAIN_BIOMES.contains(key)) {
+                    if (BiomeRegistries.MOUNTAIN_BIOMES.containsKey(key)) {
                         count++;
                     }
                 }
@@ -183,19 +183,27 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
             double nWeightedHilliness = 0;
             double nWeightedVolatility = 0;
 
+            double scatteredWeight = 0;
             for (LinkedBiomeWeightMap entry = weightMap; entry != null; entry = entry.getNext()) {
-                double weight = entry.getWeights()[idx];
                 Biome biome = entry.getBiome();
+                RegistryKey<Biome> key = this.registry.get().getKey(biome).get();
+                double weight = entry.getWeights()[idx] * BiomeRegistries.MOUNTAIN_BIOMES.getOrDefault(key, 1.0);
+                scatteredWeight += weight;
 
                 nWeightedScale += biome.getScale() * weight;
                 nWeightedDepth += biome.getDepth() * weight;
 
-                RegistryKey<Biome> key = this.registry.get().getKey(biome).get();
+
                 BiomeGenData data = BiomeGenData.LOOKUP.getOrDefault(key, BiomeGenData.DEFAULT);
 
                 nWeightedHilliness += data.hilliness * weight;
                 nWeightedVolatility += data.volatility * weight;
             }
+
+            nWeightedScale /= scatteredWeight;
+            nWeightedDepth /= scatteredWeight;
+            nWeightedHilliness /= scatteredWeight;
+            nWeightedVolatility /= scatteredWeight;
 
             // Interpolate the 2 interpolated weights. Yes, I know.
             weightedScale = MathHelper.clampedLerp(weightedScale, nWeightedScale, amt);

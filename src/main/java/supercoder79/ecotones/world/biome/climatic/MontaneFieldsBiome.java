@@ -21,6 +21,7 @@ import supercoder79.ecotones.util.compat.FloralisiaCompat;
 import supercoder79.ecotones.util.state.DeferredBlockStateProvider;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
+import supercoder79.ecotones.world.biome.technical.MountainLakeBiome;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
@@ -34,6 +35,8 @@ public class MontaneFieldsBiome extends EcotonesBiomeBuilder {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "montane_fields"), new MontaneFieldsBiome(4.5f, 0.09f, 2.6, 0.94).build());
         BiomeRegistries.addMountainBiome(INSTANCE);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_PLAINS, INSTANCE);
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 8);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, MountainLakeBiome.INSTANCE);
 
         Climate.HOT_MILD.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);
         Climate.HOT_HUMID.add(ClimateType.MOUNTAIN_PLAINS, INSTANCE, 1.0);

@@ -15,7 +15,7 @@ public final class BiomeRegistries {
     public static final Map<RegistryKey<Biome>, Integer> SMALL_SPECIAL_BIOMES = new HashMap<>();
     public static final List<RegistryKey<Biome>> NO_BEACH_BIOMES = new ArrayList<>();
     public static final List<RegistryKey<Biome>> NO_RIVER_BIOMES = new ArrayList<>();
-    public static final List<RegistryKey<Biome>> MOUNTAIN_BIOMES = new ArrayList<>();
+    public static final Map<RegistryKey<Biome>, Double> MOUNTAIN_BIOMES = new HashMap<>();
     public static final Map<ClimateType, List<RegistryKey<Biome>>> TYPED_MOUNTAIN_BIOMES = new HashMap<>();
     static {
         TYPED_MOUNTAIN_BIOMES.put(ClimateType.MOUNTAIN_FOOTHILLS, new ArrayList<>());
@@ -62,7 +62,11 @@ public final class BiomeRegistries {
     }
 
     public static void addMountainBiome(Biome biome) {
-        MOUNTAIN_BIOMES.add(key(biome));
+        addMountainBiome(biome, 1.0);
+    }
+
+    public static void addMountainBiome(Biome biome, double weight) {
+        MOUNTAIN_BIOMES.put(key(biome), weight);
     }
 
     public static void addMountainType(ClimateType type, Biome biome) {

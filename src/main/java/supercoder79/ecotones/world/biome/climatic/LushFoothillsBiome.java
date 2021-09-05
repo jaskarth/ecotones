@@ -17,6 +17,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.*;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
+import supercoder79.ecotones.world.biome.technical.MountainLakeBiome;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
@@ -34,6 +35,8 @@ public class LushFoothillsBiome extends EcotonesBiomeBuilder {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_foothills"), new LushFoothillsBiome(1.5F, 0.15F, 2, 0.94).build());
         BiomeRegistries.addMountainBiome(INSTANCE);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE);
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 8);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, MountainLakeBiome.INSTANCE);
 
         Climate.HOT_MILD.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);
         Climate.HOT_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE, 1.0);

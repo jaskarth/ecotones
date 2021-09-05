@@ -5,10 +5,7 @@ import supercoder79.ecotones.world.biome.base.warm.*;
 import supercoder79.ecotones.world.biome.cave.LimestoneCaveBiome;
 import supercoder79.ecotones.world.biome.climatic.*;
 import supercoder79.ecotones.world.biome.special.*;
-import supercoder79.ecotones.world.biome.technical.DryBeachBiome;
-import supercoder79.ecotones.world.biome.technical.GravelBeachBiome;
-import supercoder79.ecotones.world.biome.technical.RiverBiome;
-import supercoder79.ecotones.world.biome.technical.TropicalBeachBiome;
+import supercoder79.ecotones.world.biome.technical.*;
 
 public final class EcotonesBiomes {
     public static void init() {
@@ -37,6 +34,7 @@ public final class EcotonesBiomes {
         DryBeachBiome.init();
         GravelBeachBiome.init();
         RiverBiome.init();
+        MountainLakeBiome.init();
 
         // special biomes
         OasisBiome.init();
