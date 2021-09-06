@@ -64,6 +64,7 @@ public final class EcotonesFeatures {
     public static final Feature<DuckweedFeatureConfig> DUCKWEED = new DuckweedFeature(DuckweedFeatureConfig.CODEC);
     public static final Feature<SimpleTreeFeatureConfig> BRUSH_TREE = new BrushTreeFeature(SimpleTreeFeatureConfig.CODEC);
     public static final Feature<SimpleTreeFeatureConfig> TALL_PINE = new TallPineTree(SimpleTreeFeatureConfig.CODEC);
+    public static final Feature<DefaultFeatureConfig> ORE_VEIN = new OreVeinFeature(DefaultFeatureConfig.CODEC);
 
     public static void init() {
         register("desertify", DESERTIFY_SOIL);

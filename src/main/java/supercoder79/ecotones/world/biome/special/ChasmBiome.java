@@ -19,7 +19,9 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
+import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
+import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import net.minecraft.world.gen.YOffset;
 
@@ -61,14 +63,16 @@ public class ChasmBiome extends EcotonesBiomeBuilder {
 
         if (!isEdge) {
             this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                    Feature.FOREST_ROCK.configure(new SingleStateFeatureConfig(Blocks.STONE.getDefaultState()))
+                    EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 1, false))
                             .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                             .spreadHorizontally()
                             .applyChance(2));
 
-//            this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-//                    Feature.FOREST_ROCK.configure(new ForestRockFeatureConfig(Blocks.STONE.getDefaultState(), 2))
-//                            .decorate(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(5))));
+            this.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                    EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 2, false))
+                            .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                            .spreadHorizontally()
+                            .applyChance(5));
         }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

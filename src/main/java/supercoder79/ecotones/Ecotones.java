@@ -27,6 +27,7 @@ import supercoder79.ecotones.util.compat.TerrestriaCompat;
 import supercoder79.ecotones.util.compat.TraverseCompat;
 import supercoder79.ecotones.util.deco.BlockDecorations;
 import supercoder79.ecotones.util.state.EcotonesBlockStateProviders;
+import supercoder79.ecotones.util.vein.OreVeins;
 import supercoder79.ecotones.world.EcotonesWorldType;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.biome.EcotonesBiomes;
@@ -73,7 +74,9 @@ public final class Ecotones implements ModInitializer {
 		EcotonesBlocks.init();
 		EcotonesBlockEntities.init();
 		EcotonesItems.init();
+
 		EcotonesDecorators.init();
+		OreVeins.init();
 		EcotonesFeatures.init();
 		EcotonesSurfaces.init();
 

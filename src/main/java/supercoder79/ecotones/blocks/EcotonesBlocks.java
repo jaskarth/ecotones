@@ -53,6 +53,9 @@ public final class EcotonesBlocks {
     public static Block DUCKWEED = new DuckweedBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block THORN_BUSH = new ThornBushBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block RED_ROCK = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
+    public static Block MALACHITE = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
+    public static Block PYRITE = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
+    public static Block SPARSE_GOLD_ORE = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
 
 
@@ -98,6 +101,9 @@ public final class EcotonesBlocks {
         register("duckweed", DUCKWEED);
         register("thorn_bush", THORN_BUSH);
         register("red_rock", RED_ROCK);
+        register("malachite", MALACHITE);
+        register("pyrite", PYRITE);
+        register("sparse_gold_ore", SPARSE_GOLD_ORE);
         register("cyan_rose", CYAN_ROSE);
     }
 

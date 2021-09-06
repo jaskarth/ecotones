@@ -32,7 +32,9 @@ import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.chunk.AquiferSampler;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.CaveBiome;
 import supercoder79.ecotones.util.BiomeCache;
@@ -45,6 +47,7 @@ import supercoder79.ecotones.world.blend.LinkedBiomeWeightMap;
 import supercoder79.ecotones.world.data.DataFunction;
 import supercoder79.ecotones.world.data.DataHolder;
 import supercoder79.ecotones.world.data.EcotonesData;
+import supercoder79.ecotones.world.features.EcotonesFeatures;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -340,13 +343,14 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
     @Override
     public void generateFeatures(ChunkRegion world, StructureAccessor structureAccessor) {
         ChunkPos chunkPos = world.getCenterPos();
-        int centerX = chunkPos.getStartX();
-        int centerZ = chunkPos.getStartZ();
-        BlockPos pos = new BlockPos(centerX, 0, centerZ);
+        int startX = chunkPos.getStartX();
+        int startZ = chunkPos.getStartZ();
+        BlockPos pos = new BlockPos(startX, 0, startZ);
         Biome biome = this.biomeSource.getBiomeForNoiseGen((chunkPos.x << 2) + 2, 2, (chunkPos.z << 2) + 2);
         ImprovedChunkRandom random = new ImprovedChunkRandom();
-        long populationSeed = random.setPopulationSeed(world.getSeed(), centerX, centerZ, biome.getScale() + scaleNoise.sample(centerX + 8, centerZ + 8));
+        long populationSeed = random.setPopulationSeed(world.getSeed(), startX, startZ, biome.getScale() + scaleNoise.sample(startX + 8, startZ + 8));
 
+        EcotonesFeatures.ORE_VEIN.generate(new FeatureContext<>(world, this, random, pos, DefaultFeatureConfig.INSTANCE));
         try {
             biome.generateFeatureStep(structureAccessor, this, world, populationSeed, random, pos);
         } catch (Exception ex) {

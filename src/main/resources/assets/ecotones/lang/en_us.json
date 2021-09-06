@@ -288,6 +288,9 @@
   "block.ecotones.thorn_bush": "Thorn Bush",
   "block.ecotones.red_rock": "Red Rock",
   "block.ecotones.maple_syrup_jar": "Maple Syrup Jar",
+  "block.ecotones.malachite": "Malachite",
+  "block.ecotones.pyrite": "Pyrite",
+  "block.ecotones.sparse_gold_ore": "Sparse Gold Ore",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -307,6 +310,9 @@
   "item.ecotones.wide_fern": "Wide Fern",
   "item.ecotones.lichen": "Lichen",
   "item.ecotones.moss": "Moss",
+  "item.ecotones.malachite": "Malachite",
+  "item.ecotones.pyrite": "Pyrite",
+  "item.ecotones.sparse_gold_ore": "Sparse Gold Ore",
 
   "item.ecotones.maple_leaves": "Maple Leaves",
   "item.ecotones.small_lilac": "Small Lilac",
@@ -343,6 +349,9 @@
   "item.ecotones.grass_strand": "Grass Strand",
   "item.ecotones.grass_cord": "Grass Cord",
   "item.ecotones.cactus_fruit": "Cactus Fruit",
+  "item.ecotones.malachite_item": "Malachite",
+  "item.ecotones.pyrite_item": "Pyrite",
+  "item.ecotones.gold_chunk": "Gold Chunk",
 
   "generator.ecotones": "§2Ecotones",
   "itemGroup.ecotones.ecotones": "Ecotones",

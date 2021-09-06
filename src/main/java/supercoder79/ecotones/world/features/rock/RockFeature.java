@@ -8,6 +8,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class RockFeature extends Feature<RockFeatureConfig> {
                             if (config.postProcess) {
                                 postProcess(world, local, config.state, random, dirtPositions);
                             } else {
-                                world.setBlockState(pos, config.state, 4);
+                                world.setBlockState(local, config.state, 4);
                             }
                         }
                     }
@@ -73,7 +74,9 @@ public class RockFeature extends Feature<RockFeatureConfig> {
                     pos = pos.add(-(startRadius + 1) + random.nextInt(2 + startRadius * 2), -random.nextInt(2), -(startRadius + 1) + random.nextInt(2 + startRadius * 2));
                 }
 
-                convertToGrass(world, dirtPositions);
+                if (config.postProcess) {
+                    convertToGrass(world, dirtPositions);
+                }
 
                 return true;
             }
@@ -105,6 +108,19 @@ public class RockFeature extends Feature<RockFeatureConfig> {
             }
 
             if (random.nextInt(3) == 0) {
+                placementState = Blocks.DIRT.getDefaultState();
+                dirtPositions.add(pos.toImmutable());
+            }
+
+            world.setBlockState(pos, placementState, 4);
+        } else if (state.getBlock() == EcotonesBlocks.MALACHITE || state.getBlock() == EcotonesBlocks.PYRITE || state.getBlock() == EcotonesBlocks.SPARSE_GOLD_ORE) {
+            BlockState placementState = state;
+
+            if (random.nextInt(6) == 0) {
+                placementState = Blocks.STONE.getDefaultState();
+            }
+
+            if (random.nextInt(4) == 0) {
                 placementState = Blocks.DIRT.getDefaultState();
                 dirtPositions.add(pos.toImmutable());
             }
