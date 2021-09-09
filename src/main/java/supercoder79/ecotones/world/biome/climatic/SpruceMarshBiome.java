@@ -52,10 +52,7 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerNoBeachBiomes(INSTANCE, THICKET, HILLY, MOUNTAINOUS);
         BiomeRegistries.registerNoRiverBiomes(INSTANCE, THICKET, HILLY, MOUNTAINOUS);
 
-//        TerraformSlimeSpawnBiomes.addSlimeSpawnBiomes(BuiltinRegistries.BIOME.getKey(INSTANCE).get(),
-//                BuiltinRegistries.BIOME.getKey(THICKET).get(),
-//                BuiltinRegistries.BIOME.getKey(HILLY).get(),
-//                BuiltinRegistries.BIOME.getKey(MOUNTAINOUS).get());
+        BiomeRegistries.registerSlimeSpawnBiomes(INSTANCE, THICKET, HILLY, MOUNTAINOUS);
     }
 
     public SpruceMarshBiome(float depth, float scale, boolean thicket) {

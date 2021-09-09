@@ -71,8 +71,6 @@ public class OreVeinFeature extends Feature<DefaultFeatureConfig> {
         return true;
     }
 
-
-
     private OreVein generateColumn(StructureWorldAccess world, Random random, BlockPos pos) {
         int x = pos.getX();
         int z = pos.getZ();
@@ -109,14 +107,14 @@ public class OreVeinFeature extends Feature<DefaultFeatureConfig> {
 
             if (isVein(this.veinANoise.sample(x, y * 1.75, z), this.veinBNoise.sample(x, y * 1.75, z))) {
                 double quality = this.veinQualityNoise.sample(x, y, z);
-                double skipChance = MathHelper.clampedLerpFromProgress(quality, -1, 1, 0.875, 0.6);
+                double skipChance = MathHelper.clampedLerpFromProgress(quality, -1, 1, 0.875, 0.4);
 
                 if (random.nextDouble() < skipChance) {
                     continue;
                 }
 
-                if (random.nextDouble() < MathHelper.clampedLerpFromProgress(quality, -0.2, 1.0, 0, 0.45)) {
-                    double rareChance = MathHelper.clampedLerpFromProgress(quality, 0.4, 1.0, 0.02, 0.3);
+                if (random.nextDouble() < MathHelper.clampedLerpFromProgress(quality, -0.25, 1.0, 0, 0.65)) {
+                    double rareChance = MathHelper.clampedLerpFromProgress(quality, 0.45, 1.0, 0.02, 0.4);
 
                     if (random.nextDouble() < rareChance) {
                         world.setBlockState(local, vein.getRareState(), 3);
@@ -147,7 +145,7 @@ public class OreVeinFeature extends Feature<DefaultFeatureConfig> {
             this.ceilNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, random, 2, 256, 1, 1);
             this.veinANoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, random, 1, 128, 1, 1);
             this.veinBNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, random, 1, 128, 1, 1);
-            this.veinQualityNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, random, 2, 80, 1, 1);
+            this.veinQualityNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, random, 3, 80, 1, 1);
             this.xNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, random, 2, 512, 1, 1);
             this.zNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, random, 2, 512, 1, 1);
         }

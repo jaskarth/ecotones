@@ -36,7 +36,7 @@ public class MangroveSwampBiome extends EcotonesBiomeBuilder {
         Climate.HOT_DRY.add(INSTANCE, 0.2);
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
         BiomeRegistries.registerNoRiverBiome(INSTANCE);
-//        TerraformSlimeSpawnBiomes.addSlimeSpawnBiomes(BuiltinRegistries.BIOME.getKey(INSTANCE).get());
+        BiomeRegistries.registerSlimeSpawnBiome(INSTANCE);
     }
 
     protected MangroveSwampBiome() {

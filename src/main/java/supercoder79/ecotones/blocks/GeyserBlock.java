@@ -9,6 +9,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -35,6 +37,8 @@ public class GeyserBlock extends Block {
             world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 6f, Explosion.DestructionType.DESTROY);
             world.spawnParticles(ParticleTypes.POOF, pos.getX() + 0.5, pos.getY() + 0.125, pos.getZ() + 0.5, 200, random.nextDouble() * 0.005, 0.65, random.nextDouble() * 0.005, 0.5f);
         }
+
+        world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (random.nextFloat() - random.nextFloat()) * 0.8F);
 
         world.spawnParticles(ParticleTypes.POOF, pos.getX() + 0.5, pos.getY() + 0.125, pos.getZ() + 0.5, 50, random.nextDouble() * 0.005, 1, random.nextDouble() * 0.005, 0.5f);
         List<LivingEntity> list = world.getNonSpectatingEntities(LivingEntity.class, new Box(pos.add(-3, -2, -3), pos.add(3, 6, 3)));

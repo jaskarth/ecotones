@@ -49,6 +49,8 @@ public class ClayBasinBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_DRY.add(INSTANCE, 0.1);
         Climate.HOT_MODERATE.add(INSTANCE, 0.1);
+
+        BiomeRegistries.registerSlimeSpawnBiomes(INSTANCE, LAKEBED, WET, HILLY, MOUNTAINOUS);
     }
 
     protected ClayBasinBiome(float depth, float scale, double hilliness, double volatility) {

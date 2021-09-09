@@ -137,8 +137,6 @@ public final class EcotonesItems {
         register("gold_chunk", GOLD_CHUNK);
 
         register("cyan_rose", CYAN_ROSE);
-
-        FuelRegistry.INSTANCE.add(PEAT_ITEM, 400);
     }
 
     private static void register(String name, Item item) {

@@ -26,6 +26,7 @@ public final class BiomeRegistries {
 
     public static final Map<RegistryKey<Biome>, Integer> BIOME_VARIANT_CHANCE = new HashMap<>();
     public static final Map<RegistryKey<Biome>, RegistryKey<Biome>[]> BIOME_VARIANTS = new HashMap<>();
+    public static final List<RegistryKey<Biome>> SLIME_SPAWN_BIOMES = new ArrayList<>();
 
     public static void registerSpecialBiome(Biome biome, IntFunction<Boolean> rule) {
         SPECIAL_BIOMES.put(key(biome), rule);
@@ -95,6 +96,16 @@ public final class BiomeRegistries {
 
     public static void registerNoRiverBiome(Biome biome) {
         NO_RIVER_BIOMES.add(key(biome));
+    }
+
+    public static void registerSlimeSpawnBiome(Biome biome) {
+        SLIME_SPAWN_BIOMES.add(key(biome));
+    }
+
+    public static void registerSlimeSpawnBiomes(Biome... biomes) {
+        for (Biome biome : biomes) {
+            registerSlimeSpawnBiome(biome);
+        }
     }
 
     private static RegistryKey<Biome> key(Biome biome) {

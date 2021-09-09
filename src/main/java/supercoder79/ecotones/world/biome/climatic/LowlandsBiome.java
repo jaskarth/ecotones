@@ -37,6 +37,7 @@ public class LowlandsBiome extends EcotonesBiomeBuilder {
         Climate.WARM_MILD.add(INSTANCE, 0.2);
         Climate.WARM_HUMID.add(INSTANCE, 0.2);
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
+        BiomeRegistries.registerSlimeSpawnBiome(INSTANCE);
     }
 
     protected LowlandsBiome(float depth, float scale, double hilliness, double volatility) {
