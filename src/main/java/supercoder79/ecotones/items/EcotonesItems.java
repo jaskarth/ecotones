@@ -71,6 +71,7 @@ public final class EcotonesItems {
     public static final Item MALACHITE_ITEM = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item PYRITE_ITEM = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item GOLD_CHUNK = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item TURPENTINE = new TurpentineItem(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
 
     public static final Item CYAN_ROSE = new BlockItem(EcotonesBlocks.CYAN_ROSE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
@@ -135,6 +136,7 @@ public final class EcotonesItems {
         register("malachite_item", MALACHITE_ITEM);
         register("pyrite_item", PYRITE_ITEM);
         register("gold_chunk", GOLD_CHUNK);
+        register("turpentine", TURPENTINE);
 
         register("cyan_rose", CYAN_ROSE);
     }
