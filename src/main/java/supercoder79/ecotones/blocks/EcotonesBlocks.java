@@ -56,6 +56,7 @@ public final class EcotonesBlocks {
     public static Block MALACHITE = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
     public static Block PYRITE = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
     public static Block SPARSE_GOLD_ORE = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
+    public static Block FERTILIZER_SPREADER = new FertilizerSpreaderBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakByTool(FabricToolTags.AXES).strength(1.5F, 1.0F).sounds(BlockSoundGroup.WOOD).build());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
 
 
@@ -104,6 +105,7 @@ public final class EcotonesBlocks {
         register("malachite", MALACHITE);
         register("pyrite", PYRITE);
         register("sparse_gold_ore", SPARSE_GOLD_ORE);
+        register("fertilizer_spreader", FERTILIZER_SPREADER);
         register("cyan_rose", CYAN_ROSE);
     }
 

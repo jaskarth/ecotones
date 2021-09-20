@@ -20,6 +20,7 @@ import supercoder79.ecotones.client.model.EcotonesModelLayers;
 import supercoder79.ecotones.client.particle.*;
 import supercoder79.ecotones.client.render.block.EcotonesBlockEntityRenderers;
 import supercoder79.ecotones.client.render.entity.DuckEntityRenderer;
+import supercoder79.ecotones.client.render.magnifying.EcotonesMagnifyingGlassRenderers;
 import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.items.EcotonesItems;
 
@@ -27,6 +28,7 @@ import supercoder79.ecotones.items.EcotonesItems;
 public final class EcotonesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        EcotonesMagnifyingGlassRenderers.init();
         ClientPacketHandler.init();
 
         ColorProviderRegistry.BLOCK.register(

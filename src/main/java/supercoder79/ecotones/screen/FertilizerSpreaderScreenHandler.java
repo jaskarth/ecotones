@@ -5,7 +5,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -13,19 +12,19 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.tag.ItemTags;
 import supercoder79.ecotones.items.EcotonesItems;
 
-public class SapDistilleryScreenHandler extends ScreenHandler {
+public class FertilizerSpreaderScreenHandler extends ScreenHandler {
     private final PropertyDelegate propertyDelegate;
 
-    public SapDistilleryScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(2), new ArrayPropertyDelegate(4));
+    public FertilizerSpreaderScreenHandler(int syncId, PlayerInventory playerInventory) {
+        this(syncId, playerInventory, new SimpleInventory(1), new ArrayPropertyDelegate(4));
     }
 
-    public SapDistilleryScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
-        super(EcotonesScreenHandlers.SAP_DISTILLERY, syncId);
+    public FertilizerSpreaderScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
+        super(EcotonesScreenHandlers.FERTILIZER_SPREADER, syncId);
+
         this.propertyDelegate = propertyDelegate;
 
-        this.addSlot(new SapSlot(inventory, 0, 26, 37 - 7));
-        this.addSlot(new LogSlot(inventory, 1, 80, 79 - 7));
+        this.addSlot(new FertilizerSlot(inventory, 0, 80, 71 - 7));
 
         int k;
         for(k = 0; k < 3; ++k) {
@@ -41,20 +40,25 @@ public class SapDistilleryScreenHandler extends ScreenHandler {
         this.addProperties(propertyDelegate);
     }
 
-    public int getBurnTime() {
+    public int getPercent() {
         return this.propertyDelegate.get(0);
     }
 
-    public int getHeat() {
+    public int getFertilizerAmount() {
         return this.propertyDelegate.get(1);
     }
 
-    public int getSapAmount() {
+    public int getFarmCount() {
         return this.propertyDelegate.get(2);
     }
 
-    public int getSyrupAmount() {
+    public int getWaterCount() {
         return this.propertyDelegate.get(3);
+    }
+
+    @Override
+    public boolean canUse(PlayerEntity player) {
+        return true;
     }
 
     @Override
@@ -66,12 +70,8 @@ public class SapDistilleryScreenHandler extends ScreenHandler {
             ItemStack itemStack2 = slot.getStack();
             itemStack = itemStack2.copy();
 
-            if (index != 0 && index != 1) {
-                if (itemStack.isIn(ItemTags.LOGS_THAT_BURN)) {
-                    if (this.insertItem(itemStack2, 1, 2, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (itemStack.getItem() == EcotonesItems.MAPLE_SAP) {
+            if (index != 0) {
+                if (itemStack.getItem() == EcotonesItems.BASIC_FERTILIZER) {
                     if (this.insertItem(itemStack2, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }
@@ -100,32 +100,13 @@ public class SapDistilleryScreenHandler extends ScreenHandler {
         return itemStack;
     }
 
-    @Override
-    public boolean canUse(PlayerEntity player) {
-        return true;
-    }
-
-    private static class SapSlot extends Slot {
-        public SapSlot(Inventory inventory, int i, int j, int k) {
+    private static class FertilizerSlot extends Slot {
+        public FertilizerSlot(Inventory inventory, int i, int j, int k) {
             super(inventory, i, j, k);
         }
 
         public boolean canInsert(ItemStack stack) {
-            return stack.getItem() == EcotonesItems.MAPLE_SAP;
-        }
-
-        public int getMaxItemCount() {
-            return 64;
-        }
-    }
-
-    private static class LogSlot extends Slot {
-        public LogSlot(Inventory inventory, int i, int j, int k) {
-            super(inventory, i, j, k);
-        }
-
-        public boolean canInsert(ItemStack stack) {
-            return stack.isIn(ItemTags.LOGS_THAT_BURN);
+            return stack.getItem() == EcotonesItems.BASIC_FERTILIZER;
         }
 
         public int getMaxItemCount() {

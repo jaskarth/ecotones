@@ -291,6 +291,7 @@
   "block.ecotones.malachite": "Malachite",
   "block.ecotones.pyrite": "Pyrite",
   "block.ecotones.sparse_gold_ore": "Sparse Gold Ore",
+  "block.ecotones.fertilizer_spreader": "Fertilizer Spreader",
 
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
@@ -313,6 +314,7 @@
   "item.ecotones.malachite": "Malachite",
   "item.ecotones.pyrite": "Pyrite",
   "item.ecotones.sparse_gold_ore": "Sparse Gold Ore",
+  "block.ecotones.fertilizer_spreader": "Fertilizer Spreader",
 
   "item.ecotones.maple_leaves": "Maple Leaves",
   "item.ecotones.small_lilac": "Small Lilac",
@@ -337,6 +339,8 @@
   "item.ecotones.duckweed": "Duckweed",
   "item.ecotones.thorn_bush": "Thorn Bush",
   "item.ecotones.red_rock": "Red Rock",
+  "block.ecotones.magnifying_glass": "Magnifying Glass",
+  "block.ecotones.basic_fertilizer": "Basic Fertilizer",
 
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",
