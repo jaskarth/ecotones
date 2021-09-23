@@ -21,6 +21,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.api.TreeType;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.util.state.DeferredBlockStateProvider;
 import supercoder79.ecotones.util.compat.FloralisiaCompat;
 import supercoder79.ecotones.world.biome.BiomeHelper;
@@ -162,20 +163,21 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.DUCK_NEST.configure(new ShrubDecoratorConfig(0.2))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))
                         .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
                         .applyChance(2)
                         .repeat(2));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(6, 14), true, UniformIntProvider.create(3, 5)))
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(6, 14), true, UniformIntProvider.create(3, 5)))
                         .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
+                        .applyChance(2)
                         .repeat(4));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(4, 12), false, UniformIntProvider.create(2, 4)))
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(4, 12), true, UniformIntProvider.create(2, 4)))
                         .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
                         .applyChance(8));
@@ -184,7 +186,7 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(16, 64), false, UniformIntProvider.create(8, 14)))
                         .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
-                        .applyChance(32));
+                        .applyChance(86));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DUCKWEED.configure(new DuckweedFeatureConfig(UniformIntProvider.create(64, 96), UniformIntProvider.create(10, 14)))

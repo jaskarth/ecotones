@@ -102,6 +102,20 @@ public class MangroveSwampBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.DUCK_NEST.configure(DefaultFeatureConfig.INSTANCE)
                         .decorate(EcotonesDecorators.DUCK_NEST.configure(new ShrubDecoratorConfig(0.2))));
 
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .spreadHorizontally()
+                        .applyChance(4)
+                        .repeat(3));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(12, 16), true, UniformIntProvider.create(10, 14)))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .spreadHorizontally()
+                        .applyChance(2)
+                        .repeat(4));
+
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SEAGRASS.configure(new ProbabilityConfig(0.6f))
                 .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.OCEAN_FLOOR_WG)))
                 .spreadHorizontally()

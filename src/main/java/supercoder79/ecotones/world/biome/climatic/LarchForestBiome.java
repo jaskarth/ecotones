@@ -108,6 +108,13 @@ public class LarchForestBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 10, 14))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(6, 14), true, UniformIntProvider.create(3, 5)))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .spreadHorizontally()
+                        .applyChance(2)
+                        .repeat(2));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))
                         .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()

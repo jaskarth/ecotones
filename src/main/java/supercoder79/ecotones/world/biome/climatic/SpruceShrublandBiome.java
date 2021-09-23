@@ -140,6 +140,20 @@ public class SpruceShrublandBiome extends EcotonesBiomeBuilder {
                         .applyChance(2));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .spreadHorizontally()
+                        .applyChance(4)
+                        .repeat(2));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(12, 16), true, UniformIntProvider.create(10, 14)))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .spreadHorizontally()
+                        .applyChance(2)
+                        .repeat(3));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SMALL_SPRUCE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.3))));
 

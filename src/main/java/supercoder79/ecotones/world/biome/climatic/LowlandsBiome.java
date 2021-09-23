@@ -23,10 +23,7 @@ import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
-import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
-import supercoder79.ecotones.world.features.config.PatchFeatureConfig;
-import supercoder79.ecotones.world.features.config.RockFeatureConfig;
-import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
+import supercoder79.ecotones.world.features.config.*;
 
 // TODO: more golden grass color, split into tundra
 public class LowlandsBiome extends EcotonesBiomeBuilder {
@@ -131,6 +128,13 @@ public class LowlandsBiome extends EcotonesBiomeBuilder {
                         .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
                         .decorate(Decorator.COUNT_NOISE.configure(new CountNoiseDecoratorConfig(-0.8D, 12, 16))));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .spreadHorizontally()
+                        .applyChance(4)
+                        .repeat(3));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))

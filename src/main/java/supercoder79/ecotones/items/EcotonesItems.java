@@ -50,6 +50,7 @@ public final class EcotonesItems {
     public static final Item PYRITE = new BlockItem(EcotonesBlocks.PYRITE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item SPARSE_GOLD_ORE = new BlockItem(EcotonesBlocks.SPARSE_GOLD_ORE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item FERTILIZER_SPREADER = new BlockItem(EcotonesBlocks.FERTILIZER_SPREADER, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item WATERGRASS = new BlockItem(EcotonesBlocks.WATERGRASS, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
     // Regular Items
     public static final Item COCONUT = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).build()));
@@ -119,6 +120,7 @@ public final class EcotonesItems {
         register("pyrite", PYRITE);
         register("sparse_gold_ore", SPARSE_GOLD_ORE);
         register("fertilizer_spreader", FERTILIZER_SPREADER);
+        register("watergrass", WATERGRASS);
 
         register("coconut", COCONUT);
         register("hazelnut", HAZELNUT);

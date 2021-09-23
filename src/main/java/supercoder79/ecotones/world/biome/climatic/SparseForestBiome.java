@@ -126,6 +126,20 @@ public class SparseForestBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DARK_OAK.decorationData)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .spreadHorizontally()
+                        .applyChance(4)
+                        .repeat(2));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(12, 16), true, UniformIntProvider.create(10, 14)))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .spreadHorizontally()
+                        .applyChance(2)
+                        .repeat(4));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))
                         .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
                         .spreadHorizontally()
