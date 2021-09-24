@@ -11,7 +11,7 @@ import supercoder79.ecotones.util.noise.OpenSimplexNoise;
 
 import java.util.Random;
 
-public class BirchLakesSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
+public class BirchLakesSurfaceBuilder extends SlopedSurfaceBuilder<TernarySurfaceConfig> {
     private static final TernarySurfaceConfig DIORITE_CONFIG = new TernarySurfaceConfig(Blocks.DIORITE.getDefaultState(), Blocks.DIORITE.getDefaultState(), Blocks.DIORITE.getDefaultState());
 
     private OpenSimplexNoise noise;
@@ -22,7 +22,7 @@ public class BirchLakesSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfi
     }
 
     @Override
-    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, int start, long seed, TernarySurfaceConfig surfaceBlocks) {
+    public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, int start, long seed, double slope, TernarySurfaceConfig surfaceBlocks) {
         int yLevel = height - seaLevel;
         yLevel += 2;
         double progress = yLevel / 12.0;
@@ -32,7 +32,7 @@ public class BirchLakesSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfi
         double selectorNoise = (this.noise.sample(x / 12.0, z / 12.0) + 1) / 2;
         selectorNoise += random.nextDouble() * 0.1;
 
-        if (selectorNoise > progress) {
+        if (selectorNoise > progress || slope > 3) {
             SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, start, seed, DIORITE_CONFIG);
         } else {
             SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, defaultBlock, defaultFluid, seaLevel, start, seed, SurfaceBuilder.GRASS_CONFIG);

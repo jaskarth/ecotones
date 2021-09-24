@@ -307,7 +307,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                 Biome biome = region.getBiome(mutable.set(localX, y, localZ));
                 ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder = biome.getGenerationSettings().getSurfaceBuilder().get();
                 configuredSurfaceBuilder.initSeed(region.getSeed());
-                
+
                 dispatchSurfaceBuilder(configuredSurfaceBuilder, region, chunk, random, localX, localZ, y, noise, biome);
             }
         }

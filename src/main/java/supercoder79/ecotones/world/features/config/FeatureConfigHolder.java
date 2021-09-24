@@ -140,6 +140,12 @@ public final class FeatureConfigHolder {
                     .add(Blocks.GRASS.getDefaultState(), 4)
                     .add(Blocks.TALL_GRASS.getDefaultState(), 2)), new DoubleOrNormalPlacer()).tries(32).build();
 
+    public static final RandomPatchFeatureConfig LILY_OF_THE_VALLEY_CONFIG =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
+                    .add(Blocks.LILY_OF_THE_VALLEY.getDefaultState(), 32)
+                    .add(Blocks.GRASS.getDefaultState(), 4)
+                    .add(Blocks.TALL_GRASS.getDefaultState(), 2)), new DoubleOrNormalPlacer()).tries(48).build();
+
     public static final RandomPatchFeatureConfig DESERT_GRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.SANDY_GRASS.getDefaultState(), 1)), new SimpleBlockPlacer())

@@ -20,17 +20,16 @@ public enum MountainBigEdgeLayer implements MergingCrossSamplingLayer {
     public int sample(LayerRandomnessSource context, int n, int e, int s, int w, int center, int climate) {
         List<RegistryKey<Biome>> biomes = BiomeRegistries.TYPED_MOUNTAIN_BIOMES.get(ClimateType.MOUNTAIN_PEAKS);
 
+        RegistryKey<Biome> centerKey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(center)).get();
         RegistryKey<Biome> nkey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(n)).get();
         RegistryKey<Biome> ekey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(e)).get();
         RegistryKey<Biome> skey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(s)).get();
         RegistryKey<Biome> wkey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(w)).get();
 
-        if (biomes.contains(nkey) || biomes.contains(ekey) || biomes.contains(skey) || biomes.contains(wkey)) {
-            if (biomes.contains(nkey) && biomes.contains(ekey) && biomes.contains(skey) && biomes.contains(wkey)) {
-                return center;
+        if (biomes.contains(centerKey)) {
+            if (!(biomes.contains(nkey) && biomes.contains(ekey) && biomes.contains(skey) && biomes.contains(wkey))) {
+                return Climate.VALUES[climate].pickerFor(ClimateType.MOUNTAIN_FOOTHILLS).choose(context);
             }
-
-            return Climate.VALUES[climate].pickerFor(ClimateType.MOUNTAIN_FOOTHILLS).choose(context);
         }
 
         return center;

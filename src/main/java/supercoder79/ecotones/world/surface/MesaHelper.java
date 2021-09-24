@@ -18,7 +18,7 @@ public final class MesaHelper {
     private static final BlockState LIGHT_GRAY_TERRACOTTA = Blocks.LIGHT_GRAY_TERRACOTTA.getDefaultState();
     private static final BlockState GRAY_TERRACOTTA = Blocks.GRAY_TERRACOTTA.getDefaultState();
 
-    protected static BlockState[] initializeRegularMesa(long seed) {
+    public static BlockState[] initializeRegularMesa(long seed) {
         BlockState[] layerBlocks = new BlockState[64];
         Arrays.fill(layerBlocks, TERRACOTTA);
         ChunkRandom random = new ChunkRandom(seed);
