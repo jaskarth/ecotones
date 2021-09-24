@@ -54,7 +54,9 @@ public final class EcotonesBlocks {
     public static Block THORN_BUSH = new ThornBushBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block RED_ROCK = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
-
+    public static Block POTTED_MAPLE_SAPLING = new FlowerPotBlock(MAPLE_SAPLING, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
+    public static Block POTTED_LARCH_SAPLING = new FlowerPotBlock(LARCH_SAPLING, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
+    public static Block POTTED_HAZEL_SAPLING = new FlowerPotBlock(HAZEL_SAPLING, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
 
     public static void init() {
         register("peat", PEAT_BLOCK);
@@ -99,6 +101,9 @@ public final class EcotonesBlocks {
         register("thorn_bush", THORN_BUSH);
         register("red_rock", RED_ROCK);
         register("cyan_rose", CYAN_ROSE);
+        register("potted_maple_sapling", POTTED_MAPLE_SAPLING);
+        register("potted_larch_sapling.json", POTTED_LARCH_SAPLING);
+        register("potted_hazel_sapling", POTTED_HAZEL_SAPLING);
     }
 
     private static void register(String name, Block block) {
