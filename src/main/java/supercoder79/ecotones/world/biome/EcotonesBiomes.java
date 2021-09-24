@@ -94,6 +94,7 @@ public final class EcotonesBiomes {
         LushFoothillsBiome.init();
         SparseAlpineForestBiome.init();
         MontaneFieldsBiome.init();
+        RockySlopesBiome.init();
 
         // Cave biomes
         LimestoneCaveBiome.init();
