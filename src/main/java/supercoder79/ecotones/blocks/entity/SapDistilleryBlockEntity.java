@@ -43,34 +43,21 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
         this.inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
-                switch(index) {
-                    case 0:
-                        return SapDistilleryBlockEntity.this.burnTime;
-                    case 1:
-                        return SapDistilleryBlockEntity.this.heatAmount;
-                    case 2:
-                        return SapDistilleryBlockEntity.this.sapAmount;
-                    case 3:
-                        return SapDistilleryBlockEntity.this.syrupAmount;
-                    default:
-                        return 0;
-                }
+                return switch (index) {
+                    case 0 -> SapDistilleryBlockEntity.this.burnTime;
+                    case 1 -> SapDistilleryBlockEntity.this.heatAmount;
+                    case 2 -> SapDistilleryBlockEntity.this.sapAmount;
+                    case 3 -> SapDistilleryBlockEntity.this.syrupAmount;
+                    default -> 0;
+                };
             }
 
             public void set(int index, int value) {
-                switch(index) {
-                    case 0:
-                        SapDistilleryBlockEntity.this.burnTime = value;
-                        break;
-                    case 1:
-                        SapDistilleryBlockEntity.this.heatAmount = value;
-                        break;
-                    case 2:
-                        SapDistilleryBlockEntity.this.sapAmount = value;
-                        break;
-                    case 3:
-                        SapDistilleryBlockEntity.this.syrupAmount = value;
-                        break;
+                switch (index) {
+                    case 0 -> SapDistilleryBlockEntity.this.burnTime = value;
+                    case 1 -> SapDistilleryBlockEntity.this.heatAmount = value;
+                    case 2 -> SapDistilleryBlockEntity.this.sapAmount = value;
+                    case 3 -> SapDistilleryBlockEntity.this.syrupAmount = value;
                 }
 
             }
@@ -232,7 +219,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
 
     @Override
     public boolean isEmpty() {
-        return this.inventory.get(0).isEmpty();
+        return this.inventory.get(0).isEmpty() && this.inventory.get(1).isEmpty();
     }
 
     @Override

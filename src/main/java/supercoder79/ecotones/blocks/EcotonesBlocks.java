@@ -53,6 +53,11 @@ public final class EcotonesBlocks {
     public static Block DUCKWEED = new DuckweedBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block THORN_BUSH = new ThornBushBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block RED_ROCK = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
+    public static Block MALACHITE = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
+    public static Block PYRITE = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
+    public static Block SPARSE_GOLD_ORE = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
+    public static Block FERTILIZER_SPREADER = new FertilizerSpreaderBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakByTool(FabricToolTags.AXES).strength(1.5F, 1.0F).sounds(BlockSoundGroup.WOOD).build());
+    public static Block WATERGRASS = new CattailBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block POTTED_MAPLE_SAPLING = new FlowerPotBlock(MAPLE_SAPLING, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
     public static Block POTTED_LARCH_SAPLING = new FlowerPotBlock(LARCH_SAPLING, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
@@ -100,6 +105,11 @@ public final class EcotonesBlocks {
         register("duckweed", DUCKWEED);
         register("thorn_bush", THORN_BUSH);
         register("red_rock", RED_ROCK);
+        register("malachite", MALACHITE);
+        register("pyrite", PYRITE);
+        register("sparse_gold_ore", SPARSE_GOLD_ORE);
+        register("fertilizer_spreader", FERTILIZER_SPREADER);
+        register("watergrass", WATERGRASS);
         register("cyan_rose", CYAN_ROSE);
         register("potted_maple_sapling", POTTED_MAPLE_SAPLING);
         register("potted_larch_sapling.json", POTTED_LARCH_SAPLING);

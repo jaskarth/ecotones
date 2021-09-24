@@ -1,5 +1,6 @@
 package supercoder79.ecotones.mixin.client;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -8,17 +9,22 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.MutableWorldProperties;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import supercoder79.ecotones.client.ClientSidedServerData;
-import supercoder79.ecotones.client.CloudHandler;
+import supercoder79.ecotones.client.render.magnifying.MagnifyingGlassDispatcher;
 
 import java.util.function.Supplier;
 
 @Mixin(ClientWorld.class)
 public abstract class MixinClientWorld extends World {
+    @Shadow @Final private MinecraftClient client;
+
     protected MixinClientWorld(MutableWorldProperties properties, RegistryKey<World> registryRef, DimensionType dimensionType, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long seed) {
         super(properties, registryRef, dimensionType, profiler, isClient, debugWorld, seed);
     }
@@ -55,5 +61,10 @@ public abstract class MixinClientWorld extends World {
 
             cir.setReturnValue(new Vec3d(red, green, blue));
         }
+    }
+
+    @Inject(method = "doRandomBlockDisplayTicks", at = @At("HEAD"))
+    private void extraParticleRendering(int centerX, int centerY, int centerZ, CallbackInfo ci) {
+        MagnifyingGlassDispatcher.dispatch(this.client.player);
     }
 }

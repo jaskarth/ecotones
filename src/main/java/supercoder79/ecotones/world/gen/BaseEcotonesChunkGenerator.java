@@ -21,7 +21,7 @@ import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.Heightmap.Type;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkSection;
@@ -32,8 +32,12 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
+import supercoder79.ecotones.world.surface.SlopedSurfaceBuilder;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -290,17 +294,44 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         int chunkStartZ = pos.getStartZ();
         Mutable mutable = new Mutable();
 
-        for(int x = 0; x < 16; ++x) {
-            for(int z = 0; z < 16; ++z) {
+        for(int x = 0; x < 16; x++) {
+            for(int z = 0; z < 16; z++) {
                 int localX = chunkStartX + x;
                 int localZ = chunkStartZ + z;
+
                 int y = chunk.sampleHeightmap(Type.WORLD_SURFACE_WG, x, z) + 1;
-                double e = this.surfaceDepthNoise.sample((double) localX * 0.0625D, (double) localZ * 0.0625D, 0.0625D, (double) x * 0.0625D) * 15.0D;
-                region.getBiome(mutable.set(localX, y, localZ)).buildSurface(random, chunk, localX, localZ, y, e, this.defaultBlock, this.defaultFluid, this.getSeaLevel(), 0, region.getSeed());
+
+                double noise = this.surfaceDepthNoise.sample((double) localX * 0.0625D, (double) localZ * 0.0625D, 0.0625D, (double) x * 0.0625D) * 15.0D;
+
+
+                Biome biome = region.getBiome(mutable.set(localX, y, localZ));
+                ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder = biome.getGenerationSettings().getSurfaceBuilder().get();
+                configuredSurfaceBuilder.initSeed(region.getSeed());
+
+                dispatchSurfaceBuilder(configuredSurfaceBuilder, region, chunk, random, localX, localZ, y, noise, biome);
             }
         }
 
         this.buildBedrock(chunk, random);
+    }
+
+    private <SC extends SurfaceConfig> void dispatchSurfaceBuilder(ConfiguredSurfaceBuilder<SC> configuredSurfaceBuilder, ChunkRegion region, Chunk chunk, ChunkRandom random, int x, int z, int y, double noise, Biome biome) {
+        SurfaceBuilder<SC> builder =  configuredSurfaceBuilder.surfaceBuilder;
+
+        SC config = configuredSurfaceBuilder.config;
+
+        if (builder instanceof SlopedSurfaceBuilder<SC> sloped) {
+            int dx = (getHeight(x + 1, z, Type.WORLD_SURFACE_WG, region) + 1) - (getHeight(x - 1, z, Type.WORLD_SURFACE_WG, region) + 1);
+            int dz = (getHeight(x, z - 1, Type.WORLD_SURFACE_WG, region) + 1) - (getHeight(x, z - 1, Type.WORLD_SURFACE_WG, region) + 1);
+
+            int slope = dx * dx + dz * dz;
+
+            sloped.generate(random, chunk, biome, x & 15, z & 15, y, noise,
+                    this.defaultBlock, this.defaultFluid, this.getSeaLevel(), 0, region.getSeed(), slope, config);
+        } else {
+            builder.generate(random, chunk, biome, x & 15, z & 15, y, noise,
+                    this.defaultBlock, this.defaultFluid, this.getSeaLevel(), 0, region.getSeed(), config);
+        }
     }
 
     protected void buildBedrock(Chunk chunk, Random random) {
@@ -549,7 +580,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
             this.values = new double[size * noiseSize];
         }
 
-        public double[] get(double[] buffer, int x, int z) {
+        public synchronized double[] get(double[] buffer, int x, int z) {
             long key = key(x, z);
             int idx = hash(key) & this.mask;
 

@@ -48,7 +48,7 @@ public class CattailFeature extends Feature<CattailFeatureConfig> {
             boolean waterlogged = world.getFluidState(mutable).isIn(FluidTags.WATER);
 
             if (world.getBlockState(mutable).getMaterial().isReplaceable() && CattailBlock.PLANTABLE.contains(world.getBlockState(mutable.down()).getBlock())) {
-                world.setBlockState(mutable, EcotonesBlocks.CATTAIL.getDefaultState().with(CattailBlock.WATERLOGGED, waterlogged), 3);
+                world.setBlockState(mutable, config.state.with(CattailBlock.WATERLOGGED, waterlogged), 3);
             }
         }
 

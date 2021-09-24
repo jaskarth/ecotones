@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ecotones:gold_chunk"
+    },
+    {
+      "item": "ecotones:gold_chunk"
+    },
+    {
+      "item": "ecotones:gold_chunk"
+    },
+    {
+      "item": "ecotones:gold_chunk"
+    }
+  ],
+  "result": {
+    "item": "minecraft:raw_gold"
+  }
+}

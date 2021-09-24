@@ -47,21 +47,21 @@ public final class EcotonesBiomeLayers {
 
         //Add our biomes
         LayerFactory<T> climateLayer = ClimateLayer.INSTANCE.create(contextProvider.apply(2L), seed + 79);
-        LayerFactory<T> initialBiomeLayer = PickFromClimateLayer.INSTANCE.create(contextProvider.apply(2L), climateLayer);
-        LayerFactory<T> biomeLayer = MountainLayer.INSTANCE.create(contextProvider.apply(49L), initialBiomeLayer, climateLayer, seed + 1337);
+        LayerFactory<T> biomeLayer = PickFromClimateLayer.INSTANCE.create(contextProvider.apply(2L), climateLayer);
+        LayerFactory<T> initialBiomeLayer = MountainLayer.INSTANCE.create(contextProvider.apply(49L), biomeLayer, climateLayer, seed + 1337);
 
-        biomeLayer = stack(7970L, ScaleLayer.NORMAL, biomeLayer, 1, contextProvider);
+        biomeLayer = stack(7970L, ScaleLayer.NORMAL, initialBiomeLayer, 1, contextProvider);
         climateLayer = stack(7970L, ScaleLayer.NORMAL, climateLayer, 1, contextProvider);
 
         biomeLayer = MountainBigEdgeLayer.INSTANCE.create(contextProvider.apply(1001L), biomeLayer, climateLayer);
 
-        LayerFactory<T> zoom2BiomeLayer = stack(7975L, ScaleLayer.NORMAL, biomeLayer, 1, contextProvider);
+        biomeLayer = stack(7975L, ScaleLayer.NORMAL, biomeLayer, 1, contextProvider);
         climateLayer = stack(7975L, ScaleLayer.NORMAL, climateLayer, 1, contextProvider);
 
-        biomeLayer = SmoothLayer.INSTANCE.create(contextProvider.apply(402), zoom2BiomeLayer);
+        biomeLayer = SmoothLayer.INSTANCE.create(contextProvider.apply(402), biomeLayer);
         biomeLayer = MountainSmallEdgeLayer.INSTANCE.create(contextProvider.apply(1002L), biomeLayer, climateLayer);
-        biomeLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), biomeLayer);
-        biomeLayer = stack(7979L, ScaleLayer.NORMAL, biomeLayer, 3, contextProvider);
+        LayerFactory<T> zoom2BiomeLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), biomeLayer);
+        biomeLayer = stack(7979L, ScaleLayer.NORMAL, zoom2BiomeLayer, 3, contextProvider);
 
         // 1.5x zoom
         biomeLayer = Div3ScaleLayer.INSTANCE.create(contextProvider.apply(32), biomeLayer);

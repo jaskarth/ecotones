@@ -46,6 +46,11 @@ public final class EcotonesItems {
     public static final Item DUCKWEED = new PlaceOnFluidItem(EcotonesBlocks.DUCKWEED, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item THORN_BUSH = new BlockItem(EcotonesBlocks.THORN_BUSH, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item RED_ROCK = new BlockItem(EcotonesBlocks.RED_ROCK, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item MALACHITE = new BlockItem(EcotonesBlocks.MALACHITE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item PYRITE = new BlockItem(EcotonesBlocks.PYRITE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item SPARSE_GOLD_ORE = new BlockItem(EcotonesBlocks.SPARSE_GOLD_ORE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item FERTILIZER_SPREADER = new BlockItem(EcotonesBlocks.FERTILIZER_SPREADER, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item WATERGRASS = new BlockItem(EcotonesBlocks.WATERGRASS, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
     // Regular Items
     public static final Item COCONUT = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).build()));
@@ -65,6 +70,13 @@ public final class EcotonesItems {
     public static final Item GRASS_STRAND = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item GRASS_CORD = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item CACTUS_FRUIT = new AliasedBlockItem(EcotonesBlocks.SMALL_CACTUS, new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).snack().build()));
+    public static final Item MALACHITE_ITEM = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item PYRITE_ITEM = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item GOLD_CHUNK = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item TURPENTINE = new TurpentineItem(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item BASIC_FERTILIZER = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item MAGNIFYING_GLASS = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+
 
     public static final Item CYAN_ROSE = new BlockItem(EcotonesBlocks.CYAN_ROSE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
@@ -104,6 +116,11 @@ public final class EcotonesItems {
         register("duckweed", DUCKWEED);
         register("thorn_bush", THORN_BUSH);
         register("red_rock", RED_ROCK);
+        register("malachite", MALACHITE);
+        register("pyrite", PYRITE);
+        register("sparse_gold_ore", SPARSE_GOLD_ORE);
+        register("fertilizer_spreader", FERTILIZER_SPREADER);
+        register("watergrass", WATERGRASS);
 
         register("coconut", COCONUT);
         register("hazelnut", HAZELNUT);
@@ -122,10 +139,14 @@ public final class EcotonesItems {
         register("grass_strand", GRASS_STRAND);
         register("grass_cord", GRASS_CORD);
         register("cactus_fruit", CACTUS_FRUIT);
+        register("malachite_item", MALACHITE_ITEM);
+        register("pyrite_item", PYRITE_ITEM);
+        register("gold_chunk", GOLD_CHUNK);
+        register("turpentine", TURPENTINE);
+        register("magnifying_glass", MAGNIFYING_GLASS);
+        register("basic_fertilizer", BASIC_FERTILIZER);
 
         register("cyan_rose", CYAN_ROSE);
-
-        FuelRegistry.INSTANCE.add(PEAT_ITEM, 400);
     }
 
     private static void register(String name, Item item) {

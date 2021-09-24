@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ecotones:malachite_item"
+    },
+    {
+      "item": "ecotones:malachite_item"
+    },
+    {
+      "item": "ecotones:malachite_item"
+    },
+    {
+      "item": "ecotones:malachite_item"
+    }
+  ],
+  "result": {
+    "item": "minecraft:raw_copper"
+  }
+}

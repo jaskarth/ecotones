@@ -208,7 +208,7 @@ public class TreetapBlockEntity extends BlockEntity implements BlockEntityClient
         }
     }
 
-    private final class RecursionResults {
+    private static final class RecursionResults {
         private final Set<BlockPos> visited = new HashSet<>();
         private final Set<BlockPos> logs = new HashSet<>();
         private final Set<BlockPos> leaves = new HashSet<>();

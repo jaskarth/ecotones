@@ -52,10 +52,7 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerNoBeachBiomes(INSTANCE, THICKET, HILLY, MOUNTAINOUS);
         BiomeRegistries.registerNoRiverBiomes(INSTANCE, THICKET, HILLY, MOUNTAINOUS);
 
-//        TerraformSlimeSpawnBiomes.addSlimeSpawnBiomes(BuiltinRegistries.BIOME.getKey(INSTANCE).get(),
-//                BuiltinRegistries.BIOME.getKey(THICKET).get(),
-//                BuiltinRegistries.BIOME.getKey(HILLY).get(),
-//                BuiltinRegistries.BIOME.getKey(MOUNTAINOUS).get());
+        BiomeRegistries.registerSlimeSpawnBiomes(INSTANCE, THICKET, HILLY, MOUNTAINOUS);
     }
 
     public SpruceMarshBiome(float depth, float scale, boolean thicket) {
@@ -146,6 +143,20 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.GROUND_PATCH.configure(new PatchFeatureConfig(EcotonesBlocks.PEAT_BLOCK.getDefaultState(), Blocks.GRASS_BLOCK, UniformIntProvider.create(1, 4)))
                         .spreadHorizontally()
                         .applyChance(3));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .spreadHorizontally()
+                        .applyChance(4)
+                        .repeat(2));
+
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(12, 16), true, UniformIntProvider.create(10, 14)))
+                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .spreadHorizontally()
+                        .applyChance(2)
+                        .repeat(4));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 Feature.TREE.configure(FeatureConfigHolder.SPRUCE_TREE_CONFIG)

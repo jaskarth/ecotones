@@ -12,12 +12,14 @@
     "MixinCocoaBeansTreeDecorator",
     "MixinGeneratorOptions",
     "MixinPlayerManager",
+    "MixinSlimeEntity",
     "SpawnSettingsAccessor",
     "StructureFeatureAccessor",
     "TreeDecoratorTypeAccessor"
   ],
   "client": [
     "client.EntityModelLayersAccessor",
+    "client.MixinBackgroundRenderer",
     "client.MixinBiomeColors",
     "client.MixinClientPlayNetworkHandler",
     "client.MixinClientWorld",
@@ -26,8 +28,7 @@
     "client.MixinHeldItemRenderer",
     "client.MixinMinecraftClient",
     "client.MixinSkyProperties",
-    "client.MixinWorldRenderer",
-    "client.MixinBackgroundRenderer"
+    "client.MixinWorldRenderer"
   ],
   "injectors": {
     "defaultRequire": 1

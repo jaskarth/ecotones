@@ -105,7 +105,7 @@ public class SapDistilleryScreenHandler extends ScreenHandler {
         return true;
     }
 
-    static class SapSlot extends Slot {
+    private static class SapSlot extends Slot {
         public SapSlot(Inventory inventory, int i, int j, int k) {
             super(inventory, i, j, k);
         }
@@ -119,7 +119,7 @@ public class SapDistilleryScreenHandler extends ScreenHandler {
         }
     }
 
-    static class LogSlot extends Slot {
+    private static class LogSlot extends Slot {
         public LogSlot(Inventory inventory, int i, int j, int k) {
             super(inventory, i, j, k);
         }

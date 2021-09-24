@@ -43,6 +43,7 @@ public class MoorBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_MODERATE.add(INSTANCE, 0.05);
         Climate.WARM_DRY.add(INSTANCE, 0.1);
+        BiomeRegistries.registerSlimeSpawnBiomes(INSTANCE, HILLY, MOUNTAINOUS);
     }
 
     public MoorBiome(float depth, float scale, double hilliness, double volatility) {
