@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.blocks.FertilizerSpreaderBlock;
-import supercoder79.ecotones.client.gui.FertilizerSpreaderScreen;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.screen.FertilizerSpreaderScreenHandler;
 
@@ -34,7 +33,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity implements BlockEntityClientSerializable {
-    private static final Direction[] CARDINAL = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
+    private static final Direction[] HORIZONTAL = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
 
     protected final PropertyDelegate propertyDelegate;
 
@@ -42,6 +41,8 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
     private DefaultedList<ItemStack> inventory;
     // 0 .. 100
     private int percentDissolved;
+    // 0 .. 20000 (20 units)
+    private int dissolvedAmount;
     // 0 .. 20000 (20 units)
     private int fertilizerAmount;
 
@@ -51,10 +52,10 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
     private final long timeOffset = (long) (Math.random() * 300);
 
     // calculated on demand
+    // synced but not serialized
     private Set<BlockPos> water = new HashSet<>();
     private Set<BlockPos> farmland = new HashSet<>();
 
-    // synced but not serialized
 
 
     public FertilizerSpreaderBlockEntity(BlockPos pos, BlockState state) {
@@ -100,6 +101,16 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
         long time = world.getTime() + blockEntity.timeOffset;
 
         if (blockEntity.valid) {
+            if (blockEntity.fertilizerAmount >= 8 && blockEntity.dissolvedAmount < 20000) {
+                blockEntity.fertilizerAmount -= 8;
+
+                // \frac{500}{x+60}-\frac{x}{50}
+                // Makes it harder to dissolve more into the surrounding water
+                blockEntity.dissolvedAmount += (int) ((500.0 / (blockEntity.percentDissolved + 60)) - (blockEntity.percentDissolved / 50.0));
+            }
+
+            blockEntity.percentDissolved = (int) (blockEntity.dissolvedAmount / 20000.0);
+
             if (time % 20 == 0) {
                 if (blockEntity.getStack(0).getCount() > 0 && blockEntity.fertilizerAmount + 1000 <= 20000) {
                     blockEntity.getStack(0).decrement(1);
@@ -109,12 +120,18 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
             }
 
             if (time % 40 == 0) {
-                blockEntity.fertilize(world);
+                if (blockEntity.percentDissolved > 0) {
+                    blockEntity.fertilize(world);
+                }
             }
+
+            blockEntity.dissolvedAmount -= 2;
         }
 
-        // Recheck position every 10 seconds
-        if (time % 200 == 0) {
+        blockEntity.percentDissolved = (int) (blockEntity.dissolvedAmount / 20000.0);
+
+        // Recheck position every 5 seconds
+        if (time % 100 == 0) {
             blockEntity.needsValidation = true;
         }
     }
@@ -141,7 +158,11 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
     }
 
     private void fertilize(World world) {
-        int chance = 6; // Base on fertilizer quality
+        // \frac{100}{x+2}-\frac{x}{100}+2
+        // Fertilization chance curve, makes higher values less effective as more is added
+        int chance = (int)((500.0 / (this.percentDissolved + 1)) + (this.percentDissolved / 20.0) + 2);
+        // TODO: make it so that more dissolved can let more blocks be fertilized per tick?
+
         Random random = world.random;
 
         for (BlockPos pos : this.farmland) {
@@ -155,6 +176,8 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
                         // Green particles
                         world.syncWorldEvent(WorldEvents.PLANT_FERTILIZED, pos.up(), 20);
                     }
+
+                    break;
                 }
             } else {
                 // Invalid! Recheck
@@ -164,7 +187,7 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
     }
 
     private void dfs(World world, BlockPos pos, Set<BlockPos> water, Set<BlockPos> farmland, int depth) {
-        for (Direction dir : CARDINAL) {
+        for (Direction dir : HORIZONTAL) {
             BlockPos local = pos.offset(dir);
             BlockState state = world.getBlockState(local);
 
@@ -201,11 +224,25 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
+
+        Inventories.readNbt(nbt, this.inventory);
+
+        this.percentDissolved = nbt.getInt("percent_dissolved");
+        this.dissolvedAmount = nbt.getInt("dissolved_amount");
+        this.fertilizerAmount = nbt.getInt("fertilizer_amount");
     }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
-        return super.writeNbt(nbt);
+        super.writeNbt(nbt);
+
+        Inventories.writeNbt(nbt, this.inventory);
+
+        nbt.putInt("percent_dissolved", this.percentDissolved);
+        nbt.putInt("dissolved_amount", this.dissolvedAmount);
+        nbt.putInt("fertilizer_amount", this.fertilizerAmount);
+
+        return nbt;
     }
 
     @Override

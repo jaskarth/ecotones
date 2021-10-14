@@ -50,12 +50,6 @@ public class PoplarForestBiome extends EcotonesBiomeBuilder {
         OAK = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "poplar_forest_oak"), new PoplarForestBiome(0.5F, 0.05F, 5, 1, 1, 2.4, 0.95).build());
         BIRCH = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "poplar_forest_birch"), new PoplarForestBiome(0.5F, 0.05F, 1, 5, 1, 2.4, 0.95).build());
 
-        BiomeRegistries.registerAllSpecial(id ->
-                BiomeHelper.contains(id, "lichen_woodland") || BiomeHelper.contains(id, "spruce_forest") || BiomeHelper.contains(id, "prairie"),
-                INSTANCE, THICKET, FLATS, HILLS, SHRUB);
-
-        BiomeRegistries.registerBigSpecialBiome(INSTANCE, 40);
-
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 2);
         BiomeRegistries.registerBiomeVariants(INSTANCE, CLEARING, THICKET, FLATS, HILLS, SHRUB, OAK, BIRCH);
         Climate.WARM_VERY_HUMID.add(INSTANCE, 0.3);

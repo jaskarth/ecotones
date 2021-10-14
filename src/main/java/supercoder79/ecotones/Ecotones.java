@@ -2,6 +2,7 @@ package supercoder79.ecotones;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -54,6 +55,7 @@ public final class Ecotones implements ModInitializer {
 	// Dynamic registry
 	public static Registry<Biome> REGISTRY;
 	private static EcotonesWorldType worldType;
+	public static boolean isServerEcotones = false;
 
 	@Override
 	public void onInitialize() {
@@ -168,6 +170,15 @@ public final class Ecotones implements ModInitializer {
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
 			worldType = new EcotonesWorldType();
 		}
+
+		// Store if this server is in ecotones or not
+		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+			if (server.getOverworld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator) {
+				isServerEcotones = true;
+			} else {
+				isServerEcotones = false;
+			}
+		});
 	}
 
 	public static Identifier id(String name) {

@@ -28,12 +28,16 @@ import supercoder79.ecotones.world.features.config.*;
 
 public class HotPineForestBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
+    public static Biome CLEARING;
+    public static Biome LAKE;
     public static Biome HILLY;
     public static Biome MOUNTAINOUS;
     public static Biome MONTANE;
 
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hot_pine_forest"), new HotPineForestBiome(0.3f, 0.075f, 2.2, 0.96).build());
+        CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hot_pine_forest_clearing"), new HotPineForestBiome(0.3f, 0.085f, 1.4, 0.975, 2.4).build());
+        LAKE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hot_pine_forest_lake"), new HotPineForestBiome(-0.25f, 0.075f, 0.8, 0.975, 5.4).build());
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hot_pine_forest_hilly"), new HotPineForestBiome(1f, 0.5f, 4.2, 0.92).build());
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hot_pine_forest_mountainous"), new HotPineForestBiome(1.75f, 0.8f, 8, 0.84).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
@@ -46,6 +50,9 @@ public class HotPineForestBiome extends EcotonesBiomeBuilder {
         Climate.WARM_VERY_DRY.add(INSTANCE, 0.4);
         Climate.WARM_DRY.add(INSTANCE, 0.2);
 
+        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
+        BiomeRegistries.registerBiomeVariants(INSTANCE, LAKE, CLEARING);
+
         MONTANE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "montane_hot_pine_forest"), new HotPineForestBiome(3.0f, 0.125f, 2.2, 0.96).build());
         BiomeRegistries.addMountainBiome(MONTANE);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, MONTANE);
@@ -57,6 +64,10 @@ public class HotPineForestBiome extends EcotonesBiomeBuilder {
     }
 
     protected HotPineForestBiome(float depth, float scale, double hilliness, double volatility) {
+        this(depth, scale, hilliness, volatility, 8.4);
+    }
+
+    protected HotPineForestBiome(float depth, float scale, double hilliness, double volatility, double treeCount) {
         this.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG);
         this.precipitation(Biome.Precipitation.NONE);
         this.depth(depth);
@@ -180,7 +191,7 @@ public class HotPineForestBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.TALL_PINE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(8.4))));
+                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(treeCount))));
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.GROUND_PATCH.configure(new PatchFeatureConfig(EcotonesBlocks.PEAT_BLOCK.getDefaultState(), Blocks.GRASS_BLOCK, UniformIntProvider.create(1, 4)))

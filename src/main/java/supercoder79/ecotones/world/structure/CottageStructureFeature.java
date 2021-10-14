@@ -36,7 +36,7 @@ public class CottageStructureFeature extends StructureFeature<DefaultFeatureConf
             int x = ChunkSectionPos.getBlockCoord(pos.x) + this.random.nextInt(16);
             int z = ChunkSectionPos.getBlockCoord(pos.z) + this.random.nextInt(16);
 
-            CottageGenerator.generate(new BlockPos(x, chunkGenerator.getHeightOnGround(x, z, Heightmap.Type.WORLD_SURFACE_WG, world), z), this.children, this.random);
+            CottageGenerator.generate(chunkGenerator, world, new BlockPos(x, chunkGenerator.getHeightOnGround(x, z, Heightmap.Type.WORLD_SURFACE_WG, world), z), this.children, this.random);
             this.setBoundingBoxFromChildren();
         }
     }

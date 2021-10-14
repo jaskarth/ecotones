@@ -41,9 +41,9 @@ public class TreePlacementDecorator extends Decorator<TreeGenerationConfig.Decor
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
             int y = context.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
-            if (y < generator.getSeaLevel()) {
-                continue;
-            }
+//            if (y < generator.getSeaLevel()) {
+//                continue;
+//            }
 
             //make trees smaller as the height increases
             int maxFinal = maxHeight;

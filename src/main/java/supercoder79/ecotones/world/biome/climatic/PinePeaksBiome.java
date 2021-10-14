@@ -37,10 +37,7 @@ public class PinePeaksBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "pine_peaks"), new PinePeaksBiome().build());
-        BiomeRegistries.registerSpecialBiome(INSTANCE, id ->
-                BiomeHelper.contains(id, "lichen_woodland") || BiomeHelper.contains(id, "spruce_forest") || BiomeHelper.contains(id, "prairie"));
 
-        BiomeRegistries.registerBigSpecialBiome(INSTANCE, 80);
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
         Climate.WARM_HUMID.add(INSTANCE, 0.05);
         Climate.WARM_MILD.add(INSTANCE, 0.02);

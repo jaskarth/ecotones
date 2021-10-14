@@ -37,6 +37,8 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
+import supercoder79.ecotones.world.structure.StructureTerrainControl;
 import supercoder79.ecotones.world.surface.SlopedSurfaceBuilder;
 
 import javax.annotation.Nullable;
@@ -326,10 +328,10 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
             int slope = dx * dx + dz * dz;
 
-            sloped.generate(random, chunk, biome, x & 15, z & 15, y, noise,
+            sloped.generate(random, chunk, biome, x, z, y, noise,
                     this.defaultBlock, this.defaultFluid, this.getSeaLevel(), 0, region.getSeed(), slope, config);
         } else {
-            builder.generate(random, chunk, biome, x & 15, z & 15, y, noise,
+            builder.generate(random, chunk, biome, x, z, y, noise,
                     this.defaultBlock, this.defaultFluid, this.getSeaLevel(), 0, region.getSeed(), config);
         }
     }
@@ -368,19 +370,19 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         for (StructureFeature<?> feature : StructureFeature.LAND_MODIFYING_STRUCTURES) {
             accessor.getStructuresWithChildren(ChunkSectionPos.from(pos, 0), feature).forEach(start -> {
                 Iterator<StructurePiece> pieces = start.getChildren().iterator();
-                
+
+                outer:
                 while (true) {
                     StructurePiece piece;
                     do {
                         if (!pieces.hasNext()) {
-                            return;
+                            break outer;
                         }
 
                         piece = pieces.next();
-                    } while (!piece.intersectsChunk(pos, 12));
+                    } while (!piece.intersectsChunk(pos, 24));
 
-                    if (piece instanceof PoolStructurePiece) {
-                        PoolStructurePiece pool = (PoolStructurePiece) piece;
+                    if (piece instanceof PoolStructurePiece pool) {
                         Projection projection = pool.getPoolElement().getProjection();
                         if (projection == Projection.RIGID) {
                             structurePieces.add(pool);
@@ -395,6 +397,13 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                             }
                         }
                     } else {
+                        if (piece instanceof StructureTerrainControl stc) {
+                            if (!stc.generateTerrainBelow()) {
+                                // Skip pieces that don't generate terrain
+                                continue;
+                            }
+                        }
+
                         structurePieces.add(piece);
                     }
                 }
@@ -402,7 +411,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         }
 
         // Holds the rolling noise data for this chunk
-        // Instead of being noise[4 * 32 * 4] it's actually noise[2 * 5 * 33] to reuse noise data when moving onto the next column on the x axis.
+        // Instead of being noise[4 * 33 * 4] it's actually noise[2 * 5 * 33] to reuse noise data when moving onto the next column on the x axis.
         // This could probably be optimized but I'm a bit too lazy to figure out the best way to do so :P
         double[][][] noiseData = new double[2][this.noiseSizeZ + 1][this.noiseSizeY + 1];
 

@@ -6,13 +6,19 @@ import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.property.Properties;
+import net.minecraft.state.property.Property;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.structure.StructurePieceType;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.HeightLimitView;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -22,18 +28,29 @@ import supercoder79.ecotones.util.deco.BlockDecorations;
 import supercoder79.ecotones.util.deco.DecorationCategory;
 import supercoder79.ecotones.world.features.FeatureHelper;
 import supercoder79.ecotones.world.structure.EcotonesStructurePieces;
+import supercoder79.ecotones.world.structure.StructureTerrainControl;
 
 import java.util.List;
 import java.util.Random;
 
 public class CottageGenerator {
-    public static void generate(BlockPos pos, List<StructurePiece> pieces, Random random) {
+    public static void generate(ChunkGenerator chunkGenerator, HeightLimitView world, BlockPos pos, List<StructurePiece> pieces, Random random) {
         // I can't wait until 3 months from now where I completely regret implementing it this way
         pieces.add(new CenterRoom(pos.down()));
         pieces.add(new Porch(pos.down().add(-2, 0, 0)));
+
+        // Generate 1-4 patches of farmland next to the house
+        int farmland = 1 + random.nextInt(4);
+
+        for (int i = 0; i < farmland; i++) {
+            int dx = random.nextInt(24) - random.nextInt(24);
+            int dz = random.nextInt(24) - random.nextInt(24);
+
+            pieces.add(new Farm(new BlockPos(pos.getX() + dx, chunkGenerator.getHeightOnGround(pos.getX() + dx, pos.getZ() + dz, Heightmap.Type.WORLD_SURFACE_WG, world), pos.getZ() + dz)));
+        }
     }
 
-    private static abstract class CottagePiece extends StructurePiece {
+    public static abstract class CottagePiece extends StructurePiece {
         protected final BlockPos pos;
 
         protected CottagePiece(StructurePieceType type, BlockPos pos, BlockBox box) {
@@ -62,7 +79,7 @@ public class CottageGenerator {
 
     public static class CenterRoom extends CottagePiece {
         public CenterRoom(BlockPos pos) {
-            super(EcotonesStructurePieces.COTTAGE_CENTER, pos, BoxHelper.box(pos.add(-5, 0, -5), pos.add(6, 8, 10)));
+            super(EcotonesStructurePieces.COTTAGE_CENTER, pos, BoxHelper.box(pos.add(-3, 0, -3), pos.add(4, 8, 8)));
         }
 
         public CenterRoom(ServerWorld world, NbtCompound nbt) {
@@ -206,7 +223,7 @@ public class CottageGenerator {
 
     public static class Porch extends CottagePiece {
         public Porch(BlockPos pos) {
-            super(EcotonesStructurePieces.COTTAGE_PORCH, pos, BoxHelper.box(pos.add(-5, 0, -5), pos.add(6, 6, 6)));
+            super(EcotonesStructurePieces.COTTAGE_PORCH, pos, BoxHelper.box(pos.add(-3, 0, -3), pos.add(4, 6, 4)));
         }
 
         public Porch(ServerWorld world, NbtCompound nbt) {
@@ -268,6 +285,91 @@ public class CottageGenerator {
             }
 
             return true;
+        }
+    }
+
+    public static class Farm extends CottagePiece implements StructureTerrainControl {
+
+        public Farm(BlockPos pos) {
+            // TODO: variable sizes
+            super(EcotonesStructurePieces.COTTAGE_FARM, pos, BoxHelper.box(pos.add(-2, -1, -2), pos.add(2, 3, 2)));
+        }
+
+        public Farm(ServerWorld world, NbtCompound nbt) {
+            super(EcotonesStructurePieces.COTTAGE_FARM, nbt);
+        }
+
+        @Override
+        public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+            BlockState crop = Blocks.WHEAT.getDefaultState();
+
+            Property<Integer> prop = Properties.AGE_7;
+            int max = 7;
+
+            // Randomly select crops
+            if (random.nextInt(4) == 0) {
+                int selection = random.nextInt(3);
+
+                if (selection == 0) {
+                    crop = Blocks.CARROTS.getDefaultState();
+                } else if (selection == 1) {
+                    crop = Blocks.POTATOES.getDefaultState();
+                } else {
+                    crop = Blocks.BEETROOTS.getDefaultState();
+                    prop = Properties.AGE_3;
+                    max = 3;
+                }
+            }
+
+            for (int x = -2; x <= 2; x++) {
+                for (int z = -2; z <= 2; z++) {
+                    // Skip edges
+                    if (Math.abs(x) == 2 && Math.abs(z) == 2) {
+                        continue;
+                    }
+
+                    BlockPos topPos = world.getTopPosition(Heightmap.Type.WORLD_SURFACE, this.pos.add(x, 0, z)).down();
+                    if (!world.getBlockState(topPos).isIn(BlockTags.DIRT)) {
+                        continue;
+                    }
+
+                    boolean placeWater = true;
+                    // Check edges for ability to place water
+                    for (Direction direction : Direction.Type.HORIZONTAL) {
+                        BlockState edge = world.getBlockState(topPos.offset(direction));
+
+                        if (!(edge.isOpaque() || edge.getFluidState().isIn(FluidTags.WATER))) {
+                            placeWater = false;
+                            break;
+                        }
+                    }
+
+                    if (placeWater && random.nextInt(4) == 0) {
+                        world.setBlockState(topPos, Blocks.WATER.getDefaultState(), 3);
+                    } else {
+                        // Skip random amount of farms
+                        if (random.nextInt(5) == 0) {
+                            continue;
+                        }
+
+                        world.setBlockState(topPos, Blocks.FARMLAND.getDefaultState(), 3);
+
+                        // Skip random amount of crops
+                        if (random.nextInt(3) == 0) {
+                            continue;
+                        }
+
+                        world.setBlockState(topPos.up(), crop.with(prop, random.nextInt(max + 1)), 3);
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        @Override
+        public boolean generateTerrainBelow() {
+            return false;
         }
     }
 }

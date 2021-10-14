@@ -108,7 +108,7 @@ public final class BiomeRegistries {
         }
     }
 
-    private static RegistryKey<Biome> key(Biome biome) {
+    public static RegistryKey<Biome> key(Biome biome) {
         Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
 
         return optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome).orElseThrow(() -> new IllegalStateException("Impossible state when trying to get biome key")));

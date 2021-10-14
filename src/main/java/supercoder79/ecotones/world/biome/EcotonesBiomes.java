@@ -95,11 +95,11 @@ public final class EcotonesBiomes {
         SparseAlpineForestBiome.init();
         MontaneFieldsBiome.init();
         RockySlopesBiome.init();
+        SparseTundraBiome.init();
 
         // Cave biomes
         LimestoneCaveBiome.init();
 
-        // Rose Field biome
         RoseFieldBiome.init();
     }
 }

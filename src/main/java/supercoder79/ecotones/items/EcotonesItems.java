@@ -76,6 +76,8 @@ public final class EcotonesItems {
     public static final Item TURPENTINE = new TurpentineItem(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item BASIC_FERTILIZER = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item MAGNIFYING_GLASS = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item SULFUR = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item PHOSPHATE = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
 
 
     public static final Item CYAN_ROSE = new BlockItem(EcotonesBlocks.CYAN_ROSE, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
@@ -145,6 +147,8 @@ public final class EcotonesItems {
         register("turpentine", TURPENTINE);
         register("magnifying_glass", MAGNIFYING_GLASS);
         register("basic_fertilizer", BASIC_FERTILIZER);
+        register("sulfur", SULFUR);
+        register("phosphate", PHOSPHATE);
 
         register("cyan_rose", CYAN_ROSE);
     }
