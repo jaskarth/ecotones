@@ -21,6 +21,7 @@ public enum MountainLayer implements MergingLayer, IdentityCoordinateTransformer
     INSTANCE;
 
     public OpenSimplexNoise mountainNoise;
+    public OpenSimplexNoise mountainRangesNoise;
     public static final Map<RegistryKey<Biome>, RegistryKey<Biome>[]> BIOME_TO_MOUNTAINS = new LinkedHashMap<>();
 
     public double mountainOffsetX = 0;
@@ -37,6 +38,8 @@ public enum MountainLayer implements MergingLayer, IdentityCoordinateTransformer
         }
 
         double mountain = mountainNoise.sample((x + mountainOffsetX) / 3f, (z + mountainOffsetZ) / 3f) * 1.25;
+        double mountainRanges = 1 - Math.abs(MountainLayer.INSTANCE.mountainRangesNoise.sample((x - MountainLayer.INSTANCE.mountainOffsetX) / 6f, (z - MountainLayer.INSTANCE.mountainOffsetZ) / 6f));
+
         // Make mountains spawn less frequently near the spawn
         mountain *= distFactor(x, z);
 
@@ -48,7 +51,7 @@ public enum MountainLayer implements MergingLayer, IdentityCoordinateTransformer
             return Ecotones.REGISTRY.getRawId(Ecotones.REGISTRY.get(BIOME_TO_MOUNTAINS.get(key)[0]));
         }
 
-        if (mountain < -0.8) {
+        if (mountain < -0.8 + (mountainRanges * 0.2)) {
             return Climate.VALUES[climates.sample(x, z)].pickerFor(ClimateType.MOUNTAIN_PEAKS).choose(context);
         }
 
@@ -61,6 +64,7 @@ public enum MountainLayer implements MergingLayer, IdentityCoordinateTransformer
         mountainOffsetX = (random.nextDouble() - 0.5) * 10000;
         mountainOffsetZ = (random.nextDouble() - 0.5) * 10000;
         mountainNoise = new OpenSimplexNoise(seed + 90);
+        mountainRangesNoise = new OpenSimplexNoise(seed + 190);
         return this.create(context, layer1, layer2);
     }
 

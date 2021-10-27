@@ -35,7 +35,7 @@ import java.util.BitSet;
 import java.util.List;
 import java.util.Random;
 
-public class CampfireStructureGenerator {
+public class CampfireGenerator {
     public static void generate(BlockPos pos, List<StructurePiece> pieces, Random random, Block logSource) {
         pieces.add(new Piece(pos.add(random.nextInt(16), 0, random.nextInt(16)), logSource));
     }
@@ -108,6 +108,7 @@ public class CampfireStructureGenerator {
                                         if (random.nextBoolean()) {
                                             item = random.nextBoolean() ? Items.COOKED_PORKCHOP : Items.COOKED_MUTTON;
                                         }
+
                                         be.setStack(idx, new ItemStack(item, 1 + random.nextInt(8)));
                                     }
                                 }
