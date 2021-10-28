@@ -7,6 +7,7 @@ import net.minecraft.item.*;
 import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesItems {
@@ -56,6 +57,7 @@ public final class EcotonesItems {
     public static final Item BLUEBERRIES = new AliasedBlockItem(EcotonesBlocks.BLUEBERRY_BUSH, new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(1).saturationModifier(0.1F).snack().build()));
     public static final Item BLUEBERRY_JAM = new JamItem(EcotonesBlocks.BLUEBERRY_JAM_JAR, new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(4).saturationModifier(0.8F).build()));
     public static final Item DUCK_EGG = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
+    public static final Item DUCK_SPAWN_EGG = new SpawnEggItem(EcotonesEntities.DUCK, 0xFFFF0A, 0xB38134, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
     public static final Item ROSEMARY = new AliasedBlockItem(EcotonesBlocks.ROSEMARY, new Item.Settings().group(EcotonesItemGroups.ECOTONES).food(new FoodComponent.Builder().hunger(1).saturationModifier(0.1F).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 6 * 20), 0.75f).snack().build()));
     public static final Item ECOTONES_BOOK = new EcotonesBookItem(new Item.Settings().maxCount(1));
     public static final Item MAPLE_SAP = new Item(new Item.Settings().group(EcotonesItemGroups.ECOTONES));
@@ -113,6 +115,7 @@ public final class EcotonesItems {
         register("blueberries", BLUEBERRIES);
         register("blueberry_jam", BLUEBERRY_JAM);
         register("duck_egg", DUCK_EGG);
+        register("duck_spawn_egg", DUCK_SPAWN_EGG);
         register("rosemary", ROSEMARY);
         register("ecotones_book", ECOTONES_BOOK);
         register("maple_sap", MAPLE_SAP);
