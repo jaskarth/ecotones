@@ -112,7 +112,7 @@ public final class EcotonesBlocks {
         register("watergrass", WATERGRASS);
         register("cyan_rose", CYAN_ROSE);
         register("potted_maple_sapling", POTTED_MAPLE_SAPLING);
-        register("potted_larch_sapling.json", POTTED_LARCH_SAPLING);
+        register("potted_larch_sapling", POTTED_LARCH_SAPLING);
         register("potted_hazel_sapling", POTTED_HAZEL_SAPLING);
     }
 
