@@ -22,6 +22,7 @@ public class MixinPlayerManager {
         PacketByteBuf data = new PacketByteBuf(Unpooled.buffer());
         data.writeBoolean(player.getServerWorld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator);
         data.writeLong(Hashing.sha256().hashLong(player.getServerWorld().getSeed()).asLong());
+        data.writeBoolean(player.server.isDedicated()); // hacks hacks hacks
 
         ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, Ecotones.WORLD_TYPE, data);
 

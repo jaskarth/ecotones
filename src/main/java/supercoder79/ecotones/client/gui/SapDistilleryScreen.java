@@ -105,6 +105,7 @@ public class SapDistilleryScreen extends HandledScreen<SapDistilleryScreenHandle
             particle.tick();
 
             if (particle.isTooOld()) {
+                // FIXME: remove copy on write
                 this.particles.remove(particle);
             }
         }

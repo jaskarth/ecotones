@@ -3,6 +3,7 @@ package supercoder79.ecotones.api;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.world.layers.generation.MountainLayer;
 
@@ -110,6 +111,12 @@ public final class BiomeRegistries {
 
     public static RegistryKey<Biome> key(Biome biome) {
         Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
+
+        if (optional.isEmpty()) {
+            if (Ecotones.REGISTRY == null) {
+                return BiomeKeys.PLAINS; // This really shouldn't exist!!
+            }
+        }
 
         return optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome).orElseThrow(() -> new IllegalStateException("Impossible state when trying to get biome key")));
     }

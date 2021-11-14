@@ -1,4 +1,4 @@
-package supercoder79.ecotones.entity.ai;
+package supercoder79.ecotones.entity.ai.legacy;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ai.goal.Goal;

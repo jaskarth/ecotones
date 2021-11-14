@@ -1,5 +1,6 @@
 package supercoder79.ecotones.entity;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -10,22 +11,31 @@ import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.LiteralText;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import supercoder79.ecotones.entity.ai.PickBerriesGoal;
-import supercoder79.ecotones.entity.ai.RoostAtNestGoal;
-import supercoder79.ecotones.entity.ai.WanderToWaterGoal;
+import supercoder79.ecotones.entity.ai.action.PickBerriesAction;
+import supercoder79.ecotones.entity.ai.action.RoostAtNestAction;
+import supercoder79.ecotones.entity.ai.legacy.PickBerriesGoal;
+import supercoder79.ecotones.entity.ai.legacy.RoostAtNestGoal;
+import supercoder79.ecotones.entity.ai.action.WanderToWaterAction;
+import supercoder79.ecotones.entity.ai.system.*;
 
-public class DuckEntity extends ChickenEntity {
+import java.util.List;
+
+public class DuckEntity extends ChickenEntity implements ActionableEntity {
     private static final TrackedData<Boolean> ROOSTING = DataTracker.registerData(DuckEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private double food;
     private double energyPoints;
     private int eggLayingTicks;
+    private final Ai ai;
 
     public DuckEntity(EntityType<? extends DuckEntity> entityType, World world) {
         super(entityType, world);
+
+        this.ai = new Ai(ImmutableList.of(), getActions(), new AiState(new Stomach(0, 0, 50, 50, 0.002)));
     }
 
     @Override
@@ -44,11 +54,16 @@ public class DuckEntity extends ChickenEntity {
 
     @Override
     protected void mobTick() {
+        this.ai.tick();
+
         super.mobTick();
 
         if (this.eggLayingTicks > 0) {
             this.eggLayingTicks--;
         }
+
+//        Stomach stomach = this.ai.getState().getStomach();
+//        this.setCustomName(new LiteralText("F: " + stomach.getFood() + " E: " + stomach.getEnergy() + " R: " + stomach.getMetabolismRate()));
     }
 
     public boolean shouldLayEgg() {
@@ -62,9 +77,18 @@ public class DuckEntity extends ChickenEntity {
     @Override
     protected void initGoals() {
         super.initGoals();
-        this.goalSelector.add(4, new WanderToWaterGoal(this));
-        this.goalSelector.add(3, new RoostAtNestGoal(this));
-        this.goalSelector.add(3, new PickBerriesGoal(this));
+//        this.goalSelector.add(4, new WanderToWaterGoal(this));
+//        this.goalSelector.add(3, new RoostAtNestGoal(this));
+//        this.goalSelector.add(3, new PickBerriesGoal(this));
+    }
+
+    @Override
+    public List<? extends Action> getActions() {
+        return ImmutableList.of(
+                new WanderToWaterAction(this),
+                new RoostAtNestAction(this),
+                new PickBerriesAction(this)
+        );
     }
 
     public void addFood(double food) {
@@ -103,7 +127,7 @@ public class DuckEntity extends ChickenEntity {
     }
 
     @Override
-    public ChickenEntity createChild(ServerWorld world, PassiveEntity passiveEntity) {
+    public DuckEntity createChild(ServerWorld world, PassiveEntity passiveEntity) {
         return EcotonesEntities.DUCK.create(world);
     }
 
@@ -124,6 +148,7 @@ public class DuckEntity extends ChickenEntity {
         this.food = tag.getDouble("food");
         this.energyPoints = tag.getDouble("energy_points");
         this.eggLayingTicks = tag.getInt("egg_laying_ticks");
+        this.ai.deserialize(tag.getCompound("Ai"));
     }
 
     @Override
@@ -133,5 +158,6 @@ public class DuckEntity extends ChickenEntity {
         tag.putDouble("food", this.food);
         tag.putDouble("energy_points", this.energyPoints);
         tag.putInt("egg_laying_ticks", this.eggLayingTicks);
+        tag.put("Ai", this.ai.serialize(new NbtCompound()));
     }
 }
