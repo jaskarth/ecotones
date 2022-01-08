@@ -1,5 +1,7 @@
 package supercoder79.ecotones.world.layers.util;
 
+import net.minecraft.world.biome.BiomeKeys;
+import supercoder79.ecotones.api.BiomeIdManager;
 import supercoder79.ecotones.world.layers.system.layer.type.CrossSamplingLayer;
 import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.world.biome.BiomeHelper;
@@ -28,11 +30,11 @@ public enum DeepOceanLayer implements CrossSamplingLayer {
             }
 
             if (i > 3) {
-                if (center == BiomeHelper.OCEAN_ID) return BiomeHelper.DEEP_OCEAN_ID;
-                if (center == BiomeHelper.WARM_OCEAN_ID) return BiomeHelper.DEEP_WARM_OCEAN_ID;
-                if (center == BiomeHelper.LUKEWARM_OCEAN_ID) return BiomeHelper.DEEP_LUKEWARM_OCEAN_ID;
-                if (center == BiomeHelper.COLD_OCEAN_ID) return BiomeHelper.DEEP_COLD_OCEAN_ID;
-                if (center == BiomeHelper.FROZEN_OCEAN_ID) return BiomeHelper.DEEP_FROZEN_OCEAN_ID;
+                if (center == BiomeIdManager.getId(BiomeKeys.OCEAN)) return BiomeIdManager.getId(BiomeKeys.DEEP_OCEAN);
+                if (center == BiomeIdManager.getId(BiomeKeys.WARM_OCEAN)) return BiomeIdManager.getId(BiomeKeys.WARM_OCEAN);
+                if (center == BiomeIdManager.getId(BiomeKeys.LUKEWARM_OCEAN)) return BiomeIdManager.getId(BiomeKeys.DEEP_LUKEWARM_OCEAN);
+                if (center == BiomeIdManager.getId(BiomeKeys.COLD_OCEAN)) BiomeIdManager.getId(BiomeKeys.DEEP_COLD_OCEAN);
+                if (center == BiomeIdManager.getId(BiomeKeys.FROZEN_OCEAN)) return BiomeIdManager.getId(BiomeKeys.DEEP_FROZEN_OCEAN);
             }
         }
 

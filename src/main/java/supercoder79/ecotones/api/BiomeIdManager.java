@@ -12,12 +12,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class BiomeIdManager {
     private static final BiMap<RegistryKey<Biome>, Integer> MAP = HashBiMap.create();
-    private static final AtomicInteger ID = new AtomicInteger(0);
 
-    public static void register(RegistryKey<Biome> key) {
+    public static void register(RegistryKey<Biome> key, int id) {
         if (!MAP.containsKey(key)) {
-            MAP.put(key, ID.getAndIncrement());
+            MAP.put(key, id);
         }
+    }
+
+    public static void clear() {
+        MAP.clear();
     }
 
     public static int getId(RegistryKey<Biome> key) {

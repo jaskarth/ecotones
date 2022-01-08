@@ -159,6 +159,8 @@ public final class Ecotones implements ModInitializer {
 			}
 		}
 
+		VanillaBiomeData.init();
+
 		log("Registering " + ecotonesBiomes + " ecotones biomes!");
 		RegistryReport.report(ecotonesBiomes);
 

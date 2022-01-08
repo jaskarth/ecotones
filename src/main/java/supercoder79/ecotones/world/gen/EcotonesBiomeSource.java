@@ -54,8 +54,11 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
         Ecotones.REGISTRY = this.biomeRegistry;
         ModCompat.run();
 
+        BiomeIdManager.clear();
+
         for (Biome biome : this.biomeRegistry) {
-            BiomeIdManager.register(this.biomeRegistry.getKey(biome).get());
+            System.out.println(this.biomeRegistry.getKey(biome).get());
+            BiomeIdManager.register(this.biomeRegistry.getKey(biome).get(), this.biomeRegistry.getRawId(biome));
         }
     }
 

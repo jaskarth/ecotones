@@ -3,26 +3,17 @@ package supercoder79.ecotones.world.biome;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.api.BiomeIdManager;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 
 public final class BiomeHelper {
-    public static final int WARM_OCEAN_ID = 44;
-    public static final int LUKEWARM_OCEAN_ID = 45;
-    public static final int OCEAN_ID = 0;
-    public static final int COLD_OCEAN_ID = 46;
-    public static final int FROZEN_OCEAN_ID = 10;
-    public static final int DEEP_WARM_OCEAN_ID = 47;
-    public static final int DEEP_LUKEWARM_OCEAN_ID = 48;
-    public static final int DEEP_OCEAN_ID = 24;
-    public static final int DEEP_COLD_OCEAN_ID = 49;
-    public static final int DEEP_FROZEN_OCEAN_ID = 50;
-
     public static void addDefaultSpawns(SpawnSettings.Builder builder) {
         builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 12, 4, 4));
         builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.PIG, 10, 4, 4));
@@ -59,11 +50,23 @@ public final class BiomeHelper {
     }
 
     public static boolean isOcean(int id) {
-        return id == WARM_OCEAN_ID || id == LUKEWARM_OCEAN_ID || id == OCEAN_ID || id == COLD_OCEAN_ID || id == FROZEN_OCEAN_ID || id == DEEP_WARM_OCEAN_ID || id == DEEP_LUKEWARM_OCEAN_ID || id == DEEP_OCEAN_ID || id == DEEP_COLD_OCEAN_ID || id == DEEP_FROZEN_OCEAN_ID;
+        return id == BiomeIdManager.getId(BiomeKeys.WARM_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.LUKEWARM_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.COLD_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.FROZEN_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.DEEP_COLD_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.DEEP_FROZEN_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.DEEP_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.DEEP_LUKEWARM_OCEAN);
     }
 
     public static boolean isShallowOcean(int id) {
-        return id == WARM_OCEAN_ID || id == LUKEWARM_OCEAN_ID || id == OCEAN_ID || id == COLD_OCEAN_ID || id == FROZEN_OCEAN_ID;
+        return id == BiomeIdManager.getId(BiomeKeys.WARM_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.LUKEWARM_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.COLD_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.FROZEN_OCEAN);
     }
 
     // Dev and testing stuff

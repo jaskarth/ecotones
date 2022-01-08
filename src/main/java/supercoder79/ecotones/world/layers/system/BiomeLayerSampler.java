@@ -4,6 +4,7 @@ import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.BuiltinBiomes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,7 +29,7 @@ public class BiomeLayerSampler {
          Biome biome = biomeRegistry.get(registryKey);
          if (biome == null) {
             Util.error("Unknown biome id: " + i);
-            return biomeRegistry.get(BiomeIdManager.getKey(0));
+            return biomeRegistry.get(BiomeKeys.PLAINS);
          } else {
             return biome;
          }
