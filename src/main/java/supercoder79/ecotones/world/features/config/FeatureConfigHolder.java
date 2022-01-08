@@ -180,7 +180,7 @@ public final class FeatureConfigHolder {
                     .add(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1)))
                     .spreadX(7)
                     .spreadZ(7)
-                    .tries(64).build();
+                    .tries(64).cannotProject().build();
 
     public static final RandomPatchFeatureConfig WIDE_FERNS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()

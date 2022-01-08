@@ -57,7 +57,6 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
         BiomeIdManager.clear();
 
         for (Biome biome : this.biomeRegistry) {
-            System.out.println(this.biomeRegistry.getKey(biome).get());
             BiomeIdManager.register(this.biomeRegistry.getKey(biome).get(), this.biomeRegistry.getRawId(biome));
         }
     }

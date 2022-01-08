@@ -120,7 +120,7 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.TAIGA_FLOWERS)
                         .decorate(new Spread32Decorator())
                         .spreadHorizontally()
-                        .repeat(3));
+                        .applyChance(2));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.WIDE_FERNS)
@@ -177,20 +177,20 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .applyChance(2)
+                        .applyChance(3)
                         .repeat(2));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(6, 14), true, UniformIntProvider.create(3, 5)))
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .repeat(3));
+                        .repeat(2));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(4, 12), false, UniformIntProvider.create(2, 4)))
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .applyChance(6));
+                        .applyChance(8));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(16, 64), false, UniformIntProvider.create(8, 14)))
@@ -202,7 +202,7 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.DUCKWEED.configure(new DuckweedFeatureConfig(UniformIntProvider.create(64, 96), UniformIntProvider.create(10, 14)))
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .applyChance(4)
+                        .applyChance(5)
                         .repeat(2));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
