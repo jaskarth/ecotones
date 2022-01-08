@@ -5,7 +5,6 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.Climate;
@@ -50,7 +49,7 @@ public final class BiomeHelper {
     public static void addDefaultFeatures(EcotonesBiomeBuilder builder) {
         builder.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT)
-                        .decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure(DecoratorConfig.DEFAULT)));
+                        .decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure()));
     }
 
     @Deprecated

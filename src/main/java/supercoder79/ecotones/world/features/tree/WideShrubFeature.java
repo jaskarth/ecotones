@@ -10,9 +10,10 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.util.DataPos;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
-public class WideShrubFeature extends Feature<SimpleTreeFeatureConfig> {
+public class WideShrubFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
 
     public WideShrubFeature(Codec<SimpleTreeFeatureConfig> codec) {
         super(codec);

@@ -6,8 +6,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
+import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
+import supercoder79.ecotones.world.surface.system.SurfaceConfig;
 
 import java.util.Random;
 

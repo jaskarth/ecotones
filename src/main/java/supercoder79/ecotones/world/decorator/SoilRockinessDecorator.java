@@ -4,22 +4,20 @@ import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorContext;
-import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
+import net.minecraft.world.gen.decorator.PlacementModifier;
+import net.minecraft.world.gen.decorator.PlacementModifierType;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
 import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class SoilRockinessDecorator extends Decorator<NopeDecoratorConfig> {
-    public SoilRockinessDecorator(Codec<NopeDecoratorConfig> codec) {
-        super(codec);
-    }
+public class SoilRockinessDecorator extends PlacementModifier {
+    public static final Codec<SoilRockinessDecorator> CODEC = Codec.unit(SoilRockinessDecorator::new);
 
     @Override
-    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, NopeDecoratorConfig config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, BlockPos pos) {
         // Setup noise
         double noise = 0.5;
         ChunkGenerator generator = context.getWorld().toServerWorld().getChunkManager().getChunkGenerator();
@@ -49,6 +47,11 @@ public class SoilRockinessDecorator extends Decorator<NopeDecoratorConfig> {
                 return new BlockPos(x, y, z);
             });
         }
+    }
+
+    @Override
+    public PlacementModifierType<?> getType() {
+        return EcotonesDecorators.ROCKINESS;
     }
 
     // Desmos: x^{2}+2.25x

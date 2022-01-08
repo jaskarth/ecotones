@@ -11,6 +11,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.world.data.DataHolder;
 import supercoder79.ecotones.world.data.EcotonesData;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.FeatureHelper;
 import supercoder79.ecotones.world.features.config.OakTreeFeatureConfig;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class StraightOakTreeFeature extends Feature<OakTreeFeatureConfig> {
+public class StraightOakTreeFeature extends EcotonesFeature<OakTreeFeatureConfig> {
     public StraightOakTreeFeature(Codec<OakTreeFeatureConfig> configCodec) {
         super(configCodec);
     }

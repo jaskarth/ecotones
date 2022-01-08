@@ -13,18 +13,18 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.ProbabilityConfig;
-import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.HeightmapDecoratorConfig;
-import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
+import net.minecraft.world.gen.decorator.HeightmapPlacementModifier;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
-import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
+import supercoder79.ecotones.world.decorator.EcotonesDecorators;
+import supercoder79.ecotones.world.decorator.Spread32Decorator;
+import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
+import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import net.minecraft.world.gen.treedecorator.CocoaBeansTreeDecorator;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
@@ -34,10 +34,10 @@ import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class TropicalBeachBiome extends EcotonesBiomeBuilder {
     public static final TreeFeatureConfig JUNGLE_TREE = new TreeFeatureConfig.Builder(
-            new SimpleBlockStateProvider(Blocks.JUNGLE_LOG.getDefaultState()),
+            BlockStateProvider.of(Blocks.JUNGLE_LOG.getDefaultState()),
             new StraightTrunkPlacer(4, 8, 0),
-            new SimpleBlockStateProvider(Blocks.JUNGLE_LEAVES.getDefaultState()),
-            new SimpleBlockStateProvider(Blocks.JUNGLE_SAPLING.getDefaultState()),
+            BlockStateProvider.of(Blocks.JUNGLE_LEAVES.getDefaultState()),
+//            BlockStateProvider.of(Blocks.JUNGLE_SAPLING.getDefaultState()),
             new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
             new TwoLayersFeatureSize(1, 0, 1))
             .decorators(ImmutableList.of(
@@ -62,12 +62,12 @@ public class TropicalBeachBiome extends EcotonesBiomeBuilder {
 
         this.category(Biome.Category.BEACH);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
-        this.addStructureFeature(ConfiguredStructureFeatures.BURIED_TREASURE);
-        this.addStructureFeature(ConfiguredStructureFeatures.SHIPWRECK_BEACHED);
+//        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
+//        this.addStructureFeature(ConfiguredStructureFeatures.BURIED_TREASURE);
+//        this.addStructureFeature(ConfiguredStructureFeatures.SHIPWRECK_BEACHED);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
-        DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
+        //DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
         DefaultBiomeFeatures.addDungeons(this.getGenerationSettings());
         DefaultBiomeFeatures.addMineables(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultOres(this.getGenerationSettings());
@@ -81,32 +81,32 @@ public class TropicalBeachBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
+                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
+                        .decorate(new Spread32Decorator())
                         .spreadHorizontally()
                         .repeat(3));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.JUNGLE_PALM_TREE.configure(JUNGLE_TREE)
-                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.1F, 1))));
+                        .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.1F, 1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.JUNGLE_PALM_TREE.configure(JUNGLE_TREE)
-                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.05F, 3))));
+                        .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.05F, 3))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG)
-                        .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
-                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG)
+                        .decorate(new Spread32Decorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
                         .repeat(6));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SEAGRASS.configure(new ProbabilityConfig(0.6f))
-                .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.OCEAN_FLOOR_WG)))
+        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, EcotonesConfiguredFeature.wrap(Feature.SEAGRASS.configure(new ProbabilityConfig(0.6f)))
+                .decorate(HeightmapPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG))
                 .spreadHorizontally()
                 .repeat(64));
 

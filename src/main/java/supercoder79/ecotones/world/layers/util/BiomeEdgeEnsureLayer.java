@@ -1,8 +1,8 @@
 package supercoder79.ecotones.world.layers.util;
 
 import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.layer.type.DiagonalCrossSamplingLayer;
-import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.world.layers.system.layer.type.DiagonalCrossSamplingLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
 
 public enum BiomeEdgeEnsureLayer implements DiagonalCrossSamplingLayer {

@@ -29,7 +29,7 @@ public abstract class MixinClientWorld extends World {
         super(properties, registryRef, dimensionType, profiler, isClient, debugWorld, seed);
     }
 
-    @Inject(method = "method_23777", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getSkyColor", at = @At("RETURN"), cancellable = true)
     private void addEcotonesFancySkyColor(Vec3d vec3d, float f, CallbackInfoReturnable<Vec3d> cir) {
         if (ClientSidedServerData.isInEcotonesWorld) {
             Vec3d color = cir.getReturnValue();

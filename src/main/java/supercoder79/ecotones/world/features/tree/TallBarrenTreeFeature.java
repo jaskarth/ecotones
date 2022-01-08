@@ -8,12 +8,13 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.FeatureHelper;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 import java.util.Random;
 
-public class TallBarrenTreeFeature extends Feature<SimpleTreeFeatureConfig> {
+public class TallBarrenTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
     public TallBarrenTreeFeature(Codec<SimpleTreeFeatureConfig> configCodec) {
         super(configCodec);
     }

@@ -14,15 +14,16 @@ import net.minecraft.world.biome.BiomeParticleConfig;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.CountConfig;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.DecoratorConfig;
-import net.minecraft.world.gen.decorator.HeightmapDecoratorConfig;
-import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placer.ColumnPlacer;
-import net.minecraft.world.gen.placer.SimpleBlockPlacer;
-import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.decorator.HeightmapPlacementModifier;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import supercoder79.ecotones.world.decorator.Spread32Decorator;
+import supercoder79.ecotones.world.decorator.SpreadDoubleDecorator;
+import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
+import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
@@ -62,16 +63,16 @@ public class CoolDesertBiome extends EcotonesBiomeBuilder {
         this.volatility(volatility);
         this.category(Biome.Category.DESERT);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT);
-        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
+//        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT);
+//        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
-        this.addStructureFeature(ConfiguredStructureFeatures.DESERT_PYRAMID);
-        this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
+//        this.addStructureFeature(ConfiguredStructureFeatures.DESERT_PYRAMID);
+//        this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> DesertVillageData.STRUCTURE_POOLS, 5)));
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
-        DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
+        //DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
         DefaultBiomeFeatures.addDungeons(this.getGenerationSettings());
         DefaultBiomeFeatures.addMineables(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultOres(this.getGenerationSettings());
@@ -81,37 +82,35 @@ public class CoolDesertBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
-                        new SimpleBlockStateProvider(Blocks.DEAD_BUSH.getDefaultState()),
-                        SimpleBlockPlacer.INSTANCE).tries(12).build())
-                        .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
+                EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
+                        BlockStateProvider.of(Blocks.DEAD_BUSH.getDefaultState())).tries(12).build())
+                        .decorate(new Spread32Decorator())
                         .spreadHorizontally()
                         .repeat(5));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
-                        new SimpleBlockStateProvider(Blocks.CACTUS.getDefaultState()),
-                        new ColumnPlacer(UniformIntProvider.create(1, 3))).tries(10).cannotProject().build())
-                        .decorate(Decorator.HEIGHTMAP_SPREAD_DOUBLE.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
+                        BlockStateProvider.of(Blocks.CACTUS.getDefaultState())).tries(10).cannotProject().build())
+                        .decorate(new SpreadDoubleDecorator()).decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
                         .repeat(30));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_CACTUS)
-                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_CACTUS)
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
                         .applyChance(3));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .decorate(EcotonesDecorators.ROCKINESS.configure(DecoratorConfig.DEFAULT)));
+                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
+                        .decorate(EcotonesDecorators.ROCKINESS.configure()));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG)
-                        .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
-                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG)
+                        .decorate(new Spread32Decorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .decorate(Decorator.COUNT.configure(new CountConfig(5))));
+                        .repeat(5));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))

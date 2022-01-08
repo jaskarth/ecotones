@@ -10,12 +10,11 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.HeightmapDecoratorConfig;
-import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
+import net.minecraft.world.gen.decorator.HeightmapPlacementModifier;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import supercoder79.ecotones.world.decorator.Spread32Decorator;
+import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
+import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
@@ -51,7 +50,7 @@ public class ChasmBiome extends EcotonesBiomeBuilder {
         this.category(Biome.Category.UNDERGROUND);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
-        DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
+        //DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
         DefaultBiomeFeatures.addDungeons(this.getGenerationSettings());
         DefaultBiomeFeatures.addMineables(this.getGenerationSettings());
         DefaultBiomeFeatures.addDefaultOres(this.getGenerationSettings());
@@ -64,39 +63,39 @@ public class ChasmBiome extends EcotonesBiomeBuilder {
         if (!isEdge) {
             this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                     EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 1, false))
-                            .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                            .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                             .spreadHorizontally()
                             .applyChance(2));
 
             this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                     EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 2, false))
-                            .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                            .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                             .spreadHorizontally()
                             .applyChance(5));
         }
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .decorate(Decorator.SPREAD_32_ABOVE.configure(NopeDecoratorConfig.INSTANCE))
-                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.MOTION_BLOCKING)))
+                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
+                        .decorate(new Spread32Decorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
                         .repeat(12));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 9))
+                EcotonesConfiguredFeature.wrap(Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 9)))
                         .uniformRange(YOffset.fixed(0), YOffset.fixed(64))
                         .spreadHorizontally()
                         .repeat(30));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 9))
+                EcotonesConfiguredFeature.wrap(Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 9)))
                         .uniformRange(YOffset.fixed(0), YOffset.fixed(32))
                         .spreadHorizontally()
                         .repeat(6));
 
-        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.LAVA.getDefaultState()))
-                        .decorate(Decorator.LAVA_LAKE.configure(new ChanceDecoratorConfig(40))));
+//        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
+//                Feature.LAKE.configure(new SingleStateFeatureConfig(Blocks.LAVA.getDefaultState()))
+//                        .decorate(Decorator.LAVA_LAKE.configure(new ChanceDecoratorConfig(40))));
 
         this.addSpawn(SpawnGroup.AMBIENT, new SpawnSettings.SpawnEntry(EntityType.BAT, 10, 8, 8));
         this.addSpawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SPIDER, 100, 4, 4));

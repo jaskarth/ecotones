@@ -14,7 +14,7 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.Random;
 
-public class PumpkinFarmFeature extends Feature<DefaultFeatureConfig> {
+public class PumpkinFarmFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public PumpkinFarmFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }

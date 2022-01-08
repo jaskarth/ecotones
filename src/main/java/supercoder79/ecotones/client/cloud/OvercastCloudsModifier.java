@@ -11,13 +11,13 @@ public class OvercastCloudsModifier implements CloudModifier {
         int count = random.nextInt(4000) + 4000;
 
         for (int i = 0; i < count; i++) {
-            texture.setPixelColor(random.nextInt(256), random.nextInt(256), COLOR);
+            texture.setColor(random.nextInt(256), random.nextInt(256), COLOR);
         }
 
         count = random.nextInt(500) + 500;
 
         for (int i = 0; i < count; i++) {
-            texture.setPixelColor(random.nextInt(256), random.nextInt(256), 0);
+            texture.setColor(random.nextInt(256), random.nextInt(256), 0);
         }
     }
 }

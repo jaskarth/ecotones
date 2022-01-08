@@ -2,7 +2,8 @@ package supercoder79.ecotones.mixin;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.world.gen.random.SimpleRandom;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,7 +16,7 @@ import java.util.Random;
 
 @Mixin(Biome.class)
 public abstract class MixinBiome {
-    private static final ChunkRandom RANDOM = new ChunkRandom(0);
+    private static final ChunkRandom RANDOM = new ChunkRandom(new SimpleRandom(0));
     @Shadow public abstract float getTemperature();
 
     @Inject(method = "computeTemperature", at = @At("HEAD"), cancellable = true)
@@ -24,7 +25,7 @@ public abstract class MixinBiome {
             float temp = this.getTemperature();
 
 
-            RANDOM.setDeepslateSeed(0, pos.getX(), 0, pos.getZ());
+            RANDOM.setPopulationSeed(0, pos.getX(), pos.getZ());
 
             if (RANDOM.nextInt(16) == 0) {
                 cir.setReturnValue(0.0f);

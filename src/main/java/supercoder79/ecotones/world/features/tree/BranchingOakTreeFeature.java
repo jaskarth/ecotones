@@ -17,6 +17,7 @@ import net.minecraft.world.gen.treedecorator.TrunkVineTreeDecorator;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeHelper;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
 import supercoder79.ecotones.world.tree.trait.oak.OakTrait;
@@ -30,7 +31,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 
 //creates a branching trunk then places leaves
-public class BranchingOakTreeFeature extends Feature<TreeGenerationConfig> {
+public class BranchingOakTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
 
     public BranchingOakTreeFeature(Codec<TreeGenerationConfig> codec) {
         super(codec);

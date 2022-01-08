@@ -10,26 +10,32 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 import supercoder79.ecotones.util.RegistryReport;
+import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.gen.BiomeGenData;
+import supercoder79.ecotones.world.surface.system.ConfiguredSurfaceBuilder;
+import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
+import supercoder79.ecotones.world.surface.system.SurfaceConfig;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class EcotonesBiomeBuilder {
+    private static final AtomicInteger featureId = new AtomicInteger(0);
     public static final Map<Biome, BiomeGenData> OBJ2DATA = new HashMap<>();
     private final Biome.Builder builder;
     private final SpawnSettings.Builder spawnSettings;
     private final GenerationSettings.Builder generationSettings;
     private final BiomeEffects.Builder biomeEffects;
 
+    private double depth = 0.1;
+    private double scale = 0.05;
     private double hilliness = 1.0;
     private double volatility = 1.0;
+    private ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder;
 
     public EcotonesBiomeBuilder() {
         this.builder = new Biome.Builder();
@@ -48,19 +54,19 @@ public abstract class EcotonesBiomeBuilder {
     }
 
     protected void surfaceBuilder(ConfiguredSurfaceBuilder<?> surfaceBuilder) {
-        this.generationSettings.surfaceBuilder(surfaceBuilder);
+        this.configuredSurfaceBuilder = surfaceBuilder;
     }
 
     protected <C extends SurfaceConfig> void surfaceBuilder(SurfaceBuilder<C> surfaceBuilder, C config) {
-        this.generationSettings.surfaceBuilder(surfaceBuilder.withConfig(config));
+        surfaceBuilder(surfaceBuilder.withConfig(config));
     }
 
     protected void depth(float depth) {
-        this.builder.depth(depth);
+        this.depth = depth;
     }
 
     protected void scale(float scale) {
-        this.builder.scale(scale);
+        this.scale = scale;
     }
 
     protected void hilliness(double hilliness) {
@@ -89,7 +95,7 @@ public abstract class EcotonesBiomeBuilder {
     }
 
     protected void playerSpawnFriendly() {
-        this.spawnSettings.playerSpawnFriendly();
+//        this.spawnSettings.playerSpawnFriendly();
     }
 
     protected void grassColor(int grassColor) {
@@ -121,21 +127,27 @@ public abstract class EcotonesBiomeBuilder {
     }
 
     protected void addFeature(GenerationStep.Feature step, ConfiguredFeature<?, ?> feature) {
-        ConfiguredFeature<?, ?> wrapper = feature;
-        while (wrapper.feature instanceof DecoratedFeature) {
-            wrapper = ((DecoratedFeatureConfig)wrapper.config).feature.get();
+//        while (wrapper.feature instanceof DecoratedFeature) {
+//            wrapper = ((DecoratedFeatureConfig)wrapper.config).feature.get();
+//        }
+        PlacedFeature plf;
+        if (feature instanceof EcotonesConfiguredFeature ecf) {
+            plf = ecf.placed();
+        } else {
+            plf = new PlacedFeature(() -> feature, new ArrayList<>());
         }
 
-        String name = wrapper.feature.getClass().getSimpleName();
+        String name = feature.feature.getClass().getSimpleName();
         String biomeName = Thread.currentThread().getStackTrace()[3].getClassName();
         biomeName = biomeName.substring(biomeName.lastIndexOf(".") + 1).toLowerCase(Locale.ROOT);
         // TODO: refactor this mess into actually putting the biome name in the super call
 
-        Identifier id = new Identifier("ecotones", "ecotones_auto_registered_" + biomeName + "_" + name.toLowerCase(Locale.ROOT) + "_" + feature.hashCode());
+        Identifier id = new Identifier("ecotones", "ecotones_auto_registered_" + biomeName + "_" + name.toLowerCase(Locale.ROOT) + "_" + featureId.incrementAndGet());
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, id, feature);
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, id, plf);
 
         RegistryReport.increment("Configured Feature");
-        this.generationSettings.feature(step, feature);
+        this.generationSettings.feature(step, plf);
     }
 
     protected void addStructureFeature(ConfiguredStructureFeature<?, ?> structureFeature) {
@@ -145,7 +157,7 @@ public abstract class EcotonesBiomeBuilder {
             RegistryReport.increment("Configured Structure Feature");
         }
 
-        this.generationSettings.structureFeature(structureFeature);
+//        this.generationSettings.structureFeature(structureFeature);
     }
 
     public Biome build() {
@@ -154,7 +166,7 @@ public abstract class EcotonesBiomeBuilder {
         this.builder.spawnSettings(this.spawnSettings.build());
 
         Biome biome = builder.build();
-        OBJ2DATA.put(biome, new BiomeGenData(this.volatility, this.hilliness));
+        OBJ2DATA.put(biome, new BiomeGenData(this.depth, this.scale, this.volatility, this.hilliness, this.configuredSurfaceBuilder));
 
         return biome;
     }

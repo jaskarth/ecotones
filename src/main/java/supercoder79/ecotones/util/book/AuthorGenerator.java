@@ -12,7 +12,7 @@ public final class AuthorGenerator {
         }
 
         if (random.nextInt(200) == 0) {
-            return Formatting.field_33292 + Formatting.OBFUSCATED.getCode() + "ecotones";
+            return Formatting.FORMATTING_CODE_PREFIX + Formatting.OBFUSCATED.getCode() + "ecotones";
         }
 
         if (random.nextInt(8) == 0) {

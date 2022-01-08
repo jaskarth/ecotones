@@ -17,6 +17,7 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeHelper;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-public class MangroveTreeFeature extends Feature<TreeGenerationConfig> {
+public class MangroveTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
     private static final LeafVineTreeDecorator DECORATOR = new LeafVineTreeDecorator(3, 5, 3);
     public MangroveTreeFeature(Codec<TreeGenerationConfig> codec) {
         super(codec);

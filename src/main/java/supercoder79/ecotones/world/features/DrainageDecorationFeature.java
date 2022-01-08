@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.DrainageType;
 import supercoder79.ecotones.util.DataPos;
 
-public class DrainageDecorationFeature extends Feature<DefaultFeatureConfig> {
+public class DrainageDecorationFeature extends EcotonesFeature<DefaultFeatureConfig> {
 
     public DrainageDecorationFeature(Codec<DefaultFeatureConfig> codec) {
         super(codec);

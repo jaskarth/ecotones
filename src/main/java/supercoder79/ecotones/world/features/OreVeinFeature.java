@@ -17,9 +17,10 @@ import supercoder79.ecotones.util.vein.OreVein;
 import supercoder79.ecotones.util.vein.OreVeins;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 
+import java.util.Optional;
 import java.util.Random;
 
-public class OreVeinFeature extends Feature<DefaultFeatureConfig> {
+public class OreVeinFeature extends EcotonesFeature<DefaultFeatureConfig> {
     private long seed;
     private OctaveNoiseSampler<OpenSimplexNoise> enabledNoise;
     private OctaveNoiseSampler<OpenSimplexNoise> floorNoise;
@@ -65,7 +66,7 @@ public class OreVeinFeature extends Feature<DefaultFeatureConfig> {
             int y = world.getTopY(Heightmap.Type.WORLD_SURFACE_WG, pos.getX() + x, pos.getZ() + z);
 
             RockFeatureConfig config = new RockFeatureConfig(vein.getMainState(), 1, true);
-            EcotonesFeatures.ROCK.generate(new FeatureContext<>(world, context.getGenerator(), random, pos.add(x, y, z), config));
+            EcotonesFeatures.ROCK.generate(new FeatureContext<>(Optional.empty(), world, context.getGenerator(), random, pos.add(x, y, z), config));
         }
 
         return true;

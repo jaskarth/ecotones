@@ -1,10 +1,10 @@
 package supercoder79.ecotones.world.layers.util.unused;
 
-import net.minecraft.world.biome.layer.type.ParentedLayer;
-import net.minecraft.world.biome.layer.util.IdentityCoordinateTransformer;
-import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
-import net.minecraft.world.biome.layer.util.LayerSampleContext;
-import net.minecraft.world.biome.layer.util.LayerSampler;
+import supercoder79.ecotones.world.layers.system.layer.type.ParentedLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.IdentityCoordinateTransformer;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerSampleContext;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerSampler;
 
 /**
  * Samples biomes around the ends of a 5x5 plus sign. No, I'm not calling it KnightTransformer, what gave you that idea?

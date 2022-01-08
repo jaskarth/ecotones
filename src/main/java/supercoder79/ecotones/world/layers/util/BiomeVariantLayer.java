@@ -2,8 +2,8 @@ package supercoder79.ecotones.world.layers.util;
 
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.layer.type.IdentitySamplingLayer;
-import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.world.layers.system.layer.type.IdentitySamplingLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 

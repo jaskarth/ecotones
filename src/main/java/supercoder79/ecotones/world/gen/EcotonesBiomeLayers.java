@@ -1,9 +1,9 @@
 package supercoder79.ecotones.world.gen;
 
-import net.minecraft.world.biome.layer.*;
-import net.minecraft.world.biome.layer.type.ParentedLayer;
-import net.minecraft.world.biome.layer.util.*;
-import net.minecraft.world.biome.source.BiomeLayerSampler;
+import supercoder79.ecotones.world.layers.system.BiomeLayerSampler;
+import supercoder79.ecotones.world.layers.system.layer.*;
+import supercoder79.ecotones.world.layers.system.layer.type.ParentedLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.*;
 import supercoder79.ecotones.world.layers.generation.*;
 import supercoder79.ecotones.world.layers.util.*;
 

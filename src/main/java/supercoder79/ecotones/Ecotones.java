@@ -64,7 +64,6 @@ public final class Ecotones implements ModInitializer {
 
 		EcotonesParticles.init();
 		EcotonesBlockStateProviders.init();
-		EcotonesBlockPlacers.init();
 		EcotonesFoliagePlacers.init();
 		EcotonesTreeDecorators.init();
 

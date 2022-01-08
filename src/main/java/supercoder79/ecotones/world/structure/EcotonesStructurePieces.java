@@ -8,10 +8,10 @@ import supercoder79.ecotones.world.structure.gen.CampfireGenerator;
 import supercoder79.ecotones.world.structure.gen.CottageGenerator;
 
 public class EcotonesStructurePieces {
-    public static final StructurePieceType CAMPFIRE = CampfireGenerator.Piece::new;
-    public static final StructurePieceType COTTAGE_CENTER = CottageGenerator.CenterRoom::new;
-    public static final StructurePieceType COTTAGE_PORCH = CottageGenerator.Porch::new;
-    public static final StructurePieceType COTTAGE_FARM = CottageGenerator.Farm::new;
+    public static final StructurePieceType.Simple CAMPFIRE = CampfireGenerator.Piece::new;
+    public static final StructurePieceType.Simple COTTAGE_CENTER = CottageGenerator.CenterRoom::new;
+    public static final StructurePieceType.Simple COTTAGE_PORCH = CottageGenerator.Porch::new;
+    public static final StructurePieceType.Simple COTTAGE_FARM = CottageGenerator.Farm::new;
 
     public static void init() {
         register("campfire", CAMPFIRE);

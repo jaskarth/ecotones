@@ -6,14 +6,16 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.world.gen.random.SimpleRandom;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 
 import java.util.Random;
 
-public class SmallRockFeature extends Feature<DefaultFeatureConfig> {
+public class SmallRockFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public SmallRockFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }
@@ -24,7 +26,7 @@ public class SmallRockFeature extends Feature<DefaultFeatureConfig> {
         BlockPos pos = context.getOrigin();
         Random random = context.getRandom();
 
-        PerlinNoiseSampler sampler = new PerlinNoiseSampler(new ChunkRandom(world.getSeed()));
+        PerlinNoiseSampler sampler = new PerlinNoiseSampler(new ChunkRandom(new SimpleRandom(world.getSeed())));
 
         BlockState down = world.getBlockState(pos.down());
         if (!down.isOf(Blocks.GRASS_BLOCK) && !down.isOf(Blocks.STONE)) {

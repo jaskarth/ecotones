@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.Random;
 
-public class SugarCaneFeature extends Feature<DefaultFeatureConfig> {
+public class SugarCaneFeature extends EcotonesFeature<DefaultFeatureConfig> {
 
     public SugarCaneFeature(Codec<DefaultFeatureConfig> codec) {
         super(codec);

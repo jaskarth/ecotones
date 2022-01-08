@@ -17,7 +17,7 @@ public final class SyrupTextureGenerator {
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                image.setPixelColor(x, z, WHITE);
+                image.setColor(x, z, WHITE);
             }
         }
 
@@ -112,7 +112,7 @@ public final class SyrupTextureGenerator {
                 int finalRed = MathHelper.clamp((int)(finalColor * 1.25), 0, 255);
 
                 // Set RGB to this color, color is handled by the BER (ARGB format)
-                image.setPixelColor(x, z, (255 << 24) | (finalRed << 16) | (finalColor << 8) | finalColor);
+                image.setColor(x, z, (255 << 24) | (finalRed << 16) | (finalColor << 8) | finalColor);
             }
         }
 

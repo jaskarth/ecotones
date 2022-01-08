@@ -56,7 +56,7 @@ public class GeyserBlock extends Block {
         boolean isTriggered = state.get(TRIGGERED);
 
         if (isPowered && !isTriggered) {
-            world.getBlockTickScheduler().schedule(pos, this, 4);
+            world.createAndScheduleBlockTick(pos, this, 4);
             world.setBlockState(pos, state.with(TRIGGERED, true), 3);
         } else if (!isPowered && isTriggered) {
             world.setBlockState(pos, state.with(TRIGGERED, false), 3);

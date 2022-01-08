@@ -6,12 +6,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.FeatureHelper;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 import java.util.Random;
 
-public class BrushTreeFeature extends Feature<SimpleTreeFeatureConfig> {
+public class BrushTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
     private static final int[][] DELTAS = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
 
     public BrushTreeFeature(Codec<SimpleTreeFeatureConfig> configCodec) {

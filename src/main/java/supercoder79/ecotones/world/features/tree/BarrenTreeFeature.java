@@ -9,12 +9,13 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.world.data.DataHolder;
 import supercoder79.ecotones.world.data.DefaultDataHolder;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.tree.gen.BarrenTreeGenerator;
 
 import java.util.Random;
 
-public class BarrenTreeFeature extends Feature<SimpleTreeFeatureConfig> {
+public class BarrenTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
     public BarrenTreeFeature(Codec<SimpleTreeFeatureConfig> configCodec) {
         super(configCodec);
     }

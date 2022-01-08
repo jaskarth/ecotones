@@ -11,12 +11,13 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeHelper;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MapleTreeFeature extends Feature<TreeGenerationConfig> {
+public class MapleTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
     public MapleTreeFeature(Codec<TreeGenerationConfig> configCodec) {
         super(configCodec);
     }

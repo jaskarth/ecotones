@@ -23,8 +23,8 @@ public final class BiomeChecker {
             System.out.println("Biome [" + id + "] has no spawns");
         }
 
-        if (!biome.getGenerationSettings().hasStructureFeature(StructureFeature.STRONGHOLD)) {
-            System.out.println("Biome [" + id + "] has no stronghold");
-        }
+//        if (!biome.getGenerationSettings().hasStructureFeature(StructureFeature.STRONGHOLD)) {
+//            System.out.println("Biome [" + id + "] has no stronghold");
+//        }
     }
 }

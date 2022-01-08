@@ -12,8 +12,10 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.structure.StructureContext;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePiece;
+import net.minecraft.structure.StructurePiecesCollector;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
@@ -36,8 +38,8 @@ import java.util.List;
 import java.util.Random;
 
 public class CampfireGenerator {
-    public static void generate(BlockPos pos, List<StructurePiece> pieces, Random random, Block logSource) {
-        pieces.add(new Piece(pos.add(random.nextInt(16), 0, random.nextInt(16)), logSource));
+    public static void generate(BlockPos pos, StructurePiecesCollector pieces, Random random, Block logSource) {
+        pieces.addPiece(new Piece(pos.add(random.nextInt(16), 0, random.nextInt(16)), logSource));
     }
 
     public static class Piece extends StructurePiece {
@@ -50,14 +52,14 @@ public class CampfireGenerator {
             this.logSource = logSource;
         }
 
-        public Piece(ServerWorld world, NbtCompound nbt) {
+        public Piece(NbtCompound nbt) {
             super(EcotonesStructurePieces.CAMPFIRE, nbt);
             this.pos = new BlockPos(nbt.getInt("x"), nbt.getInt("y"), nbt.getInt("z"));
             this.logSource = Registry.BLOCK.get(new Identifier(nbt.getString("log_source")));
         }
 
         @Override
-        protected void writeNbt(ServerWorld world, NbtCompound tag) {
+        protected void writeNbt(StructureContext context, NbtCompound tag) {
             tag.putInt("x", this.pos.getX());
             tag.putInt("y", this.pos.getY());
             tag.putInt("z", this.pos.getZ());
@@ -65,7 +67,7 @@ public class CampfireGenerator {
         }
 
         @Override
-        public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
             // Sample heightmap
             BlockPos scaledPos = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR_WG, this.pos);
 
@@ -127,8 +129,6 @@ public class CampfireGenerator {
                     }
                 }
             }
-
-            return true;
         }
 
         private ItemStack generateBook(Random random) {

@@ -1,10 +1,10 @@
 package supercoder79.ecotones.world.layers.util.unused;
 
-import net.minecraft.world.biome.layer.type.ParentedLayer;
-import net.minecraft.world.biome.layer.util.IdentityCoordinateTransformer;
-import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
-import net.minecraft.world.biome.layer.util.LayerSampleContext;
-import net.minecraft.world.biome.layer.util.LayerSampler;
+import supercoder79.ecotones.world.layers.system.layer.type.ParentedLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.IdentityCoordinateTransformer;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerSampleContext;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerSampler;
 
 /**
  * Samples randomly in a 2x2 square. This is good for.... something? I don't even know at this point, have fun

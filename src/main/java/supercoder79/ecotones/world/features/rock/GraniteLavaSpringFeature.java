@@ -9,11 +9,12 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.FeatureHelper;
 
 import java.util.Random;
 
-public class GraniteLavaSpringFeature extends Feature<DefaultFeatureConfig> {
+public class GraniteLavaSpringFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public GraniteLavaSpringFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }

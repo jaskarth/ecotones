@@ -22,12 +22,13 @@ import net.minecraft.world.*;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 
 import java.util.*;
 import java.util.function.BiConsumer;
 
 @Deprecated
-public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends Feature<T> {
+public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends EcotonesFeature<T> {
     public AbstractTreeFeature(Codec<T> codec) {
         super(codec);
     }

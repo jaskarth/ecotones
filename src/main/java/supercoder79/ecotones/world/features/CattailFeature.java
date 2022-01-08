@@ -14,7 +14,7 @@ import supercoder79.ecotones.world.features.config.CattailFeatureConfig;
 
 import java.util.Random;
 
-public class CattailFeature extends Feature<CattailFeatureConfig> {
+public class CattailFeature extends EcotonesFeature<CattailFeatureConfig> {
     public CattailFeature(Codec<CattailFeatureConfig> configCodec) {
         super(configCodec);
     }

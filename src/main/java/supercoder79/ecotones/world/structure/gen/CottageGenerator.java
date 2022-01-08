@@ -8,9 +8,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
-import net.minecraft.structure.StructureManager;
-import net.minecraft.structure.StructurePiece;
-import net.minecraft.structure.StructurePieceType;
+import net.minecraft.structure.*;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockBox;
@@ -34,10 +32,10 @@ import java.util.List;
 import java.util.Random;
 
 public class CottageGenerator {
-    public static void generate(ChunkGenerator chunkGenerator, HeightLimitView world, BlockPos pos, List<StructurePiece> pieces, Random random) {
+    public static void generate(ChunkGenerator chunkGenerator, HeightLimitView world, BlockPos pos, StructurePiecesCollector collector, Random random) {
         // I can't wait until 3 months from now where I completely regret implementing it this way
-        pieces.add(new CenterRoom(pos.down()));
-        pieces.add(new Porch(pos.down().add(-2, 0, 0)));
+        collector.addPiece(new CenterRoom(pos.down()));
+        collector.addPiece(new Porch(pos.down().add(-2, 0, 0)));
 
         // Generate 1-4 patches of farmland next to the house
         int farmland = 1 + random.nextInt(4);
@@ -46,7 +44,7 @@ public class CottageGenerator {
             int dx = random.nextInt(24) - random.nextInt(24);
             int dz = random.nextInt(24) - random.nextInt(24);
 
-            pieces.add(new Farm(new BlockPos(pos.getX() + dx, chunkGenerator.getHeightOnGround(pos.getX() + dx, pos.getZ() + dz, Heightmap.Type.WORLD_SURFACE_WG, world), pos.getZ() + dz)));
+            collector.addPiece(new Farm(new BlockPos(pos.getX() + dx, chunkGenerator.getHeightOnGround(pos.getX() + dx, pos.getZ() + dz, Heightmap.Type.WORLD_SURFACE_WG, world), pos.getZ() + dz)));
         }
     }
 
@@ -64,8 +62,7 @@ public class CottageGenerator {
             this.pos = new BlockPos(nbt.getInt("x"), nbt.getInt("y"), nbt.getInt("z"));
         }
 
-        @Override
-        protected void writeNbt(ServerWorld world, NbtCompound nbt) {
+        protected void writeNbt(StructureContext world, NbtCompound nbt) {
             nbt.putInt("x", this.pos.getX());
             nbt.putInt("y", this.pos.getY());
             nbt.putInt("z", this.pos.getZ());
@@ -82,12 +79,12 @@ public class CottageGenerator {
             super(EcotonesStructurePieces.COTTAGE_CENTER, pos, BoxHelper.box(pos.add(-3, 0, -3), pos.add(4, 8, 8)));
         }
 
-        public CenterRoom(ServerWorld world, NbtCompound nbt) {
+        public CenterRoom(NbtCompound nbt) {
             super(EcotonesStructurePieces.COTTAGE_CENTER, nbt);
         }
 
         @Override
-        public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
             // Place floor
             for (int x = 0; x < 4; x++) {
                 for (int z = 0; z < 6; z++) {
@@ -216,8 +213,6 @@ public class CottageGenerator {
             }
 
             world.setBlockState(this.pos.add(3, 7, 1), Blocks.CAMPFIRE.getDefaultState().with(CampfireBlock.SIGNAL_FIRE, true), 3);
-
-            return true;
         }
     }
 
@@ -226,12 +221,12 @@ public class CottageGenerator {
             super(EcotonesStructurePieces.COTTAGE_PORCH, pos, BoxHelper.box(pos.add(-3, 0, -3), pos.add(4, 6, 4)));
         }
 
-        public Porch(ServerWorld world, NbtCompound nbt) {
+        public Porch(NbtCompound nbt) {
             super(EcotonesStructurePieces.COTTAGE_PORCH, nbt);
         }
 
         @Override
-        public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
             // Generate porch
             for (int z = -1; z < 7; z++) {
                 BlockState state = Blocks.OAK_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP);
@@ -283,8 +278,6 @@ public class CottageGenerator {
                 // Set edge slab
                 world.setBlockState(this.pos.add(-2, 3, z), Blocks.SPRUCE_SLAB.getDefaultState().with(SlabBlock.TYPE, edgeType), 3);
             }
-
-            return true;
         }
     }
 
@@ -295,12 +288,12 @@ public class CottageGenerator {
             super(EcotonesStructurePieces.COTTAGE_FARM, pos, BoxHelper.box(pos.add(-2, -1, -2), pos.add(2, 3, 2)));
         }
 
-        public Farm(ServerWorld world, NbtCompound nbt) {
+        public Farm(NbtCompound nbt) {
             super(EcotonesStructurePieces.COTTAGE_FARM, nbt);
         }
 
         @Override
-        public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
             BlockState crop = Blocks.WHEAT.getDefaultState();
 
             Property<Integer> prop = Properties.AGE_7;
@@ -363,8 +356,6 @@ public class CottageGenerator {
                     }
                 }
             }
-
-            return false;
         }
 
         @Override

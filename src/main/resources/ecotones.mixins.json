@@ -3,7 +3,6 @@
   "package": "supercoder79.ecotones.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "BlockPlacerTypeAccessor",
     "BlockStateProviderTypeAccessor",
     "CriteriaAccessor",
     "FoliagePlacerTypeAccessor",
@@ -29,7 +28,6 @@
     "client.MixinEntityModels",
     "client.MixinHeldItemRenderer",
     "client.MixinMinecraftClient",
-    "client.MixinSkyProperties",
     "client.MixinWorldRenderer"
   ],
   "injectors": {

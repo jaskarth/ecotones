@@ -60,13 +60,13 @@ public class FertilizerSpreaderScreen extends HandledScreen<FertilizerSpreaderSc
         this.drawTexture(matrices, (int) (x + 110 + Math.min((this.handler.getPercent() / 100.0) * 52, 51)), y + 43, 176, 0, 11, 7);
 
         // Draw water
-        Sprite sprite = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(Blocks.WATER.getDefaultState()).getSprite();
+        Sprite sprite = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(Blocks.WATER.getDefaultState()).getParticleSprite();
 
         RenderSystem.setShaderTexture(0, SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
 
         for (int x0 = 0; x0 < 3; x0++) {
             for (int y0 = 0; y0 < 3; y0++) {
-                drawWater(matrices.peek().getModel(), x + 10 + (x0 * WATER_X_FRAC), x + 10 + ((x0 + 1) * WATER_X_FRAC), y + 35 + (y0 * WATER_Y_FRAC), y + 35 + ((y0 + 1) * WATER_Y_FRAC), 1, sprite.getMinU(), sprite.getMaxU(), sprite.getMinV(), sprite.getMaxV());
+                drawWater(matrices.peek().getPositionMatrix(), x + 10 + (x0 * WATER_X_FRAC), x + 10 + ((x0 + 1) * WATER_X_FRAC), y + 35 + (y0 * WATER_Y_FRAC), y + 35 + ((y0 + 1) * WATER_Y_FRAC), 1, sprite.getMinU(), sprite.getMaxU(), sprite.getMinV(), sprite.getMaxV());
             }
         }
 

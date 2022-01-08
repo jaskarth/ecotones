@@ -39,33 +39,33 @@ public class SwampBiomes {
 //                .addDefaultFeature(PLAINS_TALL_GRASS)
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-//                                .decorate(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(2, 0.5f, 1))))
+//                                .decorate(EcotonesDecorators.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(2, 0.5f, 1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.REEDS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.REEDS_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 4, 7))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.SUGARCANE.configure(FeatureConfig.DEFAULT)
-//                                .decorate(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(1, 0.5f, 1))))
+//                                .decorate(EcotonesDecorators.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(1, 0.5f, 1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.SUGARCANE.configure(FeatureConfig.DEFAULT)
-//                                .decorate(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.125f, 1))))
+//                                .decorate(EcotonesDecorators.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.125f, 1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.BRANCHING_OAK.configure(TreeType.RARE_LARGE_CLUSTERED_OAK)
 //                                .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_CLUSTERED_OAK.decorationData)))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.LILY_PAD_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.LILY_PAD_CONFIG)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(6))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SEAGRASS.configure(new SeagrassFeatureConfig(20, 0.3D))
-//                        .decorate(Decorator.HEIGHTMAP.configure(new HeightmapDecoratorConfig(Heightmap.Type.OCEAN_FLOOR_WG))))
+//                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG)))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))))
 //
 //                .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,

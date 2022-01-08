@@ -3,7 +3,7 @@ package supercoder79.ecotones.world.layers.generation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;

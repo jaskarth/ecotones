@@ -28,7 +28,7 @@ public class TreetapBlockEntityRenderer implements BlockEntityRenderer<TreetapBl
 
             VertexConsumer consumer = vertexConsumers.getBuffer(EcotonesRenderLayers.SYRUP_TEX_LAYER);
 
-            Matrix4f model = matrices.peek().getModel();
+            Matrix4f model = matrices.peek().getPositionMatrix();
             float xStart = xStart(entity.getDirection());
             float zStart = zStart(entity.getDirection());
 

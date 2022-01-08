@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PlaceWaterFeature extends Feature<WaterFeatureConfig> {
+public class PlaceWaterFeature extends EcotonesFeature<WaterFeatureConfig> {
     public PlaceWaterFeature(Codec<WaterFeatureConfig> codec) {
         super(codec);
     }

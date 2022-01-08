@@ -2,7 +2,8 @@ package supercoder79.ecotones.world.surface;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.world.gen.ChunkRandom;
+import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.world.gen.random.SimpleRandom;
 
 import java.util.Arrays;
 
@@ -21,7 +22,7 @@ public final class MesaHelper {
     public static BlockState[] initializeRegularMesa(long seed) {
         BlockState[] layerBlocks = new BlockState[64];
         Arrays.fill(layerBlocks, TERRACOTTA);
-        ChunkRandom random = new ChunkRandom(seed);
+        ChunkRandom random = new ChunkRandom(new SimpleRandom(seed));
 
         int j;
         for(j = 0; j < 64; ++j) {
@@ -43,7 +44,7 @@ public final class MesaHelper {
     public static BlockState[] initializeWhiteMesa(long seed) {
         BlockState[] layerBlocks = new BlockState[64];
         Arrays.fill(layerBlocks, WHITE_TERRACOTTA);
-        ChunkRandom random = new ChunkRandom(seed);
+        ChunkRandom random = new ChunkRandom(new SimpleRandom(seed));
 
         int y = random.nextInt(3) + 33;
         int z = 0;

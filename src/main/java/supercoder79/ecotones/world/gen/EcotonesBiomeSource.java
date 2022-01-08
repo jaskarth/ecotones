@@ -1,19 +1,35 @@
 package supercoder79.ecotones.world.gen;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenCustomHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.minecraft.util.TopologicalSorts;
+import net.minecraft.util.Util;
 import net.minecraft.util.dynamic.RegistryLookupCodec;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.BuiltinBiomes;
-import net.minecraft.world.biome.source.BiomeLayerSampler;
 import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.biome.source.util.MultiNoiseUtil;
+import net.minecraft.world.gen.feature.PlacedFeature;
+import org.apache.commons.lang3.mutable.MutableInt;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.api.BiomeIdManager;
 import supercoder79.ecotones.api.CaveBiome;
+import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.ModCompat;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
 import supercoder79.ecotones.world.biome.cave.LimestoneCaveBiome;
+import supercoder79.ecotones.world.layers.system.BiomeLayerSampler;
+
+import java.util.*;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource {
     public static Codec<EcotonesBiomeSource> CODEC =  RecordCodecBuilder.create((instance) -> {
@@ -39,14 +55,17 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
         ModCompat.run();
 
         for (Biome biome : this.biomeRegistry) {
-            int id = this.biomeRegistry.getRawId(biome);
-            if (!BuiltinBiomes.BY_RAW_ID.containsKey(id)) {
-                BuiltinBiomes.BY_RAW_ID.put(id, this.biomeRegistry.getKey(biome).get());
-            }
+            BiomeIdManager.register(this.biomeRegistry.getKey(biome).get());
         }
     }
 
-    public Biome getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ) {
+    @Override
+    public List<BiomeSource.class_6827> method_39525(List<Biome> biomes, boolean bl) {
+        // Not relevant for ecotones
+        return new ArrayList<>();
+    }
+
+    public Biome getBiome(int biomeX, int biomeY, int biomeZ, MultiNoiseUtil.MultiNoiseSampler sampler) {
         try {
             // TODO: no crash sampler
             return this.biomeSampler.sample(this.biomeRegistry, biomeX, biomeZ);

@@ -4,9 +4,9 @@ import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorContext;
-import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
+import net.minecraft.world.gen.decorator.PlacementModifier;
+import net.minecraft.world.gen.decorator.PlacementModifierType;
 import supercoder79.ecotones.api.DrainageType;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
@@ -15,13 +15,11 @@ import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class DrainageSurfaceDecorator extends Decorator<NopeDecoratorConfig> {
-    public DrainageSurfaceDecorator(Codec<NopeDecoratorConfig> codec) {
-        super(codec);
-    }
+public class DrainageSurfaceDecorator extends PlacementModifier {
+    public static final Codec<DrainageSurfaceDecorator> CODEC = Codec.unit(DrainageSurfaceDecorator::new);
 
     @Override
-    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, NopeDecoratorConfig config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, BlockPos pos) {
         //get the quality quickly for a heuristic check
         double quality = 1;
         int decorationCount = 0;
@@ -67,5 +65,10 @@ public class DrainageSurfaceDecorator extends Decorator<NopeDecoratorConfig> {
             }
             return new DataPos(x, y, z).setDrainageType(finalType).setLikelyInvalid(isLikelyInvalid);
         });
+    }
+
+    @Override
+    public PlacementModifierType<?> getType() {
+        return EcotonesDecorators.DRAINAGE_DECORATOR;
     }
 }

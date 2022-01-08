@@ -1,6 +1,5 @@
 package supercoder79.ecotones.blocks.entity;
 
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CropBlock;
@@ -13,6 +12,9 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
@@ -23,6 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
+import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.blocks.FertilizerSpreaderBlock;
 import supercoder79.ecotones.items.EcotonesItems;
@@ -32,7 +35,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity implements BlockEntityClientSerializable {
+public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity {
     private static final Direction[] HORIZONTAL = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
 
     protected final PropertyDelegate propertyDelegate;
@@ -230,10 +233,12 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
         this.percentDissolved = nbt.getInt("percent_dissolved");
         this.dissolvedAmount = nbt.getInt("dissolved_amount");
         this.fertilizerAmount = nbt.getInt("fertilizer_amount");
+
+        fromClientTag(nbt);
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
+    public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
 
         Inventories.writeNbt(nbt, this.inventory);
@@ -242,10 +247,9 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
         nbt.putInt("dissolved_amount", this.dissolvedAmount);
         nbt.putInt("fertilizer_amount", this.fertilizerAmount);
 
-        return nbt;
+//        return nbt;
     }
 
-    @Override
     public void fromClientTag(NbtCompound tag) {
         // Debug
 
@@ -266,7 +270,6 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
         this.farmland = fList;
     }
 
-    @Override
     public NbtCompound toClientTag(NbtCompound tag) {
         // Debug
         NbtList water = new NbtList();
@@ -284,6 +287,21 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
         tag.put("farmland", farmland);
 
         return tag;
+    }
+
+    private void sync() {
+        ((ServerWorld)this.world).getChunkManager().markForUpdate(this.pos);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return toClientTag(new NbtCompound());
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
     }
 
     @Override

@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.Random;
 
-public class DesertifySoilFeature extends Feature<DefaultFeatureConfig> {
+public class DesertifySoilFeature extends EcotonesFeature<DefaultFeatureConfig> {
 
     public DesertifySoilFeature(Codec<DefaultFeatureConfig> codec) {
         super(codec);

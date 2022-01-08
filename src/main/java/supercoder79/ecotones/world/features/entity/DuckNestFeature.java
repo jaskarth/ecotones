@@ -14,10 +14,11 @@ import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.blocks.NestBlock;
 import supercoder79.ecotones.entity.DuckEntity;
 import supercoder79.ecotones.entity.EcotonesEntities;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 
 import java.util.Random;
 
-public class DuckNestFeature extends Feature<DefaultFeatureConfig> {
+public class DuckNestFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public DuckNestFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }

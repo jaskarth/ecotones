@@ -1,22 +1,28 @@
 package supercoder79.ecotones.world.decorator;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorContext;
+import net.minecraft.world.gen.decorator.PlacementModifier;
+import net.minecraft.world.gen.decorator.PlacementModifierType;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class LargeRockDecorator extends Decorator<ChanceDecoratorConfig> {
-    public LargeRockDecorator(Codec<ChanceDecoratorConfig> configCodec) {
-        super(configCodec);
+public class LargeRockDecorator extends PlacementModifier {
+    public static final Codec<LargeRockDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            ChanceDecoratorConfig.CODEC.fieldOf("config").forGetter(c -> c.config)
+    ).apply(instance, LargeRockDecorator::new));
+    private final ChanceDecoratorConfig config;
+
+    public LargeRockDecorator(ChanceDecoratorConfig config) {
+        this.config = config;
     }
 
     @Override
-    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, ChanceDecoratorConfig config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, BlockPos pos) {
         if (random.nextFloat() < 1.0f / config.chance) {
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
@@ -24,6 +30,12 @@ public class LargeRockDecorator extends Decorator<ChanceDecoratorConfig> {
 
             return Stream.of(new BlockPos(x, y, z));
         }
+
         return Stream.empty();
+    }
+
+    @Override
+    public PlacementModifierType<?> getType() {
+        return EcotonesDecorators.LARGE_ROCK;
     }
 }

@@ -28,16 +28,16 @@ public class HotBiomes {
 //
 //            .addCustomFeature(GenerationStep.Feature.RAW_GENERATION,
 //                    EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT)
-//                            .decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure(DecoratorConfig.DEFAULT)))
+//                            .decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure()))
 //
 //            .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                    Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-//                            .decorate(EcotonesDecorators.ROCKINESS.configure(DecoratorConfig.DEFAULT)))
+//                    EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
+//                            .decorate(EcotonesDecorators.ROCKINESS.configure()))
 //
-//            .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 2)
+//            .addTreeFeature(EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 2)
 //
 //            .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                    Feature.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG)
+//                    EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG)
 //                            .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))))
 //
 //            .addDefaultSpawnEntries());
@@ -49,9 +49,9 @@ public class HotBiomes {
 //                .addStructureFeature(DefaultBiomeFeatures.DESERT_PYRAMID)
 //                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
 //                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/desert/town_centers"), 4)))
-//                .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 3)
+//                .addTreeFeature(EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 3)
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
 //
 //        SCRUBLAND_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "scrubland"), template.builder()
@@ -65,12 +65,12 @@ public class HotBiomes {
 //                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/desert/town_centers"), 5)))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(40))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
-//                        .decorate(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(3, 0.5f, 2))))
+//                        .decorate(EcotonesDecorators.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(3, 0.5f, 2))))
 //
 //                .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
 //                        EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
@@ -89,16 +89,16 @@ public class HotBiomes {
 //                                .decorate(EcotonesDecorators.REVERSE_QUALITY_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.15))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SCRUBLAND_CONFIG).decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SCRUBLAND_CONFIG).decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG).decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(3))))
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG).decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(3))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.BIG_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
-//                                .decorate(EcotonesDecorators.ABOVE_QUALITY.configure(DecoratorConfig.DEFAULT)))
+//                                .decorate(EcotonesDecorators.ABOVE_QUALITY.configure()))
 //
-//                .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 3));
+//                .addTreeFeature(EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 3));
 //        STEPPE_BIOME = BiomeHelper.registerBase( new Identifier("ecotones", "steppe"), template.builder()
 //                .temperature(1.8F)
 //                .downfall(0.3F)
@@ -110,7 +110,7 @@ public class HotBiomes {
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
-//                                .decorate(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(15, 0.5f, 3))))
+//                                .decorate(EcotonesDecorators.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(15, 0.5f, 3))))
 //
 //                .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
 //                        EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
@@ -122,7 +122,7 @@ public class HotBiomes {
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.BIG_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
-//                                .decorate(EcotonesDecorators.ABOVE_QUALITY.configure(DecoratorConfig.DEFAULT)))
+//                                .decorate(EcotonesDecorators.ABOVE_QUALITY.configure()))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
@@ -133,7 +133,7 @@ public class HotBiomes {
 //                                .decorate(EcotonesDecorators.REVERSE_QUALITY_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.05))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG).decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG).decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
 //
 //                .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG));
 //        TROPICAL_GRASSLAND_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "tropical_grassland"), template.builder()
@@ -154,7 +154,7 @@ public class HotBiomes {
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
-//                                .decorate(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(2, 0.5f, 1))))
+//                                .decorate(EcotonesDecorators.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(2, 0.5f, 1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
@@ -170,7 +170,7 @@ public class HotBiomes {
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.BIG_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
-//                                .decorate(EcotonesDecorators.ABOVE_QUALITY.configure(DecoratorConfig.DEFAULT)))
+//                                .decorate(EcotonesDecorators.ABOVE_QUALITY.configure()))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
@@ -181,7 +181,7 @@ public class HotBiomes {
 //                                .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.SMALL_ACACIA.decorationData)))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 12, 12)))));
 //        LUSH_SAVANNAH_BIOME = BiomeHelper.registerBase( new Identifier("ecotones", "lush_savannah"), template.builder()
 //                .temperature(1.6F)
@@ -199,14 +199,14 @@ public class HotBiomes {
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
-//                                .decorate(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.5f, 1))))
+//                                .decorate(EcotonesDecorators.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.5f, 1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(3))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 12, 20))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -245,11 +245,11 @@ public class HotBiomes {
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(3))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 12, 20))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -296,7 +296,7 @@ public class HotBiomes {
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(4))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 16, 20))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -304,7 +304,7 @@ public class HotBiomes {
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.65))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -347,7 +347,7 @@ public class HotBiomes {
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(4))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 20))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -363,7 +363,7 @@ public class HotBiomes {
 //                                .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.LUSH_JUNGLE.decorationData)))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,

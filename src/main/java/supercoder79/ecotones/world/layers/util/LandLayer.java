@@ -1,7 +1,7 @@
 package supercoder79.ecotones.world.layers.util;
 
-import net.minecraft.world.biome.layer.type.InitLayer;
-import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.world.layers.system.layer.type.InitLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
 
 public enum LandLayer implements InitLayer {
     INSTANCE;

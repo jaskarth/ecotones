@@ -19,9 +19,9 @@ public class MapleLeafParticle extends SpriteBillboardParticle {
         this.velocityY = velocityY;
         this.velocityZ = velocityZ;
 
-        this.colorRed = (float) MathHelper.lerp(noise, 0.75, 0.85);
-        this.colorGreen = (float) MathHelper.lerp(noise, 0.2, 0.4);
-        this.colorBlue = (float) MathHelper.lerp(noise, 0.18, 0.09);
+        this.red = (float) MathHelper.lerp(noise, 0.75, 0.85);
+        this.green = (float) MathHelper.lerp(noise, 0.2, 0.4);
+        this.blue = (float) MathHelper.lerp(noise, 0.18, 0.09);
 
         this.setBoundingBoxSpacing(0.05F, 0.05F);
         this.scale = 0.25f;
