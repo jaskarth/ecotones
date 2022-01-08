@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.features;
 
 import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -44,6 +45,10 @@ public class EcotonesConfiguredFeature<FC extends FeatureConfig, F extends Featu
 
     public EcotonesConfiguredFeature<FC, ?> repeat(int count) {
         return decorate(CountPlacementModifier.of(count));
+    }
+
+    public EcotonesConfiguredFeature<FC, ?> repeat(int min, int max) {
+        return decorate(CountPlacementModifier.of(UniformIntProvider.create(min, max)));
     }
 
     public EcotonesConfiguredFeature<FC, ?> uniformRange(YOffset min, YOffset max) {

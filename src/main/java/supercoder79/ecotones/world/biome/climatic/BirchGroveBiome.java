@@ -101,7 +101,7 @@ public class BirchGroveBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.ROCKINESS.configure()));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.GRASSLAND_CONFIG)
+                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.BIRCH_GROVE_CONFIG)
                         .decorate(new Spread32Decorator())
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()

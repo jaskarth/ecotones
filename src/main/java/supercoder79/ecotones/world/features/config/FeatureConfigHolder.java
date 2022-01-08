@@ -36,7 +36,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 
 public final class FeatureConfigHolder {
-    private static DataPool.Builder<BlockState> pool() {
+    public static DataPool.Builder<BlockState> pool() {
         return DataPool.builder();
     }
     
@@ -202,6 +202,13 @@ public final class FeatureConfigHolder {
                     .spreadX(5)
                     .spreadZ(5)
                     .tries(12).build();
+
+    public static final RandomPatchFeatureConfig DENSE_LAVENDER =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
+                    .add(EcotonesBlocks.LAVENDER.getDefaultState(), 1)))
+                    .spreadX(5)
+                    .spreadZ(5)
+                    .tries(32).build();
 
     public static final RandomPatchFeatureConfig WILDFLOWERS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()

@@ -22,10 +22,7 @@ import supercoder79.ecotones.items.EcotonesItemGroups;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.screen.EcotonesScreenHandlers;
 import supercoder79.ecotones.util.*;
-import supercoder79.ecotones.util.compat.FloralisiaCompat;
-import supercoder79.ecotones.util.compat.LambdaFoxesCompat;
-import supercoder79.ecotones.util.compat.TerrestriaCompat;
-import supercoder79.ecotones.util.compat.TraverseCompat;
+import supercoder79.ecotones.util.compat.*;
 import supercoder79.ecotones.util.deco.BlockDecorations;
 import supercoder79.ecotones.util.state.EcotonesBlockStateProviders;
 import supercoder79.ecotones.util.vein.OreVeins;
@@ -91,6 +88,10 @@ public final class Ecotones implements ModInitializer {
 		if (isModLoaded("floralisia")) {
 			FloralisiaCompat.init();
 			log("Registered Floralisia compat!");
+		}
+
+		if (isModLoaded("aurorasdeco")) {
+			AurorasDecoCompat.init();
 		}
 
 		EcotonesBiomes.init();
