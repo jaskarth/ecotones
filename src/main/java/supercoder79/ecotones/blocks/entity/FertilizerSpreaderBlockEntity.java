@@ -52,6 +52,12 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
     // transient
     private boolean needsValidation = true;
     private boolean valid = false;
+    // 0: Invalid
+    // 1: Working
+    // 2: Needs water
+    // 3: Waiting
+    // 4: needs plants
+    private int status = 0;
     private final long timeOffset = (long) (Math.random() * 300);
 
     // calculated on demand
@@ -73,6 +79,7 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
                     case 1 -> FertilizerSpreaderBlockEntity.this.fertilizerAmount;
                     case 2 -> FertilizerSpreaderBlockEntity.this.farmland.size();
                     case 3 -> FertilizerSpreaderBlockEntity.this.water.size();
+                    case 4 -> FertilizerSpreaderBlockEntity.this.status;
                     default -> 0;
                 };
             }
@@ -86,7 +93,7 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
             }
 
             public int size() {
-                return 4;
+                return 5;
             }
         };
     }
@@ -107,12 +114,12 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
             if (blockEntity.fertilizerAmount >= 8 && blockEntity.dissolvedAmount < 20000) {
                 blockEntity.fertilizerAmount -= 8;
 
-                // \frac{500}{x+60}-\frac{x}{50}
+                // \frac{600}{x+60}-\frac{x}{50}
                 // Makes it harder to dissolve more into the surrounding water
-                blockEntity.dissolvedAmount += (int) ((500.0 / (blockEntity.percentDissolved + 60)) - (blockEntity.percentDissolved / 50.0));
+                blockEntity.dissolvedAmount += (int) ((600.0 / (blockEntity.percentDissolved + 60)) - (blockEntity.percentDissolved / 50.0));
             }
 
-            blockEntity.percentDissolved = (int) (blockEntity.dissolvedAmount / 20000.0);
+            blockEntity.percentDissolved = (int) ((blockEntity.dissolvedAmount / 20000.0) * 100.0);
 
             if (time % 20 == 0) {
                 if (blockEntity.getStack(0).getCount() > 0 && blockEntity.fertilizerAmount + 1000 <= 20000) {
@@ -122,16 +129,22 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
                 }
             }
 
-            if (time % 40 == 0) {
+            if (time % 160 == 0) {
                 if (blockEntity.percentDissolved > 0) {
                     blockEntity.fertilize(world);
                 }
             }
 
-            blockEntity.dissolvedAmount -= 2;
+            if (blockEntity.percentDissolved >= 120) {
+                if (blockEntity.world.random.nextInt(4) == 0) {
+                    blockEntity.dissolvedAmount -= 1;
+                }
+            }
+
+            blockEntity.markDirty();
         }
 
-        blockEntity.percentDissolved = (int) (blockEntity.dissolvedAmount / 20000.0);
+        blockEntity.percentDissolved = (int) ((blockEntity.dissolvedAmount / 20000.0) * 100.0);
 
         // Recheck position every 5 seconds
         if (time % 100 == 0) {
@@ -149,6 +162,16 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
             this.water = water;
             this.farmland = farmland;
 
+            this.status = 1;
+
+            if (this.farmland.isEmpty()) {
+                this.status = 4;
+            }
+
+            if (this.dissolvedAmount == 0 && this.fertilizerAmount == 0) {
+                this.status = 3;
+            }
+
             // Debugging!
 //            for (BlockPos p : this.farmland) {
 //                world.setBlockState(p, Blocks.MAGENTA_TERRACOTTA.getDefaultState());
@@ -156,18 +179,21 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
 
             this.valid = true;
         } else {
+            // No water
+            this.status = 2;
             this.valid = false;
         }
     }
 
     private void fertilize(World world) {
-        // \frac{100}{x+2}-\frac{x}{100}+2
+        // \frac{500}{x+1}-\frac{x}{20}+3
         // Fertilization chance curve, makes higher values less effective as more is added
-        int chance = (int)((500.0 / (this.percentDissolved + 1)) + (this.percentDissolved / 20.0) + 2);
+        int chance = (int)((500.0 / (this.percentDissolved + 1)) + (this.percentDissolved / 20.0) + 3);
         // TODO: make it so that more dissolved can let more blocks be fertilized per tick?
 
         Random random = world.random;
 
+        // FIXME: biased to start!
         for (BlockPos pos : this.farmland) {
             if (world.getBlockState(pos).isOf(Blocks.FARMLAND)) {
                 if (random.nextInt(chance) == 0) {
@@ -179,6 +205,8 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
                         // Green particles
                         world.syncWorldEvent(WorldEvents.PLANT_FERTILIZED, pos.up(), 20);
                     }
+
+                    this.dissolvedAmount -= 120;
 
                     break;
                 }

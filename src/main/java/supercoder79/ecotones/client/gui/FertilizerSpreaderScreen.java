@@ -96,22 +96,27 @@ public class FertilizerSpreaderScreen extends HandledScreen<FertilizerSpreaderSc
         int x = mouseX - (this.width - this.backgroundWidth) / 2;
         int y = mouseY - (this.height - this.backgroundHeight) / 2;
 
-        // Syrup tooltip
+        // fertilizer tooltip
         if (x >= 8 && x <= 59 && y >= 31 && y <= 87) {
             this.renderTooltip(matrices, new LiteralText(this.handler.getFertilizerAmount() + " / 20000 (Basic Fertilizer)"), x, y);
         }
 
-        // Sap tooltip
+        // percent tooltip
         if (x >= 113 && x <= 168 && y >= 36 && y <= 48) {
-            this.renderTooltip(matrices, new LiteralText(this.handler.getPercent() + "% (Basic Fertilizer max: 40%)"), x, y);
+            this.renderTooltip(matrices, new LiteralText(this.handler.getPercent() + "% Fertilizer dissolved"), x, y);
         }
 
         this.textRenderer.draw(matrices, "Farms: " + this.handler.getFarmCount(), 117, 58 - 8, 4210752);
         this.textRenderer.draw(matrices, "Water: " + this.handler.getWaterCount(), 117, 58 - 8 + 9, 4210752);
-        this.textRenderer.draw(matrices, "Working...", 117, 58 - 8 + 18, 4210752);
+        this.textRenderer.draw(matrices, switch (this.handler.getStatus()) {
+            case 0 -> "Invalid!";
+            case 1 -> "Working...";
+            case 2 -> "Water!";
+            case 3 -> "Idle";
+            case 4 -> "Plants!";
+            default -> "Invalid!";
+        }, 117, 58 - 8 + 18, 4210752);
     }
-
-    // Status options: "Working!" "Full!" "Empty!"
 
     private static void drawWater(Matrix4f matrices, int x0, int x1, int y0, int y1, int z, float u0, float u1, float v0, float v1) {
         RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
