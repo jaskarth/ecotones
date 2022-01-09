@@ -16,8 +16,8 @@ repositories {
 	maven { url = "https://maven.gegy.dev" }
 }
 
-minecraft {
-	accessWidener = file("src/main/resources/ecotones.aw")
+loom {
+	accessWidenerPath = file("src/main/resources/ecotones.aw")
 }
 
 dependencies {
@@ -30,7 +30,7 @@ dependencies {
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 
 
-	modRuntime ("supercoder79:databreaker:0.2.8") {
+	modRuntimeOnly ("supercoder79:databreaker:0.2.8") {
 		exclude module : "fabric-loader"
 	}
 
