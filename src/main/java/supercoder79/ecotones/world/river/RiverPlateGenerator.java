@@ -1,0 +1,395 @@
+package supercoder79.ecotones.world.river;
+
+import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
+import it.unimi.dsi.fastutil.longs.LongSet;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.Vec2f;
+import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.world.gen.random.SimpleRandom;
+import supercoder79.ecotones.world.layers.system.layer.util.CachingLayerSampler;
+import supercoder79.ecotones.world.river.graph.RiverGraph;
+import supercoder79.ecotones.world.river.graph.RiverNode;
+import supercoder79.ecotones.world.river.graph.RiverPhiNode;
+import supercoder79.ecotones.world.river.graph.RiverSubgraph;
+import supercoder79.ecotones.world.river.phys.AABB;
+import supercoder79.ecotones.world.river.phys.BruteforceIntersect;
+
+import java.util.*;
+
+// Where the actual river plate gets created
+public final class RiverPlateGenerator {
+    public static PlateSet generate(long seed, ChunkPos pos, CachingLayerSampler riverSampler) {
+        LongSet plateChunks = new LongOpenHashSet();
+        LongSet visited = new LongOpenHashSet();
+
+        int sample = sampleChunkPos(pos.x, pos.z, riverSampler);
+        // Empty
+        if (sample == 0) {
+            return PlateSet.OCEAN_MARKER;
+        }
+
+        // Find all chunks in plate
+        dfs(pos.x, pos.z, sample, riverSampler, plateChunks, visited);
+
+        // TODO: actual river gen lol
+
+        RiverGraph graph = runPilotRivers(seed, plateChunks);
+
+        iterateGraphReach(seed, graph, plateChunks);
+
+        traversePredecessors(seed, graph, plateChunks, 8);
+        traversePredecessors(seed, graph, plateChunks, 6);
+        traversePredecessors(seed, graph, plateChunks, 3);
+
+        resetAllNodes(graph);
+
+        growRiversDownstream(graph);
+
+        return new PlateSet(plateChunks, sample, graph);
+    }
+
+    // Initial "pilot" stage where rivers identify major contours and destinations (lakes and such)
+    private static RiverGraph runPilotRivers(long seed, LongSet plateChunks) {
+        ChunkRandom random = new ChunkRandom(new SimpleRandom(seed));
+
+        RiverGraph graph = new RiverGraph();
+        for (long pos : plateChunks) {
+            int x = ChunkPos.getPackedX(pos);
+            int z = ChunkPos.getPackedZ(pos);
+            random.setCarverSeed(seed, x, z);
+
+            if (random.nextInt(600) > 0) {
+                continue;
+            }
+
+            int length = random.nextInt(20) + 20;
+
+            // Random starting point
+            double startX = (x * 16) + random.nextDouble(16);
+            double startZ = (z * 16) + random.nextDouble(16);
+
+            double angle = random.nextDouble(RiverAngleHelper.PI2);
+
+            boolean builtPhi = false;
+            RiverSubgraph subgraph = new RiverSubgraph();
+            for (int i = 0; i < length; i++) {
+                RiverNode node = new RiverNode(startX, startZ, 3, /*2 + (int)((i * 4.0) / length),*/ 2, angle);
+
+                // Out of bounds!
+                if (!plateChunks.contains(node.holdingChunkPos())) {
+                    break;
+                }
+
+                if (subgraph.getCurrent() != null) {
+                    AABB line = AABB.buildLine(subgraph.getCurrent(), node);
+
+                    AABB clip = graph.getClip(line);
+                    if (clip != null) {
+
+//                        RiverNode base = null;
+//                        double minDist = Double.POSITIVE_INFINITY;
+//
+//                        for (RiverNode component : clip.getComponents()) {
+//                            double dist = component.dist(node);
+//
+//                            if (minDist > dist) {
+//                                minDist = dist;
+//                                base = component;
+//                            }
+//                        }
+
+//                        if (base != null) {
+//                            boolean unnatural = RiverAngleHelper.isUnnaturalMerge(base, node);
+//
+//                            if (unnatural) {
+//                                // Testing code, needs psi
+////                                subgraph.addNode(node);
+////                                node.addSuccessor(base);
+//                            } else {
+                                // Build phi node
+
+                                // Find best intersection
+                                // FIXME: slightly wrong! Needs to be closer in some cases and further in others!
+                                // FIXME: https://discord.com/channels/651605124652859404/659536223156830210/930254922149134366
+                                Vec2f intrsct = BruteforceIntersect.findBestIntersection(clip, line);
+
+                                if (intrsct != null) {
+                                    builtPhi = true;
+//                                    System.out.println("phi");
+                                    RiverNode phi = new RiverPhiNode(intrsct.x, intrsct.y, 3, 2, angle);
+
+                                    // TODO: adding to the wrong subgraph?
+                                    subgraph.addNodeDirect(phi);
+
+                                    // Add new node to graph as we break before that's done
+                                    subgraph.addNode(node);
+
+                                    // Branch->phi
+                                    node.addSuccessor(phi);
+
+                                    // Modify base branch to insert phi
+                                    // TODO: move to rivernode?
+
+                                    RiverNode first = clip.getComponents().get(0);
+                                    RiverNode next = clip.getComponents().get(1);
+
+//                                    first.delSuccessor(next);
+//                                    first.addSuccessor(phi);
+//                                    phi.addSuccessor(next);
+                                }
+                                // TODO: base-node has no collider!
+//                            }
+//                        }
+
+                        // TODO: angle based phi node
+                        // TODO: psi node when angle inappropriate
+
+                        break;
+                    }
+
+                    subgraph.addAABB(line);
+                }
+
+                subgraph.addNode(node);
+                angle += (random.nextDouble() - random.nextDouble()) * (Math.PI / 6);
+
+                // Normalize to [0, 2pi)
+                angle = RiverAngleHelper.wrapRad(angle);
+
+                double dist = random.nextDouble(20) + 15;
+                startX += Math.cos(angle) * dist;
+                startZ += Math.sin(angle) * dist;
+            }
+
+            subgraph.endsWithPhi = builtPhi;
+
+            // Check if subgraph has any rivers above a certain size
+            if (subgraph.getNodes().size() > 18) {
+                graph.addSubgraph(subgraph);
+            }
+        }
+
+        return graph;
+    }
+
+    private static void iterateGraphReach(long seed, RiverGraph graph, LongSet plateChunks) {
+//        ChunkRandom random = new ChunkRandom(new SimpleRandom(seed));
+
+        for (RiverSubgraph subgraph : graph.getSubgraphs()) {
+            if (subgraph.endsWithPhi) {
+                continue;
+            }
+
+            // Last node in line
+            RiverNode last = subgraph.getCurrent();
+            double angle = last.angle();
+
+            double x = last.x() + Math.cos(angle) * 20;
+            double z = last.z() + Math.sin(angle) * 20;
+
+            RiverNode node = new RiverNode(x, z, 3, 2, angle);
+
+            if (!plateChunks.contains(node.holdingChunkPos())) {
+                break;
+            }
+
+            AABB line = AABB.buildLine(subgraph.getCurrent(), node);
+
+            AABB clip = graph.getClip(line);
+            if (clip != null) {
+                Vec2f intrsct = BruteforceIntersect.findBestIntersection(clip, line);
+
+                if (intrsct != null) {
+                    RiverNode phi = new RiverPhiNode(intrsct.x, intrsct.y, 3, 2, angle);
+
+                    // TODO: adding to the wrong subgraph?
+                    subgraph.addNodeDirect(phi);
+
+                    // Add new node to graph as we break before that's done
+                    subgraph.addNode(node);
+
+                    // Branch->phi
+                    node.addSuccessor(phi);
+                }
+            }
+        }
+    }
+
+    private static void traversePredecessors(long seed, RiverGraph graph, LongSet plateChunks, int maxSize) {
+        ChunkRandom random = new ChunkRandom(new SimpleRandom(seed));
+
+        int minSize = maxSize / 2;
+
+        Deque<RiverNode> stack = new LinkedList<>();
+        int i = 0;
+        for (RiverSubgraph subgraph : graph.getSubgraphs()) {
+            RiverNode current = subgraph.getCurrent();
+            random.setCarverSeed(seed, (int)current.x(), (int)current.z());
+
+            stack.add(current);
+
+            // TODO: needs a good count stack
+            int good = 0;
+            int nextGood = 5 + random.nextInt(6);
+            while (!stack.isEmpty()) {
+                RiverNode node = stack.removeFirst();
+
+                // Exactly 1 path
+                if (node.getPredecessors().size() == 1) {
+                    good++;
+                } else {
+                    good = 0;
+                }
+
+                if (good >= nextGood) {
+                    good = 0;
+                    nextGood = 5 + random.nextInt(6);
+
+                    // Branch tree
+                    int len = random.nextInt(maxSize - minSize) + minSize;
+                    len = Math.max(len, 3);
+
+                    double x = node.x();
+                    double z = node.z();
+
+                    // FIXME: correct angle!
+                    double angleAdd = (random.nextDouble() - random.nextDouble()) * (Math.PI / 6);
+                    while (Math.abs(angleAdd) < (Math.PI / 12)) {
+                        angleAdd = (random.nextDouble() - random.nextDouble()) * (Math.PI / 6);
+                    }
+
+                    angleAdd = Math.PI - angleAdd;
+
+                    double angle = node.angle() + angleAdd;
+                    angle = RiverAngleHelper.wrapRad(angle);
+
+                    double dist = random.nextDouble(20) + 15;
+                    x += Math.cos(angle) * dist;
+                    z += Math.sin(angle) * dist;
+
+                    RiverNode last = node;
+                    Set<RiverNode> exclude = new HashSet<>();
+                    exclude.add(last);
+                    for (int j = 0; j < len; j++) {
+                        RiverNode branch = new RiverNode(x, z, 3, 2, node.angle());
+
+                        if (!plateChunks.contains(branch.holdingChunkPos())) {
+                            break;
+                        }
+
+                        AABB line = AABB.buildLine(last, branch);
+                        if (graph.getClip(line, exclude) != null) {
+                            // Phi not possible in limited predecessor traversal
+                            break;
+                        }
+
+                        subgraph.addAABB(line);
+
+                        branch.addSuccessor(last);
+
+                        subgraph.addNodeDirect(branch);
+
+                        //////
+
+                        angle += (random.nextDouble() - random.nextDouble()) * (Math.PI / 6);
+
+                        // Normalize to [0, 2pi)
+                        angle = RiverAngleHelper.wrapRad(angle);
+
+                        dist = random.nextDouble(20) + 15;
+                        x += Math.cos(angle) * dist;
+                        z += Math.sin(angle) * dist;
+
+                        last = branch;
+                        exclude.add(last);
+                    }
+                }
+
+                stack.addAll(node.getPredecessors());
+            }
+
+            i++;
+        }
+    }
+
+    private static void resetAllNodes(RiverGraph graph) {
+        for (RiverSubgraph subgraph : graph.getSubgraphs()) {
+            for (RiverNode node : subgraph.getNodes()) {
+                node.setRadius(3);
+            }
+        }
+    }
+
+    private static void growRiversDownstream(RiverGraph graph) {
+        // Root nodes not accurate at this point
+
+        List<RiverNode> roots = new ArrayList<>();
+
+        // Reverse traversal
+        for (RiverSubgraph subgraph : graph.getSubgraphs()) {
+            RiverNode current = subgraph.getCurrent();
+
+            Deque<RiverNode> stack = new LinkedList<>();
+            stack.add(current);
+
+            while (!stack.isEmpty()) {
+                RiverNode node = stack.removeFirst();
+
+                // Starting point
+                if (node.getPredecessors().isEmpty()) {
+                    roots.add(node);
+                }
+
+                stack.addAll(node.getPredecessors());
+            }
+        }
+
+        // Forward traversal
+        for (RiverNode root : roots) {
+            Deque<RiverNode> stack = new LinkedList<>();
+            stack.add(root);
+
+            while (!stack.isEmpty()) {
+                RiverNode node = stack.removeFirst();
+
+                node.setRadius(node.radius() + 1);
+
+                stack.addAll(node.getSuccessors());
+            }
+        }
+    }
+
+    private static void dfs(int x, int z, int check, CachingLayerSampler riverSampler, LongSet plateChunks, LongSet visited) {
+        long longpos = ChunkPos.toLong(x, z);
+        Deque<Long> next = new LinkedList<>();
+        next.add(longpos);
+
+        while (!next.isEmpty()) {
+            long pos = next.removeFirst();
+
+            if (visited.contains(pos)) {
+                continue;
+            }
+
+            visited.add(pos);
+
+            int ax = ChunkPos.getPackedX(pos);
+            int az = ChunkPos.getPackedZ(pos);
+            int sample = sampleChunkPos(ax, az, riverSampler);
+            if (sample == check) {
+                plateChunks.add(pos);
+
+                // Iterate next chunks
+                next.add(ChunkPos.toLong(ax + 1, az));
+                next.add(ChunkPos.toLong(ax - 1, az));
+                next.add(ChunkPos.toLong(ax, az + 1));
+                next.add(ChunkPos.toLong(ax, az - 1));
+            }
+        }
+    }
+
+    private static int sampleChunkPos(int x, int z, CachingLayerSampler riverSampler) {
+        // Center sampling
+        return riverSampler.sample((x << 2) + 2, (z << 2) + 2);
+    }
+}

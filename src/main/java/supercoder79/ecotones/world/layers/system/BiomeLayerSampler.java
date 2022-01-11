@@ -23,6 +23,7 @@ public class BiomeLayerSampler {
    public Biome sample(Registry<Biome> biomeRegistry, int x, int z) {
       int i = this.sampler.sample(x, z);
       RegistryKey<Biome> registryKey = BiomeIdManager.getKey(i);
+
       if (registryKey == null) {
          throw new IllegalStateException("Unknown biome id emitted by layers: " + i);
       } else {

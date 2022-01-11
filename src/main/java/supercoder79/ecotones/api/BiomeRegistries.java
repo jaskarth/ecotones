@@ -118,6 +118,7 @@ public final class BiomeRegistries {
             }
         }
 
-        return optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome).orElseThrow(() -> new IllegalStateException("Impossible state when trying to get biome key")));
+        return optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome)
+                .orElseThrow(() -> new IllegalStateException("Impossible state when trying to get biome key")));
     }
 }
