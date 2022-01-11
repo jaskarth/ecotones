@@ -31,15 +31,17 @@ public final class RiverPlateGenerator {
         // Find all chunks in plate
         dfs(pos.x, pos.z, sample, riverSampler, plateChunks, visited);
 
-        // TODO: actual river gen lol
+        // Testing seed: -4775535294389812203
 
         RiverGraph graph = runPilotRivers(seed, plateChunks);
 
         iterateGraphReach(seed, graph, plateChunks);
 
+        // Branches
+        traversePredecessors(seed, graph, plateChunks, 20);
+        traversePredecessors(seed, graph, plateChunks, 16);
+        traversePredecessors(seed, graph, plateChunks, 12);
         traversePredecessors(seed, graph, plateChunks, 8);
-        traversePredecessors(seed, graph, plateChunks, 6);
-        traversePredecessors(seed, graph, plateChunks, 3);
 
         resetAllNodes(graph);
 
@@ -62,7 +64,7 @@ public final class RiverPlateGenerator {
                 continue;
             }
 
-            int length = random.nextInt(20) + 20;
+            int length = random.nextInt(45) + 30;
 
             // Random starting point
             double startX = (x * 16) + random.nextDouble(16);
@@ -116,7 +118,7 @@ public final class RiverPlateGenerator {
                                 if (intrsct != null) {
                                     builtPhi = true;
 //                                    System.out.println("phi");
-                                    RiverNode phi = new RiverPhiNode(intrsct.x, intrsct.y, 3, 2, angle);
+                                    RiverPhiNode phi = new RiverPhiNode(intrsct.x, intrsct.y, 3, 2, angle);
 
                                     // TODO: adding to the wrong subgraph?
                                     subgraph.addNodeDirect(phi);
@@ -132,6 +134,7 @@ public final class RiverPlateGenerator {
 
                                     RiverNode first = clip.getComponents().get(0);
                                     RiverNode next = clip.getComponents().get(1);
+                                    phi.next = next;
 
 //                                    first.delSuccessor(next);
 //                                    first.addSuccessor(phi);
@@ -200,7 +203,7 @@ public final class RiverPlateGenerator {
                 Vec2f intrsct = BruteforceIntersect.findBestIntersection(clip, line);
 
                 if (intrsct != null) {
-                    RiverNode phi = new RiverPhiNode(intrsct.x, intrsct.y, 3, 2, angle);
+                    RiverPhiNode phi = new RiverPhiNode(intrsct.x, intrsct.y, 3, 2, angle);
 
                     // TODO: adding to the wrong subgraph?
                     subgraph.addNodeDirect(phi);
@@ -210,6 +213,8 @@ public final class RiverPlateGenerator {
 
                     // Branch->phi
                     node.addSuccessor(phi);
+
+                    phi.next = clip.getComponents().get(1);
                 }
             }
         }
@@ -230,7 +235,7 @@ public final class RiverPlateGenerator {
 
             // TODO: needs a good count stack
             int good = 0;
-            int nextGood = 5 + random.nextInt(6);
+            int nextGood = 4 + random.nextInt(5);
             while (!stack.isEmpty()) {
                 RiverNode node = stack.removeFirst();
 
@@ -241,13 +246,14 @@ public final class RiverPlateGenerator {
                     good = 0;
                 }
 
+                // Build branch
                 if (good >= nextGood) {
                     good = 0;
-                    nextGood = 5 + random.nextInt(6);
+                    nextGood = 4 + random.nextInt(5);
 
                     // Branch tree
                     int len = random.nextInt(maxSize - minSize) + minSize;
-                    len = Math.max(len, 3);
+                    len = Math.max(len, 6);
 
                     double x = node.x();
                     double z = node.z();
@@ -270,8 +276,10 @@ public final class RiverPlateGenerator {
                     RiverNode last = node;
                     Set<RiverNode> exclude = new HashSet<>();
                     exclude.add(last);
+                    LinkedList<RiverNode> subgraphDirect = new LinkedList<>();
+                    subgraphDirect.add(last);
                     for (int j = 0; j < len; j++) {
-                        RiverNode branch = new RiverNode(x, z, 3, 2, node.angle());
+                        RiverNode branch = new RiverNode(x, z, 3, 2, angle);
 
                         if (!plateChunks.contains(branch.holdingChunkPos())) {
                             break;
@@ -283,11 +291,13 @@ public final class RiverPlateGenerator {
                             break;
                         }
 
-                        subgraph.addAABB(line);
+                        subgraphDirect.add(branch);
 
-                        branch.addSuccessor(last);
-
-                        subgraph.addNodeDirect(branch);
+//                        subgraph.addAABB(line);
+//
+//                        branch.addSuccessor(last);
+//
+//                        subgraph.addNodeDirect(branch);
 
                         //////
 
@@ -302,6 +312,26 @@ public final class RiverPlateGenerator {
 
                         last = branch;
                         exclude.add(last);
+                    }
+
+                    if (subgraphDirect.size() >= (minSize * 0.6)) {
+                        for (RiverNode nd : subgraphDirect) {
+                            if (nd == node) {
+                                continue;
+                            }
+
+                            subgraph.addNodeDirect(nd);
+                        }
+
+                        for (int j = subgraphDirect.size() - 2; j >= 0; j--) {
+                            RiverNode nd1 = subgraphDirect.get(j + 1);
+                            RiverNode nd2 = subgraphDirect.get(j);
+                            nd1.addSuccessor(nd2);
+
+                            // Collider
+                            AABB line = AABB.buildLine(nd1, nd2);
+                            subgraph.addAABB(line);
+                        }
                     }
                 }
 
@@ -349,12 +379,25 @@ public final class RiverPlateGenerator {
             Deque<RiverNode> stack = new LinkedList<>();
             stack.add(root);
 
+            Set<RiverNode> seen = new HashSet<>();
             while (!stack.isEmpty()) {
                 RiverNode node = stack.removeFirst();
 
-                node.setRadius(node.radius() + 1);
+                if (seen.contains(node)) {
+                    continue;
+                }
+
+                seen.add(node);
+                node.setRadius(Math.min(7, node.radius() + 1));
 
                 stack.addAll(node.getSuccessors());
+
+                // FIXME: bad hack! phi node should have proper successor, but we don't do that at the moment!
+                if (node instanceof RiverPhiNode phi) {
+                    if (phi.next != null) {
+                        stack.add(phi.next);
+                    }
+                }
             }
         }
     }
