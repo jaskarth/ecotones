@@ -35,8 +35,8 @@ public class SparseAlpineForestBiome extends EcotonesBiomeBuilder {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sparse_alpine_forest"), new SparseAlpineForestBiome(3f, 0.125f, 2.2, 0.98).build());
         BiomeRegistries.addMountainBiome(INSTANCE);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE);
-        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 8);
-        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, MountainLakeBiome.INSTANCE);
+//        BiomeRegistries.registerBiomeVariantChance(INSTANCE, 8);
+//        BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, MountainLakeBiome.INSTANCE);
 
         Climate.HOT_MILD.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);
         Climate.HOT_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, INSTANCE, 1.0);

@@ -13,8 +13,8 @@ import supercoder79.ecotones.world.features.config.PatchFeatureConfig;
 
 import java.util.Random;
 
-public class PatchFeature extends EcotonesFeature<PatchFeatureConfig> {
-    public PatchFeature(Codec<PatchFeatureConfig> configCodec) {
+public class SurfacePatchFeature extends EcotonesFeature<PatchFeatureConfig> {
+    public SurfacePatchFeature(Codec<PatchFeatureConfig> configCodec) {
         super(configCodec);
     }
 

@@ -52,7 +52,7 @@ public final class EcotonesFeatures {
     public static final EcotonesFeature<SimpleTreeFeatureConfig> BARREN_TREE = new BarrenTreeFeature(SimpleTreeFeatureConfig.CODEC);
     public static final EcotonesFeature<SimpleTreeFeatureConfig> FAN_TREE = new FanTreeFeature(SimpleTreeFeatureConfig.CODEC);
     public static final EcotonesFeature<DefaultFeatureConfig> SMALL_ROCK = new SmallRockFeature(DefaultFeatureConfig.CODEC);
-    public static final EcotonesFeature<PatchFeatureConfig> GROUND_PATCH = new PatchFeature(PatchFeatureConfig.CODEC);
+    public static final EcotonesFeature<PatchFeatureConfig> GROUND_PATCH = new SurfacePatchFeature(PatchFeatureConfig.CODEC);
     public static final EcotonesFeature<SimpleTreeFeatureConfig> TALL_BARREN_TREE = new TallBarrenTreeFeature(SimpleTreeFeatureConfig.CODEC);
     public static final EcotonesFeature<RockSpireFeatureConfig> ROCK_SPIRE = new RockSpireFeature(RockSpireFeatureConfig.CODEC);
     public static final EcotonesFeature<DefaultFeatureConfig> GRANITE_SPRING = new GraniteSpringFeature(DefaultFeatureConfig.CODEC);
@@ -68,6 +68,7 @@ public final class EcotonesFeatures {
     public static final EcotonesFeature<SimpleTreeFeatureConfig> TALL_PINE = new TallPineTree(SimpleTreeFeatureConfig.CODEC);
     public static final EcotonesFeature<DefaultFeatureConfig> ORE_VEIN = new OreVeinFeature(DefaultFeatureConfig.CODEC);
     public static final EcotonesFeature<RandomPatchFeatureConfig> RANDOM_PATCH = new RandomPatchFeature(RandomPatchFeatureConfig.CODEC);
+    public static final EcotonesFeature<DefaultFeatureConfig> SURFACE_PATCH = new SurfacePatchReplaceFeature(DefaultFeatureConfig.CODEC);
 
     public static void init() {
         register("desertify", DESERTIFY_SOIL);
@@ -119,6 +120,7 @@ public final class EcotonesFeatures {
         register("brush_tree", BRUSH_TREE);
         register("tall_pine", TALL_PINE);
         register("random_patch", RANDOM_PATCH);
+        register("surface_patch", SURFACE_PATCH);
     }
 
     private static void register(String name, Feature<?> feature) {

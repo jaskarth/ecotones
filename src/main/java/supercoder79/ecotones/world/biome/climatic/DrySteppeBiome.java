@@ -12,6 +12,7 @@ import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
+import supercoder79.ecotones.world.river.deco.CommonRiverDecorations;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -41,6 +42,8 @@ public class DrySteppeBiome extends EcotonesBiomeBuilder {
         Climate.HOT_VERY_DRY.add(INSTANCE, 0.6);
         Climate.HOT_DRY.add(INSTANCE, 0.6);
         Climate.WARM_DRY.add(INSTANCE, 0.3);
+
+        BiomeRegistries.registerRiverDecorator(INSTANCE, CommonRiverDecorations::buildDesertLushness);
     }
 
     public DrySteppeBiome(float depth, float scale, double hilliness, double volatility) {

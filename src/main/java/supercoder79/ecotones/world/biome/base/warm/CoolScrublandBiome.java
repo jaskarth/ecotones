@@ -13,6 +13,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
+import supercoder79.ecotones.world.river.deco.CommonRiverDecorations;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -40,6 +41,8 @@ public class CoolScrublandBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.WARM_VERY_DRY.add(INSTANCE, 1);
+
+        BiomeRegistries.registerRiverDecorator(INSTANCE, CommonRiverDecorations::buildDesertLushness);
     }
 
     protected CoolScrublandBiome(float depth, float scale, double hilliness, double volatility, boolean thicket) {

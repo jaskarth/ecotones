@@ -30,6 +30,7 @@ import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
+import supercoder79.ecotones.world.river.deco.CommonRiverDecorations;
 import supercoder79.ecotones.world.surface.DesertScrubSurfaceBuilder;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
@@ -45,6 +46,8 @@ public class ScrublandBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.HOT_VERY_DRY.add(INSTANCE, 1);
+
+        BiomeRegistries.registerRiverDecorator(INSTANCE, CommonRiverDecorations::buildDesertLushness);
     }
 
     protected ScrublandBiome(float depth, float scale, double hilliness, double volatility) {

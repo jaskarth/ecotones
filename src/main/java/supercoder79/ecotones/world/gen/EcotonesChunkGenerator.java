@@ -52,6 +52,11 @@ import supercoder79.ecotones.world.data.DataFunction;
 import supercoder79.ecotones.world.data.DataHolder;
 import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
+import supercoder79.ecotones.world.river.deco.RiverDecorator;
+import supercoder79.ecotones.world.storage.ChunkDataStorage;
+import supercoder79.ecotones.world.storage.ChunkStorageView;
+import supercoder79.ecotones.world.storage.StorageKeys;
+import supercoder79.ecotones.world.storage.data.RiverData;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -390,6 +395,18 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         long populationSeed = random.setPopulationSeed(world.getSeed(), startX, startZ, BiomeGenData.LOOKUP.getOrDefault(key(biome), BiomeGenData.DEFAULT).scale() + scaleNoise.sample(startX + 8, startZ + 8));
 
         EcotonesFeatures.ORE_VEIN.generate(new FeatureContext<>(Optional.empty(), world, this, random, pos, DefaultFeatureConfig.INSTANCE));
+
+        // TODO: neighbor checking for distance!
+        ChunkDataStorage storage = ChunkStorageView.getStorage(chunk);
+        if (storage != null) {
+            RiverData riverData = storage.get(StorageKeys.RIVER_DATA);
+            if (riverData != null) {
+                RiverDecorator riverDecorator = BiomeRegistries.RIVER_DECORATORS.getOrDefault(BiomeRegistries.key(biome), RiverDecorator.EMPTY);
+
+                riverDecorator.decorate(riverData.openToAir(), 0, new FeatureContext<>(Optional.empty(), world, this, random, pos, DefaultFeatureConfig.INSTANCE));
+            }
+        }
+
         try {
             generateFeatureStep(biome, structureAccessor, this, (ChunkRegion) world, populationSeed, random, pos);
         } catch (Exception ex) {
@@ -404,6 +421,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 
         if (this.biomeSource instanceof CaveBiomeSource) {
             CaveBiome caveBiome = ((CaveBiomeSource)this.biomeSource).getCaveBiomeForNoiseGen((chunkPos.x << 2) + 2, (chunkPos.z << 2) + 2);
+
             for (ConfiguredFeature<?, ?> feature : caveBiome.getFeatures()) {
                 feature.generate(world, this, random, pos);
             }

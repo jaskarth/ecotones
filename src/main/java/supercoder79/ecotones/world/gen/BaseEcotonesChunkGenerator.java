@@ -42,6 +42,10 @@ import supercoder79.ecotones.util.noise.OpenSimplexNoise;
 import supercoder79.ecotones.world.river.PlateSet;
 import supercoder79.ecotones.world.river.RiverWorker;
 import supercoder79.ecotones.world.river.graph.RiverNode;
+import supercoder79.ecotones.world.storage.ChunkDataStorage;
+import supercoder79.ecotones.world.storage.ChunkStorageView;
+import supercoder79.ecotones.world.storage.StorageKeys;
+import supercoder79.ecotones.world.storage.data.RiverData;
 import supercoder79.ecotones.world.structure.StructureTerrainControl;
 import supercoder79.ecotones.world.surface.SlopedSurfaceBuilder;
 import supercoder79.ecotones.world.surface.system.ConfiguredSurfaceBuilder;
@@ -288,10 +292,10 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     }
 
     protected void sampleNoiseColumn(double[] buffer, int x, int z) {
-        sampleNoiseColumn(null, buffer, x, z);
+        sampleNoiseColumn(null, null, buffer, x, z);
     }
 
-    protected void sampleNoiseColumn(List<RiverNode> riverPlate, double[] buffer, int x, int z) {
+    protected void sampleNoiseColumn(Chunk chunk, List<RiverNode> riverPlate, double[] buffer, int x, int z) {
         this.noiseCache.get().get(buffer, x, z);
 
         for (int i = 0; i < buffer.length; i++) {
@@ -300,17 +304,20 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
         // River filter
         if (riverPlate != null) {
-            filterForRiver(riverPlate, buffer, x, z);
+            ChunkDataStorage storage = ChunkStorageView.getStorage(chunk);
+            if (storage != null) {
+                filterForRiver(storage, riverPlate, buffer, x, z);
+            }
         }
     }
 
-    private void filterForRiver(List<RiverNode> riverPlate, double[] buffer, int x, int z) {
+    private void filterForRiver(ChunkDataStorage storage, List<RiverNode> riverPlate, double[] buffer, int x, int z) {
         double color = 0;
 
-        BitSet bits = new BitSet(16);
+        BitSet bits = new BitSet(36);
         for (RiverNode node : riverPlate) {
-            // Only integer radii for now
-            int rad = (int) node.radius();
+            double radius = node.radius();
+            int rad = (int) radius;
             if (!node.getSuccessors().isEmpty()) {
                 RiverNode successor = node.getSuccessors().get(0);
 
@@ -327,12 +334,19 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
                     for (int x1 = -rad; x1 <= rad; x1++) {
                         for (int z1 = -rad; z1 <= rad; z1++) {
-                            if (x1 * x1 + z1 * z1 <= rad * rad) {
+                            if (x1 * x1 + z1 * z1 <= radius * radius) {
                                 int gx = ax + x1;
                                 int gz = az + z1;
 
-                                if (gx >= x * 4 && gx < (x + 1) * 4 && gz >= z * 4 && gz < (z + 1) * 4) {
-                                    int index = (gx - (x * 4)) + (gz - (z * 4)) * 4;
+                                if (gx >= (x * 4) - 1 && gx < ((x + 1) * 4) + 1 && gz >= (z * 4) - 1 && gz < ((z + 1) * 4) + 1) {
+                                    int index1 = (gx - ((x * 4) - 1));
+                                    int index2 = (gz - ((z * 4) - 1)) * 6;
+
+                                    int index = index1 + index2;
+
+                                    if (index < 0 || index >= 36) {
+                                        throw new IllegalStateException("Index out of bounds: " + index + " (x=" + x + ", z=" + z + ")" + " (gx=" + gx + ", gz=" + gz + ")" + " (x1=" + x1 + ", z1=" + z1 + ")");
+                                    }
 
                                     bits.set(index);
                                 }
@@ -345,13 +359,30 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
         int card = bits.cardinality();
 
-        double lerpstr = (double) card / 16.0;
+        double lerpstr = (double) card / 36.0;
         if (lerpstr > 0.0) {
-//            lerpstr = Math.max(lerpstr, 0.1);
+            RiverData data = storage.get(StorageKeys.RIVER_DATA);
+
+            // Add river data if it doesn't exist
+            if (data == null) {
+                storage.add(StorageKeys.RIVER_DATA, new RiverData(buffer[9] < 0));
+            } else {
+                // Update open to air
+                if (!data.openToAir() && (buffer[9] < 0)) {
+                    storage.add(StorageKeys.RIVER_DATA, new RiverData(true));
+                }
+            }
+//            lerpstr = Math.max(lerpstr, 0.2);
         }
 
         double noise = this.riverNoiseNoise.sample(x, z);
+        // River area- actual river transformation
         buffer[8] = MathHelper.lerp(lerpstr, buffer[8], -0.7 + noise);
+
+        // Reduce edges
+        //1+\left(x-1\right)^{3}
+        double lerp9 = 1 + Math.pow(lerpstr - 1, 3);
+        buffer[9] = MathHelper.lerp(lerp9, buffer[9], buffer[9] - MathHelper.clampedLerpFromProgress(buffer[10], -1, 0, 1.6, 0));
 //        buffer[9] = MathHelper.lerp(lerpstr, buffer[9], -0.1);
 //        buffer[7] = MathHelper.lerp(lerpstr, buffer[7], -0.05 + noise / 1.5);
     }
@@ -501,7 +532,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         // Initialize noise data on the x0 column.
         for(int noiseZ = 0; noiseZ < this.noiseSizeZ + 1; ++noiseZ) {
             noiseData[0][noiseZ] = new double[this.noiseSizeY + 1];
-            this.sampleNoiseColumn(riverNodes, noiseData[0][noiseZ], chunkX * this.noiseSizeX, chunkZ * this.noiseSizeZ + noiseZ);
+            this.sampleNoiseColumn(chunk, riverNodes, noiseData[0][noiseZ], chunkX * this.noiseSizeX, chunkZ * this.noiseSizeZ + noiseZ);
             noiseData[1][noiseZ] = new double[this.noiseSizeY + 1];
         }
 
@@ -517,7 +548,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
             // Initialize noise data on the x1 column
             int noiseZ;
             for(noiseZ = 0; noiseZ < this.noiseSizeZ + 1; ++noiseZ) {
-                this.sampleNoiseColumn(riverNodes, noiseData[1][noiseZ], chunkX * this.noiseSizeX + noiseX + 1, chunkZ * this.noiseSizeZ + noiseZ);
+                this.sampleNoiseColumn(chunk, riverNodes, noiseData[1][noiseZ], chunkX * this.noiseSizeX + noiseX + 1, chunkZ * this.noiseSizeZ + noiseZ);
             }
 
             // [0, 4] -> z noise chunks

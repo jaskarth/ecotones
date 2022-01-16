@@ -20,6 +20,7 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.decorator.SpreadDoubleDecorator;
+import supercoder79.ecotones.world.river.deco.CommonRiverDecorations;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -44,6 +45,8 @@ public class LushDesertBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_DESERT.add(INSTANCE, 0.3);
         Climate.WARM_DESERT.add(INSTANCE, 0.12);
+
+        BiomeRegistries.registerRiverDecorator(INSTANCE, CommonRiverDecorations::buildDesertLushness);
     }
 
 

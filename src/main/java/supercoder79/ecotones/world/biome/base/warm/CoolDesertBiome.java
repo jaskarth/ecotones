@@ -23,6 +23,7 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.decorator.SpreadDoubleDecorator;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
+import supercoder79.ecotones.world.river.deco.CommonRiverDecorations;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -48,6 +49,8 @@ public class CoolDesertBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.WARM_DESERT.add(INSTANCE, 1);
+
+        BiomeRegistries.registerRiverDecorator(INSTANCE, CommonRiverDecorations::buildDesertLushness);
     }
 
     protected CoolDesertBiome(float depth, float scale, double hilliness, double volatility) {

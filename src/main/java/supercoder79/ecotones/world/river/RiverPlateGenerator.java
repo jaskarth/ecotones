@@ -41,7 +41,7 @@ public final class RiverPlateGenerator {
         traversePredecessors(seed, graph, plateChunks, 20);
         traversePredecessors(seed, graph, plateChunks, 16);
         traversePredecessors(seed, graph, plateChunks, 12);
-        traversePredecessors(seed, graph, plateChunks, 8);
+//        traversePredecessors(seed, graph, plateChunks, 8);
 
         resetAllNodes(graph);
 
@@ -60,11 +60,11 @@ public final class RiverPlateGenerator {
             int z = ChunkPos.getPackedZ(pos);
             random.setCarverSeed(seed, x, z);
 
-            if (random.nextInt(600) > 0) {
+            if (random.nextInt(500) > 0) {
                 continue;
             }
 
-            int length = random.nextInt(45) + 30;
+            int length = random.nextInt(45) + 50;
 
             // Random starting point
             double startX = (x * 16) + random.nextDouble(16);
@@ -167,7 +167,7 @@ public final class RiverPlateGenerator {
             subgraph.endsWithPhi = builtPhi;
 
             // Check if subgraph has any rivers above a certain size
-            if (subgraph.getNodes().size() > 18) {
+            if (subgraph.getNodes().size() > 18 || subgraph.endsWithPhi) {
                 graph.addSubgraph(subgraph);
             }
         }
@@ -235,7 +235,7 @@ public final class RiverPlateGenerator {
 
             // TODO: needs a good count stack
             int good = 0;
-            int nextGood = 4 + random.nextInt(5);
+            int nextGood = 5 + random.nextInt(5);
             while (!stack.isEmpty()) {
                 RiverNode node = stack.removeFirst();
 
@@ -249,7 +249,7 @@ public final class RiverPlateGenerator {
                 // Build branch
                 if (good >= nextGood) {
                     good = 0;
-                    nextGood = 4 + random.nextInt(5);
+                    nextGood = 5 + random.nextInt(5);
 
                     // Branch tree
                     int len = random.nextInt(maxSize - minSize) + minSize;
@@ -259,9 +259,9 @@ public final class RiverPlateGenerator {
                     double z = node.z();
 
                     // FIXME: correct angle!
-                    double angleAdd = (random.nextDouble() - random.nextDouble()) * (Math.PI / 6);
-                    while (Math.abs(angleAdd) < (Math.PI / 12)) {
-                        angleAdd = (random.nextDouble() - random.nextDouble()) * (Math.PI / 6);
+                    double angleAdd = (random.nextDouble() - random.nextDouble()) * (Math.PI / 3);
+                    while (Math.abs(angleAdd) < (Math.PI / 5)) {
+                        angleAdd = (random.nextDouble() - random.nextDouble()) * (Math.PI / 3);
                     }
 
                     angleAdd = Math.PI - angleAdd;

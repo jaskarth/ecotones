@@ -34,6 +34,7 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
+import supercoder79.ecotones.world.river.deco.CommonRiverDecorations;
 import supercoder79.ecotones.world.surface.DesertScrubSurfaceBuilder;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
@@ -49,6 +50,8 @@ public class DesertShrublandBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_DESERT.add(INSTANCE, 0.3);
         Climate.WARM_DESERT.add(INSTANCE, 0.2);
+
+        BiomeRegistries.registerRiverDecorator(INSTANCE, CommonRiverDecorations::buildDesertLushness);
     }
 
 
