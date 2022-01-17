@@ -14,6 +14,7 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.biome.Biome;
@@ -60,6 +61,7 @@ import supercoder79.ecotones.world.storage.data.RiverData;
 
 import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implements DataHolder {
@@ -408,7 +410,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         }
 
         try {
-            generateFeatureStep(biome, structureAccessor, this, (ChunkRegion) world, populationSeed, random, pos);
+            generateFeatureStep(biome, structureAccessor, this, (ChunkRegion) world, populationSeed, random, pos, chunk);
         } catch (Exception ex) {
             CrashReport crashReport = CrashReport.create(ex, "Biome decoration");
             crashReport.addElement("Generation")
@@ -428,41 +430,48 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         }
     }
 
-    public void generateFeatureStep(Biome biome, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, ChunkRegion region, long populationSeed, ChunkRandom random, BlockPos origin) {
+    public void generateFeatureStep(Biome biome, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, ChunkRegion region, long populationSeed, ChunkRandom random, BlockPos origin, Chunk chunk) {
+        ChunkPos chunkPos = region.getCenterPos();
+        ChunkSectionPos chunkSectionPos = ChunkSectionPos.from(chunkPos, region.getBottomSectionCoord());
+
         List<List<Supplier<PlacedFeature>>> list = biome.getGenerationSettings().getFeatures();
         Registry<PlacedFeature> registry = region.getRegistryManager().get(Registry.PLACED_FEATURE_KEY);
         Registry<StructureFeature<?>> registry2 = region.getRegistryManager().get(Registry.STRUCTURE_FEATURE_KEY);
+
+        Map<Integer, List<StructureFeature<?>>> structuresByStep = Registry.STRUCTURE_FEATURE
+                .stream()
+                .collect(Collectors.groupingBy(structureFeaturex -> structureFeaturex.getGenerationStep().ordinal()));
+
         int i = GenerationStep.Feature.values().length;
 
         for(int j = 0; j < i; ++j) {
             int k = 0;
+            int m = 0;
             if (structureAccessor.shouldGenerateStructures()) {
-//                for(StructureFeature<?> structureFeature : biome.getOrDefault(j, Collections.emptyList())) {
-//                    random.setDecoratorSeed(populationSeed, k, j);
-//                    int l = ChunkSectionPos.getSectionCoord(origin.getX());
-//                    int m = ChunkSectionPos.getSectionCoord(origin.getZ());
-//                    int n = ChunkSectionPos.getBlockCoord(l);
-//                    int o = ChunkSectionPos.getBlockCoord(m);
-//                    Supplier<String> supplier = () -> registry2.getKey(structureFeature).map(Object::toString).orElseGet(structureFeature::toString);
-//
-//                    try {
-//                        int p = region.getBottomY() + 1;
-//                        int q = region.getTopY() - 1;
-//                        region.method_36972(supplier);
-//                        structureAccessor.getStructuresWithChildren(ChunkSectionPos.from(origin), structureFeature)
-//                                .forEach(
-//                                        structureStart -> structureStart.generateStructure(
-//                                                region, structureAccessor, chunkGenerator, random, new BlockBox(n, p, o, n + 15, q, o + 15), new ChunkPos(l, m)
-//                                        )
-//                                );
-//                    } catch (Exception var24) {
-//                        CrashReport crashReport = CrashReport.create(var24, "Feature placement");
-//                        crashReport.addElement("Feature").add("Description", supplier::get);
-//                        throw new CrashException(crashReport);
-//                    }
-//
-//                    ++k;
-//                }
+                if (structureAccessor.shouldGenerateStructures()) {
+                    for(StructureFeature<?> structureFeature : structuresByStep.getOrDefault(j, Collections.emptyList())) {
+                        random.setDecoratorSeed(populationSeed, m, j);
+                        Supplier<String> supplier = () -> (String)registry2.getKey(structureFeature)
+                                .map(Object::toString)
+                                .orElseGet(structureFeature::toString);
+
+                        try {
+                            region.setCurrentlyGeneratingStructureName(supplier);
+                            structureAccessor.getStructureStarts(chunkSectionPos, structureFeature)
+                                    .forEach(
+                                            structureStart -> structureStart.place(
+                                                    region, structureAccessor, this, random, getBlockBoxForChunk(chunk), chunkPos
+                                            )
+                                    );
+                        } catch (Exception var29) {
+                            CrashReport crashReport = CrashReport.create(var29, "Feature placement");
+                            crashReport.addElement("Feature").add("Description", supplier::get);
+                            throw new CrashException(crashReport);
+                        }
+
+                        ++m;
+                    }
+                }
             }
 
             if (list.size() > j) {
@@ -486,6 +495,16 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         }
 
         region.setCurrentlyGeneratingStructureName(null);
+    }
+
+    private static BlockBox getBlockBoxForChunk(Chunk chunk) {
+        ChunkPos chunkPos = chunk.getPos();
+        int i = chunkPos.getStartX();
+        int j = chunkPos.getStartZ();
+        HeightLimitView heightLimitView = chunk.getHeightLimitView();
+        int k = heightLimitView.getBottomY() + 1;
+        int l = heightLimitView.getTopY() - 1;
+        return new BlockBox(i, k, j, i + 15, l, j + 15);
     }
 
     @Override

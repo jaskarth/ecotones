@@ -38,9 +38,9 @@ public final class RiverPlateGenerator {
         iterateGraphReach(seed, graph, plateChunks);
 
         // Branches
+        traversePredecessors(seed, graph, plateChunks, 40);
+        traversePredecessors(seed, graph, plateChunks, 28);
         traversePredecessors(seed, graph, plateChunks, 20);
-        traversePredecessors(seed, graph, plateChunks, 16);
-        traversePredecessors(seed, graph, plateChunks, 12);
 //        traversePredecessors(seed, graph, plateChunks, 8);
 
         resetAllNodes(graph);
@@ -235,7 +235,7 @@ public final class RiverPlateGenerator {
 
             // TODO: needs a good count stack
             int good = 0;
-            int nextGood = 5 + random.nextInt(5);
+            int nextGood = 7 + random.nextInt(5);
             while (!stack.isEmpty()) {
                 RiverNode node = stack.removeFirst();
 
@@ -249,7 +249,7 @@ public final class RiverPlateGenerator {
                 // Build branch
                 if (good >= nextGood) {
                     good = 0;
-                    nextGood = 5 + random.nextInt(5);
+                    nextGood = 7 + random.nextInt(5);
 
                     // Branch tree
                     int len = random.nextInt(maxSize - minSize) + minSize;

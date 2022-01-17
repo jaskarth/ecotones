@@ -7,7 +7,9 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import supercoder79.ecotones.advancement.EcotonesCriteria;
@@ -39,9 +41,12 @@ import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 import supercoder79.ecotones.world.structure.EcotonesStructurePieces;
 import supercoder79.ecotones.world.structure.EcotonesStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructuresConfig;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
 import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
+
+import java.util.List;
 
 public final class Ecotones implements ModInitializer {
 	// TODO: split out into it's own class
@@ -151,8 +156,11 @@ public final class Ecotones implements ModInitializer {
 			if (id.getNamespace().contains("ecotones")) {
 				Biome biome = BuiltinRegistries.BIOME.get(id);
 				BiomeGenData data = EcotonesBiomeBuilder.OBJ2DATA.get(biome);
+				List<ConfiguredStructureFeature<?, ?>> structures = EcotonesBiomeBuilder.BIOME_STRUCTURES.get(biome);
 
-				BiomeGenData.LOOKUP.put(BuiltinRegistries.BIOME.getKey(biome).get(), data);
+				RegistryKey<Biome> key = BuiltinRegistries.BIOME.getKey(biome).get();
+				EcotonesStructuresConfig.STRUCTURE_DATA.put(key, structures);
+				BiomeGenData.LOOKUP.put(key, data);
 				if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 					BiomeChecker.check(biome);
 				}

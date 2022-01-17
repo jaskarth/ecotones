@@ -17,15 +17,13 @@ import supercoder79.ecotones.world.surface.system.ConfiguredSurfaceBuilder;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.world.surface.system.SurfaceConfig;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class EcotonesBiomeBuilder {
     private static final AtomicInteger featureId = new AtomicInteger(0);
     public static final Map<Biome, BiomeGenData> OBJ2DATA = new HashMap<>();
+    public static final Map<Biome, List<ConfiguredStructureFeature<?, ?>>> BIOME_STRUCTURES = new HashMap<>();
     private final Biome.Builder builder;
     private final SpawnSettings.Builder spawnSettings;
     private final GenerationSettings.Builder generationSettings;
@@ -36,6 +34,7 @@ public abstract class EcotonesBiomeBuilder {
     private double hilliness = 1.0;
     private double volatility = 1.0;
     private ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder;
+    private final List<ConfiguredStructureFeature<?, ?>> structures = new ArrayList<>();
 
     public EcotonesBiomeBuilder() {
         this.builder = new Biome.Builder();
@@ -152,12 +151,12 @@ public abstract class EcotonesBiomeBuilder {
 
     protected void addStructureFeature(ConfiguredStructureFeature<?, ?> structureFeature) {
         if (BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE.getRawId(structureFeature) == -1) {
-            String path = "ecotones_auto_registed_structure_" + HashCommon.mix(structureFeature.hashCode());
+            String path = "ecotones_auto_registed_structure_" + featureId.incrementAndGet();
             Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new Identifier("ecotones", path), structureFeature);
             RegistryReport.increment("Configured Structure Feature");
         }
 
-//        this.generationSettings.structureFeature(structureFeature);
+        this.structures.add(structureFeature);
     }
 
     public Biome build() {
@@ -167,6 +166,7 @@ public abstract class EcotonesBiomeBuilder {
 
         Biome biome = builder.build();
         OBJ2DATA.put(biome, new BiomeGenData(this.depth, this.scale, this.volatility, this.hilliness, this.configuredSurfaceBuilder));
+        BIOME_STRUCTURES.put(biome, this.structures);
 
         return biome;
     }

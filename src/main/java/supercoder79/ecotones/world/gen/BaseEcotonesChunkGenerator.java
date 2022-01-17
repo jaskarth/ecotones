@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.gen;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.HashCommon;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
@@ -28,10 +29,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkSection;
 import net.minecraft.world.chunk.ProtoChunk;
 import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.Blender;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.StructuresConfig;
-import net.minecraft.world.gen.chunk.VerticalBlockSample;
+import net.minecraft.world.gen.chunk.*;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.random.ChunkRandom;
 import net.minecraft.world.gen.random.SimpleRandom;
@@ -46,6 +44,7 @@ import supercoder79.ecotones.world.storage.ChunkDataStorage;
 import supercoder79.ecotones.world.storage.ChunkStorageView;
 import supercoder79.ecotones.world.storage.StorageKeys;
 import supercoder79.ecotones.world.storage.data.RiverData;
+import supercoder79.ecotones.world.structure.EcotonesStructuresConfig;
 import supercoder79.ecotones.world.structure.StructureTerrainControl;
 import supercoder79.ecotones.world.surface.SlopedSurfaceBuilder;
 import supercoder79.ecotones.world.surface.system.ConfiguredSurfaceBuilder;
@@ -58,6 +57,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
+
+import static net.minecraft.world.gen.chunk.StructuresConfig.DEFAULT_STRONGHOLD;
+import static net.minecraft.world.gen.chunk.StructuresConfig.DEFAULT_STRUCTURES;
 
 public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     private static final float[] NOISE_WEIGHT_TABLE = Util.make(new float[13824], (table) -> {
@@ -89,7 +91,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     private final OctaveNoiseSampler<OpenSimplexNoise> riverNoiseNoise;
 
     public BaseEcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
-        super(biomeSource, biomeSource, new StructuresConfig(true), seed);
+        super(biomeSource, biomeSource, new EcotonesStructuresConfig(Optional.of(DEFAULT_STRONGHOLD), Maps.newHashMap(DEFAULT_STRUCTURES)), seed);
         this.verticalNoiseResolution = 8;
         this.horizontalNoiseResolution = 4;
         this.defaultBlock = Blocks.STONE.getDefaultState();
