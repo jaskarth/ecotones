@@ -61,8 +61,7 @@ public class TreetapBlock extends BlockWithEntity {
             return ActionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof TreetapBlockEntity) {
-                TreetapBlockEntity treetap = (TreetapBlockEntity) blockEntity;
+            if (blockEntity instanceof TreetapBlockEntity treetap) {
                 if (treetap.canDropSap()) {
                     treetap.dropSap();
                     world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.25, pos.getZ() + 0.5, new ItemStack(EcotonesItems.MAPLE_SAP)));
@@ -84,8 +83,7 @@ public class TreetapBlock extends BlockWithEntity {
 
         if (isPowered && !isTriggered) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof TreetapBlockEntity) {
-                TreetapBlockEntity treetap = (TreetapBlockEntity) blockEntity;
+            if (blockEntity instanceof TreetapBlockEntity treetap) {
                 if (treetap.canDropSap()) {
                     treetap.dropSap();
                     world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1.25, pos.getZ() + 0.5, new ItemStack(EcotonesItems.MAPLE_SAP)));

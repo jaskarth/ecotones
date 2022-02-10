@@ -12,12 +12,14 @@ public class EcotonesStructurePieces {
     public static final StructurePieceType.Simple COTTAGE_CENTER = CottageGenerator.CenterRoom::new;
     public static final StructurePieceType.Simple COTTAGE_PORCH = CottageGenerator.Porch::new;
     public static final StructurePieceType.Simple COTTAGE_FARM = CottageGenerator.Farm::new;
+    public static final StructurePieceType.ManagerAware OUTPOST = OutpostStructure.OutpostPiece::new;
 
     public static void init() {
         register("campfire", CAMPFIRE);
         register("cottage_center", COTTAGE_CENTER);
         register("cottage_porch", COTTAGE_PORCH);
         register("cottage_farm", COTTAGE_FARM);
+        register("outpost", OUTPOST);
     }
 
     private static void register(String name, StructurePieceType piece) {

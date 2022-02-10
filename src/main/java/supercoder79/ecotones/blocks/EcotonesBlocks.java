@@ -58,6 +58,7 @@ public final class EcotonesBlocks {
     public static Block SPARSE_GOLD_ORE = new Block(FabricBlockSettings.copy(Blocks.STONE).breakByTool(FabricToolTags.PICKAXES).hardness(1f).build());
     public static Block FERTILIZER_SPREADER = new FertilizerSpreaderBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque().breakByTool(FabricToolTags.AXES).strength(1.5F, 1.0F).sounds(BlockSoundGroup.WOOD).build());
     public static Block WATERGRASS = new CattailBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
+    public static Block GRINDSTONE = new GrindstoneBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(2.5F, 1.0F).sounds(BlockSoundGroup.STONE).build());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
 
 
@@ -108,6 +109,7 @@ public final class EcotonesBlocks {
         register("sparse_gold_ore", SPARSE_GOLD_ORE);
         register("fertilizer_spreader", FERTILIZER_SPREADER);
         register("watergrass", WATERGRASS);
+        register("grindstone", GRINDSTONE);
         register("cyan_rose", CYAN_ROSE);
     }
 

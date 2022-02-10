@@ -2,6 +2,7 @@ package supercoder79.ecotones.test;
 
 
 import net.minecraft.util.math.MathHelper;
+import supercoder79.ecotones.api.DevOnly;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@DevOnly
 public final class ImageDumper {
     public static void dumpImage(String fileName, int size, PosFunction function) {
         BufferedImage img = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);

@@ -294,7 +294,10 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     }
 
     protected void sampleNoiseColumn(double[] buffer, int x, int z) {
-        sampleNoiseColumn(null, null, buffer, x, z);
+        ChunkPos pos = new ChunkPos(x << 2, z << 2);
+        PlateSet plateSet = this.riverWorker.forChunk(pos);
+
+        sampleNoiseColumn(null, plateSet.findForChunk(pos), buffer, x, z);
     }
 
     protected void sampleNoiseColumn(Chunk chunk, List<RiverNode> riverPlate, double[] buffer, int x, int z) {
@@ -306,7 +309,9 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
         // River filter
         if (riverPlate != null) {
-            ChunkDataStorage storage = ChunkStorageView.getStorage(chunk);
+            // Ugly hack- we don't have (or need) the chunk in heightmap sampling
+            // TODO: shared empty chunk data storage
+            ChunkDataStorage storage = chunk == null ? new ChunkDataStorage() : ChunkStorageView.getStorage(chunk);
             if (storage != null) {
                 filterForRiver(storage, riverPlate, buffer, x, z);
             }

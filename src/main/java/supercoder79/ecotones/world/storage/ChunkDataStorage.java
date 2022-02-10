@@ -24,7 +24,7 @@ public final class ChunkDataStorage {
     public void serialize(NbtCompound nbt) {
         NbtList list = new NbtList();
 
-        // Serialize all entities
+        // Serialize all entries
         for (Map.Entry<StorageKey<?>, Object> entry : this.storageMap.entrySet()) {
             NbtCompound holder = new NbtCompound();
             holder.putString("Id", entry.getKey().id());

@@ -10,6 +10,7 @@ import supercoder79.ecotones.Ecotones;
 public class EcotonesStructures {
     public static final StructureFeature<SingleStateFeatureConfig> CAMPFIRE = new CampfireStructureFeature(SingleStateFeatureConfig.CODEC);
     public static final StructureFeature<DefaultFeatureConfig> COTTAGE = new CottageStructureFeature(DefaultFeatureConfig.CODEC);
+    public static final StructureFeature<DefaultFeatureConfig> OUTPOST = new OutpostStructure(DefaultFeatureConfig.CODEC);
 
     public static void init() {
         FabricStructureBuilder.create(Ecotones.id("campfire"), CAMPFIRE)
@@ -21,6 +22,11 @@ public class EcotonesStructures {
                 .step(GenerationStep.Feature.SURFACE_STRUCTURES)
                 .defaultConfig(24, 4, 32183183)
                 .adjustsSurface()
+                .register();
+
+        FabricStructureBuilder.create(Ecotones.id("outpost"), OUTPOST)
+                .step(GenerationStep.Feature.SURFACE_STRUCTURES)
+                .defaultConfig(10, 2, 2492472)
                 .register();
     }
 }

@@ -124,6 +124,10 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         return this.registry.map(registry -> registry.getKey(biome)).get().orElse(BiomeKeys.PLAINS);
     }
 
+    public long getSeed() {
+        return seed;
+    }
+
     @Override
     protected double[] computeNoiseData(int x, int z) {
         double[] buffer = new double[3];
@@ -540,40 +544,6 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
             }
         }
     }
-
-//    @Override
-//    public void carve(long seed, BiomeAccess access, Chunk chunk, GenerationStep.Carver carver) {
-//        BiomeAccess biomeAccess = access.withSource(this.populationSource);
-//        ImprovedChunkRandom chunkRandom = new ImprovedChunkRandom();
-//        ChunkPos chunkPos = chunk.getPos();
-//        int j = chunkPos.x;
-//        int k = chunkPos.z;
-//        GenerationSettings generationSettings = this.populationSource.getBiome(BiomeCoords.fromBlock(chunkPos.getStartX()), 0, BiomeCoords.fromBlock(chunkPos.getStartZ())).getGenerationSettings();
-//        BitSet bitSet = ((ProtoChunk)chunk).getOrCreateCarvingMask(carver);
-//
-//        CarverContext carverContext = new CarverContext(this, chunk);
-//        AquiferSampler aquiferSampler = AquiferSampler.seaLevel(this.getSeaLevel(), this.defaultFluid);
-//
-//        // TODO: clean up, 1.17 made it so
-//        for(int l = j - 8; l <= j + 8; ++l) {
-//            for(int m = k - 8; m <= k + 8; ++m) {
-//                ChunkPos chunkPos2 = new ChunkPos(l, m);
-//
-//                List<Supplier<ConfiguredCarver<?>>> list = generationSettings.getCarversForStep(carver);
-//                ListIterator listIterator = list.listIterator();
-//
-//                while(listIterator.hasNext()) {
-//                    int n = listIterator.nextIndex();
-//                    ConfiguredCarver<?> configuredCarver = (ConfiguredCarver)((Supplier)listIterator.next()).get();
-//                    chunkRandom.setCarverSeed(seed + (long)n, l, m);
-//                    if (configuredCarver.shouldCarve(chunkRandom)) {
-//                        configuredCarver.carve(carverContext, chunk, biomeAccess::getBiome, chunkRandom, aquiferSampler, chunkPos2, bitSet);
-//                    }
-//                }
-//            }
-//        }
-//
-//    }
 
     // data getters
     @Deprecated

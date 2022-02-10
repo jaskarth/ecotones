@@ -14,6 +14,7 @@ public final class EcotonesConfiguredStructures {
     public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_DARK_OAK = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.DARK_OAK_LOG.getDefaultState()));
 
     public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> COTTAGE = EcotonesStructures.COTTAGE.configure(FeatureConfig.DEFAULT);
+    public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> OUTPOST = EcotonesStructures.OUTPOST.configure(FeatureConfig.DEFAULT);
 
     public static void init() {
         register("campfire_oak", CAMPFIRE_OAK);
@@ -21,6 +22,7 @@ public final class EcotonesConfiguredStructures {
         register("campfire_spruce", CAMPFIRE_SPRUCE);
         register("campfire_dark_oak", CAMPFIRE_DARK_OAK);
         register("cottage", COTTAGE);
+        register("outpost", OUTPOST);
     }
 
     private static void register(String name, ConfiguredStructureFeature<?, ?> feature) {
