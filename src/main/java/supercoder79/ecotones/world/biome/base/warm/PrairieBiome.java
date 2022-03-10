@@ -61,7 +61,7 @@ public class PrairieBiome extends EcotonesBiomeBuilder {
 //        this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 5)));
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
-        this.addStructureFeature(EcotonesConfiguredStructures.OUTPOST);
+//        this.addStructureFeature(EcotonesConfiguredStructures.OUTPOST);
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

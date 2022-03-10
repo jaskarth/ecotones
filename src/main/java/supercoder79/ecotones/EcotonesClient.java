@@ -106,6 +106,7 @@ public final class EcotonesClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.MAPLE_LEAF, MapleLeafParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SYRUP_POP, SyrupPopParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAP_DRIP, SapDripParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(EcotonesParticles.ASBESTOS, AsbestosParticle.Factory::new);
 
         EcotonesModelLayers.init();
         EcotonesScreens.init();

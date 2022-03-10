@@ -79,8 +79,6 @@ public final class VoronoiRaster {
             Vec2i vecs = this.rastersByColor.get(color).get(0);
             this.centersByColor.put(color, this.voronoi.getCellPos(vecs.x() / scale, vecs.y() / scale, scale));
         }
-
-        System.out.println(centersByColor.values());
     }
 
     public Map<Integer, List<Vec2i>> getRastersByColor() {

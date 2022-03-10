@@ -65,7 +65,7 @@ public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
 
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
-        this.addStructureFeature(EcotonesConfiguredStructures.OUTPOST);
+//        this.addStructureFeature(EcotonesConfiguredStructures.OUTPOST);
 
         this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 7)));
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
