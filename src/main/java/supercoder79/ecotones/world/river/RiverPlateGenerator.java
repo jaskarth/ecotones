@@ -38,9 +38,9 @@ public final class RiverPlateGenerator {
         iterateGraphReach(seed, graph, plateChunks);
 
         // Branches
-        traversePredecessors(seed, graph, plateChunks, 40);
-        traversePredecessors(seed, graph, plateChunks, 28);
-        traversePredecessors(seed, graph, plateChunks, 20);
+        traversePredecessors(seed, graph, plateChunks, 60);
+        traversePredecessors(seed, graph, plateChunks, 48);
+        traversePredecessors(seed, graph, plateChunks, 30);
 //        traversePredecessors(seed, graph, plateChunks, 8);
 
         resetAllNodes(graph);
@@ -60,7 +60,8 @@ public final class RiverPlateGenerator {
             int z = ChunkPos.getPackedZ(pos);
             random.setCarverSeed(seed, x, z);
 
-            if (random.nextInt(500) > 0) {
+            // 1/2500 chance
+            if (random.nextInt(2500) > 0) {
                 continue;
             }
 
@@ -87,6 +88,11 @@ public final class RiverPlateGenerator {
 
                     AABB clip = graph.getClip(line);
                     if (clip != null) {
+                        // River merging bad- disable for the time being
+                        if (true) {
+                            subgraph = new RiverSubgraph();
+                            break;
+                        }
 
 //                        RiverNode base = null;
 //                        double minDist = Double.POSITIVE_INFINITY;
@@ -235,7 +241,7 @@ public final class RiverPlateGenerator {
 
             // TODO: needs a good count stack
             int good = 0;
-            int nextGood = 7 + random.nextInt(5);
+            int nextGood = 8 + random.nextInt(7);
             while (!stack.isEmpty()) {
                 RiverNode node = stack.removeFirst();
 
@@ -249,7 +255,7 @@ public final class RiverPlateGenerator {
                 // Build branch
                 if (good >= nextGood) {
                     good = 0;
-                    nextGood = 7 + random.nextInt(5);
+                    nextGood = 8 + random.nextInt(7);
 
                     // Branch tree
                     int len = random.nextInt(maxSize - minSize) + minSize;
@@ -288,6 +294,7 @@ public final class RiverPlateGenerator {
                         AABB line = AABB.buildLine(last, branch);
                         if (graph.getClip(line, exclude) != null) {
                             // Phi not possible in limited predecessor traversal
+                            subgraphDirect = new LinkedList<>();
                             break;
                         }
 

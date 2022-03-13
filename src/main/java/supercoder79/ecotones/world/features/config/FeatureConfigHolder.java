@@ -221,10 +221,10 @@ public final class FeatureConfigHolder {
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.POOFY_DANDELION.getDefaultState(), 1)
                     .add(Blocks.DANDELION.getDefaultState(), 3)
-                    .add(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1)))
-                    .spreadX(5)
-                    .spreadZ(5)
-                    .tries(32).build();
+                    .add(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 3)))
+                    .spreadX(4)
+                    .spreadZ(4)
+                    .tries(16).build();
 
     public static final RandomPatchFeatureConfig CYAN_ROSE =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
