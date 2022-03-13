@@ -135,6 +135,7 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
                 }
             }
 
+            // FIXME: ??????? why did i do this????
             if (blockEntity.percentDissolved >= 120) {
                 if (blockEntity.world.random.nextInt(4) == 0) {
                     blockEntity.dissolvedAmount -= 1;

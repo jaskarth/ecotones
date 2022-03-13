@@ -5,8 +5,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
 
-public class EcotonesSandyGrassBlock extends EcotonesGrassBlock {
-    protected EcotonesSandyGrassBlock(Settings settings) {
+public class EcotonesSandyPlantBlock extends EcotonesPlantBlock {
+    protected EcotonesSandyPlantBlock(Settings settings) {
         super(settings);
     }
 

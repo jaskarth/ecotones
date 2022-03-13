@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.Random;
 
-public class RosemaryBlock extends EcotonesGrassBlock {
+public class RosemaryBlock extends EcotonesPlantBlock {
     public static final BooleanProperty FLOWERING = BooleanProperty.of("flowering");
 
     protected RosemaryBlock(Settings settings) {

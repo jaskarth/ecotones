@@ -10,7 +10,7 @@ import net.minecraft.world.BlockView;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class CyanRoseBlock extends EcotonesGrassBlock {
+public class CyanRoseBlock extends EcotonesPlantBlock {
     protected CyanRoseBlock(Settings settings) {
         super(settings);
     }

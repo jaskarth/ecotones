@@ -25,7 +25,7 @@ import supercoder79.ecotones.items.EcotonesItems;
 import java.util.List;
 import java.util.Random;
 
-public class SmallCactusBlock extends EcotonesGrassBlock {
+public class SmallCactusBlock extends EcotonesPlantBlock {
     public static BooleanProperty FRUITING = BooleanProperty.of("fruiting");
 
     protected SmallCactusBlock(Settings settings) {
