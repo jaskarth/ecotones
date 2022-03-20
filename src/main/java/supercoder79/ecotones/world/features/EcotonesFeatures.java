@@ -69,6 +69,8 @@ public final class EcotonesFeatures {
     public static final EcotonesFeature<DefaultFeatureConfig> ORE_VEIN = new OreVeinFeature(DefaultFeatureConfig.CODEC);
     public static final EcotonesFeature<RandomPatchFeatureConfig> RANDOM_PATCH = new RandomPatchFeature(RandomPatchFeatureConfig.CODEC);
     public static final EcotonesFeature<DefaultFeatureConfig> SURFACE_PATCH = new SurfacePatchReplaceFeature(DefaultFeatureConfig.CODEC);
+    public static final EcotonesFeature<SulfurousLakeFeature.Config> SULFUROUS_LAKE = new SulfurousLakeFeature(SulfurousLakeFeature.Config.CODEC);
+    public static final EcotonesFeature<DefaultFeatureConfig> PHOSPHATE_DOME = new PhosphateDomeFeature(DefaultFeatureConfig.CODEC);
 
     public static void init() {
         register("desertify", DESERTIFY_SOIL);
@@ -121,6 +123,8 @@ public final class EcotonesFeatures {
         register("tall_pine", TALL_PINE);
         register("random_patch", RANDOM_PATCH);
         register("surface_patch", SURFACE_PATCH);
+        register("sulfurous_lake", SULFUROUS_LAKE);
+        register("phosphate_dome", PHOSPHATE_DOME);
     }
 
     private static void register(String name, Feature<?> feature) {

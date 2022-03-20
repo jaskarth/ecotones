@@ -73,6 +73,7 @@ public class BirchLakesBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addDefaultMushrooms(this.getGenerationSettings());
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
+        BiomeHelper.addDefaultFeatures(this);
 
 //        this.getGenerationSettings().feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.GLOW_LICHEN);
 

@@ -9,6 +9,7 @@ import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.blocks.sapling.HazelSaplingGenerator;
 import supercoder79.ecotones.blocks.sapling.LarchSaplingGenerator;
 import supercoder79.ecotones.blocks.sapling.MapleSaplingGenerator;
+import supercoder79.ecotones.items.EcotonesItemBlocks;
 import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesBlocks {
@@ -60,63 +61,73 @@ public final class EcotonesBlocks {
     public static Block WATERGRASS = new CattailBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
     public static Block GRINDSTONE = new GrindstoneBlock(FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES).strength(2.5F, 1.0F).sounds(BlockSoundGroup.STONE).build());
     public static Block EXCURSION_FUNNEL = new ExcursionFunnelBlock(FabricBlockSettings.of(Material.STONE).strength(2.5F, 8.0F).ticksRandomly().build());
+    public static Block SULFUR_ORE = new Block(FabricBlockSettings.copy(Blocks.LAPIS_ORE).breakByTool(FabricToolTags.PICKAXES).hardness(3f).build());
+    public static Block PHOSPHATE_ORE = new Block(FabricBlockSettings.copy(Blocks.LAPIS_ORE).breakByTool(FabricToolTags.PICKAXES).hardness(3f).build());
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).build());
 
 
     public static void init() {
-        register("peat", PEAT_BLOCK);
-        register("short_grass", SHORT_GRASS);
-        register("reeds", REEDS);
-        register("wildflowers", WILDFLOWERS);
-        register("small_shrub", SMALL_SHRUB);
-        register("geyser", GEYSER);
+        registerWithItem("peat", PEAT_BLOCK);
+        registerWithItem("short_grass", SHORT_GRASS);
+        registerWithItem("reeds", REEDS);
+        registerWithItem("wildflowers", WILDFLOWERS);
+        registerWithItem("small_shrub", SMALL_SHRUB);
+        registerWithItem("geyser", GEYSER);
         register("coconut", COCONUT);
-        register("hazel_leaves", HAZEL_LEAVES);
-        register("hazel_sapling", HAZEL_SAPLING);
-        register("sandy_grass", SANDY_GRASS);
-        register("surface_rock", SURFACE_ROCK);
-        register("clover", CLOVER);
-        register("pinecone", PINECONE);
-        register("dried_dirt", DRIED_DIRT);
-        register("bluebell", BLUEBELL);
-        register("wide_fern", WIDE_FERN);
-        register("small_lilac", SMALL_LILAC);
-        register("lichen", LICHEN);
-        register("moss", MOSS);
-        register("maple_leaves", MAPLE_LEAVES);
+        registerWithItem("hazel_leaves", HAZEL_LEAVES);
+        registerWithItem("hazel_sapling", HAZEL_SAPLING);
+        registerWithItem("sandy_grass", SANDY_GRASS);
+        registerWithItem("surface_rock", SURFACE_ROCK);
+        registerWithItem("clover", CLOVER);
+        registerWithItem("pinecone", PINECONE);
+        registerWithItem("dried_dirt", DRIED_DIRT);
+        registerWithItem("bluebell", BLUEBELL);
+        registerWithItem("wide_fern", WIDE_FERN);
+        registerWithItem("small_lilac", SMALL_LILAC);
+        registerWithItem("lichen", LICHEN);
+        registerWithItem("moss", MOSS);
+        registerWithItem("maple_leaves", MAPLE_LEAVES);
         register("blueberry_bush", BLUEBERRY_BUSH);
-        register("nest", NEST);
-        register("switchgrass", SWITCHGRASS);
+        registerWithItem("nest", NEST);
+        registerWithItem("switchgrass", SWITCHGRASS);
         register("rosemary", ROSEMARY);
-        register("lavender", LAVENDER);
+        registerWithItem("lavender", LAVENDER);
         register("blueberry_jam_jar", BLUEBERRY_JAM_JAR);
-        register("spruce_leaf_pile", SPRUCE_LEAF_PILE);
-        register("marigold", MARIGOLD);
-        register("maple_sapling", MAPLE_SAPLING);
+        registerWithItem("spruce_leaf_pile", SPRUCE_LEAF_PILE);
+        registerWithItem("marigold", MARIGOLD);
+        registerWithItem("maple_sapling", MAPLE_SAPLING);
         register("maple_syrup_jar", MAPLE_SYRUP_JAR);
-        register("larch_leaves", LARCH_LEAVES);
-        register("sap_distillery", SAP_DISTILLERY);
+        registerWithItem("larch_leaves", LARCH_LEAVES);
+        registerWithItem("sap_distillery", SAP_DISTILLERY);
         register("small_cactus", SMALL_CACTUS);
-        register("larch_sapling", LARCH_SAPLING);
-        register("treetap", TREETAP);
-        register("limestone", LIMESTONE);
-        register("poofy_dandelion", POOFY_DANDELION);
-        register("cattail", CATTAIL);
-        register("duckweed", DUCKWEED);
-        register("thorn_bush", THORN_BUSH);
-        register("red_rock", RED_ROCK);
-        register("malachite", MALACHITE);
-        register("pyrite", PYRITE);
-        register("sparse_gold_ore", SPARSE_GOLD_ORE);
-        register("fertilizer_spreader", FERTILIZER_SPREADER);
-        register("watergrass", WATERGRASS);
-        register("grindstone", GRINDSTONE);
-        register("steady_geyser", EXCURSION_FUNNEL);
+        registerWithItem("larch_sapling", LARCH_SAPLING);
+        registerWithItem("treetap", TREETAP);
+        registerWithItem("limestone", LIMESTONE);
+        registerWithItem("poofy_dandelion", POOFY_DANDELION);
+        registerWithItem("cattail", CATTAIL);
+        registerWithItem("duckweed", DUCKWEED);
+        registerWithItem("thorn_bush", THORN_BUSH);
+        registerWithItem("red_rock", RED_ROCK);
+        registerWithItem("malachite", MALACHITE);
+        registerWithItem("pyrite", PYRITE);
+        registerWithItem("sparse_gold_ore", SPARSE_GOLD_ORE);
+        registerWithItem("fertilizer_spreader", FERTILIZER_SPREADER);
+        registerWithItem("watergrass", WATERGRASS);
+        registerWithItem("grindstone", GRINDSTONE);
+        registerWithItem("steady_geyser", EXCURSION_FUNNEL);
+        registerWithItem("sulfur_ore", SULFUR_ORE);
+        registerWithItem("phosphate_ore", PHOSPHATE_ORE);
         register("cyan_rose", CYAN_ROSE);
     }
 
     private static void register(String name, Block block) {
         Registry.register(Registry.BLOCK, Ecotones.id(name), block);
         RegistryReport.increment("Block");
+    }
+
+    private static void registerWithItem(String name, Block block) {
+        Registry.register(Registry.BLOCK, Ecotones.id(name), block);
+        RegistryReport.increment("Block");
+        EcotonesItemBlocks.associate(block, name);
     }
 }

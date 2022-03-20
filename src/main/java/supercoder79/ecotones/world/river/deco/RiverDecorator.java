@@ -5,14 +5,14 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 public class RiverDecorator {
     public static RiverDecorator EMPTY = new RiverDecorator();
 
-    private final DecorationStore decorations = new DecorationStore();
+    private final DecorationCollector decorations = new DecorationCollector();
 
-    public DecorationStore getDecorations() {
+    public DecorationCollector getDecorations() {
         return decorations;
     }
 
     public void decorate(boolean openToAir, int minimumDist, FeatureContext<?> context) {
-        for (DecorationStore.Entry feature : decorations.features()) {
+        for (DecorationCollector.Entry feature : decorations.features()) {
             if (feature.needsOpenToAir() && !openToAir) {
                 continue;
             }

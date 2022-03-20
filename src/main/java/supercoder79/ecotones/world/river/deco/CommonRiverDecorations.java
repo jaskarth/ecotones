@@ -32,7 +32,7 @@ public final class CommonRiverDecorations {
                     new CocoaBeansTreeDecorator(0.2F))
             ).ignoreVines().build();
 
-    public static void buildDesertLushness(DecorationStore decorations) {
+    public static void buildDesertLushness(DecorationCollector decorations) {
         // Grass replacing sand
         decorations.add(EcotonesFeatures.SURFACE_PATCH.configure(FeatureConfig.DEFAULT)
                 .spreadHorizontally()
@@ -58,5 +58,11 @@ public final class CommonRiverDecorations {
                 .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                 .spreadHorizontally()
                 .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.15F, 1))), true);
+
+        decorations.add(
+                EcotonesFeatures.CACTI.configure(FeatureConfig.DEFAULT)
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
+                        .spreadHorizontally()
+                        .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(2, 0.75f, 1))), true);
     }
 }

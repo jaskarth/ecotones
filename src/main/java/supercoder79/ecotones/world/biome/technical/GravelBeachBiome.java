@@ -13,6 +13,7 @@ import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.decorator.HeightmapPlacementModifier;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
+import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
@@ -38,6 +39,8 @@ public class GravelBeachBiome extends EcotonesBiomeBuilder {
         this.precipitation(Biome.Precipitation.RAIN);
 
         this.category(Biome.Category.BEACH);
+
+        BiomeHelper.addDefaultFeatures(this);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
 //        this.addStructureFeature(ConfiguredStructureFeatures.BURIED_TREASURE);

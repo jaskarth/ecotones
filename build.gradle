@@ -45,8 +45,13 @@ processResources {
 		expand "version": project.version
 	}
 
+	// Unused textures
 	exclude 'assets/ecotones/textures/unused/**'
 
+	// Raw paint.net files that still have the original layers
+	exclude 'assets/ecotones/textures/raw/**'
+
+	// Template files for sets of textures
 	exclude 'assets/ecotones/textures/template/**'
 }
 

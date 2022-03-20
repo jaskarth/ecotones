@@ -4,10 +4,9 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.world.layers.generation.MountainLayer;
-import supercoder79.ecotones.world.river.deco.DecorationStore;
+import supercoder79.ecotones.world.river.deco.DecorationCollector;
 import supercoder79.ecotones.world.river.deco.RiverDecorator;
 
 import java.util.*;
@@ -55,7 +54,7 @@ public final class BiomeRegistries {
         BIOME_VARIANT_CHANCE.put(key(biome), chance);
     }
 
-    public static void registerRiverDecorator(Biome biome, Consumer<DecorationStore> acceptor) {
+    public static void registerRiverDecorator(Biome biome, Consumer<DecorationCollector> acceptor) {
         RiverDecorator decorator = new RiverDecorator();
         acceptor.accept(decorator.getDecorations());
         RIVER_DECORATORS.put(key(biome), decorator);

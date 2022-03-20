@@ -71,6 +71,7 @@ public class UluruBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addDefaultMushrooms(this.getGenerationSettings());
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
+        BiomeHelper.addDefaultFeatures(this);
 
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
     }

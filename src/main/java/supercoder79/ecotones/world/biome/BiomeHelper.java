@@ -1,17 +1,29 @@
 package supercoder79.ecotones.world.biome;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.YOffset;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
+import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.LakeFeature;
+import net.minecraft.world.gen.heightprovider.UniformHeightProvider;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeIdManager;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
+import supercoder79.ecotones.world.features.SulfurousLakeFeature;
 
 public final class BiomeHelper {
     public static void addDefaultSpawns(SpawnSettings.Builder builder) {
@@ -38,6 +50,28 @@ public final class BiomeHelper {
     }
 
     public static void addDefaultFeatures(EcotonesBiomeBuilder builder) {
+        // Sulfurous lakes
+        builder.addFeature(GenerationStep.Feature.LAKES, EcotonesFeatures.SULFUROUS_LAKE.configure(
+                new SulfurousLakeFeature.Config(BlockStateProvider.of(Blocks.LAVA.getDefaultState()), BlockStateProvider.of(Blocks.STONE.getDefaultState()))
+        ).decorateAll(
+                RarityFilterPlacementModifier.of(5),
+                SquarePlacementModifier.of(),
+                HeightRangePlacementModifier.of(UniformHeightProvider.create(YOffset.fixed(0), YOffset.getTop())),
+                EnvironmentScanPlacementModifier.of(
+                        Direction.DOWN,
+                        BlockPredicate.bothOf(BlockPredicate.not(BlockPredicate.IS_AIR), BlockPredicate.insideWorldBounds(new BlockPos(0, -5, 0))),
+                        32
+                ),
+                SurfaceThresholdFilterPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -5)
+        ));
+
+        // Phosphate domes
+        builder.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.PHOSPHATE_DOME.configure(FeatureConfig.DEFAULT)
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
+                        .spreadHorizontally()
+                        .applyChance(220));
+
         builder.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT)
                         .decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure()));

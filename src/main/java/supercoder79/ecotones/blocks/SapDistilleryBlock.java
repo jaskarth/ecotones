@@ -48,7 +48,7 @@ public class SapDistilleryBlock extends BlockWithEntity {
                 SapDistilleryBlockEntity sapDistillery = (SapDistilleryBlockEntity) blockEntity;
                 boolean interacted = false;
 
-                if (player.getStackInHand(hand).isOf(Items.GLASS_BOTTLE)) {
+                if (player.getStackInHand(hand).isOf(EcotonesItems.JAR)) {
                     if (sapDistillery.canFillBottle()) {
                         sapDistillery.reduceForBottle();
                         player.getStackInHand(hand).decrement(1);

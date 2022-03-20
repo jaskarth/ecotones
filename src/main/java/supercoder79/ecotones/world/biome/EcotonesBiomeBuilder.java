@@ -35,6 +35,7 @@ public abstract class EcotonesBiomeBuilder {
     private double volatility = 1.0;
     private ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder;
     private final List<ConfiguredStructureFeature<?, ?>> structures = new ArrayList<>();
+    private Biome.Category category;
 
     public EcotonesBiomeBuilder() {
         this.builder = new Biome.Builder();
@@ -49,6 +50,7 @@ public abstract class EcotonesBiomeBuilder {
     }
 
     protected void category(Biome.Category category) {
+        this.category = category;
         this.builder.category(category);
     }
 
@@ -177,6 +179,10 @@ public abstract class EcotonesBiomeBuilder {
 
     public SpawnSettings.Builder getSpawnSettings() {
         return spawnSettings;
+    }
+
+    public Biome.Category getBiomeCategory() {
+        return this.category;
     }
 
     private static int getSkyColor(float temperature) {

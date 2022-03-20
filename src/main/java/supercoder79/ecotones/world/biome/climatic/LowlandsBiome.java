@@ -53,6 +53,7 @@ public class LowlandsBiome extends EcotonesBiomeBuilder {
         this.foliageColor(0x805218);
         this.waterColor(0x4E52AA);
         this.waterFogColor(0x4E52AA);
+        BiomeHelper.addDefaultFeatures(this);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

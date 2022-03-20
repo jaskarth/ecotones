@@ -55,7 +55,7 @@ public class TurpentineItem extends Item {
 
                     if ((uses - 1) <= 0) { // If this jar is done, insert glass bottle
                         stack.decrement(1);
-                        tryInsert(world, player, new ItemStack(Items.GLASS_BOTTLE, 1));
+                        tryInsert(world, player, new ItemStack(EcotonesItems.JAR, 1));
                     } else {
                         // insert the new stack
                         ItemStack newStack = new ItemStack(this, 1);
@@ -68,7 +68,7 @@ public class TurpentineItem extends Item {
 
                     if ((uses - 1) <= 0) { // If this jar is done, insert glass bottle
                         stack.decrement(1);
-                        tryInsert(world, player, new ItemStack(Items.GLASS_BOTTLE, 1));
+                        tryInsert(world, player, new ItemStack(EcotonesItems.JAR, 1));
                     } else {
                         // Reduce uses count
                         nbt.put("U", NbtInt.of(uses - 1));

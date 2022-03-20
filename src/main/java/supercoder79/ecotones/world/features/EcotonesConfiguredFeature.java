@@ -25,8 +25,16 @@ public class EcotonesConfiguredFeature<FC extends FeatureConfig, F extends Featu
         return new EcotonesConfiguredFeature<>(feature.feature, feature.config);
     }
 
+    // 1.17 style back->front
     public EcotonesConfiguredFeature<FC, F> decorate(PlacementModifier decorator) {
         decorators.add(0, decorator);
+
+        return this;
+    }
+
+    // 1.18 style front->back
+    public EcotonesConfiguredFeature<FC, F> decorateAll(PlacementModifier... decorator) {
+        decorators.addAll(List.of(decorator));
 
         return this;
     }

@@ -61,6 +61,7 @@ public class DandelionFieldBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
 //        this.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_PLAINS);
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
+        BiomeHelper.addDefaultFeatures(this);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         //DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());

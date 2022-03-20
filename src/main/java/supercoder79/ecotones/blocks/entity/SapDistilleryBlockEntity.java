@@ -130,7 +130,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
             sync();
         }
 
-        if (entity.getStack().isOf(Items.GLASS_BOTTLE) && this.syrupAmount >= 1000) {
+        if (entity.getStack().isOf(EcotonesItems.JAR) && this.syrupAmount >= 1000) {
             world.spawnEntity(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(EcotonesItems.MAPLE_SYRUP)));
 
             entity.remove(Entity.RemovalReason.KILLED);

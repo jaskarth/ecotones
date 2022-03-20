@@ -61,6 +61,8 @@ public final class Ecotones implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		long start = System.currentTimeMillis();
+
 		EcotonesCriteria.init();
 		EcotonesSounds.init();
 
@@ -190,6 +192,8 @@ public final class Ecotones implements ModInitializer {
 				isServerEcotones = false;
 			}
 		});
+
+		System.out.println("Ecotones init took " + (System.currentTimeMillis() - start) + "ms!");
 	}
 
 	public static Identifier id(String name) {
