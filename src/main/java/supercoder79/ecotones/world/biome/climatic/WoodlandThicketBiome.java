@@ -8,11 +8,11 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
-import net.minecraft.world.gen.decorator.HeightmapPlacementModifier;
-import net.minecraft.world.gen.decorator.NoiseThresholdCountPlacementModifier;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
+import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
+import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -65,7 +65,7 @@ public class WoodlandThicketBiome extends EcotonesBiomeBuilder {
         this.volatility(volatility);
         this.category(Biome.Category.FOREST);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
@@ -100,7 +100,7 @@ public class WoodlandThicketBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(6))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesConfiguredFeature.wrap(Feature.TREE.configure(new TreeFeatureConfig.Builder(
+                EcotonesConfiguredFeature.wrap(Feature.TREE, (new TreeFeatureConfig.Builder(
                                 BlockStateProvider.of(Blocks.OAK_LOG.getDefaultState()),
                                 new LargeOakTrunkPlacer(3, 11, 0),
                                 BlockStateProvider.of(Blocks.OAK_LEAVES.getDefaultState()),

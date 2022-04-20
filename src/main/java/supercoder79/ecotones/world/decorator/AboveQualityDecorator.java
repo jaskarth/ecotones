@@ -4,9 +4,9 @@ import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.decorator.DecoratorContext;
-import net.minecraft.world.gen.decorator.PlacementModifier;
-import net.minecraft.world.gen.decorator.PlacementModifierType;
+import net.minecraft.world.gen.feature.FeaturePlacementContext;
+import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
 import java.util.Random;
@@ -16,7 +16,7 @@ public class AboveQualityDecorator extends PlacementModifier {
     public static final Codec<AboveQualityDecorator> CODEC = Codec.unit(AboveQualityDecorator::new);
 
     @Override
-    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, BlockPos pos) {
+    public Stream<BlockPos> getPositions(FeaturePlacementContext context, Random random, BlockPos pos) {
         double noise = 0.5; // default for if the chunk generator is not ours
         //get noise at position (this is fairly inaccurate because the pos is at the top left of the chunk and we center it
         ChunkGenerator generator = context.getWorld().toServerWorld().getChunkManager().getChunkGenerator();

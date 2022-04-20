@@ -7,7 +7,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.*;
+import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
@@ -44,7 +44,7 @@ public class HotSpringsBiome extends EcotonesBiomeBuilder {
         this.waterColor(4445678);
         this.waterFogColor(329011);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         //DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
@@ -74,7 +74,7 @@ public class HotSpringsBiome extends EcotonesBiomeBuilder {
 //                        .decorate(EcotonesDecorators.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.66f, 1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesConfiguredFeature.wrap(Feature.TREE.configure(FeatureConfigHolder.SPRUCE_TREE_CONFIG))
+                EcotonesConfiguredFeature.wrap(Feature.TREE, (FeatureConfigHolder.SPRUCE_TREE_CONFIG))
                         .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.33f, 1)))
                         .spreadHorizontally()
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));

@@ -10,8 +10,8 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.HeightmapPlacementModifier;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -46,7 +46,7 @@ public class ChasmBiome extends EcotonesBiomeBuilder {
         this.downfall(0.4F);
 
         this.precipitation(Biome.Precipitation.RAIN);
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
         this.category(Biome.Category.UNDERGROUND);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
@@ -83,13 +83,13 @@ public class ChasmBiome extends EcotonesBiomeBuilder {
                         .repeat(12));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 9)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 9)))
                         .uniformRange(YOffset.fixed(0), YOffset.fixed(64))
                         .spreadHorizontally()
                         .repeat(30));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 9)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 9)))
                         .uniformRange(YOffset.fixed(0), YOffset.fixed(32))
                         .spreadHorizontally()
                         .repeat(6));

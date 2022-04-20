@@ -1,7 +1,7 @@
 package supercoder79.ecotones.world.decorator;
 
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.decorator.PlacementModifierType;
+import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.util.RegistryReport;
 

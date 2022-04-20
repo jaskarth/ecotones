@@ -52,7 +52,7 @@ public class VolcanicBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
@@ -61,13 +61,13 @@ public class VolcanicBiome extends EcotonesBiomeBuilder {
                         .decorate(new Spread32Decorator()));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 9)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 9)))
                 .repeat(30)
                 .spreadHorizontally()
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(64)));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 9)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 9)))
                 .repeat(6)
                 .spreadHorizontally()
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(32)));

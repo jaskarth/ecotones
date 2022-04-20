@@ -9,7 +9,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.world.gen.decorator.*;
+import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -77,37 +77,37 @@ public class BirchLakesBiome extends EcotonesBiomeBuilder {
 
 //        this.getGenerationSettings().feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.GLOW_LICHEN);
 
-        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, EcotonesConfiguredFeature.wrap(Feature.ORE.configure(
+        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, EcotonesConfiguredFeature.wrap(Feature.ORE, (
                         new OreFeatureConfig(new BlockMatchRuleTest(Blocks.STONE), Blocks.DIRT.getDefaultState(), 33)))
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(256))
                 .spreadHorizontally()
                 .repeat(10));
 
-        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, EcotonesConfiguredFeature.wrap(Feature.ORE.configure(
+        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, EcotonesConfiguredFeature.wrap(Feature.ORE, (
                 new OreFeatureConfig(new BlockMatchRuleTest(Blocks.STONE), Blocks.GRAVEL.getDefaultState(), 33)))
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(256))
                 .spreadHorizontally()
                 .repeat(8));
 
-        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, EcotonesConfiguredFeature.wrap(Feature.ORE.configure(
+        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, EcotonesConfiguredFeature.wrap(Feature.ORE, (
                 new OreFeatureConfig(new BlockMatchRuleTest(Blocks.STONE), Blocks.ANDESITE.getDefaultState(), 33)))
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(80))
                 .spreadHorizontally()
                 .repeat(10));
 
-        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, EcotonesConfiguredFeature.wrap(Feature.ORE.configure(
+        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, EcotonesConfiguredFeature.wrap(Feature.ORE, (
                 new OreFeatureConfig(new BlockMatchRuleTest(Blocks.STONE), Blocks.GRANITE.getDefaultState(), 33)))
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(80))
                 .spreadHorizontally()
                 .repeat(10));
 
-        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, EcotonesConfiguredFeature.wrap(Feature.ORE.configure(
+        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, EcotonesConfiguredFeature.wrap(Feature.ORE, (
                 new OreFeatureConfig(new BlockMatchRuleTest(Blocks.STONE), Blocks.DIORITE.getDefaultState(), 33)))
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(80))
                 .spreadHorizontally()
                 .repeat(10));
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_BIRCH);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

@@ -3,6 +3,7 @@ package supercoder79.ecotones.test;
 import com.mojang.serialization.Codec;
 import net.minecraft.Bootstrap;
 import net.minecraft.SharedConstants;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
@@ -14,7 +15,6 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.Blender;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import supercoder79.ecotones.api.DevOnly;
 import supercoder79.ecotones.util.Vec2i;
@@ -29,6 +29,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -123,7 +125,7 @@ public class TestOutpostLayout {
     private static class FakeChunkGenerator extends ChunkGenerator {
 
         public FakeChunkGenerator() {
-            super(null, new StructuresConfig(true));
+            super(null, Optional.empty(), null);
         }
 
         @Override
@@ -184,6 +186,11 @@ public class TestOutpostLayout {
         @Override
         public VerticalBlockSample getColumnSample(int x, int z, HeightLimitView world) {
             return null;
+        }
+
+        @Override
+        public void getDebugHudText(List<String> text, BlockPos pos) {
+
         }
     }
 }

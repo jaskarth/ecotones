@@ -9,8 +9,9 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenCustomHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.util.TopologicalSorts;
 import net.minecraft.util.Util;
-import net.minecraft.util.dynamic.RegistryLookupCodec;
+import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.BuiltinBiomes;
@@ -33,7 +34,7 @@ import java.util.stream.Collectors;
 
 public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource {
     public static Codec<EcotonesBiomeSource> CODEC =  RecordCodecBuilder.create((instance) -> {
-        return instance.group(RegistryLookupCodec.of(Registry.BIOME_KEY).forGetter((source) -> source.biomeRegistry),
+        return instance.group(RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter((source) -> source.biomeRegistry),
                 Codec.LONG.fieldOf("seed").stable().forGetter((source) -> source.seed))
                 .apply(instance, instance.stable(EcotonesBiomeSource::new));
     });
@@ -45,7 +46,13 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
     private final OpenSimplexNoise caveBiomeNoise;
 
     public EcotonesBiomeSource(Registry<Biome> biomeRegistry, long seed) {
-        super(BiomeGenData.LOOKUP.keySet().stream().map((k) -> () -> biomeRegistry.getOrThrow(k)));
+        super(
+                BiomeGenData.LOOKUP
+                        .keySet()
+                        .stream()
+                        .map(biomeRegistry::getOrThrow)
+                        .map(RegistryEntry.Direct::new)
+        );
         this.biomeRegistry = biomeRegistry;
         this.biomeSampler = EcotonesBiomeLayers.build(seed);
         this.seed = seed;
@@ -62,18 +69,19 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
     }
 
     @Override
-    public List<BiomeSource.class_6827> method_39525(List<Biome> biomes, boolean bl) {
+    public List<BiomeSource.IndexedFeatures> method_39525(List<RegistryEntry<Biome>> biomes, boolean bl) {
         // Not relevant for ecotones
         return new ArrayList<>();
     }
 
-    public Biome getBiome(int biomeX, int biomeY, int biomeZ, MultiNoiseUtil.MultiNoiseSampler sampler) {
+    public RegistryEntry<Biome> getBiome(int biomeX, int biomeY, int biomeZ, MultiNoiseUtil.MultiNoiseSampler sampler) {
         try {
             // TODO: no crash sampler
-            return this.biomeSampler.sample(this.biomeRegistry, biomeX, biomeZ);
+            // FIXME: direct insn?
+            return new RegistryEntry.Direct<>(this.biomeSampler.sample(this.biomeRegistry, biomeX, biomeZ));
         } catch (Exception e) {
             e.printStackTrace();
-            return this.biomeRegistry.get(BiomeKeys.PLAINS);
+            return new RegistryEntry.Direct<>(this.biomeRegistry.get(BiomeKeys.PLAINS));
         }
     }
 

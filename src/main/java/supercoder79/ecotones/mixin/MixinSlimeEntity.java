@@ -25,7 +25,7 @@ public class MixinSlimeEntity {
         // Add slime spawns
 
         if (world.getDifficulty() != Difficulty.PEACEFUL) {
-            RegistryKey<Biome> key = world.getBiomeKey(pos).orElse(null);
+            RegistryKey<Biome> key = world.getBiome(pos).getKey().get();
 
             if (BiomeRegistries.SLIME_SPAWN_BIOMES.contains(key) && pos.getY() > 50 && pos.getY() < 70 && random.nextFloat() < 0.5F && random.nextFloat() < world.getMoonSize() && world.getLightLevel(pos) <= random.nextInt(8)) {
                 BlockPos down = pos.down();

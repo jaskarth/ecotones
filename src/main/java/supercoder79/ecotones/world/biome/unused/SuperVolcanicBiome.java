@@ -42,7 +42,7 @@ public class SuperVolcanicBiome extends EcotonesBiomeBuilder {
 
         this.precipitation(Biome.Precipitation.RAIN);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         //DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
@@ -62,19 +62,19 @@ public class SuperVolcanicBiome extends EcotonesBiomeBuilder {
                         .decorate(new Spread32Decorator()));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 12)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 12)))
                 .repeat(30)
                 .spreadHorizontally()
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(96)));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 12)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 12)))
                 .repeat(6)
                 .spreadHorizontally()
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(48)));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.DIAMOND_ORE.getDefaultState(), 11)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.DIAMOND_ORE.getDefaultState(), 11)))
                 .repeat(2)
                 .spreadHorizontally()
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(24)));

@@ -44,7 +44,7 @@ public class MapBiomeColorsCommand {
                 mutable.set(x, 0, z);
 
 //                img.setRGB(x + 2048, z + 2048, source.getWorld().getBiome(mutable).getGrassColorAt(x, z)); // Centered on origin
-                img.setRGB(x + 2048, z + 2048, source.getWorld().getBiome(mutable.add(src.getBlockX(), 0, src.getBlockZ())).getGrassColorAt(x, z)); // Centered on player
+                img.setRGB(x + 2048, z + 2048, source.getWorld().getBiome(mutable.add(src.getBlockX(), 0, src.getBlockZ())).value().getGrassColorAt(x, z)); // Centered on player
             }
         }
 

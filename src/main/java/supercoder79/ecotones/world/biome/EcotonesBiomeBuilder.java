@@ -7,6 +7,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
@@ -127,28 +128,41 @@ public abstract class EcotonesBiomeBuilder {
         this.biomeEffects.particleConfig(particleConfig);
     }
 
-    protected void addFeature(GenerationStep.Feature step, ConfiguredFeature<?, ?> feature) {
+//    protected void addFeature(GenerationStep.Feature step, EcotonesConfiguredFeature<?, ?> feature) {
+//        addFeature(step, feature.vanilla(), feature.placed());
+//    }
+
+//    protected void addFeature(GenerationStep.Feature step, ConfiguredFeature<?, ?> feature) {
+//        addFeature(step, feature, new PlacedFeature(new RegistryEntry.Direct<>(feature), new ArrayList<>()));
+//    }
+
+    protected void addFeature(GenerationStep.Feature step, EcotonesConfiguredFeature<?, ?> ecfeature) {
 //        while (wrapper.feature instanceof DecoratedFeature) {
 //            wrapper = ((DecoratedFeatureConfig)wrapper.config).feature.get();
 //        }
-        PlacedFeature plf;
-        if (feature instanceof EcotonesConfiguredFeature ecf) {
-            plf = ecf.placed();
-        } else {
-            plf = new PlacedFeature(() -> feature, new ArrayList<>());
-        }
+//        PlacedFeature plf;
+//        if (feature instanceof EcotonesConfiguredFeature ecf) {
+//            plf = ecf.placed();
+//        } else {
+//            plf = new PlacedFeature(new RegistryEntry.Direct<>(feature), new ArrayList<>());
+//        }
 
-        String name = feature.feature.getClass().getSimpleName();
+        ConfiguredFeature<?, ?> feature = ecfeature.vanilla();
+        String name = feature.feature().getClass().getSimpleName();
         String biomeName = Thread.currentThread().getStackTrace()[3].getClassName();
         biomeName = biomeName.substring(biomeName.lastIndexOf(".") + 1).toLowerCase(Locale.ROOT);
         // TODO: refactor this mess into actually putting the biome name in the super call
 
         Identifier id = new Identifier("ecotones", "ecotones_auto_registered_" + biomeName + "_" + name.toLowerCase(Locale.ROOT) + "_" + featureId.incrementAndGet());
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, id, feature);
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, id, plf);
+//        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, id, feature);
+        RegistryEntry<ConfiguredFeature<?, ?>> featHolder = BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, id, feature);
+
+        PlacedFeature plf = ecfeature.placed(featHolder);
+//        Registry.register(BuiltinRegistries.PLACED_FEATURE, id, plf);
+        RegistryEntry<PlacedFeature> plHolder = BuiltinRegistries.add(BuiltinRegistries.PLACED_FEATURE, id, plf);
 
         RegistryReport.increment("Configured Feature");
-        this.generationSettings.feature(step, plf);
+        this.generationSettings.feature(step, plHolder);
     }
 
     protected void addStructureFeature(ConfiguredStructureFeature<?, ?> structureFeature) {

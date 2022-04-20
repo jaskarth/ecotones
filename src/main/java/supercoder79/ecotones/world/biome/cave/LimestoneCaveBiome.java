@@ -16,10 +16,10 @@ public class LimestoneCaveBiome extends CaveBiome {
     }
 
     protected LimestoneCaveBiome() {
-        this.addFeature(EcotonesConfiguredFeature.wrap(Feature.ORE.configure(
-                        new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, EcotonesBlocks.LIMESTONE.getDefaultState(), 33)))
+        this.addFeature(EcotonesConfiguredFeature.wrap(Feature.ORE,
+                        new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, EcotonesBlocks.LIMESTONE.getDefaultState(), 33))
                     .uniformRange(YOffset.fixed(0), YOffset.fixed(48))
                     .spreadHorizontally()
-                    .repeat(15));
+                    .repeat(15).vanilla());
     }
 }

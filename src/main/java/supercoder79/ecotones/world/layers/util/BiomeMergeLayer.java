@@ -26,11 +26,12 @@ public enum BiomeMergeLayer implements MergingLayer, IdentityCoordinateTransform
         if (landSample == 1) {
             return biomeSample;
         } else {
-            if (Ecotones.REGISTRY.get(landSample).getCategory() == Biome.Category.BEACH) {
-                if (BiomeRegistries.NO_BEACH_BIOMES.contains(Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(biomeSample)).get())) {
-                    return biomeSample;
-                }
-            }
+            // FIXME
+//            if (Ecotones.REGISTRY.get(landSample).getCategory() == Biome.Category.BEACH) {
+//                if (BiomeRegistries.NO_BEACH_BIOMES.contains(Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(biomeSample)).get())) {
+//                    return biomeSample;
+//                }
+//            }
 
             //TODO: stop hardcoding these
             if (biomeSample == chasm || biomeSample == chasmEdge) {

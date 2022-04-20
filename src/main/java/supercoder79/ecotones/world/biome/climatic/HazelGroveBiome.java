@@ -9,7 +9,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
-import net.minecraft.world.gen.decorator.*;
+import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
@@ -77,12 +77,12 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
         this.hilliness(hilly ? 4.0 : 1.5);
         this.volatility(hilly ? 0.8 : 1.0);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD);
+        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
         this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
 
         if (clearing) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                    EcotonesConfiguredFeature.wrap(Feature.TREE.configure(HAZEL_CONFIG))
+                    EcotonesConfiguredFeature.wrap(Feature.TREE, HAZEL_CONFIG)
                             .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.5f, 1)))
                             .spreadHorizontally()
                             .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
@@ -92,7 +92,7 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
                             .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(6))));
         } else {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                    EcotonesConfiguredFeature.wrap(Feature.TREE.configure(HAZEL_CONFIG))
+                    EcotonesConfiguredFeature.wrap(Feature.TREE, HAZEL_CONFIG)
                             .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(3.5))));
 
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

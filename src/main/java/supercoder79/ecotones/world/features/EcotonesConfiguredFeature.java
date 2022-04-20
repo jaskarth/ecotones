@@ -1,28 +1,47 @@
 package supercoder79.ecotones.world.features;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.YOffset;
-import net.minecraft.world.gen.decorator.*;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.heightprovider.HeightProvider;
 import net.minecraft.world.gen.heightprovider.UniformHeightProvider;
+import net.minecraft.world.gen.placementmodifier.*;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class EcotonesConfiguredFeature<FC extends FeatureConfig, F extends Feature<FC>> extends ConfiguredFeature<FC, F> {
+public class EcotonesConfiguredFeature<FC extends FeatureConfig, F extends Feature<FC>> {
+    private final F feature;
+    private final FC config;
+
     public EcotonesConfiguredFeature(F feature, FC config) {
-        super(feature, config);
+
+        this.feature = feature;
+        this.config = config;
     }
 
     private final List<PlacementModifier> decorators = new ArrayList<>();
 
     public static <FC extends FeatureConfig, F extends Feature<FC>> EcotonesConfiguredFeature<FC, F> wrap(ConfiguredFeature<FC, F> feature) {
-        return new EcotonesConfiguredFeature<>(feature.feature, feature.config);
+        return new EcotonesConfiguredFeature<>(feature.feature(), feature.config());
+    }
+
+    public static <FC extends FeatureConfig, F extends Feature<FC>> EcotonesConfiguredFeature<FC, F> wrap(F feature, FC config) {
+        return new EcotonesConfiguredFeature<>(feature, config);
+    }
+
+    public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos origin) {
+        return vanilla().generate(world, chunkGenerator, random, origin);
     }
 
     // 1.17 style back->front
@@ -63,11 +82,19 @@ public class EcotonesConfiguredFeature<FC extends FeatureConfig, F extends Featu
         return decorate(HeightRangePlacementModifier.of(UniformHeightProvider.create(min, max)));
     }
 
-    public EcotonesConfiguredFeature<FC, ?> range(RangeDecoratorConfig config) {
-        return decorate(HeightRangePlacementModifier.of(config.heightProvider));
+    public EcotonesConfiguredFeature<FC, ?> range(HeightProvider config) {
+        return decorate(HeightRangePlacementModifier.of(config));
+    }
+
+    public ConfiguredFeature<FC, F> vanilla() {
+        return new ConfiguredFeature<>(this.feature, this.config);
     }
 
     public PlacedFeature placed() {
-        return new PlacedFeature(() -> this, decorators);
+        return new PlacedFeature(new RegistryEntry.Direct<>(vanilla()), decorators);
+    }
+
+    public PlacedFeature placed(RegistryEntry<ConfiguredFeature<?, ?>> holder) {
+        return new PlacedFeature(holder, decorators);
     }
 }

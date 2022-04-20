@@ -185,13 +185,9 @@ public final class Ecotones implements ModInitializer {
 		}
 
 		// Store if this server is in ecotones or not
-		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-			if (server.getOverworld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator) {
-				isServerEcotones = true;
-			} else {
-				isServerEcotones = false;
-			}
-		});
+//		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+//			isServerEcotones = server.getOverworld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator;
+//		});
 
 		System.out.println("Ecotones init took " + (System.currentTimeMillis() - start) + "ms!");
 	}

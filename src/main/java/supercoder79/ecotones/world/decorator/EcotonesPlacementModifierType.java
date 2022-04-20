@@ -2,8 +2,8 @@ package supercoder79.ecotones.world.decorator;
 
 import com.google.common.reflect.TypeToken;
 import com.mojang.serialization.Codec;
-import net.minecraft.world.gen.decorator.PlacementModifier;
-import net.minecraft.world.gen.decorator.PlacementModifierType;
+import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;

@@ -2,7 +2,7 @@ package supercoder79.ecotones.world.decorator;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.world.gen.decorator.PlacementModifierType;
+import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 
 public class ReverseTreePlacementDecorator extends SimpleTreePlacementDecorator {

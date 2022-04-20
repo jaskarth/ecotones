@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.carver;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.DynamicRegistryManager;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.biome.Biome;
@@ -26,7 +27,7 @@ public class EcotonesCarverContext extends CarverContext {
     }
 
     @Override
-    public Optional<BlockState> applyMaterialRule(Function<BlockPos, Biome> posToBiome, Chunk chunk, BlockPos pos, boolean hasFluid) {
+    public Optional<BlockState> applyMaterialRule(Function<BlockPos, RegistryEntry<Biome>> posToBiome, Chunk chunk, BlockPos pos, boolean hasFluid) {
         return Optional.of(this.region.getBlockState(pos));
     }
 }

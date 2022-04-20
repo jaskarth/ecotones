@@ -35,7 +35,7 @@ public class BiomeCache {
         }
 
         // cache miss: sample the source and put the result into our cache entry
-        Biome sampled = source.getBiome(x, 0, z, null); // TODO: null bad!
+        Biome sampled = source.getBiome(x, 0, z, null).value(); // TODO: null bad!
         this.values[idx] = sampled;
         this.keys[idx] = key;
 

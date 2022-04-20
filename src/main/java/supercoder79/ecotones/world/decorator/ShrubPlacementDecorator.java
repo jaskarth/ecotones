@@ -5,9 +5,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.decorator.DecoratorContext;
-import net.minecraft.world.gen.decorator.PlacementModifier;
-import net.minecraft.world.gen.decorator.PlacementModifierType;
+import net.minecraft.world.gen.feature.FeaturePlacementContext;
+import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
@@ -28,7 +28,7 @@ public class ShrubPlacementDecorator extends PlacementModifier {
 
     //TODO: use a for loop instead of a stream for more control
     @Override
-    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, BlockPos pos) {
+    public Stream<BlockPos> getPositions(FeaturePlacementContext context, Random random, BlockPos pos) {
         //gets data on how many shrubs to place based on the soil drainage.
         //performs an abs function on noise to make it [0, 1].
         //drainage of 0: either too much or too little drainage, 50% of target shrub count

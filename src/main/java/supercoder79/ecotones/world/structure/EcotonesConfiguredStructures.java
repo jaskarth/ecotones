@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.structure;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.tag.BiomeTags;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.*;
@@ -8,13 +9,14 @@ import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesConfiguredStructures {
-    public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_OAK = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.OAK_LOG.getDefaultState()));
-    public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_BIRCH = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.BIRCH_LOG.getDefaultState()));
-    public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_SPRUCE = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState()));
-    public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_DARK_OAK = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.DARK_OAK_LOG.getDefaultState()));
+    // FIXME
+    public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_OAK = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.OAK_LOG.getDefaultState()), BiomeTags.IS_BEACH);
+    public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_BIRCH = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.BIRCH_LOG.getDefaultState()), BiomeTags.IS_BEACH);
+    public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_SPRUCE = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState()), BiomeTags.IS_BEACH);
+    public static final ConfiguredStructureFeature<SingleStateFeatureConfig, ? extends StructureFeature<SingleStateFeatureConfig>> CAMPFIRE_DARK_OAK = EcotonesStructures.CAMPFIRE.configure(new SingleStateFeatureConfig(Blocks.DARK_OAK_LOG.getDefaultState()), BiomeTags.IS_BEACH);
 
-    public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> COTTAGE = EcotonesStructures.COTTAGE.configure(FeatureConfig.DEFAULT);
-    public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> OUTPOST = EcotonesStructures.OUTPOST.configure(FeatureConfig.DEFAULT);
+    public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> COTTAGE = EcotonesStructures.COTTAGE.configure(FeatureConfig.DEFAULT, BiomeTags.IS_BEACH);
+    public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> OUTPOST = EcotonesStructures.OUTPOST.configure(FeatureConfig.DEFAULT, BiomeTags.IS_BEACH);
 
     public static void init() {
         register("campfire_oak", CAMPFIRE_OAK);

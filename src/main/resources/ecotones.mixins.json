@@ -16,6 +16,7 @@
     "MixinChunkSerializer",
     "MixinCocoaBeansTreeDecorator",
     "MixinGeneratorOptions",
+    "MixinMinecraftServer",
     "MixinPlayerManager",
     "MixinSlimeEntity",
     "SpawnSettingsAccessor",

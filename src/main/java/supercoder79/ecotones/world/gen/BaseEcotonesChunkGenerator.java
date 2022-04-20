@@ -11,6 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.structure.JigsawJunction;
 import net.minecraft.structure.PoolStructurePiece;
 import net.minecraft.structure.StructurePiece;
+import net.minecraft.structure.StructureSet;
 import net.minecraft.structure.pool.StructurePool.Projection;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.*;
@@ -18,6 +19,7 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
@@ -30,6 +32,7 @@ import net.minecraft.world.chunk.ChunkSection;
 import net.minecraft.world.chunk.ProtoChunk;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.*;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.random.ChunkRandom;
 import net.minecraft.world.gen.random.SimpleRandom;
@@ -57,9 +60,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
-
-import static net.minecraft.world.gen.chunk.StructuresConfig.DEFAULT_STRONGHOLD;
-import static net.minecraft.world.gen.chunk.StructuresConfig.DEFAULT_STRUCTURES;
 
 public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     private static final float[] NOISE_WEIGHT_TABLE = Util.make(new float[13824], (table) -> {
@@ -90,8 +90,9 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     private final RiverWorker riverWorker;
     private final OctaveNoiseSampler<OpenSimplexNoise> riverNoiseNoise;
 
-    public BaseEcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
-        super(biomeSource, biomeSource, new EcotonesStructuresConfig(Optional.of(DEFAULT_STRONGHOLD), Maps.newHashMap(DEFAULT_STRUCTURES)), seed);
+    public BaseEcotonesChunkGenerator(Registry<StructureSet> structures, BiomeSource biomeSource, long seed) {
+//        super(biomeSource, biomeSource, new EcotonesStructuresConfig(Optional.of(DEFAULT_STRONGHOLD), Maps.newHashMap(DEFAULT_STRUCTURES)), seed);
+        super(structures, Optional.empty(), biomeSource, biomeSource, seed);
         this.verticalNoiseResolution = 8;
         this.horizontalNoiseResolution = 4;
         this.defaultBlock = Blocks.STONE.getDefaultState();
@@ -423,7 +424,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                 double noise = this.surfaceDepthNoise.sample((double) localX * 0.0625D, (double) localZ * 0.0625D, true) * 0.55 * 15.0D;
 
 
-                Biome biome = region.getBiome(mutable.set(localX, y, localZ));
+                Biome biome = region.getBiome(mutable.set(localX, y, localZ)).value();
                 ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder = BiomeGenData.LOOKUP.getOrDefault(key(biome), BiomeGenData.DEFAULT).surface();
                 configuredSurfaceBuilder.initSeed(region.getSeed());
 
@@ -484,7 +485,8 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         int chunkStartX = chunkX << 4;
         int chunkStartZ = chunkZ << 4;
 
-        for (StructureFeature<?> feature : StructureFeature.LAND_MODIFYING_STRUCTURES) {
+//        for (StructureFeature<?> feature : StructureFeature.LAND_MODIFYING_STRUCTURES) {
+        for (ConfiguredStructureFeature<?, ?> feature : new ArrayList<ConfiguredStructureFeature<?, ?>>()) {
             accessor.getStructureStarts(ChunkSectionPos.from(pos, 0), feature).forEach(start -> {
                 Iterator<StructurePiece> pieces = start.getChildren().iterator();
 
