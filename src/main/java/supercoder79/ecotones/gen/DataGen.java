@@ -22,6 +22,8 @@ public final class DataGen {
 
     private static void runDataGen() throws IOException {
         crossBlock("flame_lily", "Flame Lily");
+
+        RecipeGen.shapeless("flame_lily_to_dye", "minecraft:red_dye", 1, "ecotones:flame_lily");
     }
 
     private static void crossBlock(String name, String localizedName) throws IOException {
@@ -31,5 +33,7 @@ public final class DataGen {
 
         LangFileGen.addBlock(name, localizedName);
         LangFileGen.addItemblock(name, localizedName);
+
+        LootTableGen.dropsSelf(name);
     }
 }
