@@ -210,6 +210,14 @@ public final class FeatureConfigHolder {
                     .spreadZ(5)
                     .tries(32).build();
 
+    public static final RandomPatchFeatureConfig DENSE_LAVENDER_LILAC =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
+                    .add(EcotonesBlocks.LAVENDER.getDefaultState(), 1)
+                    .add(EcotonesBlocks.SMALL_LILAC.getDefaultState(), 1)))
+                    .spreadX(5)
+                    .spreadZ(5)
+                    .tries(32).build();
+
     public static final RandomPatchFeatureConfig WILDFLOWERS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1)))

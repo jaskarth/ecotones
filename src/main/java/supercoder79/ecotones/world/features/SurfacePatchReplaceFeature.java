@@ -59,6 +59,7 @@ public class SurfacePatchReplaceFeature extends EcotonesFeature<DefaultFeatureCo
                     local = local.down();
 
                     boolean needsSurface = !isWater;
+                    int attempts = 0;
                     for (int y = 0; y < 4 + Math.abs(offset * 6); y++) {
                         // Replace target state
                         BlockState state = world.getBlockState(local);
@@ -75,6 +76,11 @@ public class SurfacePatchReplaceFeature extends EcotonesFeature<DefaultFeatureCo
                         } else if (state.getFluidState().isOf(Fluids.WATER)) {
                             y = 0;
                             needsSurface = false;
+                        }
+
+                        attempts++;
+                        if (attempts > 20) {
+                            break;
                         }
 
                         local = local.down();

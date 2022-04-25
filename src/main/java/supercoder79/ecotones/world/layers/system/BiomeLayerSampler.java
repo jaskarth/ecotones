@@ -20,6 +20,12 @@ public class BiomeLayerSampler {
       this.sampler = layerFactory.make();
    }
 
+   public RegistryKey<Biome> sampleKey(int x, int z) {
+      int i = this.sampler.sample(x, z);
+
+      return BiomeIdManager.getKey(i);
+   }
+
    public Biome sample(Registry<Biome> biomeRegistry, int x, int z) {
       int i = this.sampler.sample(x, z);
       RegistryKey<Biome> registryKey = BiomeIdManager.getKey(i);

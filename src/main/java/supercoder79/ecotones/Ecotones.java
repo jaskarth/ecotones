@@ -189,7 +189,7 @@ public final class Ecotones implements ModInitializer {
 //			isServerEcotones = server.getOverworld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator;
 //		});
 
-		System.out.println("Ecotones init took " + (System.currentTimeMillis() - start) + "ms!");
+		log("Ecotones init took " + (System.currentTimeMillis() - start) + "ms!");
 	}
 
 	public static Identifier id(String name) {

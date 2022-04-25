@@ -77,8 +77,7 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
     public RegistryEntry<Biome> getBiome(int biomeX, int biomeY, int biomeZ, MultiNoiseUtil.MultiNoiseSampler sampler) {
         try {
             // TODO: no crash sampler
-            // FIXME: direct insn?
-            return new RegistryEntry.Direct<>(this.biomeSampler.sample(this.biomeRegistry, biomeX, biomeZ));
+            return this.biomeRegistry.entryOf(this.biomeSampler.sampleKey(biomeX, biomeZ));
         } catch (Exception e) {
             e.printStackTrace();
             return new RegistryEntry.Direct<>(this.biomeRegistry.get(BiomeKeys.PLAINS));

@@ -52,6 +52,7 @@ import supercoder79.ecotones.world.carver.EcotonesCarverContext;
 import supercoder79.ecotones.world.data.DataFunction;
 import supercoder79.ecotones.world.data.DataHolder;
 import supercoder79.ecotones.world.data.EcotonesData;
+import supercoder79.ecotones.world.data.Mosaic;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.river.deco.RiverDecorator;
 import supercoder79.ecotones.world.storage.ChunkDataStorage;
@@ -120,6 +121,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         this.data.put(EcotonesData.SOIL_ROCKINESS, this.soilRockinessNoise::sample);
         this.data.put(EcotonesData.SOIL_PH, this.soilPhNoise::sample);
         this.data.put(EcotonesData.GRASS_NOISE, this.grassNoise::sample);
+        this.data.put(EcotonesData.FLOWER_MOSAIC, new Mosaic(this.random.nextLong(), 8, 64, 16, -0.1, 0.4));
     }
 
     protected RegistryKey<Biome> key(Biome biome) {
@@ -447,7 +449,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 
         Map<Integer, List<StructureFeature<?>>> structuresByStep = Registry.STRUCTURE_FEATURE
                 .stream()
-                .collect(Collectors.groupingBy(structureFeaturex -> structureFeaturex.getGenerationStep().ordinal()));
+                .collect(Collectors.groupingBy(structureFeaturex -> /*FIXME: should never be null!*/ structureFeaturex.getGenerationStep() == null ? 0 : structureFeaturex.getGenerationStep().ordinal()));
 
         int i = GenerationStep.Feature.values().length;
 

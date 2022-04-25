@@ -5,10 +5,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
+import java.lang.reflect.*;
 
 public interface EcotonesPlacementModifierType<P extends PlacementModifier> extends PlacementModifierType<P> {
     Class<P> clazz();
@@ -40,6 +37,10 @@ public interface EcotonesPlacementModifierType<P extends PlacementModifier> exte
             throw new IllegalStateException(clazz.getSimpleName() + " needs a public constructor!");
         }
 
+        if (constructors.length > 1) {
+            throw new IllegalStateException(clazz.getSimpleName() + " needs a single public constructor!");
+        }
+
         Constructor<?> constructor = constructors[0];
         if (constructor.getParameterCount() == 1) {
             try {
@@ -47,12 +48,14 @@ public interface EcotonesPlacementModifierType<P extends PlacementModifier> exte
             } catch (Exception e) {
                 throw new IllegalStateException("Failed to instantiate " + clazz.getSimpleName() + "!", e);
             }
-        } else {
+        } else if (constructor.getParameterCount() == 0) {
             try {
                 return (P) constructor.newInstance();
             } catch (Exception e) {
                 throw new IllegalStateException("Failed to instantiate " + clazz.getSimpleName() + "!", e);
             }
+        } else {
+            throw new IllegalStateException("Unsupported constructor for " + clazz.getSimpleName() + "!");
         }
     }
 }
