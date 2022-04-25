@@ -1,4 +1,5 @@
 {
+  "ecotones.section.start.biomes": "",
   "biome.ecotones.desert": "Desert",
   "biome.ecotones.desert_hilly": "Hilly Desert",
   "biome.ecotones.desert_mountainous": "Mountainous Desert",
@@ -243,9 +244,10 @@
   "biome.ecotones.desert_shrubland_hilly": "Hilly Desert Shrubland",
   "biome.ecotones.desert_shrubland_mountainous": "Mountainous Desert Shrubland",
 
+  "ecotones.section.end.biomes": "",
 
 
-
+  "ecotones.section.start.blocks": "",
   "block.ecotones.peat": "Peat Block",
   "block.ecotones.short_grass": "Short Grass",
   "block.ecotones.reeds": "Reeds",
@@ -264,7 +266,6 @@
   "block.ecotones.wide_fern": "Wide Fern",
   "block.ecotones.lichen": "Lichen",
   "block.ecotones.moss": "Moss",
-
   "block.ecotones.maple_leaves": "Maple Leaves",
   "block.ecotones.small_lilac": "Small Lilac",
   "block.ecotones.blueberry_bush": "Blueberry Bush",
@@ -293,7 +294,10 @@
   "block.ecotones.sparse_gold_ore": "Sparse Gold Ore",
   "block.ecotones.fertilizer_spreader": "Fertilizer Spreader",
   "block.ecotones.watergrass": "Watergrass",
+  "block.ecotones.flame_lily": "Flame Lily",
+  "ecotones.section.end.blocks": "",
 
+  "ecotones.section.start.itemblocks": "",
   "item.ecotones.peat": "Peat Block",
   "item.ecotones.short_grass": "Short Grass",
   "item.ecotones.reeds": "Reeds",
@@ -317,7 +321,6 @@
   "item.ecotones.sparse_gold_ore": "Sparse Gold Ore",
   "item.ecotones.fertilizer_spreader": "Fertilizer Spreader",
   "item.ecotones.watergrass": "Watergrass",
-
   "item.ecotones.maple_leaves": "Maple Leaves",
   "item.ecotones.small_lilac": "Small Lilac",
   "item.ecotones.nest": "Nest",
@@ -341,9 +344,10 @@
   "item.ecotones.duckweed": "Duckweed",
   "item.ecotones.thorn_bush": "Thorn Bush",
   "item.ecotones.red_rock": "Red Rock",
-  "item.ecotones.magnifying_glass": "Magnifying Glass",
-  "item.ecotones.basic_fertilizer": "Basic Fertilizer",
+  "item.ecotones.flame_lily": "Flame Lily",
+  "ecotones.section.end.itemblocks": "",
 
+  "ecotones.section.start.itemonly": "",
   "item.ecotones.peat_item": "Peat",
   "item.ecotones.pine_sap": "Pine Sap",
   "item.ecotones.sap_ball": "Sap Ball",
@@ -359,6 +363,9 @@
   "item.ecotones.pyrite_item": "Pyrite",
   "item.ecotones.gold_chunk": "Gold Chunk",
   "item.ecotones.turpentine": "Turpentine",
+  "item.ecotones.magnifying_glass": "Magnifying Glass",
+  "item.ecotones.basic_fertilizer": "Basic Fertilizer",
+  "ecotones.section.end.itemonly": "",
 
   "generator.ecotones": "§2Ecotones",
   "itemGroup.ecotones.ecotones": "Ecotones",

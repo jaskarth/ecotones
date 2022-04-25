@@ -62,6 +62,7 @@ public final class EcotonesBlocks {
     public static Block EXCURSION_FUNNEL = new ExcursionFunnelBlock(FabricBlockSettings.of(Material.STONE).strength(2.5F, 8.0F).ticksRandomly());
     public static Block SULFUR_ORE = new Block(FabricBlockSettings.copy(Blocks.LAPIS_ORE)/*.breakByTool(FabricToolTags.PICKAXES)*/.hardness(3f));
     public static Block PHOSPHATE_ORE = new Block(FabricBlockSettings.copy(Blocks.LAPIS_ORE)/*.breakByTool(FabricToolTags.PICKAXES)*/.hardness(3f));
+    public static Block FLAME_LILY = new EcotonesPlantBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
     public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
 
 
@@ -116,6 +117,7 @@ public final class EcotonesBlocks {
         registerWithItem("steady_geyser", EXCURSION_FUNNEL);
         registerWithItem("sulfur_ore", SULFUR_ORE);
         registerWithItem("phosphate_ore", PHOSPHATE_ORE);
+        registerWithItem("flame_lily", FLAME_LILY);
         register("cyan_rose", CYAN_ROSE);
     }
 

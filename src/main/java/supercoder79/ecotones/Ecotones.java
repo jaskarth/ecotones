@@ -2,7 +2,6 @@ package supercoder79.ecotones;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -20,6 +19,7 @@ import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.sound.EcotonesSounds;
 import supercoder79.ecotones.command.*;
 import supercoder79.ecotones.entity.EcotonesEntities;
+import supercoder79.ecotones.gen.DataGen;
 import supercoder79.ecotones.items.EcotonesItemGroups;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.screen.EcotonesScreenHandlers;
@@ -110,6 +110,8 @@ public final class Ecotones implements ModInitializer {
 
 		CampfireLogHelper.initVanilla();
 		BlockDecorations.init();
+
+		DataGen.run();
 
 		// Mod Compat handlers
 		if (isModLoaded("traverse")) {
