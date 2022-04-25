@@ -225,6 +225,13 @@ public final class FeatureConfigHolder {
                     .spreadZ(7)
                     .tries(32).build();
 
+    public static final RandomPatchFeatureConfig FLAME_LILY =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
+                    .add(EcotonesBlocks.FLAME_LILY.getDefaultState(), 1)))
+                    .spreadX(5)
+                    .spreadZ(5)
+                    .tries(12).build();
+
     public static final RandomPatchFeatureConfig DANDELION_FIELD_FLOWERS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.POOFY_DANDELION.getDefaultState(), 1)
