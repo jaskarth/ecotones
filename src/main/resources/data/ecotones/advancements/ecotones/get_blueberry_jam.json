@@ -1,0 +1,37 @@
+{
+  "parent": "ecotones:ecotones/get_blueberries",
+  "display": {
+    "icon": {
+      "item": "ecotones:blueberry_jam"
+    },
+    "title": {
+      "translate": "advancements.ecotones.blueberry_jam"
+    },
+    "description": {
+      "translate": "advancements.ecotones.blueberry_jam.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "blueberries": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ecotones:blueberry_jam"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "blueberries"
+    ]
+  ]
+}

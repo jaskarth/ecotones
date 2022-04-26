@@ -21,7 +21,9 @@
     "MixinSlimeEntity",
     "SpawnSettingsAccessor",
     "StructureFeatureAccessor",
-    "TreeDecoratorTypeAccessor"
+    "TreeDecoratorTypeAccessor",
+    "client.MixinAdvancementPositioner",
+    "client.MixinAdvancementTab"
   ],
   "client": [
     "client.EntityModelLayersAccessor",
