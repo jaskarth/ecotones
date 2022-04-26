@@ -57,7 +57,6 @@ public class EcotonesAdvancementTab extends AdvancementTab {
         }
 
         matrices.push();
-        matrices.scale(0.75F, 0.75F, 0.75F);
         renderLines(matrices, i, j, true, rootWidget);
         renderLines(matrices, i, j, false, rootWidget);
         this.rootWidget.renderWidgets(matrices, i, j);

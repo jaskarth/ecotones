@@ -71,6 +71,7 @@ public final class EcotonesFeatures {
     public static final EcotonesFeature<DefaultFeatureConfig> SURFACE_PATCH = new SurfacePatchReplaceFeature(DefaultFeatureConfig.CODEC);
     public static final EcotonesFeature<SulfurousLakeFeature.Config> SULFUROUS_LAKE = new SulfurousLakeFeature(SulfurousLakeFeature.Config.CODEC);
     public static final EcotonesFeature<DefaultFeatureConfig> PHOSPHATE_DOME = new PhosphateDomeFeature(DefaultFeatureConfig.CODEC);
+    public static final EcotonesFeature<SimpleTreeFeatureConfig> BRANCHED_SPRUCE = new BranchedSpruceTreeFeature(SimpleTreeFeatureConfig.CODEC);
 
     public static void init() {
         register("desertify", DESERTIFY_SOIL);
@@ -125,6 +126,7 @@ public final class EcotonesFeatures {
         register("surface_patch", SURFACE_PATCH);
         register("sulfurous_lake", SULFUROUS_LAKE);
         register("phosphate_dome", PHOSPHATE_DOME);
+        register("branched_spruce", BRANCHED_SPRUCE);
     }
 
     private static void register(String name, Feature<?> feature) {
