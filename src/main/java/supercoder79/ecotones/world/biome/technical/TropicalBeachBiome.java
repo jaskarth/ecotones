@@ -20,6 +20,7 @@ import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
@@ -49,6 +50,8 @@ public class TropicalBeachBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_beach"), new TropicalBeachBiome().build());
+
+        BiomeRegistries.registerBeach(INSTANCE);
     }
 
     protected TropicalBeachBiome() {

@@ -19,6 +19,7 @@ public final class BiomeRegistries {
     public static final Map<RegistryKey<Biome>, IntFunction<Boolean>> SPECIAL_BIOMES = new HashMap<>();
     public static final Map<RegistryKey<Biome>, Integer> BIG_SPECIAL_BIOMES = new HashMap<>();
     public static final Map<RegistryKey<Biome>, Integer> SMALL_SPECIAL_BIOMES = new HashMap<>();
+    public static final List<RegistryKey<Biome>> BEACH_LIST = new ArrayList<>();
     public static final List<RegistryKey<Biome>> NO_BEACH_BIOMES = new ArrayList<>();
     public static final List<RegistryKey<Biome>> NO_RIVER_BIOMES = new ArrayList<>();
     public static final Map<RegistryKey<Biome>, Double> MOUNTAIN_BIOMES = new HashMap<>();
@@ -100,6 +101,10 @@ public final class BiomeRegistries {
 
     public static void registerNoBeachBiome(Biome biome) {
         NO_BEACH_BIOMES.add(key(biome));
+    }
+
+    public static void registerBeach(Biome biome) {
+        BEACH_LIST.add(key(biome));
     }
 
     public static void registerNoBeachBiomes(Biome... biomes) {

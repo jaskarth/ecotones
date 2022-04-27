@@ -13,6 +13,7 @@ import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
+import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
@@ -28,6 +29,8 @@ public class DryBeachBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dry_beach"), new DryBeachBiome().build());
+
+        BiomeRegistries.registerBeach(INSTANCE);
     }
 
     protected DryBeachBiome() {

@@ -13,6 +13,7 @@ import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
+import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
@@ -26,6 +27,8 @@ public class GravelBeachBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
         INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "gravel_beach"), new GravelBeachBiome().build());
+
+        BiomeRegistries.registerBeach(INSTANCE);
     }
 
     protected GravelBeachBiome() {

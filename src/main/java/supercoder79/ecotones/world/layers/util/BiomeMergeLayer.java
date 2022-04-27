@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.layers.util;
 
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.world.layers.system.layer.type.MergingLayer;
 import supercoder79.ecotones.world.layers.system.layer.util.IdentityCoordinateTransformer;
@@ -26,12 +27,17 @@ public enum BiomeMergeLayer implements MergingLayer, IdentityCoordinateTransform
         if (landSample == 1) {
             return biomeSample;
         } else {
-            // FIXME
-//            if (Ecotones.REGISTRY.get(landSample).getCategory() == Biome.Category.BEACH) {
-//                if (BiomeRegistries.NO_BEACH_BIOMES.contains(Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(biomeSample)).get())) {
-//                    return biomeSample;
-//                }
-//            }
+            RegistryKey<Biome> key = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(biomeSample)).get();
+            RegistryKey<Biome> landKey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(landSample)).get();
+            if (BiomeRegistries.BEACH_LIST.contains(landKey)) {
+                if (BiomeRegistries.NO_BEACH_BIOMES.contains(key)) {
+                    return biomeSample;
+                }
+            }
+
+            if (BiomeRegistries.MOUNTAIN_BIOMES.containsKey(key)) {
+                return biomeSample;
+            }
 
             //TODO: stop hardcoding these
             if (biomeSample == chasm || biomeSample == chasmEdge) {
