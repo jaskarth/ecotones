@@ -6,7 +6,7 @@ import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class DecorationCollector {
+public final class RiverDecorationCollector {
     private final List<Entry> features = new ArrayList<>();
 
     public void add(EcotonesConfiguredFeature<?, ?> feature) {

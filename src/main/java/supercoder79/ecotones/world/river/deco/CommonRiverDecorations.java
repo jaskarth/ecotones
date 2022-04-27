@@ -32,7 +32,7 @@ public final class CommonRiverDecorations {
                     new CocoaBeansTreeDecorator(0.2F))
             ).ignoreVines().build();
 
-    public static void buildDesertLushness(DecorationCollector decorations) {
+    public static void buildDesertLushness(RiverDecorationCollector decorations) {
         // Grass replacing sand
         decorations.add(EcotonesFeatures.SURFACE_PATCH.configure(FeatureConfig.DEFAULT)
                 .spreadHorizontally()

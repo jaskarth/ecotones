@@ -5,8 +5,10 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.world.edge.EdgeDecorationCollector;
+import supercoder79.ecotones.world.edge.EdgeDecorator;
 import supercoder79.ecotones.world.layers.generation.MountainLayer;
-import supercoder79.ecotones.world.river.deco.DecorationCollector;
+import supercoder79.ecotones.world.river.deco.RiverDecorationCollector;
 import supercoder79.ecotones.world.river.deco.RiverDecorator;
 
 import java.util.*;
@@ -32,6 +34,7 @@ public final class BiomeRegistries {
     public static final Map<RegistryKey<Biome>, RegistryKey<Biome>[]> BIOME_VARIANTS = new HashMap<>();
     public static final List<RegistryKey<Biome>> SLIME_SPAWN_BIOMES = new ArrayList<>();
     public static final Map<RegistryKey<Biome>, RiverDecorator> RIVER_DECORATORS = new HashMap<>();
+    public static final Map<RegistryKey<Biome>, EdgeDecorator> EDGE_DECORATORS = new HashMap<>();
 
     public static void registerSpecialBiome(Biome biome, IntFunction<Boolean> rule) {
         SPECIAL_BIOMES.put(key(biome), rule);
@@ -54,10 +57,16 @@ public final class BiomeRegistries {
         BIOME_VARIANT_CHANCE.put(key(biome), chance);
     }
 
-    public static void registerRiverDecorator(Biome biome, Consumer<DecorationCollector> acceptor) {
-        RiverDecorator decorator = new RiverDecorator();
+    public static void registerRiverDecorator(Biome biome, Consumer<RiverDecorationCollector> acceptor) {
+        RiverDecorator decorator = RIVER_DECORATORS.getOrDefault(key(biome), new RiverDecorator());
         acceptor.accept(decorator.getDecorations());
         RIVER_DECORATORS.put(key(biome), decorator);
+    }
+
+    public static void registerEdgeDecorator(Biome biome, Consumer<EdgeDecorationCollector> acceptor) {
+        EdgeDecorator decorator = EDGE_DECORATORS.getOrDefault(key(biome), new EdgeDecorator());
+        acceptor.accept(decorator.getDecorations());
+        EDGE_DECORATORS.put(key(biome), decorator);
     }
 
     public static void registerBiomeVariants(Biome parent, Biome... variants) {

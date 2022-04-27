@@ -33,6 +33,7 @@ import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.biome.EcotonesBiomes;
 import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
+import supercoder79.ecotones.world.edge.EcotonesEdgeDecorations;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.foliage.EcotonesFoliagePlacers;
 import supercoder79.ecotones.world.gen.BiomeGenData;
@@ -102,6 +103,8 @@ public final class Ecotones implements ModInitializer {
 		}
 
 		EcotonesBiomes.init();
+
+		EcotonesEdgeDecorations.init();
 
 		EcotonesData.init();
 

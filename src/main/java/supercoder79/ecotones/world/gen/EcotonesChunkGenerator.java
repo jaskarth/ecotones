@@ -53,6 +53,7 @@ import supercoder79.ecotones.world.data.DataFunction;
 import supercoder79.ecotones.world.data.DataHolder;
 import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.data.Mosaic;
+import supercoder79.ecotones.world.edge.EdgeDecorator;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.river.deco.RiverDecorator;
 import supercoder79.ecotones.world.storage.ChunkDataStorage;
@@ -417,6 +418,11 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
                 riverDecorator.decorate(riverData.openToAir(), 0, new FeatureContext<>(Optional.empty(), world, this, random, pos, DefaultFeatureConfig.INSTANCE));
             }
         }
+
+        EdgeDecorator edgeDecorator = BiomeRegistries.EDGE_DECORATORS.getOrDefault(BiomeRegistries.key(biome), EdgeDecorator.EMPTY);
+
+        edgeDecorator.decorate(chunkPos.x, chunkPos.z, this.biomeSource, new FeatureContext<>(Optional.empty(), world, this, random, pos, DefaultFeatureConfig.INSTANCE));
+
 
         try {
             generateFeatureStep(biome, structureAccessor, this, (ChunkRegion) world, populationSeed, random, pos, chunk);
