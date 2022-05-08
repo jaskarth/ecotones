@@ -21,9 +21,7 @@
     "MixinSlimeEntity",
     "SpawnSettingsAccessor",
     "StructureFeatureAccessor",
-    "TreeDecoratorTypeAccessor",
-    "client.MixinAdvancementPositioner",
-    "client.MixinAdvancementTab"
+    "TreeDecoratorTypeAccessor"
   ],
   "client": [
     "client.EntityModelLayersAccessor",
@@ -35,7 +33,9 @@
     "client.MixinEntityModels",
     "client.MixinHeldItemRenderer",
     "client.MixinMinecraftClient",
-    "client.MixinWorldRenderer"
+    "client.MixinWorldRenderer",
+    "client.MixinAdvancementPositioner",
+    "client.MixinAdvancementTab"
   ],
   "injectors": {
     "defaultRequire": 1

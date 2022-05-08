@@ -67,15 +67,21 @@ public class SapDistilleryScreen extends HandledScreen<SapDistilleryScreenHandle
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         // Syrup cauldron
+        // Maple: 0xE58632
+        RenderSystem.setShaderColor(229.f / 255.f, 134.f / 255.f, 50 / 255.f, 1.0F);
         int syrupAmt = this.handler.getSyrupAmount();
         int scaledSyrupAmt = (syrupAmt * 34) / 5000;
         this.drawTexture(matrices, x + 52, y + 26 + (33 - scaledSyrupAmt), 176, 88 - scaledSyrupAmt, 72, scaledSyrupAmt);
 
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        // Maple: 0xD96927
+        RenderSystem.setShaderColor(217 / 255.f, 105 / 255.f, 39 / 255.f, 1.0F);
 
         for (ParticleState particle : this.particles) {
             this.drawTexture(matrices, x + particle.pos.x(), y + particle.pos.y(), particle.getU(), 0, 3, 3);
         }
+
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         // Reset state
         RenderSystem.disableBlend();
