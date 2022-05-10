@@ -2,8 +2,8 @@ package supercoder79.ecotones.world.layers.util;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.biome.layer.type.ParentedLayer;
-import net.minecraft.world.biome.layer.util.*;
+import supercoder79.ecotones.world.layers.system.layer.type.ParentedLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.*;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;

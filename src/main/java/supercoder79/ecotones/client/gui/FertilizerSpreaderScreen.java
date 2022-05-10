@@ -60,13 +60,13 @@ public class FertilizerSpreaderScreen extends HandledScreen<FertilizerSpreaderSc
         this.drawTexture(matrices, (int) (x + 110 + Math.min((this.handler.getPercent() / 100.0) * 52, 51)), y + 43, 176, 0, 11, 7);
 
         // Draw water
-        Sprite sprite = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(Blocks.WATER.getDefaultState()).getSprite();
+        Sprite sprite = MinecraftClient.getInstance().getBakedModelManager().getBlockModels().getModel(Blocks.WATER.getDefaultState()).getParticleSprite();
 
         RenderSystem.setShaderTexture(0, SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
 
         for (int x0 = 0; x0 < 3; x0++) {
             for (int y0 = 0; y0 < 3; y0++) {
-                drawWater(matrices.peek().getModel(), x + 10 + (x0 * WATER_X_FRAC), x + 10 + ((x0 + 1) * WATER_X_FRAC), y + 35 + (y0 * WATER_Y_FRAC), y + 35 + ((y0 + 1) * WATER_Y_FRAC), 1, sprite.getMinU(), sprite.getMaxU(), sprite.getMinV(), sprite.getMaxV());
+                drawWater(matrices.peek().getPositionMatrix(), x + 10 + (x0 * WATER_X_FRAC), x + 10 + ((x0 + 1) * WATER_X_FRAC), y + 35 + (y0 * WATER_Y_FRAC), y + 35 + ((y0 + 1) * WATER_Y_FRAC), 1, sprite.getMinU(), sprite.getMaxU(), sprite.getMinV(), sprite.getMaxV());
             }
         }
 
@@ -96,22 +96,27 @@ public class FertilizerSpreaderScreen extends HandledScreen<FertilizerSpreaderSc
         int x = mouseX - (this.width - this.backgroundWidth) / 2;
         int y = mouseY - (this.height - this.backgroundHeight) / 2;
 
-        // Syrup tooltip
+        // fertilizer tooltip
         if (x >= 8 && x <= 59 && y >= 31 && y <= 87) {
             this.renderTooltip(matrices, new LiteralText(this.handler.getFertilizerAmount() + " / 20000 (Basic Fertilizer)"), x, y);
         }
 
-        // Sap tooltip
+        // percent tooltip
         if (x >= 113 && x <= 168 && y >= 36 && y <= 48) {
-            this.renderTooltip(matrices, new LiteralText(this.handler.getPercent() + "% (Basic Fertilizer max: 40%)"), x, y);
+            this.renderTooltip(matrices, new LiteralText(this.handler.getPercent() + "% Fertilizer dissolved"), x, y);
         }
 
         this.textRenderer.draw(matrices, "Farms: " + this.handler.getFarmCount(), 117, 58 - 8, 4210752);
         this.textRenderer.draw(matrices, "Water: " + this.handler.getWaterCount(), 117, 58 - 8 + 9, 4210752);
-        this.textRenderer.draw(matrices, "Working...", 117, 58 - 8 + 18, 4210752);
+        this.textRenderer.draw(matrices, switch (this.handler.getStatus()) {
+            case 0 -> "Invalid!";
+            case 1 -> "Working...";
+            case 2 -> "Water!";
+            case 3 -> "Idle";
+            case 4 -> "Plants!";
+            default -> "Invalid!";
+        }, 117, 58 - 8 + 18, 4210752);
     }
-
-    // Status options: "Working!" "Full!" "Empty!"
 
     private static void drawWater(Matrix4f matrices, int x0, int x1, int y0, int y1, int z, float u0, float u1, float v0, float v1) {
         RenderSystem.setShader(GameRenderer::getPositionColorTexShader);

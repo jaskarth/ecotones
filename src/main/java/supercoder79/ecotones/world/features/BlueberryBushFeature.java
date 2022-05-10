@@ -15,7 +15,7 @@ import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
 import java.util.Random;
 
-public class BlueberryBushFeature extends Feature<DefaultFeatureConfig> {
+public class BlueberryBushFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public BlueberryBushFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }

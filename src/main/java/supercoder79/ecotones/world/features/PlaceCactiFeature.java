@@ -12,7 +12,7 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.Random;
 
-public class PlaceCactiFeature extends Feature<DefaultFeatureConfig> {
+public class PlaceCactiFeature extends EcotonesFeature<DefaultFeatureConfig> {
 
     public PlaceCactiFeature(Codec<DefaultFeatureConfig> codec) {
         super(codec);

@@ -15,6 +15,7 @@ import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.util.BoxHelper;
 import supercoder79.ecotones.world.data.DataHolder;
 import supercoder79.ecotones.world.data.DefaultDataHolder;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.tree.GeneratedTreeData;
 import supercoder79.ecotones.world.tree.gen.BarrenTreeGenerator;
@@ -24,7 +25,7 @@ import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-public class BarrenPineTreeFeature extends Feature<SimpleTreeFeatureConfig> {
+public class BarrenPineTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
     private static final PineconeTreeDecorator PINECONES = new PineconeTreeDecorator(2);
 
     private static final LeafPileTreeDecorator LEAF_PILES = new LeafPileTreeDecorator(EcotonesBlocks.SPRUCE_LEAF_PILE.getDefaultState(), 6, 3);

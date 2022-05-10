@@ -1,6 +1,5 @@
 package supercoder79.ecotones.blocks.entity;
 
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CropBlock;
@@ -13,6 +12,9 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
@@ -23,9 +25,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
+import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.blocks.FertilizerSpreaderBlock;
-import supercoder79.ecotones.client.gui.FertilizerSpreaderScreen;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.screen.FertilizerSpreaderScreenHandler;
 
@@ -33,8 +35,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity implements BlockEntityClientSerializable {
-    private static final Direction[] CARDINAL = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
+public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity {
+    private static final Direction[] HORIZONTAL = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
 
     protected final PropertyDelegate propertyDelegate;
 
@@ -43,18 +45,26 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
     // 0 .. 100
     private int percentDissolved;
     // 0 .. 20000 (20 units)
+    private int dissolvedAmount;
+    // 0 .. 20000 (20 units)
     private int fertilizerAmount;
 
     // transient
     private boolean needsValidation = true;
     private boolean valid = false;
+    // 0: Invalid
+    // 1: Working
+    // 2: Needs water
+    // 3: Waiting
+    // 4: needs plants
+    private int status = 0;
     private final long timeOffset = (long) (Math.random() * 300);
 
     // calculated on demand
+    // synced but not serialized
     private Set<BlockPos> water = new HashSet<>();
     private Set<BlockPos> farmland = new HashSet<>();
 
-    // synced but not serialized
 
 
     public FertilizerSpreaderBlockEntity(BlockPos pos, BlockState state) {
@@ -69,6 +79,7 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
                     case 1 -> FertilizerSpreaderBlockEntity.this.fertilizerAmount;
                     case 2 -> FertilizerSpreaderBlockEntity.this.farmland.size();
                     case 3 -> FertilizerSpreaderBlockEntity.this.water.size();
+                    case 4 -> FertilizerSpreaderBlockEntity.this.status;
                     default -> 0;
                 };
             }
@@ -82,7 +93,7 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
             }
 
             public int size() {
-                return 4;
+                return 5;
             }
         };
     }
@@ -100,6 +111,16 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
         long time = world.getTime() + blockEntity.timeOffset;
 
         if (blockEntity.valid) {
+            if (blockEntity.fertilizerAmount >= 8 && blockEntity.dissolvedAmount < 20000) {
+                blockEntity.fertilizerAmount -= 8;
+
+                // \frac{600}{x+60}-\frac{x}{50}
+                // Makes it harder to dissolve more into the surrounding water
+                blockEntity.dissolvedAmount += (int) ((600.0 / (blockEntity.percentDissolved + 60)) - (blockEntity.percentDissolved / 50.0));
+            }
+
+            blockEntity.percentDissolved = (int) ((blockEntity.dissolvedAmount / 20000.0) * 100.0);
+
             if (time % 20 == 0) {
                 if (blockEntity.getStack(0).getCount() > 0 && blockEntity.fertilizerAmount + 1000 <= 20000) {
                     blockEntity.getStack(0).decrement(1);
@@ -108,13 +129,25 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
                 }
             }
 
-            if (time % 40 == 0) {
-                blockEntity.fertilize(world);
+            if (time % 160 == 0) {
+                if (blockEntity.percentDissolved > 0) {
+                    blockEntity.fertilize(world);
+                }
             }
+
+            if (blockEntity.dissolvedAmount >= 120) {
+                if (blockEntity.world.random.nextInt(4) == 0) {
+                    blockEntity.dissolvedAmount -= 1;
+                }
+            }
+
+            blockEntity.markDirty();
         }
 
-        // Recheck position every 10 seconds
-        if (time % 200 == 0) {
+        blockEntity.percentDissolved = (int) ((blockEntity.dissolvedAmount / 20000.0) * 100.0);
+
+        // Recheck position every 5 seconds
+        if (time % 100 == 0) {
             blockEntity.needsValidation = true;
         }
     }
@@ -129,6 +162,16 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
             this.water = water;
             this.farmland = farmland;
 
+            this.status = 1;
+
+            if (this.farmland.isEmpty()) {
+                this.status = 4;
+            }
+
+            if (this.dissolvedAmount == 0 && this.fertilizerAmount == 0) {
+                this.status = 3;
+            }
+
             // Debugging!
 //            for (BlockPos p : this.farmland) {
 //                world.setBlockState(p, Blocks.MAGENTA_TERRACOTTA.getDefaultState());
@@ -136,14 +179,21 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
 
             this.valid = true;
         } else {
+            // No water
+            this.status = 2;
             this.valid = false;
         }
     }
 
     private void fertilize(World world) {
-        int chance = 6; // Base on fertilizer quality
+        // \frac{500}{x+1}-\frac{x}{20}+3
+        // Fertilization chance curve, makes higher values less effective as more is added
+        int chance = (int)((500.0 / (this.percentDissolved + 1)) + (this.percentDissolved / 20.0) + 3);
+        // TODO: make it so that more dissolved can let more blocks be fertilized per tick?
+
         Random random = world.random;
 
+        // FIXME: biased to start!
         for (BlockPos pos : this.farmland) {
             if (world.getBlockState(pos).isOf(Blocks.FARMLAND)) {
                 if (random.nextInt(chance) == 0) {
@@ -155,6 +205,10 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
                         // Green particles
                         world.syncWorldEvent(WorldEvents.PLANT_FERTILIZED, pos.up(), 20);
                     }
+
+                    this.dissolvedAmount -= 120;
+
+                    break;
                 }
             } else {
                 // Invalid! Recheck
@@ -164,7 +218,7 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
     }
 
     private void dfs(World world, BlockPos pos, Set<BlockPos> water, Set<BlockPos> farmland, int depth) {
-        for (Direction dir : CARDINAL) {
+        for (Direction dir : HORIZONTAL) {
             BlockPos local = pos.offset(dir);
             BlockState state = world.getBlockState(local);
 
@@ -201,14 +255,29 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
+
+        Inventories.readNbt(nbt, this.inventory);
+
+        this.percentDissolved = nbt.getInt("percent_dissolved");
+        this.dissolvedAmount = nbt.getInt("dissolved_amount");
+        this.fertilizerAmount = nbt.getInt("fertilizer_amount");
+
+        fromClientTag(nbt);
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
-        return super.writeNbt(nbt);
+    public void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
+
+        Inventories.writeNbt(nbt, this.inventory);
+
+        nbt.putInt("percent_dissolved", this.percentDissolved);
+        nbt.putInt("dissolved_amount", this.dissolvedAmount);
+        nbt.putInt("fertilizer_amount", this.fertilizerAmount);
+
+//        return nbt;
     }
 
-    @Override
     public void fromClientTag(NbtCompound tag) {
         // Debug
 
@@ -229,7 +298,6 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
         this.farmland = fList;
     }
 
-    @Override
     public NbtCompound toClientTag(NbtCompound tag) {
         // Debug
         NbtList water = new NbtList();
@@ -247,6 +315,21 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
         tag.put("farmland", farmland);
 
         return tag;
+    }
+
+    private void sync() {
+        ((ServerWorld)this.world).getChunkManager().markForUpdate(this.pos);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return toClientTag(new NbtCompound());
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
     }
 
     @Override

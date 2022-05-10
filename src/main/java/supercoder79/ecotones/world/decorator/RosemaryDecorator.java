@@ -1,11 +1,13 @@
 package supercoder79.ecotones.world.decorator;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.DecoratorContext;
+import net.minecraft.world.gen.feature.FeaturePlacementContext;
+import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import supercoder79.ecotones.world.data.DataHolder;
 import supercoder79.ecotones.world.data.EcotonesData;
 
@@ -14,13 +16,19 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class RosemaryDecorator extends Decorator<ShrubDecoratorConfig> {
-    public RosemaryDecorator(Codec<ShrubDecoratorConfig> configCodec) {
-        super(configCodec);
+public class RosemaryDecorator extends PlacementModifier {
+    public static final Codec<RosemaryDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            ShrubDecoratorConfig.CODEC.fieldOf("config").forGetter(c -> c.config)
+    ).apply(instance, RosemaryDecorator::new));
+
+    private final ShrubDecoratorConfig config;
+
+    public RosemaryDecorator(ShrubDecoratorConfig config) {
+        this.config = config;
     }
 
     @Override
-    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, ShrubDecoratorConfig config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(FeaturePlacementContext context, Random random, BlockPos pos) {
         List<BlockPos> positions = new ArrayList<>();
 
         double soilQuality = 0.5;
@@ -47,6 +55,11 @@ public class RosemaryDecorator extends Decorator<ShrubDecoratorConfig> {
         }
 
         return positions.stream();
+    }
+
+    @Override
+    public PlacementModifierType<?> getType() {
+        return EcotonesDecorators.ROSEMARY;
     }
 
     // Desmos: 0.8x^{3}+0.15x+0.65

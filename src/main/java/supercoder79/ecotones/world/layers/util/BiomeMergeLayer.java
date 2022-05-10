@@ -1,11 +1,12 @@
 package supercoder79.ecotones.world.layers.util;
 
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.layer.type.MergingLayer;
-import net.minecraft.world.biome.layer.util.IdentityCoordinateTransformer;
-import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
-import net.minecraft.world.biome.layer.util.LayerSampler;
+import supercoder79.ecotones.world.layers.system.layer.type.MergingLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.IdentityCoordinateTransformer;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerSampler;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 
@@ -26,10 +27,16 @@ public enum BiomeMergeLayer implements MergingLayer, IdentityCoordinateTransform
         if (landSample == 1) {
             return biomeSample;
         } else {
-            if (Ecotones.REGISTRY.get(landSample).getCategory() == Biome.Category.BEACH) {
-                if (BiomeRegistries.NO_BEACH_BIOMES.contains(Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(biomeSample)).get())) {
+            RegistryKey<Biome> key = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(biomeSample)).get();
+            RegistryKey<Biome> landKey = Ecotones.REGISTRY.getKey(Ecotones.REGISTRY.get(landSample)).get();
+            if (BiomeRegistries.BEACH_LIST.contains(landKey)) {
+                if (BiomeRegistries.NO_BEACH_BIOMES.contains(key)) {
                     return biomeSample;
                 }
+            }
+
+            if (BiomeRegistries.MOUNTAIN_BIOMES.containsKey(key)) {
+                return biomeSample;
             }
 
             //TODO: stop hardcoding these

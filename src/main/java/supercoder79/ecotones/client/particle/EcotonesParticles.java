@@ -12,12 +12,14 @@ public final class EcotonesParticles {
     public static final DefaultParticleType MAPLE_LEAF = FabricParticleTypes.simple(false);
     public static final DefaultParticleType SYRUP_POP = FabricParticleTypes.simple(false);
     public static final DefaultParticleType SAP_DRIP = FabricParticleTypes.simple(false);
+    public static final DefaultParticleType ASBESTOS = FabricParticleTypes.simple(false);
 
     public static void init() {
         register("sand", SAND);
         register("maple_leaf", MAPLE_LEAF);
         register("syrup_pop", SYRUP_POP);
         register("sap_drip", SAP_DRIP);
+        register("steady_geyser", ASBESTOS);
     }
 
     private static void register(String string, ParticleType<?> type) {

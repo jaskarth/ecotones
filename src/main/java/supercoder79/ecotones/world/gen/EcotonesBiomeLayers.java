@@ -1,25 +1,16 @@
 package supercoder79.ecotones.world.gen;
 
-import net.minecraft.world.biome.layer.*;
-import net.minecraft.world.biome.layer.type.ParentedLayer;
-import net.minecraft.world.biome.layer.util.*;
-import net.minecraft.world.biome.source.BiomeLayerSampler;
+import supercoder79.ecotones.world.layers.LayerHelper;
+import supercoder79.ecotones.world.layers.system.BiomeLayerSampler;
+import supercoder79.ecotones.world.layers.system.layer.*;
+import supercoder79.ecotones.world.layers.system.layer.type.ParentedLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.*;
 import supercoder79.ecotones.world.layers.generation.*;
 import supercoder79.ecotones.world.layers.util.*;
 
 import java.util.function.LongFunction;
 
 public final class EcotonesBiomeLayers {
-    private static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> stack(long seed, ParentedLayer layer, LayerFactory<T> parent, int count, LongFunction<C> contextProvider) {
-        LayerFactory<T> layerFactory = parent;
-
-        for(int i = 0; i < count; ++i) {
-            layerFactory = layer.create(contextProvider.apply(seed + i), layerFactory);
-        }
-
-        return layerFactory;
-    }
-
     public static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> build(long seed, LongFunction<C> contextProvider) {
         //Initialize land
         LayerFactory<T> layerFactory = LandLayer.INSTANCE.create(contextProvider.apply(1L));
@@ -30,19 +21,19 @@ public final class EcotonesBiomeLayers {
         // RemoveTooMuchOcean- do we need it?
         layerFactory = AddIslandLayer.INSTANCE.create(contextProvider.apply(2L), layerFactory);
 
-        layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 2, contextProvider);
+        layerFactory = LayerHelper.stack(2001L, ScaleLayer.NORMAL, layerFactory, 2, contextProvider);
 
         //Add ocean temperatures and deep oceans
         LayerFactory<T> layerFactory2 = OceanTemperatureLayer.INSTANCE.create(contextProvider.apply(2L));
-        layerFactory2 = stack(2301L, ScaleLayer.NORMAL, layerFactory2, 1, contextProvider);
+        layerFactory2 = LayerHelper.stack(2301L, ScaleLayer.NORMAL, layerFactory2, 1, contextProvider);
         layerFactory = ApplyOceanTemperatureLayer.INSTANCE.create(contextProvider.apply(100L), layerFactory, layerFactory2);
         layerFactory = DeepOceanLayer.INSTANCE.create(contextProvider.apply(102L), layerFactory);
 
         //scale up the land to be bigger
-        layerFactory = stack(2001L, ScaleLayer.NORMAL, layerFactory, 2, contextProvider);
+        layerFactory = LayerHelper.stack(2001L, ScaleLayer.NORMAL, layerFactory, 2, contextProvider);
         //add beaches
         layerFactory = ShorelineLayer.INSTANCE.create(contextProvider.apply(54L), layerFactory, seed + 43);
-        layerFactory = stack(2081L, ScaleLayer.NORMAL, layerFactory, 3, contextProvider);
+        layerFactory = LayerHelper.stack(2081L, ScaleLayer.NORMAL, layerFactory, 3, contextProvider);
         // Total: 2^7 (2 + 2 + 3)
 
         //Add our biomes
@@ -50,18 +41,18 @@ public final class EcotonesBiomeLayers {
         LayerFactory<T> biomeLayer = PickFromClimateLayer.INSTANCE.create(contextProvider.apply(2L), climateLayer);
         LayerFactory<T> initialBiomeLayer = MountainLayer.INSTANCE.create(contextProvider.apply(49L), biomeLayer, climateLayer, seed + 1337);
 
-        biomeLayer = stack(7970L, ScaleLayer.NORMAL, initialBiomeLayer, 1, contextProvider);
-        climateLayer = stack(7970L, ScaleLayer.NORMAL, climateLayer, 1, contextProvider);
+        biomeLayer = LayerHelper.stack(7970L, ScaleLayer.NORMAL, initialBiomeLayer, 1, contextProvider);
+        climateLayer = LayerHelper.stack(7970L, ScaleLayer.NORMAL, climateLayer, 1, contextProvider);
 
         biomeLayer = MountainBigEdgeLayer.INSTANCE.create(contextProvider.apply(1001L), biomeLayer, climateLayer);
 
-        biomeLayer = stack(7975L, ScaleLayer.NORMAL, biomeLayer, 1, contextProvider);
-        climateLayer = stack(7975L, ScaleLayer.NORMAL, climateLayer, 1, contextProvider);
+        biomeLayer = LayerHelper.stack(7975L, ScaleLayer.NORMAL, biomeLayer, 1, contextProvider);
+        climateLayer = LayerHelper.stack(7975L, ScaleLayer.NORMAL, climateLayer, 1, contextProvider);
 
         biomeLayer = SmoothLayer.INSTANCE.create(contextProvider.apply(402), biomeLayer);
         biomeLayer = MountainSmallEdgeLayer.INSTANCE.create(contextProvider.apply(1002L), biomeLayer, climateLayer);
         LayerFactory<T> zoom2BiomeLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), biomeLayer);
-        biomeLayer = stack(7979L, ScaleLayer.NORMAL, zoom2BiomeLayer, 3, contextProvider);
+        biomeLayer = LayerHelper.stack(7979L, ScaleLayer.NORMAL, zoom2BiomeLayer, 3, contextProvider);
 
         // 1.5x zoom
         biomeLayer = Div3ScaleLayer.INSTANCE.create(contextProvider.apply(32), biomeLayer);
@@ -71,21 +62,21 @@ public final class EcotonesBiomeLayers {
         LayerFactory<T> specialBiomesLayer = PlainsOnlyLayer.INSTANCE.create(contextProvider.apply(3L));
 
         specialBiomesLayer = BigSpecialBiomesLayer.INSTANCE.create(contextProvider.apply(38L), specialBiomesLayer, initialBiomeLayer);
-        specialBiomesLayer = stack(3043L, ScaleLayer.NORMAL, specialBiomesLayer, 2, contextProvider);
+        specialBiomesLayer = LayerHelper.stack(3043L, ScaleLayer.NORMAL, specialBiomesLayer, 2, contextProvider);
 
         specialBiomesLayer = SmallSpecialBiomesLayer.INSTANCE.create(contextProvider.apply(32L), specialBiomesLayer, zoom2BiomeLayer);
         specialBiomesLayer = BiomeVariantLayer.INSTANCE.create(contextProvider.apply(632L), specialBiomesLayer);
 
-        specialBiomesLayer = stack(3080L, ScaleLayer.NORMAL, specialBiomesLayer, 5, contextProvider);
+        specialBiomesLayer = LayerHelper.stack(3080L, ScaleLayer.NORMAL, specialBiomesLayer, 5, contextProvider);
 
         specialBiomesLayer = BiomeEdgeLayer.INSTANCE.create(contextProvider.apply(36L), specialBiomesLayer);
         specialBiomesLayer = BiomeEdgeEnsureLayer.INSTANCE.create(contextProvider.apply(37L), specialBiomesLayer);
 
         //River stuff
-        LayerFactory<T> riverLayer = SimpleLandNoiseLayer.INSTANCE.create(contextProvider.apply(100L), stack(1000L, ScaleLayer.NORMAL, layerFactory, 0, contextProvider));
-        riverLayer = stack(1000L, ScaleLayer.NORMAL, riverLayer, 7, contextProvider);
+        LayerFactory<T> riverLayer = SimpleLandNoiseLayer.INSTANCE.create(contextProvider.apply(100L), LayerHelper.stack(1000L, ScaleLayer.NORMAL, layerFactory, 0, contextProvider));
+        riverLayer = LayerHelper.stack(1000L, ScaleLayer.NORMAL, riverLayer, 7, contextProvider);
         riverLayer = GenerateRiversLayer.INSTANCE.create(contextProvider.apply(1L), riverLayer);
-        riverLayer = stack(3000L, ScaleLayer.NORMAL, riverLayer, 2, contextProvider);
+        riverLayer = LayerHelper.stack(3000L, ScaleLayer.NORMAL, riverLayer, 2, contextProvider);
 
         // merge rivers
         biomeLayer = ApplyRiversLayer.INSTANCE.create(contextProvider.apply(79L), biomeLayer, riverLayer);

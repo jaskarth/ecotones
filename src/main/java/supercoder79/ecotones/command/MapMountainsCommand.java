@@ -57,6 +57,7 @@ public class MapMountainsCommand {
 
     private static int getColorAtCoords(int x, int z) {
         double mountain = MountainLayer.INSTANCE.mountainNoise.sample((x + MountainLayer.INSTANCE.mountainOffsetX) / 3f, (z + MountainLayer.INSTANCE.mountainOffsetZ) / 3f) * 1.25;
+        double mountainRanges = 1 - Math.abs(MountainLayer.INSTANCE.mountainRangesNoise.sample((x - MountainLayer.INSTANCE.mountainOffsetX) / 6f, (z - MountainLayer.INSTANCE.mountainOffsetZ) / 6f));
         // Make mountains spawn less frequently near the spawn
         mountain *= MountainLayer.distFactor(x, z);
 
@@ -68,7 +69,7 @@ public class MapMountainsCommand {
             return getIntFromColor(150, 150, 150);
         }
 
-        if (mountain < -0.8) {
+        if (mountain < -0.8 + (mountainRanges * 0.2)) {
             return getIntFromColor(50, 50, 170);
         }
 

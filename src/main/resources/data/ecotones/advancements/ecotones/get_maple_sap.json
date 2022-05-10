@@ -1,0 +1,37 @@
+{
+  "parent": "ecotones:ecotones/root",
+  "display": {
+    "icon": {
+      "item": "ecotones:maple_sap"
+    },
+    "title": {
+      "translate": "advancements.ecotones.maple_sap"
+    },
+    "description": {
+      "translate": "advancements.ecotones.maple_sap.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "blueberries": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ecotones:maple_sap"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "blueberries"
+    ]
+  ]
+}

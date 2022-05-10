@@ -97,7 +97,7 @@ public final class CloudHandler {
         for (int x = 0; x < 256; x++) {
             for (int z = 0; z < 256; z++) {
                 // Returns fully opaque (0xFFFFFFFF) pixels as -1.
-                if (cloudsTexture.getImage().getPixelColor(x, z) < 0) {
+                if (cloudsTexture.getImage().getColor(x, z) < 0) {
                     nonEmptyPixels++;
                 }
             }

@@ -14,11 +14,12 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 
 import java.util.List;
 import java.util.Random;
 
-public class BeehiveFeature extends Feature<DefaultFeatureConfig> {
+public class BeehiveFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public static final List<BlockState> FLOWERS = ImmutableList.of(Blocks.ORANGE_TULIP.getDefaultState(), Blocks.PINK_TULIP.getDefaultState(), Blocks.RED_TULIP.getDefaultState(), Blocks.WHITE_TULIP.getDefaultState(), Blocks.OXEYE_DAISY.getDefaultState());
 
     public BeehiveFeature(Codec<DefaultFeatureConfig> codec) {

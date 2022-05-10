@@ -1,9 +1,9 @@
 package supercoder79.ecotones.world.layers.util;
 
-import net.minecraft.world.biome.layer.type.MergingLayer;
-import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
-import net.minecraft.world.biome.layer.util.LayerSampler;
-import net.minecraft.world.biome.layer.util.NorthWestCoordinateTransformer;
+import supercoder79.ecotones.world.layers.system.layer.type.MergingLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerSampler;
+import supercoder79.ecotones.world.layers.system.layer.util.NorthWestCoordinateTransformer;
 
 public interface MergingCrossSamplingLayer extends MergingLayer, NorthWestCoordinateTransformer {
     int sample(LayerRandomnessSource context, int n, int e, int s, int w, int center, int sample2);

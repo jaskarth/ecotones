@@ -9,14 +9,14 @@ public class SapDripParticle extends SpriteBillboardParticle {
     protected SapDripParticle(ClientWorld world, double x, double y, double z) {
         super(world, x, y, z);
         this.gravityStrength = 0;
-        this.field_28786 = 0.999F;
+        this.velocityMultiplier = 0.999F;
         this.maxAge = 40;
 
         this.scale = world.getRandom().nextFloat() * 0.2f + 0.3f;
 
-        this.colorRed = 1;
-        this.colorGreen = 0.75F;
-        this.colorBlue = 0.2F;
+        this.red = 1;
+        this.green = 0.75F;
+        this.blue = 0.2F;
 
         this.velocityY = 0;
         this.velocityX = 0;

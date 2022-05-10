@@ -14,6 +14,7 @@ import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.util.BoxHelper;
 import supercoder79.ecotones.util.Shapes;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
@@ -22,7 +23,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-public class LarchTreeFeature extends Feature<SimpleTreeFeatureConfig> {
+public class LarchTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
     private static final PineconeTreeDecorator PINECONES = new PineconeTreeDecorator(2);
 
     public LarchTreeFeature(Codec<SimpleTreeFeatureConfig> configCodec) {

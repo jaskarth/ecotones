@@ -11,11 +11,12 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.FeatureHelper;
 
 import java.util.Random;
 
-public class GeyserPatchFeature extends Feature<DefaultFeatureConfig> {
+public class GeyserPatchFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public GeyserPatchFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }

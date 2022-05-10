@@ -8,11 +8,12 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.util.Shapes;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 import java.util.Random;
 
-public class BigShrubFeature extends Feature<SimpleTreeFeatureConfig> {
+public class BigShrubFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
     public BigShrubFeature(Codec<SimpleTreeFeatureConfig> codec) {
         super(codec);
     }

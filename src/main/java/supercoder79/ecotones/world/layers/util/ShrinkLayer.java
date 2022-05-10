@@ -1,8 +1,8 @@
 package supercoder79.ecotones.world.layers.util;
 
-import net.minecraft.world.biome.layer.type.ParentedLayer;
-import net.minecraft.world.biome.layer.util.LayerSampleContext;
-import net.minecraft.world.biome.layer.util.LayerSampler;
+import supercoder79.ecotones.world.layers.system.layer.type.ParentedLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerSampleContext;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerSampler;
 
 public enum ShrinkLayer implements ParentedLayer {
     INSTANCE;

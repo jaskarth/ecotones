@@ -13,7 +13,7 @@ import supercoder79.ecotones.world.features.config.DuckweedFeatureConfig;
 
 import java.util.Random;
 
-public class DuckweedFeature extends Feature<DuckweedFeatureConfig> {
+public class DuckweedFeature extends EcotonesFeature<DuckweedFeatureConfig> {
     public DuckweedFeature(Codec<DuckweedFeatureConfig> configCodec) {
         super(configCodec);
     }

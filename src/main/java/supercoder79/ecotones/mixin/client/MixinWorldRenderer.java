@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.texture.NativeImage;
@@ -13,7 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
-import net.minecraft.world.gen.SimpleRandom;
+import net.minecraft.world.gen.random.SimpleRandom;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -69,7 +70,7 @@ public class MixinWorldRenderer {
         for (int x = 0; x < 256; x++) {
             for (int z = 0; z < 256; z++) {
                 if (noise.sample(x / 16.0, 0, z / 16.0) * 2.5 < random.nextDouble()) {
-                    image.setPixelColor(x, z, COLOR);
+                    image.setColor(x, z, COLOR);
                 }
             }
         }
@@ -79,8 +80,8 @@ public class MixinWorldRenderer {
         CloudHandler.setTexture(texture);
     }
 
-    @Inject(method = "renderSky", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/VertexBuffer;setShader(Lnet/minecraft/util/math/Matrix4f;Lnet/minecraft/util/math/Matrix4f;Lnet/minecraft/client/render/Shader;)V", ordinal = 1, shift = At.Shift.BEFORE), cancellable = true)
-    private void renderEcotonesFancyStars(MatrixStack matrices, Matrix4f matrix4f, float f, Runnable runnable, CallbackInfo ci) {
+    @Inject(method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FLnet/minecraft/client/render/Camera;ZLjava/lang/Runnable;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/VertexBuffer;setShader(Lnet/minecraft/util/math/Matrix4f;Lnet/minecraft/util/math/Matrix4f;Lnet/minecraft/client/render/Shader;)V", ordinal = 1, shift = At.Shift.BEFORE), cancellable = true)
+    private void renderEcotonesFancyStars(MatrixStack matrices, Matrix4f projectionMatrix, float tickDelta, Camera camera, boolean bl, Runnable runnable, CallbackInfo ci) {
         if (ClientSidedServerData.isInEcotonesWorld) {
             if (!this.initializedStars) {
                 this.starsBuffer.close();

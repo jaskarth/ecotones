@@ -8,14 +8,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.world.gen.random.SimpleRandom;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 
 import java.util.Random;
 
-public class WideGraniteSpringFeature extends Feature<DefaultFeatureConfig> {
+public class WideGraniteSpringFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public WideGraniteSpringFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }
@@ -31,7 +33,7 @@ public class WideGraniteSpringFeature extends Feature<DefaultFeatureConfig> {
             return false;
         }
 
-        PerlinNoiseSampler sampler = new PerlinNoiseSampler(new ChunkRandom(world.getSeed()));
+        PerlinNoiseSampler sampler = new PerlinNoiseSampler(new ChunkRandom(new SimpleRandom(world.getSeed())));
 
         BlockPos.Mutable mutable = pos.mutableCopy();
 
@@ -81,7 +83,7 @@ public class WideGraniteSpringFeature extends Feature<DefaultFeatureConfig> {
                     if (r2 <= scaledRadius) {
                         if (y >= 1 && r2 <= scaledWaterRadius) {
                             world.setBlockState(mutable.set(pos, x, y, z), Blocks.WATER.getDefaultState(), 3);
-                            world.getFluidTickScheduler().schedule(mutable.toImmutable(), Fluids.WATER, 0);
+                            world.createAndScheduleFluidTick(mutable.toImmutable(), Fluids.WATER, 0);
                         } else {
                             world.setBlockState(mutable.set(pos, x, y, z), Blocks.GRANITE.getDefaultState(), 3);
                         }

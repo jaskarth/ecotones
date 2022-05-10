@@ -15,13 +15,14 @@ import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-public class DeadTreeFeature extends Feature<SimpleTreeFeatureConfig> {
+public class DeadTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
 
 	public DeadTreeFeature(Codec<SimpleTreeFeatureConfig> codec) {
 		super(codec);

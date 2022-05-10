@@ -16,7 +16,7 @@ public class FertilizerSpreaderScreenHandler extends ScreenHandler {
     private final PropertyDelegate propertyDelegate;
 
     public FertilizerSpreaderScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(1), new ArrayPropertyDelegate(4));
+        this(syncId, playerInventory, new SimpleInventory(1), new ArrayPropertyDelegate(5));
     }
 
     public FertilizerSpreaderScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
@@ -54,6 +54,10 @@ public class FertilizerSpreaderScreenHandler extends ScreenHandler {
 
     public int getWaterCount() {
         return this.propertyDelegate.get(3);
+    }
+
+    public int getStatus() {
+        return this.propertyDelegate.get(4);
     }
 
     @Override

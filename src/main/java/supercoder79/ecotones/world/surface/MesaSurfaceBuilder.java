@@ -8,14 +8,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.ChunkRandom;
-import net.minecraft.world.gen.surfacebuilder.BadlandsSurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
+import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.world.gen.random.SimpleRandom;
+import supercoder79.ecotones.world.surface.system.BadlandsSurfaceBuilder;
+import supercoder79.ecotones.world.surface.system.TernarySurfaceConfig;
 
 import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.IntStream;
 
 public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
     private static final BlockState WHITE_TERRACOTTA = Blocks.WHITE_TERRACOTTA.getDefaultState();
@@ -38,7 +38,7 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
         int localX = x & 15;
         int localZ = z & 15;
         BlockState blockState3 = WHITE_TERRACOTTA;
-        BlockState blockState4 = biome.getGenerationSettings().getSurfaceConfig().getUnderMaterial();
+        BlockState blockState4 = Blocks.DIRT.getDefaultState();
         int dirtDepth = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
         boolean cosineNoise = Math.cos(noise / 3.0D * 3.141592653589793D) > 0.0D;
         int placedDirtDepth = -1;
@@ -60,7 +60,7 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
                             blockState4 = stone;
                         } else if (y >= seaLevel - 4 && y <= seaLevel + 1) {
                             blockState3 = WHITE_TERRACOTTA;
-                            blockState4 = biome.getGenerationSettings().getSurfaceConfig().getUnderMaterial();
+                            blockState4 = Blocks.DIRT.getDefaultState();
                         }
 
                         if (y < seaLevel && (blockState3 == null || blockState3.isAir())) {
@@ -85,7 +85,7 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
 
                                 chunk.setBlockState(mutable, placeLayer, false);
                             } else {
-                                chunk.setBlockState(mutable, biome.getGenerationSettings().getSurfaceConfig().getTopMaterial(), false);
+                                chunk.setBlockState(mutable, Blocks.GRASS_BLOCK.getDefaultState(), false);
                                 setTop = true;
                             }
                         } else {
@@ -116,8 +116,8 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
         }
 
         if (this.seed != seed || this.heightCutoffNoise == null || this.heightNoise == null) {
-            ChunkRandom chunkRandom = new ChunkRandom(seed);
-            this.heightCutoffNoise = new OctaveSimplexNoiseSampler(chunkRandom, IntStream.rangeClosed(-3, 0));
+            ChunkRandom chunkRandom = new ChunkRandom(new SimpleRandom(seed));
+            this.heightCutoffNoise = new OctaveSimplexNoiseSampler(chunkRandom, ImmutableList.of(-3, -2, -1, 0));
             this.heightNoise = new OctaveSimplexNoiseSampler(chunkRandom, ImmutableList.of(0));
             this.layerNoise = new OctaveSimplexNoiseSampler(chunkRandom, ImmutableList.of(0));
         }

@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world;
 
 import net.minecraft.client.world.GeneratorType;
+import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -15,7 +16,7 @@ public class EcotonesWorldType extends GeneratorType {
     }
 
     @Override
-    protected ChunkGenerator getChunkGenerator(Registry<Biome> biomes, Registry<ChunkGeneratorSettings> settings, long seed) {
-        return new EcotonesChunkGenerator(new EcotonesBiomeSource(biomes, seed), seed);
+    protected ChunkGenerator getChunkGenerator(DynamicRegistryManager registryManager, long seed) {
+        return new EcotonesChunkGenerator(registryManager.get(Registry.STRUCTURE_SET_KEY), new EcotonesBiomeSource(registryManager.get(Registry.BIOME_KEY), seed), seed);
     }
 }

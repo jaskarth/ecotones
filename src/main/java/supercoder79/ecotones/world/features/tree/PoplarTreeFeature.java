@@ -10,6 +10,7 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.util.Shapes;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
@@ -18,7 +19,7 @@ import supercoder79.ecotones.world.tree.trait.poplar.DefaultPoplarTrait;
 
 import java.util.Random;
 
-public class PoplarTreeFeature extends Feature<SimpleTreeFeatureConfig> {
+public class PoplarTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
 
     public PoplarTreeFeature(Codec<SimpleTreeFeatureConfig> codec) {
         super(codec);

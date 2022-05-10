@@ -12,11 +12,11 @@ import java.util.function.Supplier;
 
 @Mixin(ChunkRegion.class)
 public class MixinChunkRegion {
-    @Shadow @Nullable private Supplier<String> field_33756;
+    @Shadow @Nullable private Supplier<String> currentlyGeneratingStructureName;
 
-    @Redirect(method = "method_37368", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Util;error(Ljava/lang/String;)V"))
+    @Redirect(method = "isValidForSetBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Util;error(Ljava/lang/String;)V"))
     private void filterEcotones(String message) {
-        if (!(this.field_33756 != null && this.field_33756.get().contains("ecotones"))) {
+        if (!(this.currentlyGeneratingStructureName != null && this.currentlyGeneratingStructureName.get().contains("ecotones"))) {
             Util.error(message);
         }
     }

@@ -8,6 +8,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.util.layer.Layer;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.FeatureHelper;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.tree.root.RootLayers;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class FanTreeFeature extends Feature<SimpleTreeFeatureConfig> {
+public class FanTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
     public FanTreeFeature(Codec<SimpleTreeFeatureConfig> configCodec) {
         super(configCodec);
     }

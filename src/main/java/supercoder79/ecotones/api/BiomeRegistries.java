@@ -3,16 +3,23 @@ package supercoder79.ecotones.api;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.world.edge.EdgeDecorationCollector;
+import supercoder79.ecotones.world.edge.EdgeDecorator;
 import supercoder79.ecotones.world.layers.generation.MountainLayer;
+import supercoder79.ecotones.world.river.deco.RiverDecorationCollector;
+import supercoder79.ecotones.world.river.deco.RiverDecorator;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.IntFunction;
 
 public final class BiomeRegistries {
     public static final Map<RegistryKey<Biome>, IntFunction<Boolean>> SPECIAL_BIOMES = new HashMap<>();
     public static final Map<RegistryKey<Biome>, Integer> BIG_SPECIAL_BIOMES = new HashMap<>();
     public static final Map<RegistryKey<Biome>, Integer> SMALL_SPECIAL_BIOMES = new HashMap<>();
+    public static final List<RegistryKey<Biome>> BEACH_LIST = new ArrayList<>();
     public static final List<RegistryKey<Biome>> NO_BEACH_BIOMES = new ArrayList<>();
     public static final List<RegistryKey<Biome>> NO_RIVER_BIOMES = new ArrayList<>();
     public static final Map<RegistryKey<Biome>, Double> MOUNTAIN_BIOMES = new HashMap<>();
@@ -27,6 +34,8 @@ public final class BiomeRegistries {
     public static final Map<RegistryKey<Biome>, Integer> BIOME_VARIANT_CHANCE = new HashMap<>();
     public static final Map<RegistryKey<Biome>, RegistryKey<Biome>[]> BIOME_VARIANTS = new HashMap<>();
     public static final List<RegistryKey<Biome>> SLIME_SPAWN_BIOMES = new ArrayList<>();
+    public static final Map<RegistryKey<Biome>, RiverDecorator> RIVER_DECORATORS = new HashMap<>();
+    public static final Map<RegistryKey<Biome>, EdgeDecorator> EDGE_DECORATORS = new HashMap<>();
 
     public static void registerSpecialBiome(Biome biome, IntFunction<Boolean> rule) {
         SPECIAL_BIOMES.put(key(biome), rule);
@@ -47,6 +56,18 @@ public final class BiomeRegistries {
 
     public static void registerBiomeVariantChance(Biome biome, int chance) {
         BIOME_VARIANT_CHANCE.put(key(biome), chance);
+    }
+
+    public static void registerRiverDecorator(Biome biome, Consumer<RiverDecorationCollector> acceptor) {
+        RiverDecorator decorator = RIVER_DECORATORS.getOrDefault(key(biome), new RiverDecorator());
+        acceptor.accept(decorator.getDecorations());
+        RIVER_DECORATORS.put(key(biome), decorator);
+    }
+
+    public static void registerEdgeDecorator(Biome biome, Consumer<EdgeDecorationCollector> acceptor) {
+        EdgeDecorator decorator = EDGE_DECORATORS.getOrDefault(key(biome), new EdgeDecorator());
+        acceptor.accept(decorator.getDecorations());
+        EDGE_DECORATORS.put(key(biome), decorator);
     }
 
     public static void registerBiomeVariants(Biome parent, Biome... variants) {
@@ -82,6 +103,10 @@ public final class BiomeRegistries {
         NO_BEACH_BIOMES.add(key(biome));
     }
 
+    public static void registerBeach(Biome biome) {
+        BEACH_LIST.add(key(biome));
+    }
+
     public static void registerNoBeachBiomes(Biome... biomes) {
         for (Biome biome : biomes) {
             registerNoBeachBiome(biome);
@@ -108,9 +133,16 @@ public final class BiomeRegistries {
         }
     }
 
-    private static RegistryKey<Biome> key(Biome biome) {
+    public static RegistryKey<Biome> key(Biome biome) {
         Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
 
-        return optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome).orElseThrow(() -> new IllegalStateException("Impossible state when trying to get biome key")));
+        if (optional.isEmpty()) {
+            if (Ecotones.REGISTRY == null) {
+                return BiomeKeys.PLAINS; // This really shouldn't exist!!
+            }
+        }
+
+        return optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome)
+                .orElseThrow(() -> new IllegalStateException("Impossible state when trying to get biome key")));
     }
 }

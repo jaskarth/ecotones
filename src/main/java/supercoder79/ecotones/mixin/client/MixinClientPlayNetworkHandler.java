@@ -6,13 +6,17 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.NetworkThreadUtils;
 import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.s2c.play.GameJoinS2CPacket;
 import net.minecraft.network.packet.s2c.play.OpenWrittenBookS2CPacket;
+import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.client.ClientRegistrySyncState;
 import supercoder79.ecotones.items.EcotonesItems;
 
 @Mixin(ClientPlayNetworkHandler.class)
@@ -27,6 +31,14 @@ public abstract class MixinClientPlayNetworkHandler implements ClientPlayPacketL
         if (itemStack.isOf(EcotonesItems.ECOTONES_BOOK)) {
             this.client.setScreen(new BookScreen(new BookScreen.WrittenBookContents(itemStack)));
             ci.cancel();
+        }
+    }
+
+    @Inject(method = "onGameJoin", at = @At("RETURN"))
+    private void handleGameJoinEcotones(GameJoinS2CPacket packet, CallbackInfo ci) {
+        if (ClientRegistrySyncState.state == ClientRegistrySyncState.State.WAITING) {
+            Ecotones.REGISTRY = MinecraftClient.getInstance().world.getRegistryManager().get(Registry.BIOME_KEY);
+            ClientRegistrySyncState.state = ClientRegistrySyncState.State.SYNCED;
         }
     }
 }

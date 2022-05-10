@@ -46,8 +46,8 @@ public class EcotonesBookItem extends WrittenBookItem {
         if (stack.hasNbt()) {
             NbtCompound compoundTag = stack.getNbt();
             String string = compoundTag.getString("author");
-            if (!ChatUtil.isEmpty(string)) {
-                tooltip.add((new TranslatableText("book.byAuthor", new Object[]{string})).formatted(Formatting.GRAY));
+            if (!StringHelper.isEmpty(string)) {
+                tooltip.add((new TranslatableText("book.byAuthor", string)).formatted(Formatting.GRAY));
             }
         }
 

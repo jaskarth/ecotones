@@ -2,15 +2,21 @@
   "required": true,
   "package": "supercoder79.ecotones.mixin",
   "compatibilityLevel": "JAVA_8",
+  "plugin": "supercoder79.ecotones.asm.TransformerMixinPlugin",
   "mixins": [
-    "BlockPlacerTypeAccessor",
     "BlockStateProviderTypeAccessor",
     "CriteriaAccessor",
     "FoliagePlacerTypeAccessor",
+    "MixinBiome",
     "MixinBiomeSelectors",
+    "MixinCarver",
+    "MixinChunk",
+    "MixinChunkGenerator",
     "MixinChunkRegion",
+    "MixinChunkSerializer",
     "MixinCocoaBeansTreeDecorator",
     "MixinGeneratorOptions",
+    "MixinMinecraftServer",
     "MixinPlayerManager",
     "MixinSlimeEntity",
     "SpawnSettingsAccessor",
@@ -27,8 +33,9 @@
     "client.MixinEntityModels",
     "client.MixinHeldItemRenderer",
     "client.MixinMinecraftClient",
-    "client.MixinSkyProperties",
-    "client.MixinWorldRenderer"
+    "client.MixinWorldRenderer",
+    "client.MixinAdvancementPositioner",
+    "client.MixinAdvancementTab"
   ],
   "injectors": {
     "defaultRequire": 1

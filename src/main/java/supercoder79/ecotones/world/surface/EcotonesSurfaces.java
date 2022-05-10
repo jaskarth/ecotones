@@ -2,10 +2,10 @@ package supercoder79.ecotones.world.surface;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.util.RegistryReport;
+import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
+import supercoder79.ecotones.world.surface.system.TernarySurfaceConfig;
 
 public final class EcotonesSurfaces {
     public static final SurfaceBuilder<DesertScrubSurfaceBuilder.Config> DESERT_SCRUB_BUILDER = new DesertScrubSurfaceBuilder(DesertScrubSurfaceBuilder.Config.CODEC);
@@ -65,7 +65,7 @@ public final class EcotonesSurfaces {
     }
 
     private static void register(String name, SurfaceBuilder<?> builder) {
-        Registry.register(Registry.SURFACE_BUILDER, Ecotones.id(name), builder);
+
         RegistryReport.increment("Surface Builder");
     }
 }

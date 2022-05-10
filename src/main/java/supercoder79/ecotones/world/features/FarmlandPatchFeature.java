@@ -14,7 +14,7 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.Random;
 
-public class FarmlandPatchFeature extends Feature<DefaultFeatureConfig> {
+public class FarmlandPatchFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public FarmlandPatchFeature(Codec<DefaultFeatureConfig> codec) {
         super(codec);
     }

@@ -9,14 +9,14 @@ public class SyrupPopParticle extends SpriteBillboardParticle {
     private SyrupPopParticle(ClientWorld world, double x, double y, double z) {
         super(world, x, y, z, 0.0D, 0.0D, 0.0D);
         this.gravityStrength = 0.75F;
-        this.field_28786 = 0.999F;
+        this.velocityMultiplier = 0.999F;
         this.velocityX *= 0.8;
         this.velocityY *= 0.8;
         this.velocityZ *= 0.8;
 
-        this.colorRed = 0.9F;
-        this.colorGreen = 0.5F;
-        this.colorBlue = 0.2F;
+        this.red = 0.9F;
+        this.green = 0.5F;
+        this.blue = 0.2F;
 
         this.velocityY = this.random.nextFloat() * 0.1F + 0.05F;
         this.scale *= this.random.nextFloat() * 2.0F + 0.2F;

@@ -11,9 +11,9 @@ public class SandParticle extends SpriteBillboardParticle {
         super(clientWorld, x, y - 0.125D, z, velocityX, velocityY, velocityZ);
         this.collidesWithWorld = false;
 
-        this.colorRed = 0.9F;
-        this.colorGreen = 0.8F;
-        this.colorBlue = 0.6F;
+        this.red = 0.9F;
+        this.green = 0.8F;
+        this.blue = 0.6F;
 
         this.setBoundingBoxSpacing(0.01F, 0.01F);
         this.scale *= this.random.nextFloat() * 0.4F + 0.7F;

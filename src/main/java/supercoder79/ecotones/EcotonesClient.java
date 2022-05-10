@@ -22,6 +22,7 @@ import supercoder79.ecotones.client.render.block.EcotonesBlockEntityRenderers;
 import supercoder79.ecotones.client.render.entity.DuckEntityRenderer;
 import supercoder79.ecotones.client.render.magnifying.EcotonesMagnifyingGlassRenderers;
 import supercoder79.ecotones.entity.EcotonesEntities;
+import supercoder79.ecotones.items.EcotonesItemBlocks;
 import supercoder79.ecotones.items.EcotonesItems;
 
 @Environment(EnvType.CLIENT)
@@ -45,20 +46,21 @@ public final class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.SMALL_LILAC);
 
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColors.getDefaultColor(),
-                EcotonesItems.SHORT_GRASS,
-                EcotonesItems.WIDE_FERN,
-                EcotonesItems.HAZEL_LEAVES);
+                EcotonesItemBlocks.getAll(
+                EcotonesBlocks.SHORT_GRASS,
+                        EcotonesBlocks.WIDE_FERN,
+                        EcotonesBlocks.HAZEL_LEAVES));
 
         // Maple leaves
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> Colors.maple(),
-                EcotonesItems.MAPLE_LEAVES);
+                EcotonesItemBlocks.get(EcotonesBlocks.MAPLE_LEAVES));
 
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> Colors.maple(pos),
                 EcotonesBlocks.MAPLE_LEAVES);
 
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> Colors.larch(),
-                EcotonesItems.LARCH_LEAVES);
+                EcotonesItemBlocks.get(EcotonesBlocks.LARCH_LEAVES));
 
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> Colors.larch(pos),
@@ -99,6 +101,7 @@ public final class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.POTTED_MAPLE_SAPLING,
                 EcotonesBlocks.THORN_BUSH,
                 EcotonesBlocks.LARCH_SAPLING,
+                EcotonesBlocks.FLAME_LILY,
                 EcotonesBlocks.WATERGRASS);
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
@@ -109,6 +112,7 @@ public final class EcotonesClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.MAPLE_LEAF, MapleLeafParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SYRUP_POP, SyrupPopParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAP_DRIP, SapDripParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(EcotonesParticles.ASBESTOS, AsbestosParticle.Factory::new);
 
         EcotonesModelLayers.init();
         EcotonesScreens.init();

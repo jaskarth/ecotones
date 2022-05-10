@@ -1,11 +1,13 @@
 package supercoder79.ecotones.world.decorator;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.DecoratorContext;
+import net.minecraft.world.gen.feature.FeaturePlacementContext;
+import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
@@ -15,13 +17,18 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class TreePlacementDecorator extends Decorator<TreeGenerationConfig.DecorationData> {
-    public TreePlacementDecorator(Codec<TreeGenerationConfig.DecorationData> codec) {
-        super(codec);
+public class TreePlacementDecorator extends PlacementModifier {
+    public static final Codec<TreePlacementDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            TreeGenerationConfig.DecorationData.CODEC.fieldOf("config").forGetter(c -> c.config)
+    ).apply(instance, TreePlacementDecorator::new));
+    private final TreeGenerationConfig.DecorationData config;
+
+    public TreePlacementDecorator(TreeGenerationConfig.DecorationData config) {
+        this.config = config;
     }
 
     @Override
-    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, TreeGenerationConfig.DecorationData config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(FeaturePlacementContext context, Random random, BlockPos pos) {
         double soilQuality = 0.0; // default for if the chunk generator is not ours
         ChunkGenerator generator = context.getWorld().toServerWorld().getChunkManager().getChunkGenerator();
         if (generator instanceof EcotonesChunkGenerator) {
@@ -41,9 +48,9 @@ public class TreePlacementDecorator extends Decorator<TreeGenerationConfig.Decor
             int x = random.nextInt(16) + pos.getX();
             int z = random.nextInt(16) + pos.getZ();
             int y = context.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, x, z);
-            if (y < generator.getSeaLevel()) {
-                continue;
-            }
+//            if (y < generator.getSeaLevel()) {
+//                continue;
+//            }
 
             //make trees smaller as the height increases
             int maxFinal = maxHeight;
@@ -80,6 +87,11 @@ public class TreePlacementDecorator extends Decorator<TreeGenerationConfig.Decor
         }
 
         return positions.stream();
+    }
+
+    @Override
+    public PlacementModifierType<?> getType() {
+        return EcotonesDecorators.TREE_DECORATOR;
     }
 
     // Desmos: x^{3}+2.75x-1.5

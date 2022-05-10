@@ -6,7 +6,9 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import supercoder79.ecotones.advancement.EcotonesCriteria;
@@ -17,14 +19,12 @@ import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.sound.EcotonesSounds;
 import supercoder79.ecotones.command.*;
 import supercoder79.ecotones.entity.EcotonesEntities;
+import supercoder79.ecotones.gen.DataGen;
 import supercoder79.ecotones.items.EcotonesItemGroups;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.screen.EcotonesScreenHandlers;
 import supercoder79.ecotones.util.*;
-import supercoder79.ecotones.util.compat.FloralisiaCompat;
-import supercoder79.ecotones.util.compat.LambdaFoxesCompat;
-import supercoder79.ecotones.util.compat.TerrestriaCompat;
-import supercoder79.ecotones.util.compat.TraverseCompat;
+import supercoder79.ecotones.util.compat.*;
 import supercoder79.ecotones.util.deco.BlockDecorations;
 import supercoder79.ecotones.util.state.EcotonesBlockStateProviders;
 import supercoder79.ecotones.util.vein.OreVeins;
@@ -33,6 +33,7 @@ import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.biome.EcotonesBiomes;
 import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
+import supercoder79.ecotones.world.edge.EcotonesEdgeDecorations;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.foliage.EcotonesFoliagePlacers;
 import supercoder79.ecotones.world.gen.BiomeGenData;
@@ -41,9 +42,12 @@ import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
 import supercoder79.ecotones.world.structure.EcotonesStructurePieces;
 import supercoder79.ecotones.world.structure.EcotonesStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructuresConfig;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
 import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
+
+import java.util.List;
 
 public final class Ecotones implements ModInitializer {
 	// TODO: split out into it's own class
@@ -54,15 +58,17 @@ public final class Ecotones implements ModInitializer {
 	// Dynamic registry
 	public static Registry<Biome> REGISTRY;
 	private static EcotonesWorldType worldType;
+	public static boolean isServerEcotones = false;
 
 	@Override
 	public void onInitialize() {
+		long start = System.currentTimeMillis();
+
 		EcotonesCriteria.init();
 		EcotonesSounds.init();
 
 		EcotonesParticles.init();
 		EcotonesBlockStateProviders.init();
-		EcotonesBlockPlacers.init();
 		EcotonesFoliagePlacers.init();
 		EcotonesTreeDecorators.init();
 
@@ -92,7 +98,13 @@ public final class Ecotones implements ModInitializer {
 			log("Registered Floralisia compat!");
 		}
 
+		if (isModLoaded("aurorasdeco")) {
+			AurorasDecoCompat.init();
+		}
+
 		EcotonesBiomes.init();
+
+		EcotonesEdgeDecorations.init();
 
 		EcotonesData.init();
 
@@ -101,6 +113,8 @@ public final class Ecotones implements ModInitializer {
 
 		CampfireLogHelper.initVanilla();
 		BlockDecorations.init();
+
+		DataGen.run();
 
 		// Mod Compat handlers
 		if (isModLoaded("traverse")) {
@@ -140,6 +154,7 @@ public final class Ecotones implements ModInitializer {
 			MapMountainsCommand.init();
 			MapBiomeColorsCommand.init();
 			TestLootTablesCommand.init();
+			MapRiversCommand.init();
 		}
 
 		// Biome count summary and biome finalization
@@ -148,8 +163,11 @@ public final class Ecotones implements ModInitializer {
 			if (id.getNamespace().contains("ecotones")) {
 				Biome biome = BuiltinRegistries.BIOME.get(id);
 				BiomeGenData data = EcotonesBiomeBuilder.OBJ2DATA.get(biome);
+				List<ConfiguredStructureFeature<?, ?>> structures = EcotonesBiomeBuilder.BIOME_STRUCTURES.get(biome);
 
-				BiomeGenData.LOOKUP.put(BuiltinRegistries.BIOME.getKey(biome).get(), data);
+				RegistryKey<Biome> key = BuiltinRegistries.BIOME.getKey(biome).get();
+				EcotonesStructuresConfig.STRUCTURE_DATA.put(key, structures);
+				BiomeGenData.LOOKUP.put(key, data);
 				if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 					BiomeChecker.check(biome);
 				}
@@ -157,6 +175,8 @@ public final class Ecotones implements ModInitializer {
 				ecotonesBiomes++;
 			}
 		}
+
+		VanillaBiomeData.init();
 
 		log("Registering " + ecotonesBiomes + " ecotones biomes!");
 		RegistryReport.report(ecotonesBiomes);
@@ -168,6 +188,13 @@ public final class Ecotones implements ModInitializer {
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
 			worldType = new EcotonesWorldType();
 		}
+
+		// Store if this server is in ecotones or not
+//		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+//			isServerEcotones = server.getOverworld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator;
+//		});
+
+		log("Ecotones init took " + (System.currentTimeMillis() - start) + "ms!");
 	}
 
 	public static Identifier id(String name) {

@@ -1,9 +1,6 @@
 package supercoder79.ecotones.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -28,7 +25,7 @@ import supercoder79.ecotones.blocks.entity.FertilizerSpreaderBlockEntity;
 import supercoder79.ecotones.blocks.entity.SapDistilleryBlockEntity;
 import supercoder79.ecotones.items.EcotonesItems;
 
-public class FertilizerSpreaderBlock extends BlockWithEntity {
+public class FertilizerSpreaderBlock extends BlockWithEntity implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     public FertilizerSpreaderBlock(Settings settings) {

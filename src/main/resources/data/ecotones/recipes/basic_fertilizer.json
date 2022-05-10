@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ecotones:phosphate"
+    },
+    {
+      "item": "ecotones:sulfur"
+    },
+    {
+      "item": "minecraft:dirt"
+    }
+  ],
+  "result": {
+    "item": "ecotones:basic_fertilizer",
+    "count": 8
+  }
+}

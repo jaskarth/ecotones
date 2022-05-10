@@ -1,5 +1,7 @@
 package supercoder79.ecotones.world.gen;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.HashCommon;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
@@ -9,14 +11,16 @@ import net.minecraft.block.Blocks;
 import net.minecraft.structure.JigsawJunction;
 import net.minecraft.structure.PoolStructurePiece;
 import net.minecraft.structure.StructurePiece;
+import net.minecraft.structure.StructureSet;
 import net.minecraft.structure.pool.StructurePool.Projection;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.math.noise.NoiseSampler;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
@@ -26,23 +30,32 @@ import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkSection;
 import net.minecraft.world.chunk.ProtoChunk;
-import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.StructuresConfig;
-import net.minecraft.world.gen.chunk.VerticalBlockSample;
+import net.minecraft.world.gen.chunk.*;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
+import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.world.gen.random.SimpleRandom;
 import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
+import supercoder79.ecotones.util.noise.OctaveNoiseSampler;
+import supercoder79.ecotones.util.noise.OpenSimplexNoise;
+import supercoder79.ecotones.world.river.PlateSet;
+import supercoder79.ecotones.world.river.RiverWorker;
+import supercoder79.ecotones.world.river.graph.RiverNode;
+import supercoder79.ecotones.world.storage.ChunkDataStorage;
+import supercoder79.ecotones.world.storage.ChunkStorageView;
+import supercoder79.ecotones.world.storage.StorageKeys;
+import supercoder79.ecotones.world.storage.data.RiverData;
+import supercoder79.ecotones.world.structure.EcotonesStructuresConfig;
+import supercoder79.ecotones.world.structure.StructureTerrainControl;
 import supercoder79.ecotones.world.surface.SlopedSurfaceBuilder;
+import supercoder79.ecotones.world.surface.system.ConfiguredSurfaceBuilder;
+import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
+import supercoder79.ecotones.world.surface.system.SurfaceConfig;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Predicate;
@@ -69,14 +82,17 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     private final OctavePerlinNoiseSampler lowerInterpolatedNoise;
     private final OctavePerlinNoiseSampler upperInterpolatedNoise;
     private final OctavePerlinNoiseSampler interpolationNoise;
-    private final NoiseSampler surfaceDepthNoise;
+    private final OctaveSimplexNoiseSampler surfaceDepthNoise;
     protected final BlockState defaultBlock;
     protected final BlockState defaultFluid;
     protected final ThreadLocal<BiomeCache> biomeCache;
     private final ThreadLocal<NoiseCache> noiseCache;
+    private final RiverWorker riverWorker;
+    private final OctaveNoiseSampler<OpenSimplexNoise> riverNoiseNoise;
 
-    public BaseEcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
-        super(biomeSource, biomeSource, new StructuresConfig(true), seed);
+    public BaseEcotonesChunkGenerator(Registry<StructureSet> structures, BiomeSource biomeSource, long seed) {
+//        super(biomeSource, biomeSource, new EcotonesStructuresConfig(Optional.of(DEFAULT_STRONGHOLD), Maps.newHashMap(DEFAULT_STRUCTURES)), seed);
+        super(structures, Optional.empty(), biomeSource, biomeSource, seed);
         this.verticalNoiseResolution = 8;
         this.horizontalNoiseResolution = 4;
         this.defaultBlock = Blocks.STONE.getDefaultState();
@@ -84,14 +100,18 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         this.noiseSizeX = 16 / this.horizontalNoiseResolution;
         this.noiseSizeY = 256 / this.verticalNoiseResolution;
         this.noiseSizeZ = 16 / this.horizontalNoiseResolution;
-        this.random = new ChunkRandom(seed);
-        this.lowerInterpolatedNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-15, 0));
-        this.upperInterpolatedNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-15, 0));
-        this.interpolationNoise = new OctavePerlinNoiseSampler(this.random, IntStream.rangeClosed(-7, 0));
-        this.surfaceDepthNoise = new OctaveSimplexNoiseSampler(this.random, IntStream.rangeClosed(-3, 0));
+        this.random = new ChunkRandom(new SimpleRandom(seed));
+        this.lowerInterpolatedNoise = OctavePerlinNoiseSampler.createLegacy(this.random, IntStream.rangeClosed(-15, 0));
+        this.upperInterpolatedNoise = OctavePerlinNoiseSampler.createLegacy(this.random, IntStream.rangeClosed(-15, 0));
+        this.interpolationNoise = OctavePerlinNoiseSampler.createLegacy(this.random, IntStream.rangeClosed(-7, 0));
+        this.surfaceDepthNoise = new OctaveSimplexNoiseSampler(this.random, ImmutableList.of(-3, -2, -1, 0));
 
         this.biomeCache = ThreadLocal.withInitial(() -> new BiomeCache(1024, biomeSource));
         this.noiseCache = ThreadLocal.withInitial(() -> new NoiseCache(128, this.noiseSizeY + 1));
+
+        this.riverWorker = new RiverWorker(seed);
+
+        this.riverNoiseNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 128, 0.15, 0.15);
     }
 
     public double sampleTerrainNoise(int x, int y, int z, double horizontalScale, double verticalScale, double horizontalStretch, double verticalStretch) {
@@ -275,7 +295,104 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     }
 
     protected void sampleNoiseColumn(double[] buffer, int x, int z) {
+        ChunkPos pos = new ChunkPos(x << 2, z << 2);
+        PlateSet plateSet = this.riverWorker.forChunk(pos);
+
+        sampleNoiseColumn(null, plateSet.findForChunk(pos), buffer, x, z);
+    }
+
+    protected void sampleNoiseColumn(Chunk chunk, List<RiverNode> riverPlate, double[] buffer, int x, int z) {
         this.noiseCache.get().get(buffer, x, z);
+
+        for (int i = 0; i < buffer.length; i++) {
+            buffer[i] /= 200;
+        }
+
+        // River filter
+        if (riverPlate != null) {
+            // Ugly hack- we don't have (or need) the chunk in heightmap sampling
+            // TODO: shared empty chunk data storage
+            ChunkDataStorage storage = chunk == null ? new ChunkDataStorage() : ChunkStorageView.getStorage(chunk);
+            if (storage != null) {
+                filterForRiver(storage, riverPlate, buffer, x, z);
+            }
+        }
+    }
+
+    private void filterForRiver(ChunkDataStorage storage, List<RiverNode> riverPlate, double[] buffer, int x, int z) {
+        double color = 0;
+
+        BitSet bits = new BitSet(36);
+        for (RiverNode node : riverPlate) {
+            double radius = node.radius();
+            int rad = (int) radius;
+            if (!node.getSuccessors().isEmpty()) {
+                RiverNode successor = node.getSuccessors().get(0);
+
+                int xStart = ((int) node.x());
+                int zStart = ((int) node.z());
+                int xNext = ((int) successor.x());
+                int zNext = ((int) successor.z());
+
+                for (int i = 0; i < 20; i++) {
+                    double progress = (double) i / 20.0;
+
+                    int ax = (int) MathHelper.lerp(progress, xStart, xNext);
+                    int az = (int) MathHelper.lerp(progress, zStart, zNext);
+
+                    for (int x1 = -rad; x1 <= rad; x1++) {
+                        for (int z1 = -rad; z1 <= rad; z1++) {
+                            if (x1 * x1 + z1 * z1 <= radius * radius) {
+                                int gx = ax + x1;
+                                int gz = az + z1;
+
+                                if (gx >= (x * 4) - 1 && gx < ((x + 1) * 4) + 1 && gz >= (z * 4) - 1 && gz < ((z + 1) * 4) + 1) {
+                                    int index1 = (gx - ((x * 4) - 1));
+                                    int index2 = (gz - ((z * 4) - 1)) * 6;
+
+                                    int index = index1 + index2;
+
+                                    if (index < 0 || index >= 36) {
+                                        throw new IllegalStateException("Index out of bounds: " + index + " (x=" + x + ", z=" + z + ")" + " (gx=" + gx + ", gz=" + gz + ")" + " (x1=" + x1 + ", z1=" + z1 + ")");
+                                    }
+
+                                    bits.set(index);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        int card = bits.cardinality();
+
+        double lerpstr = (double) card / 36.0;
+        if (lerpstr > 0.0) {
+            RiverData data = storage.get(StorageKeys.RIVER_DATA);
+
+            // Add river data if it doesn't exist
+            if (data == null) {
+                storage.add(StorageKeys.RIVER_DATA, new RiverData(buffer[9] < 0));
+            } else {
+                // Update open to air
+                if (!data.openToAir() && (buffer[9] < 0)) {
+                    storage.add(StorageKeys.RIVER_DATA, new RiverData(true));
+                }
+            }
+//            lerpstr = Math.max(lerpstr, 0.2);
+        }
+
+        double noise = this.riverNoiseNoise.sample(x, z);
+        // River area- actual river transformation
+        buffer[8] = MathHelper.lerp(lerpstr, buffer[8], -0.7 + noise);
+
+        // Reduce edges
+        //1+\left(x-1\right)^{3}
+        double lerp9 = 1 + Math.pow(lerpstr - 1, 3);
+        buffer[9] = MathHelper.lerp(lerp9, buffer[9], buffer[9] - MathHelper.clampedLerpFromProgress(buffer[10], -1, 0, 1.6, 0));
+//        buffer[9] = MathHelper.lerp(lerpstr, buffer[9], -0.1);
+//        buffer[7] = MathHelper.lerp(lerpstr, buffer[7], -0.05 + noise / 1.5);
     }
 
     protected abstract void fillNoiseColumn(double[] buffer, int x, int z);
@@ -284,11 +401,14 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         return this.noiseSizeY + 1;
     }
 
-    public void buildSurface(ChunkRegion region, Chunk chunk) {
+    protected abstract RegistryKey<Biome> key(Biome biome);
+
+    @Override
+    public void buildSurface(ChunkRegion region, StructureAccessor structures, Chunk chunk) {
         ChunkPos pos = chunk.getPos();
         int chunkX = pos.x;
         int chunkZ = pos.z;
-        ChunkRandom random = new ImprovedChunkRandom();
+        ImprovedChunkRandom random = new ImprovedChunkRandom(new SimpleRandom(0));
         random.setTerrainSeed(chunkX, chunkZ);
         int chunkStartX = pos.getStartX();
         int chunkStartZ = pos.getStartZ();
@@ -301,11 +421,11 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
                 int y = chunk.sampleHeightmap(Type.WORLD_SURFACE_WG, x, z) + 1;
 
-                double noise = this.surfaceDepthNoise.sample((double) localX * 0.0625D, (double) localZ * 0.0625D, 0.0625D, (double) x * 0.0625D) * 15.0D;
+                double noise = this.surfaceDepthNoise.sample((double) localX * 0.0625D, (double) localZ * 0.0625D, true) * 0.55 * 15.0D;
 
 
-                Biome biome = region.getBiome(mutable.set(localX, y, localZ));
-                ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder = biome.getGenerationSettings().getSurfaceBuilder().get();
+                Biome biome = region.getBiome(mutable.set(localX, y, localZ)).value();
+                ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder = BiomeGenData.LOOKUP.getOrDefault(key(biome), BiomeGenData.DEFAULT).surface();
                 configuredSurfaceBuilder.initSeed(region.getSeed());
 
                 dispatchSurfaceBuilder(configuredSurfaceBuilder, region, chunk, random, localX, localZ, y, noise, biome);
@@ -326,10 +446,10 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
             int slope = dx * dx + dz * dz;
 
-            sloped.generate(random, chunk, biome, x & 15, z & 15, y, noise,
+            sloped.generate(random, chunk, biome, x, z, y, noise,
                     this.defaultBlock, this.defaultFluid, this.getSeaLevel(), 0, region.getSeed(), slope, config);
         } else {
-            builder.generate(random, chunk, biome, x & 15, z & 15, y, noise,
+            builder.generate(random, chunk, biome, x, z, y, noise,
                     this.defaultBlock, this.defaultFluid, this.getSeaLevel(), 0, region.getSeed(), config);
         }
     }
@@ -349,7 +469,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     }
 
     @Override
-    public CompletableFuture<Chunk> populateNoise(Executor executor, StructureAccessor accessor, Chunk chunk) {
+    public CompletableFuture<Chunk> populateNoise(Executor executor, Blender blender, StructureAccessor accessor, Chunk chunk) {
         // TODO: proper multithreading
         populateNoise(accessor, chunk);
 
@@ -365,22 +485,23 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         int chunkStartX = chunkX << 4;
         int chunkStartZ = chunkZ << 4;
 
-        for (StructureFeature<?> feature : StructureFeature.LAND_MODIFYING_STRUCTURES) {
-            accessor.getStructuresWithChildren(ChunkSectionPos.from(pos, 0), feature).forEach(start -> {
+//        for (StructureFeature<?> feature : StructureFeature.LAND_MODIFYING_STRUCTURES) {
+        for (ConfiguredStructureFeature<?, ?> feature : new ArrayList<ConfiguredStructureFeature<?, ?>>()) {
+            accessor.getStructureStarts(ChunkSectionPos.from(pos, 0), feature).forEach(start -> {
                 Iterator<StructurePiece> pieces = start.getChildren().iterator();
-                
+
+                outer:
                 while (true) {
                     StructurePiece piece;
                     do {
                         if (!pieces.hasNext()) {
-                            return;
+                            break outer;
                         }
 
                         piece = pieces.next();
-                    } while (!piece.intersectsChunk(pos, 12));
+                    } while (!piece.intersectsChunk(pos, 24));
 
-                    if (piece instanceof PoolStructurePiece) {
-                        PoolStructurePiece pool = (PoolStructurePiece) piece;
+                    if (piece instanceof PoolStructurePiece pool) {
                         Projection projection = pool.getPoolElement().getProjection();
                         if (projection == Projection.RIGID) {
                             structurePieces.add(pool);
@@ -395,6 +516,13 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                             }
                         }
                     } else {
+                        if (piece instanceof StructureTerrainControl stc) {
+                            if (!stc.generateTerrainBelow()) {
+                                // Skip pieces that don't generate terrain
+                                continue;
+                            }
+                        }
+
                         structurePieces.add(piece);
                     }
                 }
@@ -402,14 +530,18 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         }
 
         // Holds the rolling noise data for this chunk
-        // Instead of being noise[4 * 32 * 4] it's actually noise[2 * 5 * 33] to reuse noise data when moving onto the next column on the x axis.
+        // Instead of being noise[4 * 33 * 4] it's actually noise[2 * 5 * 33] to reuse noise data when moving onto the next column on the x axis.
         // This could probably be optimized but I'm a bit too lazy to figure out the best way to do so :P
         double[][][] noiseData = new double[2][this.noiseSizeZ + 1][this.noiseSizeY + 1];
+
+        PlateSet riverPlate = this.riverWorker.forChunk(pos);
+
+        List<RiverNode> riverNodes = riverPlate.findForChunk(pos);
 
         // Initialize noise data on the x0 column.
         for(int noiseZ = 0; noiseZ < this.noiseSizeZ + 1; ++noiseZ) {
             noiseData[0][noiseZ] = new double[this.noiseSizeY + 1];
-            this.sampleNoiseColumn(noiseData[0][noiseZ], chunkX * this.noiseSizeX, chunkZ * this.noiseSizeZ + noiseZ);
+            this.sampleNoiseColumn(chunk, riverNodes, noiseData[0][noiseZ], chunkX * this.noiseSizeX, chunkZ * this.noiseSizeZ + noiseZ);
             noiseData[1][noiseZ] = new double[this.noiseSizeY + 1];
         }
 
@@ -425,7 +557,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
             // Initialize noise data on the x1 column
             int noiseZ;
             for(noiseZ = 0; noiseZ < this.noiseSizeZ + 1; ++noiseZ) {
-                this.sampleNoiseColumn(noiseData[1][noiseZ], chunkX * this.noiseSizeX + noiseX + 1, chunkZ * this.noiseSizeZ + noiseZ);
+                this.sampleNoiseColumn(chunk, riverNodes, noiseData[1][noiseZ], chunkX * this.noiseSizeX + noiseX + 1, chunkZ * this.noiseSizeZ + noiseZ);
             }
 
             // [0, 4] -> z noise chunks
@@ -484,7 +616,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                                 // Get the real noise here by interpolating the last 2 noises together
                                 double rawNoise = MathHelper.lerp(zLerp, z0, z1);
                                 // Normalize the noise from (-256, 256) to [-1, 1]
-                                double density = MathHelper.clamp(rawNoise / 200.0D, -1.0D, 1.0D);
+                                double density = MathHelper.clamp(rawNoise /*rawNoise / 200.0D*/, -1.0D, 1.0D);
 
                                 // Iterate through structures to add density
                                 int structureX;

@@ -1,26 +1,27 @@
 package supercoder79.ecotones.world.decorator;
 
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
+import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import supercoder79.ecotones.Ecotones;
-import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.RegistryReport;
 
 public final class EcotonesDecorators {
-    public static final Decorator<ShrubDecoratorConfig> SHRUB_PLACEMENT_DECORATOR = new ShrubPlacementDecorator(ShrubDecoratorConfig.CODEC);
-    public static final Decorator<NopeDecoratorConfig> DRAINAGE_DECORATOR = new DrainageSurfaceDecorator(NopeDecoratorConfig.CODEC);
-    public static final Decorator<TreeGenerationConfig.DecorationData> TREE_DECORATOR = new TreePlacementDecorator(TreeGenerationConfig.DecorationData.CODEC);
-    public static final Decorator<SimpleTreeDecorationData> SIMPLE_TREE_DECORATOR = new SimpleTreePlacementDecorator(SimpleTreeDecorationData.CODEC);
-    public static final Decorator<SimpleTreeDecorationData> REVERSE_QUALITY_TREE_DECORATOR = new ReverseTreePlacementDecorator(SimpleTreeDecorationData.CODEC);
-    public static final Decorator<NopeDecoratorConfig> ABOVE_QUALITY = new AboveQualityDecorator(NopeDecoratorConfig.CODEC);
-    public static final Decorator<NopeDecoratorConfig> ROCKINESS = new SoilRockinessDecorator(NopeDecoratorConfig.CODEC);
-    public static final Decorator<ChanceDecoratorConfig> LARGE_ROCK = new LargeRockDecorator(ChanceDecoratorConfig.CODEC);
-    public static final Decorator<ShrubDecoratorConfig> BLUEBERRY_BUSH = new BlueberryBushDecorator(ShrubDecoratorConfig.CODEC);
-    public static final Decorator<ShrubDecoratorConfig> DUCK_NEST = new DuckNestDecorator(ShrubDecoratorConfig.CODEC);
-    public static final Decorator<ShrubDecoratorConfig> ROSEMARY = new RosemaryDecorator(ShrubDecoratorConfig.CODEC);
+    public static final EcotonesPlacementModifierType<ShrubPlacementDecorator> SHRUB_PLACEMENT_DECORATOR = EcotonesPlacementModifierType.make(ShrubPlacementDecorator.class, ShrubPlacementDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<DrainageSurfaceDecorator> DRAINAGE_DECORATOR = EcotonesPlacementModifierType.make(DrainageSurfaceDecorator.class,  DrainageSurfaceDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<TreePlacementDecorator> TREE_DECORATOR = EcotonesPlacementModifierType.make(TreePlacementDecorator.class, TreePlacementDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<SimpleTreePlacementDecorator> SIMPLE_TREE_DECORATOR = EcotonesPlacementModifierType.make(SimpleTreePlacementDecorator.class, SimpleTreePlacementDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<ReverseTreePlacementDecorator> REVERSE_QUALITY_TREE_DECORATOR = EcotonesPlacementModifierType.make(ReverseTreePlacementDecorator.class, ReverseTreePlacementDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<AboveQualityDecorator> ABOVE_QUALITY = EcotonesPlacementModifierType.make(AboveQualityDecorator.class, AboveQualityDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<SoilRockinessDecorator> ROCKINESS = EcotonesPlacementModifierType.make(SoilRockinessDecorator.class, SoilRockinessDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<LargeRockDecorator> LARGE_ROCK = EcotonesPlacementModifierType.make(LargeRockDecorator.class, LargeRockDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<BlueberryBushDecorator> BLUEBERRY_BUSH = EcotonesPlacementModifierType.make(BlueberryBushDecorator.class, BlueberryBushDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<DuckNestDecorator> DUCK_NEST = EcotonesPlacementModifierType.make(DuckNestDecorator.class, DuckNestDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<RosemaryDecorator> ROSEMARY = EcotonesPlacementModifierType.make(RosemaryDecorator.class, RosemaryDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<DataFunctionDecorator> DATA_FUNCTION = EcotonesPlacementModifierType.make(DataFunctionDecorator.class, DataFunctionDecorator.CODEC);
+
+    public static final EcotonesPlacementModifierType<Spread32Decorator> SPREAD_32 = EcotonesPlacementModifierType.make(Spread32Decorator.class, Spread32Decorator.CODEC);
+    public static final EcotonesPlacementModifierType<SpreadDoubleDecorator> SPREAD_DOUBLE = EcotonesPlacementModifierType.make(SpreadDoubleDecorator.class, SpreadDoubleDecorator.CODEC);
+    public static final EcotonesPlacementModifierType<CountExtraDecorator> COUNT_EXTRA = EcotonesPlacementModifierType.make(CountExtraDecorator.class, CountExtraDecorator.CODEC);
 
     public static void init() {
         register("shrub_placement", SHRUB_PLACEMENT_DECORATOR);
@@ -34,10 +35,15 @@ public final class EcotonesDecorators {
         register("blueberry_bush", BLUEBERRY_BUSH);
         register("duck_nest", DUCK_NEST);
         register("rosemary", ROSEMARY);
+        register("data_function", DATA_FUNCTION);
+
+        register("spread_32", SPREAD_32);
+        register("spread_double", SPREAD_DOUBLE);
+        register("count_extra", COUNT_EXTRA);
     }
 
-    private static void register(String name, Decorator<?> decorator) {
-        Registry.register(Registry.DECORATOR, Ecotones.id(name), decorator);
+    private static void register(String name, PlacementModifierType<?> decorator) {
+        Registry.register(Registry.PLACEMENT_MODIFIER_TYPE, Ecotones.id(name), decorator);
         RegistryReport.increment("Decorator");
     }
 }

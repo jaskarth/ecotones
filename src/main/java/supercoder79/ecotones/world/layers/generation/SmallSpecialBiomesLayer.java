@@ -2,10 +2,10 @@ package supercoder79.ecotones.world.layers.generation;
 
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.layer.type.MergingLayer;
-import net.minecraft.world.biome.layer.util.IdentityCoordinateTransformer;
-import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
-import net.minecraft.world.biome.layer.util.LayerSampler;
+import supercoder79.ecotones.world.layers.system.layer.type.MergingLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.IdentityCoordinateTransformer;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerSampler;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 

@@ -12,12 +12,13 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeHelper;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BranchingDarkOakTreeFeature extends Feature<TreeGenerationConfig> {
+public class BranchingDarkOakTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
     public BranchingDarkOakTreeFeature(Codec<TreeGenerationConfig> codec) {
         super(codec);
     }

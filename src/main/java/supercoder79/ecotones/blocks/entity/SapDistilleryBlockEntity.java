@@ -1,6 +1,5 @@
 package supercoder79.ecotones.blocks.entity;
 
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.Entity;
@@ -11,6 +10,9 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
@@ -20,13 +22,14 @@ import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.screen.SapDistilleryScreenHandler;
 
 import java.util.Random;
 
-public class SapDistilleryBlockEntity extends LockableContainerBlockEntity implements BlockEntityClientSerializable {
+public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
     private DefaultedList<ItemStack> inventory;
     protected final PropertyDelegate propertyDelegate;
     // 0 .. 600
@@ -127,7 +130,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
             sync();
         }
 
-        if (entity.getStack().isOf(Items.GLASS_BOTTLE) && this.syrupAmount >= 1000) {
+        if (entity.getStack().isOf(EcotonesItems.JAR) && this.syrupAmount >= 1000) {
             world.spawnEntity(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(EcotonesItems.MAPLE_SYRUP)));
 
             entity.remove(Entity.RemovalReason.KILLED);
@@ -193,10 +196,15 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
         this.heatAmount = tag.getShort("heat_amt");
         this.sapAmount = tag.getInt("sap_amt");
         this.syrupAmount = tag.getShort("syrup_amt");
+
+        // Client sync
+        if (tag.contains("syrup")) {
+            this.syrupAmount = tag.getShort("syrup");
+        }
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound tag) {
+    public void writeNbt(NbtCompound tag) {
         super.writeNbt(tag);
         Inventories.writeNbt(tag, this.inventory);
         tag.putShort("burn_time", (short) this.burnTime);
@@ -204,7 +212,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
         tag.putInt("sap_amt", this.sapAmount);
         tag.putShort("syrup_amt", (short) this.syrupAmount);
 
-        return tag;
+//        return tag;
     }
 
     @Override
@@ -267,12 +275,26 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity imple
         this.inventory.clear();
     }
 
-    @Override
-    public void fromClientTag(NbtCompound tag) {
-        this.syrupAmount = tag.getShort("syrup");
+    private void sync() {
+        ((ServerWorld)this.world).getChunkManager().markForUpdate(this.pos);
     }
 
     @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return toClientTag(new NbtCompound());
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+//    @Override
+//    public void fromClientTag(NbtCompound tag) {
+//        this.syrupAmount = tag.getShort("syrup");
+//    }
+
     public NbtCompound toClientTag(NbtCompound tag) {
         tag.putShort("syrup", (short) this.syrupAmount);
         return tag;

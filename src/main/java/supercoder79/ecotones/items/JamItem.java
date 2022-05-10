@@ -24,10 +24,10 @@ public class JamItem extends AliasedBlockItem implements DynamicEatTimeItem {
         super.finishUsing(stack, world, livingEntity);
 
         if (stack.isEmpty()) {
-            return new ItemStack(Items.GLASS_BOTTLE);
+            return new ItemStack(EcotonesItems.JAR);
         } else {
             if (livingEntity instanceof PlayerEntity && !((PlayerEntity)livingEntity).getAbilities().creativeMode) {
-                ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
+                ItemStack bottle = new ItemStack(EcotonesItems.JAR);
                 PlayerEntity playerEntity = (PlayerEntity)livingEntity;
                 if (!playerEntity.getInventory().insertStack(bottle)) {
                     playerEntity.dropItem(bottle, false);

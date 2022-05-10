@@ -10,10 +10,11 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 
 import java.util.Random;
 
-public class PebblesFeature extends Feature<DefaultFeatureConfig> {
+public class PebblesFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public PebblesFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }

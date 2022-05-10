@@ -1,11 +1,13 @@
 package supercoder79.ecotones.world.decorator;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.DecoratorContext;
+import net.minecraft.world.gen.feature.FeaturePlacementContext;
+import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
@@ -13,14 +15,20 @@ import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class ShrubPlacementDecorator extends Decorator<ShrubDecoratorConfig> {
-    public ShrubPlacementDecorator(Codec<ShrubDecoratorConfig> codec) {
-        super(codec);
+public class ShrubPlacementDecorator extends PlacementModifier {
+    public static final Codec<ShrubPlacementDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            ShrubDecoratorConfig.CODEC.fieldOf("config").forGetter(c -> c.config)
+    ).apply(instance, ShrubPlacementDecorator::new));
+
+    private final ShrubDecoratorConfig config;
+
+    public ShrubPlacementDecorator(ShrubDecoratorConfig config) {
+        this.config = config;
     }
 
     //TODO: use a for loop instead of a stream for more control
     @Override
-    public Stream<BlockPos> getPositions(DecoratorContext context, Random random, ShrubDecoratorConfig config, BlockPos pos) {
+    public Stream<BlockPos> getPositions(FeaturePlacementContext context, Random random, BlockPos pos) {
         //gets data on how many shrubs to place based on the soil drainage.
         //performs an abs function on noise to make it [0, 1].
         //drainage of 0: either too much or too little drainage, 50% of target shrub count
@@ -102,5 +110,10 @@ public class ShrubPlacementDecorator extends Decorator<ShrubDecoratorConfig> {
     // Desmos: x^{3}+0.1x+0.4
     private double qualityToDensity(double q) {
         return (q * q * q) + (0.1 * q) + 0.4;
+    }
+
+    @Override
+    public PlacementModifierType<?> getType() {
+        return EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR;
     }
 }

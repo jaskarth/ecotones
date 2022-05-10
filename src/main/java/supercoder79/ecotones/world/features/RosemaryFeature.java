@@ -16,7 +16,7 @@ import supercoder79.ecotones.world.data.EcotonesData;
 
 import java.util.Random;
 
-public class RosemaryFeature extends Feature<DefaultFeatureConfig> {
+public class RosemaryFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public RosemaryFeature(Codec<DefaultFeatureConfig> configCodec) {
         super(configCodec);
     }

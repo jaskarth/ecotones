@@ -1,15 +1,18 @@
 package supercoder79.ecotones.blocks.entity;
 
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.blocks.TreetapBlock;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
@@ -17,13 +20,14 @@ import supercoder79.ecotones.client.particle.EcotonesParticles;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TreetapBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
+public class TreetapBlockEntity extends BlockEntity {
     // 0 .. 8,000
     private int sapAmount = 0;
     private Direction direction;
     private boolean isValid;
     private boolean needsValidation = true;
     private long timeOffset;
+    private boolean showMode = false;
 
     public TreetapBlockEntity(BlockPos pos, BlockState state) {
         super(EcotonesBlockEntities.TREETAP, pos, state);
@@ -37,6 +41,13 @@ public class TreetapBlockEntity extends BlockEntity implements BlockEntityClient
     public static void tick(World world, BlockPos pos, BlockState state, TreetapBlockEntity blockEntity) {
         if (blockEntity.isValid) {
             blockEntity.sapAmount++;
+
+            // Used to lock the amount for display purposes
+            // At this time, this was written for Blanketcon 2022. We'll see how long this code lasts!
+            if (blockEntity.showMode) {
+                blockEntity.sapAmount = 5000;
+            }
+
             blockEntity.markDirty();
             blockEntity.sync();
 
@@ -125,7 +136,7 @@ public class TreetapBlockEntity extends BlockEntity implements BlockEntityClient
     }
 
     public boolean canDropSap() {
-        return this.sapAmount >= 1000;
+        return this.sapAmount >= 1000 && !this.showMode;
     }
 
     public void dropSap() {
@@ -148,17 +159,20 @@ public class TreetapBlockEntity extends BlockEntity implements BlockEntityClient
     @Override
     public void readNbt(NbtCompound tag) {
         super.readNbt(tag);
-        this.sapAmount = tag.getInt("sap_amount");
+        this.sapAmount = tag.getInt("SapAmt");
+        this.showMode = tag.getBoolean("ShowMode");
+
+        fromClientTag(tag);
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound tag) {
+    public void writeNbt(NbtCompound tag) {
         super.writeNbt(tag);
-        tag.putInt("sap_amount", this.sapAmount);
-        return tag;
+        tag.putInt("SapAmt", this.sapAmount);
+        tag.putBoolean("ShowMode", this.showMode);
+//        return tag;
     }
 
-    @Override
     public void fromClientTag(NbtCompound tag) {
         this.sapAmount = tag.getInt("sap_amount");
         this.direction = Direction.fromHorizontal(tag.getInt("direction"));
@@ -167,7 +181,6 @@ public class TreetapBlockEntity extends BlockEntity implements BlockEntityClient
         this.timeOffset = tag.getLong("time_offset");
     }
 
-    @Override
     public NbtCompound toClientTag(NbtCompound tag) {
         tag.putInt("sap_amount", this.sapAmount);
         tag.putInt("direction", this.direction.getHorizontal());
@@ -175,6 +188,21 @@ public class TreetapBlockEntity extends BlockEntity implements BlockEntityClient
         tag.putBoolean("needs_validation", this.needsValidation);
         tag.putLong("time_offset", this.timeOffset);
         return tag;
+    }
+
+    private void sync() {
+        ((ServerWorld)this.world).getChunkManager().markForUpdate(this.pos);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return toClientTag(new NbtCompound());
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
     }
 
     // TODO: these values are slightly wrong

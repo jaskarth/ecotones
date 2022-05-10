@@ -1,29 +1,31 @@
 package supercoder79.ecotones.world.biome;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.DecoratorConfig;
+import net.minecraft.world.gen.YOffset;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
+import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.LakeFeature;
+import net.minecraft.world.gen.heightprovider.UniformHeightProvider;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.api.BiomeIdManager;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
+import supercoder79.ecotones.world.features.SulfurousLakeFeature;
 
 public final class BiomeHelper {
-    public static final int WARM_OCEAN_ID = 44;
-    public static final int LUKEWARM_OCEAN_ID = 45;
-    public static final int OCEAN_ID = 0;
-    public static final int COLD_OCEAN_ID = 46;
-    public static final int FROZEN_OCEAN_ID = 10;
-    public static final int DEEP_WARM_OCEAN_ID = 47;
-    public static final int DEEP_LUKEWARM_OCEAN_ID = 48;
-    public static final int DEEP_OCEAN_ID = 24;
-    public static final int DEEP_COLD_OCEAN_ID = 49;
-    public static final int DEEP_FROZEN_OCEAN_ID = 50;
-
     public static void addDefaultSpawns(SpawnSettings.Builder builder) {
         builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 12, 4, 4));
         builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.PIG, 10, 4, 4));
@@ -48,9 +50,31 @@ public final class BiomeHelper {
     }
 
     public static void addDefaultFeatures(EcotonesBiomeBuilder builder) {
+        // Sulfurous lakes
+        builder.addFeature(GenerationStep.Feature.LAKES, EcotonesFeatures.SULFUROUS_LAKE.configure(
+                new SulfurousLakeFeature.Config(BlockStateProvider.of(Blocks.LAVA.getDefaultState()), BlockStateProvider.of(Blocks.STONE.getDefaultState()))
+        ).decorateAll(
+                RarityFilterPlacementModifier.of(5),
+                SquarePlacementModifier.of(),
+                HeightRangePlacementModifier.of(UniformHeightProvider.create(YOffset.fixed(0), YOffset.getTop())),
+                EnvironmentScanPlacementModifier.of(
+                        Direction.DOWN,
+                        BlockPredicate.bothOf(BlockPredicate.not(BlockPredicate.IS_AIR), BlockPredicate.insideWorldBounds(new BlockPos(0, -5, 0))),
+                        32
+                ),
+                SurfaceThresholdFilterPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -5)
+        ));
+
+        // Phosphate domes
+        builder.addFeature(GenerationStep.Feature.RAW_GENERATION,
+                EcotonesFeatures.PHOSPHATE_DOME.configure(FeatureConfig.DEFAULT)
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
+                        .spreadHorizontally()
+                        .applyChance(220));
+
         builder.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT)
-                        .decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure(DecoratorConfig.DEFAULT)));
+                        .decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure()));
     }
 
     @Deprecated
@@ -60,11 +84,23 @@ public final class BiomeHelper {
     }
 
     public static boolean isOcean(int id) {
-        return id == WARM_OCEAN_ID || id == LUKEWARM_OCEAN_ID || id == OCEAN_ID || id == COLD_OCEAN_ID || id == FROZEN_OCEAN_ID || id == DEEP_WARM_OCEAN_ID || id == DEEP_LUKEWARM_OCEAN_ID || id == DEEP_OCEAN_ID || id == DEEP_COLD_OCEAN_ID || id == DEEP_FROZEN_OCEAN_ID;
+        return id == BiomeIdManager.getId(BiomeKeys.WARM_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.LUKEWARM_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.COLD_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.FROZEN_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.DEEP_COLD_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.DEEP_FROZEN_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.DEEP_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.DEEP_LUKEWARM_OCEAN);
     }
 
     public static boolean isShallowOcean(int id) {
-        return id == WARM_OCEAN_ID || id == LUKEWARM_OCEAN_ID || id == OCEAN_ID || id == COLD_OCEAN_ID || id == FROZEN_OCEAN_ID;
+        return id == BiomeIdManager.getId(BiomeKeys.WARM_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.LUKEWARM_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.COLD_OCEAN) ||
+                id == BiomeIdManager.getId(BiomeKeys.FROZEN_OCEAN);
     }
 
     // Dev and testing stuff

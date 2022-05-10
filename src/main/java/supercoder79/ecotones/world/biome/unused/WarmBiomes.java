@@ -5,9 +5,9 @@
 //import net.minecraft.world.biome.Biome;
 //import net.minecraft.world.biome.BiomeParticleConfig;
 //import net.minecraft.world.gen.GenerationStep;
-//import net.minecraft.world.gen.decorator.*;
+//import net.minecraft.world.gen.placementmodifier.*;
 //import net.minecraft.world.gen.feature.*;
-//import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+//import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 //import supercoder79.ecotones.api.Climate;
 //import supercoder79.ecotones.api.SimpleTreeDecorationData;
 //import supercoder79.ecotones.api.TreeType;
@@ -50,10 +50,10 @@
 //            .addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL)
 //
 //            .addCustomFeature(GenerationStep.Feature.RAW_GENERATION,
-//                    EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT).decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure(DecoratorConfig.DEFAULT)))
+//                    EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT).decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure()))
 //
 //            .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                    Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS).decorate(EcotonesDecorators.ROCKINESS.configure(DecoratorConfig.DEFAULT)))
+//                    EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS).decorate(EcotonesDecorators.ROCKINESS.configure()))
 //
 //            .addDefaultSpawnEntries());
 //
@@ -65,13 +65,13 @@
 //                .addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST)
 //                .addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(new Identifier("village/desert/town_centers"), 10)))
 //
-//                .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 4)
+//                .addTreeFeature(EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 4)
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG).decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(3))))
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG).decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(3))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).decorate(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).decorate(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(10)))));
 //        COOL_SCRUBLAND_BIOME = BiomeHelper.registerBase(new Identifier("ecotones", "cool_scrubland"), template.builder()
 //                .configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 //                .temperature(1.2F)
@@ -94,12 +94,12 @@
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(3))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.COOL_SCRUBLAND_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.COOL_SCRUBLAND_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.DESERTIFY_SOIL.configure(FeatureConfig.DEFAULT)
-//                                .decorate(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(1, 0.5f, 1))))
+//                                .decorate(EcotonesDecorators.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(1, 0.5f, 1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
@@ -113,7 +113,7 @@
 //                        EcotonesFeatures.SMALL_ACACIA.configure(TreeType.SMALL_ACACIA)
 //                                .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.SMALL_ACACIA.decorationData)))
 //
-//                .addTreeFeature(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 4));
+//                .addTreeFeature(EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG), 4));
 //        COOL_STEPPE_BIOME = BiomeHelper.registerBase( new Identifier("ecotones", "cool_steppe"), template.builder()
 //                .temperature(1.2F)
 //                .downfall(0.35F)
@@ -133,7 +133,7 @@
 //                                .decorate(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(14))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG).decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSTLY_SHORT_GRASS_CONFIG).decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 5, 10))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.BRANCHING_ACACIA.configure(TreeType.RARE_ACACIA)
@@ -172,7 +172,7 @@
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(1.75))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER).decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER).decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
@@ -183,7 +183,7 @@
 //                                .decorate(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(64))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.PRAIRIE_CONFIG).decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 30)))));
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.PRAIRIE_CONFIG).decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 30)))));
 //
 //        LICHEN_WOODLAND_BIOME = BiomeHelper.registerBase( new Identifier("ecotones", "lichen_woodland"), template.builder()
 //                .temperature(0.8F)
@@ -204,17 +204,17 @@
 //                                .decorate(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(10))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 4, 6))))
 //
-//                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(FeatureConfigHolder.TAIGA_FLOWERS)
+//                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.TAIGA_FLOWERS)
 //                        .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))))
 //
-//                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(FeatureConfigHolder.WIDE_FERNS)
+//                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.WIDE_FERNS)
 //                        .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER).decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))))
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER).decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.RARE_DEAD_SPRUCE)
@@ -229,7 +229,7 @@
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.35))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.SWEET_BERRY_BUSH_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.SWEET_BERRY_BUSH_CONFIG)
 //                        .decorate(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(3))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -237,11 +237,11 @@
 //                                .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(1.25))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_LILAC)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_LILAC)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -262,10 +262,10 @@
 //                        EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(3))))
 //
-//                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(FeatureConfigHolder.TAIGA_FLOWERS)
+//                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.TAIGA_FLOWERS)
 //                        .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(3))))
 //
-//                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(FeatureConfigHolder.WIDE_FERNS)
+//                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.WIDE_FERNS)
 //                        .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
@@ -273,7 +273,7 @@
 //                                .decorate(Decorator.CHANCE_HEIGHTMAP.configure(new ChanceDecoratorConfig(8))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -285,15 +285,15 @@
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.65))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.SWEET_BERRY_BUSH_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.SWEET_BERRY_BUSH_CONFIG)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(2))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.TAIGA_GRASS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.TAIGA_GRASS_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 6, 8))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -331,14 +331,14 @@
 //                                .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.STANDARD_BIRCH.decorationData)))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER).decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER).decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 //                        EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(2))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_LILAC)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_LILAC)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
@@ -346,11 +346,11 @@
 //                                .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DEAD_BIRCH.decorationData)))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.SHORT_GRASS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SHORT_GRASS_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 16, 20))))
 //        );
 //
@@ -378,11 +378,11 @@
 //                                .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(1))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(DefaultBiomeFeatures.GRASS_CONFIG)
 //                                .decorate(Decorator.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseHeightmapDecoratorConfig(-0.8D, 20, 24))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-//                        Feature.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
+//                        EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
 //                                .decorate(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))))
 //
 //                .addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,

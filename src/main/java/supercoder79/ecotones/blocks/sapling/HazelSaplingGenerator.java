@@ -1,16 +1,17 @@
 package supercoder79.ecotones.blocks.sapling;
 
 import net.minecraft.block.sapling.SaplingGenerator;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import supercoder79.ecotones.world.biome.climatic.HazelGroveBiome;
+import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 
 import java.util.Random;
 
 public final class HazelSaplingGenerator extends SaplingGenerator {
     @Override
-    protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random random, boolean bl) {
-        return Feature.TREE.configure(HazelGroveBiome.HAZEL_CONFIG);
+    protected RegistryEntry<? extends ConfiguredFeature<?, ?>> getTreeFeature(Random random, boolean bl) {
+        return new RegistryEntry.Direct<>(EcotonesConfiguredFeature.wrap(Feature.TREE, HazelGroveBiome.HAZEL_CONFIG).vanilla());
     }
 }

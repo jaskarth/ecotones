@@ -1,8 +1,8 @@
 package supercoder79.ecotones.world.layers.util;
 
 import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.layer.type.CrossSamplingLayer;
-import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
+import supercoder79.ecotones.world.layers.system.layer.type.CrossSamplingLayer;
+import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
 
 public enum GenerateRiversLayer implements CrossSamplingLayer {

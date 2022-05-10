@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
-import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.feature.FeatureConfig;
 
 /**
@@ -56,7 +55,7 @@ public class TreeGenerationConfig implements FeatureConfig {
         this.traitSalt = traitSalt;
     }
 
-    public static class DecorationData implements DecoratorConfig {
+    public static class DecorationData {
         public static final Codec<DecorationData> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
                 Codec.DOUBLE.fieldOf("target_count").forGetter(config -> config.targetCount),
                 Codec.INT.fieldOf("min_size").forGetter(config -> config.minSize),

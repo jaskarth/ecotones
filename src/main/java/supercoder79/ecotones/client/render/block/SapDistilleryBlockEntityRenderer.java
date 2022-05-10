@@ -26,7 +26,7 @@ public class SapDistilleryBlockEntityRenderer implements BlockEntityRenderer<Sap
 
             VertexConsumer consumer = vertexConsumers.getBuffer(EcotonesRenderLayers.SYRUP_TEX_LAYER);
 
-            Matrix4f model = matrices.peek().getModel();
+            Matrix4f model = matrices.peek().getPositionMatrix();
             consumer.vertex(model, 0.1875F, height, 0.8125F).color(229, 134, 50, 255).texture(0.0F, 1.0F).next();
             consumer.vertex(model, 0.8125F, height, 0.8125F).color(229, 134, 50, 255).texture(1.0F, 1.0F).next();
             consumer.vertex(model, 0.8125F, height, 0.1875F).color(229, 134, 50, 255).texture(1.0F, 0.0F).next();

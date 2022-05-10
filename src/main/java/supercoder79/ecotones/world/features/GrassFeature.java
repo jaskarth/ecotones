@@ -11,7 +11,7 @@ import supercoder79.ecotones.world.data.DataHolder;
 
 import java.util.Random;
 
-public class GrassFeature extends Feature<GrassFeatureConfig> {
+public class GrassFeature extends EcotonesFeature<GrassFeatureConfig> {
     public GrassFeature(Codec<GrassFeatureConfig> configCodec) {
         super(configCodec);
     }

@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class PoofyDandelionBlock extends EcotonesGrassBlock{
+public class PoofyDandelionBlock extends EcotonesPlantBlock {
     protected PoofyDandelionBlock(Settings settings) {
         super(settings);
     }

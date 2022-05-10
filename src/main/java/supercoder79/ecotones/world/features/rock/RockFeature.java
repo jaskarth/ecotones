@@ -9,6 +9,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
+import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class RockFeature extends Feature<RockFeatureConfig> {
+public class RockFeature extends EcotonesFeature<RockFeatureConfig> {
     public RockFeature(Codec<RockFeatureConfig> codec) {
         super(codec);
     }
