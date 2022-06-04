@@ -134,6 +134,16 @@ public final class BiomeRegistries {
     }
 
     public static RegistryKey<Biome> key(Biome biome) {
+        RegistryKey<Biome> key = keyOrNull(biome);
+
+        if (key == null) {
+            throw new IllegalStateException("Impossible state when trying to get biome key");
+        }
+
+        return key;
+    }
+
+    public static RegistryKey<Biome> keyOrNull(Biome biome) {
         Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
 
         if (optional.isEmpty()) {
@@ -143,6 +153,6 @@ public final class BiomeRegistries {
         }
 
         return optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome)
-                .orElseThrow(() -> new IllegalStateException("Impossible state when trying to get biome key")));
+                .orElse(null));
     }
 }

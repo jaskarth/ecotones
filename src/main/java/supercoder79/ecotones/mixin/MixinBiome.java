@@ -21,7 +21,7 @@ public abstract class MixinBiome {
 
     @Inject(method = "computeTemperature", at = @At("HEAD"), cancellable = true)
     private void injectEcotonesTemperatures(BlockPos pos, CallbackInfoReturnable<Float> cir) {
-        if (BiomeRegistries.key((Biome) (Object)this) == SparseTundraBiome.KEY) {
+        if (BiomeRegistries.keyOrNull((Biome) (Object)this) == SparseTundraBiome.KEY) {
             float temp = this.getTemperature();
 
 
