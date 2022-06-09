@@ -40,6 +40,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
     private int sapAmount;
     // 0 .. 5,000
     private int syrupAmount;
+    private boolean showMode = false;
 
     public SapDistilleryBlockEntity(BlockPos pos, BlockState state) {
         super(EcotonesBlockEntities.SAP_DISTILLERY, pos, state);
@@ -89,6 +90,10 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
             if (blockEntity.heatAmount > 0) {
                 blockEntity.heatAmount--;
             }
+        }
+
+        if (blockEntity.showMode) {
+            blockEntity.syrupAmount = 4000;
         }
 
         // Try to increment sap amount every tick (illusion of consuming sap slowly)
@@ -164,7 +169,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
     }
 
     public boolean canFillBottle() {
-        return this.syrupAmount >= 1000;
+        return this.syrupAmount >= 1000 && !this.showMode;
     }
 
     public void reduceForBottle() {
@@ -197,6 +202,8 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
         this.sapAmount = tag.getInt("sap_amt");
         this.syrupAmount = tag.getShort("syrup_amt");
 
+        this.showMode = tag.getBoolean("ShowMode");
+
         // Client sync
         if (tag.contains("syrup")) {
             this.syrupAmount = tag.getShort("syrup");
@@ -211,6 +218,8 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
         tag.putShort("heat_amt", (short) this.heatAmount);
         tag.putInt("sap_amt", this.sapAmount);
         tag.putShort("syrup_amt", (short) this.syrupAmount);
+
+        tag.putBoolean("ShowMode", this.showMode);
 
 //        return tag;
     }

@@ -9,30 +9,20 @@ public class Fluid {
         this.properties = properties;
     }
 
-    public static record Properties(String name, int color) {
+    public record Properties(
+            String name, Color color, Color secondaryColor
+    ) {
 
-        // TODO: fields?
-
-        public int r() {
-            return (this.color >> 16) & 0xFF;
-        }
-
-        public int g() {
-            return (this.color >> 8) & 0xFF;
-        }
-
-        public int b() {
-            return (this.color) & 0xFF;
-        }
     }
 
     public void stateColor() {
-        RenderSystem.setShaderColor(this.properties.r() / 255.f, this.properties.g() / 255.f, this.properties.b() / 255.f, 1.0F);
+        RenderSystem.setShaderColor(this.properties.color.r() / 255.f, this.properties.color.g() / 255.f, this.properties.color.b() / 255.f, 1.0F);
     }
 
     public static class Builder {
         private String name;
-        private int color;
+        private Color color;
+        private Color secondaryColor;
 
         public Builder() {
 
@@ -45,13 +35,37 @@ public class Fluid {
         }
 
         public Builder color(int r, int g, int b) {
-            this.color = r << 16 | g << 8 | b;
+            this.color = new Color(r << 16 | g << 8 | b);
+
+            if (this.secondaryColor == null) {
+                this.secondaryColor = this.color;
+            }
+
+            return this;
+        }
+
+        public Builder secondaryColor(int r, int g, int b) {
+            this.secondaryColor = new Color(r << 16 | g << 8 | b);
 
             return this;
         }
 
         public Properties build() {
-            return new Properties(this.name, this.color);
+            return new Properties(this.name, this.color, this.secondaryColor);
+        }
+    }
+
+    public record Color(int rgb) {
+        public int r() {
+            return (this.rgb >> 16) & 0xFF;
+        }
+
+        public int g() {
+            return (this.rgb >> 8) & 0xFF;
+        }
+
+        public int b() {
+            return (this.rgb) & 0xFF;
         }
     }
 }
