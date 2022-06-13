@@ -39,7 +39,6 @@
 * Add edge biomes to everything
 * Burned village for dead spruce forests
 * Improve the look of a few biomes (remove shrubs, more unique features, etc.)
-* Mason jar item
 * Add fruit tags
 * Add Avocado, name advancement "6.02e23"
 * EMI support
@@ -71,7 +70,6 @@
 * Grindstone
   * Texture and model
 * Turpentine in sap distillery
-* World height increase
 * Cave gen
 * Fix structures
 * Add all remaining books

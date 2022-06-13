@@ -62,6 +62,8 @@ import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
 public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
+    private static final boolean GENERATE_384 = true;
+
     private static final float[] NOISE_WEIGHT_TABLE = Util.make(new float[13824], (table) -> {
         for(int z = 0; z < 24; ++z) {
             for(int x = 0; x < 24; ++x) {
@@ -89,16 +91,18 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     private final ThreadLocal<NoiseCache> noiseCache;
     private final RiverWorker riverWorker;
     private final OctaveNoiseSampler<OpenSimplexNoise> riverNoiseNoise;
+    private final long seed;
 
     public BaseEcotonesChunkGenerator(Registry<StructureSet> structures, BiomeSource biomeSource, long seed) {
 //        super(biomeSource, biomeSource, new EcotonesStructuresConfig(Optional.of(DEFAULT_STRONGHOLD), Maps.newHashMap(DEFAULT_STRUCTURES)), seed);
         super(structures, Optional.empty(), biomeSource, biomeSource, seed);
+        this.seed = seed;
         this.verticalNoiseResolution = 8;
         this.horizontalNoiseResolution = 4;
         this.defaultBlock = Blocks.STONE.getDefaultState();
         this.defaultFluid = Blocks.WATER.getDefaultState();
         this.noiseSizeX = 16 / this.horizontalNoiseResolution;
-        this.noiseSizeY = 256 / this.verticalNoiseResolution;
+        this.noiseSizeY = 384 / this.verticalNoiseResolution;
         this.noiseSizeZ = 16 / this.horizontalNoiseResolution;
         this.random = new ChunkRandom(new SimpleRandom(seed));
         this.lowerInterpolatedNoise = OctavePerlinNoiseSampler.createLegacy(this.random, IntStream.rangeClosed(-15, 0));
@@ -286,6 +290,16 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
     protected BlockState getBlockState(double density, int y) {
         if (density > 0.0D) {
+            if (y < -8) {
+                return Blocks.DEEPSLATE.getDefaultState();
+            } else if (y < 0) {
+                double chance = -(y / 8.0);
+
+                // TODO: not setting seed breaks heightmap sample
+                if (this.random.nextDouble() < chance) {
+                    return Blocks.DEEPSLATE.getDefaultState();
+                }
+            }
             return this.defaultBlock;
         } else if (y < this.getSeaLevel()) {
             return this.defaultFluid;
@@ -373,10 +387,10 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
             // Add river data if it doesn't exist
             if (data == null) {
-                storage.add(StorageKeys.RIVER_DATA, new RiverData(buffer[9] < 0));
+                storage.add(StorageKeys.RIVER_DATA, new RiverData(buffer[9 + 8] < 0));
             } else {
                 // Update open to air
-                if (!data.openToAir() && (buffer[9] < 0)) {
+                if (!data.openToAir() && (buffer[9 + 8] < 0)) {
                     storage.add(StorageKeys.RIVER_DATA, new RiverData(true));
                 }
             }
@@ -385,12 +399,12 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
         double noise = this.riverNoiseNoise.sample(x, z);
         // River area- actual river transformation
-        buffer[8] = MathHelper.lerp(lerpstr, buffer[8], -0.7 + noise);
+        buffer[8 + 8] = MathHelper.lerp(lerpstr, buffer[8 + 8], -0.7 + noise);
 
         // Reduce edges
         //1+\left(x-1\right)^{3}
         double lerp9 = 1 + Math.pow(lerpstr - 1, 3);
-        buffer[9] = MathHelper.lerp(lerp9, buffer[9], buffer[9] - MathHelper.clampedLerpFromProgress(buffer[10], -1, 0, 1.6, 0));
+        buffer[9 + 8] = MathHelper.lerp(lerp9, buffer[9 + 8], buffer[9 + 8] - MathHelper.clampedLerpFromProgress(buffer[10 + 8], -1, 0, 1.6, 0));
 //        buffer[9] = MathHelper.lerp(lerpstr, buffer[9], -0.1);
 //        buffer[7] = MathHelper.lerp(lerpstr, buffer[7], -0.05 + noise / 1.5);
     }
@@ -459,8 +473,10 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         int chunkStartX = chunk.getPos().getStartX();
         int chunkStartZ = chunk.getPos().getStartZ();
 
+        int start = GENERATE_384 ? -64 : 0;
+
         for (BlockPos pos : BlockPos.iterate(chunkStartX, 0, chunkStartZ, chunkStartX + 15, 0, chunkStartZ + 15)) {
-            for (int y = 4; y >= 0; --y) {
+            for (int y = start + 4; y >= start; --y) {
                 if (y <= random.nextInt(5)) {
                     chunk.setBlockState(mutable.set(pos.getX(), y, pos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
                 }
@@ -552,6 +568,8 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         ObjectListIterator<StructurePiece> structurePieceIterator = structurePieces.iterator();
         ObjectListIterator<JigsawJunction> jigsawIterator = jigsaws.iterator();
 
+        this.random.setPopulationSeed(this.seed, chunkX * 100, chunkZ * 100);
+
         // [0, 4] -> x noise chunks
         for(int noiseX = 0; noiseX < this.noiseSizeX; ++noiseX) {
             // Initialize noise data on the x1 column
@@ -562,7 +580,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
             // [0, 4] -> z noise chunks
             for(noiseZ = 0; noiseZ < this.noiseSizeZ; ++noiseZ) {
-                ChunkSection section = protoChunk.getSection(chunk.getSectionIndex(255));
+                ChunkSection section = protoChunk.getSection(chunk.getSectionIndex(319));
                 section.lock();
 
                 // [0, 32] -> y noise chunks
@@ -580,7 +598,13 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
                     // [0, 8) -> y noise pieces
                     for(int pieceY = this.verticalNoiseResolution - 1; pieceY >= 0; --pieceY) {
-                        int realY = noiseY * this.verticalNoiseResolution + pieceY;
+                        int realY = noiseY * this.verticalNoiseResolution + pieceY - 64;
+                        if (!GENERATE_384) {
+                            if (realY < 0 || realY > 255) {
+                                continue;
+                            }
+                        }
+
                         int localY = realY & 15;
                         int sectionY = chunk.getSectionIndex(realY);
                         // Get the chunk section

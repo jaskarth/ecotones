@@ -264,7 +264,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         double upperInterpolationStart = this.upperInterpolationStart();
         double lowerInterpolationStart = this.lowerInterpolationStart();
 
-        for(int y = 0; y < this.getNoiseSizeY(); ++y) {
+        for(int y = -8; y < this.getNoiseSizeY() - 8; ++y) {
             double noise = this.sampleTerrainNoise(x, y, z, horizontalScale, verticalScale, horizontalStretch, verticalStretch) + (scaleNoise.sample(x, y, z) * 5);
 
             //calculate volatility
@@ -283,7 +283,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 //                noise = ((EcotonesBiome)biome).modifyNoise(x, y, z, noise);
 //            }
 
-            buffer[y] = noise;
+            buffer[y + 8] = noise;
         }
     }
 
@@ -313,7 +313,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 
     @Override
     public int getWorldHeight() {
-        return 256;
+        return 384;
     }
 
     //height additions - makes the terrain a bit hillier
@@ -532,7 +532,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         ChunkPos chunkPos = chunk.getPos();
         CarverContext carverContext = new EcotonesCarverContext(this, this.shim, chunkRegion.getRegistryManager(), chunkRegion);
         CarvingMask carvingMask = ((ProtoChunk)chunk).getOrCreateCarvingMask(generationStep);
-        AquiferSampler aquiferSampler = AquiferSampler.seaLevel((x, y, z) -> new AquiferSampler.FluidLevel(0, this.defaultFluid));
+        AquiferSampler aquiferSampler = AquiferSampler.seaLevel((x, y, z) -> new AquiferSampler.FluidLevel(-100, this.defaultFluid));
 
         for(int j = -8; j <= 8; ++j) {
             for(int k = -8; k <= 8; ++k) {
