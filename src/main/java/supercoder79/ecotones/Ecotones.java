@@ -22,6 +22,7 @@ import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.gen.DataGen;
 import supercoder79.ecotones.items.EcotonesItemGroups;
 import supercoder79.ecotones.items.EcotonesItems;
+import supercoder79.ecotones.recipe.EcotonesRecipes;
 import supercoder79.ecotones.screen.EcotonesScreenHandlers;
 import supercoder79.ecotones.util.*;
 import supercoder79.ecotones.util.compat.*;
@@ -50,6 +51,8 @@ import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
 import java.util.List;
 
 public final class Ecotones implements ModInitializer {
+	private static final boolean RUN_DATA_GEN = "true".equals(System.getProperty("ECOTONES_RUN_DATAGEN", null));
+
 	// TODO: split out into it's own class
 	public static final Identifier WORLD_TYPE = new Identifier("ecotones", "world_type");
 
@@ -80,6 +83,8 @@ public final class Ecotones implements ModInitializer {
 		EcotonesBlocks.init();
 		EcotonesBlockEntities.init();
 		EcotonesItems.init();
+
+		EcotonesRecipes.init();
 
 		EcotonesDecorators.init();
 		OreVeins.init();
@@ -114,7 +119,9 @@ public final class Ecotones implements ModInitializer {
 		CampfireLogHelper.initVanilla();
 		BlockDecorations.init();
 
-		DataGen.run();
+		if (RUN_DATA_GEN) {
+			DataGen.run();
+		}
 
 		// Mod Compat handlers
 		if (isModLoaded("traverse")) {
