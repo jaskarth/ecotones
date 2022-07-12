@@ -4,7 +4,8 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
+
+import net.minecraft.text.Text;
 import supercoder79.ecotones.api.BiomePicker;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.ClimateType;
@@ -35,7 +36,7 @@ public class DumpClimatesCommand {
 
     private static int execute(ServerCommandSource source) {
         Path path = Paths.get("climates.txt");
-        source.sendFeedback(new LiteralText("Dumping climates to " + path.toAbsolutePath()), false);
+        source.sendFeedback(Text.literal("Dumping climates to " + path.toAbsolutePath()), false);
 
         try {
             File file = new File(path.toString());
@@ -52,9 +53,9 @@ public class DumpClimatesCommand {
             }
 
             writer.close();
-            source.sendFeedback(new LiteralText("Done."), false);
+            source.sendFeedback(Text.literal("Done."), false);
         } catch (IOException e) {
-            source.sendFeedback(new LiteralText("Something went wrong, check the log!"), true);
+            source.sendFeedback(Text.literal("Something went wrong, check the log!"), true);
             e.printStackTrace();
         }
 

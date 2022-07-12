@@ -18,11 +18,11 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import org.jetbrains.annotations.Nullable;
@@ -32,7 +32,6 @@ import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.screen.FertilizerSpreaderScreenHandler;
 
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
 public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity {
@@ -334,7 +333,7 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
 
     @Override
     protected Text getContainerName() {
-        return new LiteralText("Fertilizer Spreader");
+        return Text.literal("Fertilizer Spreader");
     }
 
     @Override

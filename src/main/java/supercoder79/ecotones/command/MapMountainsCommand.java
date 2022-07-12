@@ -4,7 +4,8 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
+
+import net.minecraft.text.Text;
 import supercoder79.ecotones.api.DevOnly;
 import supercoder79.ecotones.world.layers.generation.MountainLayer;
 
@@ -33,7 +34,7 @@ public class MapMountainsCommand {
 
         for (int x = -2048; x < 2048; x++) {
             if (x % 512 == 0) {
-                source.sendFeedback(new LiteralText(((x + 2048) / 4096.0) * 100 + "%"), false);
+                source.sendFeedback(Text.literal(((x + 2048) / 4096.0) * 100 + "%"), false);
             }
 
             for (int z = -2048; z < 2048; z++) {
@@ -46,9 +47,9 @@ public class MapMountainsCommand {
         Path p = Paths.get("ecotones_mountains.png");
         try {
             ImageIO.write(img, "png", p.toAbsolutePath().toFile());
-            source.sendFeedback(new LiteralText("Mapped mountains!"), false);
+            source.sendFeedback(Text.literal("Mapped mountains!"), false);
         } catch (IOException e) {
-            source.sendFeedback(new LiteralText("Something went wrong, check the log!"), true);
+            source.sendFeedback(Text.literal("Something went wrong, check the log!"), true);
             e.printStackTrace();
         }
 

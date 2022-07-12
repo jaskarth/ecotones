@@ -6,10 +6,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
+import net.minecraft.util.math.random.CheckedRandom;
+import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.SimpleRandom;
 import supercoder79.ecotones.world.surface.system.BadlandsSurfaceBuilder;
 import supercoder79.ecotones.world.surface.system.TernarySurfaceConfig;
 
@@ -116,7 +116,7 @@ public class MesaSurfaceBuilder extends BadlandsSurfaceBuilder {
         }
 
         if (this.seed != seed || this.heightCutoffNoise == null || this.heightNoise == null) {
-            ChunkRandom chunkRandom = new ChunkRandom(new SimpleRandom(seed));
+            ChunkRandom chunkRandom = new ChunkRandom(new CheckedRandom(seed));
             this.heightCutoffNoise = new OctaveSimplexNoiseSampler(chunkRandom, ImmutableList.of(-3, -2, -1, 0));
             this.heightNoise = new OctaveSimplexNoiseSampler(chunkRandom, ImmutableList.of(0));
             this.layerNoise = new OctaveSimplexNoiseSampler(chunkRandom, ImmutableList.of(0));

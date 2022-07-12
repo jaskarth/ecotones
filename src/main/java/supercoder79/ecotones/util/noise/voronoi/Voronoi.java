@@ -1,14 +1,14 @@
 package supercoder79.ecotones.util.noise.voronoi;
 
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.SimpleRandom;
+import net.minecraft.util.math.random.ChunkRandom;
+import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.Vec2d;
 
 // Simple voronoi diagram
 public final class Voronoi {
     private final long seed;
-    private final ChunkRandom random = new ChunkRandom(new SimpleRandom(0));
+    private final ImprovedChunkRandom random = new ChunkRandom(new SimpleRandom(0));
 
     public Voronoi(long seed) {
         this.seed = seed;

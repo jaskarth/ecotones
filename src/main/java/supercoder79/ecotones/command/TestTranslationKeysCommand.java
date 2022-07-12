@@ -4,7 +4,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
+
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Language;
 import net.minecraft.util.Util;
@@ -74,16 +74,16 @@ public class TestTranslationKeysCommand {
             }
         }
 
-        source.sendFeedback(new LiteralText("Found " + count + " missing translation keys."), false);
+        source.sendFeedback(Text.literal("Found " + count + " missing translation keys."), false);
         if (count == 0) {
             // Congratulating myself moment
-            source.sendFeedback(new LiteralText("Nice job!"), false);
+            source.sendFeedback(Text.literal("Nice job!"), false);
             return 0;
         }
 
         try {
             Path path = Paths.get("translations.txt");
-            source.sendFeedback(new LiteralText("Dumping them to " + path.toAbsolutePath()), false);
+            source.sendFeedback(Text.literal("Dumping them to " + path.toAbsolutePath()), false);
             File file = new File(path.toString());
             FileWriter writer = new FileWriter(file);
 

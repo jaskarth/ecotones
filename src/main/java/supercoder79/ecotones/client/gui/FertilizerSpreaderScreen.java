@@ -9,7 +9,7 @@ import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.text.LiteralText;
+
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
@@ -98,12 +98,12 @@ public class FertilizerSpreaderScreen extends HandledScreen<FertilizerSpreaderSc
 
         // fertilizer tooltip
         if (x >= 8 && x <= 59 && y >= 31 && y <= 87) {
-            this.renderTooltip(matrices, new LiteralText(this.handler.getFertilizerAmount() + " / 20000 (Basic Fertilizer)"), x, y);
+            this.renderTooltip(matrices, Text.literal(this.handler.getFertilizerAmount() + " / 20000 (Basic Fertilizer)"), x, y);
         }
 
         // percent tooltip
         if (x >= 113 && x <= 168 && y >= 36 && y <= 48) {
-            this.renderTooltip(matrices, new LiteralText(this.handler.getPercent() + "% Fertilizer dissolved"), x, y);
+            this.renderTooltip(matrices, Text.literal(this.handler.getPercent() + "% Fertilizer dissolved"), x, y);
         }
 
         this.textRenderer.draw(matrices, "Farms: " + this.handler.getFarmCount(), 117, 58 - 8, 4210752);

@@ -17,17 +17,15 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.ItemTags;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.screen.SapDistilleryScreenHandler;
-
-import java.util.Random;
 
 public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
     private DefaultedList<ItemStack> inventory;
@@ -189,7 +187,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
 
     @Override
     protected Text getContainerName() {
-        return new LiteralText("Sap Distillery");
+        return Text.literal("Sap Distillery");
     }
 
     @Override

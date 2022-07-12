@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.tag.ItemTags;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
@@ -197,7 +196,7 @@ public class GrindstoneBlockEntity extends LockableContainerBlockEntity {
 
     @Override
     protected Text getContainerName() {
-        return new LiteralText("Grinding Mill");
+        return Text.literal("Grinding Mill");
     }
 
     @Override

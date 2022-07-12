@@ -4,7 +4,7 @@ accessible class net/minecraft/client/render/RenderPhase$Texture
 accessible class net/minecraft/client/render/RenderLayer$MultiPhaseParameters
 accessible class net/minecraft/client/gui/screen/advancement/AdvancementTabType
 
-accessible method net/minecraft/client/world/GeneratorType <init> (Ljava/lang/String;)V
+# accessible method net/minecraft/client/world/GeneratorType <init> (Ljava/lang/String;)V
 accessible method net/minecraft/client/render/RenderLayer of (Ljava/lang/String;Lnet/minecraft/client/render/VertexFormat;Lnet/minecraft/client/render/VertexFormat$DrawMode;IZZLnet/minecraft/client/render/RenderLayer$MultiPhaseParameters;)Lnet/minecraft/client/render/RenderLayer$MultiPhase;
 
 # accessible field net/minecraft/world/gen/decorator/DecoratorContext generator Lnet/minecraft/world/gen/chunk/ChunkGenerator;
@@ -23,5 +23,5 @@ accessible field net/minecraft/client/gui/screen/advancement/AdvancementTab root
 accessible field net/minecraft/client/gui/screen/advancement/AdvancementWidget parent Lnet/minecraft/client/gui/screen/advancement/AdvancementWidget;
 accessible field net/minecraft/client/gui/screen/advancement/AdvancementWidget children Ljava/util/List;
 
-accessible    method    net/minecraft/world/biome/source/BiomeSource    method_39525    (Ljava/util/List;Z)Ljava/util/List;
-extendable    method    net/minecraft/world/biome/source/BiomeSource    method_39525    (Ljava/util/List;Z)Ljava/util/List;
+# accessible    method    net/minecraft/world/biome/source/BiomeSource    method_39525    (Ljava/util/List;Z)Ljava/util/List;
+# extendable    method    net/minecraft/world/biome/source/BiomeSource    method_39525    (Ljava/util/List;Z)Ljava/util/List;

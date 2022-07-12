@@ -14,6 +14,8 @@ import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
+import net.minecraft.util.math.random.CheckedRandom;
+import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.util.registry.*;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
@@ -70,7 +72,7 @@ import java.util.stream.IntStream;
 public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implements DataHolder {
     public static final Codec<EcotonesChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(
-                            RegistryOps.createRegistryCodec(Registry.STRUCTURE_SET_KEY).forGetter(g -> g.field_37053),
+                            RegistryOps.createRegistryCodec(Registry.STRUCTURE_SET_KEY).forGetter(g -> g.structureSetRegistry),
                     BiomeSource.CODEC.fieldOf("biome_source").forGetter((generator) -> generator.biomeSource),
                     Codec.LONG.fieldOf("seed").stable().forGetter((generator) -> generator.seed))
                     .apply(instance, instance.stable(EcotonesChunkGenerator::new)));
@@ -111,11 +113,11 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 
         this.shim = new NoiseChunkGenerator(BuiltinRegistries.STRUCTURE_SET, BuiltinRegistries.NOISE_PARAMETERS, biomeSource, seed, ChunkGeneratorSettings.getInstance());
 
-        this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 256, 0.2, -0.2);
-        this.soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 1.75, 0.75);
-        this.soilRockinessNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 4, 1024, 2, -2);
-        this.soilPhNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 1600, 0.9, 0.9);
-        this.grassNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.random, 2, 800, 0.9, 0.9);
+        this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.juRandom, 4, 256, 0.2, -0.2);
+        this.soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.juRandom, 2, 1600, 1.75, 0.75);
+        this.soilRockinessNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.juRandom, 4, 1024, 2, -2);
+        this.soilPhNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.juRandom, 2, 1600, 0.9, 0.9);
+        this.grassNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.juRandom, 2, 800, 0.9, 0.9);
 
         this.data.put(EcotonesData.SOIL_QUALITY, (x, z) -> MathHelper.clamp((this.soilDrainageNoise.sample(x, z) / 2) + 0.5, 0, 1));
         this.data.put(EcotonesData.SOIL_DRAINAGE, this.soilDrainageNoise::sample);
@@ -306,7 +308,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
     public void populateEntities(ChunkRegion region) {
         ChunkPos chunkPos = region.getCenterPos();
         RegistryEntry<Biome> biome = region.getBiome(chunkPos.getStartPos());
-        ChunkRandom chunkRandom = new ChunkRandom(new SimpleRandom(0));
+        ChunkRandom chunkRandom = new ChunkRandom(new CheckedRandom(0));
         chunkRandom.setPopulationSeed(region.getSeed(), chunkPos.getStartX(), chunkPos.getStartZ());
         SpawnHelper.populateEntities(region, biome, chunkPos, chunkRandom);
     }
@@ -386,6 +388,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
     protected Codec<? extends ChunkGenerator> getCodec() {
         return CODEC;
     }
+
+
 
     @Override
     public ChunkGenerator withSeed(long seed) {

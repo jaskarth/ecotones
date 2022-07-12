@@ -4,7 +4,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
+
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
@@ -27,12 +27,12 @@ public class GetDataAtCommand {
             double x = source.getPosition().x;
             double z = source.getPosition().z;
 
-            source.sendFeedback(new LiteralText("Soil Drainage: " + chunkGenerator.getSoilDrainageNoise().sample(x, z)), false);
-            source.sendFeedback(new LiteralText("Soil Rockiness: " + chunkGenerator.getSoilRockinessNoise().sample(x, z)), false);
-            source.sendFeedback(new LiteralText("Soil Quality: " + chunkGenerator.getSoilQualityAt(x, z)), false);
-            source.sendFeedback(new LiteralText("Soil pH: " + chunkGenerator.getSoilPhAt(x, z)), false);
+            source.sendFeedback(Text.literal("Soil Drainage: " + chunkGenerator.getSoilDrainageNoise().sample(x, z)), false);
+            source.sendFeedback(Text.literal("Soil Rockiness: " + chunkGenerator.getSoilRockinessNoise().sample(x, z)), false);
+            source.sendFeedback(Text.literal("Soil Quality: " + chunkGenerator.getSoilQualityAt(x, z)), false);
+            source.sendFeedback(Text.literal("Soil pH: " + chunkGenerator.getSoilPhAt(x, z)), false);
         } else {
-            source.sendFeedback(new LiteralText("This only works on ecotones worlds."), false);
+            source.sendFeedback(Text.literal("This only works on ecotones worlds."), false);
         }
 
         return 1;

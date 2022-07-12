@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.loot.LootTable;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
+
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.api.DevOnly;
@@ -35,7 +35,7 @@ public class TestLootTablesCommand {
             }
         }
 
-        source.sendFeedback(new LiteralText("Dumped blocks without loot tables, check the console"), true);
+        source.sendFeedback(Text.literal("Dumped blocks without loot tables, check the console"), true);
 
         return 0;
     }

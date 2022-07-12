@@ -11,7 +11,6 @@ import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.LiteralText;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -63,7 +62,7 @@ public class DuckEntity extends ChickenEntity implements ActionableEntity {
         }
 
 //        Stomach stomach = this.ai.getState().getStomach();
-//        this.setCustomName(new LiteralText("F: " + stomach.getFood() + " E: " + stomach.getEnergy() + " R: " + stomach.getMetabolismRate()));
+//        this.setCustomName(Text.literal("F: " + stomach.getFood() + " E: " + stomach.getEnergy() + " R: " + stomach.getMetabolismRate()));
     }
 
     public boolean shouldLayEgg() {

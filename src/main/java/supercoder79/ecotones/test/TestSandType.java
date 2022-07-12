@@ -1,8 +1,7 @@
 package supercoder79.ecotones.test;
 
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.SimpleRandom;
 import supercoder79.ecotones.api.DevOnly;
+import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.noise.OctaveNoiseSampler;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
 
@@ -11,7 +10,7 @@ import java.util.Random;
 @DevOnly
 public class TestSandType {
     public static void main(String[] args) {
-        ChunkRandom random = new ChunkRandom(new SimpleRandom(new Random().nextLong()));
+        ImprovedChunkRandom random = new ImprovedChunkRandom(new Random().nextLong());
 
         OctaveNoiseSampler<OpenSimplexNoise> noise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, random, 3, 800, 1, 1);
         ImageDumper.dumpImage("sands.png", 1024, (x, z) -> {
