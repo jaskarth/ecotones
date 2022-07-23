@@ -35,7 +35,7 @@ import supercoder79.ecotones.world.features.config.CattailFeatureConfig;
 import supercoder79.ecotones.world.features.config.DuckweedFeatureConfig;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 
 public class FertileValleyBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -70,7 +70,7 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
         this.temperature(0.9F);
         this.downfall(0.5f);
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.PLAINS);
+//        this.category(Biome.Category.PLAINS);
 
         this.grassColor(0x5db85a);
         this.foliageColor(0x44a341);
@@ -79,8 +79,8 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
         this.volatility(1.1);
 
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 7)));
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_OAK);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addSavannaGrass(this.getGenerationSettings());

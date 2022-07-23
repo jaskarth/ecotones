@@ -8,12 +8,12 @@ import net.minecraft.entity.player.PlayerInventory;
 
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.random.Random;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.screen.SapDistilleryScreenHandler;
 import supercoder79.ecotones.util.Vec2i;
 
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SapDistilleryScreen extends HandledScreen<SapDistilleryScreenHandler> {

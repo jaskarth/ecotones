@@ -35,7 +35,8 @@ import java.util.stream.Collectors;
 public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource {
     public static Codec<EcotonesBiomeSource> CODEC =  RecordCodecBuilder.create((instance) -> {
         return instance.group(RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter((source) -> source.biomeRegistry),
-                Codec.LONG.fieldOf("seed").stable().forGetter((source) -> source.seed))
+                Codec.LONG.fieldOf("seed").stable().forGetter((source) -> source.seed),
+                Codec.BOOL.fieldOf("real").stable().forGetter((source) -> source.isReal))
                 .apply(instance, instance.stable(EcotonesBiomeSource::new));
     });
 
@@ -44,8 +45,9 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
     private final long seed;
 
     private final OpenSimplexNoise caveBiomeNoise;
+    private final boolean isReal;
 
-    public EcotonesBiomeSource(Registry<Biome> biomeRegistry, long seed) {
+    public EcotonesBiomeSource(Registry<Biome> biomeRegistry, long seed, boolean isReal) {
         super(
                 BiomeGenData.LOOKUP
                         .keySet()
@@ -57,22 +59,25 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
         this.biomeSampler = EcotonesBiomeLayers.build(seed);
         this.seed = seed;
         this.caveBiomeNoise = new OpenSimplexNoise(seed);
+        this.isReal = isReal;
 
-        Ecotones.REGISTRY = this.biomeRegistry;
-        ModCompat.run();
+        if (isReal) {
+            Ecotones.REGISTRY = this.biomeRegistry;
+            ModCompat.run();
 
-        BiomeIdManager.clear();
+            BiomeIdManager.clear();
 
-        for (Biome biome : this.biomeRegistry) {
-            BiomeIdManager.register(this.biomeRegistry.getKey(biome).get(), this.biomeRegistry.getRawId(biome));
+            for (Biome biome : this.biomeRegistry) {
+                BiomeIdManager.register(this.biomeRegistry.getKey(biome).get(), this.biomeRegistry.getRawId(biome));
+            }
         }
     }
 
-    @Override
-    public List<BiomeSource.IndexedFeatures> method_39525(List<RegistryEntry<Biome>> biomes, boolean bl) {
-        // Not relevant for ecotones
-        return new ArrayList<>();
-    }
+//    @Override
+//    public List<BiomeSource.IndexedFeatures> method_39525(List<RegistryEntry<Biome>> biomes, boolean bl) {
+//        // Not relevant for ecotones
+//        return new ArrayList<>();
+//    }
 
     public RegistryEntry<Biome> getBiome(int biomeX, int biomeY, int biomeZ, MultiNoiseUtil.MultiNoiseSampler sampler) {
         try {
@@ -89,10 +94,10 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
         return CODEC;
     }
 
-    @Override
-    public BiomeSource withSeed(long seed) {
-        return new EcotonesBiomeSource(this.biomeRegistry, seed);
-    }
+//    @Override
+//    public BiomeSource withSeed(long seed) {
+//        return new EcotonesBiomeSource(this.biomeRegistry, seed);
+//    }
 
     @Override
     public CaveBiome getCaveBiomeForNoiseGen(int x, int z) {

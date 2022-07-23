@@ -1,7 +1,7 @@
 package supercoder79.ecotones.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.fabricmc.fabric.api.registry.CommandRegistry;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 
@@ -24,7 +24,7 @@ public class DumpClimatesCommand {
     private static final DecimalFormat FORMAT = new DecimalFormat("#.##");
 
     public static void init() {
-        CommandRegistry.INSTANCE.register(false, dispatcher -> {
+        CommandRegistrationCallback.EVENT.register((dispatcher, registry, env) -> {
             LiteralArgumentBuilder<ServerCommandSource> builder = CommandManager.literal("dumpclimates").requires(source ->
                     source.hasPermissionLevel(2));
 

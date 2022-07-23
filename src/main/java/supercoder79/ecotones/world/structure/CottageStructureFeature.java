@@ -13,14 +13,23 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.world.gen.structure.Structure;
+import net.minecraft.world.gen.structure.StructureType;
 import supercoder79.ecotones.world.structure.gen.CottageGenerator;
 
-public class CottageStructureFeature extends StructureFeature<DefaultFeatureConfig> {
-    public CottageStructureFeature(Codec<DefaultFeatureConfig> codec) {
-        super(codec, StructureGeneratorFactory.simple(CottageStructureFeature::canGenerate, CottageStructureFeature::addPieces));
+import java.util.Optional;
+import java.util.Random;
+
+public class CottageStructureFeature extends Structure {
+    public static final Codec<CottageStructureFeature> CODEC = createCodec(CottageStructureFeature::new);
+
+    protected CottageStructureFeature(Config config) {
+        super(config);
     }
+//    public CottageStructureFeature(Codec<DefaultFeatureConfig> codec) {
+//        super(codec, StructureGeneratorFactory.simple(CottageStructureFeature::canGenerate, CottageStructureFeature::addPieces));
+//    }
 
     private static <C extends FeatureConfig> boolean canGenerate(StructureGeneratorFactory.Context<C> context) {
         if (!context.isBiomeValid(Heightmap.Type.WORLD_SURFACE_WG)) {
@@ -30,7 +39,7 @@ public class CottageStructureFeature extends StructureFeature<DefaultFeatureConf
         return true;
     }
 
-    private static void addPieces(StructurePiecesCollector collector, StructurePiecesGenerator.Context<DefaultFeatureConfig> context) {
+    private static void addPieces(StructurePiecesCollector collector, Context context) {
         HeightLimitView world = context.world();
         ChunkGenerator chunkGenerator = context.chunkGenerator();
         ChunkPos pos = context.chunkPos();
@@ -39,8 +48,18 @@ public class CottageStructureFeature extends StructureFeature<DefaultFeatureConf
         int z = ChunkSectionPos.getBlockCoord(pos.z) + random.nextInt(16);
 
         CottageGenerator.generate(chunkGenerator, world,
-                new BlockPos(x, chunkGenerator.getHeightOnGround(x, z, Heightmap.Type.WORLD_SURFACE_WG, world), z),
-                collector, random);
+                new BlockPos(x, chunkGenerator.getHeightOnGround(x, z, Heightmap.Type.WORLD_SURFACE_WG, world, null), z),
+                collector, new Random(random.nextLong()));
 //        this.setBoundingBoxFromChildren();
+    }
+
+    @Override
+    public Optional<StructurePosition> getStructurePosition(Context context) {
+        return Optional.of(new Structure.StructurePosition(context.chunkPos().getStartPos(), collector -> addPieces(collector, context)));
+    }
+
+    @Override
+    public StructureType<?> getType() {
+        return EcotonesStructureTypes.COTTAGE;
     }
 }

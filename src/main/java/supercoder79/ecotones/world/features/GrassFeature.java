@@ -19,7 +19,7 @@ public class GrassFeature extends EcotonesFeature<GrassFeatureConfig> {
     @Override
     public boolean generate(FeatureContext<GrassFeatureConfig> context) {
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
         GrassFeatureConfig config = context.getConfig();
         StructureWorldAccess world = context.getWorld();
         ChunkGenerator generator = context.getGenerator();

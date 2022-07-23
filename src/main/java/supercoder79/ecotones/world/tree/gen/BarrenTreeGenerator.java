@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.world.StructureWorldAccess;
 import supercoder79.ecotones.world.data.DataHolder;
 import supercoder79.ecotones.world.data.EcotonesData;
@@ -41,7 +42,7 @@ public class BarrenTreeGenerator implements TreeGenerator {
                 // 1 - [2 - 4]
                 int count = 1 + random.nextInt(3 + (int)(soilQuality * 2.5));
                 for (int i = 0; i < count; i++) {
-                    Direction direction = Direction.Type.HORIZONTAL.random(random);
+                    Direction direction = Direction.Type.HORIZONTAL.random(new CheckedRandom(random.nextLong()));
                     BlockPos center = log.offset(direction);
                     placeLeaves(world, random, center, 0.6 + (soilQuality / 2.5), leaves, config);
                 }

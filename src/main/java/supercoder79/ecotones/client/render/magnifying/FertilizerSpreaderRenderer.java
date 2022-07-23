@@ -7,11 +7,10 @@ import net.minecraft.item.BoneMealItem;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.WorldAccess;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.blocks.entity.FertilizerSpreaderBlockEntity;
-
-import java.util.Random;
 
 public class FertilizerSpreaderRenderer extends MagnifyingGlassRenderer {
     @Override

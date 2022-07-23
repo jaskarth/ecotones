@@ -11,6 +11,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.carver.CarverContext;
 import net.minecraft.world.gen.chunk.ChunkNoiseSampler;
 import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
+import net.minecraft.world.gen.noise.NoiseConfig;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
 import java.util.Optional;
@@ -21,7 +22,7 @@ public class EcotonesCarverContext extends CarverContext {
     private final ChunkRegion region;
 
     public EcotonesCarverContext(EcotonesChunkGenerator generator, NoiseChunkGenerator shim, DynamicRegistryManager registryManager, HeightLimitView heightLimitView) {
-        super(shim, registryManager, heightLimitView, null);
+        super(shim, registryManager, heightLimitView, null, null, null);
         this.generator = generator;
         this.region = (ChunkRegion)heightLimitView;
     }

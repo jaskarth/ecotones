@@ -4,15 +4,13 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
+import net.minecraft.util.math.random.CheckedRandom;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.SimpleRandom;
-
-import java.util.Random;
 
 public class PodzolPatchFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public PodzolPatchFeature(Codec<DefaultFeatureConfig> configCodec) {
@@ -27,7 +25,7 @@ public class PodzolPatchFeature extends EcotonesFeature<DefaultFeatureConfig> {
 
         // TODO: customizable
         int radius = 2 + random.nextInt(4);
-        DoublePerlinNoiseSampler noise = DoublePerlinNoiseSampler.create(new ChunkRandom(new SimpleRandom(random.nextLong())), -4, 1.0);
+        DoublePerlinNoiseSampler noise = DoublePerlinNoiseSampler.create(new ChunkRandom(new CheckedRandom(random.nextLong())), -4, 1.0);
 
         for(int x = -radius; x <= radius; x++) {
             for(int z = -radius; z <= radius; z++) {

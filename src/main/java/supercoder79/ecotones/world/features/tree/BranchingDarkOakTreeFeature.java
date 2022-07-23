@@ -5,6 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.Feature;
@@ -27,7 +28,7 @@ public class BranchingDarkOakTreeFeature extends EcotonesFeature<TreeGenerationC
     public boolean generate(FeatureContext<TreeGenerationConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
         TreeGenerationConfig config = context.getConfig();
 
         //ensure spawn
@@ -100,7 +101,7 @@ public class BranchingDarkOakTreeFeature extends EcotonesFeature<TreeGenerationC
     }
 
     private void branch(WorldAccess world, BlockPos trunkPos, Random random, List<BlockPos> leaves, TreeGenerationConfig config) {
-        BlockPos pos = trunkPos.offset(Direction.Type.HORIZONTAL.random(random));
+        BlockPos pos = trunkPos.offset(Direction.Type.HORIZONTAL.random(new CheckedRandom(random.nextLong())));
 
         if (TreeHelper.canLogReplace(world, pos)) {
             world.setBlockState(pos, config.woodState, 0);

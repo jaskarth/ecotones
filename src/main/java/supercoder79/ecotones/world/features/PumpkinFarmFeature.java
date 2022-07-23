@@ -23,7 +23,7 @@ public class PumpkinFarmFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
 
         // TODO: make layer based approach
 

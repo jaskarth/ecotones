@@ -1,10 +1,11 @@
 package supercoder79.ecotones.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 
+import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import supercoder79.ecotones.api.DevOnly;
 import supercoder79.ecotones.world.layers.generation.ClimateLayer;
@@ -18,7 +19,7 @@ import java.nio.file.Paths;
 @DevOnly
 public class MapClimatesCommand {
     public static void init() {
-        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+        CommandRegistrationCallback.EVENT.register((dispatcher, registry, env) -> {
             LiteralArgumentBuilder<ServerCommandSource> builder = CommandManager.literal("mapclimates")
                     .requires(source -> source.hasPermissionLevel(2));
 

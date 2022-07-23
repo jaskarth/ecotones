@@ -19,6 +19,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -27,7 +28,6 @@ import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
 import java.util.List;
-import java.util.Random;
 
 public class BlueberryBushBlock extends PlantBlock implements Fertilizable {
     // 0 - Small bush

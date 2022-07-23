@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.Feature;
@@ -11,8 +12,6 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.world.features.EcotonesFeature;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-
-import java.util.Random;
 
 public class ShrubFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
 

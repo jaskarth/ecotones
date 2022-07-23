@@ -8,10 +8,7 @@ import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.structure.JigsawJunction;
-import net.minecraft.structure.PoolStructurePiece;
-import net.minecraft.structure.StructurePiece;
-import net.minecraft.structure.StructureSet;
+import net.minecraft.structure.*;
 import net.minecraft.structure.pool.StructurePool.Projection;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.*;
@@ -33,6 +30,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkSection;
 import net.minecraft.world.chunk.ProtoChunk;
 import net.minecraft.world.gen.StructureAccessor;
+import net.minecraft.world.gen.StructureTerrainAdaptation;
 import net.minecraft.world.gen.chunk.*;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import supercoder79.ecotones.util.BiomeCache;
@@ -229,11 +227,11 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         return 0.0D;
     }
 
-    public int getHeight(int x, int z, Type heightmapType, HeightLimitView world) {
+    public int getHeight(int x, int z, Type heightmapType, HeightLimitView world, NoiseConfig noiseConfig) {
         return this.sampleHeightmap(x, z, null, heightmapType.getBlockPredicate());
     }
 
-    public VerticalBlockSample getColumnSample(int x, int z, HeightLimitView world) {
+    public VerticalBlockSample getColumnSample(int x, int z, HeightLimitView world, NoiseConfig noiseConfig) {
         BlockState[] states = new BlockState[this.noiseSizeY * this.verticalNoiseResolution];
         this.sampleHeightmap(x, z, states, null);
         // TODO: custom min y, using 0 for now
@@ -456,8 +454,8 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         SC config = configuredSurfaceBuilder.config;
 
         if (builder instanceof SlopedSurfaceBuilder<SC> sloped) {
-            int dx = (getHeight(x + 1, z, Type.WORLD_SURFACE_WG, region) + 1) - (getHeight(x - 1, z, Type.WORLD_SURFACE_WG, region) + 1);
-            int dz = (getHeight(x, z - 1, Type.WORLD_SURFACE_WG, region) + 1) - (getHeight(x, z - 1, Type.WORLD_SURFACE_WG, region) + 1);
+            int dx = (getHeight(x + 1, z, Type.WORLD_SURFACE_WG, region, null) + 1) - (getHeight(x - 1, z, Type.WORLD_SURFACE_WG, region, null) + 1);
+            int dz = (getHeight(x, z - 1, Type.WORLD_SURFACE_WG, region, null) + 1) - (getHeight(x, z - 1, Type.WORLD_SURFACE_WG, region, null) + 1);
 
             int slope = dx * dx + dz * dz;
 
@@ -495,6 +493,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     }
 
     public void populateNoise(StructureAccessor accessor, Chunk chunk) {
+        // FIXME: StructureWeightSampler.class_7301
         ObjectList<StructurePiece> structurePieces = new ObjectArrayList<>(10);
         ObjectList<JigsawJunction> jigsaws = new ObjectArrayList<>(32);
         ChunkPos pos = chunk.getPos();
@@ -504,48 +503,51 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         int chunkStartZ = chunkZ << 4;
 
 //        for (StructureFeature<?> feature : StructureFeature.LAND_MODIFYING_STRUCTURES) {
-        for (ConfiguredStructureFeature<?, ?> feature : new ArrayList<ConfiguredStructureFeature<?, ?>>()) {
-            accessor.getStructureStarts(ChunkSectionPos.from(pos, 0), feature).forEach(start -> {
-                Iterator<StructurePiece> pieces = start.getChildren().iterator();
+        List<StructureStart> starts = accessor.method_41035(pos, structure -> structure.getTerrainAdaptation() != StructureTerrainAdaptation.NONE);
 
-                outer:
-                while (true) {
-                    StructurePiece piece;
-                    do {
-                        if (!pieces.hasNext()) {
-                            break outer;
-                        }
-
-                        piece = pieces.next();
-                    } while (!piece.intersectsChunk(pos, 24));
-
-                    if (piece instanceof PoolStructurePiece pool) {
-                        Projection projection = pool.getPoolElement().getProjection();
-                        if (projection == Projection.RIGID) {
-                            structurePieces.add(pool);
-                        }
-
-                        // Add junctions that fit within the general chunk area
-                        for (JigsawJunction junction : pool.getJunctions()) {
-                            int sourceX = junction.getSourceX();
-                            int sourceZ = junction.getSourceZ();
-                            if (sourceX > chunkStartX - 12 && sourceZ > chunkStartZ - 12 && sourceX < chunkStartX + 15 + 12 && sourceZ < chunkStartZ + 15 + 12) {
-                                jigsaws.add(junction);
-                            }
-                        }
-                    } else {
-                        if (piece instanceof StructureTerrainControl stc) {
-                            if (!stc.generateTerrainBelow()) {
-                                // Skip pieces that don't generate terrain
-                                continue;
-                            }
-                        }
-
-                        structurePieces.add(piece);
-                    }
-                }
-            });
-        }
+        // TODO: reimpl
+//        for (StructureStart feature : starts) {
+//            accessor.getStructureStarts(ChunkSectionPos.from(pos, 0), feature).forEach(start -> {
+//                Iterator<StructurePiece> pieces = start.getChildren().iterator();
+//
+//                outer:
+//                while (true) {
+//                    StructurePiece piece;
+//                    do {
+//                        if (!pieces.hasNext()) {
+//                            break outer;
+//                        }
+//
+//                        piece = pieces.next();
+//                    } while (!piece.intersectsChunk(pos, 24));
+//
+//                    if (piece instanceof PoolStructurePiece pool) {
+//                        Projection projection = pool.getPoolElement().getProjection();
+//                        if (projection == Projection.RIGID) {
+//                            structurePieces.add(pool);
+//                        }
+//
+//                        // Add junctions that fit within the general chunk area
+//                        for (JigsawJunction junction : pool.getJunctions()) {
+//                            int sourceX = junction.getSourceX();
+//                            int sourceZ = junction.getSourceZ();
+//                            if (sourceX > chunkStartX - 12 && sourceZ > chunkStartZ - 12 && sourceX < chunkStartX + 15 + 12 && sourceZ < chunkStartZ + 15 + 12) {
+//                                jigsaws.add(junction);
+//                            }
+//                        }
+//                    } else {
+//                        if (piece instanceof StructureTerrainControl stc) {
+//                            if (!stc.generateTerrainBelow()) {
+//                                // Skip pieces that don't generate terrain
+//                                continue;
+//                            }
+//                        }
+//
+//                        structurePieces.add(piece);
+//                    }
+//                }
+//            });
+//        }
 
         // Holds the rolling noise data for this chunk
         // Instead of being noise[4 * 33 * 4] it's actually noise[2 * 5 * 33] to reuse noise data when moving onto the next column on the x axis.

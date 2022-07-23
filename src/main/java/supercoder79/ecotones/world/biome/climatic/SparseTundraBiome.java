@@ -47,7 +47,7 @@ public class SparseTundraBiome extends EcotonesBiomeBuilder {
         this.temperature(0.2f);
         this.downfall(0.6f);
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.TAIGA);
+//        this.category(Biome.Category.TAIGA);
 
         this.grassColor(0xc47960);
         this.foliageColor(0xb36856);

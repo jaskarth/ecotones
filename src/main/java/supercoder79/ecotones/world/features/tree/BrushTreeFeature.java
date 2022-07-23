@@ -23,7 +23,7 @@ public class BrushTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
     public boolean generate(FeatureContext<SimpleTreeFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
         SimpleTreeFeatureConfig config = context.getConfig();
 
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) {

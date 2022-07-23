@@ -47,7 +47,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
             .decorators(ImmutableList.of(
                     new CocoaBeansTreeDecorator(0.2F),
                     TrunkVineTreeDecorator.INSTANCE,
-                    LeavesVineTreeDecorator.INSTANCE)
+                    new LeavesVineTreeDecorator(0.2f))
             ).ignoreVines().build();
 
     public static Biome INSTANCE;
@@ -69,7 +69,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
         this.downfall(1F);
 
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.JUNGLE);
+//        this.category(Biome.Category.JUNGLE);
 
         this.skyColor(0xadc1cc);
         this.grassColor(0x73a859);
@@ -77,7 +77,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
         this.waterColor(0x74ad57);
         this.waterFogColor(0x73a859);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)

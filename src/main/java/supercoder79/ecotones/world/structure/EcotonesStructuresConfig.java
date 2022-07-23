@@ -4,9 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.StructureFeature;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class EcotonesStructuresConfig /*extends StructuresConfig*/ {
-    public static Map<RegistryKey<Biome>, List<ConfiguredStructureFeature<?, ?>>> STRUCTURE_DATA = new HashMap<>();
+//    public static Map<RegistryKey<Biome>, List<ConfiguredStructureFeature<?, ?>>> STRUCTURE_DATA = new HashMap<>();
 //    private final ImmutableMap<StructureFeature<?>, ImmutableMultimap<ConfiguredStructureFeature<?, ?>, RegistryKey<Biome>>> configuredStructures;
 //
 //    public EcotonesStructuresConfig(Optional<StrongholdConfig> stronghold, Map<StructureFeature<?>, StructureConfig> structures) {

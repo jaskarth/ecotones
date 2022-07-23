@@ -8,7 +8,6 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import supercoder79.ecotones.advancement.EcotonesCriteria;
@@ -40,10 +39,8 @@ import supercoder79.ecotones.world.features.foliage.EcotonesFoliagePlacers;
 import supercoder79.ecotones.world.gen.BiomeGenData;
 import supercoder79.ecotones.world.gen.EcotonesBiomeSource;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
-import supercoder79.ecotones.world.structure.EcotonesStructurePieces;
+import supercoder79.ecotones.world.structure.*;
 import supercoder79.ecotones.world.structure.EcotonesStructures;
-import supercoder79.ecotones.world.structure.EcotonesStructuresConfig;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
 import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
@@ -60,7 +57,6 @@ public final class Ecotones implements ModInitializer {
 
 	// Dynamic registry
 	public static Registry<Biome> REGISTRY;
-	private static EcotonesWorldType worldType;
 	public static boolean isServerEcotones = false;
 
 	@Override
@@ -92,8 +88,9 @@ public final class Ecotones implements ModInitializer {
 		EcotonesSurfaces.init();
 
 		EcotonesStructurePieces.init();
+		EcotonesStructureTypes.init();
 		EcotonesStructures.init();
-		EcotonesConfiguredStructures.init();
+		EcotonesStructureSets.init();
 
 		EcotonesEntities.init();
 
@@ -170,10 +167,10 @@ public final class Ecotones implements ModInitializer {
 			if (id.getNamespace().contains("ecotones")) {
 				Biome biome = BuiltinRegistries.BIOME.get(id);
 				BiomeGenData data = EcotonesBiomeBuilder.OBJ2DATA.get(biome);
-				List<ConfiguredStructureFeature<?, ?>> structures = EcotonesBiomeBuilder.BIOME_STRUCTURES.get(biome);
+//				List<ConfiguredStructureFeature<?, ?>> structures = EcotonesBiomeBuilder.BIOME_STRUCTURES.get(biome);
 
 				RegistryKey<Biome> key = BuiltinRegistries.BIOME.getKey(biome).get();
-				EcotonesStructuresConfig.STRUCTURE_DATA.put(key, structures);
+//				EcotonesStructuresConfig.STRUCTURE_DATA.put(key, structures);
 				BiomeGenData.LOOKUP.put(key, data);
 				if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 					BiomeChecker.check(biome);
@@ -192,9 +189,11 @@ public final class Ecotones implements ModInitializer {
 		Registry.register(Registry.BIOME_SOURCE, new Identifier("ecotones", "ecotones"), EcotonesBiomeSource.CODEC);
 		Registry.register(Registry.CHUNK_GENERATOR, new Identifier("ecotones", "ecotones"), EcotonesChunkGenerator.CODEC);
 
-		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-			worldType = new EcotonesWorldType();
-		}
+//		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+//			worldType = new EcotonesWorldType();
+//		}
+
+		EcotonesWorldType.init();
 
 		// Store if this server is in ecotones or not
 //		ServerLifecycleEvents.SERVER_STARTED.register(server -> {

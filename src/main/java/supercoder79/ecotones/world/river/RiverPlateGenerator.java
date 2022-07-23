@@ -4,8 +4,9 @@ import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec2f;
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.SimpleRandom;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.util.math.random.CheckedRandom;
+import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.world.layers.system.layer.util.CachingLayerSampler;
 import supercoder79.ecotones.world.river.graph.RiverGraph;
 import supercoder79.ecotones.world.river.graph.RiverNode;
@@ -52,7 +53,7 @@ public final class RiverPlateGenerator {
 
     // Initial "pilot" stage where rivers identify major contours and destinations (lakes and such)
     private static RiverGraph runPilotRivers(long seed, LongSet plateChunks) {
-        ChunkRandom random = new ChunkRandom(new SimpleRandom(seed));
+        ImprovedChunkRandom random = new ImprovedChunkRandom((seed));
 
         RiverGraph graph = new RiverGraph();
         for (long pos : plateChunks) {
@@ -182,7 +183,7 @@ public final class RiverPlateGenerator {
     }
 
     private static void iterateGraphReach(long seed, RiverGraph graph, LongSet plateChunks) {
-//        ChunkRandom random = new ChunkRandom(new SimpleRandom(seed));
+//        ChunkRandom random = new ChunkRandom(new CheckedRandom(seed));
 
         for (RiverSubgraph subgraph : graph.getSubgraphs()) {
             if (subgraph.endsWithPhi) {
@@ -227,7 +228,7 @@ public final class RiverPlateGenerator {
     }
 
     private static void traversePredecessors(long seed, RiverGraph graph, LongSet plateChunks, int maxSize) {
-        ChunkRandom random = new ChunkRandom(new SimpleRandom(seed));
+        ImprovedChunkRandom random = new ImprovedChunkRandom((seed));
 
         int minSize = maxSize / 2;
 

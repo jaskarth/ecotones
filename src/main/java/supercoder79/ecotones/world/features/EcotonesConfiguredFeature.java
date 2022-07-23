@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.features;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.YOffset;
@@ -41,6 +42,10 @@ public class EcotonesConfiguredFeature<FC extends FeatureConfig, F extends Featu
     }
 
     public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos origin) {
+        return vanilla().generate(world, chunkGenerator, new CheckedRandom(random.nextLong()), origin);
+    }
+
+    public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, net.minecraft.util.math.random.Random random, BlockPos origin) {
         return vanilla().generate(world, chunkGenerator, random, origin);
     }
 

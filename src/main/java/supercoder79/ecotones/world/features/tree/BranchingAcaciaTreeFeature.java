@@ -29,7 +29,7 @@ public class BranchingAcaciaTreeFeature extends EcotonesFeature<TreeGenerationCo
     public boolean generate(FeatureContext<TreeGenerationConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
         TreeGenerationConfig config = context.getConfig();
 
         //ensure spawn

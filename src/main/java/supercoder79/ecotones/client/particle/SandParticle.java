@@ -3,8 +3,7 @@ package supercoder79.ecotones.client.particle;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 
 public class SandParticle extends SpriteBillboardParticle {
     protected SandParticle(ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {

@@ -11,8 +11,10 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.stateprovider.PredicatedStateProvider;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.decorator.*;
@@ -26,7 +28,7 @@ import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.*;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
@@ -54,13 +56,13 @@ public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
         this.downfall(0.55F);
 
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.TAIGA);
+//        this.category(Biome.Category.TAIGA);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_SPRUCE);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         //DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());
@@ -107,8 +109,10 @@ public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.LAKES,
                 EcotonesConfiguredFeature.wrap(Feature.DISK, (
-                                new DiskFeatureConfig(Blocks.GRAVEL.getDefaultState(), UniformIntProvider.create(4, 8), 2,
-                                        ImmutableList.of(Blocks.DIRT.getDefaultState(), Blocks.GRASS_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState()))))
+                                new DiskFeatureConfig(PredicatedStateProvider.of(Blocks.GRAVEL),
+                                        BlockPredicate.matchingBlocks(ImmutableList.of(Blocks.DIRT, Blocks.GRASS_BLOCK, Blocks.STONE)),
+                                        UniformIntProvider.create(4, 8),
+                                        2)))
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG))
                         .spreadHorizontally()
                         .repeat(32));

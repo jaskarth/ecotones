@@ -25,7 +25,7 @@ public class GeyserPatchFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
 
         for (int i = 0; i < 16; i++) {
             int dx = random.nextInt(8) - random.nextInt(8) + pos.getX();

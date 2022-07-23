@@ -1,6 +1,7 @@
 package supercoder79.ecotones.util.noise.voronoi;
 
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.util.math.random.ChunkRandom;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.Vec2d;
@@ -8,7 +9,7 @@ import supercoder79.ecotones.util.Vec2d;
 // Simple voronoi diagram
 public final class Voronoi {
     private final long seed;
-    private final ImprovedChunkRandom random = new ChunkRandom(new SimpleRandom(0));
+    private final ImprovedChunkRandom random = new ImprovedChunkRandom(0);
 
     public Voronoi(long seed) {
         this.seed = seed;

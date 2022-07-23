@@ -9,8 +9,4 @@ import java.util.Map;
 
 @Mixin(Structure.class)
 public interface StructureFeatureAccessor {
-    @Accessor(value = "STRUCTURE_TO_GENERATION_STEP")
-    static Map<Structure, GenerationStep.Feature> getGenerationStepMap() {
-        throw new UnsupportedOperationException();
-    }
 }

@@ -57,7 +57,7 @@ public class SwampBiome extends EcotonesBiomeBuilder {
         this.hilliness(1.2);
         this.volatility(0.96);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_SWAMP);
 //        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
 

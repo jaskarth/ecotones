@@ -44,7 +44,7 @@ public class LowlandsBiome extends EcotonesBiomeBuilder {
         this.temperature(0.6f);
         this.downfall(0.8f);
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.TAIGA);
+//        this.category(Biome.Category.TAIGA);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

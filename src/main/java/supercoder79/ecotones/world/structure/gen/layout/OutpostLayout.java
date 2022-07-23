@@ -46,7 +46,7 @@ public class OutpostLayout extends Layout {
 
         building.addBuilding(new House(new BlockPos(
                 center.x(),
-                generator.getHeight(center.x(), center.y(), Heightmap.Type.WORLD_SURFACE_WG, height),
+                generator.getHeight(center.x(), center.y(), Heightmap.Type.WORLD_SURFACE_WG, height, null),
                 center.y())
                 , FeatureHelper.randomHorizontal(random)));
     }

@@ -2,7 +2,7 @@ package supercoder79.ecotones.mixin;
 
 import com.google.common.hash.Hashing;
 import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.PlayerManager;
@@ -24,7 +24,7 @@ public class MixinPlayerManager {
         data.writeLong(Hashing.sha256().hashLong(player.getWorld().getSeed()).asLong());
         data.writeBoolean(player.server.isDedicated()); // hacks hacks hacks
 
-        ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, Ecotones.WORLD_TYPE, data);
+        ServerPlayNetworking.send(player, Ecotones.WORLD_TYPE, data);
 
         // Handle advancement
         if (player.getWorld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator) {

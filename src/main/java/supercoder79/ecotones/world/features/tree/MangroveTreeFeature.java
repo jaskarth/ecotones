@@ -9,11 +9,14 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.CheckedRandom;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
 import supercoder79.ecotones.util.TreeHelper;
@@ -23,7 +26,7 @@ import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 public class MangroveTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
@@ -89,7 +92,8 @@ public class MangroveTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
 
         BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
 
-        DECORATOR.generate(world, replacer, random, ImmutableList.of(), leaves);
+        TreeDecorator.Generator generator = new TreeDecorator.Generator(world, replacer, new CheckedRandom(random.nextLong()), Set.of(), new HashSet<>(leaves), Set.of());
+        DECORATOR.generate(generator);
     }
 
     private void root(WorldAccess world, BlockPos startPos, Random random, float yaw, float pitch, TreeGenerationConfig config) {

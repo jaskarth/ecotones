@@ -21,7 +21,7 @@ public class SugarCaneFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
 
         // Check the position for a 3x3 of grass underneath to grow the sugarcane
         for (int x = -1; x <= 1; x++) {

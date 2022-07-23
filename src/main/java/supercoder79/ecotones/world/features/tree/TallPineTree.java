@@ -8,10 +8,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.util.BoxHelper;
 import supercoder79.ecotones.world.features.EcotonesFeature;
@@ -20,9 +22,7 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.treedecorator.LeafPileTreeDecorator;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 public class TallPineTree extends EcotonesFeature<SimpleTreeFeatureConfig> {
@@ -37,7 +37,7 @@ public class TallPineTree extends EcotonesFeature<SimpleTreeFeatureConfig> {
     public boolean generate(FeatureContext<SimpleTreeFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
         SimpleTreeFeatureConfig config = context.getConfig();
 
         if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) {
@@ -72,8 +72,10 @@ public class TallPineTree extends EcotonesFeature<SimpleTreeFeatureConfig> {
 
         BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
 
-        PINECONES.generate(world, replacer, random, ImmutableList.of(), leaves);
-        LEAF_PILES.generate(world, replacer, random, ImmutableList.of(), leaves);
+        TreeDecorator.Generator decorator = new TreeDecorator.Generator(world, replacer, new CheckedRandom(random.nextLong()), new HashSet<>(), new HashSet<>(leaves), Set.of());
+
+        PINECONES.generate(decorator);
+        LEAF_PILES.generate(decorator);
 
         return false;
     }

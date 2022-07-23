@@ -24,7 +24,7 @@ public class BarrenTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> 
     public boolean generate(FeatureContext<SimpleTreeFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
         SimpleTreeFeatureConfig config = context.getConfig();
         ChunkGenerator generator = context.getGenerator();
 

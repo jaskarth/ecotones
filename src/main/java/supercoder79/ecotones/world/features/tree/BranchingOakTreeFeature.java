@@ -8,11 +8,13 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TrunkVineTreeDecorator;
 import supercoder79.ecotones.api.TreeGenerationConfig;
 import supercoder79.ecotones.util.DataPos;
@@ -24,10 +26,7 @@ import supercoder79.ecotones.world.tree.trait.oak.OakTrait;
 import supercoder79.ecotones.world.tree.trait.oak.DefaultOakTrait;
 import supercoder79.ecotones.world.treedecorator.LeafVineTreeDecorator;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 //creates a branching trunk then places leaves
@@ -41,7 +40,7 @@ public class BranchingOakTreeFeature extends EcotonesFeature<TreeGenerationConfi
     public boolean generate(FeatureContext<TreeGenerationConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
         ChunkGenerator generator = context.getGenerator();
         TreeGenerationConfig config = context.getConfig();
 
@@ -84,8 +83,9 @@ public class BranchingOakTreeFeature extends EcotonesFeature<TreeGenerationConfi
         if (config.generateVines) {
             BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
 
-            new LeafVineTreeDecorator(3, 4, 2).generate(world, replacer, random, ImmutableList.of(), leaves);
-            new TrunkVineTreeDecorator().generate(world, replacer, random, ImmutableList.of(), leaves);
+            TreeDecorator.Generator generator = new TreeDecorator.Generator(world, replacer, new CheckedRandom(random.nextLong()), Set.of(), new HashSet<>(leaves), Set.of());
+            new LeafVineTreeDecorator(3, 4, 2).generate(generator);
+            new TrunkVineTreeDecorator().generate(generator);
         }
     }
 

@@ -8,6 +8,7 @@ import net.minecraft.block.entity.BeehiveBlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.StructureWorldAccess;
@@ -17,7 +18,6 @@ import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.world.features.EcotonesFeature;
 
 import java.util.List;
-import java.util.Random;
 
 public class BeehiveFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public static final List<BlockState> FLOWERS = ImmutableList.of(Blocks.ORANGE_TULIP.getDefaultState(), Blocks.PINK_TULIP.getDefaultState(), Blocks.RED_TULIP.getDefaultState(), Blocks.WHITE_TULIP.getDefaultState(), Blocks.OXEYE_DAISY.getDefaultState());

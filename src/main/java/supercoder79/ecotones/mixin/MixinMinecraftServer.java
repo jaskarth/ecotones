@@ -24,14 +24,10 @@ import java.net.Proxy;
 public abstract class MixinMinecraftServer {
     @Shadow public abstract ServerWorld getOverworld();
 
-    @Inject(method = "<init>", at = @At("TAIL"))
-    private void onServerBootstrap(Thread serverThread, LevelStorage.Session session, ResourcePackManager dataPackManager, SaveLoader saveLoader, Proxy proxy, DataFixer dataFixer, MinecraftSessionService sessionService, GameProfileRepository gameProfileRepo, UserCache userCache, WorldGenerationProgressListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
-
-    }
-
     // From fabric api- event doesn't seem to work??
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;setFavicon(Lnet/minecraft/server/ServerMetadata;)V", ordinal = 0), method = "runServer")
     private void onServerStart(CallbackInfo info) {
         Ecotones.isServerEcotones = getOverworld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator;
+        // FIXME: check to see this actually works
     }
 }

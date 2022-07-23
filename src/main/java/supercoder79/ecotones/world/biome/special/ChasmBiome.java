@@ -46,8 +46,8 @@ public class ChasmBiome extends EcotonesBiomeBuilder {
         this.downfall(0.4F);
 
         this.precipitation(Biome.Precipitation.RAIN);
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.category(Biome.Category.UNDERGROUND);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//        this.category(Biome.Category.UNDERGROUND);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         //DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());

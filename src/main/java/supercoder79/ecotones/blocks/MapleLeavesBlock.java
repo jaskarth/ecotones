@@ -3,10 +3,9 @@ package supercoder79.ecotones.blocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
-
-import java.util.Random;
 
 public class MapleLeavesBlock extends LeavesBlock {
     public MapleLeavesBlock(Settings settings) {

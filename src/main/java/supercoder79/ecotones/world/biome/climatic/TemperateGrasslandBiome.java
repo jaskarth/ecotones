@@ -32,7 +32,7 @@ import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.*;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 
 public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -58,15 +58,15 @@ public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
         this.downfall(0.5F);
 
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.PLAINS);
+//        this.category(Biome.Category.PLAINS);
 
         // TODO: customize
         this.hilliness(4.0);
         this.volatility(0.92);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
-//        this.addStructureFeature(EcotonesConfiguredStructures.OUTPOST);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_OAK);
+//        this.addStructureFeature(EcotonesStructures.OUTPOST);
 
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 7)));
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

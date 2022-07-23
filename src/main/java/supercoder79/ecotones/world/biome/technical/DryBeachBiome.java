@@ -43,7 +43,7 @@ public class DryBeachBiome extends EcotonesBiomeBuilder {
 
         this.precipitation(Biome.Precipitation.RAIN);
 
-        this.category(Biome.Category.BEACH);
+//        this.category(Biome.Category.BEACH);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
 //        this.addStructureFeature(ConfiguredStructureFeatures.BURIED_TREASURE);

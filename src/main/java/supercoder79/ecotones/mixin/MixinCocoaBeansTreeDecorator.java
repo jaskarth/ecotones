@@ -15,10 +15,10 @@ import java.util.function.BiConsumer;
 
 @Mixin(CocoaBeansTreeDecorator.class)
 public class MixinCocoaBeansTreeDecorator {
-    @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
-    private void fixCrash(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, CallbackInfo ci) {
-        if (logPositions.size() == 0) {
-            ci.cancel(); // Not sure how this happens but it does
-        }
-    }
+//    @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
+//    private void fixCrash(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, CallbackInfo ci) {
+//        if (logPositions.size() == 0) {
+//            ci.cancel(); // Not sure how this happens but it does
+//        }
+//    }
 }

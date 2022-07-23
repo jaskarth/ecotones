@@ -1,13 +1,13 @@
 package supercoder79.ecotones.util.noise.voronoi;
 
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.SimpleRandom;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.util.math.random.CheckedRandom;
 
 // Voronoi with a point relaxation algorithm
 public final class VoronoiRelax {
     private final long seed;
-    private final ChunkRandom random = new ChunkRandom(new SimpleRandom(0));
+    private final ChunkRandom random = new ChunkRandom(new CheckedRandom(0));
 
     public VoronoiRelax(long seed) {
         this.seed = seed;
