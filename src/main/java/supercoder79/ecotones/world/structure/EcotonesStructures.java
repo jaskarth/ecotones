@@ -95,7 +95,9 @@ public final class EcotonesStructures {
     }
 
     private static RegistryEntry<Structure> register(RegistryKey<Structure> key, Structure structure) {
-        return BuiltinRegistries.add(BuiltinRegistries.STRUCTURE, key, structure);
+        Registry.register(BuiltinRegistries.STRUCTURE, key.getValue(), structure);
+
+        return BuiltinRegistries.STRUCTURE.entryOf(key);
     }
 
     private static RegistryEntryList<Biome> getOrCreateBiomeTag(TagKey<Biome> key) {

@@ -14,6 +14,7 @@ group = project.maven_group
 repositories {
 	mavenLocal()
 	maven { url = "https://maven.gegy.dev" }
+	maven { url = "https://maven.terraformersmc.com/" }
 }
 
 loom {
@@ -33,6 +34,11 @@ dependencies {
 //	modRuntimeOnly ("supercoder79:databreaker:0.2.9") {
 //		exclude module : "fabric-loader"
 //	}
+
+	// Move to compileOnly as well when emi integration is added
+	modRuntimeOnly ("dev.emi:emi:0.2.0+1.19") {
+		transitive = false
+	}
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.

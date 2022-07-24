@@ -18,5 +18,7 @@ public final class BlockstateGen {
     public static void simple(String name) throws IOException {
         String json = SIMPLE.replace("%%NAME%%", name);
         Files.write(PATH.resolve(name + ".json"), json.getBytes());
+
+        DataGen.DATA.blockstates++;
     }
 }

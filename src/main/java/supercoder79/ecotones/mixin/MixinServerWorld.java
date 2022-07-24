@@ -51,9 +51,9 @@ public abstract class MixinServerWorld {
             DataFixer dataFixer = server.getDataFixer();
             boolean bl = server.syncChunkWrites();
 
-            // TODO: structure set correct?
             DynamicRegistryManager.Immutable registryManager = server.getRegistryManager();
-            ChunkGenerator chunkGenerator = new EcotonesChunkGenerator(BuiltinRegistries.STRUCTURE_SET,
+
+            ChunkGenerator chunkGenerator = new EcotonesChunkGenerator(registryManager.get(Registry.STRUCTURE_SET_KEY),
                     new EcotonesBiomeSource(registryManager.get(Registry.BIOME_KEY), l, true), l);
 
             this.chunkManager = new ServerChunkManager(

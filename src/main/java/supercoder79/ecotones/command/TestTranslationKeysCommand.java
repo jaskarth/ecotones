@@ -77,7 +77,7 @@ public class TestTranslationKeysCommand {
 
         source.sendFeedback(Text.literal("Found " + count + " missing translation keys."), false);
         if (count == 0) {
-            // Congratulating myself moment
+            // Congratulating myself :)
             source.sendFeedback(Text.literal("Nice job!"), false);
             return 0;
         }

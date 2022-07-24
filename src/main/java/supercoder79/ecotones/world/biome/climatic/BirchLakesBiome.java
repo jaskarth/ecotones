@@ -33,7 +33,6 @@ import supercoder79.ecotones.world.structure.EcotonesStructures;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import net.minecraft.world.gen.YOffset;
 
-// TODO: needs rename?
 public class BirchLakesBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
     public static Biome HILLY;

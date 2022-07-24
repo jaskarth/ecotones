@@ -38,15 +38,21 @@ public final class BlockModelGen {
     public static void cubeAll(String name) throws IOException {
         String json = CUBE_ALL.replace("%%NAME%%", name);
         Files.write(PATH.resolve(name + ".json"), json.getBytes());
+
+        DataGen.DATA.blockModels++;
     }
 
     public static void cross(String name) throws IOException {
         String json = CROSS.replace("%%NAME%%", name);
         Files.write(PATH.resolve(name + ".json"), json.getBytes());
+
+        DataGen.DATA.blockModels++;
     }
 
     public static void leaves(String name) throws IOException {
         String json = LEAVES.replace("%%NAME%%", name);
         Files.write(PATH.resolve(name + ".json"), json.getBytes());
+
+        DataGen.DATA.blockModels++;
     }
 }

@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.tag.ItemTags;
@@ -189,10 +190,34 @@ public class GrindstoneBlockEntity extends LockableContainerBlockEntity {
         }
     }
 
-    // TODO: nbt
+    @Override
+    public void readNbt(NbtCompound tag) {
+        super.readNbt(tag);
 
+        Inventories.readNbt(tag, this.inventory);
+        this.burnTime = tag.getInt("BurnTime");
+        this.burnTimeMax = tag.getInt("BurnTimeMax");
+        this.mainOutPercent = tag.getShort("MainOutPercent");
+        this.altOutPercent = tag.getShort("AltOutPercent");
+        this.progress = tag.getShort("Progress");
 
+        String id = tag.getString("RecipeId");
+        this.recipeId = id.equals("nil") ? null : new Identifier(id);
+    }
 
+    @Override
+    protected void writeNbt(NbtCompound tag) {
+        super.writeNbt(tag);
+
+        Inventories.writeNbt(tag, this.inventory);
+        tag.putInt("BurnTime", this.burnTime);
+        tag.putInt("BurnTimeMax", this.burnTimeMax);
+        tag.putShort("MainOutPercent", (short) this.mainOutPercent);
+        tag.putShort("AltOutPercent", (short) this.altOutPercent);
+        tag.putShort("Progress", (short) this.progress);
+
+        tag.putString("RecipeId", recipeId == null ? "nil" : recipeId.toString());
+    }
 
     @Override
     protected Text getContainerName() {

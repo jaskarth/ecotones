@@ -65,6 +65,8 @@ public final class RecipeGen {
                 );
 
         Files.write(PATH.resolve(name + ".json"), json.getBytes());
+
+        DataGen.DATA.recipes++;
     }
 
     public static void shaped(String name, String output, int amount, String lineA, String... ingredients) throws IOException {
@@ -97,5 +99,7 @@ public final class RecipeGen {
                 );
 
         Files.write(PATH.resolve(name + ".json"), json.getBytes());
+
+        DataGen.DATA.recipes++;
     }
 }

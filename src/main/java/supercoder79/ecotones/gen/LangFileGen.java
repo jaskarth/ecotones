@@ -69,6 +69,7 @@ public final class LangFileGen {
         }
 
         updated.put(oldEnd, content);
+        DataGen.DATA.langs++;
 
         LINES.clear();
         LINES.putAll(updated);
@@ -95,6 +96,7 @@ public final class LangFileGen {
         }
 
         updated.put(oldEnd, content);
+        DataGen.DATA.langs++;
 
         LINES.clear();
         LINES.putAll(updated);
@@ -120,6 +122,7 @@ public final class LangFileGen {
         }
 
         updated.put(oldEnd, content);
+        DataGen.DATA.langs++;
 
         LINES.clear();
         LINES.putAll(updated);

@@ -367,7 +367,7 @@
   "item.ecotones.basic_fertilizer": "Basic Fertilizer",
   "ecotones.section.end.itemonly": "",
 
-  "generator.ecotones": "§2Ecotones",
+  "generator.ecotones.ecotones": "§2Ecotones",
   "itemGroup.ecotones.ecotones": "Ecotones",
 
   "advancements.ecotones.root": "Ecotones",
