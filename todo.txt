@@ -75,6 +75,5 @@
 * Aquifers
 * Fix structures
 * Add all remaining books
-* Finishing fertilizers
 * Grindstone recipes for malachite and pyrite
-* Ensuring all recipes are craftable`u
+* Ensuring all recipes are craftable

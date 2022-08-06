@@ -188,6 +188,8 @@ public class GrindstoneBlockEntity extends LockableContainerBlockEntity {
             blockEntity.progress = 0;
             blockEntity.recipeId = null;
         }
+
+        blockEntity.markDirty();
     }
 
     @Override

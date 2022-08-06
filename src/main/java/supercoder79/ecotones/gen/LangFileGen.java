@@ -106,6 +106,11 @@ public final class LangFileGen {
         end++;
     }
 
+    public static void addBlockItemBlock(String unloc, String localized) {
+        addBlock(unloc, localized);
+        addItemblock(unloc, localized);
+    }
+
     public static void addItemOnly(String unloc, String localized) {
         int oldEnd = itemonlyEnd;
 

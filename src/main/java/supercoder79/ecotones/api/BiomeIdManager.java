@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BiomeIdManager {
-    private static final BiMap<RegistryKey<Biome>, Integer> MAP = HashBiMap.create();
+    public static final BiMap<RegistryKey<Biome>, Integer> MAP = HashBiMap.create();
 
     public static void register(RegistryKey<Biome> key, int id) {
         if (!MAP.containsKey(key)) {

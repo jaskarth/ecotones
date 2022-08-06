@@ -31,9 +31,9 @@ dependencies {
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 
 
-//	modRuntimeOnly ("supercoder79:databreaker:0.2.9") {
-//		exclude module : "fabric-loader"
-//	}
+	modRuntimeOnly ("supercoder79:databreaker:0.2.10") {
+		exclude module : "fabric-loader"
+	}
 
 	// Move to compileOnly as well when emi integration is added
 	modRuntimeOnly ("dev.emi:emi:0.2.0+1.19") {

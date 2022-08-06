@@ -31,7 +31,9 @@ import net.minecraft.world.chunk.ChunkSection;
 import net.minecraft.world.chunk.ProtoChunk;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.StructureTerrainAdaptation;
+import net.minecraft.world.gen.StructureWeightSampler;
 import net.minecraft.world.gen.chunk.*;
+import net.minecraft.world.gen.densityfunction.DensityFunction;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
@@ -493,61 +495,13 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     }
 
     public void populateNoise(StructureAccessor accessor, Chunk chunk) {
-        // FIXME: StructureWeightSampler.class_7301
-        ObjectList<StructurePiece> structurePieces = new ObjectArrayList<>(10);
-        ObjectList<JigsawJunction> jigsaws = new ObjectArrayList<>(32);
         ChunkPos pos = chunk.getPos();
         int chunkX = pos.x;
         int chunkZ = pos.z;
         int chunkStartX = chunkX << 4;
         int chunkStartZ = chunkZ << 4;
 
-//        for (StructureFeature<?> feature : StructureFeature.LAND_MODIFYING_STRUCTURES) {
-        List<StructureStart> starts = accessor.method_41035(pos, structure -> structure.getTerrainAdaptation() != StructureTerrainAdaptation.NONE);
-
-        // TODO: reimpl
-//        for (StructureStart feature : starts) {
-//            accessor.getStructureStarts(ChunkSectionPos.from(pos, 0), feature).forEach(start -> {
-//                Iterator<StructurePiece> pieces = start.getChildren().iterator();
-//
-//                outer:
-//                while (true) {
-//                    StructurePiece piece;
-//                    do {
-//                        if (!pieces.hasNext()) {
-//                            break outer;
-//                        }
-//
-//                        piece = pieces.next();
-//                    } while (!piece.intersectsChunk(pos, 24));
-//
-//                    if (piece instanceof PoolStructurePiece pool) {
-//                        Projection projection = pool.getPoolElement().getProjection();
-//                        if (projection == Projection.RIGID) {
-//                            structurePieces.add(pool);
-//                        }
-//
-//                        // Add junctions that fit within the general chunk area
-//                        for (JigsawJunction junction : pool.getJunctions()) {
-//                            int sourceX = junction.getSourceX();
-//                            int sourceZ = junction.getSourceZ();
-//                            if (sourceX > chunkStartX - 12 && sourceZ > chunkStartZ - 12 && sourceX < chunkStartX + 15 + 12 && sourceZ < chunkStartZ + 15 + 12) {
-//                                jigsaws.add(junction);
-//                            }
-//                        }
-//                    } else {
-//                        if (piece instanceof StructureTerrainControl stc) {
-//                            if (!stc.generateTerrainBelow()) {
-//                                // Skip pieces that don't generate terrain
-//                                continue;
-//                            }
-//                        }
-//
-//                        structurePieces.add(piece);
-//                    }
-//                }
-//            });
-//        }
+        StructureWeightSampler structures = StructureWeightSampler.method_42695(accessor, pos);
 
         // Holds the rolling noise data for this chunk
         // Instead of being noise[4 * 33 * 4] it's actually noise[2 * 5 * 33] to reuse noise data when moving onto the next column on the x axis.
@@ -569,10 +523,10 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         Heightmap oceanFloor = protoChunk.getHeightmap(Type.OCEAN_FLOOR_WG);
         Heightmap worldSurface = protoChunk.getHeightmap(Type.WORLD_SURFACE_WG);
         Mutable mutable = new Mutable();
-        ObjectListIterator<StructurePiece> structurePieceIterator = structurePieces.iterator();
-        ObjectListIterator<JigsawJunction> jigsawIterator = jigsaws.iterator();
 
         this.random.setPopulationSeed(this.seed, chunkX * 100, chunkZ * 100);
+
+        MutableNoisePos mpos = new MutableNoisePos();
 
         // [0, 4] -> x noise chunks
         for(int noiseX = 0; noiseX < this.noiseSizeX; ++noiseX) {
@@ -647,27 +601,13 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                                 double density = MathHelper.clamp(rawNoise /*rawNoise / 200.0D*/, -1.0D, 1.0D);
 
                                 // Iterate through structures to add density
-                                int structureX;
-                                int structureY;
-                                int structureZ;
-                                for(density = density / 2.0D - density * density * density / 24.0D; structurePieceIterator.hasNext(); density += getNoiseWeight(structureX, structureY, structureZ) * 0.8D) {
-                                    StructurePiece structurePiece = structurePieceIterator.next();
-                                    BlockBox box = structurePiece.getBoundingBox();
-                                    structureX = Math.max(0, Math.max(box.getMinX() - realX, realX - box.getMaxX()));
-                                    structureY = realY - (box.getMinY() + (structurePiece instanceof PoolStructurePiece ? ((PoolStructurePiece)structurePiece).getGroundLevelDelta() : 0));
-                                    structureZ = Math.max(0, Math.max(box.getMinZ() - realZ, realZ - box.getMaxZ()));
-                                }
-                                structurePieceIterator.back(structurePieces.size());
+                                density = density / 2.0D - density * density * density / 24.0D;
 
-                                // Iterate through jigsawws to add density
-                                while(jigsawIterator.hasNext()) {
-                                    JigsawJunction jigsawJunction = jigsawIterator.next();
-                                    int sourceX = realX - jigsawJunction.getSourceX();
-                                    int sourceY = realY - jigsawJunction.getSourceGroundY();
-                                    int sourceZ = realZ - jigsawJunction.getSourceZ();
-                                    density += getNoiseWeight(sourceX, sourceY, sourceZ) * 0.4D;
-                                }
-                                jigsawIterator.back(jigsaws.size());
+                                mpos.set(realX, realY, realZ);
+
+                                double structureAdd = structures.sample(mpos);
+
+                                density += structureAdd;
 
                                 // Get the blockstate based on the y and density
                                 BlockState state = this.getBlockState(density, realY);
@@ -769,6 +709,38 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
         private long key(int x, int z) {
             return ChunkPos.toLong(x, z);
+        }
+    }
+
+    private static final class MutableNoisePos implements DensityFunction.NoisePos {
+        private int x;
+        private int y;
+        private int z;
+
+        public MutableNoisePos() {
+
+        }
+
+        private void set(int x, int y, int z) {
+
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        @Override
+        public int blockX() {
+            return x;
+        }
+
+        @Override
+        public int blockY() {
+            return y;
+        }
+
+        @Override
+        public int blockZ() {
+            return z;
         }
     }
 }

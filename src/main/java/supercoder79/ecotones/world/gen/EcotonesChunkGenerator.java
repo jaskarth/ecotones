@@ -127,6 +127,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         this.data.put(EcotonesData.SOIL_PH, this.soilPhNoise::sample);
         this.data.put(EcotonesData.GRASS_NOISE, this.grassNoise::sample);
         this.data.put(EcotonesData.FLOWER_MOSAIC, new Mosaic(this.random.nextLong(), 8, 64, 16, -0.1, 0.4));
+
+//        System.out.println(">> SEED: " + seed);
     }
 
     protected RegistryKey<Biome> key(Biome biome) {
@@ -462,30 +464,6 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
             int m = 0;
             if (structureAccessor.shouldGenerateStructures()) {
                 if (structureAccessor.shouldGenerateStructures()) {
-//                    for(StructureFeature<?> structureFeature : structuresByStep.getOrDefault(j, Collections.emptyList())) {
-//                        random.setDecoratorSeed(populationSeed, m, j);
-//                        Supplier<String> supplier = () -> (String)registry2.getKey(structureFeature)
-//                                .map(Object::toString)
-//                                .orElseGet(structureFeature::toString);
-//
-//                        try {
-//                            region.setCurrentlyGeneratingStructureName(supplier);
-//                            // FIXME: structures don't work
-////                            structureAccessor.getStructureStarts(chunkSectionPos, structureFeature)
-////                                    .forEach(
-////                                            structureStart -> structureStart.place(
-////                                                    region, structureAccessor, this, random, getBlockBoxForChunk(chunk), chunkPos
-////                                            )
-////                                    );
-//                        } catch (Exception var29) {
-//                            CrashReport crashReport = CrashReport.create(var29, "Feature placement");
-//                            crashReport.addElement("Feature").add("Description", supplier::get);
-//                            throw new CrashException(crashReport);
-//                        }
-//
-//                        ++m;
-//                    }
-
                     for(Structure structure : map.getOrDefault(k, Collections.emptyList())) {
                         random.setDecoratorSeed(populationSeed, m, k);
                         Supplier<String> supplier = () -> (String)registry2.getKey(structure).map(Object::toString).orElseGet(structure::toString);

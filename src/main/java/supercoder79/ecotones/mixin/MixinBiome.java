@@ -25,7 +25,7 @@ public abstract class MixinBiome {
             float temp = this.getTemperature();
 
 
-            RANDOM.setPopulationSeed(0, pos.getX(), pos.getZ());
+            RANDOM.setCarverSeed(0, pos.getX(), pos.getZ());
 
             if (RANDOM.nextInt(16) == 0) {
                 cir.setReturnValue(0.0f);

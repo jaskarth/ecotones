@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XWX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "ecotones:blueberries"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "result": {
+    "item": "minecraft:blue_dye",
+    "count": 1
+  }
+}
