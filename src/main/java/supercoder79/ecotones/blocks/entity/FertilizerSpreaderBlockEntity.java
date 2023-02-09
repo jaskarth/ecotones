@@ -222,6 +222,7 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
             BlockState state = world.getBlockState(local);
 
             boolean search = false;
+            // TODO: also check for waterlogged
             if (state.isOf(Blocks.WATER)) {
                 water.add(local);
 

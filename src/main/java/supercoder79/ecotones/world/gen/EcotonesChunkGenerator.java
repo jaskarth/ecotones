@@ -56,6 +56,9 @@ import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.data.Mosaic;
 import supercoder79.ecotones.world.edge.EdgeDecorator;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
+import supercoder79.ecotones.world.gen.caves.EcotonesCaveGenerator;
+import supercoder79.ecotones.world.gen.caves.NoiseCaveGenerator;
+import supercoder79.ecotones.world.gen.caves.OldCaveBiomesCaveGenerator;
 import supercoder79.ecotones.world.river.deco.RiverDecorator;
 import supercoder79.ecotones.world.storage.ChunkDataStorage;
 import supercoder79.ecotones.world.storage.ChunkStorageView;
@@ -99,6 +102,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
     private final Map<Identifier, DataFunction> data = new HashMap<>();
     private final CachingBlender blender = new CachingBlender(0.24, 6, 4);
     private final NoiseChunkGenerator shim;
+    private final NoiseCaveGenerator caves;
 
     public EcotonesChunkGenerator(Registry<StructureSet> structures, BiomeSource biomeSource, long seed) {
         super(structures, biomeSource, seed);
@@ -127,6 +131,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         this.data.put(EcotonesData.SOIL_PH, this.soilPhNoise::sample);
         this.data.put(EcotonesData.GRASS_NOISE, this.grassNoise::sample);
         this.data.put(EcotonesData.FLOWER_MOSAIC, new Mosaic(this.random.nextLong(), 8, 64, 16, -0.1, 0.4));
+        this.caves = new EcotonesCaveGenerator();
+        this.caves.init(seed);
 
 //        System.out.println(">> SEED: " + seed);
     }
@@ -261,7 +267,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
     }
 
     @Override
-    protected void sampleNoiseColumn(double[] buffer, int x, int z, double horizontalScale, double verticalScale, double horizontalStretch, double verticalStretch, int interpolationSize, int interpolateTowards) {
+    protected void sampleNoiseColumn(double[] column, int x, int z, double horizontalScale, double verticalScale, double horizontalStretch, double verticalStretch, int interpolationSize, int interpolateTowards) {
         double[] noiseData = this.computeNoiseData(x, z);
         double depth = noiseData[0];
         double scale = noiseData[1];
@@ -289,8 +295,13 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 //                noise = ((EcotonesBiome)biome).modifyNoise(x, y, z, noise);
 //            }
 
-            buffer[y + 8] = noise;
+            column[y + 8] = noise;
         }
+    }
+
+    @Override
+    protected void generateCavesInto(int x, int z, NoiseColumn col) {
+        this.caves.genColumn(x, z, col);
     }
 
     @Override
@@ -312,7 +323,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
     public void populateEntities(ChunkRegion region) {
         ChunkPos chunkPos = region.getCenterPos();
         RegistryEntry<Biome> biome = region.getBiome(chunkPos.getStartPos());
-        ChunkRandom chunkRandom = new ChunkRandom(new CheckedRandom(0));
+        ChunkRandom chunkRandom = new ChunkRandom(new CheckedRandom(RandomSeed.getSeed()));
         chunkRandom.setPopulationSeed(region.getSeed(), chunkPos.getStartX(), chunkPos.getStartZ());
         SpawnHelper.populateEntities(region, biome, chunkPos, chunkRandom);
     }
@@ -380,7 +391,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 
     @Override
     public int getMinimumY() {
-        return 0;
+        return -64;
     }
 
     @Override
@@ -394,7 +405,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
     }
 
     public MultiNoiseUtil.MultiNoiseSampler getMultiNoiseSampler() {
-        return MultiNoiseUtil.method_40443();
+        return MultiNoiseUtil.createEmptyMultiNoiseSampler();
     }
 
     @Override

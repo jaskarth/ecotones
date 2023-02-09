@@ -108,14 +108,14 @@ public class OreVeinFeature extends EcotonesFeature<DefaultFeatureConfig> {
 
             if (isVein(this.veinANoise.sample(x, y * 1.75, z), this.veinBNoise.sample(x, y * 1.75, z))) {
                 double quality = this.veinQualityNoise.sample(x, y, z);
-                double skipChance = MathHelper.clampedLerpFromProgress(quality, -1, 1, 0.875, 0.4);
+                double skipChance = MathHelper.clampedMap(quality, -1, 1, 0.875, 0.4);
 
                 if (random.nextDouble() < skipChance) {
                     continue;
                 }
 
-                if (random.nextDouble() < MathHelper.clampedLerpFromProgress(quality, -0.25, 1.0, 0, 0.65)) {
-                    double rareChance = MathHelper.clampedLerpFromProgress(quality, 0.45, 1.0, 0.02, 0.4);
+                if (random.nextDouble() < MathHelper.clampedMap(quality, -0.25, 1.0, 0, 0.65)) {
+                    double rareChance = MathHelper.clampedMap(quality, 0.45, 1.0, 0.02, 0.4);
 
                     if (random.nextDouble() < rareChance) {
                         world.setBlockState(local, vein.getRareState(), 3);

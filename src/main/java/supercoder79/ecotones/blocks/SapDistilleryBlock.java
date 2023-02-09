@@ -43,15 +43,14 @@ public class SapDistilleryBlock extends BlockWithEntity {
             return ActionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof SapDistilleryBlockEntity) {
-                SapDistilleryBlockEntity sapDistillery = (SapDistilleryBlockEntity) blockEntity;
+            if (blockEntity instanceof SapDistilleryBlockEntity sapDistillery) {
                 boolean interacted = false;
 
                 if (player.getStackInHand(hand).isOf(EcotonesItems.JAR)) {
                     if (sapDistillery.canFillBottle()) {
                         sapDistillery.reduceForBottle();
                         player.getStackInHand(hand).decrement(1);
-                        player.getInventory().insertStack(new ItemStack(EcotonesItems.MAPLE_SYRUP));
+                        player.getInventory().insertStack(sapDistillery.fillBottle());
 
                         interacted = true;
                     }

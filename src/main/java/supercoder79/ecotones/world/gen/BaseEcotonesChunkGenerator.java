@@ -226,7 +226,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     }
 
     protected double lowerInterpolationStart() {
-        return 0.0D;
+        return -500.0D;
     }
 
     public int getHeight(int x, int z, Type heightmapType, HeightLimitView world, NoiseConfig noiseConfig) {
@@ -236,11 +236,11 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     public VerticalBlockSample getColumnSample(int x, int z, HeightLimitView world, NoiseConfig noiseConfig) {
         BlockState[] states = new BlockState[this.noiseSizeY * this.verticalNoiseResolution];
         this.sampleHeightmap(x, z, states, null);
-        // TODO: custom min y, using 0 for now
-        return new VerticalBlockSample(0, states);
+        return new VerticalBlockSample(getMinimumY(), states);
     }
 
     private int sampleHeightmap(int x, int z, @Nullable BlockState[] blockStates, @Nullable Predicate<BlockState> predicate) {
+        // TODO: handle rivers and such
         // Get all of the coordinate starts and positions
         int xStart = Math.floorDiv(x, this.horizontalNoiseResolution);
         int zStart = Math.floorDiv(z, this.horizontalNoiseResolution);
@@ -274,7 +274,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                 // Get the real y position (translate noise chunk and noise piece)
                 int y = noiseY * this.verticalNoiseResolution + pieceY;
 
-                BlockState state = this.getBlockState(density, y);
+                BlockState state = this.getBlockState(density, y, 0);
                 if (blockStates != null) {
                     blockStates[y] = state;
                 }
@@ -289,7 +289,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         return 0;
     }
 
-    protected BlockState getBlockState(double density, int y) {
+    protected BlockState getBlockState(double density, int y, int minY) {
         if (density > 0.0D) {
             if (y < -8) {
                 return Blocks.DEEPSLATE.getDefaultState();
@@ -302,7 +302,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                 }
             }
             return this.defaultBlock;
-        } else if (y < this.getSeaLevel()) {
+        } else if (y < this.getSeaLevel() && y > (minY * 8)) {
             return this.defaultFluid;
         } else {
             return AIR;
@@ -316,7 +316,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         sampleNoiseColumn(null, plateSet.findForChunk(pos), buffer, x, z);
     }
 
-    protected void sampleNoiseColumn(Chunk chunk, List<RiverNode> riverPlate, double[] buffer, int x, int z) {
+    protected int sampleNoiseColumn(Chunk chunk, List<RiverNode> riverPlate, double[] buffer, int x, int z) {
         this.noiseCache.get().get(buffer, x, z);
 
         for (int i = 0; i < buffer.length; i++) {
@@ -332,7 +332,15 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                 filterForRiver(storage, riverPlate, buffer, x, z);
             }
         }
+
+        NoiseColumn acol = new NoiseColumn();
+        acol.buffer = buffer;
+        generateCavesInto(x, z, acol);
+
+        return acol.maxY;
     }
+
+    protected abstract void generateCavesInto(int x, int z, NoiseColumn col);
 
     private void filterForRiver(ChunkDataStorage storage, List<RiverNode> riverPlate, double[] buffer, int x, int z) {
         double color = 0;
@@ -405,7 +413,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         // Reduce edges
         //1+\left(x-1\right)^{3}
         double lerp9 = 1 + Math.pow(lerpstr - 1, 3);
-        buffer[9 + 8] = MathHelper.lerp(lerp9, buffer[9 + 8], buffer[9 + 8] - MathHelper.clampedLerpFromProgress(buffer[10 + 8], -1, 0, 1.6, 0));
+        buffer[9 + 8] = MathHelper.lerp(lerp9, buffer[9 + 8], buffer[9 + 8] - MathHelper.clampedMap(buffer[10 + 8], -1, 0, 1.6, 0));
 //        buffer[9] = MathHelper.lerp(lerpstr, buffer[9], -0.1);
 //        buffer[7] = MathHelper.lerp(lerpstr, buffer[7], -0.05 + noise / 1.5);
     }
@@ -501,22 +509,25 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         int chunkStartX = chunkX << 4;
         int chunkStartZ = chunkZ << 4;
 
-        StructureWeightSampler structures = StructureWeightSampler.method_42695(accessor, pos);
+        StructureWeightSampler structures = StructureWeightSampler.createStructureWeightSampler(accessor, pos);
 
         // Holds the rolling noise data for this chunk
         // Instead of being noise[4 * 33 * 4] it's actually noise[2 * 5 * 33] to reuse noise data when moving onto the next column on the x axis.
         // This could probably be optimized but I'm a bit too lazy to figure out the best way to do so :P
-        double[][][] noiseData = new double[2][this.noiseSizeZ + 1][this.noiseSizeY + 1];
+        double[][][] noiseData = new double[this.noiseSizeX + 1][this.noiseSizeZ + 1][this.noiseSizeY + 1];
 
         PlateSet riverPlate = this.riverWorker.forChunk(pos);
 
         List<RiverNode> riverNodes = riverPlate.findForChunk(pos);
 
         // Initialize noise data on the x0 column.
-        for(int noiseZ = 0; noiseZ < this.noiseSizeZ + 1; ++noiseZ) {
-            noiseData[0][noiseZ] = new double[this.noiseSizeY + 1];
-            this.sampleNoiseColumn(chunk, riverNodes, noiseData[0][noiseZ], chunkX * this.noiseSizeX, chunkZ * this.noiseSizeZ + noiseZ);
-            noiseData[1][noiseZ] = new double[this.noiseSizeY + 1];
+        int minY = 10000;
+        for(int noiseX = 0; noiseX < this.noiseSizeX + 1; ++noiseX) {
+            for(int noiseZ = 0; noiseZ < this.noiseSizeZ + 1; ++noiseZ) {
+                noiseData[noiseX][noiseZ] = new double[this.noiseSizeY + 1];
+                int minYHere = this.sampleNoiseColumn(chunk, riverNodes, noiseData[noiseX][noiseZ], chunkX * this.noiseSizeX + noiseX, chunkZ * this.noiseSizeZ + noiseZ);
+                minY = Math.min(minY, minYHere);
+            }
         }
 
         ProtoChunk protoChunk = (ProtoChunk)chunk;
@@ -531,28 +542,24 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         // [0, 4] -> x noise chunks
         for(int noiseX = 0; noiseX < this.noiseSizeX; ++noiseX) {
             // Initialize noise data on the x1 column
-            int noiseZ;
-            for(noiseZ = 0; noiseZ < this.noiseSizeZ + 1; ++noiseZ) {
-                this.sampleNoiseColumn(chunk, riverNodes, noiseData[1][noiseZ], chunkX * this.noiseSizeX + noiseX + 1, chunkZ * this.noiseSizeZ + noiseZ);
-            }
 
             // [0, 4] -> z noise chunks
-            for(noiseZ = 0; noiseZ < this.noiseSizeZ; ++noiseZ) {
+            for(int noiseZ = 0; noiseZ < this.noiseSizeZ; ++noiseZ) {
                 ChunkSection section = protoChunk.getSection(chunk.getSectionIndex(319));
                 section.lock();
 
                 // [0, 32] -> y noise chunks
                 for(int noiseY = this.noiseSizeY - 1; noiseY >= 0; --noiseY) {
                     // Lower samples
-                    double x0z0y0 = noiseData[0][noiseZ][noiseY];
-                    double x0z1y0 = noiseData[0][noiseZ + 1][noiseY];
-                    double x1z0y0 = noiseData[1][noiseZ][noiseY];
-                    double x1z1y0 = noiseData[1][noiseZ + 1][noiseY];
+                    double x0z0y0 = noiseData[noiseX][noiseZ][noiseY];
+                    double x0z1y0 = noiseData[noiseX][noiseZ + 1][noiseY];
+                    double x1z0y0 = noiseData[noiseX + 1][noiseZ][noiseY];
+                    double x1z1y0 = noiseData[noiseX + 1][noiseZ + 1][noiseY];
                     // Upper samples
-                    double x0z0y1 = noiseData[0][noiseZ][noiseY + 1];
-                    double x0z1y1 = noiseData[0][noiseZ + 1][noiseY + 1];
-                    double x1z0y1 = noiseData[1][noiseZ][noiseY + 1];
-                    double x1z1y1 = noiseData[1][noiseZ + 1][noiseY + 1];
+                    double x0z0y1 = noiseData[noiseX][noiseZ][noiseY + 1];
+                    double x0z1y1 = noiseData[noiseX][noiseZ + 1][noiseY + 1];
+                    double x1z0y1 = noiseData[noiseX + 1][noiseZ][noiseY + 1];
+                    double x1z1y1 = noiseData[noiseX + 1][noiseZ + 1][noiseY + 1];
 
                     // [0, 8) -> y noise pieces
                     for(int pieceY = this.verticalNoiseResolution - 1; pieceY >= 0; --pieceY) {
@@ -610,7 +617,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                                 density += structureAdd;
 
                                 // Get the blockstate based on the y and density
-                                BlockState state = this.getBlockState(density, realY);
+                                BlockState state = this.getBlockState(density, realY, minY);
 
                                 if (state != AIR) {
                                     // Add light source if the state has light
@@ -634,9 +641,9 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
             }
 
             // Reuse noise data from the previous column for speed
-            double[][] xColumn = noiseData[0];
-            noiseData[0] = noiseData[1];
-            noiseData[1] = xColumn;
+//            double[][] xColumn = noiseData[0];
+//            noiseData[0] = noiseData[1];
+//            noiseData[1] = xColumn;
         }
 
     }

@@ -48,8 +48,8 @@ public abstract class MixinClientWorld extends World {
             time += 2000;
             time %= 24000;
             double delta = time / 24000.0;
-            double lerp = MathHelper.clampedLerpFromProgress(delta, 0.5, 0.55, 0, 1);
-            lerp *= MathHelper.clampedLerpFromProgress(delta, 0.95, 1, 1, 0);
+            double lerp = MathHelper.clampedMap(delta, 0.5, 0.55, 0, 1);
+            lerp *= MathHelper.clampedMap(delta, 0.95, 1, 1, 0);
             if (delta > 0.5) {
                 red += 0.05 * lerp;
                 green += 0.025 * lerp;

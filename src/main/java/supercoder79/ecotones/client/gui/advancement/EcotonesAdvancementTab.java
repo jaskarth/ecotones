@@ -68,6 +68,7 @@ public class EcotonesAdvancementTab extends AdvancementTab {
         fill(matrices, 4680, 2260, -4680, -2260, -16777216);
         RenderSystem.colorMask(true, true, true, true);
         RenderSystem.depthFunc(515);
+        RenderSystem.disableDepthTest();
         matrices.pop();
     }
 

@@ -22,6 +22,9 @@
     ],
     "client": [
       "supercoder79.ecotones.EcotonesClient"
+    ],
+    "preLaunch": [
+      "supercoder79.ecotones.EcotonesPrelaunch"
     ]
   },
   "mixins": [

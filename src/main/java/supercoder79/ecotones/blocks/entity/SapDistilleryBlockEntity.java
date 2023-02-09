@@ -134,7 +134,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
         }
 
         if (entity.getStack().isOf(EcotonesItems.JAR) && this.syrupAmount >= 1000) {
-            world.spawnEntity(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(EcotonesItems.MAPLE_SYRUP)));
+            world.spawnEntity(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), fillBottle()));
 
             entity.remove(Entity.RemovalReason.KILLED);
 
@@ -179,6 +179,10 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
                 sync();
             }
         }
+    }
+
+    public ItemStack fillBottle() {
+        return new ItemStack(EcotonesItems.MAPLE_SYRUP);
     }
 
     public int getSyrupAmount() {

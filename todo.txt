@@ -72,7 +72,7 @@
 * Turpentine in sap distillery
 * Cave gen
 * Cave biomes
-* Aquifers
+* Aquifers // non blocking
 * Fix structures
 * Add all remaining books
 * Grindstone recipes for malachite and pyrite
