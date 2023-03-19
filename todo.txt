@@ -71,6 +71,5 @@
 * Grindstone
   * Texture and model
 * Turpentine in sap distillery
-* Cave biomes
 * Add all remaining books
 * World corruption bugs?

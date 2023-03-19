@@ -26,7 +26,6 @@ public class EcotonesConfiguredFeature<FC extends FeatureConfig, F extends Featu
     private final FC config;
 
     public EcotonesConfiguredFeature(F feature, FC config) {
-
         this.feature = feature;
         this.config = config;
     }

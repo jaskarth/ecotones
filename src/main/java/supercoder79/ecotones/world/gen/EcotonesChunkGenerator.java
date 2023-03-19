@@ -444,7 +444,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         if (this.biomeSource instanceof CaveBiomeSource) {
             CaveBiome caveBiome = ((CaveBiomeSource)this.biomeSource).getCaveBiomeForNoiseGen((chunkPos.x << 2) + 2, (chunkPos.z << 2) + 2);
 
-            for (ConfiguredFeature<?, ?> feature : caveBiome.getFeatures()) {
+            for (PlacedFeature feature : caveBiome.getFeatures()) {
                 feature.generate(world, this, new CheckedRandom(random.nextLong()), pos);
             }
         }

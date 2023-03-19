@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.biome;
 import supercoder79.ecotones.world.biome.base.hot.*;
 import supercoder79.ecotones.world.biome.base.warm.*;
 import supercoder79.ecotones.world.biome.cave.LimestoneCaveBiome;
+import supercoder79.ecotones.world.biome.cave.WrappedCaveBiome;
 import supercoder79.ecotones.world.biome.climatic.*;
 import supercoder79.ecotones.world.biome.special.*;
 import supercoder79.ecotones.world.biome.technical.*;
@@ -100,6 +101,7 @@ public final class EcotonesBiomes {
 
         // Cave biomes
         LimestoneCaveBiome.init();
+        WrappedCaveBiome.init();
 
         RoseFieldBiome.init();
     }
