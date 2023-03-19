@@ -11,7 +11,7 @@ public final class AuthorGenerator {
             return "SuperCoder79";
         }
 
-        if (random.nextInt(200) == 0) {
+        if (random.nextInt(2000) == 0) {
             return Formatting.FORMATTING_CODE_PREFIX + Formatting.OBFUSCATED.getCode() + "ecotones";
         }
 

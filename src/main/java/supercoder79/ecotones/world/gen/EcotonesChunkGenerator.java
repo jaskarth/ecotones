@@ -2,13 +2,9 @@ package supercoder79.ecotones.world.gen;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.longs.LongSet;
-import net.minecraft.entity.SpawnGroup;
 import net.minecraft.structure.StructureSet;
-import net.minecraft.structure.StructureStart;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import net.minecraft.util.collection.Pool;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.dynamic.RegistryOps;
@@ -17,6 +13,7 @@ import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.util.math.random.RandomSeed;
+import net.minecraft.util.math.random.ThreadSafeRandom;
 import net.minecraft.util.registry.*;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
@@ -38,8 +35,6 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import net.minecraft.world.gen.structure.Structure;
-import net.minecraft.world.gen.structure.Structures;
-import org.apache.commons.lang3.mutable.MutableBoolean;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.CaveBiome;
 import supercoder79.ecotones.util.BiomeCache;
@@ -58,7 +53,6 @@ import supercoder79.ecotones.world.edge.EdgeDecorator;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.gen.caves.EcotonesCaveGenerator;
 import supercoder79.ecotones.world.gen.caves.NoiseCaveGenerator;
-import supercoder79.ecotones.world.gen.caves.OldCaveBiomesCaveGenerator;
 import supercoder79.ecotones.world.river.deco.RiverDecorator;
 import supercoder79.ecotones.world.storage.ChunkDataStorage;
 import supercoder79.ecotones.world.storage.ChunkStorageView;
@@ -66,7 +60,6 @@ import supercoder79.ecotones.world.storage.StorageKeys;
 import supercoder79.ecotones.world.storage.data.RiverData;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -322,8 +315,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
     @Override
     public void populateEntities(ChunkRegion region) {
         ChunkPos chunkPos = region.getCenterPos();
-        RegistryEntry<Biome> biome = region.getBiome(chunkPos.getStartPos());
-        ChunkRandom chunkRandom = new ChunkRandom(new CheckedRandom(RandomSeed.getSeed()));
+        RegistryEntry<Biome> biome = region.getBiome(chunkPos.getStartPos().withY(region.getTopY() - 1));
+        ChunkRandom chunkRandom = new ChunkRandom(new ThreadSafeRandom(RandomSeed.getSeed()));
         chunkRandom.setPopulationSeed(region.getSeed(), chunkPos.getStartX(), chunkPos.getStartZ());
         SpawnHelper.populateEntities(region, biome, chunkPos, chunkRandom);
     }

@@ -36,6 +36,7 @@ import supercoder79.ecotones.world.biome.cave.LimestoneCaveBiome;
 import supercoder79.ecotones.world.layers.system.BiomeLayerSampler;
 
 import java.util.*;
+import java.util.concurrent.locks.StampedLock;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -54,14 +55,14 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
 
     private final OpenSimplexNoise caveBiomeNoise;
     private final boolean isReal;
+    private final StampedLock lock = new StampedLock();
 
     public EcotonesBiomeSource(Registry<Biome> biomeRegistry, long seed, boolean isReal) {
         super(
                 BiomeGenData.LOOKUP
                         .keySet()
                         .stream()
-                        .map(biomeRegistry::getOrThrow)
-                        .map(RegistryEntry.Direct::new)
+                        .map(k -> biomeRegistry.entryOf(k))
         );
         this.biomeRegistry = biomeRegistry;
         this.biomeSampler = EcotonesBiomeLayers.build(seed);
@@ -70,6 +71,7 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
         this.isReal = isReal;
 
         if (isReal) {
+            long stamp = this.lock.writeLock();
             Ecotones.REGISTRY = this.biomeRegistry;
             ModCompat.run();
 
@@ -79,8 +81,7 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
                 BiomeIdManager.register(this.biomeRegistry.getKey(biome).get(), this.biomeRegistry.getRawId(biome));
             }
 
-//            System.out.println("============");
-//            System.out.println(BiomeIdManager.MAP);
+            this.lock.unlockWrite(stamp);
         }
     }
 
@@ -91,12 +92,15 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
 //    }
 
     public RegistryEntry<Biome> getBiome(int biomeX, int biomeY, int biomeZ, MultiNoiseUtil.MultiNoiseSampler sampler) {
+        long stamp = this.lock.readLock();
         try {
             // TODO: no crash sampler
             return this.biomeRegistry.entryOf(this.biomeSampler.sampleKey(biomeX, biomeZ));
         } catch (Exception e) {
             e.printStackTrace();
             return new RegistryEntry.Direct<>(this.biomeRegistry.get(BiomeKeys.PLAINS));
+        } finally {
+            this.lock.unlockRead(stamp);
         }
     }
 
@@ -126,10 +130,6 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
             WorldView world
     ) {
         Set<RegistryEntry<Biome>> set = this.getBiomes().stream().filter(predicate).collect(Collectors.toUnmodifiableSet());
-        System.out.println(set);
-        System.out.println("----------");
-        System.out.println(getBiomes());
-        System.out.println("----------");
         if (set.isEmpty()) {
             return null;
         } else {

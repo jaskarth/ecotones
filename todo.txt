@@ -59,6 +59,7 @@
 * Trees don't set block to dirt
 * Fix disks
 * Skip analysis when good soil quality
+* Aquifers
 
 * Add flowers to bonemeal
 * More clover variation
@@ -70,10 +71,6 @@
 * Grindstone
   * Texture and model
 * Turpentine in sap distillery
-* Cave gen
 * Cave biomes
-* Aquifers // non blocking
 * Fix structures
 * Add all remaining books
-* Grindstone recipes for malachite and pyrite
-* Ensuring all recipes are craftable
