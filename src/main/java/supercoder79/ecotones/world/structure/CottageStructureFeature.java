@@ -39,7 +39,7 @@ public class CottageStructureFeature extends Structure {
         return true;
     }
 
-    private static void addPieces(StructurePiecesCollector collector, Context context) {
+    private void addPieces(StructurePiecesCollector collector, Context context) {
         HeightLimitView world = context.world();
         ChunkGenerator chunkGenerator = context.chunkGenerator();
         ChunkPos pos = context.chunkPos();

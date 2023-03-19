@@ -251,7 +251,7 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         // Create the noise data in a 2 * 2 * 32 grid for interpolation.
         double[][] noiseData = new double[][]{this.createNoiseColumn(xStart, zStart), this.createNoiseColumn(xStart, zStart + 1), this.createNoiseColumn(xStart + 1, zStart), this.createNoiseColumn(xStart + 1, zStart + 1)};
 
-        // [0, 32] -> noise chunks
+        // [0, 40] -> noise chunks
         for(int noiseY = this.noiseSizeY - 1; noiseY >= 0; --noiseY) {
             // Gets all the noise in a 2x2x2 cube and interpolates it together.
             // Lower pieces
@@ -272,11 +272,11 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                 double density = MathHelper.lerp3(yLerp, xLerp, zLerp, x0z0y0, x0z0y1, x1z0y0, x1z0y1, x0z1y0, x0z1y1, x1z1y0, x1z1y1);
 
                 // Get the real y position (translate noise chunk and noise piece)
-                int y = noiseY * this.verticalNoiseResolution + pieceY;
+                int y = (noiseY * this.verticalNoiseResolution + pieceY) - 64;
 
                 BlockState state = this.getBlockState(density, y, 0);
                 if (blockStates != null) {
-                    blockStates[y] = state;
+                    blockStates[y + 64] = state;
                 }
 
                 // return y if it fails the check

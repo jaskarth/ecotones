@@ -30,19 +30,19 @@ public final class EcotonesStructures {
     );
 
     public static final RegistryEntry<Structure> CAMPFIRE_OAK = register(
-            of("campfire_oak"), new CampfireStructureFeature(createConfig(tag("campfire_oak"), StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.OAK_LOG.getDefaultState()))
+            of("campfire_oak"), new CampfireStructureFeature(createConfig(tag("campfire_oak"), StructureTerrainAdaptation.NONE), new SingleStateFeatureConfig(Blocks.OAK_LOG.getDefaultState()))
     );
 
     public static final RegistryEntry<Structure> CAMPFIRE_BIRCH = register(
-            of("campfire_birch"), new CampfireStructureFeature(createConfig(tag("campfire_birch"), StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.BIRCH_LOG.getDefaultState()))
+            of("campfire_birch"), new CampfireStructureFeature(createConfig(tag("campfire_birch"), StructureTerrainAdaptation.NONE), new SingleStateFeatureConfig(Blocks.BIRCH_LOG.getDefaultState()))
     );
 
     public static final RegistryEntry<Structure> CAMPFIRE_SPRUCE = register(
-            of("campfire_spruce"), new CampfireStructureFeature(createConfig(tag("campfire_spruce"), StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState()))
+            of("campfire_spruce"), new CampfireStructureFeature(createConfig(tag("campfire_spruce"), StructureTerrainAdaptation.NONE), new SingleStateFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState()))
     );
 
     public static final RegistryEntry<Structure> CAMPFIRE_DARK_OAK = register(
-            of("campfire_dark_oak"), new CampfireStructureFeature(createConfig(tag("campfire_dark_oak"), StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.DARK_OAK_LOG.getDefaultState()))
+            of("campfire_dark_oak"), new CampfireStructureFeature(createConfig(tag("campfire_dark_oak"), StructureTerrainAdaptation.NONE), new SingleStateFeatureConfig(Blocks.DARK_OAK_LOG.getDefaultState()))
     );
 
 //    public static final StructureFeature<SingleStateFeatureConfig> CAMPFIRE = new CampfireStructureFeature(SingleStateFeatureConfig.CODEC);

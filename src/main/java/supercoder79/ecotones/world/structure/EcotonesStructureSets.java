@@ -30,11 +30,11 @@ public final class EcotonesStructureSets {
             )
     );
 
-    RegistryEntry<StructureSet> COTTAGES = register(
+    private static final RegistryEntry<StructureSet> COTTAGES = register(
             of("cottages"), EcotonesStructures.COTTAGE, new RandomSpreadStructurePlacement(24, 4, SpreadType.LINEAR, 14357617)
     );
 
-    RegistryEntry<StructureSet> OUTPOSTS = register(
+    private static final RegistryEntry<StructureSet> OUTPOSTS = register(
             of("outposts"), EcotonesStructures.OUTPOST, new RandomSpreadStructurePlacement(10, 2, SpreadType.LINEAR, 14357617)
     );
 

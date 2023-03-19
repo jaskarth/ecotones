@@ -72,5 +72,5 @@
   * Texture and model
 * Turpentine in sap distillery
 * Cave biomes
-* Fix structures
 * Add all remaining books
+* World corruption bugs?
