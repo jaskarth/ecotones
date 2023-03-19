@@ -28,6 +28,7 @@
 * Sap mob trap
 * Acorns -> grow large trees
 * Birch seeds -> grow large birch trees
+* Turpentine in sap distillery
 
 # Misc
 * Stop procrastinating on cold biomes
@@ -70,6 +71,4 @@
 # 0.9.0 blockers
 * Grindstone
   * Texture and model
-* Turpentine in sap distillery
-* Add all remaining books
 * World corruption bugs?

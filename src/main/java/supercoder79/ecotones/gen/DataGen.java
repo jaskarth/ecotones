@@ -13,7 +13,7 @@ public final class DataGen {
     public static final Logger LOGGER = LogManager.getLogger("ecotones-datagen");
     public static final DataGenData DATA = new DataGenData();
 
-    private static final boolean RUN = false;
+    private static final boolean RUN = true;
     public static void run() {
         if (RUN && FabricLoader.getInstance().isDevelopmentEnvironment()) {
             try {
@@ -45,6 +45,9 @@ public final class DataGen {
 
         RecipeGen.shaped("blueberry_to_blue_dye", "minecraft:blue_dye", 1, " X ", "XWX", " X ",
                 List.of("X", "ecotones:blueberries", "W", "minecraft:white_dye"));
+
+        RecipeGen.shaped("turpentine", "ecotones:turpentine", 1, " X ", "XJX", " X ",
+                List.of("X", "ecotones:pine_sap", "J", "ecotones:jar"));
 
         LangFileGen.addBlockItemBlock("steady_geyser", "Steady Geyser");
 
