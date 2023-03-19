@@ -467,23 +467,21 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
             int k = 0;
             int m = 0;
             if (structureAccessor.shouldGenerateStructures()) {
-                if (structureAccessor.shouldGenerateStructures()) {
-                    for(Structure structure : map.getOrDefault(k, Collections.emptyList())) {
-                        random.setDecoratorSeed(populationSeed, m, k);
-                        Supplier<String> supplier = () -> (String)registry2.getKey(structure).map(Object::toString).orElseGet(structure::toString);
+                for(Structure structure : map.getOrDefault(j, Collections.emptyList())) {
+                    random.setDecoratorSeed(populationSeed, m, j);
+                    Supplier<String> supplier = () -> (String)registry2.getKey(structure).map(Object::toString).orElseGet(structure::toString);
 
-                        try {
-                            region.setCurrentlyGeneratingStructureName(supplier);
-                            structureAccessor.getStructureStarts(chunkSectionPos, structure)
-                                    .forEach(start -> start.place(region, structureAccessor, this, random, getBlockBoxForChunk(chunk), chunkPos));
-                        } catch (Exception var29) {
-                            CrashReport crashReport = CrashReport.create(var29, "Feature placement");
-                            crashReport.addElement("Feature").add("Description", supplier::get);
-                            throw new CrashException(crashReport);
-                        }
-
-                        ++m;
+                    try {
+                        region.setCurrentlyGeneratingStructureName(supplier);
+                        structureAccessor.getStructureStarts(chunkSectionPos, structure)
+                                .forEach(start -> start.place(region, structureAccessor, this, random, getBlockBoxForChunk(chunk), chunkPos));
+                    } catch (Exception var29) {
+                        CrashReport crashReport = CrashReport.create(var29, "Feature placement");
+                        crashReport.addElement("Feature").add("Description", supplier::get);
+                        throw new CrashException(crashReport);
                     }
+
+                    ++m;
                 }
             }
 

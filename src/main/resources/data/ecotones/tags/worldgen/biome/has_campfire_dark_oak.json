@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "ecotones:dark_oak_thicket",
+    "ecotones:dark_oak_thicket_hilly",
+    "ecotones:dark_oak_thicket_mountainous"
+  ]
+}

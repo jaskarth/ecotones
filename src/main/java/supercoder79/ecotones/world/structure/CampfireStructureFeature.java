@@ -49,7 +49,7 @@ public class CampfireStructureFeature extends Structure {
 
     @Override
     public Optional<StructurePosition> getStructurePosition(Context context) {
-        return Optional.of(new Structure.StructurePosition(context.chunkPos().getStartPos(), collector -> addPieces(collector, context)));
+        return getStructurePosition(context, Heightmap.Type.OCEAN_FLOOR_WG, collector -> addPieces(collector, context));
     }
 
     @Override

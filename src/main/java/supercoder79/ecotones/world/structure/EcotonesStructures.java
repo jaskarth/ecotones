@@ -20,30 +20,29 @@ import supercoder79.ecotones.mixin.StructureFeatureAccessor;
 import java.util.Map;
 
 public final class EcotonesStructures {
-    public static final TagKey<Biome> DUMMY_TAG = TagKey.of(Registry.BIOME_KEY, Ecotones.id("dummy_ecotones_tag"));
 
     public static final RegistryEntry<Structure> COTTAGE = register(
-            of("cottage"), new CottageStructureFeature(createConfig(DUMMY_TAG, StructureTerrainAdaptation.BEARD_THIN))
+            of("cottage"), new CottageStructureFeature(createConfig(tag("cottage"), StructureTerrainAdaptation.BEARD_THIN))
     );
 
     public static final RegistryEntry<Structure> OUTPOST = register(
-            of("outpost"), new OutpostStructure(createConfig(DUMMY_TAG, StructureTerrainAdaptation.NONE))
+            of("outpost"), new OutpostStructure(createConfig(tag("outpost"), StructureTerrainAdaptation.NONE))
     );
 
     public static final RegistryEntry<Structure> CAMPFIRE_OAK = register(
-            of("campfire_oak"), new CampfireStructureFeature(createConfig(DUMMY_TAG, StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.OAK_LOG.getDefaultState()))
+            of("campfire_oak"), new CampfireStructureFeature(createConfig(tag("campfire_oak"), StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.OAK_LOG.getDefaultState()))
     );
 
     public static final RegistryEntry<Structure> CAMPFIRE_BIRCH = register(
-            of("campfire_birch"), new CampfireStructureFeature(createConfig(DUMMY_TAG, StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.BIRCH_LOG.getDefaultState()))
+            of("campfire_birch"), new CampfireStructureFeature(createConfig(tag("campfire_birch"), StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.BIRCH_LOG.getDefaultState()))
     );
 
     public static final RegistryEntry<Structure> CAMPFIRE_SPRUCE = register(
-            of("campfire_spruce"), new CampfireStructureFeature(createConfig(DUMMY_TAG, StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState()))
+            of("campfire_spruce"), new CampfireStructureFeature(createConfig(tag("campfire_spruce"), StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState()))
     );
 
     public static final RegistryEntry<Structure> CAMPFIRE_DARK_OAK = register(
-            of("campfire_dark_oak"), new CampfireStructureFeature(createConfig(DUMMY_TAG, StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.DARK_OAK_LOG.getDefaultState()))
+            of("campfire_dark_oak"), new CampfireStructureFeature(createConfig(tag("campfire_dark_oak"), StructureTerrainAdaptation.BURY), new SingleStateFeatureConfig(Blocks.DARK_OAK_LOG.getDefaultState()))
     );
 
 //    public static final StructureFeature<SingleStateFeatureConfig> CAMPFIRE = new CampfireStructureFeature(SingleStateFeatureConfig.CODEC);
@@ -74,6 +73,10 @@ public final class EcotonesStructures {
 //                .step(GenerationStep.Feature.SURFACE_STRUCTURES)
 //                .defaultConfig(10, 2, 2492472)
 //                .register();
+    }
+
+    private static TagKey<Biome> tag(String s) {
+        return TagKey.of(Registry.BIOME_KEY, Ecotones.id("has_" + s));
     }
 
     private static RegistryKey<Structure> of(String id) {

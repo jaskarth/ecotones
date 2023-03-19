@@ -11,6 +11,8 @@ import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.structure.Structure;
+import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.util.RegistryReport;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.gen.BiomeGenData;
@@ -29,6 +31,7 @@ public abstract class EcotonesBiomeBuilder {
     private final SpawnSettings.Builder spawnSettings;
     private final GenerationSettings.Builder generationSettings;
     private final BiomeEffects.Builder biomeEffects;
+    private final List<RegistryEntry<Structure>> structures = new ArrayList<>();
 
     private double depth = 0.1;
     private double scale = 0.05;
@@ -165,15 +168,8 @@ public abstract class EcotonesBiomeBuilder {
         this.generationSettings.feature(step, plHolder);
     }
 
-    @Deprecated // Exists only so that i can figure out what biomes get what structures in the future
-    protected void addStructureFeature(/*ConfiguredStructureFeature<?, ?> structureFeature*/ Object o) {
-//        if (BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE.getRawId(structureFeature) == -1) {
-//            String path = "ecotones_auto_registed_structure_" + featureId.incrementAndGet();
-//            Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new Identifier("ecotones", path), structureFeature);
-//            RegistryReport.increment("Configured Structure Feature");
-//        }
-//
-//        this.structures.add(structureFeature);
+    protected void addStructureFeature(RegistryEntry<Structure> structure) {
+        structures.add(structure);
     }
 
     public Biome build() {
@@ -182,6 +178,9 @@ public abstract class EcotonesBiomeBuilder {
         this.builder.spawnSettings(this.spawnSettings.build());
 
         Biome biome = builder.build();
+        for (RegistryEntry<Structure> structure : structures) {
+            BiomeRegistries.registerStructure(structure, biome);
+        }
         OBJ2DATA.put(biome, new BiomeGenData(this.depth, this.scale, this.volatility, this.hilliness, this.configuredSurfaceBuilder));
 //        BIOME_STRUCTURES.put(biome, this.structures);
 

@@ -37,6 +37,8 @@ public final class DataGen {
     }
 
     private static void runDataGen() throws IOException {
+        TagGen.automakeStructureHas();
+
         crossBlock("flame_lily", "Flame Lily");
 
         RecipeGen.shapeless("flame_lily_to_dye", "minecraft:red_dye", 1, "ecotones:flame_lily");
