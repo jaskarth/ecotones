@@ -25,3 +25,5 @@ accessible field net/minecraft/client/gui/screen/advancement/AdvancementWidget c
 
 # accessible    method    net/minecraft/world/biome/source/BiomeSource    method_39525    (Ljava/util/List;Z)Ljava/util/List;
 # extendable    method    net/minecraft/world/biome/source/BiomeSource    method_39525    (Ljava/util/List;Z)Ljava/util/List;
+
+extendable class net/minecraft/world/dimension/DimensionOptions

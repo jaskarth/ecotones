@@ -14,6 +14,7 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.StructureLocator;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.level.LevelProperties;
 import net.minecraft.world.level.ServerWorldProperties;
 import net.minecraft.world.level.storage.LevelStorage;
 import org.spongepowered.asm.mixin.Final;
@@ -43,47 +44,50 @@ public abstract class MixinServerWorld {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void buildEcotonesGenerator(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey worldKey, DimensionOptions dimensionOptions, WorldGenerationProgressListener worldGenerationProgressListener, boolean debugWorld, long seed, List spawners, boolean shouldTickTime, CallbackInfo ci) {
-        if (dimensionOptions.getChunkGenerator() instanceof EcotonesChunkGenerator) {
-            // Found dummy ecotones chunk gen, replace with live ver
-
-            long l = server.getSaveProperties().getGeneratorOptions().getSeed();
-
-            DataFixer dataFixer = server.getDataFixer();
-            boolean bl = server.syncChunkWrites();
-
-            DynamicRegistryManager.Immutable registryManager = server.getRegistryManager();
-
-            ChunkGenerator chunkGenerator = new EcotonesChunkGenerator(registryManager.get(Registry.STRUCTURE_SET_KEY),
-                    new EcotonesBiomeSource(registryManager.get(Registry.BIOME_KEY), l, true), l);
-
-            this.chunkManager = new ServerChunkManager(
-                    (ServerWorld)(Object) this,
-                    session,
-                    dataFixer,
-                    server.getStructureTemplateManager(),
-                    workerExecutor,
-                    chunkGenerator,
-                    server.getPlayerManager().getViewDistance(),
-                    server.getPlayerManager().getSimulationDistance(),
-                    bl,
-                    worldGenerationProgressListener,
-                    this.entityManager::updateTrackingStatus,
-                    () -> server.getOverworld().getPersistentStateManager()
-            );
-            chunkGenerator.computeStructurePlacementsIfNeeded(this.chunkManager.getNoiseConfig());
-
-            this.structureLocator = new StructureLocator(
-                    this.chunkManager.getChunkIoWorker(),
-                    this.getRegistryManager(),
-                    server.getStructureTemplateManager(),
-                    worldKey,
-                    chunkGenerator,
-                    this.chunkManager.getNoiseConfig(),
-                    (ServerWorld)(Object) this,
-                    chunkGenerator.getBiomeSource(),
-                    l,
-                    dataFixer
-            );
-        }
+//        if (dimensionOptions.getChunkGenerator() instanceof EcotonesChunkGenerator && false) {
+//            // Found dummy ecotones chunk gen, replace with live ver
+//
+//            long l = server.getSaveProperties().getGeneratorOptions().getSeed();
+//            LevelProperties props = (LevelProperties) server.getSaveProperties();
+//
+//            DataFixer dataFixer = server.getDataFixer();
+//            boolean bl = server.syncChunkWrites();
+//
+//            DynamicRegistryManager.Immutable registryManager = server.getRegistryManager();
+//
+//            ChunkGenerator chunkGenerator = new EcotonesChunkGenerator(registryManager.get(Registry.STRUCTURE_SET_KEY),
+//                    new EcotonesBiomeSource(registryManager.get(Registry.BIOME_KEY), l, true), l);
+//
+//            this.chunkManager = new ServerChunkManager(
+//                    (ServerWorld)(Object) this,
+//                    session,
+//                    dataFixer,
+//                    server.getStructureTemplateManager(),
+//                    workerExecutor,
+//                    chunkGenerator,
+//                    server.getPlayerManager().getViewDistance(),
+//                    server.getPlayerManager().getSimulationDistance(),
+//                    bl,
+//                    worldGenerationProgressListener,
+//                    this.entityManager::updateTrackingStatus,
+//                    () -> server.getOverworld().getPersistentStateManager()
+//            );
+//            chunkGenerator.computeStructurePlacementsIfNeeded(this.chunkManager.getNoiseConfig());
+//
+//            this.structureLocator = new StructureLocator(
+//                    this.chunkManager.getChunkIoWorker(),
+//                    this.getRegistryManager(),
+//                    server.getStructureTemplateManager(),
+//                    worldKey,
+//                    chunkGenerator,
+//                    this.chunkManager.getNoiseConfig(),
+//                    (ServerWorld)(Object) this,
+//                    chunkGenerator.getBiomeSource(),
+//                    l,
+//                    dataFixer
+//            );
+//
+//            ((DimensionOptionsAccessor)props.getGeneratorOptions().getDimensions().get(worldKey)).setChunkGenerator(chunkGenerator);
+//        }
     }
 }
