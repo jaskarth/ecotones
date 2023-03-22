@@ -33,6 +33,9 @@ public class EcotonesCaveGenerator implements NoiseCaveGenerator {
                 break;
             }
         }
+        if (maxY > 11) {
+            maxY = 11;
+        }
 
         double offset =  Math.max(0, Math.abs(offsetNoise.sample(x, z) * 4) - 1);
         Random random = new Random(((long) x << 1) * 341873128712L + ((long) z << 1) * 132897987541L);

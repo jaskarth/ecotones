@@ -305,6 +305,10 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
         } else if (y < this.getSeaLevel() && y > (minY * 8)) {
             return this.defaultFluid;
         } else {
+            if (y <= -56) {
+                return Blocks.LAVA.getDefaultState();
+            }
+
             return AIR;
         }
     }

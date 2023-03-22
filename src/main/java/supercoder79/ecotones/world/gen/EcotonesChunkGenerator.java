@@ -107,10 +107,8 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
             this.registry = Optional.empty();
         }
 
-        Set<Map.Entry<RegistryKey<ChunkGeneratorSettings>, ChunkGeneratorSettings>> entrySet = (BuiltinRegistries.CHUNK_GENERATOR_SETTINGS).getEntrySet();
-
         this.shim = new NoiseChunkGenerator(BuiltinRegistries.STRUCTURE_SET, BuiltinRegistries.NOISE_PARAMETERS, biomeSource,
-                RegistryEntry.of(entrySet.iterator().next().getValue()));
+                RegistryEntry.of(BuiltinRegistries.CHUNK_GENERATOR_SETTINGS.get(ChunkGeneratorSettings.OVERWORLD)));
 
         this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.juRandom, 4, 256, 0.2, -0.2);
         this.soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.juRandom, 2, 1600, 1.75, 0.75);
