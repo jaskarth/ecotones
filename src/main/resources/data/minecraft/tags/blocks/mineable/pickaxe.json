@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "ecotones:sap_distillery",
+    "ecotones:treetap",
+    "ecotones:grindstone",
+    "ecotones:limestone",
+    "ecotones:malachite",
+    "ecotones:pyrite",
+    "ecotones:sparse_gold_ore",
+    "ecotones:sulfur_ore",
+    "ecotones:phosphate_ore",
+    "ecotones:red_rock",
+    "ecotones:dried_dirt"
+  ]
+}

@@ -298,6 +298,7 @@
   "block.ecotones.sulfur_ore": "Sulfur Ore",
   "block.ecotones.phosphate_ore": "Phosphate Ore",
   "block.ecotones.steady_geyser": "Steady Geyser",
+  "block.ecotones.grindstone": "Grindstone",
   "ecotones.section.end.blocks": "",
 
   "ecotones.section.start.itemblocks": "",
@@ -373,6 +374,7 @@
   "item.ecotones.basic_fertilizer": "Basic Fertilizer",
   "item.ecotones.sulfur": "Sulfur",
   "item.ecotones.phosphate": "Phosphate",
+  "item.ecotones.jar": "Jar",
   "ecotones.section.end.itemonly": "",
 
   "generator.ecotones.ecotones": "§2Ecotones",

@@ -53,6 +53,11 @@ public final class RecipeGen {
                   "item": "%%ITEM%%"
                 }""";
 
+    private static final String SHAPED_TAGREDIENT = """
+            "%%CHAR%%": {
+                  "tag": "%%ITEM%%"
+                }""";
+
     public static void shapeless(String name, String output, int amount, String... ingredients) throws IOException {
         String json = SHAPELESS
                 .replace("%%COUNT%%", String.valueOf(amount))
@@ -93,9 +98,18 @@ public final class RecipeGen {
                         .collect(Collectors.joining(",\n"))
                 )
                 .replace("%%INGREDIENTS%%", IntStream.range(1, (ingredients.length / 2) + 1)
-                        .mapToObj(i -> SHAPED_INGREDIENT
-                                .replace("%%ITEM%%", ingredients[i * 2 - 1])
-                                .replace("%%CHAR%%", ingredients[i * 2 - 2])
+                        .mapToObj(i -> {
+                            String ingr = ingredients[i * 2 - 1];
+                            if (ingr.startsWith("#")) {
+                                return SHAPED_TAGREDIENT
+                                        .replace("%%ITEM%%", ingr.substring(1))
+                                        .replace("%%CHAR%%", ingredients[i * 2 - 2]);
+                            }
+
+                            return SHAPED_INGREDIENT
+                                    .replace("%%ITEM%%", ingr)
+                                    .replace("%%CHAR%%", ingredients[i * 2 - 2]);
+                            }
                         )
                         .collect(Collectors.joining(",\n    "))
 

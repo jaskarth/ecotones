@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W W",
+    "WFW",
+    "PPP"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:stick"
+    },
+    "F": {
+      "item": "ecotones:basic_fertilizer"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "ecotones:fertilizer_spreader",
+    "count": 1
+  }
+}

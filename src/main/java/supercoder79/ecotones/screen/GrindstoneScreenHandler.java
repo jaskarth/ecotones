@@ -11,8 +11,10 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.tag.ItemTags;
 import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.items.EcotonesItems;
+import supercoder79.ecotones.recipe.EcotonesGrindingRecipes;
 
 public class GrindstoneScreenHandler extends ScreenHandler {
     private final PropertyDelegate propertyDelegate;
@@ -66,7 +68,56 @@ public class GrindstoneScreenHandler extends ScreenHandler {
 
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
-        return null;
+        ItemStack itemStack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(index);
+
+        if (slot != null && slot.hasStack()) {
+            ItemStack itemStack2 = slot.getStack();
+            itemStack = itemStack2.copy();
+
+            int start = 5;
+            if (index == 3 || index == 4) {
+                if (!this.insertItem(itemStack2, start, 36 + start, true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                slot.onQuickTransfer(itemStack2, itemStack);
+            } else if (index != 0 && index != 1 && index != 2) {
+                if (AbstractFurnaceBlockEntity.canUseAsFuel(itemStack)) {
+                    if (this.insertItem(itemStack2, 0, 1, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (EcotonesGrindingRecipes.findRecipeByInput(itemStack.getItem()) != null) {
+                    if (this.insertItem(itemStack2, 1, 2, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (itemStack2.getItem() == EcotonesItems.JAR) {
+                    if (this.insertItem(itemStack2, 2, 3, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+            } else {
+                if (!this.insertItem(itemStack2, start, start + 36, true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                slot.onQuickTransfer(itemStack2, itemStack);
+            }
+
+            if (itemStack2.isEmpty()) {
+                slot.setStack(ItemStack.EMPTY);
+            } else {
+                slot.markDirty();
+            }
+
+            if (itemStack2.getCount() == itemStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTakeItem(player, itemStack2);
+        }
+
+        return itemStack;
     }
 
     @Override

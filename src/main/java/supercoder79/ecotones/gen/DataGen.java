@@ -41,6 +41,33 @@ public final class DataGen {
 
         crossBlock("flame_lily", "Flame Lily");
 
+        writeRecipes();
+
+        LangFileGen.addBlockItemBlock("steady_geyser", "Steady Geyser");
+        ItemModelGen.block("grindstone");
+
+        TagGen.block(BlockTags.SAPLINGS, EcotonesBlocks.HAZEL_SAPLING, EcotonesBlocks.LARCH_SAPLING, EcotonesBlocks.MAPLE_SAPLING);
+        LangFileGen.addItemOnly("jar", "Jar");
+        LangFileGen.addBlock("grindstone", "Grindstone");
+
+        LootTableGen.dropsSelf("sap_distillery");
+        LootTableGen.dropsSelf("treetap");
+        LootTableGen.dropsSelf("grindstone");
+        LootTableGen.dropsSelf("fertilizer_spreader");
+
+        TagGen.block(BlockTags.PICKAXE_MINEABLE, EcotonesBlocks.SAP_DISTILLERY, EcotonesBlocks.TREETAP, EcotonesBlocks.GRINDSTONE,
+                EcotonesBlocks.LIMESTONE, EcotonesBlocks.MALACHITE, EcotonesBlocks.PYRITE, EcotonesBlocks.SPARSE_GOLD_ORE, EcotonesBlocks.SULFUR_ORE,
+                EcotonesBlocks.PHOSPHATE_ORE, EcotonesBlocks.RED_ROCK, EcotonesBlocks.DRIED_DIRT);
+
+        TagGen.block(BlockTags.NEEDS_STONE_TOOL, EcotonesBlocks.LIMESTONE, EcotonesBlocks.MALACHITE, EcotonesBlocks.PYRITE);
+        TagGen.block(BlockTags.NEEDS_IRON_TOOL, EcotonesBlocks.SPARSE_GOLD_ORE, EcotonesBlocks.SULFUR_ORE, EcotonesBlocks.PHOSPHATE_ORE);
+
+        TagGen.block(BlockTags.AXE_MINEABLE, EcotonesBlocks.FERTILIZER_SPREADER);
+
+        TagGen.block(BlockTags.SHOVEL_MINEABLE, EcotonesBlocks.PEAT_BLOCK);
+    }
+
+    private static void writeRecipes() throws IOException {
         RecipeGen.shapeless("flame_lily_to_dye", "minecraft:red_dye", 1, "ecotones:flame_lily");
 
         RecipeGen.shaped("blueberry_to_blue_dye", "minecraft:blue_dye", 1, " X ", "XWX", " X ",
@@ -49,9 +76,17 @@ public final class DataGen {
         RecipeGen.shaped("turpentine", "ecotones:turpentine", 1, " X ", "XJX", " X ",
                 List.of("X", "ecotones:pine_sap", "J", "ecotones:jar"));
 
-        LangFileGen.addBlockItemBlock("steady_geyser", "Steady Geyser");
+        RecipeGen.shaped("treetap", "ecotones:treetap", 1, " X ", "XJX", "X  ",
+                List.of("X", "minecraft:iron_ingot", "J", "ecotones:jar"));
 
-        TagGen.block(BlockTags.SAPLINGS, EcotonesBlocks.HAZEL_SAPLING, EcotonesBlocks.LARCH_SAPLING, EcotonesBlocks.MAPLE_SAPLING);
+        RecipeGen.shaped("sap_distillery", "ecotones:sap_distillery", 1, "XJX", "XXX",
+                List.of("X", "minecraft:iron_ingot", "J", "ecotones:jar"));
+
+        RecipeGen.shaped("grindstone", "ecotones:grindstone", 1, "XXX", "XJX", "W W",
+                List.of("W", "minecraft:stick", "J", "ecotones:jar", "X", "minecraft:cobblestone"));
+
+        RecipeGen.shaped("fertilizer_spreader", "ecotones:fertilizer_spreader", 1, "W W", "WFW", "PPP",
+                List.of("W", "minecraft:stick", "F", "ecotones:basic_fertilizer", "P", "#minecraft:planks"));
     }
 
     private static void crossBlock(String name, String localizedName) throws IOException {

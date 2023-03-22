@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ecotones:treetap"
+          "name": "ecotones:grindstone"
         }
       ],
       "conditions": [

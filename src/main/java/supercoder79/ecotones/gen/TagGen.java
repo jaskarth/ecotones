@@ -65,8 +65,10 @@ public final class TagGen {
                 .resolve("tags")
                 .resolve("blocks");
 
-        path.toFile().mkdirs();
-        Files.write(path.resolve(key.id().getPath() + ".json"), json.getBytes());
+        path = path.resolve(key.id().getPath() + ".json");
+
+        path.getParent().toFile().mkdirs();
+        Files.write(path, json.getBytes());
 
         DataGen.DATA.tags++;
     }

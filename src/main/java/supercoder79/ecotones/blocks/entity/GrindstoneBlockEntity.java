@@ -223,7 +223,7 @@ public class GrindstoneBlockEntity extends LockableContainerBlockEntity {
 
     @Override
     protected Text getContainerName() {
-        return Text.literal("Grinding Mill");
+        return Text.literal("Grindstone");
     }
 
     @Override
