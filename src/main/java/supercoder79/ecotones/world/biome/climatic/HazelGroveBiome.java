@@ -2,6 +2,7 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -9,6 +10,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
@@ -85,6 +87,7 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
                     EcotonesConfiguredFeature.wrap(Feature.TREE, HAZEL_CONFIG)
                             .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.5f, 1)))
                             .spreadHorizontally()
+                            .decorate(BlockFilterPlacementModifier.of(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.getDefaultState(), BlockPos.ORIGIN)))
                             .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
 
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
