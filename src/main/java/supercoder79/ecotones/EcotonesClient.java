@@ -102,7 +102,8 @@ public final class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.THORN_BUSH,
                 EcotonesBlocks.LARCH_SAPLING,
                 EcotonesBlocks.FLAME_LILY,
-                EcotonesBlocks.WATERGRASS);
+                EcotonesBlocks.WATERGRASS
+        );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
                 EcotonesBlocks.BLUEBERRY_JAM_JAR,

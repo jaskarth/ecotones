@@ -63,10 +63,11 @@ public final class EcotonesBlocks {
     public static Block SULFUR_ORE = new Block(FabricBlockSettings.copy(Blocks.LAPIS_ORE)/*.breakByTool(FabricToolTags.PICKAXES)*/.hardness(3f));
     public static Block PHOSPHATE_ORE = new Block(FabricBlockSettings.copy(Blocks.LAPIS_ORE)/*.breakByTool(FabricToolTags.PICKAXES)*/.hardness(3f));
     public static Block FLAME_LILY = new EcotonesPlantBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
-    public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
     public static Block POTTED_MAPLE_SAPLING = new FlowerPotBlock(MAPLE_SAPLING, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
     public static Block POTTED_LARCH_SAPLING = new FlowerPotBlock(LARCH_SAPLING, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
     public static Block POTTED_HAZEL_SAPLING = new FlowerPotBlock(HAZEL_SAPLING, AbstractBlock.Settings.of(Material.DECORATION).breakInstantly().nonOpaque());
+
+    public static Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
 
     public static void init() {
         registerWithItem("peat", PEAT_BLOCK);
@@ -120,10 +121,11 @@ public final class EcotonesBlocks {
         registerWithItem("sulfur_ore", SULFUR_ORE);
         registerWithItem("phosphate_ore", PHOSPHATE_ORE);
         registerWithItem("flame_lily", FLAME_LILY);
-        register("cyan_rose", CYAN_ROSE);
         register("potted_maple_sapling", POTTED_MAPLE_SAPLING);
         register("potted_larch_sapling", POTTED_LARCH_SAPLING);
         register("potted_hazel_sapling", POTTED_HAZEL_SAPLING);
+
+        register("cyan_rose", CYAN_ROSE);
     }
 
     private static void register(String name, Block block) {

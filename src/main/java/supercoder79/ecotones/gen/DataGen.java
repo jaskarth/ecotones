@@ -1,6 +1,7 @@
 package supercoder79.ecotones.gen;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
 import net.minecraft.tag.BlockTags;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +14,7 @@ public final class DataGen {
     public static final Logger LOGGER = LogManager.getLogger("ecotones-datagen");
     public static final DataGenData DATA = new DataGenData();
 
-    private static final boolean RUN = false;
+    private static final boolean RUN = true;
     public static void run() {
         if (RUN && FabricLoader.getInstance().isDevelopmentEnvironment()) {
             try {
@@ -47,6 +48,8 @@ public final class DataGen {
         ItemModelGen.block("grindstone");
 
         TagGen.block(BlockTags.SAPLINGS, EcotonesBlocks.HAZEL_SAPLING, EcotonesBlocks.LARCH_SAPLING, EcotonesBlocks.MAPLE_SAPLING);
+        TagGen.block(BlockTags.FLOWERS, floral());
+        TagGen.block(BlockTags.SMALL_FLOWERS, floral());
         LangFileGen.addItemOnly("jar", "Jar");
         LangFileGen.addBlock("grindstone", "Grindstone");
 
@@ -55,6 +58,17 @@ public final class DataGen {
         LootTableGen.dropsSelf("grindstone");
         LootTableGen.dropsSelf("fertilizer_spreader");
 
+        writeMineableTags();
+    }
+
+    private static Block[] floral() {
+        return new Block[] {
+                EcotonesBlocks.WILDFLOWERS, EcotonesBlocks.BLUEBELL, EcotonesBlocks.SMALL_LILAC,
+                EcotonesBlocks.FLAME_LILY, EcotonesBlocks.LAVENDER, EcotonesBlocks.LAVENDER
+        };
+    }
+
+    private static void writeMineableTags() throws IOException {
         TagGen.block(BlockTags.PICKAXE_MINEABLE, EcotonesBlocks.SAP_DISTILLERY, EcotonesBlocks.TREETAP, EcotonesBlocks.GRINDSTONE,
                 EcotonesBlocks.LIMESTONE, EcotonesBlocks.MALACHITE, EcotonesBlocks.PYRITE, EcotonesBlocks.SPARSE_GOLD_ORE, EcotonesBlocks.SULFUR_ORE,
                 EcotonesBlocks.PHOSPHATE_ORE, EcotonesBlocks.RED_ROCK, EcotonesBlocks.DRIED_DIRT);
