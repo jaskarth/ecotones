@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -115,6 +116,7 @@ public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
                                         BlockPredicate.matchingBlocks(ImmutableList.of(Blocks.DIRT, Blocks.GRASS_BLOCK, Blocks.STONE)),
                                         UniformIntProvider.create(4, 8),
                                         2)))
+                        .decorate(BlockFilterPlacementModifier.of(BlockPredicate.matchingFluids(Fluids.WATER)))
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG))
                         .spreadHorizontally()
                         .repeat(32));

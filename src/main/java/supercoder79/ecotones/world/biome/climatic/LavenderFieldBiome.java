@@ -25,6 +25,7 @@ import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
+import supercoder79.ecotones.world.features.LookupFeature;
 import supercoder79.ecotones.world.features.config.*;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.structure.EcotonesStructures;
@@ -162,6 +163,10 @@ public class LavenderFieldBiome extends EcotonesBiomeBuilder {
                             .spreadHorizontally()
                             .repeat(7, 10));
         } else {
+            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+                    EcotonesFeatures.LOOKUP.configure(new LookupFeature.Config("aurorasdeco:trees_lavender_plains"))
+                            .repeat(1));
+
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.DENSE_LAVENDER)
                             .decorate(new Spread32Decorator())

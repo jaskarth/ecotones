@@ -101,6 +101,12 @@ public final class DataGen {
 
         RecipeGen.shaped("fertilizer_spreader", "ecotones:fertilizer_spreader", 1, "W W", "WFW", "PPP",
                 List.of("W", "minecraft:stick", "F", "ecotones:basic_fertilizer", "P", "#minecraft:planks"));
+
+        RecipeGen.shaped("torch_s", "minecraft:torch", 2, "X", "S",
+                List.of("S", "minecraft:stick", "X", "ecotones:sulfur"));
+
+        RecipeGen.shaped("torch_p", "minecraft:torch", 1, "X", "S",
+                List.of("S", "minecraft:stick", "X", "ecotones:phosphate"));
     }
 
     private static void crossBlock(String name, String localizedName) throws IOException {

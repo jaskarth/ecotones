@@ -69,15 +69,12 @@
 # 0.9.1 todo
 * EMI support
 * Yttr support
-  * Wasteland biome
   * Cottage blocks?
 * Aurora'sdeco support tweaks
   * Lavender spawns in more places
-  * Daffodils (Add to temperate grassland mosiac)
   * Add more blocks, such as sawmill, to cottages
 * Ensure terrestria and traverse compat works
 * BYG compat?
-* More uses for sulfur and phosphor (fuel, torches)
 * Ensure skybox is working
 * Add more books
 * Flesh out campfire chests

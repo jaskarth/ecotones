@@ -1,14 +1,36 @@
 package supercoder79.ecotones.util.compat;
 
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.world.gen.BiomeGenData;
+import supercoder79.ecotones.world.surface.system.ConfiguredSurfaceBuilder;
+import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 
 public final class TraverseCompat {
     private static Identifier id(String path) {
         return new Identifier("traverse", path);
+    }
+
+    private static RegistryKey<Biome> key(String path) {
+        return RegistryKey.of(Registry.BIOME_KEY, id(path));
+    }
+
+    public static void associateGenData() {
+        BiomeGenData.LOOKUP.put(key("arid_highlands"), new BiomeGenData( 0.2, 0.1, new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)));
+        BiomeGenData.LOOKUP.put(key("autumnal_woods"), new BiomeGenData( 0.2, 0.1, new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)));
+        BiomeGenData.LOOKUP.put(key("autumnal_wooded_hills"), new BiomeGenData( 0.3, 0.25, new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)));
+        BiomeGenData.LOOKUP.put(key("coniferous_forest"), new BiomeGenData( 0.2, 0.1, new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)));
+        BiomeGenData.LOOKUP.put(key("coniferous_wooded_hills"), new BiomeGenData( 0.3, 0.25, new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)));
+        BiomeGenData.LOOKUP.put(key("high_coniferous_forest"), new BiomeGenData( 1.2, 0.25, new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)));
+        BiomeGenData.LOOKUP.put(key("lush_swamp"), new BiomeGenData( -0.1, 0.05, new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)));
+        BiomeGenData.LOOKUP.put(key("meadow"), new BiomeGenData( 0.2, 0.10, 0.95, 1.6, new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)));
+        BiomeGenData.LOOKUP.put(key("woodlands"), new BiomeGenData( 0.2, 0.1, new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)));
     }
 
     public static void init() {

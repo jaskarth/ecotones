@@ -1,6 +1,5 @@
 package supercoder79.ecotones;
 
-import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
@@ -11,7 +10,7 @@ import net.minecraft.world.biome.Biome;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import supercoder79.ecotones.advancement.EcotonesCriteria;
-import supercoder79.ecotones.api.ModCompat;
+import supercoder79.ecotones.api.ModCompatRunner;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.blocks.entity.EcotonesBlockEntities;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
@@ -44,8 +43,6 @@ import supercoder79.ecotones.world.structure.EcotonesStructures;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
 import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
-
-import java.util.List;
 
 public final class Ecotones implements ModInitializer {
 	private static final boolean RUN_DATA_GEN = "true".equals(System.getProperty("ECOTONES_RUN_DATAGEN", null));
@@ -94,15 +91,7 @@ public final class Ecotones implements ModInitializer {
 
 		EcotonesEntities.init();
 
-		// Mod compat handlers that add new blocks that we use
-		if (isModLoaded("floralisia")) {
-			FloralisiaCompat.init();
-			log("Registered Floralisia compat!");
-		}
-
-		if (isModLoaded("aurorasdeco")) {
-			AurorasDecoCompat.init();
-		}
+		ModCompat.initEarly();
 
 		EcotonesBiomes.init();
 
@@ -120,27 +109,7 @@ public final class Ecotones implements ModInitializer {
 			DataGen.run();
 		}
 
-		// Mod Compat handlers
-		if (isModLoaded("traverse")) {
-			ModCompat.register(TraverseCompat::init);
-			log("Registered Traverse compat!");
-		}
-
-		if (isModLoaded("terrestria")) {
-			ModCompat.register(TerrestriaCompat::init);
-			log("Registered Terrestria compat!");
-		}
-
-		// Love Aurora's Decorations <3
-		if (isModLoaded("aurorasdeco")) {
-			ModCompat.register(CampfireLogHelper::initAurorasDeco);
-			log("Registered Aurora's Decorations compat!");
-		}
-
-		if (isModLoaded("lambdafoxes")) {
-			LambdaFoxesCompat.init();
-			log("Registered LambdaFoxes compat!");
-		}
+		ModCompat.initLate();
 
 		AiLog.init();
 		AiLog.log("[System] Starting AI log");
@@ -211,7 +180,7 @@ public final class Ecotones implements ModInitializer {
 		LOGGER.info("[ecotones] " + str);
 	}
 
-	private static boolean isModLoaded(String modid) {
+	public static boolean isModLoaded(String modid) {
 		return FabricLoader.getInstance().isModLoaded(modid);
 	}
 }

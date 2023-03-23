@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeIdManager;
 import supercoder79.ecotones.api.CaveBiome;
-import supercoder79.ecotones.api.ModCompat;
+import supercoder79.ecotones.api.ModCompatRunner;
 import supercoder79.ecotones.util.noise.OpenSimplexNoise;
 import supercoder79.ecotones.world.biome.cave.WrappedCaveBiome;
 import supercoder79.ecotones.world.layers.system.BiomeLayerSampler;
@@ -61,7 +61,7 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
         if (isReal) {
             long stamp = this.lock.writeLock();
             Ecotones.REGISTRY = this.biomeRegistry;
-            ModCompat.run();
+            ModCompatRunner.run();
 
             BiomeIdManager.clear();
 

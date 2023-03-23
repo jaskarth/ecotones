@@ -122,6 +122,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         this.data.put(EcotonesData.SOIL_PH, this.soilPhNoise::sample);
         this.data.put(EcotonesData.GRASS_NOISE, this.grassNoise::sample);
         this.data.put(EcotonesData.FLOWER_MOSAIC, new Mosaic(this.random.nextLong(), 8, 64, 16, -0.1, 0.4));
+        this.data.put(EcotonesData.FLOWER_MOSAIC_ALT, new Mosaic(this.random.nextLong(), 8, 64, 16, -0.1, 0.4));
         this.caves = new EcotonesCaveGenerator();
         this.caves.init(seed);
 

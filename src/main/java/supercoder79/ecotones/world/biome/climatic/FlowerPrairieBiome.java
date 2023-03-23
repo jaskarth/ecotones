@@ -10,6 +10,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.util.compat.AurorasDecoCompat;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -127,6 +128,8 @@ public class FlowerPrairieBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.DENSE_LAVENDER_LILAC)
                         .decorate(EcotonesDecorators.DATA_FUNCTION.configure(EcotonesData.FLOWER_MOSAIC)));
+
+        AurorasDecoCompat.applyDaffodils(this);
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 EcotonesFeatures.BEEHIVES.configure(FeatureConfig.DEFAULT)

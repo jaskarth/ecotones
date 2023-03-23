@@ -15,6 +15,7 @@ public class EcotonesData {
     public static final Identifier GRASS_NOISE = Ecotones.id("grass_noise");
 
     public static final Identifier FLOWER_MOSAIC = Ecotones.id("flower_mosaic");
+    public static final Identifier FLOWER_MOSAIC_ALT = Ecotones.id("flower_mosaic_alt");
 
     public static void init() {
         // TODO: some sort of default impl thing

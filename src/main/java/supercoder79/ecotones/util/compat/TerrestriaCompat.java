@@ -11,6 +11,10 @@ public final class TerrestriaCompat {
         return new Identifier("terrestria", path);
     }
 
+    public static void associateGenData() {
+
+    }
+
     public static void init() {
         // cypress forest
         Biome cypressForest = Ecotones.REGISTRY.get(id("cypress_forest"));

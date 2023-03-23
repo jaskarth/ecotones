@@ -87,10 +87,11 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
         if (clearing) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     EcotonesConfiguredFeature.wrap(Feature.TREE, HAZEL_CONFIG)
-                            .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.5f, 1)))
-                            .spreadHorizontally()
                             .decorate(BlockFilterPlacementModifier.of(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.getDefaultState(), BlockPos.ORIGIN)))
-                            .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
+                            .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
+                            .spreadHorizontally()
+                            .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.5f, 1)))
+            );
 
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))

@@ -11,6 +11,7 @@ import supercoder79.ecotones.util.RegistryReport;
 import supercoder79.ecotones.world.features.config.*;
 import supercoder79.ecotones.world.features.entity.BeehiveFeature;
 import supercoder79.ecotones.world.features.entity.DuckNestFeature;
+import supercoder79.ecotones.world.features.mc.EveryBlockRandomPatchFeature;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeature;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.features.rock.*;
@@ -68,10 +69,12 @@ public final class EcotonesFeatures {
     public static final EcotonesFeature<SimpleTreeFeatureConfig> TALL_PINE = new TallPineTree(SimpleTreeFeatureConfig.CODEC);
     public static final EcotonesFeature<DefaultFeatureConfig> ORE_VEIN = new OreVeinFeature(DefaultFeatureConfig.CODEC);
     public static final EcotonesFeature<RandomPatchFeatureConfig> RANDOM_PATCH = new RandomPatchFeature(RandomPatchFeatureConfig.CODEC);
+    public static final EcotonesFeature<RandomPatchFeatureConfig> EVERY_BLOCK_RANDOM_PATCH = new EveryBlockRandomPatchFeature(RandomPatchFeatureConfig.CODEC);
     public static final EcotonesFeature<DefaultFeatureConfig> SURFACE_PATCH = new SurfacePatchReplaceFeature(DefaultFeatureConfig.CODEC);
     public static final EcotonesFeature<SulfurousLakeFeature.Config> SULFUROUS_LAKE = new SulfurousLakeFeature(SulfurousLakeFeature.Config.CODEC);
     public static final EcotonesFeature<DefaultFeatureConfig> PHOSPHATE_DOME = new PhosphateDomeFeature(DefaultFeatureConfig.CODEC);
     public static final EcotonesFeature<SimpleTreeFeatureConfig> BRANCHED_SPRUCE = new BranchedSpruceTreeFeature(SimpleTreeFeatureConfig.CODEC);
+    public static final EcotonesFeature<LookupFeature.Config> LOOKUP = new LookupFeature(LookupFeature.Config.CODEC);
 
     public static void init() {
         register("desertify", DESERTIFY_SOIL);
@@ -123,10 +126,12 @@ public final class EcotonesFeatures {
         register("brush_tree", BRUSH_TREE);
         register("tall_pine", TALL_PINE);
         register("random_patch", RANDOM_PATCH);
+        register("eb_random_patch", EVERY_BLOCK_RANDOM_PATCH);
         register("surface_patch", SURFACE_PATCH);
         register("sulfurous_lake", SULFUROUS_LAKE);
         register("phosphate_dome", PHOSPHATE_DOME);
         register("branched_spruce", BRANCHED_SPRUCE);
+        register("lookup", LOOKUP);
     }
 
     private static void register(String name, Feature<?> feature) {

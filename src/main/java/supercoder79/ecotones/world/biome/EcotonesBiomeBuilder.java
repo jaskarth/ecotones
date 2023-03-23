@@ -144,7 +144,7 @@ public abstract class EcotonesBiomeBuilder {
 //        addFeature(step, feature, new PlacedFeature(new RegistryEntry.Direct<>(feature), new ArrayList<>()));
 //    }
 
-    protected void addFeature(GenerationStep.Feature step, EcotonesConfiguredFeature<?, ?> ecfeature) {
+    public void addFeature(GenerationStep.Feature step, EcotonesConfiguredFeature<?, ?> ecfeature) {
 //        while (wrapper.feature instanceof DecoratedFeature) {
 //            wrapper = ((DecoratedFeatureConfig)wrapper.config).feature.get();
 //        }
