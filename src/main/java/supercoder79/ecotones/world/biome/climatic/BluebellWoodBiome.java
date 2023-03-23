@@ -26,7 +26,7 @@ import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.*;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 
 public class BluebellWoodBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -58,14 +58,14 @@ public class BluebellWoodBiome extends EcotonesBiomeBuilder {
         this.temperature(0.9f);
         this.downfall(0.7f);
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.FOREST);
+//        this.category(Biome.Category.FOREST);
 
         this.hilliness(flat ? 1 : 3);
         this.volatility(flat ? 1.1 : 0.9);
 
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 7)));
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_OAK);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

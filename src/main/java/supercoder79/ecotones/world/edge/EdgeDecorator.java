@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class EdgeDecorator {
-    private static final MultiNoiseUtil.MultiNoiseSampler SAMPLER = MultiNoiseUtil.method_40443();
+    private static final MultiNoiseUtil.MultiNoiseSampler SAMPLER = MultiNoiseUtil.createEmptyMultiNoiseSampler();
 
     public static EdgeDecorator EMPTY = new EdgeDecorator();
 

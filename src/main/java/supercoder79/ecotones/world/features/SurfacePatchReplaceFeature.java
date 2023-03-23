@@ -10,8 +10,8 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.SimpleRandom;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.util.math.random.CheckedRandom;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.world.features.config.PatchFeatureConfig;
 
@@ -27,10 +27,10 @@ public class SurfacePatchReplaceFeature extends EcotonesFeature<DefaultFeatureCo
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
 
         int radius = 4 + random.nextInt(4);
-        DoublePerlinNoiseSampler noise = DoublePerlinNoiseSampler.create(new ChunkRandom(new SimpleRandom(random.nextLong())), -5, 1.0);
+        DoublePerlinNoiseSampler noise = DoublePerlinNoiseSampler.create(new ChunkRandom(new CheckedRandom(random.nextLong())), -5, 1.0);
 
         for(int x = -radius; x <= radius; x++) {
             for(int z = -radius; z <= radius; z++) {

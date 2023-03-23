@@ -2,10 +2,11 @@ package supercoder79.ecotones.world.surface;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.SimpleRandom;
+import net.minecraft.util.math.random.ChunkRandom;
+import supercoder79.ecotones.util.ImprovedChunkRandom;
 
 import java.util.Arrays;
+import java.util.Random;
 
 // Partially derived from https://github.com/Gegy/Terrarium/blob/1.12-dev/src/main/java/net/gegy1000/earth/server/world/ecology/soil/MesaSoilTexture.java.
 // Used with permission!
@@ -22,7 +23,7 @@ public final class MesaHelper {
     public static BlockState[] initializeRegularMesa(long seed) {
         BlockState[] layerBlocks = new BlockState[64];
         Arrays.fill(layerBlocks, TERRACOTTA);
-        ChunkRandom random = new ChunkRandom(new SimpleRandom(seed));
+        ImprovedChunkRandom random = new ImprovedChunkRandom(seed);
 
         int j;
         for(j = 0; j < 64; ++j) {
@@ -44,7 +45,7 @@ public final class MesaHelper {
     public static BlockState[] initializeWhiteMesa(long seed) {
         BlockState[] layerBlocks = new BlockState[64];
         Arrays.fill(layerBlocks, WHITE_TERRACOTTA);
-        ChunkRandom random = new ChunkRandom(new SimpleRandom(seed));
+        ImprovedChunkRandom random = new ImprovedChunkRandom(seed);
 
         int y = random.nextInt(3) + 33;
         int z = 0;
@@ -73,7 +74,7 @@ public final class MesaHelper {
         return layerBlocks;
     }
 
-    private static void addBand(BlockState[] layerBlocks, ChunkRandom random, int minDepth, BlockState state) {
+    private static void addBand(BlockState[] layerBlocks, Random random, int minDepth, BlockState state) {
         int count = random.nextInt(4) + 2;
 
         for (int i = 0; i < count; i++) {
@@ -86,7 +87,7 @@ public final class MesaHelper {
         }
     }
 
-    private static void addGradientBand(BlockState[] layerBlocks, ChunkRandom random, BlockState main, BlockState grad) {
+    private static void addGradientBand(BlockState[] layerBlocks, Random random, BlockState main, BlockState grad) {
         int count = random.nextInt(3) + 3;
         int y = 0;
 

@@ -54,14 +54,14 @@ public class MoorBiome extends EcotonesBiomeBuilder {
         this.downfall(0.4F);
         this.hilliness(hilliness);
         this.volatility(volatility);
-        this.category(Biome.Category.PLAINS);
+//        this.category(Biome.Category.PLAINS);
 
         this.precipitation(Biome.Precipitation.RAIN);
 
         this.grassColor(0x368f55);
         this.foliageColor(0x368f55);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

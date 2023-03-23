@@ -26,10 +26,14 @@ public final class ItemModelGen {
     public static void flat(String name) throws IOException {
         String json = FLAT.replace("%%NAME%%", name);
         Files.write(PATH.resolve(name + ".json"), json.getBytes());
+
+        DataGen.DATA.itemModels++;
     }
 
     public static void block(String name) throws IOException {
         String json = FROM_BLOCK.replace("%%NAME%%", name);
         Files.write(PATH.resolve(name + ".json"), json.getBytes());
+
+        DataGen.DATA.itemModels++;
     }
 }

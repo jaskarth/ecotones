@@ -25,7 +25,7 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.OakTreeFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 
 public class FlowerPrairieBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -56,11 +56,11 @@ public class FlowerPrairieBiome extends EcotonesBiomeBuilder {
         this.volatility(1.1);
 
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.PLAINS);
+//        this.category(Biome.Category.PLAINS);
 
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 7)));
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_OAK);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

@@ -11,6 +11,8 @@ import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.structure.Structure;
+import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.util.RegistryReport;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.gen.BiomeGenData;
@@ -24,19 +26,20 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class EcotonesBiomeBuilder {
     private static final AtomicInteger featureId = new AtomicInteger(0);
     public static final Map<Biome, BiomeGenData> OBJ2DATA = new HashMap<>();
-    public static final Map<Biome, List<ConfiguredStructureFeature<?, ?>>> BIOME_STRUCTURES = new HashMap<>();
+//    public static final Map<Biome, List<ConfiguredStructureFeature<?, ?>>> BIOME_STRUCTURES = new HashMap<>();
     private final Biome.Builder builder;
     private final SpawnSettings.Builder spawnSettings;
     private final GenerationSettings.Builder generationSettings;
     private final BiomeEffects.Builder biomeEffects;
+    private final List<RegistryEntry<Structure>> structures = new ArrayList<>();
 
     private double depth = 0.1;
     private double scale = 0.05;
     private double hilliness = 1.0;
     private double volatility = 1.0;
     private ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder;
-    private final List<ConfiguredStructureFeature<?, ?>> structures = new ArrayList<>();
-    private Biome.Category category;
+//    private final List<ConfiguredStructureFeature<?, ?>> structures = new ArrayList<>();
+//    private Biome.Category category;
 
     public EcotonesBiomeBuilder() {
         this.builder = new Biome.Builder();
@@ -50,10 +53,10 @@ public abstract class EcotonesBiomeBuilder {
         this.biomeEffects.fogColor(0xC0D8FF);
     }
 
-    protected void category(Biome.Category category) {
-        this.category = category;
-        this.builder.category(category);
-    }
+//    protected void category(Biome.Category category) {
+////        this.category = category;
+//        this.builder.category(category);
+//    }
 
     protected void surfaceBuilder(ConfiguredSurfaceBuilder<?> surfaceBuilder) {
         this.configuredSurfaceBuilder = surfaceBuilder;
@@ -165,14 +168,8 @@ public abstract class EcotonesBiomeBuilder {
         this.generationSettings.feature(step, plHolder);
     }
 
-    protected void addStructureFeature(ConfiguredStructureFeature<?, ?> structureFeature) {
-        if (BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE.getRawId(structureFeature) == -1) {
-            String path = "ecotones_auto_registed_structure_" + featureId.incrementAndGet();
-            Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, new Identifier("ecotones", path), structureFeature);
-            RegistryReport.increment("Configured Structure Feature");
-        }
-
-        this.structures.add(structureFeature);
+    protected void addStructureFeature(RegistryEntry<Structure> structure) {
+        structures.add(structure);
     }
 
     public Biome build() {
@@ -181,8 +178,11 @@ public abstract class EcotonesBiomeBuilder {
         this.builder.spawnSettings(this.spawnSettings.build());
 
         Biome biome = builder.build();
+        for (RegistryEntry<Structure> structure : structures) {
+            BiomeRegistries.registerStructure(structure, biome);
+        }
         OBJ2DATA.put(biome, new BiomeGenData(this.depth, this.scale, this.volatility, this.hilliness, this.configuredSurfaceBuilder));
-        BIOME_STRUCTURES.put(biome, this.structures);
+//        BIOME_STRUCTURES.put(biome, this.structures);
 
         return biome;
     }
@@ -195,9 +195,9 @@ public abstract class EcotonesBiomeBuilder {
         return spawnSettings;
     }
 
-    public Biome.Category getBiomeCategory() {
-        return this.category;
-    }
+//    public Biome.Category getBiomeCategory() {
+//        return this.category;
+//    }
 
     private static int getSkyColor(float temperature) {
         float f = temperature / 3.0F;

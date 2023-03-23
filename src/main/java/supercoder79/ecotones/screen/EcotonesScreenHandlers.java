@@ -10,6 +10,7 @@ import supercoder79.ecotones.util.RegistryReport;
 public final class EcotonesScreenHandlers {
     public static final ScreenHandlerType<SapDistilleryScreenHandler> SAP_DISTILLERY = register("sap_distillery", SapDistilleryScreenHandler::new);
     public static final ScreenHandlerType<FertilizerSpreaderScreenHandler> FERTILIZER_SPREADER = register("fertilizer_spreader", FertilizerSpreaderScreenHandler::new);
+    public static final ScreenHandlerType<GrindstoneScreenHandler> GRINDSTONE = register("grindstone", GrindstoneScreenHandler::new);
 
     public static void init() {
         // NO-OP due to registering in clinit

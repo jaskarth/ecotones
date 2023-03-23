@@ -2,6 +2,7 @@ package supercoder79.ecotones.world.decorator;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.FeaturePlacementContext;
@@ -9,7 +10,6 @@ import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
-import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 

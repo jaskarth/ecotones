@@ -26,7 +26,7 @@ public class RockFeature extends EcotonesFeature<RockFeatureConfig> {
     public boolean generate(FeatureContext<RockFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
         RockFeatureConfig config = context.getConfig();
 
         // TODO: cleanup

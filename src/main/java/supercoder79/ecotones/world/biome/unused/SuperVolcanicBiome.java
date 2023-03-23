@@ -42,7 +42,7 @@ public class SuperVolcanicBiome extends EcotonesBiomeBuilder {
 
         this.precipitation(Biome.Precipitation.RAIN);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         //DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());

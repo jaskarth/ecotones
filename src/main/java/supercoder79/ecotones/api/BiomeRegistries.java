@@ -1,9 +1,11 @@
 package supercoder79.ecotones.api;
 
 import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.gen.structure.Structure;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.world.edge.EdgeDecorationCollector;
 import supercoder79.ecotones.world.edge.EdgeDecorator;
@@ -36,6 +38,7 @@ public final class BiomeRegistries {
     public static final List<RegistryKey<Biome>> SLIME_SPAWN_BIOMES = new ArrayList<>();
     public static final Map<RegistryKey<Biome>, RiverDecorator> RIVER_DECORATORS = new HashMap<>();
     public static final Map<RegistryKey<Biome>, EdgeDecorator> EDGE_DECORATORS = new HashMap<>();
+    public static final Map<RegistryEntry<Structure>, List<Biome>> STRUCTURE_TO_BIOME_LIST = new HashMap<>();
 
     public static void registerSpecialBiome(Biome biome, IntFunction<Boolean> rule) {
         SPECIAL_BIOMES.put(key(biome), rule);
@@ -134,6 +137,20 @@ public final class BiomeRegistries {
     }
 
     public static RegistryKey<Biome> key(Biome biome) {
+        RegistryKey<Biome> key = keyOrNull(biome);
+
+        if (key == null) {
+            throw new IllegalStateException("Impossible state when trying to get biome key");
+        }
+
+        return key;
+    }
+
+    public static void registerStructure(RegistryEntry<Structure> s, Biome b) {
+        STRUCTURE_TO_BIOME_LIST.computeIfAbsent(s, k -> new ArrayList<>()).add(b);
+    }
+
+    public static RegistryKey<Biome> keyOrNull(Biome biome) {
         Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
 
         if (optional.isEmpty()) {
@@ -143,6 +160,6 @@ public final class BiomeRegistries {
         }
 
         return optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome)
-                .orElseThrow(() -> new IllegalStateException("Impossible state when trying to get biome key")));
+                .orElse(null));
     }
 }

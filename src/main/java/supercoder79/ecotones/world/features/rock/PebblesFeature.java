@@ -23,7 +23,7 @@ public class PebblesFeature extends EcotonesFeature<DefaultFeatureConfig> {
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
 
         BlockState down = world.getBlockState(pos.down());
         if (!(down.isOf(Blocks.GRASS_BLOCK) || down.isOf(Blocks.STONE))) {

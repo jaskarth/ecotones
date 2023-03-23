@@ -28,7 +28,7 @@ import supercoder79.ecotones.world.features.config.CattailFeatureConfig;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.OakTreeFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 
 // TODO: add large pumpkins
 public class PumpkinPatchBiome extends EcotonesBiomeBuilder {
@@ -53,17 +53,17 @@ public class PumpkinPatchBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(0.8F);
         this.downfall(0.4F);
-        this.category(Biome.Category.PLAINS);
+//        this.category(Biome.Category.PLAINS);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);
 //        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 //        this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 5)));
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_OAK);
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

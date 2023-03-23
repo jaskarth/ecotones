@@ -9,7 +9,7 @@ import java.util.Random;
 public class OreVeinsBookGenerator implements BookGenerator {
     @Override
     public String generateTitle(Random random) {
-        return "Ore Cluster Discovery";
+        return random.nextBoolean() ? "Ore Cluster Discovery" : "Ore Vein Discovery";
     }
 
     @Override

@@ -26,7 +26,7 @@ import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.*;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 
 public class LavenderFieldBiome extends EcotonesBiomeBuilder {
@@ -64,14 +64,14 @@ public class LavenderFieldBiome extends EcotonesBiomeBuilder {
         this.downfall(0.72F);
 
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.PLAINS);
+//        this.category(Biome.Category.PLAINS);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
-        this.addStructureFeature(EcotonesConfiguredStructures.COTTAGE);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_SPRUCE);
+        this.addStructureFeature(EcotonesStructures.COTTAGE);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         //DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());

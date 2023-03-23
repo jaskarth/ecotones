@@ -13,7 +13,6 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureContext;
-import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.structure.StructurePiecesCollector;
 import net.minecraft.util.Identifier;
@@ -67,7 +66,7 @@ public class CampfireGenerator {
         }
 
         @Override
-        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, net.minecraft.util.math.random.Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot) {
             // Sample heightmap
             BlockPos scaledPos = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR_WG, this.pos);
 
@@ -99,7 +98,7 @@ public class CampfireGenerator {
 
                             if (be != null) {
                                 int idx = random.nextInt(27);
-                                be.setStack(idx, generateBook(random));
+                                be.setStack(idx, generateBook(new Random(random.nextLong())));
                                 chest.set(idx);
 
                                 for (int i = 0; i < foodStacks; i++) {

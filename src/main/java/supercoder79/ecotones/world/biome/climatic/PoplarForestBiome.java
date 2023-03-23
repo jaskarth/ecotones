@@ -9,7 +9,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -27,7 +26,7 @@ import supercoder79.ecotones.world.features.config.CattailFeatureConfig;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.PatchFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 
 public class PoplarForestBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -65,7 +64,7 @@ public class PoplarForestBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(0.7F);
         this.downfall(0.6F);
-        this.category(Biome.Category.FOREST);
+//        this.category(Biome.Category.FOREST);
 
         this.precipitation(Biome.Precipitation.RAIN);
 
@@ -85,8 +84,8 @@ public class PoplarForestBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_OAK);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)

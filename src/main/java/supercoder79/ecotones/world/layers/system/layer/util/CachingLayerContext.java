@@ -3,7 +3,7 @@ package supercoder79.ecotones.world.layers.system.layer.util;
 import it.unimi.dsi.fastutil.longs.Long2IntLinkedOpenHashMap;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.world.biome.source.SeedMixer;
-import net.minecraft.world.gen.random.SimpleRandom;
+import net.minecraft.util.math.random.CheckedRandom;
 
 public class CachingLayerContext implements LayerSampleContext<CachingLayerSampler> {
    private static final int field_31730 = 1024;
@@ -15,7 +15,7 @@ public class CachingLayerContext implements LayerSampleContext<CachingLayerSampl
 
    public CachingLayerContext(int cacheCapacity, long seed, long salt) {
       this.worldSeed = addSalt(seed, salt);
-      this.noiseSampler = new PerlinNoiseSampler(new SimpleRandom(seed));
+      this.noiseSampler = new PerlinNoiseSampler(new CheckedRandom(seed));
       this.cache = new Long2IntLinkedOpenHashMap(16, 0.25F);
       this.cache.defaultReturnValue(Integer.MIN_VALUE);
       this.cacheCapacity = cacheCapacity;

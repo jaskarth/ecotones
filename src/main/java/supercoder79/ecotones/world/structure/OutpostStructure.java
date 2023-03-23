@@ -14,19 +14,26 @@ import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.random.ChunkRandom;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.world.gen.structure.Structure;
+import net.minecraft.world.gen.structure.StructureType;
 import supercoder79.ecotones.util.BoxHelper;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.structure.gen.layout.OutpostLayout;
 import supercoder79.ecotones.world.structure.gen.layout.cell.GeneralCell;
 
+import java.util.Optional;
 import java.util.Random;
 
-public class OutpostStructure extends StructureFeature<DefaultFeatureConfig> {
-    public OutpostStructure(Codec<DefaultFeatureConfig> configCodec) {
-        super(configCodec, StructureGeneratorFactory.simple(OutpostStructure::canGenerate, OutpostStructure::addPieces));
+public class OutpostStructure extends Structure {
+    public static final Codec<OutpostStructure> CODEC = createCodec(OutpostStructure::new);
+
+    protected OutpostStructure(Config config) {
+        super(config);
     }
+//    public OutpostStructure(Codec<DefaultFeatureConfig> configCodec) {
+//        super(configCodec, StructureGeneratorFactory.simple(OutpostStructure::canGenerate, OutpostStructure::addPieces));
+//    }
 
     private static <C extends FeatureConfig> boolean canGenerate(StructureGeneratorFactory.Context<C> context) {
         if (!context.isBiomeValid(Heightmap.Type.WORLD_SURFACE_WG)) {
@@ -36,7 +43,7 @@ public class OutpostStructure extends StructureFeature<DefaultFeatureConfig> {
         return true;
     }
 
-    private static void addPieces(StructurePiecesCollector collector, StructurePiecesGenerator.Context<DefaultFeatureConfig> context) {
+    private static void addPieces(StructurePiecesCollector collector, Context context) {
         HeightLimitView world = context.world();
         ChunkGenerator chunkGenerator = context.chunkGenerator();
         ChunkPos pos = context.chunkPos();
@@ -49,7 +56,17 @@ public class OutpostStructure extends StructureFeature<DefaultFeatureConfig> {
             seed = ecg.getSeed();
         }
 
-        collector.addPiece(new OutpostPiece(seed, new BlockPos(x, chunkGenerator.getHeightOnGround(x, z, Heightmap.Type.WORLD_SURFACE_WG, world), z), chunkGenerator, world));
+        collector.addPiece(new OutpostPiece(seed, new BlockPos(x, chunkGenerator.getHeightOnGround(x, z, Heightmap.Type.WORLD_SURFACE_WG, world, null), z), chunkGenerator, world));
+    }
+
+    @Override
+    public Optional<StructurePosition> getStructurePosition(Context context) {
+        return Optional.of(new Structure.StructurePosition(context.chunkPos().getStartPos(), collector -> addPieces(collector, context)));
+    }
+
+    @Override
+    public StructureType<?> getType() {
+        return EcotonesStructureTypes.OUTPOST;
     }
 
     public static class OutpostPiece extends StructurePiece {
@@ -66,7 +83,7 @@ public class OutpostStructure extends StructureFeature<DefaultFeatureConfig> {
             this.layout.generate(generator, height);
         }
 
-        public OutpostPiece(StructureManager manager, NbtCompound nbt) {
+        public OutpostPiece(StructureTemplateManager manager, NbtCompound nbt) {
             super(EcotonesStructurePieces.OUTPOST, nbt);
             this.pos = new BlockPos(nbt.getInt("x"), nbt.getInt("y"), nbt.getInt("z"));
             this.seed = nbt.getLong("seed");
@@ -84,8 +101,8 @@ public class OutpostStructure extends StructureFeature<DefaultFeatureConfig> {
         }
 
         @Override
-        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pos) {
-            this.layout.generateCells(world, structureAccessor, chunkGenerator, random, pos);
+        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, net.minecraft.util.math.random.Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot) {
+            this.layout.generateCells(world, structureAccessor, chunkGenerator, new Random(random.nextLong()), pos);
         }
     }
 }

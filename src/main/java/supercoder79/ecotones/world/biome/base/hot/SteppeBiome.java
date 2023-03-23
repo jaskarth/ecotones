@@ -50,11 +50,11 @@ public class SteppeBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
-        this.category(Biome.Category.SAVANNA);
+//        this.category(Biome.Category.SAVANNA);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);
 //        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 //        this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> SavannaVillageData.STRUCTURE_POOLS, 5)));
 

@@ -1,6 +1,6 @@
 package supercoder79.ecotones.client;
 
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.registry.Registry;
@@ -8,7 +8,7 @@ import supercoder79.ecotones.Ecotones;
 
 public final class ClientPacketHandler {
     public static void init() {
-        ClientSidePacketRegistry.INSTANCE.register(Ecotones.WORLD_TYPE, (packetContext, data) -> {
+        ClientPlayNetworking.registerGlobalReceiver(Ecotones.WORLD_TYPE, (client, handler, data, sender) -> {
             ClientSidedServerData.isInEcotonesWorld = data.readBoolean();
             ClientRegistrySyncState.state = ClientRegistrySyncState.State.NONE;
 

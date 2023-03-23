@@ -31,7 +31,7 @@ import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.*;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 
 public class SpruceGlenBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -56,14 +56,14 @@ public class SpruceGlenBiome extends EcotonesBiomeBuilder {
         this.downfall(0.7F);
 
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.TAIGA);
+//        this.category(Biome.Category.TAIGA);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
-        this.addStructureFeature(EcotonesConfiguredStructures.COTTAGE);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_SPRUCE);
+        this.addStructureFeature(EcotonesStructures.COTTAGE);
 
         this.grassColor(0x408f5a);
         this.foliageColor(0x408f5a);

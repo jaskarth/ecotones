@@ -4,9 +4,8 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.biome.Biome;
-
-import java.util.Random;
 
 public class MapleLeafParticle extends SpriteBillboardParticle {
     protected MapleLeafParticle(ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {

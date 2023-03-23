@@ -5,6 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -14,7 +15,6 @@ import supercoder79.ecotones.world.features.config.WaterFeatureConfig;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class PlaceWaterFeature extends EcotonesFeature<WaterFeatureConfig> {
     public PlaceWaterFeature(Codec<WaterFeatureConfig> codec) {

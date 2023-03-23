@@ -63,14 +63,14 @@ public class SpruceShrublandBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(1.2F);
         this.downfall(0.075F);
-        this.category(Biome.Category.SAVANNA);
+//        this.category(Biome.Category.SAVANNA);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT);
 //        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

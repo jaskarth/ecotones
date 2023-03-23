@@ -5,8 +5,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.render.RenderLayer;
@@ -119,6 +119,6 @@ public final class EcotonesClient implements ClientModInitializer {
         EcotonesBlockEntityRenderers.init();
 
         ModelDataRegistry.register(EcotonesModelLayers.DUCK, DuckEntityModel.getTexturedModelData());
-        EntityRendererRegistry.INSTANCE.register(EcotonesEntities.DUCK, DuckEntityRenderer::new);
+        EntityRendererRegistry.register(EcotonesEntities.DUCK, DuckEntityRenderer::new);
     }
 }

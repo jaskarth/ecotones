@@ -9,19 +9,20 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.state.property.Properties;
-import net.minecraft.structure.Structure;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.util.shape.BitSetVoxelSet;
 import net.minecraft.util.shape.VoxelSet;
 import net.minecraft.world.*;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import supercoder79.ecotones.world.features.EcotonesFeature;
 
 import java.util.*;
@@ -92,7 +93,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends E
         if (!isAirOrLeaves(world, pos) && !isReplaceablePlant(world, pos) && !isWater(world, pos)) {
             return false;
         } else {
-            setBlockState(world, pos, config.trunkProvider.getBlockState(random, pos), box);
+            setBlockState(world, pos, config.trunkProvider.getBlockState(new CheckedRandom(random.nextLong()), pos), box);
             trunkPositions.add(pos.toImmutable());
             return true;
         }
@@ -102,7 +103,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends E
         if (!isAirOrLeaves(world, pos) && !isReplaceablePlant(world, pos) && !isWater(world, pos)) {
             return false;
         } else {
-            setBlockState(world, pos, config.foliageProvider.getBlockState(random, pos), box);
+            setBlockState(world, pos, config.foliageProvider.getBlockState(new CheckedRandom(random.nextLong()), pos), box);
             leavesPositions.add(pos.toImmutable());
             return true;
         }
@@ -125,7 +126,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends E
     public boolean generate(FeatureContext<T> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
         T config = context.getConfig();
 
         Set<BlockPos> set = Sets.newHashSet();
@@ -142,12 +143,14 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends E
 
                 BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
 
+                TreeDecorator.Generator generator = new TreeDecorator.Generator(world, replacer, new CheckedRandom(random.nextLong()), set, set2, set3);
+
                 config.decorators.forEach((decorator) -> {
-                    decorator.generate(world, replacer, random, list, list2);
+                    decorator.generate(generator);
                 });
             }
 
-            this.placeLogsAndLeaves(world, blockBox, random, set, set3, config);
+            this.placeLogsAndLeaves(world, blockBox, random, set, set2, config);
             return true;
         } else {
             return false;
@@ -156,11 +159,11 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends E
 
     private void placeLogsAndLeaves(WorldAccess world, BlockBox box, Random random, Set<BlockPos> logs, Set<BlockPos> leaves, T config) {
         for (BlockPos log : logs) {
-            world.setBlockState(log, config.trunkProvider.getBlockState(random, log), 3);
+            world.setBlockState(log, config.trunkProvider.getBlockState(new CheckedRandom(random.nextLong()), log), 3);
         }
 
         for (BlockPos leaf : leaves) {
-            BlockState leafState = config.foliageProvider.getBlockState(random, leaf);
+            BlockState leafState = config.foliageProvider.getBlockState(new CheckedRandom(random.nextLong()), leaf);
 
             if (leafState.getProperties().contains(Properties.DISTANCE_1_7)) {
                 leafState = leafState.with(Properties.DISTANCE_1_7, 1);

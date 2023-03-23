@@ -2,6 +2,7 @@ package supercoder79.ecotones.mixin;
 
 import com.google.common.base.MoreObjects;
 import net.minecraft.server.dedicated.ServerPropertiesHandler;
+import net.minecraft.structure.StructureSet;
 import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.SimpleRegistry;
@@ -9,53 +10,58 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.GeneratorOptions;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
+import net.minecraft.world.gen.chunk.FlatChunkGenerator;
+import net.minecraft.world.gen.chunk.FlatChunkGeneratorConfig;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import supercoder79.ecotones.world.gen.EcotonesBiomeSource;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
+import java.util.OptionalLong;
 import java.util.Properties;
 import java.util.Random;
 
 @Mixin(GeneratorOptions.class)
-public class MixinGeneratorOptions {
+public abstract class MixinGeneratorOptions {
     // FIXME
 
+    @Shadow
+    public static OptionalLong parseSeed(String seed) {
+        return null;
+    }
+
+    @Shadow
+    public static Registry<DimensionOptions> getRegistryWithReplacedOverworldGenerator(Registry<DimensionType> dimensionTypeRegistry, Registry<DimensionOptions> options, ChunkGenerator overworldGenerator) {
+        return null;
+    }
+
 //    @Inject(method = "fromProperties", at = @At("HEAD"), cancellable = true)
-//    private static void injectEcotones(DynamicRegistryManager dynamicRegistryManager, ServerPropertiesHandler.WorldGenProperties properties, CallbackInfoReturnable<GeneratorOptions> cir) {
-//        // no server.properties file generated
-//        if (properties.get("level-type") == null) {
-//            return;
-//        }
+//    private static void injectEcotones(DynamicRegistryManager registryManager, ServerPropertiesHandler.WorldGenProperties properties, CallbackInfoReturnable<GeneratorOptions> cir) {
+//        long l = parseSeed(properties.levelSeed()).orElse(new Random().nextLong());
+//        Registry<DimensionType> registry = registryManager.get(Registry.DIMENSION_TYPE_KEY);
+//        Registry<Biome> registry2 = registryManager.get(Registry.BIOME_KEY);
+//        Registry<StructureSet> registry3 = registryManager.get(Registry.STRUCTURE_SET_KEY);
+//        Registry<DimensionOptions> registry4 = DimensionType.createDefaultDimensionOptions(registryManager, l);
+//        String name = properties.levelType();
 //
-//        // check for our world type and return if so
-//        if (properties.get("level-type").toString().trim().toLowerCase().equals("ecotones")) {
-//            // get or generate seed
-//            String seed = (String) MoreObjects.firstNonNull(properties.get("level-seed"), "");
-//            long l = new Random().nextLong();
-//            if (!seed.isEmpty()) {
-//                try {
-//                    long m = Long.parseLong(seed);
-//                    if (m != 0L) {
-//                        l = m;
-//                    }
-//                } catch (NumberFormatException var14) {
-//                    l = seed.hashCode();
-//                }
-//            }
+//        if (name.equals("ecotones")) {
+//            GeneratorOptions genop = new GeneratorOptions(
+//                    l,
+//                    properties.generateStructures(),
+//                    false,
+//                    getRegistryWithReplacedOverworldGenerator(
+//                            registry,
+//                            registry4,
+//                            new EcotonesChunkGenerator(registry3, new EcotonesBiomeSource(registry2, l), l)
+//                    )
+//            );
 //
-//
-//            String generate_structures = (String)properties.get("generate-structures");
-//            boolean generateStructures = generate_structures == null || Boolean.parseBoolean(generate_structures);
-//            Registry<DimensionType> dimensionTypes = dynamicRegistryManager.get(Registry.DIMENSION_TYPE_KEY);
-//            Registry<Biome> biomes = dynamicRegistryManager.get(Registry.BIOME_KEY);
-//            Registry<DimensionOptions> dimensionOptions = DimensionType.createDefaultDimensionOptions(dynamicRegistryManager, l);
-//
-//            // return our chunk generator
-//            cir.setReturnValue(new GeneratorOptions(l, generateStructures, false, GeneratorOptions.getRegistryWithReplacedOverworldGenerator(dimensionTypes, dimensionOptions, new EcotonesChunkGenerator(dynamicRegistryManager.get(Registry.STRUCTURE_SET_KEY), new EcotonesBiomeSource(biomes, l), l))));
+//            cir.setReturnValue(genop);
 //        }
 //    }
 }

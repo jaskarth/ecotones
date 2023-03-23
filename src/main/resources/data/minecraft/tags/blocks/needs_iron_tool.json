@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "ecotones:sparse_gold_ore",
+    "ecotones:sulfur_ore",
+    "ecotones:phosphate_ore"
+  ]
+}

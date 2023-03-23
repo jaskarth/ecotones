@@ -12,7 +12,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtInt;
 import net.minecraft.tag.BlockTags;
-import net.minecraft.text.LiteralText;
+
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -125,10 +125,10 @@ public class TurpentineItem extends Item {
 
         boolean f3h = context.isAdvanced();
         switch (uses) {
-            case 4 -> tooltip.add(new LiteralText("Full" + (f3h ? " (4/4)" : "")).formatted(Formatting.GRAY));
-            case 3 -> tooltip.add(new LiteralText("Mostly full" + (f3h ? " (3/4)" : "")).formatted(Formatting.GRAY));
-            case 2 -> tooltip.add(new LiteralText("Half full" + (f3h ? " (2/4)" : "")).formatted(Formatting.GRAY));
-            case 1 -> tooltip.add(new LiteralText("Mostly empty" + (f3h ? " (1/4)" : "")).formatted(Formatting.GRAY));
+            case 4 -> tooltip.add(Text.literal("Full" + (f3h ? " (4/4)" : "")).formatted(Formatting.GRAY));
+            case 3 -> tooltip.add(Text.literal("Mostly full" + (f3h ? " (3/4)" : "")).formatted(Formatting.GRAY));
+            case 2 -> tooltip.add(Text.literal("Half full" + (f3h ? " (2/4)" : "")).formatted(Formatting.GRAY));
+            case 1 -> tooltip.add(Text.literal("Mostly empty" + (f3h ? " (1/4)" : "")).formatted(Formatting.GRAY));
         }
     }
 

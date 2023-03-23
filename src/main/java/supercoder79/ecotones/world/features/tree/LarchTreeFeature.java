@@ -7,11 +7,13 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SimpleBlockFeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import supercoder79.ecotones.util.BoxHelper;
 import supercoder79.ecotones.util.Shapes;
 import supercoder79.ecotones.world.features.EcotonesFeature;
@@ -19,8 +21,9 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 import supercoder79.ecotones.world.treedecorator.PineconeTreeDecorator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 public class LarchTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
@@ -70,7 +73,7 @@ public class LarchTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
 
         BiConsumer<BlockPos, BlockState> replacer = (p, s) -> world.setBlockState(p, s, 3);
 
-        PINECONES.generate(world, replacer, random, logs, leaves);
+        PINECONES.generate(new TreeDecorator.Generator(world, replacer, random, new HashSet<>(logs), new HashSet<>(leaves), Set.of()));
 
         return true;
     }

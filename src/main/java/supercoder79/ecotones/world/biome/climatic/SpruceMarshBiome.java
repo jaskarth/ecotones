@@ -31,7 +31,7 @@ import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.*;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 
 public class SpruceMarshBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -76,11 +76,11 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
 
         this.waterColor(0x5c5214);
         this.waterFogColor(0x5c5214);
-        this.category(Biome.Category.SWAMP);
+//        this.category(Biome.Category.SWAMP);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
-        this.addStructureFeature(EcotonesConfiguredStructures.COTTAGE);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_SPRUCE);
+        this.addStructureFeature(EcotonesStructures.COTTAGE);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());

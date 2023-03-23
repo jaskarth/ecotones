@@ -8,7 +8,6 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
@@ -43,12 +42,12 @@ public class OasisBiome extends EcotonesBiomeBuilder {
         this.downfall(1F);
 
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.JUNGLE);
+//        this.category(Biome.Category.JUNGLE);
 
         this.waterColor(4445678);
         this.waterFogColor(329011);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)

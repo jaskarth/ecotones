@@ -3,15 +3,14 @@ package supercoder79.ecotones.world.features;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.SimpleRandom;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.util.math.random.CheckedRandom;
 import supercoder79.ecotones.world.features.config.PatchFeatureConfig;
-
-import java.util.Random;
 
 public class SurfacePatchFeature extends EcotonesFeature<PatchFeatureConfig> {
     public SurfacePatchFeature(Codec<PatchFeatureConfig> configCodec) {
@@ -26,7 +25,7 @@ public class SurfacePatchFeature extends EcotonesFeature<PatchFeatureConfig> {
         PatchFeatureConfig config = context.getConfig();
 
         int radius = config.radius.get(random);
-        DoublePerlinNoiseSampler noise = DoublePerlinNoiseSampler.create(new ChunkRandom(new SimpleRandom(random.nextLong())), -4, 1.0);
+        DoublePerlinNoiseSampler noise = DoublePerlinNoiseSampler.create(new ChunkRandom(new CheckedRandom(random.nextLong())), -4, 1.0);
 
         for(int x = -radius; x <= radius; x++) {
             for(int z = -radius; z <= radius; z++) {

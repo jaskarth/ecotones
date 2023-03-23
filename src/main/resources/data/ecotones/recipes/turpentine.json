@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XJX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "ecotones:pine_sap"
+    },
+    "J": {
+      "item": "ecotones:jar"
+    }
+  },
+  "result": {
+    "item": "ecotones:turpentine",
+    "count": 1
+  }
+}

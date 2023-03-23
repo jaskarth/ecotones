@@ -1,6 +1,5 @@
 package supercoder79.ecotones.util.layer;
 
-import net.minecraft.world.gen.random.SimpleRandom;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 
 import java.util.Random;
@@ -17,7 +16,7 @@ public abstract class Layer {
     public int[][] operate(int x, int z, int width, int height) {
         int[][] data = new int[width][height];
 
-        ImprovedChunkRandom random = new ImprovedChunkRandom(new SimpleRandom(0));
+        ImprovedChunkRandom random = new ImprovedChunkRandom(0);
         random.setPopulationSeed(this.seed, x, z);
 
         return operate(data, random, x, z, width, height);

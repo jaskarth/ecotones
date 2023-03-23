@@ -47,7 +47,7 @@ public class MountainLakeBiome extends EcotonesBiomeBuilder {
         this.downfall(0.6F);
 
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.RIVER);
+//        this.category(Biome.Category.RIVER);
 
         this.waterColor(0x3991d4);
         this.waterFogColor(0x3991d4);

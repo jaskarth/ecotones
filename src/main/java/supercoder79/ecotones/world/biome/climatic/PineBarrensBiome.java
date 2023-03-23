@@ -27,7 +27,7 @@ import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.*;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 
 public class PineBarrensBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -51,16 +51,16 @@ public class PineBarrensBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(0.55F);
         this.downfall(0.3F);
-        this.category(Biome.Category.TAIGA);
+//        this.category(Biome.Category.TAIGA);
 
         this.precipitation(Biome.Precipitation.RAIN);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
-        this.addStructureFeature(EcotonesConfiguredStructures.COTTAGE);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_SPRUCE);
+        this.addStructureFeature(EcotonesStructures.COTTAGE);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         //DefaultBiomeFeatures.addDefaultUndergroundStructures(this.getGenerationSettings());

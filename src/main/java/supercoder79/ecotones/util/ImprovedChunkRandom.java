@@ -1,17 +1,15 @@
 package supercoder79.ecotones.util;
 
-import net.minecraft.world.gen.random.AbstractRandom;
-import net.minecraft.world.gen.random.ChunkRandom;
+import java.util.Random;
 
 /**
  * Improved version of Minecraft's ChunkRandom to handle seeds and entropy better.
  */
-public class ImprovedChunkRandom extends ChunkRandom {
-    public ImprovedChunkRandom(AbstractRandom baseRandom) {
-        super(baseRandom);
+public class ImprovedChunkRandom extends Random {
+    public ImprovedChunkRandom(long seed) {
+        super(seed);
     }
 
-    @Override
     public long setPopulationSeed(long worldSeed, int blockX, int blockZ) {
         blockX = blockX >> 4;
         blockZ = blockZ >> 4;
@@ -43,7 +41,6 @@ public class ImprovedChunkRandom extends ChunkRandom {
         return result;
     }
 
-    @Override
     public void setDecoratorSeed(long populationSeed, int index, int step) {
         this.setSeed(populationSeed);
         long a = this.nextLong() | 1L;
@@ -56,7 +53,6 @@ public class ImprovedChunkRandom extends ChunkRandom {
 //        return result;
     }
 
-    @Override
     public void setCarverSeed(long worldSeed, int chunkX, int chunkZ) {
         this.setSeed(worldSeed);
         long l = this.nextLong() | 1L;

@@ -14,7 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
-import net.minecraft.world.gen.random.SimpleRandom;
+import net.minecraft.util.math.random.CheckedRandom;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -65,7 +65,7 @@ public class MixinWorldRenderer {
         NativeImage image = new NativeImage(256, 256, false);
 
         Random random = new Random();
-        PerlinNoiseSampler noise = new PerlinNoiseSampler(new SimpleRandom(random.nextLong()));
+        PerlinNoiseSampler noise = new PerlinNoiseSampler(new CheckedRandom(random.nextLong()));
 
         for (int x = 0; x < 256; x++) {
             for (int z = 0; z < 256; z++) {
@@ -80,7 +80,7 @@ public class MixinWorldRenderer {
         CloudHandler.setTexture(texture);
     }
 
-    @Inject(method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FLnet/minecraft/client/render/Camera;ZLjava/lang/Runnable;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gl/VertexBuffer;setShader(Lnet/minecraft/util/math/Matrix4f;Lnet/minecraft/util/math/Matrix4f;Lnet/minecraft/client/render/Shader;)V", ordinal = 1, shift = At.Shift.BEFORE), cancellable = true)
+    @Inject(method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FLnet/minecraft/client/render/Camera;ZLjava/lang/Runnable;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/BackgroundRenderer;clearFog()V", ordinal = 0, shift = At.Shift.BEFORE), cancellable = true)
     private void renderEcotonesFancyStars(MatrixStack matrices, Matrix4f projectionMatrix, float tickDelta, Camera camera, boolean bl, Runnable runnable, CallbackInfo ci) {
         if (ClientSidedServerData.isInEcotonesWorld) {
             if (!this.initializedStars) {
@@ -91,8 +91,9 @@ public class MixinWorldRenderer {
 
                 SkyboxGenerator.renderStars(buffer);
 
-                buffer.end();
-                this.starsBuffer.upload(buffer);
+                this.starsBuffer.bind();
+                this.starsBuffer.upload(buffer.end());
+                VertexBuffer.unbind();
                 this.initializedStars = true;
             }
         }

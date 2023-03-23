@@ -5,7 +5,6 @@ import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.random.SimpleRandom;
 import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.Vec2i;
@@ -31,7 +30,7 @@ public abstract class Layout {
             this.cells.add(new GeneralCell(entry.getValue(), this.voronoi.getCentersByColor().get(entry.getKey()), entry.getKey()));
         }
 
-        ImprovedChunkRandom random = new ImprovedChunkRandom(new SimpleRandom(seed));
+        ImprovedChunkRandom random = new ImprovedChunkRandom((seed));
         random.setCarverSeed(seed, x, z);
 
         this.random = random;

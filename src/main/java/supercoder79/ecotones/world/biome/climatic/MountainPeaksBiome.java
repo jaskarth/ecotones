@@ -29,7 +29,7 @@ import supercoder79.ecotones.world.features.config.DuckweedFeatureConfig;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 
 public class MountainPeaksBiome extends EcotonesBiomeBuilder {
@@ -70,7 +70,7 @@ public class MountainPeaksBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
-        this.category(Biome.Category.EXTREME_HILLS);
+//        this.category(Biome.Category.EXTREME_HILLS);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());
@@ -84,7 +84,7 @@ public class MountainPeaksBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 1))

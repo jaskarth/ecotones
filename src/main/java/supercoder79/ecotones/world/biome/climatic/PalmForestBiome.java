@@ -15,7 +15,6 @@ import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
@@ -63,14 +62,14 @@ public class PalmForestBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(1.6F);
         this.downfall(0.8F);
-        this.category(Biome.Category.JUNGLE);
+//        this.category(Biome.Category.JUNGLE);
 
         this.precipitation(Biome.Precipitation.RAIN);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());
         DefaultBiomeFeatures.addPlainsTallGrass(this.getGenerationSettings());
@@ -114,7 +113,7 @@ public class PalmForestBiome extends EcotonesBiomeBuilder {
                         .decorators(ImmutableList.of(
                                 new CocoaBeansTreeDecorator(0.2F),
                                 TrunkVineTreeDecorator.INSTANCE,
-                                LeavesVineTreeDecorator.INSTANCE)
+                                new LeavesVineTreeDecorator(0.2f))
                         ).ignoreVines().build())
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(3.5))));
 

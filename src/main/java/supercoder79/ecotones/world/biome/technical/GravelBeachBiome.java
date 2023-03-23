@@ -41,7 +41,7 @@ public class GravelBeachBiome extends EcotonesBiomeBuilder {
 
         this.precipitation(Biome.Precipitation.RAIN);
 
-        this.category(Biome.Category.BEACH);
+//        this.category(Biome.Category.BEACH);
 
         BiomeHelper.addDefaultFeatures(this);
 

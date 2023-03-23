@@ -48,7 +48,7 @@ public class RedRockRidgeBiome extends EcotonesBiomeBuilder {
         this.temperature(0.575F);
         this.downfall(0.825F);
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.MESA);
+//        this.category(Biome.Category.MESA);
 
         this.foliageColor(10387789);
         this.grassColor(9470285);

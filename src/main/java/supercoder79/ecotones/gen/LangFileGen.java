@@ -69,6 +69,7 @@ public final class LangFileGen {
         }
 
         updated.put(oldEnd, content);
+        DataGen.DATA.langs++;
 
         LINES.clear();
         LINES.putAll(updated);
@@ -95,6 +96,7 @@ public final class LangFileGen {
         }
 
         updated.put(oldEnd, content);
+        DataGen.DATA.langs++;
 
         LINES.clear();
         LINES.putAll(updated);
@@ -102,6 +104,11 @@ public final class LangFileGen {
         itemblockEnd++;
         itemonlyEnd++;
         end++;
+    }
+
+    public static void addBlockItemBlock(String unloc, String localized) {
+        addBlock(unloc, localized);
+        addItemblock(unloc, localized);
     }
 
     public static void addItemOnly(String unloc, String localized) {
@@ -120,6 +127,7 @@ public final class LangFileGen {
         }
 
         updated.put(oldEnd, content);
+        DataGen.DATA.langs++;
 
         LINES.clear();
         LINES.putAll(updated);

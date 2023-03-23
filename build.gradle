@@ -1,6 +1,6 @@
 plugins {
-	id 'fabric-loom' version '0.11-SNAPSHOT'
-	id 'io.github.juuxel.loom-quiltflower' version '1.7.0'
+	id 'fabric-loom' version '1.0-SNAPSHOT'
+	id 'io.github.juuxel.loom-quiltflower' version '1.8.0'
 	id 'maven-publish'
 }
 
@@ -14,6 +14,7 @@ group = project.maven_group
 repositories {
 	mavenLocal()
 	maven { url = "https://maven.gegy.dev" }
+	maven { url = "https://maven.terraformersmc.com/" }
 }
 
 loom {
@@ -30,8 +31,13 @@ dependencies {
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 
 
-	modRuntimeOnly ("supercoder79:databreaker:0.2.9") {
+	modRuntimeOnly ("supercoder79:databreaker:0.2.10") {
 		exclude module : "fabric-loader"
+	}
+
+	// Move to compileOnly as well when emi integration is added
+	modRuntimeOnly ("dev.emi:emi:0.7.1+1.19.2") {
+		transitive = false
 	}
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.

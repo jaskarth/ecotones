@@ -1,10 +1,11 @@
 package supercoder79.ecotones.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.fabricmc.fabric.api.registry.CommandRegistry;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
+
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Language;
 import net.minecraft.util.Util;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 @DevOnly
 public class TestTranslationKeysCommand {
     public static void init() {
-        CommandRegistry.INSTANCE.register(false, dispatcher -> {
+        CommandRegistrationCallback.EVENT.register((dispatcher, registry, env) -> {
             LiteralArgumentBuilder<ServerCommandSource> builder = CommandManager.literal("testtranslations").requires(source ->
                     source.hasPermissionLevel(2));
 
@@ -74,16 +75,16 @@ public class TestTranslationKeysCommand {
             }
         }
 
-        source.sendFeedback(new LiteralText("Found " + count + " missing translation keys."), false);
+        source.sendFeedback(Text.literal("Found " + count + " missing translation keys."), false);
         if (count == 0) {
-            // Congratulating myself moment
-            source.sendFeedback(new LiteralText("Nice job!"), false);
+            // Congratulating myself :)
+            source.sendFeedback(Text.literal("Nice job!"), false);
             return 0;
         }
 
         try {
             Path path = Paths.get("translations.txt");
-            source.sendFeedback(new LiteralText("Dumping them to " + path.toAbsolutePath()), false);
+            source.sendFeedback(Text.literal("Dumping them to " + path.toAbsolutePath()), false);
             File file = new File(path.toString());
             FileWriter writer = new FileWriter(file);
 

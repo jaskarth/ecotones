@@ -5,6 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.chunk.ChunkSection;
@@ -18,7 +19,6 @@ import supercoder79.ecotones.util.vein.OreVeins;
 import supercoder79.ecotones.world.features.config.RockFeatureConfig;
 
 import java.util.Optional;
-import java.util.Random;
 
 public class OreVeinFeature extends EcotonesFeature<DefaultFeatureConfig> {
     private long seed;
@@ -108,14 +108,14 @@ public class OreVeinFeature extends EcotonesFeature<DefaultFeatureConfig> {
 
             if (isVein(this.veinANoise.sample(x, y * 1.75, z), this.veinBNoise.sample(x, y * 1.75, z))) {
                 double quality = this.veinQualityNoise.sample(x, y, z);
-                double skipChance = MathHelper.clampedLerpFromProgress(quality, -1, 1, 0.875, 0.4);
+                double skipChance = MathHelper.clampedMap(quality, -1, 1, 0.875, 0.4);
 
                 if (random.nextDouble() < skipChance) {
                     continue;
                 }
 
-                if (random.nextDouble() < MathHelper.clampedLerpFromProgress(quality, -0.25, 1.0, 0, 0.65)) {
-                    double rareChance = MathHelper.clampedLerpFromProgress(quality, 0.45, 1.0, 0.02, 0.4);
+                if (random.nextDouble() < MathHelper.clampedMap(quality, -0.25, 1.0, 0, 0.65)) {
+                    double rareChance = MathHelper.clampedMap(quality, 0.45, 1.0, 0.02, 0.4);
 
                     if (random.nextDouble() < rareChance) {
                         world.setBlockState(local, vein.getRareState(), 3);
@@ -139,7 +139,7 @@ public class OreVeinFeature extends EcotonesFeature<DefaultFeatureConfig> {
 
     private void initSeed(long seed) {
         if (this.seed != seed || this.enabledNoise == null) {
-            Random random = new Random(seed);
+            java.util.Random random = new java.util.Random(seed);
             this.seed = seed;
             this.enabledNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, random, 3, 512 + 256, 1, 1);
             this.floorNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, random, 2, 256, 1, 1);

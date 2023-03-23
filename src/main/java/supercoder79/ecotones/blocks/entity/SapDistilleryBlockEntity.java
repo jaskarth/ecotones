@@ -17,17 +17,15 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.ItemTags;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.screen.SapDistilleryScreenHandler;
-
-import java.util.Random;
 
 public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
     private DefaultedList<ItemStack> inventory;
@@ -40,6 +38,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
     private int sapAmount;
     // 0 .. 5,000
     private int syrupAmount;
+    private boolean showMode = false;
 
     public SapDistilleryBlockEntity(BlockPos pos, BlockState state) {
         super(EcotonesBlockEntities.SAP_DISTILLERY, pos, state);
@@ -91,6 +90,10 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
             }
         }
 
+        if (blockEntity.showMode) {
+            blockEntity.syrupAmount = 4000;
+        }
+
         // Try to increment sap amount every tick (illusion of consuming sap slowly)
         if (world.getTime() % 20 == 0) {
             if (blockEntity.getStack(0).getCount() > 0 && blockEntity.sapAmount + 1000 <= 40000) {
@@ -131,7 +134,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
         }
 
         if (entity.getStack().isOf(EcotonesItems.JAR) && this.syrupAmount >= 1000) {
-            world.spawnEntity(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(EcotonesItems.MAPLE_SYRUP)));
+            world.spawnEntity(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), fillBottle()));
 
             entity.remove(Entity.RemovalReason.KILLED);
 
@@ -164,7 +167,7 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
     }
 
     public boolean canFillBottle() {
-        return this.syrupAmount >= 1000;
+        return this.syrupAmount >= 1000 && !this.showMode;
     }
 
     public void reduceForBottle() {
@@ -178,13 +181,17 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
         }
     }
 
+    public ItemStack fillBottle() {
+        return new ItemStack(EcotonesItems.MAPLE_SYRUP);
+    }
+
     public int getSyrupAmount() {
         return syrupAmount;
     }
 
     @Override
     protected Text getContainerName() {
-        return new LiteralText("Sap Distillery");
+        return Text.literal("Sap Distillery");
     }
 
     @Override
@@ -196,6 +203,8 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
         this.heatAmount = tag.getShort("heat_amt");
         this.sapAmount = tag.getInt("sap_amt");
         this.syrupAmount = tag.getShort("syrup_amt");
+
+        this.showMode = tag.getBoolean("ShowMode");
 
         // Client sync
         if (tag.contains("syrup")) {
@@ -211,6 +220,8 @@ public class SapDistilleryBlockEntity extends LockableContainerBlockEntity {
         tag.putShort("heat_amt", (short) this.heatAmount);
         tag.putInt("sap_amt", this.sapAmount);
         tag.putShort("syrup_amt", (short) this.syrupAmount);
+
+        tag.putBoolean("ShowMode", this.showMode);
 
 //        return tag;
     }

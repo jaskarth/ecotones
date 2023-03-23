@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XJX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "J": {
+      "item": "ecotones:jar"
+    }
+  },
+  "result": {
+    "item": "ecotones:sap_distillery",
+    "count": 1
+  }
+}

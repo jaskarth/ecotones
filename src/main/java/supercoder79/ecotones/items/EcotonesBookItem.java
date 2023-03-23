@@ -12,7 +12,6 @@ import net.minecraft.network.packet.s2c.play.OpenWrittenBookS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
@@ -47,7 +46,7 @@ public class EcotonesBookItem extends WrittenBookItem {
             NbtCompound compoundTag = stack.getNbt();
             String string = compoundTag.getString("author");
             if (!StringHelper.isEmpty(string)) {
-                tooltip.add((new TranslatableText("book.byAuthor", string)).formatted(Formatting.GRAY));
+                tooltip.add((Text.translatable("book.byAuthor", string)).formatted(Formatting.GRAY));
             }
         }
 

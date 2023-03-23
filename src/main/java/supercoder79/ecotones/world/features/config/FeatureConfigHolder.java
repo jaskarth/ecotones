@@ -360,7 +360,7 @@ public final class FeatureConfigHolder {
 //            BlockStateProvider.of(Blocks.JUNGLE_SAPLING.getDefaultState()),
             new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3),
             new TwoLayersFeatureSize(1, 0, 1))
-            .decorators(ImmutableList.of(new CocoaBeansTreeDecorator(0.2F), TrunkVineTreeDecorator.INSTANCE, LeavesVineTreeDecorator.INSTANCE)).ignoreVines().build();
+            .decorators(ImmutableList.of(new CocoaBeansTreeDecorator(0.2F), TrunkVineTreeDecorator.INSTANCE, new LeavesVineTreeDecorator(0.2f))).ignoreVines().build();
 
     public static final TreeFeatureConfig MEGA_JUNGLE = new TreeFeatureConfig.Builder(
             BlockStateProvider.of(Blocks.JUNGLE_LOG.getDefaultState()),
@@ -369,7 +369,7 @@ public final class FeatureConfigHolder {
 //            BlockStateProvider.of(Blocks.JUNGLE_SAPLING.getDefaultState()),
             new JungleFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 2),
             new TwoLayersFeatureSize(1, 1, 2))
-            .decorators(ImmutableList.of(TrunkVineTreeDecorator.INSTANCE, LeavesVineTreeDecorator.INSTANCE)).build();
+            .decorators(ImmutableList.of(TrunkVineTreeDecorator.INSTANCE, new LeavesVineTreeDecorator(0.2f))).build();
 
     public static final TreeFeatureConfig DRY_STEPPE_TREE = new TreeFeatureConfig.Builder(
             BlockStateProvider.of(Blocks.OAK_LOG.getDefaultState()),

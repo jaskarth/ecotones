@@ -64,14 +64,14 @@ public class DesertBiome extends EcotonesBiomeBuilder {
         this.temperature(2F);
         this.downfall(0F);
         this.particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.00325F));
-        this.category(Biome.Category.DESERT);
+//        this.category(Biome.Category.DESERT);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT);
 //        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 //        this.addStructureFeature(ConfiguredStructureFeatures.DESERT_PYRAMID);
 //        this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> DesertVillageData.STRUCTURE_POOLS, 4)));

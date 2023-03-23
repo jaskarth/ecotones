@@ -41,11 +41,15 @@ public final class LootTableGen {
     public static void dropsSelf(String name) throws IOException {
         String json = DROPS_SELF.replace("%%NAME%%", name).replace("%%ROLLS%%", "1");
         Files.write(PATH.resolve(name + ".json"), json.getBytes());
+
+        DataGen.DATA.loottables++;
     }
 
     public static void dropsItem(String name, String drop) throws IOException {
         String json = DROPS_SELF.replace("%%NAME%%", drop).replace("%%ROLLS%%", "1");
         Files.write(PATH.resolve(name + ".json"), json.getBytes());
+
+        DataGen.DATA.loottables++;
     }
 
     public static void dropsItem(String name, String drop, int min, int max) throws IOException {
@@ -56,5 +60,7 @@ public final class LootTableGen {
                         .replace("%%MAX%%", String.valueOf(max))
                 );
         Files.write(PATH.resolve(name + ".json"), json.getBytes());
+
+        DataGen.DATA.loottables++;
     }
 }

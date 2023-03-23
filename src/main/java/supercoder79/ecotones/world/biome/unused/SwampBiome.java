@@ -9,7 +9,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.placementmodifier.*;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
@@ -58,7 +57,7 @@ public class SwampBiome extends EcotonesBiomeBuilder {
         this.hilliness(1.2);
         this.volatility(0.96);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_SWAMP);
 //        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
 

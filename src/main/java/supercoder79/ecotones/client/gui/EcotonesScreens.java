@@ -12,6 +12,7 @@ public final class EcotonesScreens {
     public static void init() {
         register(EcotonesScreenHandlers.SAP_DISTILLERY, SapDistilleryScreen::new);
         register(EcotonesScreenHandlers.FERTILIZER_SPREADER, FertilizerSpreaderScreen::new);
+        register(EcotonesScreenHandlers.GRINDSTONE, GrindstoneScreen::new);
     }
 
     private static <H extends ScreenHandler, S extends Screen & ScreenHandlerProvider<H>> void register(ScreenHandlerType<? extends H> type, ScreenRegistry.Factory<H, S> screenFactory) {

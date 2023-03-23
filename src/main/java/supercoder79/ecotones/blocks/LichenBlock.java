@@ -4,8 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.VineBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 
 public class LichenBlock extends VineBlock {
     public LichenBlock(Settings settings) {

@@ -4,12 +4,12 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
+import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-import net.minecraft.world.gen.random.ChunkRandom;
-import net.minecraft.world.gen.random.SimpleRandom;
+import net.minecraft.util.math.random.CheckedRandom;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 import java.util.Random;
@@ -22,7 +22,7 @@ public class PhosphateDomeFeature extends EcotonesFeature<DefaultFeatureConfig> 
     @Override
     public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
         StructureWorldAccess world = context.getWorld();
 
         if (!world.getBlockState(pos.down()).isOf(Blocks.GRASS_BLOCK)) {
@@ -43,7 +43,7 @@ public class PhosphateDomeFeature extends EcotonesFeature<DefaultFeatureConfig> 
             }
         }
 
-        DoublePerlinNoiseSampler noise = DoublePerlinNoiseSampler.create(new ChunkRandom(new SimpleRandom(random.nextLong())), -4, 1.0);
+        DoublePerlinNoiseSampler noise = DoublePerlinNoiseSampler.create(new ChunkRandom(new CheckedRandom(random.nextLong())), -4, 1.0);
 
         pos = pos.down(2 + (Math.max(0, radius - 4)));
 

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XJX",
+    "W W"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:stick"
+    },
+    "J": {
+      "item": "ecotones:jar"
+    },
+    "X": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "result": {
+    "item": "ecotones:grindstone",
+    "count": 1
+  }
+}

@@ -26,8 +26,8 @@ import java.util.function.Supplier;
 public abstract class MixinClientWorld extends World {
     @Shadow @Final private MinecraftClient client;
 
-    protected MixinClientWorld(MutableWorldProperties properties, RegistryKey<World> registryRef, RegistryEntry<DimensionType> registryEntry, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long seed) {
-        super(properties, registryRef, registryEntry, profiler, isClient, debugWorld, seed);
+    protected MixinClientWorld(MutableWorldProperties properties, RegistryKey<World> registryRef, RegistryEntry<DimensionType> dimension, Supplier<Profiler> profiler, boolean isClient, boolean debugWorld, long seed, int maxChainedNeighborUpdates) {
+        super(properties, registryRef, dimension, profiler, isClient, debugWorld, seed, maxChainedNeighborUpdates);
     }
 
     @Inject(method = "getSkyColor", at = @At("RETURN"), cancellable = true)
@@ -48,8 +48,8 @@ public abstract class MixinClientWorld extends World {
             time += 2000;
             time %= 24000;
             double delta = time / 24000.0;
-            double lerp = MathHelper.clampedLerpFromProgress(delta, 0.5, 0.55, 0, 1);
-            lerp *= MathHelper.clampedLerpFromProgress(delta, 0.95, 1, 1, 0);
+            double lerp = MathHelper.clampedMap(delta, 0.5, 0.55, 0, 1);
+            lerp *= MathHelper.clampedMap(delta, 0.95, 1, 1, 0);
             if (delta > 0.5) {
                 red += 0.05 * lerp;
                 green += 0.025 * lerp;

@@ -44,7 +44,7 @@ public final class EcotonesAdvancementPositioning {
         for (Advancement adv : advs) {
             Vec2d vec = POSITIONS.get(adv.getId());
             if (vec == null) {
-                System.out.println(adv.getId());
+                Ecotones.LOGGER.error("MISSING POSITION FOR " + adv.getId());
             } else {
                 adv.getDisplay().setPos((float) vec.x(), (float) vec.y());
             }

@@ -2,6 +2,7 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -9,6 +10,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
@@ -31,7 +33,7 @@ import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.CattailFeatureConfig;
 import supercoder79.ecotones.world.features.config.FeatureConfigHolder;
 import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 
 public class HazelGroveBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
@@ -66,7 +68,7 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
         this.scale(hilly ? 0.6f : 0.05f);
         this.temperature(1F);
         this.downfall(1F);
-        this.category(Biome.Category.FOREST);
+//        this.category(Biome.Category.FOREST);
 
         this.precipitation(Biome.Precipitation.RAIN);
 
@@ -77,14 +79,15 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
         this.hilliness(hilly ? 4.0 : 1.5);
         this.volatility(hilly ? 0.8 : 1.0);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_OAK);
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_OAK);
 
         if (clearing) {
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     EcotonesConfiguredFeature.wrap(Feature.TREE, HAZEL_CONFIG)
                             .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.5f, 1)))
                             .spreadHorizontally()
+                            .decorate(BlockFilterPlacementModifier.of(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.getDefaultState(), BlockPos.ORIGIN)))
                             .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
 
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

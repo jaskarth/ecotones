@@ -44,7 +44,7 @@ public class CottageGenerator {
             int dx = random.nextInt(24) - random.nextInt(24);
             int dz = random.nextInt(24) - random.nextInt(24);
 
-            collector.addPiece(new Farm(new BlockPos(pos.getX() + dx, chunkGenerator.getHeightOnGround(pos.getX() + dx, pos.getZ() + dz, Heightmap.Type.WORLD_SURFACE_WG, world), pos.getZ() + dz)));
+            collector.addPiece(new Farm(new BlockPos(pos.getX() + dx, chunkGenerator.getHeightOnGround(pos.getX() + dx, pos.getZ() + dz, Heightmap.Type.WORLD_SURFACE_WG, world, null), pos.getZ() + dz)));
         }
     }
 
@@ -84,7 +84,7 @@ public class CottageGenerator {
         }
 
         @Override
-        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, net.minecraft.util.math.random.Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
             // Place floor
             for (int x = 0; x < 4; x++) {
                 for (int z = 0; z < 6; z++) {
@@ -173,11 +173,12 @@ public class CottageGenerator {
             world.setBlockState(this.pos.add(4, 2, 4), Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.NORTH, true).with(PaneBlock.SOUTH, true), 3);
             world.setBlockState(this.pos.add(2, 2, 6), Blocks.GLASS_PANE.getDefaultState().with(PaneBlock.EAST, true).with(PaneBlock.WEST, true), 3);
 
+            Random juRandom = new Random(random.nextLong());
             // Decorations
-            BlockDecorations.get(random, BlockAttachment.FLOOR, DecorationCategory.TABLES).generate(world, this.pos.add(3, 1, 5), Direction.UP);
-            BlockDecorations.get(random, BlockAttachment.FLOOR, DecorationCategory.INDUSTRY).generate(world, this.pos.add(3, 1, 3), Direction.UP);
-            BlockDecorations.get(random, BlockAttachment.CEILING, DecorationCategory.LIGHTS).generate(world, this.pos.add(3, 3, 5), Direction.UP);
-            BlockDecorations.get(random, BlockAttachment.CEILING, DecorationCategory.LIGHTS).generate(world, this.pos.add(0, 3, 0), Direction.UP);
+            BlockDecorations.get(juRandom, BlockAttachment.FLOOR, DecorationCategory.TABLES).generate(world, this.pos.add(3, 1, 5), Direction.UP);
+            BlockDecorations.get(juRandom, BlockAttachment.FLOOR, DecorationCategory.INDUSTRY).generate(world, this.pos.add(3, 1, 3), Direction.UP);
+            BlockDecorations.get(juRandom, BlockAttachment.CEILING, DecorationCategory.LIGHTS).generate(world, this.pos.add(3, 3, 5), Direction.UP);
+            BlockDecorations.get(juRandom, BlockAttachment.CEILING, DecorationCategory.LIGHTS).generate(world, this.pos.add(0, 3, 0), Direction.UP);
 
             // Bed
             world.setBlockState(this.pos.add(0, 1, 0), Blocks.RED_BED.getDefaultState().with(BedBlock.FACING, Direction.NORTH).with(BedBlock.PART, BedPart.HEAD), 3);
@@ -226,7 +227,7 @@ public class CottageGenerator {
         }
 
         @Override
-        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, net.minecraft.util.math.random.Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
             // Generate porch
             for (int z = -1; z < 7; z++) {
                 BlockState state = Blocks.OAK_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP);
@@ -293,7 +294,7 @@ public class CottageGenerator {
         }
 
         @Override
-        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+        public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, net.minecraft.util.math.random.Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
             BlockState crop = Blocks.WHEAT.getDefaultState();
 
             Property<Integer> prop = Properties.AGE_7;

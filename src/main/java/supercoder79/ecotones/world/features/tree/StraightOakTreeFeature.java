@@ -28,7 +28,7 @@ public class StraightOakTreeFeature extends EcotonesFeature<OakTreeFeatureConfig
     public boolean generate(FeatureContext<OakTreeFeatureConfig> context) {
         StructureWorldAccess world = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        Random random = new Random(context.getRandom().nextLong());
         ChunkGenerator generator = context.getGenerator();
         OakTreeFeatureConfig config = context.getConfig();
 

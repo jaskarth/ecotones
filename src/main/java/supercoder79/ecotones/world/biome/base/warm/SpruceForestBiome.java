@@ -31,7 +31,7 @@ import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesFeatures;
 import supercoder79.ecotones.world.features.config.*;
-import supercoder79.ecotones.world.structure.EcotonesConfiguredStructures;
+import supercoder79.ecotones.world.structure.EcotonesStructures;
 import supercoder79.ecotones.world.surface.EcotonesSurfaces;
 import supercoder79.ecotones.world.surface.system.TernarySurfaceConfig;
 
@@ -72,15 +72,15 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
-        this.category(Biome.Category.TAIGA);
+//        this.category(Biome.Category.TAIGA);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);
 //        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 //        this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> TaigaVillageData.STRUCTURE_POOLS, 5)));
-        this.addStructureFeature(EcotonesConfiguredStructures.CAMPFIRE_SPRUCE);
-        this.addStructureFeature(EcotonesConfiguredStructures.COTTAGE);
+        this.addStructureFeature(EcotonesStructures.CAMPFIRE_SPRUCE);
+        this.addStructureFeature(EcotonesStructures.COTTAGE);
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

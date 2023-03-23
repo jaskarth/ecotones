@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XJX",
+    "X  "
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "J": {
+      "item": "ecotones:jar"
+    }
+  },
+  "result": {
+    "item": "ecotones:treetap",
+    "count": 1
+  }
+}

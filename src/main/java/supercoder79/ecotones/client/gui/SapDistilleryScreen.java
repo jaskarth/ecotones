@@ -5,15 +5,15 @@ import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.text.LiteralText;
+
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.random.Random;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.screen.SapDistilleryScreenHandler;
 import supercoder79.ecotones.util.Vec2i;
 
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SapDistilleryScreen extends HandledScreen<SapDistilleryScreenHandler> {
@@ -126,12 +126,12 @@ public class SapDistilleryScreen extends HandledScreen<SapDistilleryScreenHandle
 
         // Syrup tooltip
         if (x >= 50 && x <= 122 && y >= 23 && y <= 61) {
-            this.renderTooltip(matrices, new LiteralText(this.handler.getSyrupAmount() + " / 5000"), x, y);
+            this.renderTooltip(matrices, Text.literal(this.handler.getSyrupAmount() + " / 5000"), x, y);
         }
 
         // Sap tooltip
         if (x >= 7 && x <= 12 && y >= 21 && y <= 57) {
-            this.renderTooltip(matrices, new LiteralText(this.handler.getSapAmount() + " / 40000"), x, y);
+            this.renderTooltip(matrices, Text.literal(this.handler.getSapAmount() + " / 40000"), x, y);
         }
     }
 

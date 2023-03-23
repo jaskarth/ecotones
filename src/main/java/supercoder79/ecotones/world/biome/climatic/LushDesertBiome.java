@@ -57,7 +57,7 @@ public class LushDesertBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(2F);
         this.downfall(0.3F);
-        this.category(Biome.Category.DESERT);
+//        this.category(Biome.Category.DESERT);
 
         this.precipitation(Biome.Precipitation.NONE);
 
@@ -65,7 +65,7 @@ public class LushDesertBiome extends EcotonesBiomeBuilder {
         this.volatility(volatility);
 
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> DesertVillageData.STRUCTURE_POOLS, 7)));
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 //        this.addStructureFeature(ConfiguredStructureFeatures.PILLAGER_OUTPOST);
 //        this.addStructureFeature(ConfiguredStructureFeatures.DESERT_PYRAMID);
 

@@ -20,6 +20,6 @@ public class LimestoneCaveBiome extends CaveBiome {
                         new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, EcotonesBlocks.LIMESTONE.getDefaultState(), 33))
                     .uniformRange(YOffset.fixed(0), YOffset.fixed(48))
                     .spreadHorizontally()
-                    .repeat(15).vanilla());
+                    .repeat(15).placed());
     }
 }

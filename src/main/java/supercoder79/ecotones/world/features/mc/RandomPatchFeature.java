@@ -7,13 +7,12 @@ import net.minecraft.block.TallPlantBlock;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import supercoder79.ecotones.world.features.EcotonesFeature;
-
-import java.util.Random;
 
 public class RandomPatchFeature extends EcotonesFeature<RandomPatchFeatureConfig> {
    public RandomPatchFeature(Codec<RandomPatchFeatureConfig> codec) {

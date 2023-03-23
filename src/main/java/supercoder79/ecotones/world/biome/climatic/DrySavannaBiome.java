@@ -49,7 +49,7 @@ public class DrySavannaBiome extends EcotonesBiomeBuilder {
         this.temperature(1.2f);
         this.downfall(0.025f);
         this.precipitation(Biome.Precipitation.NONE);
-        this.category(Biome.Category.SAVANNA);
+//        this.category(Biome.Category.SAVANNA);
 
         this.hilliness(hilliness);
         this.volatility(volatility);
@@ -68,7 +68,7 @@ public class DrySavannaBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSavannaGrass(this.getGenerationSettings());
         DefaultBiomeFeatures.addSavannaTallGrass(this.getGenerationSettings());
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> SavannaVillageData.STRUCTURE_POOLS, 7)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

@@ -3,6 +3,7 @@ package supercoder79.ecotones.world.biome.special;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
@@ -11,6 +12,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.YOffset;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
@@ -47,7 +49,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
             .decorators(ImmutableList.of(
                     new CocoaBeansTreeDecorator(0.2F),
                     TrunkVineTreeDecorator.INSTANCE,
-                    LeavesVineTreeDecorator.INSTANCE)
+                    new LeavesVineTreeDecorator(0.2f))
             ).ignoreVines().build();
 
     public static Biome INSTANCE;
@@ -69,7 +71,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
         this.downfall(1F);
 
         this.precipitation(Biome.Precipitation.RAIN);
-        this.category(Biome.Category.JUNGLE);
+//        this.category(Biome.Category.JUNGLE);
 
         this.skyColor(0xadc1cc);
         this.grassColor(0x73a859);
@@ -77,7 +79,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
         this.waterColor(0x74ad57);
         this.waterFogColor(0x73a859);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
@@ -90,9 +92,10 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesConfiguredFeature.wrap(Feature.TREE, (JUNGLE_TREE))
+                EcotonesConfiguredFeature.wrap(Feature.TREE, JUNGLE_TREE)
                         .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(6, 0.5f, 1)))
                         .spreadHorizontally()
+                        .decorate(BlockFilterPlacementModifier.of(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.getDefaultState(), BlockPos.ORIGIN)))
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, EcotonesConfiguredFeature.wrap(Feature.SEAGRASS, (new ProbabilityConfig(0.75f)))

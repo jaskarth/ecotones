@@ -6,6 +6,7 @@
   "mixins": [
     "BlockStateProviderTypeAccessor",
     "CriteriaAccessor",
+    "DimensionOptionsAccessor",
     "FoliagePlacerTypeAccessor",
     "MixinBiome",
     "MixinBiomeSelectors",
@@ -17,7 +18,9 @@
     "MixinCocoaBeansTreeDecorator",
     "MixinGeneratorOptions",
     "MixinMinecraftServer",
+    "MixinPlacedFeatureIndexer",
     "MixinPlayerManager",
+    "MixinServerWorld",
     "MixinSlimeEntity",
     "SpawnSettingsAccessor",
     "StructureFeatureAccessor",
@@ -25,6 +28,8 @@
   ],
   "client": [
     "client.EntityModelLayersAccessor",
+    "client.MixinAdvancementPositioner",
+    "client.MixinAdvancementTab",
     "client.MixinBackgroundRenderer",
     "client.MixinBiomeColors",
     "client.MixinClientPlayNetworkHandler",
@@ -33,9 +38,7 @@
     "client.MixinEntityModels",
     "client.MixinHeldItemRenderer",
     "client.MixinMinecraftClient",
-    "client.MixinWorldRenderer",
-    "client.MixinAdvancementPositioner",
-    "client.MixinAdvancementTab"
+    "client.MixinWorldRenderer"
   ],
   "injectors": {
     "defaultRequire": 1

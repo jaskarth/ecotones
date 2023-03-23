@@ -49,7 +49,7 @@ public class MangroveSwampBiome extends EcotonesBiomeBuilder {
         this.scale(0.0F);
         this.temperature(0.8F);
         this.downfall(0.65F);
-        this.category(Biome.Category.SWAMP);
+//        this.category(Biome.Category.SWAMP);
 
         this.precipitation(Biome.Precipitation.RAIN);
 
@@ -59,7 +59,7 @@ public class MangroveSwampBiome extends EcotonesBiomeBuilder {
         this.hilliness(0.3);
         this.volatility(1.0);
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))

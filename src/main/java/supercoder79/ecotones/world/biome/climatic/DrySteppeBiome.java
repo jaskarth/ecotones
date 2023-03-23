@@ -58,7 +58,7 @@ public class DrySteppeBiome extends EcotonesBiomeBuilder {
         this.temperature(1.5f);
         this.downfall(0.05f);
         this.precipitation(Biome.Precipitation.NONE);
-        this.category(Biome.Category.SAVANNA);
+//        this.category(Biome.Category.SAVANNA);
 
         this.grassColor(0xc4b956);
         this.foliageColor(0xaba252);
@@ -78,7 +78,7 @@ public class DrySteppeBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addSprings(this.getGenerationSettings());
         DefaultBiomeFeatures.addFrozenTopLayer(this.getGenerationSettings());
 
-        this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
+//         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> SavannaVillageData.STRUCTURE_POOLS, 5)));
 
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,

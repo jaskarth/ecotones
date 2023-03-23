@@ -18,6 +18,11 @@ public final class RiverWorker {
     }
 
     public PlateSet forChunk(ChunkPos pos) {
+        // TODO: actually implement rivers
+        if (true) {
+            return PlateSet.OCEAN_MARKER;
+        }
+
         long longpos = pos.toLong();
 
         for (PlateSet set : this.plateSets) {

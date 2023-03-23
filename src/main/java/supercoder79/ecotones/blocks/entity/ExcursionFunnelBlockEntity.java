@@ -9,11 +9,11 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 
 import java.util.List;
-import java.util.Random;
 
 public class ExcursionFunnelBlockEntity extends BlockEntity {
     public ExcursionFunnelBlockEntity(BlockPos pos, BlockState state) {

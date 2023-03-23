@@ -55,7 +55,7 @@ public final class EcotonesBlocks {
     public static Block RED_ROCK = new Block(FabricBlockSettings.copy(Blocks.STONE)/*.breakByTool(FabricToolTags.PICKAXES)*/.hardness(1f));
     public static Block MALACHITE = new Block(FabricBlockSettings.copy(Blocks.STONE)/*.breakByTool(FabricToolTags.PICKAXES)*/.hardness(1f));
     public static Block PYRITE = new Block(FabricBlockSettings.copy(Blocks.STONE)/*.breakByTool(FabricToolTags.PICKAXES)*/.hardness(1f));
-    public static Block SPARSE_GOLD_ORE = new Block(FabricBlockSettings.copy(Blocks.STONE)/*.breakByTool(FabricToolTags.PICKAXES)*/.hardness(1f));
+    public static Block SPARSE_GOLD_ORE = new Block(FabricBlockSettings.copy(Blocks.STONE)/*.breakByTool(FabricToolTags.PICKAXES)*/.hardness(2.5f));
     public static Block FERTILIZER_SPREADER = new FertilizerSpreaderBlock(FabricBlockSettings.of(Material.WOOD).nonOpaque()/*.breakByTool(FabricToolTags.AXES)*/.strength(1.5F, 1.0F).sounds(BlockSoundGroup.WOOD));
     public static Block WATERGRASS = new CattailBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
     public static Block GRINDSTONE = new GrindstoneBlock(FabricBlockSettings.of(Material.STONE)/*.breakByTool(FabricToolTags.PICKAXES)*/.strength(2.5F, 1.0F).sounds(BlockSoundGroup.STONE));

@@ -28,6 +28,7 @@
 * Sap mob trap
 * Acorns -> grow large trees
 * Birch seeds -> grow large birch trees
+* Turpentine in sap distillery
 
 # Misc
 * Stop procrastinating on cold biomes
@@ -39,10 +40,9 @@
 * Add edge biomes to everything
 * Burned village for dead spruce forests
 * Improve the look of a few biomes (remove shrubs, more unique features, etc.)
-* Blueberry jam recipe
-* Mason jar item
 * Add fruit tags
 * Add Avocado, name advancement "6.02e23"
+* EMI support
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas
@@ -60,9 +60,15 @@
 * Trees don't set block to dirt
 * Fix disks
 * Skip analysis when good soil quality
+* Aquifers
 
 * Add flowers to bonemeal
 * More clover variation
 
 # Automation
 * Testing suite to find errors within biomes (no strongholds, etc.)
+
+# 0.9.0 blockers
+* Grindstone
+  * Texture and model
+* Add all recipes

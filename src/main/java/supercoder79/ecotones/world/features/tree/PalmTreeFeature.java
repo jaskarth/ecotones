@@ -7,6 +7,7 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.TestableWorld;
@@ -195,7 +196,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
     }
 
     public static boolean setLeavesWithDistance(ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> blocks, BlockBox box, TreeFeatureConfig config, int distance) {
-        BlockState state = config.foliageProvider.getBlockState(random, pos);
+        BlockState state = config.foliageProvider.getBlockState(new CheckedRandom(random.nextLong()), pos);
 
         if(state.contains(Properties.DISTANCE_1_7)) {
             state = state.with(Properties.DISTANCE_1_7, Math.min(distance, 7));

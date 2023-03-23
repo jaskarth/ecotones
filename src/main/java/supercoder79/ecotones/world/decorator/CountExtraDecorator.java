@@ -3,10 +3,10 @@ package supercoder79.ecotones.world.decorator;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.placementmodifier.AbstractCountPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
 public class CountExtraDecorator extends AbstractCountPlacementModifier {
