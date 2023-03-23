@@ -10,6 +10,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -44,6 +45,7 @@ public class LowlandsBiome extends EcotonesBiomeBuilder {
         this.temperature(0.6f);
         this.downfall(0.8f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.LONLEY_SPRUCE_LIKE);
 //        this.category(Biome.Category.TAIGA);
 
         this.hilliness(hilliness);

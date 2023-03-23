@@ -11,6 +11,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.river.deco.CommonRiverDecorations;
@@ -55,6 +56,7 @@ public class CoolScrublandBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.SAVANNA_LIKE);
 //        this.category(Biome.Category.SAVANNA);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT);

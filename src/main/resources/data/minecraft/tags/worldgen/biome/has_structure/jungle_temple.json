@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "ecotones:tropical_rainforest",
+    "ecotones:tropical_rainforest_hilly",
+    "ecotones:tropical_rainforest_mountainous",
+    "ecotones:temperate_rainforest",
+    "ecotones:temperate_rainforest_hilly",
+    "ecotones:temperate_rainforest_mountainous",
+    "ecotones:oasis",
+    "ecotones:green_spires",
+    "ecotones:palm_forest",
+    "ecotones:palm_forest_hilly",
+    "ecotones:palm_forest_mountainous"
+  ]
+}

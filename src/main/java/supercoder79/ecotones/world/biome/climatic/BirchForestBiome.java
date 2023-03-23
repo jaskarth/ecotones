@@ -12,6 +12,7 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -48,6 +49,7 @@ public class BirchForestBiome extends EcotonesBiomeBuilder {
         this.temperature(0.7f);
         this.downfall(0.7f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.FOREST_LIKE);
 //        this.category(Biome.Category.FOREST);
 
         this.hilliness(hilliness);

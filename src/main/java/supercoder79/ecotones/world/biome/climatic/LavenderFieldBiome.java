@@ -19,6 +19,7 @@ import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.util.compat.AurorasDecoCompat;
 import supercoder79.ecotones.util.compat.FloralisiaCompat;
 import supercoder79.ecotones.util.state.DeferredBlockStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.*;
@@ -64,6 +65,7 @@ public class LavenderFieldBiome extends EcotonesBiomeBuilder {
         this.downfall(0.72F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.LONELY_PLAINS_LIKE);
 //        this.category(Biome.Category.PLAINS);
 
         this.hilliness(hilliness);

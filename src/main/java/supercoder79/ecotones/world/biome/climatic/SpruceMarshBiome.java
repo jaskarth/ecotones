@@ -12,6 +12,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
@@ -76,6 +77,7 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
 
         this.waterColor(0x5c5214);
         this.waterFogColor(0x5c5214);
+        this.associate(BiomeAssociations.SWAMP_LIKE);
 //        this.category(Biome.Category.SWAMP);
 
 //         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());

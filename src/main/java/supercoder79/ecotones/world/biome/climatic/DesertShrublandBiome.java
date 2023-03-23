@@ -21,6 +21,7 @@ import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.util.compat.LambdaFoxesCompat;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
@@ -59,6 +60,7 @@ public class DesertShrublandBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(2F);
         this.downfall(0.1F);
+        this.associate(BiomeAssociations.DESERT_LIKE);
 //        this.category(Biome.Category.DESERT);
 
         this.precipitation(Biome.Precipitation.NONE);

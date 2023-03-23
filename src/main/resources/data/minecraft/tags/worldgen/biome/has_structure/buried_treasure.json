@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "ecotones:tropical_beach",
+    "ecotones:dry_beach",
+    "ecotones:gravel_beach"
+  ]
+}

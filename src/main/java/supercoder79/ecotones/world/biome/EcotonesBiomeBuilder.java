@@ -1,12 +1,11 @@
 package supercoder79.ecotones.world.biome;
 
-import it.unimi.dsi.fastutil.HashCommon;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStep;
@@ -38,6 +37,7 @@ public abstract class EcotonesBiomeBuilder {
     private double hilliness = 1.0;
     private double volatility = 1.0;
     private ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder;
+    private List<TagKey<Biome>> tags = new ArrayList<>();
 //    private final List<ConfiguredStructureFeature<?, ?>> structures = new ArrayList<>();
 //    private Biome.Category category;
 
@@ -51,12 +51,17 @@ public abstract class EcotonesBiomeBuilder {
         this.biomeEffects.waterColor(0x3F76E4);
         this.biomeEffects.waterFogColor(0x050533);
         this.biomeEffects.fogColor(0xC0D8FF);
+        associate(BiomeAssociations.DEFAULT);
     }
 
 //    protected void category(Biome.Category category) {
 ////        this.category = category;
 //        this.builder.category(category);
 //    }
+
+    protected void associate(BiomeAssociations.BiomeAssociation... associations) {
+        this.tags = Arrays.stream(associations).flatMap(a -> Arrays.stream(a.tags())).toList();
+    }
 
     protected void surfaceBuilder(ConfiguredSurfaceBuilder<?> surfaceBuilder) {
         this.configuredSurfaceBuilder = surfaceBuilder;
@@ -181,6 +186,11 @@ public abstract class EcotonesBiomeBuilder {
         for (RegistryEntry<Structure> structure : structures) {
             BiomeRegistries.registerStructure(structure, biome);
         }
+
+        for (TagKey<Biome> tag : tags) {
+            BiomeRegistries.associateTag(tag, biome);
+        }
+
         OBJ2DATA.put(biome, new BiomeGenData(this.depth, this.scale, this.volatility, this.hilliness, this.configuredSurfaceBuilder));
 //        BIOME_STRUCTURES.put(biome, this.structures);
 

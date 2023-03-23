@@ -1,5 +1,6 @@
 package supercoder79.ecotones.api;
 
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
@@ -39,6 +40,7 @@ public final class BiomeRegistries {
     public static final Map<RegistryKey<Biome>, RiverDecorator> RIVER_DECORATORS = new HashMap<>();
     public static final Map<RegistryKey<Biome>, EdgeDecorator> EDGE_DECORATORS = new HashMap<>();
     public static final Map<RegistryEntry<Structure>, List<Biome>> STRUCTURE_TO_BIOME_LIST = new HashMap<>();
+    public static final Map<TagKey<Biome>, List<Biome>> TAG_TO_BIOMES = new HashMap<>();
 
     public static void registerSpecialBiome(Biome biome, IntFunction<Boolean> rule) {
         SPECIAL_BIOMES.put(key(biome), rule);
@@ -144,6 +146,10 @@ public final class BiomeRegistries {
         }
 
         return key;
+    }
+
+    public static void associateTag(TagKey<Biome> s, Biome b) {
+        TAG_TO_BIOMES.computeIfAbsent(s, k -> new ArrayList<>()).add(b);
     }
 
     public static void registerStructure(RegistryEntry<Structure> s, Biome b) {

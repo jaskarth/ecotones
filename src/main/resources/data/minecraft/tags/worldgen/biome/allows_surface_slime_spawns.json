@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "ecotones:spruce_marsh",
+    "ecotones:spruce_marsh_thicket",
+    "ecotones:spruce_marsh_hilly",
+    "ecotones:spruce_marsh_mountainous",
+    "ecotones:mangrove_swamp"
+  ]
+}

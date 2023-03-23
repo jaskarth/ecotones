@@ -68,9 +68,6 @@
 
 # 0.9.1 todo
 * EMI support
-* Tag all biomes
-  * MC tags, common tags
-  * Structure tags
 * Yttr support
   * Wasteland biome
   * Cottage blocks?

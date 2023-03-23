@@ -11,6 +11,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -54,6 +55,7 @@ public class TropicalWoodlandBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        associate(BiomeAssociations.FOREST_LIKE);
 //        this.category(Biome.Category.FOREST);
 
         DefaultBiomeFeatures.addDefaultDisks(this.getGenerationSettings());

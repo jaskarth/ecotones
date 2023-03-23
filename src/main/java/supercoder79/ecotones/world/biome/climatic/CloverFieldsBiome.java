@@ -15,6 +15,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.decorator.SpreadDoubleDecorator;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
@@ -60,6 +61,7 @@ public class CloverFieldsBiome extends EcotonesBiomeBuilder {
 
         this.grassColor(0x308046);
         this.foliageColor(0x308046);
+        this.associate(BiomeAssociations.PLAINS_LIKE);
 //        this.category(Biome.Category.PLAINS);
 
         this.hilliness(hilliness);

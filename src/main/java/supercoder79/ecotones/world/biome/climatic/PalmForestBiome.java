@@ -14,6 +14,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
@@ -62,6 +63,7 @@ public class PalmForestBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(1.6F);
         this.downfall(0.8F);
+        this.associate(BiomeAssociations.JUNGLE_LIKE);
 //        this.category(Biome.Category.JUNGLE);
 
         this.precipitation(Biome.Precipitation.RAIN);

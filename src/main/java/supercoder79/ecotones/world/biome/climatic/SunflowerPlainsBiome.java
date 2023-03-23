@@ -14,6 +14,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
@@ -42,7 +43,7 @@ public class SunflowerPlainsBiome extends EcotonesBiomeBuilder {
         HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sunflower_plains_hilly"), new SunflowerPlainsBiome(0.85F, 0.225F).build());
         MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sunflower_plains_mountainous"), new SunflowerPlainsBiome(1.65F, 0.625F).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
-        Climate.WARM_MODERATE.add(INSTANCE, 0.1);
+        Climate.WARM_MODERATE.add(INSTANCE, 0.3);
     }
 
     public SunflowerPlainsBiome(float depth, float scale) {
@@ -54,6 +55,7 @@ public class SunflowerPlainsBiome extends EcotonesBiomeBuilder {
         this.downfall(0.525F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.PLAINS_LIKE);
 //        this.category(Biome.Category.PLAINS);
 
         this.hilliness(4.0);

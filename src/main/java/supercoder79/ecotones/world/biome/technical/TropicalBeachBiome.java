@@ -5,6 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
@@ -13,14 +14,17 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.ProbabilityConfig;
+import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.placementmodifier.BlockFilterPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
@@ -63,6 +67,7 @@ public class TropicalBeachBiome extends EcotonesBiomeBuilder {
         this.downfall(0.9F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.BEACH_LIKE);
 
 //        this.category(Biome.Category.BEACH);
 
@@ -95,6 +100,7 @@ public class TropicalBeachBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.JUNGLE_PALM_TREE.configure(JUNGLE_TREE)
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
+                        .decorate(BlockFilterPlacementModifier.of(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.getDefaultState(), BlockPos.ORIGIN)))
                         .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.1F, 1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

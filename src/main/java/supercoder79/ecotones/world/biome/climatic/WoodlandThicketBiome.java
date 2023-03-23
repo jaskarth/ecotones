@@ -15,6 +15,7 @@ import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -63,6 +64,7 @@ public class WoodlandThicketBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.FOREST_LIKE);
 //        this.category(Biome.Category.FOREST);
 
 //         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());

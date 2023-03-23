@@ -11,6 +11,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -53,6 +54,7 @@ public class PumpkinPatchBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(0.8F);
         this.downfall(0.4F);
+        this.associate(BiomeAssociations.PLAINS_LIKE);
 //        this.category(Biome.Category.PLAINS);
 
         this.hilliness(hilliness);

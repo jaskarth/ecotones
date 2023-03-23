@@ -14,6 +14,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
@@ -77,6 +78,7 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(4.0);
         this.volatility(1.1);
+        this.associate(BiomeAssociations.PLAINS_LIKE);
 
 //        this.addStructureFeature(StructureFeature.VILLAGE.configure(new StructurePoolFeatureConfig(() -> PlainsVillageData.STRUCTURE_POOLS, 7)));
 //         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());

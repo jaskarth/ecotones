@@ -15,6 +15,7 @@ import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.PredicatedStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.decorator.*;
@@ -56,6 +57,7 @@ public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
         this.downfall(0.55F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.SPRUCE_LIKE);
 //        this.category(Biome.Category.TAIGA);
 
         this.hilliness(hilliness);

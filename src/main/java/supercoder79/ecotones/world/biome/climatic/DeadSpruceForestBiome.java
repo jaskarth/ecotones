@@ -17,6 +17,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.decorator.SpreadDoubleDecorator;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
@@ -60,6 +61,7 @@ public class DeadSpruceForestBiome extends EcotonesBiomeBuilder {
         this.temperature(0.8f);
         this.downfall(0.6f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.LONLEY_SPRUCE_LIKE);
 //        this.category(Biome.Category.TAIGA);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

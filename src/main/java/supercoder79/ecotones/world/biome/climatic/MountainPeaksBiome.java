@@ -13,6 +13,7 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -70,6 +71,7 @@ public class MountainPeaksBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.MOUNTAIN_LIKE);
 //        this.category(Biome.Category.EXTREME_HILLS);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

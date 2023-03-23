@@ -10,6 +10,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -54,6 +55,7 @@ public class RockySteppeBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.SAVANNA_LIKE);
 //        this.category(Biome.Category.SAVANNA);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);

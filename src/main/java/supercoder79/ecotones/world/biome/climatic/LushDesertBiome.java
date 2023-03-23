@@ -15,6 +15,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
@@ -60,6 +61,7 @@ public class LushDesertBiome extends EcotonesBiomeBuilder {
 //        this.category(Biome.Category.DESERT);
 
         this.precipitation(Biome.Precipitation.NONE);
+        this.associate(BiomeAssociations.DESERT_LIKE);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

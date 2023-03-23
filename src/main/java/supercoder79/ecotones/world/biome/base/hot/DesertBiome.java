@@ -29,6 +29,7 @@ import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.util.compat.LambdaFoxesCompat;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.*;
@@ -68,6 +69,7 @@ public class DesertBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.DESERT_LIKE);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT);
 //        this.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT);

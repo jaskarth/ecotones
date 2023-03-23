@@ -11,6 +11,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -65,6 +66,7 @@ public class RockyMountainBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(1.6F);
         this.downfall(0.15F);
+        this.associate(BiomeAssociations.MOUNTAIN_LIKE);
 //        this.category(Biome.Category.EXTREME_HILLS);
 
         this.hilliness(hilliness);

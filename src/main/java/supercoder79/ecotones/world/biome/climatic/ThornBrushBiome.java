@@ -12,6 +12,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -57,6 +58,7 @@ public class ThornBrushBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.LONELY_SAVANNA_LIKE);
 //        this.category(Biome.Category.SAVANNA);
 
         this.particleConfig(new BiomeParticleConfig(EcotonesParticles.SAND, 0.001F));

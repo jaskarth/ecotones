@@ -13,6 +13,7 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -54,6 +55,7 @@ public class DarkOakThicketBiome extends EcotonesBiomeBuilder {
         this.temperature(0.8f);
         this.downfall(0.45f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.FOREST_LIKE, BiomeAssociations.DARK_OAK);
 //        this.category(Biome.Category.FOREST);
 
         this.hilliness(hilliness);

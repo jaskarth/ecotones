@@ -10,6 +10,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -49,6 +50,7 @@ public class LushShrublandBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(1.6F);
         this.downfall(0.75F);
+        this.associate(BiomeAssociations.LONELY_PLAINS_LIKE);
 //        this.category(Biome.Category.PLAINS);
 
         this.hilliness(hilliness);

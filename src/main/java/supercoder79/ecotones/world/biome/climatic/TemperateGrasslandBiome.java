@@ -14,6 +14,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
@@ -58,6 +59,7 @@ public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
         this.downfall(0.5F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.PLAINS_LIKE);
 //        this.category(Biome.Category.PLAINS);
 
         // TODO: customize

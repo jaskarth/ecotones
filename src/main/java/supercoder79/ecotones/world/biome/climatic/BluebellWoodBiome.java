@@ -10,6 +10,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
@@ -58,6 +59,7 @@ public class BluebellWoodBiome extends EcotonesBiomeBuilder {
         this.temperature(0.9f);
         this.downfall(0.7f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.FOREST_LIKE);
 //        this.category(Biome.Category.FOREST);
 
         this.hilliness(flat ? 1 : 3);

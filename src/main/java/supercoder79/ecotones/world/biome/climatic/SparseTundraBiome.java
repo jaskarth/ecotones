@@ -14,6 +14,7 @@ import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -47,6 +48,7 @@ public class SparseTundraBiome extends EcotonesBiomeBuilder {
         this.temperature(0.2f);
         this.downfall(0.6f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.LONLEY_SPRUCE_LIKE);
 //        this.category(Biome.Category.TAIGA);
 
         this.grassColor(0xc47960);

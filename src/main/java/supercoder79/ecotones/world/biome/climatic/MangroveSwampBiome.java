@@ -11,6 +11,7 @@ import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
@@ -49,6 +50,7 @@ public class MangroveSwampBiome extends EcotonesBiomeBuilder {
         this.scale(0.0F);
         this.temperature(0.8F);
         this.downfall(0.65F);
+        this.associate(BiomeAssociations.SWAMP_LIKE);
 //        this.category(Biome.Category.SWAMP);
 
         this.precipitation(Biome.Precipitation.RAIN);

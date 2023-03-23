@@ -17,7 +17,7 @@ public final class DataGen {
     public static void run() {
         if (RUN && FabricLoader.getInstance().isDevelopmentEnvironment()) {
             try {
-                LOGGER.info("Hello! Spooling up datagen...");
+                LOGGER.info("Hello! Starting datagen...");
 
                 long start = System.currentTimeMillis();
 

@@ -13,6 +13,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
@@ -56,6 +57,7 @@ public class PinePeaksBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(3);
         this.volatility(0.73);
+        this.associate(BiomeAssociations.LONLEY_SPRUCE_LIKE);
 //        this.category(Biome.Category.TAIGA);
 
         this.precipitation(Biome.Precipitation.RAIN);

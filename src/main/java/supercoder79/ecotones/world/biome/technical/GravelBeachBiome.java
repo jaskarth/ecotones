@@ -14,6 +14,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
@@ -40,6 +41,7 @@ public class GravelBeachBiome extends EcotonesBiomeBuilder {
         this.downfall(0.9F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.BEACH_LIKE);
 
 //        this.category(Biome.Category.BEACH);
 

@@ -6,6 +6,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.Structure;
 import supercoder79.ecotones.api.BiomeRegistries;
 
@@ -49,6 +50,27 @@ public final class TagGen {
             Files.write(path.resolve("has_" + k.getKey().orElseThrow().getValue().getPath() + ".json"), json.getBytes());
             DataGen.DATA.tags++;
         }
+
+        for (TagKey<Biome> k : BiomeRegistries.TAG_TO_BIOMES.keySet()) {
+            String json = TAG
+                    .replace("%%VALUES%%", BiomeRegistries.TAG_TO_BIOMES.get(k).stream()
+                            .map(b -> BiomeRegistries.keyOrNull(b).getValue().toString())
+                            .map(s -> "\"" + s + "\"")
+                            .collect(Collectors.joining(",\n    "))
+
+                    );
+
+            Path path = PATH
+                    .resolve(k.id().getNamespace())
+                    .resolve("tags")
+                    .resolve("worldgen")
+                    .resolve("biome")
+                    .resolve(k.id().getPath() + ".json");
+
+            path.getParent().toFile().mkdirs();
+            Files.write(path, json.getBytes());
+            DataGen.DATA.tags++;
+        }
     }
 
     public static void block(TagKey<Block> key, Block... values) throws IOException {
@@ -63,9 +85,8 @@ public final class TagGen {
         Path path = PATH
                 .resolve(key.id().getNamespace())
                 .resolve("tags")
-                .resolve("blocks");
-
-        path = path.resolve(key.id().getPath() + ".json");
+                .resolve("blocks")
+                .resolve(key.id().getPath() + ".json");
 
         path.getParent().toFile().mkdirs();
         Files.write(path, json.getBytes());

@@ -10,6 +10,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -43,6 +44,7 @@ public class UluruBiome extends EcotonesBiomeBuilder {
         this.downfall(0.2F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.LONELY_SAVANNA_LIKE);
 //        this.category(Biome.Category.DESERT);
 
 //         this.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD.value());

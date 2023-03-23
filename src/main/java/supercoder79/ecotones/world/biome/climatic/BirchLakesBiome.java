@@ -12,6 +12,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
@@ -56,6 +57,7 @@ public class BirchLakesBiome extends EcotonesBiomeBuilder {
         this.temperature(0.5f);
         this.downfall(0.7f);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.FOREST_LIKE);
 //        this.category(Biome.Category.FOREST);
 
         this.hilliness(hilliness);

@@ -10,6 +10,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
@@ -52,6 +53,7 @@ public class LarchForestBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.LONLEY_SPRUCE_LIKE);
 //        this.category(Biome.Category.TAIGA);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);

@@ -13,6 +13,7 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
@@ -66,6 +67,7 @@ public class LushFoothillsBiome extends EcotonesBiomeBuilder {
         this.hilliness(hilliness);
         this.volatility(volatility);
         this.addStructureFeature(EcotonesStructures.CAMPFIRE_BIRCH);
+        this.associate(BiomeAssociations.MOUNTAIN_LIKE);
 //        this.category(Biome.Category.EXTREME_HILLS);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

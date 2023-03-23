@@ -15,6 +15,7 @@ import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -54,6 +55,7 @@ public class GraniteSpringsBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(0.8F);
         this.downfall(0.5F);
+        this.associate(BiomeAssociations.SPRUCE_LIKE);
 //        this.category(Biome.Category.TAIGA);
 
         this.hilliness(hilliness);

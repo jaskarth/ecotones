@@ -10,6 +10,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.river.deco.CommonRiverDecorations;
@@ -58,6 +59,7 @@ public class DrySteppeBiome extends EcotonesBiomeBuilder {
         this.temperature(1.5f);
         this.downfall(0.05f);
         this.precipitation(Biome.Precipitation.NONE);
+        this.associate(BiomeAssociations.SAVANNA_LIKE);
 //        this.category(Biome.Category.SAVANNA);
 
         this.grassColor(0xc4b956);

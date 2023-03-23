@@ -10,6 +10,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -48,6 +49,7 @@ public class RedRockRidgeBiome extends EcotonesBiomeBuilder {
         this.temperature(0.575F);
         this.downfall(0.825F);
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.MESA_LIKE);
 //        this.category(Biome.Category.MESA);
 
         this.foliageColor(10387789);

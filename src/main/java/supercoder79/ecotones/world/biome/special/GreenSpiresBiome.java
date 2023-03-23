@@ -20,6 +20,7 @@ import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.heightprovider.BiasedToBottomHeightProvider;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -71,6 +72,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
         this.downfall(1F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.JUNGLE_LIKE);
 //        this.category(Biome.Category.JUNGLE);
 
         this.skyColor(0xadc1cc);

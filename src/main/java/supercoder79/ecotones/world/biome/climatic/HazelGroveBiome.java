@@ -17,6 +17,7 @@ import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
@@ -68,6 +69,7 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
         this.scale(hilly ? 0.6f : 0.05f);
         this.temperature(1F);
         this.downfall(1F);
+        this.associate(BiomeAssociations.FOREST_LIKE);
 //        this.category(Biome.Category.FOREST);
 
         this.precipitation(Biome.Precipitation.RAIN);

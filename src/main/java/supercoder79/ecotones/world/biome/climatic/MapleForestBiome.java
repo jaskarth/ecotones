@@ -11,6 +11,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -51,6 +52,7 @@ public class MapleForestBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(0.8F);
         this.downfall(0.8F);
+        this.associate(BiomeAssociations.FOREST_LIKE);
 //        this.category(Biome.Category.FOREST);
 
         this.hilliness(hilliness);

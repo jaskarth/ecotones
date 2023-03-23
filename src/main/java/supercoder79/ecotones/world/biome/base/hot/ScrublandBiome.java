@@ -22,6 +22,7 @@ import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.util.compat.LambdaFoxesCompat;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.*;
@@ -61,6 +62,7 @@ public class ScrublandBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        associate(BiomeAssociations.SAVANNA_LIKE);
 //        this.category(Biome.Category.SAVANNA);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT);

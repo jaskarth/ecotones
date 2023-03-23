@@ -11,6 +11,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -48,6 +49,7 @@ public class DriedForestBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.LONELY_SAVANNA_LIKE);
 //        this.category(Biome.Category.SAVANNA);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);

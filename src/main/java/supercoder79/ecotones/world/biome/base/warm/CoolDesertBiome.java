@@ -17,6 +17,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.decorator.SpreadDoubleDecorator;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
@@ -61,6 +62,7 @@ public class CoolDesertBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.DESERT_LIKE);
 //        this.category(Biome.Category.DESERT);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT);

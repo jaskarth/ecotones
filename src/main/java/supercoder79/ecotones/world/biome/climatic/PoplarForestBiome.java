@@ -11,6 +11,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -64,6 +65,7 @@ public class PoplarForestBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(0.7F);
         this.downfall(0.6F);
+        this.associate(BiomeAssociations.FOREST_LIKE);
 //        this.category(Biome.Category.FOREST);
 
         this.precipitation(Biome.Precipitation.RAIN);

@@ -13,6 +13,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -54,6 +55,7 @@ public class MoorBiome extends EcotonesBiomeBuilder {
         this.downfall(0.4F);
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.LONELY_PLAINS_LIKE);
 //        this.category(Biome.Category.PLAINS);
 
         this.precipitation(Biome.Precipitation.RAIN);

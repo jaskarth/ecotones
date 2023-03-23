@@ -11,6 +11,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -50,6 +51,7 @@ public class SavannaMesaBiome extends EcotonesBiomeBuilder {
         this.downfall(0.225F);
 
         this.precipitation(Biome.Precipitation.RAIN);
+        this.associate(BiomeAssociations.MESA_LIKE);
 //        this.category(Biome.Category.MESA);
 
         this.hilliness(hilliness);

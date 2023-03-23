@@ -13,6 +13,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
@@ -72,6 +73,7 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.SPRUCE_LIKE);
 //        this.category(Biome.Category.TAIGA);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);

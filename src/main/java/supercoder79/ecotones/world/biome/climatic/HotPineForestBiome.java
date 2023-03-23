@@ -12,6 +12,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -79,6 +80,7 @@ public class HotPineForestBiome extends EcotonesBiomeBuilder {
 
         this.hilliness(hilliness);
         this.volatility(volatility);
+        this.associate(BiomeAssociations.LONELY_SAVANNA_LIKE);
 //        this.category(Biome.Category.SAVANNA);
 
 //        this.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT);

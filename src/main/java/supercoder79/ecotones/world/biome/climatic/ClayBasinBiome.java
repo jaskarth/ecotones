@@ -12,6 +12,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -64,6 +65,7 @@ public class ClayBasinBiome extends EcotonesBiomeBuilder {
         this.temperature(1.2f);
         this.downfall(0.065f);
         this.precipitation(Biome.Precipitation.NONE);
+        this.associate(BiomeAssociations.LONELY_SAVANNA_LIKE);
 //        this.category(Biome.Category.SAVANNA);
 
         this.hilliness(hilliness);
