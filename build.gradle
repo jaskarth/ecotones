@@ -35,8 +35,7 @@ dependencies {
 		exclude module : "fabric-loader"
 	}
 
-	// Move to compileOnly as well when emi integration is added
-	modRuntimeOnly ("dev.emi:emi:0.7.1+1.19.2") {
+	modImplementation ("dev.emi:emi:0.7.1+1.19.2") {
 		transitive = false
 	}
 
@@ -85,15 +84,15 @@ jar {
 
 def excludedFiles(Collection<File> files) {
 	List<String> classes = new ArrayList<>()
-	files.each { file ->
-		if (file.isDirectory()) {
-			classes.addAll(excludedFiles(Arrays.asList(file.listFiles())))
-		} else {
-			if (file.text.contains("@DevOnly") && file.text.contains("import supercoder79.ecotones.api.DevOnly")) {
-				classes.add(getClassName(file.absolutePath))
-			}
-		}
-	}
+//	files.each { file ->
+//		if (file.isDirectory()) {
+//			classes.addAll(excludedFiles(Arrays.asList(file.listFiles())))
+//		} else {
+//			if (file.text.contains("@DevOnly") && file.text.contains("import supercoder79.ecotones.api.DevOnly")) {
+//				classes.add(getClassName(file.absolutePath))
+//			}
+//		}
+//	}
 	return classes
 }
 

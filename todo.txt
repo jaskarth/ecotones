@@ -17,7 +17,6 @@
 * Stone Spires (basically the ending fight area of Avatar lmao)
 * Cherry forest
 * Floodplains
-* Birch forest style with oak trees
 * Everest biome, somehow
 
 # Blocks and items
@@ -33,7 +32,6 @@
 # Misc
 * Stop procrastinating on cold biomes
 * Balloon-y tree with edges hanging off (this is very hard to describe in text)
-* Add all biomes to lang file
 * Take another look at well carvers
 * Variants for the newly added biomes
 * Fallen logs for every biome
@@ -68,7 +66,21 @@
 # Automation
 * Testing suite to find errors within biomes (no strongholds, etc.)
 
-# 0.9.0 blockers
-* Grindstone
-  * Texture and model
-* Add all recipes
+# 0.9.1 todo
+* EMI support
+* Tag all biomes
+  * MC tags, common tags
+  * Structure tags
+* Yttr support
+  * Wasteland biome
+  * Cottage blocks?
+* Aurora'sdeco support tweaks
+  * Lavender spawns in more places
+  * Daffodils (Add to temperate grassland mosiac)
+  * Add more blocks, such as sawmill, to cottages
+* Ensure terrestria and traverse compat works
+* BYG compat?
+* More uses for sulfur and phosphor (fuel, torches)
+* Ensure skybox is working
+* Add more books
+* Flesh out campfire chests
