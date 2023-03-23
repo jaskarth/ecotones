@@ -40,7 +40,6 @@
 * Improve the look of a few biomes (remove shrubs, more unique features, etc.)
 * Add fruit tags
 * Add Avocado, name advancement "6.02e23"
-* EMI support
 
 # Improved terrain
 * Change shrubs to grow more frequently in medium quality areas
@@ -67,14 +66,13 @@
 * Testing suite to find errors within biomes (no strongholds, etc.)
 
 # 0.9.1 todo
-* EMI support
 * Yttr support
   * Cottage blocks?
 * Aurora'sdeco support tweaks
   * Lavender spawns in more places
   * Add more blocks, such as sawmill, to cottages
 * Ensure terrestria and traverse compat works
-* BYG compat?
-* Ensure skybox is working
 * Add more books
 * Flesh out campfire chests
+* Localize advancement names
+* Biome size config (Use config system from Shimmer&Shade)

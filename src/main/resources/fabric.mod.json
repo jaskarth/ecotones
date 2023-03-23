@@ -25,6 +25,9 @@
     ],
     "preLaunch": [
       "supercoder79.ecotones.EcotonesPrelaunch"
+    ],
+    "emi": [
+      "supercoder79.ecotones.util.compat.emi.EcotonesEmi"
     ]
   },
   "mixins": [

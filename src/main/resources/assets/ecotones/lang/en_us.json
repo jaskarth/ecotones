@@ -380,6 +380,9 @@
 
   "generator.ecotones.ecotones": "§2Ecotones",
   "itemGroup.ecotones.ecotones": "Ecotones",
+  "emi.category.ecotones.grindstone": "Grindstone",
+  "emi.category.ecotones.sap_distillery": "Sap Distillery",
+  "emi.category.ecotones.treetap": "Treetap",
 
   "advancements.ecotones.root": "Ecotones",
   "advancements.ecotones.root.desc": "Enter an ecotones world",

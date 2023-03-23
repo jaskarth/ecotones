@@ -44,11 +44,6 @@ public class EveryBlockRandomPatchFeature extends EcotonesFeature<RandomPatchFea
             random.nextInt(randomPatchFeatureConfig.spreadZ + 1) - random.nextInt(randomPatchFeatureConfig.spreadZ + 1)
          );
          BlockState blockState = randomPatchFeatureConfig.stateProvider.getBlockState(random, mutable.toImmutable());
-         System.out.print("Placing >> " + blockState.getBlock() + " ");
-         for (Property<?> k : blockState.getProperties()) {
-            System.out.print("Property: " + k + "=" + blockState.get(k) + " ");
-         }
-         System.out.println();
          BlockPos blockPos4 = mutable.down();
          BlockState blockState2 = structureWorldAccess.getBlockState(blockPos4);
          if ((
