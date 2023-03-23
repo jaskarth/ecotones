@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "ecotones:larch_leaves",
+    "ecotones:hazel_leaves",
+    "ecotones:maple_leaves"
+  ]
+}
