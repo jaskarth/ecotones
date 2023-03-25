@@ -4,8 +4,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LanternBlock;
 import net.minecraft.block.enums.SlabType;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.GenerationStep;
@@ -45,8 +47,20 @@ public final class AurorasDecoCompat {
 
         BlockDecorations.register(new DefaultBlockDecoration(getDeco("brazier").with(Properties.LIT, true)), BlockAttachment.FLOOR, DecorationCategory.INDUSTRY);
         BlockDecorations.register(new DefaultBlockDecoration(getDeco("sawmill").with(Properties.HORIZONTAL_FACING, Direction.SOUTH)), BlockAttachment.FLOOR, DecorationCategory.TABLES);
-        BlockDecorations.register(new DefaultBlockDecoration(getDeco("small_log_pile/oak").with(Properties.SLAB_TYPE, SlabType.DOUBLE)), BlockAttachment.FLOOR, DecorationCategory.TABLES);
-        BlockDecorations.register(new DefaultBlockDecoration(getDeco("small_log_pile/spruce").with(Properties.SLAB_TYPE, SlabType.DOUBLE)), BlockAttachment.FLOOR, DecorationCategory.TABLES);
+
+        try {
+            trySetupLogPiles();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static <T extends Enum<T> & StringIdentifiable> void trySetupLogPiles() throws Exception {
+        EnumProperty<T> prop = (EnumProperty) Class.forName("dev.lambdaurora.aurorasdeco.block.AurorasDecoProperties").getField("PART_TYPE").get(null);
+        T doubleprop = (T) Class.forName("dev.lambdaurora.aurorasdeco.block.PartType").getField("DOUBLE").get(null);
+
+        BlockDecorations.register(new DefaultBlockDecoration(getDeco("small_log_pile/oak").with(prop, doubleprop)), BlockAttachment.FLOOR, DecorationCategory.TABLES);
+        BlockDecorations.register(new DefaultBlockDecoration(getDeco("small_log_pile/spruce").with(prop, doubleprop)), BlockAttachment.FLOOR, DecorationCategory.TABLES);
     }
 
     private static BlockState getDeco(String name) {

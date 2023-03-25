@@ -45,6 +45,7 @@ public class ModCompat {
 
         if (isModLoaded("yttr")) {
             ModCompatRunner.registerEarly(YttrCompat::associateGenData);
+            ModCompatRunner.register(YttrCompat::setupYttrStates);
             ModCompatRunner.register(YttrCompat::init);
             log("Registered Yttr compat!");
         }

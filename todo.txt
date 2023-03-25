@@ -75,11 +75,4 @@
 * Dropped fruits can be picked up to yield fruits or mulch
 
 # 0.9.1 todo
-* Yttr support
-  * Cottage blocks?
-* Aurora'sdeco support tweaks
-  * Add more blocks, such as sawmill, to cottages
-* Ensure terrestria and traverse compat works
 * Add more books
-* Deep dark
-* Biome size config (Use config system from Shimmer&Shade)

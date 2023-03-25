@@ -16,6 +16,8 @@ import supercoder79.ecotones.blocks.entity.EcotonesBlockEntities;
 import supercoder79.ecotones.client.particle.EcotonesParticles;
 import supercoder79.ecotones.client.sound.EcotonesSounds;
 import supercoder79.ecotones.command.*;
+import supercoder79.ecotones.config.ConfigReader;
+import supercoder79.ecotones.config.ConfigSpec;
 import supercoder79.ecotones.entity.EcotonesEntities;
 import supercoder79.ecotones.gen.DataGen;
 import supercoder79.ecotones.items.EcotonesItemGroups;
@@ -45,6 +47,7 @@ import supercoder79.ecotones.world.tree.trait.EcotonesTreeTraits;
 import supercoder79.ecotones.world.treedecorator.EcotonesTreeDecorators;
 
 public final class Ecotones implements ModInitializer {
+	public static final ConfigSpec CONFIG = ConfigReader.read();
 	private static final boolean RUN_DATA_GEN = "true".equals(System.getProperty("ECOTONES_RUN_DATAGEN", null));
 
 	// TODO: split out into it's own class
@@ -157,10 +160,6 @@ public final class Ecotones implements ModInitializer {
 		// register chunk generator and world type
 		Registry.register(Registry.BIOME_SOURCE, new Identifier("ecotones", "ecotones"), EcotonesBiomeSource.CODEC);
 		Registry.register(Registry.CHUNK_GENERATOR, new Identifier("ecotones", "ecotones"), EcotonesChunkGenerator.CODEC);
-
-//		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-//			worldType = new EcotonesWorldType();
-//		}
 
 		EcotonesWorldType.init();
 

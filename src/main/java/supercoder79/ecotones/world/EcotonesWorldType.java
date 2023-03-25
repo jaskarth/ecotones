@@ -13,9 +13,11 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.mixin.WorldGenPropertiesAccessor;
 import supercoder79.ecotones.world.gen.EcotonesBiomeSource;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public final class EcotonesWorldType {
@@ -49,6 +51,10 @@ public final class EcotonesWorldType {
     public static void init() {
         Registry.register(BuiltinRegistries.WORLD_PRESET, Ecotones.id("ecotones"), createPreset(createEcotonesOptions(
                 new EcotonesChunkGenerator(null, new EcotonesBiomeSource(BuiltinRegistries.BIOME, 0, false), 0))));
+
+        Map<String, RegistryKey<WorldPreset>> m = new HashMap<>(WorldGenPropertiesAccessor.getLEVEL_TYPE_TO_PRESET_KEY());
+        m.put("ecotones", ECOTONES);
+        WorldGenPropertiesAccessor.setLEVEL_TYPE_TO_PRESET_KEY(m);
     }
 
     private static WorldPreset createPreset(DimensionOptions dimensionOptions) {

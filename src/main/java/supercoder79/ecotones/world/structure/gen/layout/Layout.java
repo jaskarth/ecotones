@@ -7,6 +7,7 @@ import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
+import supercoder79.ecotones.util.Vec2d;
 import supercoder79.ecotones.util.Vec2i;
 import supercoder79.ecotones.util.noise.voronoi.VoronoiRaster;
 import supercoder79.ecotones.world.structure.gen.layout.cell.Cell;
@@ -24,7 +25,7 @@ public abstract class Layout {
     protected final Random random;
 
     protected Layout(long seed, int x, int z) {
-        this.voronoi = new VoronoiRaster(seed, x, z, 48, 24);
+        this.voronoi = new VoronoiRaster(seed, x, z, 64, 24);
 
         for (Map.Entry<Integer, List<Vec2i>> entry : this.voronoi.getRastersByColor().entrySet()) {
             this.cells.add(new GeneralCell(entry.getValue(), this.voronoi.getCentersByColor().get(entry.getKey()), entry.getKey()));
@@ -51,6 +52,32 @@ public abstract class Layout {
                 break;
             }
         }
+    }
+
+    protected Cell chooseCentroid() {
+        double x = 0;
+        double z = 0;
+        for (Cell cell : this.cells) {
+            x += cell.getCenter().x();
+            z += cell.getCenter().y();
+        }
+
+        x /= this.cells.size();
+        z /= this.cells.size();
+
+        double dist = 10000;
+        Cell closest = null;
+
+        for (Cell cell : this.cells) {
+            double d = cell.getCenter().distSqr(new Vec2d(x, z));
+
+            if (d < dist) {
+                dist = d;
+                closest = cell;
+            }
+        }
+
+        return closest;
     }
 
     @Nullable

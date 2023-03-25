@@ -11,13 +11,13 @@ public class ImprovedChunkRandom extends Random {
     }
 
     public long setPopulationSeed(long worldSeed, int blockX, int blockZ) {
-        blockX = blockX >> 4;
-        blockZ = blockZ >> 4;
+//        blockX = blockX >> 4;
+//        blockZ = blockZ >> 4;
         this.setSeed(worldSeed);
         long a = this.nextLong() | 1L;
         long b = this.nextLong() | 1L;
         long c = this.nextLong() | 1L;
-        long result = (a * blockX * blockX * blockX + b * blockZ * blockZ + c) ^ worldSeed;
+        long result = ((a ^ blockX) * blockX * blockX + (b ^ blockZ) * blockZ + c) ^ worldSeed;
         this.setSeed(result);
         return result;
     }

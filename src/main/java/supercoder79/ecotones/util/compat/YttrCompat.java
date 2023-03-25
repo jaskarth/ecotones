@@ -1,12 +1,19 @@
 package supercoder79.ecotones.util.compat;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
+import supercoder79.ecotones.util.deco.BlockAttachment;
+import supercoder79.ecotones.util.deco.BlockDecorations;
+import supercoder79.ecotones.util.deco.DecorationCategory;
+import supercoder79.ecotones.util.deco.DefaultBlockDecoration;
 import supercoder79.ecotones.world.gen.BiomeGenData;
 import supercoder79.ecotones.world.surface.system.ConfiguredSurfaceBuilder;
 import supercoder79.ecotones.world.surface.system.ForwardSurfaceConfig;
@@ -29,6 +36,14 @@ public class YttrCompat {
                         () -> Registry.BLOCK.get(id("wasteland_dirt")).getDefaultState()
                 ))));
 
+    }
+
+    public static void setupYttrStates() {
+        BlockDecorations.register(new DefaultBlockDecoration(getY("crafting/table")), BlockAttachment.FLOOR, DecorationCategory.TABLES);
+    }
+
+    private static BlockState getY(String name) {
+        return Registry.BLOCK.get(new Identifier("yttr", name)).getDefaultState();
     }
 
     public static void init() {

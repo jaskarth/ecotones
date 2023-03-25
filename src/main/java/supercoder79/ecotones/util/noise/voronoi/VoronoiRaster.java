@@ -44,16 +44,16 @@ public final class VoronoiRaster {
             int b = this.voronoi.get((startX + x1) / scale, (startZ - radius) / scale);
             int a = this.voronoi.get((startX + x1) / scale, (startZ + radius) / scale);
 
-            this.rastersByColor.remove(a);
-            this.rastersByColor.remove(b);
+//            this.rastersByColor.remove(a);
+//            this.rastersByColor.remove(b);
         }
 
         for (int z1 = -radius; z1 <= radius; z1++) {
             int b = this.voronoi.get((startX - radius) / scale, (startZ + z1) / scale);
             int a = this.voronoi.get((startX + radius) / scale, (startZ + z1) / scale);
 
-            this.rastersByColor.remove(a);
-            this.rastersByColor.remove(b);
+//            this.rastersByColor.remove(a);
+//            this.rastersByColor.remove(b);
         }
 
         // Discard circle TODO: configurable?
@@ -79,6 +79,7 @@ public final class VoronoiRaster {
             Vec2i vecs = this.rastersByColor.get(color).get(0);
             this.centersByColor.put(color, this.voronoi.getCellPos(vecs.x() / scale, vecs.y() / scale, scale));
         }
+//        System.out.println(">>" + rastersByColor);
     }
 
     public Map<Integer, List<Vec2i>> getRastersByColor() {

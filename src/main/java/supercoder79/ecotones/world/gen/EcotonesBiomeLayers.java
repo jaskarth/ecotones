@@ -1,5 +1,6 @@
 package supercoder79.ecotones.world.gen;
 
+import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.world.layers.LayerHelper;
 import supercoder79.ecotones.world.layers.system.BiomeLayerSampler;
 import supercoder79.ecotones.world.layers.system.layer.*;
@@ -55,7 +56,7 @@ public final class EcotonesBiomeLayers {
         biomeLayer = LayerHelper.stack(7979L, ScaleLayer.NORMAL, zoom2BiomeLayer, 3, contextProvider);
 
         // 1.5x zoom
-        biomeLayer = Div3ScaleLayer.INSTANCE.create(contextProvider.apply(32), biomeLayer);
+        biomeLayer = sizeLayer(contextProvider, biomeLayer);
         // Total: 2^6.5 (1 + 1 + 1 + 2 + 1.5)
 
         //Initialize special biomes (smaller biomes with c o o l effects)
@@ -87,6 +88,21 @@ public final class EcotonesBiomeLayers {
         //Merge biomes onto the continent
         layerFactory = BiomeMergeLayer.INSTANCE.create(contextProvider.apply(84L), layerFactory, biomeLayer);
         return layerFactory;
+    }
+
+    private static <T extends LayerSampler, C extends LayerSampleContext<T>> LayerFactory<T> sizeLayer(LongFunction<C> contextProvider, LayerFactory<T> biomeLayer) {
+        int size = Ecotones.CONFIG.biomeSize;
+        if (size == 0) { // / 1
+            return biomeLayer;
+        } else if (size == 1) { // / 2
+            return ScaleLayer.NORMAL.create(contextProvider.apply(32), biomeLayer);
+        } else if (size == 3) { // / 4
+            return ScaleLayer.NORMAL.create(contextProvider.apply(31), ScaleLayer.NORMAL.create(contextProvider.apply(32), biomeLayer));
+        } else if (size == 4) { // / 6
+            return Div3ScaleLayer.INSTANCE.create(contextProvider.apply(31), ScaleLayer.NORMAL.create(contextProvider.apply(32), biomeLayer));
+        } else { // / 3
+            return Div3ScaleLayer.INSTANCE.create(contextProvider.apply(32), biomeLayer);
+        }
     }
 
     public static BiomeLayerSampler build(long seed) {

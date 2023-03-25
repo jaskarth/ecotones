@@ -24,7 +24,8 @@
     "MixinSlimeEntity",
     "SpawnSettingsAccessor",
     "StructureFeatureAccessor",
-    "TreeDecoratorTypeAccessor"
+    "TreeDecoratorTypeAccessor",
+    "WorldGenPropertiesAccessor"
   ],
   "client": [
     "client.EntityModelLayersAccessor",

@@ -23,10 +23,12 @@ import java.util.stream.Stream;
 public class WrappedCaveBiome extends CaveBiome {
 public static WrappedCaveBiome LUSH;
 public static WrappedCaveBiome DRIPSTONE;
+public static WrappedCaveBiome DEEP_DARK;
 
     public static void init() {
         LUSH = new WrappedCaveBiome(BiomeKeys.LUSH_CAVES);
         DRIPSTONE = new WrappedCaveBiome(BiomeKeys.DRIPSTONE_CAVES);
+        DEEP_DARK = new WrappedCaveBiome(BiomeKeys.DEEP_DARK);
     }
 
     private final RegistryKey<Biome> key;

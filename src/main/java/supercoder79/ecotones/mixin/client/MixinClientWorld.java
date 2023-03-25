@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.client.ClientSidedServerData;
 import supercoder79.ecotones.client.render.magnifying.MagnifyingGlassDispatcher;
 
@@ -32,7 +33,7 @@ public abstract class MixinClientWorld extends World {
 
     @Inject(method = "getSkyColor", at = @At("RETURN"), cancellable = true)
     private void addEcotonesFancySkyColor(Vec3d vec3d, float f, CallbackInfoReturnable<Vec3d> cir) {
-        if (ClientSidedServerData.isInEcotonesWorld) {
+        if (ClientSidedServerData.isInEcotonesWorld && Ecotones.CONFIG.client.useEcotonesSky) {
             Vec3d color = cir.getReturnValue();
 
             double red = color.x;

@@ -116,9 +116,12 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
     @Override
     public CaveBiome getCaveBiomeForNoiseGen(int x, int z) {
         double noise = this.caveBiomeNoise.sample(x / 192.0, z / 192.0);
-        if (noise > 0.6) {
+
+        if (noise < -0.4) {
+            return WrappedCaveBiome.DEEP_DARK;
+        } else if (noise > 0.5) {
             return WrappedCaveBiome.LUSH;
-        } else if (noise > 0.2 && noise < 0.6) {
+        } else if (noise > 0.2 && noise < 0.5) {
             return WrappedCaveBiome.DRIPSTONE;
         }
         return CaveBiome.DEFAULT;

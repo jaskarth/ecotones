@@ -27,13 +27,16 @@ public class TestVoronoi {
 
     // Raster test
     public static void main(String[] args) {
-        VoronoiRaster vn = new VoronoiRaster(102, 0, 0, 64, 32);
+        VoronoiRaster vn = new VoronoiRaster(100, 0, 0, 64, 24);
 
         Random random = new Random();
         Map<Vec2i, Integer> postToCol = vn.getPosToColor();
         ImageDumper.dumpImage("voronoi.png", 512, (x, z) -> {
             Integer i = postToCol.get(Vec2i.of(x, z));
             if (i != null) {
+                if (true) {
+                    return ImageDumper.getIntFromColor((i >> 16) & 0xFF, (i >> 8) & 0xFF, i & 0xFF);
+                }
                 random.setSeed(i);
 
                 int r = 120 + random.nextInt(40) - random.nextInt(40);

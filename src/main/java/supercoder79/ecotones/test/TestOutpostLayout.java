@@ -57,7 +57,7 @@ public class TestOutpostLayout {
             }
         });
 
-        BufferedImage img = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
+        BufferedImage img = new BufferedImage(512, 512, BufferedImage.TYPE_INT_RGB);
         for (Cell cell : layout.getCells()) {
             for (Vec2i position : cell.getPositions()) {
                 img.setRGB(128 + position.x(), 128 + position.y(), getColor(cell));
@@ -82,7 +82,7 @@ public class TestOutpostLayout {
 //            img.setRGB(128 + ((int) cell.getCenter().x()), 128 + ((int) cell.getCenter().y()), ImageDumper.getIntFromColor(0, 0, 0));
 //        }
 
-        Path p = Paths.get("run", "outpost_layout.png");
+        Path p = Paths.get("outpost_layout.png");
         try {
             ImageIO.write(img, "png", p.toAbsolutePath().toFile());
         } catch (IOException e) {
@@ -101,8 +101,8 @@ public class TestOutpostLayout {
 
         if (cell instanceof EmptyCell) {
             int r = 120 + random.nextInt(40) - random.nextInt(40);
-            int g = 200 + random.nextInt(22) - random.nextInt(22);
-            int b = 40 + random.nextInt(30) - random.nextInt(30);
+            int g = 190 + random.nextInt(22) - random.nextInt(22);
+            int b = 60 + random.nextInt(30) - random.nextInt(30);
 
             return ImageDumper.getIntFromColor(r, g, b);
         }

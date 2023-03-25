@@ -42,4 +42,9 @@ public abstract class Cell {
     public int getUniqueId() {
         return uniqueId;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "[" + uniqueId + "]";
+    }
 }

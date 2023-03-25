@@ -19,7 +19,7 @@ public class OutpostLayout extends Layout {
 
     @Override
     public void generate(ChunkGenerator generator, HeightLimitView height) {
-        Cell startCell = ListHelper.randomIn(this.cells, this.random);
+        Cell startCell = chooseCentroid();
 
         // Make center building cell
         BuildingCell building = new BuildingCell(startCell);
@@ -39,6 +39,8 @@ public class OutpostLayout extends Layout {
                 }
             }
         });
+
+        System.out.println(">>>> " + cells);
     }
 
     private void generateBuildings(BuildingCell building, ChunkGenerator generator, HeightLimitView height) {
@@ -47,7 +49,19 @@ public class OutpostLayout extends Layout {
         building.addBuilding(new House(new BlockPos(
                 center.x(),
                 generator.getHeight(center.x(), center.y(), Heightmap.Type.WORLD_SURFACE_WG, height, null),
-                center.y())
-                , FeatureHelper.randomHorizontal(random)));
+                center.y()), FeatureHelper.randomHorizontal(random))
+        );
+
+        building.addBuilding(new House(new BlockPos(
+                center.x() + 10,
+                generator.getHeight(center.x(), center.y(), Heightmap.Type.WORLD_SURFACE_WG, height, null),
+                center.y()), FeatureHelper.randomHorizontal(random))
+        );
+
+        building.addBuilding(new House(new BlockPos(
+                center.x(),
+                generator.getHeight(center.x(), center.y(), Heightmap.Type.WORLD_SURFACE_WG, height, null),
+                center.y() + 10), FeatureHelper.randomHorizontal(random))
+        );
     }
 }

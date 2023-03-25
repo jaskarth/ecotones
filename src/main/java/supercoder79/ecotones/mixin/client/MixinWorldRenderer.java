@@ -24,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.client.ClientSidedServerData;
 import supercoder79.ecotones.client.CloudHandler;
 import supercoder79.ecotones.client.sky.SkyboxGenerator;
@@ -82,7 +83,7 @@ public class MixinWorldRenderer {
 
     @Inject(method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FLnet/minecraft/client/render/Camera;ZLjava/lang/Runnable;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/BackgroundRenderer;clearFog()V", ordinal = 0, shift = At.Shift.BEFORE), cancellable = true)
     private void renderEcotonesFancyStars(MatrixStack matrices, Matrix4f projectionMatrix, float tickDelta, Camera camera, boolean bl, Runnable runnable, CallbackInfo ci) {
-        if (ClientSidedServerData.isInEcotonesWorld) {
+        if (ClientSidedServerData.isInEcotonesWorld && Ecotones.CONFIG.client.useEcotonesSky) {
             if (!this.initializedStars) {
                 this.starsBuffer.close();
                 this.starsBuffer = new VertexBuffer();
