@@ -80,7 +80,10 @@ public class RockySlopesBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
-                        .repeat(3).spreadHorizontally().decorate(new Spread32Decorator()));
+                        .decorate(new Spread32Decorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
+                        .spreadHorizontally()
+                        .repeat(3));
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 1))

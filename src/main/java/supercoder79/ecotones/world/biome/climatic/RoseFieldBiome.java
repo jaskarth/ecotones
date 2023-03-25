@@ -98,9 +98,9 @@ public class RoseFieldBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CYAN_ROSE)
-                        .repeat(8)
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
+                        .repeat(8));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BRANCHING_OAK.configure(TreeType.RARE_LARGE_CLUSTERED_OAK)

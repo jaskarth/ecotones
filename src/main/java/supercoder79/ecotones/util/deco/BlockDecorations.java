@@ -2,6 +2,7 @@ package supercoder79.ecotones.util.deco;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LanternBlock;
+import supercoder79.ecotones.blocks.EcotonesBlocks;
 
 import java.util.*;
 
@@ -22,12 +23,16 @@ public final class BlockDecorations {
         register(new DefaultBlockDecoration(Blocks.SMITHING_TABLE.getDefaultState()), BlockAttachment.FLOOR, DecorationCategory.INDUSTRY);
         register(new DefaultBlockDecoration(Blocks.GRINDSTONE.getDefaultState()), BlockAttachment.FLOOR, DecorationCategory.INDUSTRY);
 
+        // Ecotones industry
+        register(new DefaultBlockDecoration(EcotonesBlocks.GRINDSTONE.getDefaultState()), BlockAttachment.FLOOR, DecorationCategory.INDUSTRY);
+        register(new DefaultBlockDecoration(EcotonesBlocks.SAP_DISTILLERY.getDefaultState()), BlockAttachment.FLOOR, DecorationCategory.INDUSTRY);
+
         register(new DefaultBlockDecoration(Blocks.TORCH.getDefaultState()), BlockAttachment.WALL, DecorationCategory.LIGHTS);
         register(new DefaultBlockDecoration(Blocks.LANTERN.getDefaultState().with(LanternBlock.HANGING, true)), BlockAttachment.CEILING, DecorationCategory.LIGHTS);
         register(new DefaultBlockDecoration(Blocks.LANTERN.getDefaultState()), BlockAttachment.FLOOR, DecorationCategory.LIGHTS);
     }
 
-    private static void register(BlockDecoration decoration, BlockAttachment attachment, DecorationCategory category) {
+    public static void register(BlockDecoration decoration, BlockAttachment attachment, DecorationCategory category) {
         Map<DecorationCategory, List<BlockDecoration>> fromCategory = REGISTRY.getOrDefault(attachment, new HashMap<>());
         List<BlockDecoration> decorations = fromCategory.getOrDefault(category, new ArrayList<>());
 

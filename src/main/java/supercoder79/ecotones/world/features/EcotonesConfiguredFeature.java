@@ -50,6 +50,11 @@ public class EcotonesConfiguredFeature<FC extends FeatureConfig, F extends Featu
 
     // 1.17 style back->front
     public EcotonesConfiguredFeature<FC, F> decorate(PlacementModifier decorator) {
+        // TODO: complain when spread but no heightmap
+//        if (decorator instanceof CountPlacementModifier && decorators.size() == 0) {
+//            System.err.println("You're using old-school decoration, but count is the first decorator. This is probably not what you want.");
+//            Thread.dumpStack();
+//        }
         decorators.add(0, decorator);
 
         return this;

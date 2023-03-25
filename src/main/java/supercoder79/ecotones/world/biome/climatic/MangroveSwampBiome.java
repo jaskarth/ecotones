@@ -84,9 +84,10 @@ public class MangroveSwampBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
-                        .repeat(6)
+                        .decorate(new Spread32Decorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .decorate(new Spread32Decorator()));
+                        .repeat(6));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.MANGROVE_TREE.configure(TreeType.MANGROVE)
@@ -94,9 +95,11 @@ public class MangroveSwampBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(BlockStateProvider.of(Blocks.LILY_PAD.getDefaultState())).tries(10).build())
-                        .repeat(6)
+                        .decorate(new Spread32Decorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .decorate(new Spread32Decorator()));
+                        .repeat(6)
+        );
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))

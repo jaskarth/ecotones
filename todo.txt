@@ -65,14 +65,21 @@
 # Automation
 * Testing suite to find errors within biomes (no strongholds, etc.)
 
+# Fruit trees thoughts and design
+* Seperate leaves, normal wood (for simplicity)
+* Controlled by a blockentity underneath the tree, like dynamic trees
+* Fruit leaves will have multiple stages, and will always be in a state of flux
+  * Empty->Flowering->Fruit
+  * Fruiting leaves can drop their fruit on the ground like in DF, and they will return back to empty
+  * The BE will ensure that once the tree is fully grown, the ratio of fruit to flowering to empty leaves is fairly consistent
+* Dropped fruits can be picked up to yield fruits or mulch
+
 # 0.9.1 todo
 * Yttr support
   * Cottage blocks?
 * Aurora'sdeco support tweaks
-  * Lavender spawns in more places
   * Add more blocks, such as sawmill, to cottages
 * Ensure terrestria and traverse compat works
 * Add more books
-* Flesh out campfire chests
-* Localize advancement names
+* Deep dark
 * Biome size config (Use config system from Shimmer&Shade)

@@ -133,9 +133,11 @@ public class PalmForestBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
-                        .repeat(1)
+                        .decorate(new Spread32Decorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .decorate(new Spread32Decorator()));
+                        .repeat(1)
+        );
 
         DefaultBiomeFeatures.addForestFlowers(this.getGenerationSettings());
 

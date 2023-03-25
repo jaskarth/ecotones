@@ -15,6 +15,7 @@ import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.source.BiomeCoords;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeIdManager;
@@ -28,6 +29,7 @@ import java.util.*;
 import java.util.concurrent.locks.StampedLock;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource {
     public static Codec<EcotonesBiomeSource> CODEC =  RecordCodecBuilder.create((instance) -> {
@@ -47,10 +49,7 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
 
     public EcotonesBiomeSource(Registry<Biome> biomeRegistry, long seed, boolean isReal) {
         super(
-                BiomeGenData.LOOKUP
-                        .keySet()
-                        .stream()
-                        .map(k -> biomeRegistry.entryOf(k))
+                superSetup(isReal, biomeRegistry)
         );
         this.biomeRegistry = biomeRegistry;
         this.biomeSampler = EcotonesBiomeLayers.build(seed);
@@ -71,6 +70,18 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
 
             this.lock.unlockWrite(stamp);
         }
+    }
+
+    @NotNull
+    private static Stream<RegistryEntry<Biome>> superSetup(boolean real, Registry<Biome> biomeRegistry) {
+        if (real) {
+            ModCompatRunner.runEarly();
+        }
+
+        return BiomeGenData.LOOKUP
+                .keySet()
+                .stream()
+                .map(k -> biomeRegistry.entryOf(k));
     }
 
 //    @Override

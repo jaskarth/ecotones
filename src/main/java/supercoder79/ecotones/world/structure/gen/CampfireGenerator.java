@@ -11,7 +11,6 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureContext;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.structure.StructurePiecesCollector;
@@ -35,6 +34,7 @@ import supercoder79.ecotones.world.structure.EcotonesStructurePieces;
 import java.util.BitSet;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class CampfireGenerator {
     public static void generate(BlockPos pos, StructurePiecesCollector pieces, Random random, Block logSource) {
@@ -93,8 +93,13 @@ public class CampfireGenerator {
                             ChestBlockEntity be = (ChestBlockEntity) world.getBlockEntity(local);
                             BitSet chest = new BitSet(27);
 
-                            int stickStacks = 3 + random.nextInt(4);
+                            int stickStacks = 4 + random.nextInt(4);
                             int foodStacks = 3 + random.nextInt(4);
+                            int charcoalStacks = 1 + random.nextInt(2);
+                            int jarStacks = random.nextBoolean() ? 0 : (random.nextInt(2) + 1);
+                            int woodStacks = random.nextInt(3);
+                            int plankStacks = random.nextInt(3);
+                            int specials = random.nextInt(3);
 
                             if (be != null) {
                                 int idx = random.nextInt(27);
@@ -114,12 +119,14 @@ public class CampfireGenerator {
                                     }
                                 }
 
-                                for (int i = 0; i < stickStacks; i++) {
-                                    idx = random.nextInt(27);
-
-                                    if (!chest.get(idx)) {
-                                        be.setStack(idx, new ItemStack(Items.STICK, 1 + random.nextInt(8)));
-                                    }
+                                place(stickStacks, random, chest, be, () -> new ItemStack(Items.STICK, 1 + random.nextInt(8)));
+                                place(charcoalStacks, random, chest, be, () -> new ItemStack(Items.CHARCOAL, 1 + random.nextInt(3)));
+                                place(jarStacks, random, chest, be, () -> new ItemStack(EcotonesItems.JAR, 1 + random.nextInt(4)));
+                                place(woodStacks, random, chest, be, () -> new ItemStack(this.logSource, 2 + random.nextInt(4)));
+                                place(plankStacks, random, chest, be, () -> new ItemStack(logToPlank(this.logSource).getBlock(), 2 + random.nextInt(3)));
+                                Item special = special(this.logSource);
+                                if (special != null) {
+                                    place(specials, random, chest, be, () -> new ItemStack(special, 1 + random.nextInt(2)));
                                 }
                             }
 
@@ -128,6 +135,40 @@ public class CampfireGenerator {
                     }
                 }
             }
+        }
+
+        private void place(int stacks, net.minecraft.util.math.random.Random random, BitSet chest, ChestBlockEntity be, Supplier<ItemStack> stack) {
+            for (int i = 0; i < stacks; i++) {
+                int idx = random.nextInt(27);
+
+                if (!chest.get(idx)) {
+                    be.setStack(idx, stack.get());
+                }
+            }
+        }
+
+        private static BlockState logToPlank(Block log) {
+            if (log == Blocks.OAK_LOG) {
+                return Blocks.OAK_PLANKS.getDefaultState();
+            } else if (log == Blocks.SPRUCE_LOG) {
+                return Blocks.SPRUCE_PLANKS.getDefaultState();
+            } else if (log == Blocks.BIRCH_LOG) {
+                return Blocks.BIRCH_PLANKS.getDefaultState();
+            } else if (log == Blocks.DARK_OAK_LOG) {
+                return Blocks.DARK_OAK_PLANKS.getDefaultState();
+            }
+
+            throw new IllegalStateException("Invalid log type: " + log);
+        }
+
+        private static Item special(Block log) {
+            if (log == Blocks.OAK_LOG) {
+                return Items.APPLE;
+            } else if (log == Blocks.SPRUCE_LOG) {
+                return EcotonesItems.BLUEBERRIES;
+            }
+
+            return null;
         }
 
         private ItemStack generateBook(Random random) {

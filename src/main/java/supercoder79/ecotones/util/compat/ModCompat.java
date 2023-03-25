@@ -21,12 +21,13 @@ public class ModCompat {
     public static void initLate() {
         // Mod Compat handlers
         if (isModLoaded("traverse")) {
-            TraverseCompat.associateGenData();
+            ModCompatRunner.registerEarly(TraverseCompat::associateGenData);
             ModCompatRunner.register(TraverseCompat::init);
             log("Registered Traverse compat!");
         }
 
         if (isModLoaded("terrestria")) {
+            ModCompatRunner.registerEarly(TerrestriaCompat::associateGenData);
             ModCompatRunner.register(TerrestriaCompat::init);
             log("Registered Terrestria compat!");
         }
@@ -43,7 +44,7 @@ public class ModCompat {
         }
 
         if (isModLoaded("yttr")) {
-            YttrCompat.associateGenData();
+            ModCompatRunner.registerEarly(YttrCompat::associateGenData);
             ModCompatRunner.register(YttrCompat::init);
             log("Registered Yttr compat!");
         }

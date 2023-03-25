@@ -171,7 +171,11 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
                         BlockStateProvider.of(Blocks.SWEET_BERRY_BUSH.getDefaultState().with(SweetBerryBushBlock.AGE, 3))).tries(64)
                         .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).cannotProject().build())
-                        .repeat(3).spreadHorizontally().decorate(new SpreadDoubleDecorator()).decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
+                        .decorate(new SpreadDoubleDecorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
+                        .spreadHorizontally()
+                        .repeat(3)
+        );
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
@@ -240,9 +244,10 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.45))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.WIDE_FERNS)
-                .repeat(6)
+                .decorate(new Spread32Decorator())
+                .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                 .spreadHorizontally()
-                .decorate(new Spread32Decorator()));
+                .repeat(6));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SMALL_SPRUCE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))

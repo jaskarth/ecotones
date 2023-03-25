@@ -14,7 +14,7 @@ public final class DataGen {
     public static final Logger LOGGER = LogManager.getLogger("ecotones-datagen");
     public static final DataGenData DATA = new DataGenData();
 
-    private static final boolean RUN = true;
+    private static final boolean RUN = false;
     public static void run() {
         if (RUN && FabricLoader.getInstance().isDevelopmentEnvironment()) {
             try {

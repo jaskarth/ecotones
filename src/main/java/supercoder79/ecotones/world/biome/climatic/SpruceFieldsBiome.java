@@ -123,7 +123,11 @@ public class SpruceFieldsBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
                         BlockStateProvider.of(Blocks.SWEET_BERRY_BUSH.getDefaultState().with(SweetBerryBushBlock.AGE, 3))).tries(24)
                         .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).cannotProject().build())
-                        .repeat(4).spreadHorizontally().decorate(new SpreadDoubleDecorator()).decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
+                        .decorate(new SpreadDoubleDecorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
+                        .spreadHorizontally()
+                        .repeat(4)
+        );
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)

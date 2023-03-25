@@ -36,7 +36,7 @@ public final class BiomePicker {
     }
 
     public void add(Biome biome, double weight) {
-        this.biomeEntries.add(new Entry(biome, weight));
+        this.biomeEntries.add(new Entry(biome, this, weight));
         this.totalWeight += weight;
     }
 
@@ -52,15 +52,21 @@ public final class BiomePicker {
         return totalWeight;
     }
 
+    @Override
+    public String toString() {
+        return owner.toString();
+    }
+
     public static class Entry {
         private final RegistryKey<Biome> biome;
         private final double weight;
-        private Entry(Biome biome, double weight) {
+        private Entry(Biome biome, BiomePicker picker, double weight) {
             // Attempt from builtin
             Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
 
             // Mod compat mode: use dynamic registry
-            this.biome = optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome).get());
+            this.biome = optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome)
+                    .orElseThrow(() -> new IllegalStateException("Biome " + biome + "for" + picker + " is not in the registry!")));
             this.weight = weight;
         }
 

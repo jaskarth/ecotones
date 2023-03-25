@@ -340,6 +340,7 @@ public class CottageGenerator {
 
                     if (placeWater && random.nextInt(4) == 0) {
                         world.setBlockState(topPos, Blocks.WATER.getDefaultState(), 3);
+                        // TODO: rare chance of fertilizer spreader
                     } else {
                         // Skip random amount of farms
                         if (random.nextInt(5) == 0) {

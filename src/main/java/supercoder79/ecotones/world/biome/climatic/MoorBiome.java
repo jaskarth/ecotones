@@ -95,15 +95,19 @@ public class MoorBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
-                        .repeat(1)
+                        .decorate(new Spread32Decorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .decorate(new SpreadDoubleDecorator()).decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
+                        .repeat(1)
+                    );
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
-                        .repeat(1)
+                        .decorate(new Spread32Decorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
-                        .decorate(new Spread32Decorator()));
+                        .repeat(1)
+        );
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BLUEBERRY_BUSH.configure(FeatureConfig.DEFAULT)

@@ -122,12 +122,15 @@ public class MontaneFieldsBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 1))
                         .decorate(EcotonesDecorators.LARGE_ROCK.configure(new ChanceDecoratorConfig(4))));
 
-        // TODO
+
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
                         BlockStateProvider.of(Blocks.SWEET_BERRY_BUSH.getDefaultState().with(SweetBerryBushBlock.AGE, 3))).tries(24)
                         .whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).cannotProject().build())
-                        .repeat(4).spreadHorizontally().decorate(new SpreadDoubleDecorator()).decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
+                        .decorate(new Spread32Decorator())
+                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
+                        .spreadHorizontally()
+                        .repeat(4));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)

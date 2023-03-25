@@ -9,7 +9,6 @@ public class DefaultBlockDecoration implements BlockDecoration {
     private final BlockState state;
 
     public DefaultBlockDecoration(BlockState state) {
-
         this.state = state;
     }
 
