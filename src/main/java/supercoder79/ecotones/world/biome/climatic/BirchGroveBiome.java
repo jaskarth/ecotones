@@ -61,7 +61,7 @@ public class BirchGroveBiome extends EcotonesBiomeBuilder {
         this.hilliness(hilliness);
         this.volatility(volatility);
         this.addStructureFeature(EcotonesStructures.CAMPFIRE_BIRCH);
-        this.associate(BiomeAssociations.FOREST_LIKE);
+        this.associate(BiomeAssociations.FOREST_LIKE, BiomeAssociations.BIRCH);
 //        this.category(Biome.Category.PLAINS);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

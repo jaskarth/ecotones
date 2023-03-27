@@ -6,10 +6,12 @@ import net.minecraft.block.LanternBlock;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import supercoder79.ecotones.util.CampfireLogHelper;
 import supercoder79.ecotones.util.deco.BlockAttachment;
@@ -30,6 +32,10 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public final class AurorasDecoCompat {
+    public static final TagKey<Biome> WAY_SIGN_OAK = TagKey.of(Registry.BIOME_KEY, id("feature/way_sign/oak"));
+    public static final TagKey<Biome> WAY_SIGN_BIRCH = TagKey.of(Registry.BIOME_KEY, id("feature/way_sign/birch"));
+    public static final TagKey<Biome> WAY_SIGN_SPRUCE = TagKey.of(Registry.BIOME_KEY, id("feature/way_sign/taiga"));
+    public static final TagKey<Biome> WAY_SIGN_DESERT = TagKey.of(Registry.BIOME_KEY, id("feature/way_sign/desert"));
     private static boolean aurorasDecoEnabled = false;
 
     public static void init() {

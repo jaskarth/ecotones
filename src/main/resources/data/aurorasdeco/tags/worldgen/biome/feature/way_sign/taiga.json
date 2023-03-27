@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "ecotones:lichen_woodland",
+    "ecotones:lichen_woodland_hilly",
+    "ecotones:lichen_woodland_mountainous",
+    "ecotones:spruce_forest",
+    "ecotones:spruce_forest_clearing",
+    "ecotones:spruce_forest_gravelly",
+    "ecotones:spruce_forest_lake",
+    "ecotones:spruce_forest_hilly",
+    "ecotones:spruce_forest_mountainous",
+    "ecotones:shield_taiga",
+    "ecotones:shield_taiga_hilly",
+    "ecotones:shield_taiga_mountainous",
+    "ecotones:spruce_fields",
+    "ecotones:spruce_fields_hilly",
+    "ecotones:spruce_fields_mountainous",
+    "ecotones:granite_springs",
+    "ecotones:granite_springs_hilly",
+    "ecotones:granite_springs_mountainous",
+    "ecotones:spruce_glen",
+    "ecotones:spruce_glen_hilly",
+    "ecotones:spruce_glen_mountainous"
+  ]
+}

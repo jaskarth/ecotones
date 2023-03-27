@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "ecotones:desert",
+    "ecotones:desert_hilly",
+    "ecotones:desert_mountainous",
+    "ecotones:cool_desert",
+    "ecotones:cool_desert_hilly",
+    "ecotones:cool_desert_mountainous",
+    "ecotones:lush_desert",
+    "ecotones:lush_desert_hilly",
+    "ecotones:lush_desert_mountainous",
+    "ecotones:desert_shrubland",
+    "ecotones:desert_shrubland_hilly",
+    "ecotones:desert_shrubland_mountainous"
+  ]
+}

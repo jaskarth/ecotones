@@ -75,7 +75,7 @@ public class AspenFoothillsBiome extends EcotonesBiomeBuilder {
         this.hilliness(hilliness);
         this.volatility(volatility);
         this.addStructureFeature(EcotonesStructures.CAMPFIRE_BIRCH);
-        this.associate(BiomeAssociations.MOUNTAIN_LIKE);
+        this.associate(BiomeAssociations.MOUNTAIN_LIKE, BiomeAssociations.BIRCH);
 //        this.category(Biome.Category.EXTREME_HILLS);
 
         DefaultBiomeFeatures.addLandCarvers(this.getGenerationSettings());

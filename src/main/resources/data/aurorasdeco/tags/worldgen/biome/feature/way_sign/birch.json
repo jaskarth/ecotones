@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "ecotones:birch_forest",
+    "ecotones:birch_forest_hilly",
+    "ecotones:birch_forest_mountainous",
+    "ecotones:aspen_foothills",
+    "ecotones:aspen_foothills_clearing",
+    "ecotones:aspen_hills",
+    "ecotones:aspen_mountains",
+    "ecotones:birch_lakes",
+    "ecotones:birch_lakes_hilly",
+    "ecotones:birch_lakes_mountainous",
+    "ecotones:birch_grove",
+    "ecotones:birch_grove_hilly",
+    "ecotones:birch_grove_mountainous"
+  ]
+}

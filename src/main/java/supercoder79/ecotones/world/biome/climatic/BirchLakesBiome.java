@@ -57,7 +57,7 @@ public class BirchLakesBiome extends EcotonesBiomeBuilder {
         this.temperature(0.5f);
         this.downfall(0.7f);
         this.precipitation(Biome.Precipitation.RAIN);
-        this.associate(BiomeAssociations.FOREST_LIKE);
+        this.associate(BiomeAssociations.FOREST_LIKE, BiomeAssociations.BIRCH);
 //        this.category(Biome.Category.FOREST);
 
         this.hilliness(hilliness);
