@@ -73,6 +73,3 @@
   * Fruiting leaves can drop their fruit on the ground like in DF, and they will return back to empty
   * The BE will ensure that once the tree is fully grown, the ratio of fruit to flowering to empty leaves is fairly consistent
 * Dropped fruits can be picked up to yield fruits or mulch
-
-# 0.9.1 todo
-* Add more books
