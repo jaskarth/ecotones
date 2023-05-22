@@ -5,8 +5,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.structure.TaigaVillageData;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -16,6 +14,7 @@ import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.decorator.SpreadDoubleDecorator;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
@@ -40,11 +39,11 @@ public class CloverFieldsBiome extends EcotonesBiomeBuilder {
     public static Biome SHRUB;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clover_fields"), new CloverFieldsBiome(0.5F, 0.05F, 0, 1, 2.4, 0.95).build());
-        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clover_thicket"), new CloverFieldsBiome(0.5F, 0.025F, 2, 2, 2.8, 0.9).build());
-        FLATS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clover_flats"), new CloverFieldsBiome(0.5F, 0.01F, 0, 2, 1.2, 1.2).build());
-        HILLS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clover_hills"), new CloverFieldsBiome(1.2F, 0.625F, 0, 1, 4.8, 0.75).build());
-        SHRUB = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clover_shrubs"), new CloverFieldsBiome(0.5F, 0.025F, 0, 4, 2.8, 0.9).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "clover_fields"), new CloverFieldsBiome(0.5F, 0.05F, 0, 1, 2.4, 0.95).build());
+        THICKET = EarlyBiomeRegistry.register(new Identifier("ecotones", "clover_thicket"), new CloverFieldsBiome(0.5F, 0.025F, 2, 2, 2.8, 0.9).build());
+        FLATS = EarlyBiomeRegistry.register(new Identifier("ecotones", "clover_flats"), new CloverFieldsBiome(0.5F, 0.01F, 0, 2, 1.2, 1.2).build());
+        HILLS = EarlyBiomeRegistry.register(new Identifier("ecotones", "clover_hills"), new CloverFieldsBiome(1.2F, 0.625F, 0, 1, 4.8, 0.75).build());
+        SHRUB = EarlyBiomeRegistry.register(new Identifier("ecotones", "clover_shrubs"), new CloverFieldsBiome(0.5F, 0.025F, 0, 4, 2.8, 0.9).build());
         Climate.WARM_MODERATE.add(INSTANCE, 0.1);
         Climate.WARM_MILD.add(INSTANCE, 0.1);
         Climate.WARM_HUMID.add(INSTANCE, 0.1);

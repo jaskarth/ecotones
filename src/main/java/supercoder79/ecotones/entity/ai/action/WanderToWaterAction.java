@@ -2,7 +2,7 @@ package supercoder79.ecotones.entity.ai.action;
 
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
@@ -36,7 +36,7 @@ public class WanderToWaterAction extends Action {
             return false;
         }
 
-        BlockPos target = AiHelper.locateBlock(this.mob.getBlockPos(), this.mob.world, 12, 6, s -> s.getFluidState().isIn(FluidTags.WATER));
+        BlockPos target = AiHelper.locateBlock(this.mob.getBlockPos(), this.mob.getWorld(), 12, 6, s -> s.getFluidState().isIn(FluidTags.WATER));
         if (target == null) {
             return false;
         }

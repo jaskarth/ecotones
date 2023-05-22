@@ -1,6 +1,6 @@
 package supercoder79.ecotones.world.gen;
 
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.world.surface.system.ConfiguredSurfaceBuilder;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;

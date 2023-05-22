@@ -5,8 +5,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -14,6 +12,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
@@ -34,7 +33,7 @@ public class LushFoothillsBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_foothills"), new LushFoothillsBiome(1.5F, 0.15F, 2, 0.94).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_foothills"), new LushFoothillsBiome(1.5F, 0.15F, 2, 0.94).build());
         BiomeRegistries.addMountainBiome(INSTANCE);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS, INSTANCE);
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 8);

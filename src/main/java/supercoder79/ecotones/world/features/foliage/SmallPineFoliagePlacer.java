@@ -34,14 +34,14 @@ public class SmallPineFoliagePlacer extends PineFoliagePlacer {
     }
 
     @Override
-    protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
+    protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
         for(int k = offset; k >= offset - foliageHeight; --k) {
             // topmost is a single block
             if (k == offset) {
-                this.generateSquare(world, replacer, random, config, treeNode.getCenter(), 0, k, treeNode.isGiantTrunk());
+                this.generateSquare(world, placer, random, config, treeNode.getCenter(), 0, k, treeNode.isGiantTrunk());
             } else {
                 // everything after is a +
-                this.generateSquare(world, replacer, random, config, treeNode.getCenter(), 1, k, treeNode.isGiantTrunk());
+                this.generateSquare(world, placer, random, config, treeNode.getCenter(), 1, k, treeNode.isGiantTrunk());
             }
         }
     }

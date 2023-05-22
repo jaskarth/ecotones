@@ -19,7 +19,7 @@ public class SmallCactusBlockStateProvider extends BlockStateProvider {
     }
 
     @Override
-    public BlockState getBlockState(Random random, BlockPos pos) {
+    public BlockState get(Random random, BlockPos pos) {
         return EcotonesBlocks.SMALL_CACTUS.getDefaultState().with(SmallCactusBlock.FRUITING, random.nextBoolean());
     }
 }

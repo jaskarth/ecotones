@@ -1,7 +1,7 @@
 package supercoder79.ecotones.world.features;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
@@ -46,7 +46,7 @@ public class CattailFeature extends EcotonesFeature<CattailFeatureConfig> {
 
             boolean waterlogged = world.getFluidState(mutable).isIn(FluidTags.WATER);
 
-            if (world.getBlockState(mutable).getMaterial().isReplaceable() && CattailBlock.PLANTABLE.contains(world.getBlockState(mutable.down()).getBlock())) {
+            if (world.getBlockState(mutable).isReplaceable() && CattailBlock.PLANTABLE.contains(world.getBlockState(mutable.down()).getBlock())) {
                 world.setBlockState(mutable, config.state.with(CattailBlock.WATERLOGGED, waterlogged), 3);
             }
         }

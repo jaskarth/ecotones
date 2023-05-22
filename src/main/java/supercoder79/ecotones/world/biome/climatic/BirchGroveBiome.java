@@ -5,8 +5,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -14,6 +12,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -38,9 +37,9 @@ public class BirchGroveBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "birch_grove"), new BirchGroveBiome(0.25F, 0.065F, 4.2, 0.93).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "birch_grove_hilly"), new BirchGroveBiome(0.6F, 0.125F, 5.4, 0.88).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "birch_grove_mountainous"), new BirchGroveBiome(1.4F, 0.325F, 6.6, 0.82).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "birch_grove"), new BirchGroveBiome(0.25F, 0.065F, 4.2, 0.93).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "birch_grove_hilly"), new BirchGroveBiome(0.6F, 0.125F, 5.4, 0.88).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "birch_grove_mountainous"), new BirchGroveBiome(1.4F, 0.325F, 6.6, 0.82).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_VERY_HUMID.add(INSTANCE, 0.2);
         Climate.WARM_HUMID.add(INSTANCE, 0.2);

@@ -2,10 +2,13 @@ package supercoder79.ecotones.world.structure;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.tag.BiomeTags;
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.*;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryList;
+import net.minecraft.registry.entry.RegistryEntryOwner;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.StructureSpawns;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -16,8 +19,12 @@ import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureKeys;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.mixin.StructureFeatureAccessor;
+import supercoder79.ecotones.util.register.EarlyRegistrationState;
+import supercoder79.ecotones.world.gen.SyntheticRegistryEntryList;
 
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public final class EcotonesStructures {
 
@@ -50,37 +57,14 @@ public final class EcotonesStructures {
 //    public static final StructureFeature<DefaultFeatureConfig> OUTPOST = new OutpostStructure(DefaultFeatureConfig.CODEC);
 
     public static void init() {
-//        Registry.register(Registry.STRUCTURE_FEATURE, Ecotones.id("campfire"), CAMPFIRE);
-//        Registry.register(Registry.STRUCTURE_FEATURE, Ecotones.id("cottage"), COTTAGE);
-//        Registry.register(Registry.STRUCTURE_FEATURE, Ecotones.id("outpost"), OUTPOST);
-//
-//        StructureFeatureAccessor.getGenerationStepMap().put(CAMPFIRE, GenerationStep.Feature.SURFACE_STRUCTURES);
-//        StructureFeatureAccessor.getGenerationStepMap().put(COTTAGE, GenerationStep.Feature.SURFACE_STRUCTURES);
-//        StructureFeatureAccessor.getGenerationStepMap().put(OUTPOST, GenerationStep.Feature.SURFACE_STRUCTURES);
-
-//        FabricStructureBuilder.create(Ecotones.id("campfire"), CAMPFIRE)
-//                .step(GenerationStep.Feature.SURFACE_STRUCTURES)
-//                .defaultConfig(20, 4, 2492472)
-//                .register();
-//
-//        FabricStructureBuilder.create(Ecotones.id("cottage"), COTTAGE)
-//                .step(GenerationStep.Feature.SURFACE_STRUCTURES)
-//                .defaultConfig(24, 4, 32183183)
-//                .adjustsSurface()
-//                .register();
-//
-//        FabricStructureBuilder.create(Ecotones.id("outpost"), OUTPOST)
-//                .step(GenerationStep.Feature.SURFACE_STRUCTURES)
-//                .defaultConfig(10, 2, 2492472)
-//                .register();
     }
 
     private static TagKey<Biome> tag(String s) {
-        return TagKey.of(Registry.BIOME_KEY, Ecotones.id("has_" + s));
+        return TagKey.of(RegistryKeys.BIOME, Ecotones.id("has_" + s));
     }
 
     private static RegistryKey<Structure> of(String id) {
-        return RegistryKey.of(Registry.STRUCTURE_KEY, Ecotones.id(id));
+        return RegistryKey.of(RegistryKeys.STRUCTURE, Ecotones.id(id));
     }
 
     private static Structure.Config createConfig(
@@ -98,12 +82,27 @@ public final class EcotonesStructures {
     }
 
     private static RegistryEntry<Structure> register(RegistryKey<Structure> key, Structure structure) {
-        Registry.register(BuiltinRegistries.STRUCTURE, key.getValue(), structure);
+//        Registry.register(BuiltinRegistries.STRUCTURE, key.getValue(), structure);
 
-        return BuiltinRegistries.STRUCTURE.entryOf(key);
+//        return BuiltinRegistries.STRUCTURE.entryOf(key);
+
+        EarlyRegistrationState.STRUCTURES.put(key.getValue(), structure);
+
+        return RegistryEntry.of(structure);
     }
 
     private static RegistryEntryList<Biome> getOrCreateBiomeTag(TagKey<Biome> key) {
-        return BuiltinRegistries.BIOME.getOrCreateEntryList(key);
+        System.out.println(EarlyRegistrationState.globalBuiltins.createRegistryLookup().getOrThrow(RegistryKeys.BIOME));
+        Optional<RegistryEntryList.Named<Biome>> optional = EarlyRegistrationState.globalBuiltins.createRegistryLookup().getOrThrow(RegistryKeys.BIOME).getOptional(key);
+        System.out.println(">>>> " + optional);
+//        return BuiltinRegistries.BIOME.getOrCreateEntryList(key);
+//        return new SyntheticRegistryEntryList(Stream.of());
+
+        return RegistryEntryList.of(new RegistryEntryOwner<Biome>() {
+            @Override
+            public boolean ownerEquals(RegistryEntryOwner<Biome> other) {
+                return true;
+            }
+        }, key);
     }
 }

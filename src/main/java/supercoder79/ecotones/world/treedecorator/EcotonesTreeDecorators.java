@@ -1,6 +1,8 @@
 package supercoder79.ecotones.world.treedecorator;
 
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.mixin.TreeDecoratorTypeAccessor;
@@ -20,7 +22,7 @@ public final class EcotonesTreeDecorators {
     }
 
     private static void register(String name, TreeDecoratorType<?> type) {
-        Registry.register(Registry.TREE_DECORATOR_TYPE, Ecotones.id(name), type);
+        Registry.register(Registries.TREE_DECORATOR_TYPE, Ecotones.id(name), type);
         RegistryReport.increment("Tree Decorator");
     }
 }

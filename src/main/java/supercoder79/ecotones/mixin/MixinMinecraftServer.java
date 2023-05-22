@@ -3,6 +3,8 @@ package supercoder79.ecotones.mixin;
 import com.mojang.authlib.GameProfileRepository;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.datafixers.DataFixer;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.SaveLoader;
@@ -10,9 +12,8 @@ import net.minecraft.server.WorldGenerationProgressListener;
 import net.minecraft.server.WorldGenerationProgressListenerFactory;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.UserCache;
-import net.minecraft.util.registry.DynamicRegistryManager;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.util.math.random.RandomSequencesState;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.level.LevelProperties;
@@ -37,24 +38,24 @@ public abstract class MixinMinecraftServer {
     @Shadow public abstract ServerWorld getOverworld();
 
     // From fabric api- event doesn't seem to work??
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;setFavicon(Lnet/minecraft/server/ServerMetadata;)V", ordinal = 0), method = "runServer")
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;loadFavicon()Ljava/util/Optional;", ordinal = 0), method = "runServer")
     private void onServerStart(CallbackInfo info) {
         Ecotones.isServerEcotones = getOverworld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator;
         // FIXME: check to see this actually works
     }
 
     @Redirect(method = "createWorlds", at = @At(value = "NEW", target = "net/minecraft/server/world/ServerWorld"))
-    private ServerWorld redirectCtor(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey worldKey, DimensionOptions dimensionOptions, WorldGenerationProgressListener worldGenerationProgressListener, boolean debugWorld, long seed, List spawners, boolean shouldTickTime) {
-        if (dimensionOptions.getChunkGenerator() instanceof EcotonesChunkGenerator) {
+    private ServerWorld redirectCtor(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey worldKey, DimensionOptions dimensionOptions, WorldGenerationProgressListener worldGenerationProgressListener, boolean debugWorld, long seed, List spawners, boolean shouldTickTime, RandomSequencesState randomSequencesState) {
+        if (dimensionOptions.chunkGenerator() instanceof EcotonesChunkGenerator) {
             long l = server.getSaveProperties().getGeneratorOptions().getSeed();
             LevelProperties props = (LevelProperties) server.getSaveProperties();
             DynamicRegistryManager.Immutable registryManager = server.getRegistryManager();
 
-            ChunkGenerator chunkGenerator = new EcotonesChunkGenerator(registryManager.get(Registry.STRUCTURE_SET_KEY),
-                    new EcotonesBiomeSource(registryManager.get(Registry.BIOME_KEY), l, true), l);
-            ((DimensionOptionsAccessor)props.getGeneratorOptions().getDimensions().get(worldKey)).setChunkGenerator(chunkGenerator);
+            ChunkGenerator chunkGenerator = new EcotonesChunkGenerator(
+                    new EcotonesBiomeSource(registryManager.get(RegistryKeys.BIOME), l, true), l);
+            ((DimensionOptionsAccessor)dimensionOptions).setChunkGenerator(chunkGenerator);
         }
 
-        return new ServerWorld(server, workerExecutor, session, properties, worldKey, dimensionOptions, worldGenerationProgressListener, debugWorld, seed, spawners, shouldTickTime);
+        return new ServerWorld(server, workerExecutor, session, properties, worldKey, dimensionOptions, worldGenerationProgressListener, debugWorld, seed, spawners, shouldTickTime, randomSequencesState);
     }
 }

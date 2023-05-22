@@ -52,7 +52,7 @@ public class DrainageSurfaceDecorator extends PlacementModifier {
             for (int x1 = -1; x1 <= 1; x1++) {
                 for (int z1 = -1; z1 <= 1; z1++) {
                     for (int y1 = -1; y1 <= 1; y1++) {
-                        if (context.getBlockState(new BlockPos(x + x1, y + y1, z + z1)).getMaterial().isSolid()) {
+                        if (context.getBlockState(new BlockPos(x + x1, y + y1, z + z1)).isSolid()) {
                             solidAround++;
                         }
                     }

@@ -3,14 +3,13 @@ package supercoder79.ecotones.world.biome.climatic;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -34,9 +33,9 @@ public class LushShrublandBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_shrubland"), new LushShrublandBiome(0.5f, 0.075f, 2.8, 0.88).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_shrubland_hilly"), new LushShrublandBiome(1f, 0.5f, 4.2, 0.83).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_shrubland_mountainous"), new LushShrublandBiome(1.75f, 0.8f, 7, 0.75).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_shrubland"), new LushShrublandBiome(0.5f, 0.075f, 2.8, 0.88).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_shrubland_hilly"), new LushShrublandBiome(1f, 0.5f, 4.2, 0.83).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_shrubland_mountainous"), new LushShrublandBiome(1.75f, 0.8f, 7, 0.75).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_MILD.add(INSTANCE, 0.1);
         Climate.HOT_HUMID.add(INSTANCE, 0.3);

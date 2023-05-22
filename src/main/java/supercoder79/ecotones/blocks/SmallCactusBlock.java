@@ -10,6 +10,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -47,7 +48,7 @@ public class SmallCactusBlock extends EcotonesPlantBlock {
                 double dX = Math.abs(entity.getX() - entity.lastRenderX);
                 double dZ = Math.abs(entity.getZ() - entity.lastRenderZ);
                 if (dX >= 0.003 || dZ >= 0.003) {
-                    entity.damage(DamageSource.CACTUS, 0.5F);
+                    entity.damage(entity.getDamageSources().cactus(), 0.5F);
                 }
             }
         }
@@ -80,7 +81,7 @@ public class SmallCactusBlock extends EcotonesPlantBlock {
     }
 
     @Override
-    public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
+    public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
         if (state.get(FRUITING)) {
             return ImmutableList.of(new ItemStack(EcotonesItems.CACTUS_FRUIT, 1 + builder.getWorld().getRandom().nextInt(2)));
         } else {

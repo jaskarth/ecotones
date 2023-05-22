@@ -2,8 +2,8 @@ package supercoder79.ecotones.world.features.tree;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -196,7 +196,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
     }
 
     public static boolean setLeavesWithDistance(ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> blocks, BlockBox box, TreeFeatureConfig config, int distance) {
-        BlockState state = config.foliageProvider.getBlockState(new CheckedRandom(random.nextLong()), pos);
+        BlockState state = config.foliageProvider.get(new CheckedRandom(random.nextLong()), pos);
 
         if(state.contains(Properties.DISTANCE_1_7)) {
             state = state.with(Properties.DISTANCE_1_7, Math.min(distance, 7));

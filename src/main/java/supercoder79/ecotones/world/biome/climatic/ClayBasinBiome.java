@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -13,6 +11,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -38,11 +37,11 @@ public class ClayBasinBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin"), new ClayBasinBiome(0.2f, 0.125f, 2.8, 0.94).build());
-        LAKEBED = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_lakebed"), new ClayBasinBiome(0.2f, 0.125f, 1.2, 0.98, 8, 1).build());
-        WET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_wet"), new ClayBasinBiome(0.1f, 0.125f, 2.8, 0.94, 3, 10).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_hilly"), new ClayBasinBiome(0.4f, 0.5f, 4.2, 0.89).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "clay_basin_mountainous"), new ClayBasinBiome(0.75f, 0.8f, 7, 0.82).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "clay_basin"), new ClayBasinBiome(0.2f, 0.125f, 2.8, 0.94).build());
+        LAKEBED = EarlyBiomeRegistry.register(new Identifier("ecotones", "clay_basin_lakebed"), new ClayBasinBiome(0.2f, 0.125f, 1.2, 0.98, 8, 1).build());
+        WET = EarlyBiomeRegistry.register(new Identifier("ecotones", "clay_basin_wet"), new ClayBasinBiome(0.1f, 0.125f, 2.8, 0.94, 3, 10).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "clay_basin_hilly"), new ClayBasinBiome(0.4f, 0.5f, 4.2, 0.89).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "clay_basin_mountainous"), new ClayBasinBiome(0.75f, 0.8f, 7, 0.82).build());
 
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 4);
         BiomeRegistries.registerBiomeVariants(INSTANCE, LAKEBED, WET);

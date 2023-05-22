@@ -9,7 +9,6 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.tag.ItemTags;
 import supercoder79.ecotones.items.EcotonesItems;
 
 public class FertilizerSpreaderScreenHandler extends ScreenHandler {
@@ -66,7 +65,7 @@ public class FertilizerSpreaderScreenHandler extends ScreenHandler {
     }
 
     @Override
-    public ItemStack transferSlot(PlayerEntity player, int index) {
+    public ItemStack quickMove(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
 

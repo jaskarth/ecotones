@@ -2,7 +2,7 @@ package supercoder79.ecotones.world.features;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -71,11 +71,11 @@ public class PlaceWaterFeature extends EcotonesFeature<WaterFeatureConfig> {
 
                     if (config.surroundings.isPresent()) {
                         for (BlockPos replacement : toReplace) {
-                            world.setBlockState(replacement, config.surroundings.get().getBlockState(random, replacement), 3);
+                            world.setBlockState(replacement, config.surroundings.get().get(random, replacement), 3);
                         }
 
                         // Set state below
-                        world.setBlockState(mutable.down(), config.surroundings.get().getBlockState(random, mutable.down()), 3);
+                        world.setBlockState(mutable.down(), config.surroundings.get().get(random, mutable.down()), 3);
                     }
                 }
             }

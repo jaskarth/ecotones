@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.server.world.ServerChunkManager;
 import net.minecraft.server.world.ServerWorld;
@@ -19,10 +20,12 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
@@ -120,7 +123,7 @@ public class BlueberryBushBlock extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         return state.get(AGE) < 4;
     }
 
@@ -136,7 +139,7 @@ public class BlueberryBushBlock extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    public List<ItemStack> getDroppedStacks(BlockState state, LootContext.Builder builder) {
+    public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
         int baseCount = 1;
         int randomCount = 3;
 
@@ -144,10 +147,10 @@ public class BlueberryBushBlock extends PlantBlock implements Fertilizable {
         ChunkGenerator generator = world.getChunkManager().getChunkGenerator();
 
         if (generator instanceof EcotonesChunkGenerator) {
-            BlockPos pos = new BlockPos(builder.get(LootContextParameters.ORIGIN));
+            Vec3d vec = builder.get(LootContextParameters.ORIGIN);
 
-            double soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(pos.getX(), pos.getZ());
-            double soilPh = ((EcotonesChunkGenerator)generator).getSoilPhAt(pos.getX(), pos.getZ());
+            double soilQuality = ((EcotonesChunkGenerator)generator).getSoilQualityAt(vec.x, vec.z);
+            double soilPh = ((EcotonesChunkGenerator)generator).getSoilPhAt(vec.x, vec.z);
             baseCount = baseCount(soilQuality, soilPh);
             randomCount = randomCount(soilQuality, soilPh);
         }

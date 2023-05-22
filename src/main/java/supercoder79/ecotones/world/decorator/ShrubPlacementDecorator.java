@@ -74,12 +74,12 @@ public class ShrubPlacementDecorator extends PlacementModifier {
             int solidBase = 0;
             for (int x1 = -1; x1 <= 1; x1++) {
                 for (int z1 = -1; z1 <= 1; z1++) {
-                    if (context.getBlockState(new BlockPos(x + x1, y - 1, z + z1)).getMaterial().isSolid()) {
+                    if (context.getBlockState(new BlockPos(x + x1, y - 1, z + z1)).isSolid()) {
                         solidBase++;
                     }
 
                     for (int y1 = 0; y1 <= 1; y1++) {
-                        if (context.getBlockState(new BlockPos(x + x1, y + y1, z + z1)).getMaterial().isSolid()) {
+                        if (context.getBlockState(new BlockPos(x + x1, y + y1, z + z1)).isSolid()) {
                             solidAround++;
                         }
                     }

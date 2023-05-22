@@ -7,9 +7,8 @@ import net.minecraft.block.AbstractBlock.AbstractBlockState;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
@@ -76,10 +75,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends E
     }
 
     public static boolean isReplaceablePlant(TestableWorld world, BlockPos pos) {
-        return world.testBlockState(pos, (state) -> {
-            Material material = state.getMaterial();
-            return material == Material.REPLACEABLE_PLANT;
-        });
+        return world.testBlockState(pos, AbstractBlockState::isReplaceable);
     }
 
     protected void setToDirt(ModifiableTestableWorld world, BlockPos pos) {
@@ -93,7 +89,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends E
         if (!isAirOrLeaves(world, pos) && !isReplaceablePlant(world, pos) && !isWater(world, pos)) {
             return false;
         } else {
-            setBlockState(world, pos, config.trunkProvider.getBlockState(new CheckedRandom(random.nextLong()), pos), box);
+            setBlockState(world, pos, config.trunkProvider.get(new CheckedRandom(random.nextLong()), pos), box);
             trunkPositions.add(pos.toImmutable());
             return true;
         }
@@ -103,7 +99,7 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends E
         if (!isAirOrLeaves(world, pos) && !isReplaceablePlant(world, pos) && !isWater(world, pos)) {
             return false;
         } else {
-            setBlockState(world, pos, config.foliageProvider.getBlockState(new CheckedRandom(random.nextLong()), pos), box);
+            setBlockState(world, pos, config.foliageProvider.get(new CheckedRandom(random.nextLong()), pos), box);
             leavesPositions.add(pos.toImmutable());
             return true;
         }
@@ -159,11 +155,11 @@ public abstract class AbstractTreeFeature<T extends TreeFeatureConfig> extends E
 
     private void placeLogsAndLeaves(WorldAccess world, BlockBox box, Random random, Set<BlockPos> logs, Set<BlockPos> leaves, T config) {
         for (BlockPos log : logs) {
-            world.setBlockState(log, config.trunkProvider.getBlockState(new CheckedRandom(random.nextLong()), log), 3);
+            world.setBlockState(log, config.trunkProvider.get(new CheckedRandom(random.nextLong()), log), 3);
         }
 
         for (BlockPos leaf : leaves) {
-            BlockState leafState = config.foliageProvider.getBlockState(new CheckedRandom(random.nextLong()), leaf);
+            BlockState leafState = config.foliageProvider.get(new CheckedRandom(random.nextLong()), leaf);
 
             if (leafState.getProperties().contains(Properties.DISTANCE_1_7)) {
                 leafState = leafState.with(Properties.DISTANCE_1_7, 1);

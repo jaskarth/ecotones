@@ -4,14 +4,13 @@ import net.minecraft.block.Blocks;
 import net.minecraft.structure.PlainsVillageData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -38,9 +37,9 @@ public class PumpkinPatchBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "pumpkin_patch"), new PumpkinPatchBiome(0.5f, 0.075f, 1.6, 0.96).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "pumpkin_patch_hilly"), new PumpkinPatchBiome(1f, 0.5f, 3.2, 0.91).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "pumpkin_patch_mountainous"), new PumpkinPatchBiome(1.75f, 0.8f, 5.4, 0.84).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "pumpkin_patch"), new PumpkinPatchBiome(0.5f, 0.075f, 1.6, 0.96).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "pumpkin_patch_hilly"), new PumpkinPatchBiome(1f, 0.5f, 3.2, 0.91).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "pumpkin_patch_mountainous"), new PumpkinPatchBiome(1.75f, 0.8f, 5.4, 0.84).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.WARM_MODERATE.add(INSTANCE, 0.1);

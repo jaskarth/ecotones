@@ -2,6 +2,9 @@ package supercoder79.ecotones.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 
@@ -9,7 +12,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Language;
 import net.minecraft.util.Util;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.api.DevOnly;
 
@@ -36,7 +38,7 @@ public class TestTranslationKeysCommand {
     }
 
     private static int execute(ServerCommandSource source) {
-        Registry<Biome> registry = source.getRegistryManager().get(Registry.BIOME_KEY);
+        Registry<Biome> registry = source.getRegistryManager().get(RegistryKeys.BIOME);
 
         Set<String> set = new HashSet<>();
         int count = 0;
@@ -53,7 +55,7 @@ public class TestTranslationKeysCommand {
             }
         }
 
-        for (Identifier id : Registry.BLOCK.getIds()) {
+        for (Identifier id : Registries.BLOCK.getIds()) {
             if (id.getNamespace().equals("ecotones")) {
                 String key = Util.createTranslationKey("block", id);
 
@@ -64,7 +66,7 @@ public class TestTranslationKeysCommand {
             }
         }
 
-        for (Identifier id : Registry.ITEM.getIds()) {
+        for (Identifier id : Registries.ITEM.getIds()) {
             if (id.getNamespace().equals("ecotones")) {
                 String key = Util.createTranslationKey("item", id);
 
@@ -75,16 +77,17 @@ public class TestTranslationKeysCommand {
             }
         }
 
-        source.sendFeedback(Text.literal("Found " + count + " missing translation keys."), false);
+        int finalCount = count;
+        source.sendFeedback(() -> Text.literal("Found " + finalCount + " missing translation keys."), false);
         if (count == 0) {
             // Congratulating myself :)
-            source.sendFeedback(Text.literal("Nice job!"), false);
+            source.sendFeedback(() -> Text.literal("Nice job!"), false);
             return 0;
         }
 
         try {
             Path path = Paths.get("translations.txt");
-            source.sendFeedback(Text.literal("Dumping them to " + path.toAbsolutePath()), false);
+            source.sendFeedback(() -> Text.literal("Dumping them to " + path.toAbsolutePath()), false);
             File file = new File(path.toString());
             FileWriter writer = new FileWriter(file);
 

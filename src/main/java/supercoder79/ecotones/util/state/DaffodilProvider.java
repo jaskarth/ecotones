@@ -2,11 +2,11 @@ package supercoder79.ecotones.util.state;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
+import net.minecraft.registry.Registries;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.BlockStateProviderType;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
@@ -23,8 +23,8 @@ public class DaffodilProvider extends BlockStateProvider {
     }
 
     @Override
-    public BlockState getBlockState(Random random, BlockPos pos) {
-        return Registry.BLOCK.get(id("daffodil"))
+    public BlockState get(Random random, BlockPos pos) {
+        return Registries.BLOCK.get(id("daffodil"))
                 .getDefaultState()
                 .with(Properties.HORIZONTAL_FACING, FeatureHelper.randomHorizontal(new java.util.Random(random.nextLong())));
     }

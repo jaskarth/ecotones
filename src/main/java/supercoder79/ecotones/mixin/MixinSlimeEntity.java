@@ -5,7 +5,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;

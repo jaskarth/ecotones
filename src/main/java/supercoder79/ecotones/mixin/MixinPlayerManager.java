@@ -20,14 +20,14 @@ public class MixinPlayerManager {
     @Inject(method = "onPlayerConnect", at = @At("TAIL"))
     private void handlePlayerConnection(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) {
         PacketByteBuf data = new PacketByteBuf(Unpooled.buffer());
-        data.writeBoolean(player.getWorld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator);
-        data.writeLong(Hashing.sha256().hashLong(player.getWorld().getSeed()).asLong());
+        data.writeBoolean(player.getServerWorld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator);
+        data.writeLong(Hashing.sha256().hashLong(player.getServerWorld().getSeed()).asLong());
         data.writeBoolean(player.server.isDedicated()); // hacks hacks hacks
 
         ServerPlayNetworking.send(player, Ecotones.WORLD_TYPE, data);
 
         // Handle advancement
-        if (player.getWorld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator) {
+        if (player.getServerWorld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator) {
             EcotonesCriteria.ENTER_ECOTONES_WORLD.trigger(player);
         }
     }

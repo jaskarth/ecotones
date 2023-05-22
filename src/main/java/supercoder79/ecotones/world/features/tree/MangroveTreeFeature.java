@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -99,11 +99,13 @@ public class MangroveTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
     private void root(WorldAccess world, BlockPos startPos, Random random, float yaw, float pitch, TreeGenerationConfig config) {
         BlockPos local = startPos;
         int i = 0;
-        while (world.getBlockState(local).isAir() || world.getBlockState(local).getFluidState().isIn(FluidTags.WATER) || world.getBlockState(local) == config.woodState || world.getBlockState(local).getMaterial().isReplaceable()) {
+        while (world.getBlockState(local).isAir() || world.getBlockState(local).getFluidState().isIn(FluidTags.WATER) || world.getBlockState(local) == config.woodState || world.getBlockState(local).isReplaceable()) {
             local = startPos.add(
+                    BlockPos.ofFloored(
                     MathHelper.sin(pitch) * MathHelper.cos(yaw) * i,
                     MathHelper.cos(pitch) * i,
-                    MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
+                    MathHelper.sin(pitch) * MathHelper.sin(yaw) * i)
+            );
             i++;
             if (i > 25) break;
 
@@ -117,9 +119,11 @@ public class MangroveTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
         boolean hasModified = false;
         for (int i = 0; i < maxHeight; i++) {
             BlockPos local = startPos.add(
-                    MathHelper.sin(pitch) * MathHelper.cos(yaw) * i,
-                    MathHelper.cos(pitch) * i,
-                    MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
+                    BlockPos.ofFloored(
+                            MathHelper.sin(pitch) * MathHelper.cos(yaw) * i,
+                            MathHelper.cos(pitch) * i,
+                            MathHelper.sin(pitch) * MathHelper.sin(yaw) * i)
+            );
 
             //if the tree hits a solid block, stop
             if (TreeHelper.canLogReplace(world, local)) {

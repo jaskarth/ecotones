@@ -6,7 +6,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -41,9 +41,9 @@ public class MixinHeldItemRenderer {
             i = 1.0F - (float)Math.pow((double)g, exponent);
             int j = arm == Arm.RIGHT ? 1 : -1;
             matrices.translate((double)(i * 0.6F * (float)j), (double)(i * -0.5F), (double)(i * 0.0F));
-            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((float)j * i * 90.0F));
-            matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(i * 10.0F));
-            matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion((float)j * i * 30.0F));
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float)j * i * 90.0F));
+            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(i * 10.0F));
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float)j * i * 30.0F));
 
             ci.cancel();
         }

@@ -5,8 +5,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -14,6 +12,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -37,9 +36,9 @@ public class RockySlopesBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_slopes"), new RockySlopesBiome(0.8F, 0.225F, 7, 0.935).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_slopes_hilly"), new RockySlopesBiome(1.85F, 0.375F, 9, 0.85).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_slopes_mountainous"), new RockySlopesBiome(2.5F, 0.625F, 10, 0.8).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_slopes"), new RockySlopesBiome(0.8F, 0.225F, 7, 0.935).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_slopes_hilly"), new RockySlopesBiome(1.85F, 0.375F, 9, 0.85).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_slopes_mountainous"), new RockySlopesBiome(2.5F, 0.625F, 10, 0.8).build());
 
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_VERY_HUMID.add(INSTANCE, 0.2);

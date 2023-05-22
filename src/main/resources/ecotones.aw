@@ -9,7 +9,7 @@ accessible method net/minecraft/client/render/RenderLayer of (Ljava/lang/String;
 
 # accessible field net/minecraft/world/gen/decorator/DecoratorContext generator Lnet/minecraft/world/gen/chunk/ChunkGenerator;
 # accessible field net/minecraft/world/biome/BuiltinBiomes BY_RAW_ID Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
-accessible field net/minecraft/client/render/RenderPhase POSITION_COLOR_TEXTURE_SHADER Lnet/minecraft/client/render/RenderPhase$Shader;
+# accessible field net/minecraft/client/render/RenderPhase POSITION_COLOR_TEXTURE_SHADER Lnet/minecraft/client/render/RenderPhase$Shader;
 
 accessible field net/minecraft/client/gui/screen/advancement/AdvancementTab initialized Z
 accessible field net/minecraft/client/gui/screen/advancement/AdvancementTab minPanX I
@@ -22,6 +22,7 @@ accessible field net/minecraft/client/gui/screen/advancement/AdvancementTab disp
 accessible field net/minecraft/client/gui/screen/advancement/AdvancementTab rootWidget Lnet/minecraft/client/gui/screen/advancement/AdvancementWidget;
 accessible field net/minecraft/client/gui/screen/advancement/AdvancementWidget parent Lnet/minecraft/client/gui/screen/advancement/AdvancementWidget;
 accessible field net/minecraft/client/gui/screen/advancement/AdvancementWidget children Ljava/util/List;
+accessible class net/minecraft/server/dedicated/ServerPropertiesHandler$WorldGenProperties
 
 # accessible    method    net/minecraft/world/biome/source/BiomeSource    method_39525    (Ljava/util/List;Z)Ljava/util/List;
 # extendable    method    net/minecraft/world/biome/source/BiomeSource    method_39525    (Ljava/util/List;Z)Ljava/util/List;

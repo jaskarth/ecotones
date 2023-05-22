@@ -3,14 +3,13 @@ package supercoder79.ecotones.world.biome.climatic;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.SavannaVillageData;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.river.deco.CommonRiverDecorations;
@@ -33,10 +32,10 @@ public class DrySteppeBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dry_steppe"), new DrySteppeBiome(0.5F, 0.025F, 3, 0.96).build());
-        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dry_steppe_thicket"), new DrySteppeBiome(0.5F, 0.025F, 3, 0.96, 6.4).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dry_steppe_hilly"), new DrySteppeBiome(1.25F, 0.125F, 6, 0.87).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dry_steppe_mountainous"), new DrySteppeBiome(2F, 0.325F, 8, 0.82).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "dry_steppe"), new DrySteppeBiome(0.5F, 0.025F, 3, 0.96).build());
+        THICKET = EarlyBiomeRegistry.register(new Identifier("ecotones", "dry_steppe_thicket"), new DrySteppeBiome(0.5F, 0.025F, 3, 0.96, 6.4).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "dry_steppe_hilly"), new DrySteppeBiome(1.25F, 0.125F, 6, 0.87).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "dry_steppe_mountainous"), new DrySteppeBiome(2F, 0.325F, 8, 0.82).build());
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 4);
         BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, THICKET);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);

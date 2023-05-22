@@ -3,8 +3,6 @@ package supercoder79.ecotones.world.biome.climatic;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -12,6 +10,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -41,12 +40,12 @@ public class RockyMountainBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_foothills"), new RockyMountainBiome(0.75f, 0.275f, 6.0, 0.86).build());
-        PLATEAU = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_foothills_plateau"), new RockyMountainBiome(1.5f, 0.05f, 3.0, 0.96).build());
-        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_foothills_thicket"), new RockyMountainBiome(0.75f, 0.225f, 4.0, 0.86, true).build());
-        LAKE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_foothills_lake"), new RockyMountainBiome(0.0f, 0.15f, 3.0, 0.92).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_hills"), new RockyMountainBiome(1f, 0.5f, 7.0, 0.84).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_mountains"), new RockyMountainBiome(1.75f, 0.8f, 8.0, 0.75).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_foothills"), new RockyMountainBiome(0.75f, 0.275f, 6.0, 0.86).build());
+        PLATEAU = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_foothills_plateau"), new RockyMountainBiome(1.5f, 0.05f, 3.0, 0.96).build());
+        THICKET = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_foothills_thicket"), new RockyMountainBiome(0.75f, 0.225f, 4.0, 0.86, true).build());
+        LAKE = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_foothills_lake"), new RockyMountainBiome(0.0f, 0.15f, 3.0, 0.92).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_hills"), new RockyMountainBiome(1f, 0.5f, 7.0, 0.84).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_mountains"), new RockyMountainBiome(1.75f, 0.8f, 8.0, 0.75).build());
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 4);
         BiomeRegistries.registerBiomeVariants(INSTANCE, PLATEAU, THICKET, LAKE);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);

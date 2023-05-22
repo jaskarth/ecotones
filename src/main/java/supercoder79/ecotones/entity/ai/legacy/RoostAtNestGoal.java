@@ -51,11 +51,11 @@ public class RoostAtNestGoal extends Goal {
             }
 
             if (this.roostTicks < this.halfTick && this.mob.shouldLayEgg() && !this.checkedEgg) {
-                BlockState state = this.mob.world.getBlockState(this.nestPos);
+                BlockState state = this.mob.getWorld().getBlockState(this.nestPos);
 
                 if (state.isOf(EcotonesBlocks.NEST) && state.get(NestBlock.EGGS) < 3) {
                     int newEggCount = state.get(NestBlock.EGGS) + 1;
-                    this.mob.world.setBlockState(this.nestPos, state.with(NestBlock.EGGS, newEggCount));
+                    this.mob.getWorld().setBlockState(this.nestPos, state.with(NestBlock.EGGS, newEggCount));
                     this.mob.useEnergyPoints(5.0);
                     this.mob.resetEggTimer();
                     AiLog.log(this.mob, "Laying egg at " + this.nestPos + " which now has " + newEggCount + " eggs in it");
@@ -90,7 +90,7 @@ public class RoostAtNestGoal extends Goal {
         }
 
         AiLog.log(this.mob, "Attempting find nest");
-        BlockPos nestPos = locateNest(this.mob.world, 16, 6);
+        BlockPos nestPos = locateNest(this.mob.getWorld(), 16, 6);
         if (nestPos == null) {
             return false;
         }

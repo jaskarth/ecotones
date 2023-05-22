@@ -1,6 +1,7 @@
 package supercoder79.ecotones.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -30,53 +31,49 @@ public class GrindstoneScreen extends HandledScreen<GrindstoneScreenHandler> {
     }
 
     @Override
-    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-
+    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         // Draw gui
         int x = (this.width - this.backgroundWidth) / 2;
         int y = (this.height - this.backgroundHeight) / 2;
-        this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        context.drawTexture(TEXTURE, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
         int progress = this.handler.getProgress();
 
         // Draw progress bar
         int percent = (int)(30 * ((double)progress / 200.0));
         if (percent > 0) {
-            this.drawTexture(matrices, x + 89, y + 30, 176, 14, 14, percent + 1);
+            context.drawTexture(TEXTURE, x + 89, y + 30, 176, 14, 14, percent + 1);
         }
 
         // Draw fire
         if (this.handler.getBurnTimeMax() > 0) {
             int burnTime = this.handler.getBurnTime();
             int scaledBurnTime = (burnTime * 14) / this.handler.getBurnTimeMax();
-            this.drawTexture(matrices, x + 152, y + 57 + (13 - scaledBurnTime), 176, 13 - scaledBurnTime, 14, scaledBurnTime + 1);
+            context.drawTexture(TEXTURE, x + 152, y + 57 + (13 - scaledBurnTime), 176, 13 - scaledBurnTime, 14, scaledBurnTime + 1);
         }
 
         // TODO: ghost textures
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
-        this.drawMouseoverTooltip(matrices, mouseX, mouseY);
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.renderBackground(context);
+        super.render(context, mouseX, mouseY, delta);
+        this.drawMouseoverTooltip(context, mouseX, mouseY);
     }
 
     @Override
-    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
-        super.drawForeground(matrices, mouseX, mouseY);
+    protected void drawForeground(DrawContext context, int mouseX, int mouseY) {
+        super.drawForeground(context, mouseX, mouseY);
 
         // TODO: move these to a custom 9patch so the bubble is dynamic
 
         if (this.handler.getMainChance() > 0) {
-            this.textRenderer.draw(matrices, this.handler.getMainChance() + "%", 102, 67 - 7, 4210752);
+            context.drawTextWithShadow(this.textRenderer, this.handler.getMainChance() + "%", 102, 67 - 7, 4210752);
         }
 
         if (this.handler.getAltChance() > 0) {
-            this.textRenderer.draw(matrices, this.handler.getAltChance() + "%", 25, 54 - 7, 4210752);
+            context.drawTextWithShadow(this.textRenderer, this.handler.getAltChance() + "%", 25, 54 - 7, 4210752);
         }
     }
 }

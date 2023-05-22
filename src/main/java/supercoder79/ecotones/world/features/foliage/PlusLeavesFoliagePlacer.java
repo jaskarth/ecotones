@@ -31,14 +31,14 @@ public class PlusLeavesFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
+    protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
         BlockPos pos = treeNode.getCenter();
         BlockPos.Mutable mutable = pos.mutableCopy();
 
         for (Direction direction : Direction.values()) {
             mutable.set(pos).move(direction);
             if (TreeFeature.canReplace(world, mutable)) {
-                placeFoliageBlock(world, replacer, random, config, mutable);
+                placeFoliageBlock(world, placer, random, config, mutable);
             }
         }
     }

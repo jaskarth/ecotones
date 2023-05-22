@@ -28,12 +28,12 @@ public class GetDataAtCommand {
             double x = source.getPosition().x;
             double z = source.getPosition().z;
 
-            source.sendFeedback(Text.literal("Soil Drainage: " + chunkGenerator.getSoilDrainageNoise().sample(x, z)), false);
-            source.sendFeedback(Text.literal("Soil Rockiness: " + chunkGenerator.getSoilRockinessNoise().sample(x, z)), false);
-            source.sendFeedback(Text.literal("Soil Quality: " + chunkGenerator.getSoilQualityAt(x, z)), false);
-            source.sendFeedback(Text.literal("Soil pH: " + chunkGenerator.getSoilPhAt(x, z)), false);
+            source.sendMessage(Text.literal("Soil Drainage: " + chunkGenerator.getSoilDrainageNoise().sample(x, z)));
+            source.sendMessage(Text.literal("Soil Rockiness: " + chunkGenerator.getSoilRockinessNoise().sample(x, z)));
+            source.sendMessage(Text.literal("Soil Quality: " + chunkGenerator.getSoilQualityAt(x, z)));
+            source.sendMessage(Text.literal("Soil pH: " + chunkGenerator.getSoilPhAt(x, z)));
         } else {
-            source.sendFeedback(Text.literal("This only works on ecotones worlds."), false);
+            source.sendMessage(Text.literal("This only works on ecotones worlds."));
         }
 
         return 1;

@@ -1,12 +1,10 @@
 package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -16,6 +14,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -40,9 +39,9 @@ public class GraniteSpringsBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "granite_springs"), new GraniteSpringsBiome(0.5f, 0.075f, 4.0, 0.94).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "granite_springs_hilly"), new GraniteSpringsBiome(1f, 0.25f, 6.0, 0.90).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "granite_springs_mountainous"), new GraniteSpringsBiome(1.75f, 0.5f, 7.0, 0.82).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "granite_springs"), new GraniteSpringsBiome(0.5f, 0.075f, 4.0, 0.94).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "granite_springs_hilly"), new GraniteSpringsBiome(1f, 0.25f, 6.0, 0.90).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "granite_springs_mountainous"), new GraniteSpringsBiome(1.75f, 0.5f, 7.0, 0.82).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_MILD.add(INSTANCE, 0.2);
         Climate.WARM_MODERATE.add(INSTANCE, 0.2);

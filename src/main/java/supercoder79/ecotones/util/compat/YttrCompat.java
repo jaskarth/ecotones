@@ -1,11 +1,12 @@
 package supercoder79.ecotones.util.compat;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -25,15 +26,15 @@ public class YttrCompat {
     }
 
     private static RegistryKey<Biome> key(String path) {
-        return RegistryKey.of(Registry.BIOME_KEY, id(path));
+        return RegistryKey.of(RegistryKeys.BIOME, id(path));
     }
 
     public static void associateGenData() {
         BiomeGenData.LOOKUP.put(key("wasteland"), new BiomeGenData( 0.2, 0.15, 0.95, 2.4,
                 new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, new ForwardSurfaceConfig(
-                        () -> Registry.BLOCK.get(id("wasteland_dirt")).getDefaultState(),
-                        () -> Registry.BLOCK.get(id("wasteland_dirt")).getDefaultState(),
-                        () -> Registry.BLOCK.get(id("wasteland_dirt")).getDefaultState()
+                        () -> Registries.BLOCK.get(id("wasteland_dirt")).getDefaultState(),
+                        () -> Registries.BLOCK.get(id("wasteland_dirt")).getDefaultState(),
+                        () -> Registries.BLOCK.get(id("wasteland_dirt")).getDefaultState()
                 ))));
 
     }
@@ -43,7 +44,7 @@ public class YttrCompat {
     }
 
     private static BlockState getY(String name) {
-        return Registry.BLOCK.get(new Identifier("yttr", name)).getDefaultState();
+        return Registries.BLOCK.get(new Identifier("yttr", name)).getDefaultState();
     }
 
     public static void init() {

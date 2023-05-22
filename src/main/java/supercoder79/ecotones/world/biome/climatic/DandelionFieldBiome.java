@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -13,6 +11,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.structure.EcotonesStructures;
@@ -36,9 +35,9 @@ public class DandelionFieldBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dandelion_field"), new DandelionFieldBiome(0.35f, 0.15f, 4.2, 0.92).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dandelion_field_hilly"), new DandelionFieldBiome(0.65f, 0.25f, 4.8, 0.90).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dandelion_field_mountainous"), new DandelionFieldBiome(1.15f, 0.9f, 5.2, 0.86).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "dandelion_field"), new DandelionFieldBiome(0.35f, 0.15f, 4.2, 0.92).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "dandelion_field_hilly"), new DandelionFieldBiome(0.65f, 0.25f, 4.8, 0.90).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "dandelion_field_mountainous"), new DandelionFieldBiome(1.15f, 0.9f, 5.2, 0.86).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_HUMID.add(INSTANCE, 0.1);
         Climate.WARM_MILD.add(INSTANCE, 0.1);

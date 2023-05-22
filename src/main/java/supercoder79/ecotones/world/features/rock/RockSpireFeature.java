@@ -82,7 +82,7 @@ public class RockSpireFeature extends EcotonesFeature<RockSpireFeatureConfig> {
                     if (current.get(idx) && dx * dx + dz * dz <= radx + noise) {
                         mutable.set(pos, x, y, z);
 
-                        world.setBlockState(mutable, config.provider.getBlockState(random, mutable), 3);
+                        world.setBlockState(mutable, config.provider.get(random, mutable), 3);
                         next.set(idx);
                     }
                 }

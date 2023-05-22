@@ -4,8 +4,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -18,6 +16,7 @@ import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
@@ -53,10 +52,10 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
         .ignoreVines().build();
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hazel_grove"), new HazelGroveBiome(false, false).build());
-        CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hazel_grove_clearing"), new HazelGroveBiome(true, false).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hazel_grove_hilly"), new HazelGroveBiome(false, true).build());
-        HILLY_CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hazel_grove_hilly_clearing"), new HazelGroveBiome(true, true).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "hazel_grove"), new HazelGroveBiome(false, false).build());
+        CLEARING = EarlyBiomeRegistry.register(new Identifier("ecotones", "hazel_grove_clearing"), new HazelGroveBiome(true, false).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "hazel_grove_hilly"), new HazelGroveBiome(false, true).build());
+        HILLY_CLEARING = EarlyBiomeRegistry.register(new Identifier("ecotones", "hazel_grove_hilly_clearing"), new HazelGroveBiome(true, true).build());
         Climate.HOT_VERY_HUMID.add(INSTANCE, 0.1);
         Climate.HOT_HUMID.add(INSTANCE, 0.1);
     }

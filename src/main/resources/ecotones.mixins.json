@@ -10,6 +10,7 @@
     "FoliagePlacerTypeAccessor",
     "MixinBiome",
     "MixinBiomeSelectors",
+    "MixinBuiltinBiomes",
     "MixinCarver",
     "MixinChunk",
     "MixinChunkGenerator",

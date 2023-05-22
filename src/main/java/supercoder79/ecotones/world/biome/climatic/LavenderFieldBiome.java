@@ -5,8 +5,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -21,6 +19,7 @@ import supercoder79.ecotones.util.compat.FloralisiaCompat;
 import supercoder79.ecotones.util.state.DeferredBlockStateProvider;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.biome.BiomeHelper;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
@@ -39,12 +38,12 @@ public class LavenderFieldBiome extends EcotonesBiomeBuilder {
     public static Biome MONTANE;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lavender_field"), new LavenderFieldBiome(0.5f, 0.1f, 4.2, 0.92).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lavender_field_hilly"), new LavenderFieldBiome(0.9f, 0.175f, 5.4, 0.90).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lavender_field_mountainous"), new LavenderFieldBiome(1.45f, 0.9f, 5.8, 0.86).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "lavender_field"), new LavenderFieldBiome(0.5f, 0.1f, 4.2, 0.92).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "lavender_field_hilly"), new LavenderFieldBiome(0.9f, 0.175f, 5.4, 0.90).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "lavender_field_mountainous"), new LavenderFieldBiome(1.45f, 0.9f, 5.8, 0.86).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
-        MONTANE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "montane_lavender_field"), new LavenderFieldBiome(4.5f, 0.1f, 2.2, 0.92).build());
+        MONTANE = EarlyBiomeRegistry.register(new Identifier("ecotones", "montane_lavender_field"), new LavenderFieldBiome(4.5f, 0.1f, 2.2, 0.92).build());
         BiomeRegistries.addMountainBiome(MONTANE);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_PLAINS, MONTANE);
 

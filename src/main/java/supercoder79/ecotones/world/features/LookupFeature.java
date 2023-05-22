@@ -3,9 +3,9 @@ package supercoder79.ecotones.world.features;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -27,7 +27,7 @@ public class LookupFeature extends EcotonesFeature<LookupFeature.Config> {
 
     @Override
     public boolean generate(FeatureContext<Config> context) {
-        PlacedFeature pf = context.getWorld().getServer().getRegistryManager().get(Registry.PLACED_FEATURE_KEY).get(new Identifier(context.getConfig().id()));
+        PlacedFeature pf = context.getWorld().getServer().getRegistryManager().get(RegistryKeys.PLACED_FEATURE).get(new Identifier(context.getConfig().id()));
         PlacedFeature npf = new PlacedFeature(pf.feature(), pf.placementModifiers().stream().filter(m -> !(m instanceof BiomePlacementModifier)).toList());
 
         return npf.generateUnregistered(context.getWorld(), context.getGenerator(), context.getRandom(), context.getOrigin());

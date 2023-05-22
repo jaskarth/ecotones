@@ -1,11 +1,5 @@
 package supercoder79.ecotones.mixin;
 
-import com.google.common.base.MoreObjects;
-import net.minecraft.server.dedicated.ServerPropertiesHandler;
-import net.minecraft.structure.StructureSet;
-import net.minecraft.util.registry.DynamicRegistryManager;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.SimpleRegistry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.dimension.DimensionType;
@@ -35,10 +29,10 @@ public abstract class MixinGeneratorOptions {
         return null;
     }
 
-    @Shadow
-    public static Registry<DimensionOptions> getRegistryWithReplacedOverworldGenerator(Registry<DimensionType> dimensionTypeRegistry, Registry<DimensionOptions> options, ChunkGenerator overworldGenerator) {
-        return null;
-    }
+//    @Shadow
+//    public static Registry<DimensionOptions> getRegistryWithReplacedOverworldGenerator(Registry<DimensionType> dimensionTypeRegistry, Registry<DimensionOptions> options, ChunkGenerator overworldGenerator) {
+//        return null;
+//    }
 
 //    @Inject(method = "fromProperties", at = @At("HEAD"), cancellable = true)
 //    private static void injectEcotones(DynamicRegistryManager registryManager, ServerPropertiesHandler.WorldGenProperties properties, CallbackInfoReturnable<GeneratorOptions> cir) {

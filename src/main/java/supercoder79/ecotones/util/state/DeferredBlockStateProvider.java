@@ -34,7 +34,7 @@ public class DeferredBlockStateProvider extends BlockStateProvider {
     }
 
     @Override
-    public BlockState getBlockState(Random random, BlockPos pos) {
+    public BlockState get(Random random, BlockPos pos) {
         if (this.cache == null) {
             this.cache = this.supplier.get();
         }

@@ -6,8 +6,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -26,6 +24,7 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.biome.BiomeHelper;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -53,7 +52,7 @@ public class TropicalBeachBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_beach"), new TropicalBeachBiome().build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_beach"), new TropicalBeachBiome().build());
 
         BiomeRegistries.registerBeach(INSTANCE);
     }

@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -11,6 +9,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
@@ -34,9 +33,9 @@ public class LarchForestBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "larch_forest"), new LarchForestBiome(0.05f, 0.075f, 2.0, 0.94).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "larch_forest_hilly"), new LarchForestBiome(0.3f, 0.25f, 4.0, 0.90).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "larch_forest_mountainous"), new LarchForestBiome(0.95f, 0.5f, 6.0, 0.82).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "larch_forest"), new LarchForestBiome(0.05f, 0.075f, 2.0, 0.94).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "larch_forest_hilly"), new LarchForestBiome(0.3f, 0.25f, 4.0, 0.90).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "larch_forest_mountainous"), new LarchForestBiome(0.95f, 0.5f, 6.0, 0.82).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_MILD.add(INSTANCE, 0.1);
         Climate.WARM_HUMID.add(INSTANCE, 0.2);

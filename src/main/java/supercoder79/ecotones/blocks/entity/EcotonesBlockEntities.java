@@ -2,7 +2,8 @@ package supercoder79.ecotones.blocks.entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.blocks.ExcursionFunnelBlock;
@@ -25,7 +26,7 @@ public final class EcotonesBlockEntities {
     }
 
     private static void register(String path, BlockEntityType<?> be) {
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, Ecotones.id(path), be);
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, Ecotones.id(path), be);
         RegistryReport.increment("Block Entity");
     }
 }

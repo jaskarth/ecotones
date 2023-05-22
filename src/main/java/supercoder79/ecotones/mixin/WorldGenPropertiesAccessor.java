@@ -1,7 +1,7 @@
 package supercoder79.ecotones.mixin;
 
 import net.minecraft.server.dedicated.ServerPropertiesHandler;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.gen.WorldPreset;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;

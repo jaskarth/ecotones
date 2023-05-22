@@ -1,17 +1,15 @@
 package supercoder79.ecotones.world.biome.base.hot;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.structure.SavannaVillageData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -33,9 +31,9 @@ public class LushSavannaBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_savanna"), new LushSavannaBiome(0.5f, 0.125f, 1.8, 0.94).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_savanna_hilly"), new LushSavannaBiome(1f, 0.35f, 4.2, 0.88).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_savanna_mountainous"), new LushSavannaBiome(1.75f, 0.6f, 7, 0.82).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_savanna"), new LushSavannaBiome(0.5f, 0.125f, 1.8, 0.94).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_savanna_hilly"), new LushSavannaBiome(1f, 0.35f, 4.2, 0.88).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_savanna_mountainous"), new LushSavannaBiome(1.75f, 0.6f, 7, 0.82).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.HOT_MILD.add(INSTANCE, 0.5);

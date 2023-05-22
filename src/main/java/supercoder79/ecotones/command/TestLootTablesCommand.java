@@ -4,12 +4,12 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.block.Block;
 import net.minecraft.loot.LootTable;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.api.DevOnly;
 
 @DevOnly
@@ -26,17 +26,17 @@ public class TestLootTablesCommand {
     }
 
     private static int execute(ServerCommandSource source) {
-        for (Block block : Registry.BLOCK) {
-            Identifier id = Registry.BLOCK.getId(block);
+        for (Block block : Registries.BLOCK) {
+            Identifier id = Registries.BLOCK.getId(block);
 
             if (id.getNamespace().equals("ecotones")) {
-                if (source.getServer().getLootManager().getTable(block.getLootTableId()) == LootTable.EMPTY) {
+                if (source.getServer().getLootManager().getLootTable(block.getLootTableId()) == LootTable.EMPTY) {
                     System.out.println("Block [" + id + "] has no loot table ");
                 }
             }
         }
 
-        source.sendFeedback(Text.literal("Dumped blocks without loot tables, check the console"), true);
+        source.sendFeedback(() -> Text.literal("Dumped blocks without loot tables, check the console"), true);
 
         return 0;
     }

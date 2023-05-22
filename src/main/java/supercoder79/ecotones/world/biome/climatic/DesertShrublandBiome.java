@@ -6,8 +6,6 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.structure.DesertVillageData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -23,6 +21,7 @@ import supercoder79.ecotones.api.SimpleTreeDecorationData;
 import supercoder79.ecotones.util.compat.LambdaFoxesCompat;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
 import supercoder79.ecotones.world.biome.BiomeHelper;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.ShrubDecoratorConfig;
@@ -42,9 +41,9 @@ public class DesertShrublandBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "desert_shrubland"), new DesertShrublandBiome(0.4f, 0.1f, 2.4, 0.94).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "desert_shrubland_hilly"), new DesertShrublandBiome(0.7f, 0.2f, 4.2, 0.88).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "desert_shrubland_mountainous"), new DesertShrublandBiome(1.25f, 0.6f, 8, 0.86).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "desert_shrubland"), new DesertShrublandBiome(0.4f, 0.1f, 2.4, 0.94).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "desert_shrubland_hilly"), new DesertShrublandBiome(0.7f, 0.2f, 4.2, 0.88).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "desert_shrubland_mountainous"), new DesertShrublandBiome(1.25f, 0.6f, 8, 0.86).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_DESERT.add(INSTANCE, 0.3);
         Climate.WARM_DESERT.add(INSTANCE, 0.2);

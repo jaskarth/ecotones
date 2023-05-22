@@ -1,13 +1,14 @@
 package supercoder79.ecotones.api;
 
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.BuiltinRegistries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.structure.Structure;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.edge.EdgeDecorationCollector;
 import supercoder79.ecotones.world.edge.EdgeDecorator;
 import supercoder79.ecotones.world.layers.generation.MountainLayer;
@@ -39,6 +40,8 @@ public final class BiomeRegistries {
     public static final List<RegistryKey<Biome>> SLIME_SPAWN_BIOMES = new ArrayList<>();
     public static final Map<RegistryKey<Biome>, RiverDecorator> RIVER_DECORATORS = new HashMap<>();
     public static final Map<RegistryKey<Biome>, EdgeDecorator> EDGE_DECORATORS = new HashMap<>();
+    private static final Map<Biome, FeatureList> FEATURE_LISTS_PRE = new HashMap<>();
+    public static final Map<RegistryKey<Biome>, FeatureList> FEATURE_LISTS = new HashMap<>();
     public static final Map<RegistryEntry<Structure>, List<Biome>> STRUCTURE_TO_BIOME_LIST = new HashMap<>();
     public static final Map<TagKey<Biome>, List<Biome>> TAG_TO_BIOMES = new HashMap<>();
 
@@ -156,8 +159,16 @@ public final class BiomeRegistries {
         STRUCTURE_TO_BIOME_LIST.computeIfAbsent(s, k -> new ArrayList<>()).add(b);
     }
 
+    public static void registerFeatureList(Biome b, FeatureList list) {
+        FEATURE_LISTS_PRE.put(b, list);
+    }
+
+    public static void finalizeValues() {
+        FEATURE_LISTS_PRE.forEach((b, list) -> FEATURE_LISTS.put(key(b), list));
+    }
+
     public static RegistryKey<Biome> keyOrNull(Biome biome) {
-        Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
+        Optional<RegistryKey<Biome>> optional = EarlyBiomeRegistry.get(biome);
 
         if (optional.isEmpty()) {
             if (Ecotones.REGISTRY == null) {

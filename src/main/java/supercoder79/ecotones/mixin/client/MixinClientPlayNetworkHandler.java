@@ -8,7 +8,8 @@ import net.minecraft.network.NetworkThreadUtils;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.GameJoinS2CPacket;
 import net.minecraft.network.packet.s2c.play.OpenWrittenBookS2CPacket;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,7 +38,7 @@ public abstract class MixinClientPlayNetworkHandler implements ClientPlayPacketL
     @Inject(method = "onGameJoin", at = @At("RETURN"))
     private void handleGameJoinEcotones(GameJoinS2CPacket packet, CallbackInfo ci) {
         if (ClientRegistrySyncState.state == ClientRegistrySyncState.State.WAITING) {
-            Ecotones.REGISTRY = MinecraftClient.getInstance().world.getRegistryManager().get(Registry.BIOME_KEY);
+            Ecotones.REGISTRY = MinecraftClient.getInstance().world.getRegistryManager().get(RegistryKeys.BIOME);
             ClientRegistrySyncState.state = ClientRegistrySyncState.State.SYNCED;
         }
     }

@@ -1,25 +1,21 @@
 package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
-import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
-import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
 import supercoder79.ecotones.api.SimpleTreeDecorationData;
-import supercoder79.ecotones.blocks.EcotonesBlocks;
 import supercoder79.ecotones.world.biome.BiomeHelper;
 import supercoder79.ecotones.world.biome.EcotonesBiomeBuilder;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
@@ -31,11 +27,11 @@ import supercoder79.ecotones.world.features.config.*;
 
 public class SparseTundraBiome extends EcotonesBiomeBuilder {
     // TODO: fix this!
-    public static RegistryKey<Biome> KEY = RegistryKey.of(Registry.BIOME_KEY, new Identifier("ecotones", "sparse_tundra"));
+    public static RegistryKey<Biome> KEY = RegistryKey.of(RegistryKeys.BIOME, new Identifier("ecotones", "sparse_tundra"));
     public static Biome INSTANCE;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sparse_tundra"), new SparseTundraBiome(0.3f, 0.155f, 2.4, 0.96).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_tundra"), new SparseTundraBiome(0.3f, 0.155f, 2.4, 0.96).build());
         Climate.WARM_MILD.add(INSTANCE, 0.2);
         Climate.WARM_HUMID.add(INSTANCE, 0.2);
     }

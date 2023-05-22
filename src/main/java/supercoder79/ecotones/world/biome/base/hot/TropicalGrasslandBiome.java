@@ -4,14 +4,13 @@ import net.minecraft.block.Blocks;
 import net.minecraft.structure.SavannaVillageData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.*;
@@ -33,11 +32,11 @@ public class TropicalGrasslandBiome extends EcotonesBiomeBuilder {
     public static Biome MONTANE;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_grassland"), new TropicalGrasslandBiome(0.5f, 0.15f, 1.8, 0.88).build());
-        SHRUBS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_grassland_shrubs"), new TropicalGrasslandBiome(0.5f, 0.15f, 1.8, 0.88, 2.8, 0.4).build());
-        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_grassland_thicket"), new TropicalGrasslandBiome(0.5f, 0.075f, 1.8, 0.88, 1.4, 2.6).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_grassland_hilly"), new TropicalGrasslandBiome(1f, 0.5f, 4.2, 0.83).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_grassland_mountainous"), new TropicalGrasslandBiome(1.75f, 0.8f, 7, 0.75).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_grassland"), new TropicalGrasslandBiome(0.5f, 0.15f, 1.8, 0.88).build());
+        SHRUBS = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_grassland_shrubs"), new TropicalGrasslandBiome(0.5f, 0.15f, 1.8, 0.88, 2.8, 0.4).build());
+        THICKET = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_grassland_thicket"), new TropicalGrasslandBiome(0.5f, 0.075f, 1.8, 0.88, 1.4, 2.6).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_grassland_hilly"), new TropicalGrasslandBiome(1f, 0.5f, 4.2, 0.83).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_grassland_mountainous"), new TropicalGrasslandBiome(1.75f, 0.8f, 7, 0.75).build());
 
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
@@ -45,7 +44,7 @@ public class TropicalGrasslandBiome extends EcotonesBiomeBuilder {
 
         Climate.HOT_MODERATE.add(INSTANCE, 1);
 
-        MONTANE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "montane_tropical_grassland"), new TropicalGrasslandBiome(4.5f, 0.15f, 1.8, 0.97, 1.4, 0.1).build());
+        MONTANE = EarlyBiomeRegistry.register(new Identifier("ecotones", "montane_tropical_grassland"), new TropicalGrasslandBiome(4.5f, 0.15f, 1.8, 0.97, 1.4, 0.1).build());
         BiomeRegistries.addMountainBiome(MONTANE);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_PLAINS, MONTANE);
 

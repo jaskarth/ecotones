@@ -2,9 +2,9 @@ package supercoder79.ecotones.world.features.tree;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -68,7 +68,7 @@ public class DeadTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
 					double randomTheta = (double) (random.nextFloat() * 2.0F) * Math.PI;
 					double localX = branchDirection * Math.sin(randomTheta) + 0.5D;
 					double localZ = branchDirection * Math.cos(randomTheta) + 0.5D;
-					BlockPos local = pos.add(localX, (yProgress - 1), localZ);
+					BlockPos local = pos.add((int) localX, (yProgress - 1), (int) localZ);
 					BlockPos upperLocal = local.up(5);
 
 					if (this.tryMakeBranch(world, random, local, upperLocal, false, config)) {
@@ -103,7 +103,7 @@ public class DeadTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
 			float sideZ = (float) blockPos.getZ() / (float) longestSide;
 
 			for (int side = 0; side <= longestSide; ++side) {
-				BlockPos currPos = start.add(0.5F + (float) side * sideX, 0.5F + (float) side * sideY, 0.5F + (float) side * sideZ);
+				BlockPos currPos = start.add((int) (0.5F + (float) side * sideX), (int) (0.5F + (float) side * sideY), (int) (0.5F + (float) side * sideZ));
 				if (make) {
 					world.setBlockState(currPos, config.woodState.with(PillarBlock.AXIS, this.getLogAxis(start, currPos)), 3);
 				} else if (!canReplace(world, currPos)) {
@@ -117,14 +117,11 @@ public class DeadTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
 	}
 
 	public static boolean canReplace(TestableWorld world, BlockPos pos) {
-		return TreeFeature.isAirOrLeaves(world, pos) || isReplaceablePlant(world, pos) || TreeFeature.isWater(world, pos);
+		return TreeFeature.isAirOrLeaves(world, pos) || isReplaceablePlant(world, pos);
 	}
 
 	private static boolean isReplaceablePlant(TestableWorld world, BlockPos pos) {
-		return world.testBlockState(pos, state -> {
-			Material material = state.getMaterial();
-			return material == Material.REPLACEABLE_PLANT || material == Material.REPLACEABLE_UNDERWATER_PLANT || material == Material.NETHER_SHOOTS;
-		});
+		return world.testBlockState(pos, AbstractBlock.AbstractBlockState::isReplaceable);
 	}
 
 	private float getHeightProgress(int trunkHeight, int y) {

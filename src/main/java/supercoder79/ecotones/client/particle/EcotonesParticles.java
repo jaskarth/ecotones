@@ -3,7 +3,8 @@ package supercoder79.ecotones.client.particle;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleType;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.util.RegistryReport;
 
@@ -23,7 +24,7 @@ public final class EcotonesParticles {
     }
 
     private static void register(String string, ParticleType<?> type) {
-        Registry.register(Registry.PARTICLE_TYPE, Ecotones.id(string), type);
+        Registry.register(Registries.PARTICLE_TYPE, Ecotones.id(string), type);
         RegistryReport.increment("Particle Type");
     }
 }

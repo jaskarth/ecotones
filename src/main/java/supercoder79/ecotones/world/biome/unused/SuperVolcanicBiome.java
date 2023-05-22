@@ -3,13 +3,14 @@ package supercoder79.ecotones.world.biome.unused;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -28,7 +29,7 @@ public class SuperVolcanicBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "supervolcanic_biome"), new SuperVolcanicBiome().build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "supervolcanic_biome"), new SuperVolcanicBiome().build());
         BiomeRegistries.registerSpecialBiome(INSTANCE, id -> true);
     }
 
@@ -62,19 +63,19 @@ public class SuperVolcanicBiome extends EcotonesBiomeBuilder {
                         .decorate(new Spread32Decorator()));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 12)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(new TagMatchRuleTest(BlockTags.BASE_STONE_OVERWORLD), Blocks.IRON_ORE.getDefaultState(), 12)))
                 .repeat(30)
                 .spreadHorizontally()
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(96)));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 12)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(new TagMatchRuleTest(BlockTags.BASE_STONE_OVERWORLD), Blocks.GOLD_ORE.getDefaultState(), 12)))
                 .repeat(6)
                 .spreadHorizontally()
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(48)));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.DIAMOND_ORE.getDefaultState(), 11)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(new TagMatchRuleTest(BlockTags.BASE_STONE_OVERWORLD), Blocks.DIAMOND_ORE.getDefaultState(), 11)))
                 .repeat(2)
                 .spreadHorizontally()
                 .uniformRange(YOffset.fixed(0), YOffset.fixed(24)));

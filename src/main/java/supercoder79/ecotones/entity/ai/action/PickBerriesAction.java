@@ -52,13 +52,13 @@ public class PickBerriesAction extends Action {
             return false;
         }
 
-        BlockPos target = AiHelper.locateBlock(this.mob.getBlockPos(), this.mob.world, 12, 6, PickBerriesAction::isValidBerries);
+        BlockPos target = AiHelper.locateBlock(this.mob.getBlockPos(), this.mob.getWorld(), 12, 6, PickBerriesAction::isValidBerries);
         if (target == null) {
             return false;
         }
 
         this.bushPos = target;
-        this.damagingBush = this.mob.world.getBlockState(target).isOf(Blocks.SWEET_BERRY_BUSH);
+        this.damagingBush = this.mob.getWorld().getBlockState(target).isOf(Blocks.SWEET_BERRY_BUSH);
         this.isAtBush = false;
         AiLog.log(this.mob, "Found berry bush at " + target + ". Moving there" + (this.damagingBush ? " and making sure to avoid it" : ""));
 
@@ -88,7 +88,7 @@ public class PickBerriesAction extends Action {
     public void tick(AiState state) {
         if (!this.isAtBush) {
             if (this.mob.getPos().squaredDistanceTo(this.bushPos.getX(), this.bushPos.getY(), this.bushPos.getZ()) <= 2.5) {
-                World world = this.mob.world;
+                World world = this.mob.getWorld();
                 if (this.damagingBush) {
                     int count = 1 + this.mob.getRandom().nextInt(2);
                     Block.dropStack(world, this.bushPos, new ItemStack(Items.SWEET_BERRIES, count));

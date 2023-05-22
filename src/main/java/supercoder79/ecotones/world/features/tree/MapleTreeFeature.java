@@ -58,9 +58,12 @@ public class MapleTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
 
         for (int i = 0; i < maxHeight; i++) {
             BlockPos local = startPos.add(
+                    BlockPos.ofFloored(
                     MathHelper.sin(pitch) * MathHelper.cos(yaw) * i,
                     MathHelper.cos(pitch) * i,
-                    MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
+                    MathHelper.sin(pitch) * MathHelper.sin(yaw) * i
+                    )
+            );
 
             //if the tree hits a solid block, stop
             if (TreeHelper.canLogReplace(world, local)) {
@@ -97,7 +100,7 @@ public class MapleTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
         BlockPos lastPos = startPos;
 
         for (int i = 0; i < length; i++) {
-            BlockPos local = startPos.add(Math.cos(theta) * i, i / 2.0, Math.sin(theta) * i);
+            BlockPos local = startPos.add(BlockPos.ofFloored(Math.cos(theta) * i, i / 2.0, Math.sin(theta) * i));
             lastPos = local;
 
             if (TreeHelper.canLogReplace(world, local)) {

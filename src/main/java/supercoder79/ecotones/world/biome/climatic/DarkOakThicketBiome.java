@@ -5,8 +5,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -14,6 +12,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -36,9 +35,9 @@ public class DarkOakThicketBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dark_oak_thicket"), new DarkOakThicketBiome(0.4F, 0.175F, 2.4, 0.97).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dark_oak_thicket_hilly"), new DarkOakThicketBiome(0.9F, 0.25F, 3.8, 0.93).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dark_oak_thicket_mountainous"), new DarkOakThicketBiome(1.3F, 0.625F, 5.3, 0.85).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "dark_oak_thicket"), new DarkOakThicketBiome(0.4F, 0.175F, 2.4, 0.97).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "dark_oak_thicket_hilly"), new DarkOakThicketBiome(0.9F, 0.25F, 3.8, 0.93).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "dark_oak_thicket_mountainous"), new DarkOakThicketBiome(1.3F, 0.625F, 5.3, 0.85).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_MODERATE.add(INSTANCE, 0.1);
         Climate.WARM_MILD.add(INSTANCE, 0.1);

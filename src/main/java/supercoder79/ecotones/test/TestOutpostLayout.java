@@ -5,8 +5,6 @@ import net.minecraft.Bootstrap;
 import net.minecraft.SharedConstants;
 import net.minecraft.structure.StructureSet;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntryList;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
@@ -128,7 +126,7 @@ public class TestOutpostLayout {
 
     private static class FakeChunkGenerator extends ChunkGenerator {
         public FakeChunkGenerator() {
-            super(null, Optional.empty(), null);
+            super(null, null);
         }
 
         @Override

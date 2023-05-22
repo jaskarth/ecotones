@@ -36,7 +36,7 @@ public class DumpClimatesCommand {
 
     private static int execute(ServerCommandSource source) {
         Path path = Paths.get("climates.txt");
-        source.sendFeedback(Text.literal("Dumping climates to " + path.toAbsolutePath()), false);
+        source.sendMessage(Text.literal("Dumping climates to " + path.toAbsolutePath()));
 
         try {
             File file = new File(path.toString());
@@ -53,9 +53,9 @@ public class DumpClimatesCommand {
             }
 
             writer.close();
-            source.sendFeedback(Text.literal("Done."), false);
+            source.sendMessage(Text.literal("Done."));
         } catch (IOException e) {
-            source.sendFeedback(Text.literal("Something went wrong, check the log!"), true);
+            source.sendMessage(Text.literal("Something went wrong, check the log!"));
             e.printStackTrace();
         }
 

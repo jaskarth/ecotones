@@ -5,8 +5,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.structure.PlainsVillageData;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -15,6 +13,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
@@ -47,12 +46,12 @@ public class FertileValleyBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley"), new FertileValleyBiome(0.2F, 0.025F, 0.6, 0.15).build());
-        CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley_clearing"), new FertileValleyBiome(0.2F, 0.025F, 0.1, 0.35).build());
-        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley_thicket"), new FertileValleyBiome(0.2F, 0.025F, 1.6, 0.4).build());
-        LAKE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley_lake"), new FertileValleyBiome(-0.25F, 0.025F, 0.8, 1.2).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley_hilly"), new FertileValleyBiome(0.3F, 0.225F, 0.6, 0.15).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "fertile_valley_mountainous"), new FertileValleyBiome(0.5F, 0.625F, 0.6, 0.15).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "fertile_valley"), new FertileValleyBiome(0.2F, 0.025F, 0.6, 0.15).build());
+        CLEARING = EarlyBiomeRegistry.register(new Identifier("ecotones", "fertile_valley_clearing"), new FertileValleyBiome(0.2F, 0.025F, 0.1, 0.35).build());
+        THICKET = EarlyBiomeRegistry.register(new Identifier("ecotones", "fertile_valley_thicket"), new FertileValleyBiome(0.2F, 0.025F, 1.6, 0.4).build());
+        LAKE = EarlyBiomeRegistry.register(new Identifier("ecotones", "fertile_valley_lake"), new FertileValleyBiome(-0.25F, 0.025F, 0.8, 1.2).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "fertile_valley_hilly"), new FertileValleyBiome(0.3F, 0.225F, 0.6, 0.15).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "fertile_valley_mountainous"), new FertileValleyBiome(0.5F, 0.625F, 0.6, 0.15).build());
         BiomeRegistries.registerNoBeachBiomes(INSTANCE, THICKET, CLEARING, LAKE, HILLY, MOUNTAINOUS);
 
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);

@@ -1,8 +1,7 @@
 package supercoder79.ecotones.world.biome;
 
-import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
-import net.minecraft.tag.BiomeTags;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.util.compat.AurorasDecoCompat;
 

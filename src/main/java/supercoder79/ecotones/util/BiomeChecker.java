@@ -3,14 +3,14 @@ package supercoder79.ecotones.util;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.biome.Biome;
 import supercoder79.ecotones.api.DevOnly;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 
 @DevOnly
 public final class BiomeChecker {
     public static void check(Biome biome) {
-        Identifier id = BuiltinRegistries.BIOME.getId(biome);
+        Identifier id = EarlyBiomeRegistry.getId(biome);
         boolean hasSpawns = false;
         for (SpawnGroup value : SpawnGroup.values()) {
             if (!biome.getSpawnSettings().getSpawnEntries(value).getEntries().isEmpty()) {

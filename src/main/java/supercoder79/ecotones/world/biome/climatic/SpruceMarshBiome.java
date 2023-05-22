@@ -4,8 +4,6 @@ import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -13,6 +11,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
@@ -41,10 +40,10 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_marsh"), new SpruceMarshBiome(0.1F, 0.025F, false).build());
-        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_marsh_thicket"), new SpruceMarshBiome(0.1F, 0.025F, true).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_marsh_hilly"), new SpruceMarshBiome(0.25F, 0.225F, false).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_marsh_mountainous"), new SpruceMarshBiome(0.4F, 0.625F, false).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_marsh"), new SpruceMarshBiome(0.1F, 0.025F, false).build());
+        THICKET = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_marsh_thicket"), new SpruceMarshBiome(0.1F, 0.025F, true).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_marsh_hilly"), new SpruceMarshBiome(0.25F, 0.225F, false).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_marsh_mountainous"), new SpruceMarshBiome(0.4F, 0.625F, false).build());
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
         BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, THICKET);
         BiomeRegistries.registerNoRiverBiome(INSTANCE);

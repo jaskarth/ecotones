@@ -1,6 +1,7 @@
 package supercoder79.ecotones.util.state;
 
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.world.gen.stateprovider.BlockStateProviderType;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.mixin.BlockStateProviderTypeAccessor;
@@ -18,7 +19,7 @@ public final class EcotonesBlockStateProviders {
     }
 
     private static void register(String name, BlockStateProviderType<?> provider) {
-        Registry.register(Registry.BLOCK_STATE_PROVIDER_TYPE, Ecotones.id(name), provider);
+        Registry.register(Registries.BLOCK_STATE_PROVIDER_TYPE, Ecotones.id(name), provider);
         RegistryReport.increment("Blockstate Provider");
     }
 }

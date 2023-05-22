@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.decorator;
 
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.util.RegistryReport;
@@ -43,7 +44,7 @@ public final class EcotonesDecorators {
     }
 
     private static void register(String name, PlacementModifierType<?> decorator) {
-        Registry.register(Registry.PLACEMENT_MODIFIER_TYPE, Ecotones.id(name), decorator);
+        Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, Ecotones.id(name), decorator);
         RegistryReport.increment("Decorator");
     }
 }

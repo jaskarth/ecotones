@@ -4,8 +4,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -14,6 +12,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -37,9 +36,9 @@ public class MoorBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "moor"), new MoorBiome(0.74F, 0.025F, 5, 0.97).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "moor_hilly"), new MoorBiome(1.5F, 0.125F, 6, 0.89).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "moor_mountainous"), new MoorBiome(2.5F, 0.525F, 8, 0.78).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "moor"), new MoorBiome(0.74F, 0.025F, 5, 0.97).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "moor_hilly"), new MoorBiome(1.5F, 0.125F, 6, 0.89).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "moor_mountainous"), new MoorBiome(2.5F, 0.525F, 8, 0.78).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_MODERATE.add(INSTANCE, 0.05);
         Climate.WARM_DRY.add(INSTANCE, 0.1);

@@ -3,14 +3,13 @@ package supercoder79.ecotones.world.biome.base.warm;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.SavannaVillageData;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -34,10 +33,10 @@ public class RockySteppeBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_steppe"), new RockySteppeBiome(0.5f, 0.075f, 2.8, 0.88, false).build());
-        THICKET = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_steppe_thicket"), new RockySteppeBiome(0.5f, 0.075f, 2.8, 0.88, true).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_steppe_hilly"), new RockySteppeBiome(1f, 0.5f, 4.2, 0.83, false).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rocky_steppe_mountainous"), new RockySteppeBiome(1.75f, 0.8f, 7, 0.75, false).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_steppe"), new RockySteppeBiome(0.5f, 0.075f, 2.8, 0.88, false).build());
+        THICKET = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_steppe_thicket"), new RockySteppeBiome(0.5f, 0.075f, 2.8, 0.88, true).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_steppe_hilly"), new RockySteppeBiome(1f, 0.5f, 4.2, 0.83, false).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_steppe_mountainous"), new RockySteppeBiome(1.75f, 0.8f, 7, 0.75, false).build());
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
         BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, THICKET);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);

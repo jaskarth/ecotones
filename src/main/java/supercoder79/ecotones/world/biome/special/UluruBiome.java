@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome.special;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -11,6 +9,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.CountExtraDecoratorConfig;
 import supercoder79.ecotones.world.decorator.EcotonesDecorators;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -27,7 +26,7 @@ public class UluruBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "uluru"), new UluruBiome().build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "uluru"), new UluruBiome().build());
         BiomeRegistries.registerSpecialBiome(INSTANCE, id ->
                 BiomeHelper.contains(id, "desert") || BiomeHelper.contains(id, "scrub"));
 

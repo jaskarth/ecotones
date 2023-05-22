@@ -3,14 +3,13 @@ package supercoder79.ecotones.world.biome.climatic;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.SavannaVillageData;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -32,10 +31,10 @@ public class WhiteMesaBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "white_mesa"), new WhiteMesaBiome(0.4F, 0.05F, 3, 0.96).build());
-        PLATEAU = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "white_mesa_plateau"), new WhiteMesaBiome(1.6F, 0.1F, 5, 1.2).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "white_mesa_hilly"), new WhiteMesaBiome(0.6F, 0.125F, 4, 0.87).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "white_mesa_mountainous"), new WhiteMesaBiome(0.8F, 0.325F, 5, 0.82).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "white_mesa"), new WhiteMesaBiome(0.4F, 0.05F, 3, 0.96).build());
+        PLATEAU = EarlyBiomeRegistry.register(new Identifier("ecotones", "white_mesa_plateau"), new WhiteMesaBiome(1.6F, 0.1F, 5, 1.2).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "white_mesa_hilly"), new WhiteMesaBiome(0.6F, 0.125F, 4, 0.87).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "white_mesa_mountainous"), new WhiteMesaBiome(0.8F, 0.325F, 5, 0.82).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 1);
         BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, PLATEAU);

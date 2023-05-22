@@ -35,7 +35,7 @@ public class MapClimatesCommand {
 
         for (int x = -2048; x < 2048; x++) {
             if (x % 512 == 0) {
-                source.sendFeedback(Text.literal(((x + 2048) / 4096.0) * 100 + "%"), false);
+                source.sendMessage(Text.literal(((x + 2048) / 4096.0) * 100 + "%"));
             }
 
             for (int z = -2048; z < 2048; z++) {
@@ -48,9 +48,9 @@ public class MapClimatesCommand {
         Path p = Paths.get("ecotones_climates.png");
         try {
             ImageIO.write(img, "png", p.toAbsolutePath().toFile());
-            source.sendFeedback(Text.literal("Mapped climates!"), false);
+            source.sendMessage(Text.literal("Mapped climates!"));
         } catch (IOException e) {
-            source.sendFeedback(Text.literal("Something went wrong, check the log!"), true);
+            source.sendMessage(Text.literal("Something went wrong, check the log!"));
             e.printStackTrace();
         }
 

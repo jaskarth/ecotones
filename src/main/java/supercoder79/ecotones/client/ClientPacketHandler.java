@@ -3,7 +3,8 @@ package supercoder79.ecotones.client;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
 import supercoder79.ecotones.Ecotones;
 
 public final class ClientPacketHandler {
@@ -23,7 +24,7 @@ public final class ClientPacketHandler {
                 ClientWorld world = MinecraftClient.getInstance().world;
 
                 if (world != null) {
-                    Ecotones.REGISTRY = world.getRegistryManager().get(Registry.BIOME_KEY);
+                    Ecotones.REGISTRY = world.getRegistryManager().get(RegistryKeys.BIOME);
                     ClientRegistrySyncState.state = ClientRegistrySyncState.State.SYNCED;
                 } else {
                     ClientRegistrySyncState.state = ClientRegistrySyncState.State.WAITING;

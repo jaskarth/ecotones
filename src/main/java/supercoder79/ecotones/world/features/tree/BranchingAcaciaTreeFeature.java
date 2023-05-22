@@ -80,9 +80,12 @@ public class BranchingAcaciaTreeFeature extends EcotonesFeature<TreeGenerationCo
 
         for (int i = 0; i < height; i++) {
             BlockPos local = startPos.add(
+                    BlockPos.ofFloored(
                     MathHelper.sin(pitch) * MathHelper.cos(yaw) * i,
                     MathHelper.cos(pitch) * i,
-                    MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
+                    MathHelper.sin(pitch) * MathHelper.sin(yaw) * i
+                    )
+            );
 
             //if the tree hits a solid block, stop the branch
             if (TreeHelper.canLogReplace(world, local)) {

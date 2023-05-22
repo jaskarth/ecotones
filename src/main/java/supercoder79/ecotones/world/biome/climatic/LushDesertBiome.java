@@ -6,8 +6,6 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.structure.DesertVillageData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -16,6 +14,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
@@ -40,9 +39,9 @@ public class LushDesertBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_desert"), new LushDesertBiome(0.5f, 0.3f, 2.4, 0.94).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_desert_hilly"), new LushDesertBiome(1f, 0.5f, 4.2, 0.87).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_desert_mountainous"), new LushDesertBiome(1.75f, 0.8f, 8, 0.81).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_desert"), new LushDesertBiome(0.5f, 0.3f, 2.4, 0.94).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_desert_hilly"), new LushDesertBiome(1f, 0.5f, 4.2, 0.87).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_desert_mountainous"), new LushDesertBiome(1.75f, 0.8f, 8, 0.81).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_DESERT.add(INSTANCE, 0.3);
         Climate.WARM_DESERT.add(INSTANCE, 0.12);

@@ -50,7 +50,7 @@ public abstract class Building {
 
     protected void setBlockState(StructureWorldAccess world, BlockState state, BlockPos pos) {
         // Not replaceable
-        if (!world.getBlockState(pos).getMaterial().isReplaceable()) {
+        if (!world.getBlockState(pos).isReplaceable()) {
             return;
         }
 

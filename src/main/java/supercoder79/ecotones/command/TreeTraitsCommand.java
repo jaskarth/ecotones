@@ -10,6 +10,7 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import supercoder79.ecotones.world.gen.EcotonesChunkGenerator;
 import supercoder79.ecotones.world.tree.trait.Trait;
@@ -34,11 +35,12 @@ public class TreeTraitsCommand {
         ChunkGenerator generator = source.getWorld().getChunkManager().getChunkGenerator();
         if (generator instanceof EcotonesChunkGenerator) {
             TraitContainer<? extends Trait> container = TreeTraitRegistry.get(trait);
-            Trait treeTrait = container.get((EcotonesChunkGenerator) generator, new BlockPos(source.getPosition()));
+            Vec3d vec = source.getPosition();
+            Trait treeTrait = container.get((EcotonesChunkGenerator) generator, BlockPos.ofFloored(vec));
 
-            source.sendFeedback(Text.literal(container.getName() + " trait: " + treeTrait.name()), false);
+            source.sendMessage(Text.literal(container.getName() + " trait: " + treeTrait.name()));
         } else {
-            source.sendFeedback(Text.literal("This only works on ecotones worlds."), false);
+            source.sendMessage(Text.literal("This only works on ecotones worlds."));
         }
         return 0;
     }

@@ -2,19 +2,23 @@ package supercoder79.ecotones.world.gen;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.registry.BuiltinRegistries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.structure.StructureSet;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
-import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.noise.OctavePerlinNoiseSampler;
 import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.util.math.random.RandomSeed;
 import net.minecraft.util.math.random.ThreadSafeRandom;
-import net.minecraft.util.registry.*;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
@@ -37,6 +41,7 @@ import net.minecraft.world.gen.noise.NoiseConfig;
 import net.minecraft.world.gen.structure.Structure;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.CaveBiome;
+import supercoder79.ecotones.api.FeatureList;
 import supercoder79.ecotones.util.BiomeCache;
 import supercoder79.ecotones.util.ImprovedChunkRandom;
 import supercoder79.ecotones.util.LayerRandom;
@@ -67,7 +72,6 @@ import java.util.stream.IntStream;
 public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implements DataHolder {
     public static final Codec<EcotonesChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(
-                            RegistryOps.createRegistryCodec(Registry.STRUCTURE_SET_KEY).forGetter(g -> g.structureSetRegistry),
                     BiomeSource.CODEC.fieldOf("biome_source").forGetter((generator) -> generator.biomeSource),
                     Codec.LONG.fieldOf("seed").stable().forGetter((generator) -> generator.seed))
                     .apply(instance, instance.stable(EcotonesChunkGenerator::new)));
@@ -97,18 +101,18 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
     private final NoiseChunkGenerator shim;
     private final NoiseCaveGenerator caves;
 
-    public EcotonesChunkGenerator(Registry<StructureSet> structures, BiomeSource biomeSource, long seed) {
-        super(structures, biomeSource, seed);
+    public EcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
+        super(biomeSource, seed);
         this.seed = seed;
         this.hillinessNoise = OctavePerlinNoiseSampler.createLegacy(this.random, IntStream.rangeClosed(-15, 0));
         if (biomeSource instanceof EcotonesBiomeSource) {
-            this.registry = Optional.of(((EcotonesBiomeSource)biomeSource).biomeRegistry);
+            this.registry = Optional.ofNullable(((EcotonesBiomeSource)biomeSource).biomeRegistry);
         } else {
             this.registry = Optional.empty();
         }
 
-        this.shim = new NoiseChunkGenerator(BuiltinRegistries.STRUCTURE_SET, BuiltinRegistries.NOISE_PARAMETERS, biomeSource,
-                RegistryEntry.of(BuiltinRegistries.CHUNK_GENERATOR_SETTINGS.get(ChunkGeneratorSettings.OVERWORLD)));
+        this.shim = new NoiseChunkGenerator(biomeSource, RegistryEntry.of(BuiltinRegistries.createWrapperLookup()
+                .createRegistryLookup().getOrThrow(RegistryKeys.CHUNK_GENERATOR_SETTINGS).getOrThrow(ChunkGeneratorSettings.OVERWORLD).value()));
 
         this.scaleNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.juRandom, 4, 256, 0.2, -0.2);
         this.soilDrainageNoise = new OctaveNoiseSampler<>(OpenSimplexNoise.class, this.juRandom, 2, 1600, 1.75, 0.75);
@@ -453,9 +457,15 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         ChunkPos chunkPos = region.getCenterPos();
         ChunkSectionPos chunkSectionPos = ChunkSectionPos.from(chunkPos, region.getBottomSectionCoord());
 
-        List<RegistryEntryList<PlacedFeature>> list = biome.getGenerationSettings().getFeatures();
-        Registry<PlacedFeature> registry = region.getRegistryManager().get(Registry.PLACED_FEATURE_KEY);
-        Registry<Structure> registry2 = region.getRegistryManager().get(Registry.STRUCTURE_KEY);
+        List<ArrayList<PlacedFeature>> list = new ArrayList<>(biome.getGenerationSettings().getFeatures().stream().map(s -> new ArrayList<>(s.stream().map(RegistryEntry::value).toList())).toList());
+        FeatureList featureList = BiomeRegistries.FEATURE_LISTS.get(BiomeRegistries.key(biome));
+        if (featureList != null) {
+            for (GenerationStep.Feature step : GenerationStep.Feature.values()) {
+                list.get(step.ordinal()).addAll(featureList.get(step));
+            }
+        }
+        Registry<PlacedFeature> registry = region.getRegistryManager().get(RegistryKeys.PLACED_FEATURE);
+        Registry<Structure> registry2 = region.getRegistryManager().get(RegistryKeys.STRUCTURE);
 
         Map<Integer, List<Structure>> map = registry2.stream()
                 .collect(Collectors.groupingBy(structureType -> structureType.getFeatureGenerationStep().ordinal()));
@@ -485,14 +495,13 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
             }
 
             if (list.size() > j) {
-                for(RegistryEntry<PlacedFeature> supplier2 : list.get(j)) {
-                    PlacedFeature configuredFeature = supplier2.value();
-                    Supplier<String> supplier3 = () -> registry.getKey(configuredFeature).map(Object::toString).orElseGet(configuredFeature::toString);
+                for(PlacedFeature feature : list.get(j)) {
+                    Supplier<String> supplier3 = () -> registry.getKey(feature).map(Object::toString).orElseGet(feature::toString);
                     random.setDecoratorSeed(populationSeed, k, j);
 
                     try {
                         region.setCurrentlyGeneratingStructureName(supplier3);
-                        configuredFeature.generate(region, chunkGenerator, random, origin);
+                        feature.generate(region, chunkGenerator, random, origin);
                     } catch (Exception var25) {
                         CrashReport crashReport2 = CrashReport.create(var25, "Feature placement");
                         crashReport2.addElement("Feature").add("Description", supplier3::get);

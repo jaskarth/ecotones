@@ -61,7 +61,7 @@ public class WideShrubFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
     }
 
     protected void trySet(WorldAccess world, BlockPos pos, BlockState state) {
-        if (!world.getBlockState(pos).getMaterial().isSolid()) {
+        if (!world.getBlockState(pos).isSolid()) {
             world.setBlockState(pos, state, 2);
         }
     }

@@ -6,8 +6,6 @@ import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -18,6 +16,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.decorator.SpreadDoubleDecorator;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
@@ -42,10 +41,10 @@ public class DeadSpruceForestBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dead_spruce_forest"), new DeadSpruceForestBiome(0.5F, 0.025F, false).build());
-        CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dead_spruce_forest_clearing"), new DeadSpruceForestBiome(0.5F, 0.025F, true).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dead_spruce_forest_hilly"), new DeadSpruceForestBiome(1.25F, 0.125F, false).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dead_spruce_forest_mountainous"), new DeadSpruceForestBiome(2F, 0.325F, false).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "dead_spruce_forest"), new DeadSpruceForestBiome(0.5F, 0.025F, false).build());
+        CLEARING = EarlyBiomeRegistry.register(new Identifier("ecotones", "dead_spruce_forest_clearing"), new DeadSpruceForestBiome(0.5F, 0.025F, true).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "dead_spruce_forest_hilly"), new DeadSpruceForestBiome(1.25F, 0.125F, false).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "dead_spruce_forest_mountainous"), new DeadSpruceForestBiome(2F, 0.325F, false).build());
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
         BiomeRegistries.registerBiomeVariants(INSTANCE, INSTANCE, CLEARING);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);

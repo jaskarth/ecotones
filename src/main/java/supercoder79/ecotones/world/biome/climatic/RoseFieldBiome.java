@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -11,6 +9,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.Climate;
@@ -31,12 +30,12 @@ import supercoder79.ecotones.world.features.config.SimpleTreeFeatureConfig;
 // So.
 // This biome is for you. I know it doesn't mean all that much, but.... thank you.
 //
-// For Amelia Rose, with love. - SuperCoder79
+// For Amelia Rose, with love. - Jasmine Karthikeyan
 public class RoseFieldBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "rose_field"), new RoseFieldBiome().build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "rose_field"), new RoseFieldBiome().build());
         Climate.WARM_MILD.add(INSTANCE, 0.1);
         Climate.WARM_HUMID.add(INSTANCE, 0.1);
     }

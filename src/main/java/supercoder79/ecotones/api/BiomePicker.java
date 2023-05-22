@@ -1,9 +1,12 @@
 package supercoder79.ecotones.api;
 
 import com.google.common.collect.Lists;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.BuiltinRegistries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.biome.Biome;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.layers.system.layer.util.LayerRandomnessSource;
 import supercoder79.ecotones.Ecotones;
 
@@ -62,7 +65,7 @@ public final class BiomePicker {
         private final double weight;
         private Entry(Biome biome, BiomePicker picker, double weight) {
             // Attempt from builtin
-            Optional<RegistryKey<Biome>> optional = BuiltinRegistries.BIOME.getKey(biome);
+            Optional<RegistryKey<Biome>> optional = EarlyBiomeRegistry.get(biome);
 
             // Mod compat mode: use dynamic registry
             this.biome = optional.orElseGet(() -> Ecotones.REGISTRY.getKey(biome)

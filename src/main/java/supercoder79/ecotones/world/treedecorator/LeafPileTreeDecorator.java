@@ -51,7 +51,7 @@ public class LeafPileTreeDecorator extends TreeDecorator {
                 BlockPos localPos = pos.add(random.nextInt(this.offset) - random.nextInt(this.offset), 0, random.nextInt(this.offset) - random.nextInt(this.offset));
                 BlockPos topPos = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR_WG, localPos);
 
-                if (topPos.getY() <= pos.getY() && world.testBlockState(topPos, s -> s.getMaterial().isReplaceable()) && world.testBlockState(topPos.down(), s -> s.isOf(Blocks.GRASS_BLOCK))) {
+                if (topPos.getY() <= pos.getY() && world.testBlockState(topPos, s -> s.isReplaceable()) && world.testBlockState(topPos.down(), s -> s.isOf(Blocks.GRASS_BLOCK))) {
                     generator.replace(topPos, this.state);
                 }
             }

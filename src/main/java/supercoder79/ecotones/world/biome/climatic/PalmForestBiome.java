@@ -5,8 +5,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -15,6 +13,7 @@ import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
@@ -47,9 +46,9 @@ public class PalmForestBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "palm_forest"), new PalmForestBiome(0.5F, 0.025F, 2, 0.9).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "palm_forest_hilly"), new PalmForestBiome(1.25F, 0.225F, 2.4, 0.8).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "palm_forest_mountainous"), new PalmForestBiome(2F, 0.625F, 3, 0.7).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "palm_forest"), new PalmForestBiome(0.5F, 0.025F, 2, 0.9).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "palm_forest_hilly"), new PalmForestBiome(1.25F, 0.225F, 2.4, 0.8).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "palm_forest_mountainous"), new PalmForestBiome(2F, 0.625F, 3, 0.7).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_VERY_HUMID.add(INSTANCE, 0.2);
         Climate.HOT_RAINFOREST.add(INSTANCE, 0.07);

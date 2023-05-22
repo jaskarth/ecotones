@@ -26,8 +26,9 @@ public class EcotonesPlantBlock extends PlantBlock implements Fertilizable {
         return !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, facing, neighborState, world, pos, neighborPos);
     }
 
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        return true;
+    @Override
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+        return false;
     }
 
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {

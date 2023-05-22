@@ -8,13 +8,13 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.random.Random;
@@ -34,7 +34,7 @@ public class GeyserBlock extends Block {
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (world.getBlockState(pos.up()).isOpaque()) {
-            world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 6f, Explosion.DestructionType.DESTROY);
+            world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 6f, World.ExplosionSourceType.BLOCK);
             world.spawnParticles(ParticleTypes.POOF, pos.getX() + 0.5, pos.getY() + 0.125, pos.getZ() + 0.5, 200, random.nextDouble() * 0.005, 0.65, random.nextDouble() * 0.005, 0.5f);
         }
 
@@ -44,7 +44,7 @@ public class GeyserBlock extends Block {
         List<LivingEntity> list = world.getNonSpectatingEntities(LivingEntity.class, new Box(pos.add(-3, -2, -3), pos.add(3, 6, 3)));
         for (LivingEntity entity : list) {
             entity.addVelocity(0, 1.5, 0);
-            entity.damage(DamageSource.GENERIC, 4);
+            entity.damage(entity.getDamageSources().generic(), 4);
         }
     }
 
@@ -56,7 +56,7 @@ public class GeyserBlock extends Block {
         boolean isTriggered = state.get(TRIGGERED);
 
         if (isPowered && !isTriggered) {
-            world.createAndScheduleBlockTick(pos, this, 4);
+            world.scheduleBlockTick(pos, this, 4);
             world.setBlockState(pos, state.with(TRIGGERED, true), 3);
         } else if (!isPowered && isTriggered) {
             world.setBlockState(pos, state.with(TRIGGERED, false), 3);

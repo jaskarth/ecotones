@@ -5,8 +5,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.structure.PlainsVillageData;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
@@ -15,6 +13,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
@@ -39,9 +38,9 @@ public class SunflowerPlainsBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sunflower_plains"), new SunflowerPlainsBiome(0.35F, 0.025F).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sunflower_plains_hilly"), new SunflowerPlainsBiome(0.85F, 0.225F).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sunflower_plains_mountainous"), new SunflowerPlainsBiome(1.65F, 0.625F).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "sunflower_plains"), new SunflowerPlainsBiome(0.35F, 0.025F).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "sunflower_plains_hilly"), new SunflowerPlainsBiome(0.85F, 0.225F).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "sunflower_plains_mountainous"), new SunflowerPlainsBiome(1.65F, 0.625F).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_MODERATE.add(INSTANCE, 0.3);
     }

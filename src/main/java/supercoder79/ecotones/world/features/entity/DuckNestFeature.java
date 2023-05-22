@@ -2,7 +2,7 @@ package supercoder79.ecotones.world.features.entity;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;

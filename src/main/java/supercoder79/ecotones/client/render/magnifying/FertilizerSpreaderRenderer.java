@@ -61,7 +61,7 @@ public class FertilizerSpreaderRenderer extends MagnifyingGlassRenderer {
             double m = (double)pos.getX() + l + random.nextDouble() * d * 2.0D;
             double n = (double)pos.getY() + random.nextDouble() * g;
             double o = (double)pos.getZ() + l + random.nextDouble() * d * 2.0D;
-            if (!world.getBlockState((new BlockPos(m, n, o)).down()).isAir()) {
+            if (!world.getBlockState(BlockPos.ofFloored(m, n, o).down()).isAir()) {
                 world.addParticle(ParticleTypes.HAPPY_VILLAGER, m, n, o, h, j, k);
             }
         }

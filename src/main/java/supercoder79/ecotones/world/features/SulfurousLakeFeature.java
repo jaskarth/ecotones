@@ -5,9 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.util.math.random.Random;
@@ -62,7 +60,7 @@ public class SulfurousLakeFeature extends EcotonesFeature<SulfurousLakeFeature.C
                 }
             }
 
-            BlockState j = config.fluid().getBlockState(random, blockPos);
+            BlockState j = config.fluid().get(random, blockPos);
 
             for(int d = 0; d < 16; ++d) {
                 for(int s = 0; s < 16; ++s) {
@@ -77,7 +75,7 @@ public class SulfurousLakeFeature extends EcotonesFeature<SulfurousLakeFeature.C
                                     || e > 0 && bls[(d * 16 + s) * 8 + (e - 1)]
                             );
                         if (bl) {
-                            Material f = structureWorldAccess.getBlockState(blockPos.add(d, e, s)).getMaterial();
+                            BlockState f = structureWorldAccess.getBlockState(blockPos.add(d, e, s));
                             if (e >= 4 && f.isLiquid()) {
                                 return false;
                             }
@@ -99,7 +97,7 @@ public class SulfurousLakeFeature extends EcotonesFeature<SulfurousLakeFeature.C
                                 boolean f = e >= 4;
                                 structureWorldAccess.setBlockState(bl, f ? CAVE_AIR : j, Block.NOTIFY_LISTENERS);
                                 if (f) {
-                                    structureWorldAccess.createAndScheduleBlockTick(bl, CAVE_AIR.getBlock(), 0);
+                                    structureWorldAccess.scheduleBlockTick(bl, CAVE_AIR.getBlock(), 0);
                                     this.markBlocksAboveForPostProcessing(structureWorldAccess, bl);
                                 }
                             }
@@ -108,7 +106,7 @@ public class SulfurousLakeFeature extends EcotonesFeature<SulfurousLakeFeature.C
                 }
             }
 
-            BlockState d = config.barrier().getBlockState(random, blockPos);
+            BlockState d = config.barrier().get(random, blockPos);
             if (!d.isAir()) {
                 for(int s = 0; s < 16; ++s) {
                     for(int e = 0; e < 16; ++e) {
@@ -124,7 +122,7 @@ public class SulfurousLakeFeature extends EcotonesFeature<SulfurousLakeFeature.C
                                 );
                             if (f && (bl < 4 || random.nextInt(2) != 0)) {
                                 BlockState blockState = structureWorldAccess.getBlockState(blockPos.add(s, bl, e));
-                                if (blockState.getMaterial().isSolid() && !blockState.isIn(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE)) {
+                                if (blockState.isSolid() && !blockState.isIn(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE)) {
                                     BlockPos g = blockPos.add(s, bl, e);
 
                                     // Random check for sulfur ore

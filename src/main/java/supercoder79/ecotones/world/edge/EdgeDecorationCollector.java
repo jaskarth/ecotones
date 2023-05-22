@@ -1,6 +1,6 @@
 package supercoder79.ecotones.world.edge;
 
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import supercoder79.ecotones.api.BiomeRegistries;

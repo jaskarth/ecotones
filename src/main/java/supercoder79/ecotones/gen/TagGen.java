@@ -1,14 +1,15 @@
 package supercoder79.ecotones.gen;
 
 import net.minecraft.block.Block;
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.Structure;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.util.register.EarlyRegistrationState;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,7 +48,8 @@ public final class TagGen {
                     .resolve("biome");
 
             path.toFile().mkdirs();
-            Files.write(path.resolve("has_" + k.getKey().orElseThrow().getValue().getPath() + ".json"), json.getBytes());
+            Files.write(path.resolve("has_" + k.getKey()
+                    .orElse(RegistryKey.of(RegistryKeys.STRUCTURE, EarlyRegistrationState.STRUCTURES.inverse().get(k.value()))).getValue().getPath() + ".json"), json.getBytes());
             DataGen.DATA.tags++;
         }
 
@@ -76,7 +78,7 @@ public final class TagGen {
     public static void block(TagKey<Block> key, Block... values) throws IOException {
         String json = TAG
                 .replace("%%VALUES%%", Arrays.stream(values)
-                        .map(b -> Registry.BLOCK.getId(b).toString())
+                        .map(b -> Registries.BLOCK.getId(b).toString())
                         .map(s -> "\"" + s + "\"")
                         .collect(Collectors.joining(",\n    "))
 

@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -11,6 +9,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.decorator.*;
@@ -35,12 +34,12 @@ public class SparseForestBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sparse_forest"), new SparseForestBiome(0.3F, 0.065F, 2.8, 0.97).build());
-        SHRUBS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sparse_forest_shrubs"), new SparseForestBiome(0.3F, 0.025F, 1.4, 0.97, 5.4, 64).build());
-        LAKES = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sparse_forest_lakes"), new SparseForestBiome(-0.235F, 0.025F, 0.4, 0.97, 4.2, 52).build());
-        BOG = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sparse_forest_bog"), new SparseForestBiome(-0.165F, 0.035F, 0.8, 0.97, 4.2, 2).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sparse_forest_hilly"), new SparseForestBiome(0.5F, 0.125F, 4.2, 0.89).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "sparse_forest_mountainous"), new SparseForestBiome(1.2F, 0.525F, 6, 0.78).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_forest"), new SparseForestBiome(0.3F, 0.065F, 2.8, 0.97).build());
+        SHRUBS = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_forest_shrubs"), new SparseForestBiome(0.3F, 0.025F, 1.4, 0.97, 5.4, 64).build());
+        LAKES = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_forest_lakes"), new SparseForestBiome(-0.235F, 0.025F, 0.4, 0.97, 4.2, 52).build());
+        BOG = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_forest_bog"), new SparseForestBiome(-0.165F, 0.035F, 0.8, 0.97, 4.2, 2).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_forest_hilly"), new SparseForestBiome(0.5F, 0.125F, 4.2, 0.89).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_forest_mountainous"), new SparseForestBiome(1.2F, 0.525F, 6, 0.78).build());
 
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);

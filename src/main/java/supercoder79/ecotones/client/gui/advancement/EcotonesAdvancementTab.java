@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementDisplay;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.advancement.AdvancementTab;
 import net.minecraft.client.gui.screen.advancement.AdvancementTabType;
 import net.minecraft.client.gui.screen.advancement.AdvancementWidget;
@@ -14,37 +15,25 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
+import java.util.Objects;
+
 public class EcotonesAdvancementTab extends AdvancementTab {
     public EcotonesAdvancementTab(MinecraftClient client, AdvancementsScreen screen, AdvancementTabType type, int index, Advancement root, AdvancementDisplay display) {
         super(client, screen, type, index, root, display);
     }
 
     @Override
-    public void render(MatrixStack matrices) {
+    public void render(DrawContext context, int x, int y) {
         if (!this.initialized) {
             this.originX = (double)(117 - (this.maxPanX + this.minPanX) / 2);
             this.originY = (double)(56 - (this.maxPanY + this.minPanY) / 2);
             this.initialized = true;
         }
 
-        matrices.push();
-        matrices.translate(0.0D, 0.0D, 950.0D);
-        RenderSystem.enableDepthTest();
-        RenderSystem.colorMask(false, false, false, false);
-        fill(matrices, 4680, 2260, -4680, -2260, -16777216);
-        RenderSystem.colorMask(true, true, true, true);
-        matrices.translate(0.0D, 0.0D, -950.0D);
-        RenderSystem.depthFunc(518);
-        fill(matrices, 234, 113, 0, 0, -16777216);
-        RenderSystem.depthFunc(515);
-        Identifier identifier = this.display.getBackground();
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        if (identifier != null) {
-            RenderSystem.setShaderTexture(0, identifier);
-        } else {
-            RenderSystem.setShaderTexture(0, TextureManager.MISSING_IDENTIFIER);
-        }
-
+        context.enableScissor(x, y, x + 234, y + 113);
+        context.getMatrices().push();
+        context.getMatrices().translate((float)x, (float)y, 0.0F);
+        Identifier identifier = (Identifier) Objects.requireNonNullElse(this.display.getBackground(), TextureManager.MISSING_IDENTIFIER);
         int i = MathHelper.floor(this.originX);
         int j = MathHelper.floor(this.originY);
         int k = i % 16;
@@ -52,27 +41,18 @@ public class EcotonesAdvancementTab extends AdvancementTab {
 
         for(int m = -1; m <= 15; ++m) {
             for(int n = -1; n <= 8; ++n) {
-                drawTexture(matrices, k + 16 * m, l + 16 * n, 0.0F, 0.0F, 16, 16, 16, 16);
+                context.drawTexture(identifier, k + 16 * m, l + 16 * n, 0.0F, 0.0F, 16, 16, 16, 16);
             }
         }
 
-        matrices.push();
-        renderLines(matrices, i, j, true, rootWidget);
-        renderLines(matrices, i, j, false, rootWidget);
-        this.rootWidget.renderWidgets(matrices, i, j);
-        matrices.pop();
-
-        RenderSystem.depthFunc(518);
-        matrices.translate(0.0D, 0.0D, -950.0D);
-        RenderSystem.colorMask(false, false, false, false);
-        fill(matrices, 4680, 2260, -4680, -2260, -16777216);
-        RenderSystem.colorMask(true, true, true, true);
-        RenderSystem.depthFunc(515);
-        RenderSystem.disableDepthTest();
-        matrices.pop();
+        renderLines(context, i, j, true, rootWidget);
+        renderLines(context, i, j, false, rootWidget);
+        this.rootWidget.renderWidgets(context, i, j);
+        context.getMatrices().pop();
+        context.disableScissor();
     }
 
-    private void renderLines(MatrixStack matrices, int x, int y, boolean border, AdvancementWidget widget) {
+    private void renderLines(DrawContext context, int x, int y, boolean border, AdvancementWidget widget) {
         if (widget.parent != null) {
             if (widget.parent.getX() < widget.getX()) {
                 int i = x + widget.parent.getX() + 13;
@@ -84,18 +64,18 @@ public class EcotonesAdvancementTab extends AdvancementTab {
                 int n = border ? -16777216 : -1;
 
                 if (border) {
-                    this.drawHorizontalLine(matrices, j, i, k - 1, n);
-                    this.drawHorizontalLine(matrices, j + 1, i, k, n);
-                    this.drawHorizontalLine(matrices, j, i, k + 1, n);
-                    this.drawHorizontalLine(matrices, l, j - 1, m - 1, n);
-                    this.drawHorizontalLine(matrices, l, j - 1, m, n);
-                    this.drawHorizontalLine(matrices, l, j - 1, m + 1, n);
-                    this.drawVerticalLine(matrices, j - 1, m, k, n);
-                    this.drawVerticalLine(matrices, j + 1, m, k, n);
+                    context.drawHorizontalLine(j, i, k - 1, n);
+                    context.drawHorizontalLine(j + 1, i, k, n);
+                    context.drawHorizontalLine(j, i, k + 1, n);
+                    context.drawHorizontalLine(l, j - 1, m - 1, n);
+                    context.drawHorizontalLine(l, j - 1, m, n);
+                    context.drawHorizontalLine(l, j - 1, m + 1, n);
+                    context.drawVerticalLine(j - 1, m, k, n);
+                    context.drawVerticalLine(j + 1, m, k, n);
                 } else {
-                    this.drawHorizontalLine(matrices, j, i, k, n);
-                    this.drawHorizontalLine(matrices, l, j, m, n);
-                    this.drawVerticalLine(matrices, j, m, k, n);
+                    context.drawHorizontalLine(j, i, k, n);
+                    context.drawHorizontalLine(l, j, m, n);
+                    context.drawVerticalLine(j, m, k, n);
                 }
             } else if (widget.parent.getX() > widget.getX()) {
                 int i = x + widget.parent.getX() + 13;
@@ -107,18 +87,18 @@ public class EcotonesAdvancementTab extends AdvancementTab {
                 int n = border ? -16777216 : -1;
 
                 if (border) {
-                    this.drawHorizontalLine(matrices, j, i, k - 1, n);
-                    this.drawHorizontalLine(matrices, j + 1, i, k, n);
-                    this.drawHorizontalLine(matrices, j, i, k + 1, n);
-                    this.drawHorizontalLine(matrices, l, j - 1, m - 1, n);
-                    this.drawHorizontalLine(matrices, l, j - 1, m, n);
-                    this.drawHorizontalLine(matrices, l, j - 1, m + 1, n);
-                    this.drawVerticalLine(matrices, j - 1, m, k, n);
-                    this.drawVerticalLine(matrices, j + 1, m, k, n);
+                    context.drawHorizontalLine(j, i, k - 1, n);
+                    context.drawHorizontalLine(j + 1, i, k, n);
+                    context.drawHorizontalLine(j, i, k + 1, n);
+                    context.drawHorizontalLine(l, j - 1, m - 1, n);
+                    context.drawHorizontalLine(l, j - 1, m, n);
+                    context.drawHorizontalLine(l, j - 1, m + 1, n);
+                    context.drawVerticalLine(j - 1, m, k, n);
+                    context.drawVerticalLine(j + 1, m, k, n);
                 } else {
-                    this.drawHorizontalLine(matrices, j, i, k, n);
-                    this.drawHorizontalLine(matrices, l, j, m, n);
-                    this.drawVerticalLine(matrices, j, m, k, n);
+                    context.drawHorizontalLine(j, i, k, n);
+                    context.drawHorizontalLine(l, j, m, n);
+                    context.drawVerticalLine(j, m, k, n);
                 }
             } else if (widget.parent.getX() == widget.getX()) {
                 int j = x + widget.parent.getX() + 15;
@@ -128,16 +108,16 @@ public class EcotonesAdvancementTab extends AdvancementTab {
                 int n = border ? -16777216 : -1;
 
                 if (border) {
-                    this.drawVerticalLine(matrices, j - 1, m, k, n);
-                    this.drawVerticalLine(matrices, j + 1, m, k, n);
+                    context.drawVerticalLine(j - 1, m, k, n);
+                    context.drawVerticalLine(j + 1, m, k, n);
                 } else {
-                    this.drawVerticalLine(matrices, j, m, k, n);
+                    context.drawVerticalLine(j, m, k, n);
                 }
             }
         }
 
         for(AdvancementWidget advancementWidget : widget.children) {
-            renderLines(matrices, x, y, border, advancementWidget);
+            renderLines(context, x, y, border, advancementWidget);
         }
 
     }

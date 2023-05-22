@@ -38,7 +38,7 @@ public class RoostAtNestAction extends Action {
         }
 
         AiLog.log(this.mob, "Attempting find nest");
-        BlockPos nestPos = AiHelper.locateBlock(this.mob.getBlockPos(), this.mob.world, 16, 6, s -> s.isOf(EcotonesBlocks.NEST));
+        BlockPos nestPos = AiHelper.locateBlock(this.mob.getBlockPos(), this.mob.getWorld(), 16, 6, s -> s.isOf(EcotonesBlocks.NEST));
         if (nestPos == null) {
             return false;
         }
@@ -83,11 +83,11 @@ public class RoostAtNestAction extends Action {
             state.getStomach().setMetabolismRate(0.002);
 
             if (this.roostTicks < this.halfTick && this.mob.shouldLayEgg() && !this.checkedEgg) {
-                BlockState bstate = this.mob.world.getBlockState(this.nestPos);
+                BlockState bstate = this.mob.getWorld().getBlockState(this.nestPos);
 
                 if (bstate.isOf(EcotonesBlocks.NEST) && bstate.get(NestBlock.EGGS) < 3 && state.getStomach().exhaust(5.0)) {
                     int newEggCount = bstate.get(NestBlock.EGGS) + 1;
-                    this.mob.world.setBlockState(this.nestPos, bstate.with(NestBlock.EGGS, newEggCount));
+                    this.mob.getWorld().setBlockState(this.nestPos, bstate.with(NestBlock.EGGS, newEggCount));
 
                     this.mob.resetEggTimer();
                     AiLog.log(this.mob, "Laying egg at " + this.nestPos + " which now has " + newEggCount + " eggs in it");

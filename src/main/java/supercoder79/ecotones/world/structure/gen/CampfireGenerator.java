@@ -11,6 +11,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
+import net.minecraft.registry.Registries;
 import net.minecraft.structure.StructureContext;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.structure.StructurePiecesCollector;
@@ -19,7 +20,6 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
@@ -54,7 +54,7 @@ public class CampfireGenerator {
         public Piece(NbtCompound nbt) {
             super(EcotonesStructurePieces.CAMPFIRE, nbt);
             this.pos = new BlockPos(nbt.getInt("x"), nbt.getInt("y"), nbt.getInt("z"));
-            this.logSource = Registry.BLOCK.get(new Identifier(nbt.getString("log_source")));
+            this.logSource = Registries.BLOCK.get(new Identifier(nbt.getString("log_source")));
         }
 
         @Override
@@ -62,7 +62,7 @@ public class CampfireGenerator {
             tag.putInt("x", this.pos.getX());
             tag.putInt("y", this.pos.getY());
             tag.putInt("z", this.pos.getZ());
-            tag.putString("log_source", Registry.BLOCK.getId(this.logSource).toString());
+            tag.putString("log_source", Registries.BLOCK.getId(this.logSource).toString());
         }
 
         @Override

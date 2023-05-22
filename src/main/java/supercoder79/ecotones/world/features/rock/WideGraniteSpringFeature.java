@@ -83,7 +83,7 @@ public class WideGraniteSpringFeature extends EcotonesFeature<DefaultFeatureConf
                     if (r2 <= scaledRadius) {
                         if (y >= 1 && r2 <= scaledWaterRadius) {
                             world.setBlockState(mutable.set(pos, x, y, z), Blocks.WATER.getDefaultState(), 3);
-                            world.createAndScheduleFluidTick(mutable.toImmutable(), Fluids.WATER, 0);
+                            world.scheduleFluidTick(mutable.toImmutable(), Fluids.WATER, 0);
                         } else {
                             world.setBlockState(mutable.set(pos, x, y, z), Blocks.GRANITE.getDefaultState(), 3);
                         }

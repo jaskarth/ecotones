@@ -3,12 +3,14 @@ package supercoder79.ecotones.world.gen;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.util.dynamic.RegistryOps;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryCodecs;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
@@ -33,13 +35,14 @@ import java.util.stream.Stream;
 
 public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource {
     public static Codec<EcotonesBiomeSource> CODEC =  RecordCodecBuilder.create((instance) -> {
-        return instance.group(RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter((source) -> source.biomeRegistry),
+        return instance.group(RegistryCodecs.entryList(RegistryKeys.BIOME, Biome.CODEC).fieldOf("biomes").forGetter((source) -> source.entries),
                 Codec.LONG.fieldOf("seed").stable().forGetter((source) -> source.seed),
                 Codec.BOOL.fieldOf("real").stable().forGetter((source) -> source.isReal))
                 .apply(instance, instance.stable(EcotonesBiomeSource::new));
     });
 
     public final Registry<Biome> biomeRegistry;
+    public final RegistryEntryList<Biome> entries;
     private final BiomeLayerSampler biomeSampler;
     private final long seed;
 
@@ -48,14 +51,14 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
     private final StampedLock lock = new StampedLock();
 
     public EcotonesBiomeSource(Registry<Biome> biomeRegistry, long seed, boolean isReal) {
-        super(
-                superSetup(isReal, biomeRegistry)
-        );
-        this.biomeRegistry = biomeRegistry;
+        superSetup(isReal, biomeRegistry);
         this.biomeSampler = EcotonesBiomeLayers.build(seed);
         this.seed = seed;
         this.caveBiomeNoise = new OpenSimplexNoise(seed);
         this.isReal = isReal;
+        this.entries = new SyntheticRegistryEntryList(biomeRegistry.streamEntries().map(RegistryEntry.class::cast));
+
+        this.biomeRegistry = biomeRegistry;
 
         if (isReal) {
             long stamp = this.lock.writeLock();
@@ -72,6 +75,15 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
         }
     }
 
+    public EcotonesBiomeSource(RegistryEntryList<Biome> registryEntries, long seed, boolean isReal) {
+        this.biomeRegistry = null;
+        this.entries = registryEntries;
+        this.biomeSampler = EcotonesBiomeLayers.build(seed);
+        this.seed = seed;
+        this.caveBiomeNoise = new OpenSimplexNoise(seed);
+        this.isReal = isReal;
+    }
+
     @NotNull
     private static Stream<RegistryEntry<Biome>> superSetup(boolean real, Registry<Biome> biomeRegistry) {
         if (real) {
@@ -84,13 +96,15 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
                 .map(k -> biomeRegistry.entryOf(k));
     }
 
-//    @Override
-//    public List<BiomeSource.IndexedFeatures> method_39525(List<RegistryEntry<Biome>> biomes, boolean bl) {
-//        // Not relevant for ecotones
-//        return new ArrayList<>();
-//    }
-
     public RegistryEntry<Biome> getBiome(int biomeX, int biomeY, int biomeZ, MultiNoiseUtil.MultiNoiseSampler sampler) {
+        if (!isReal) {
+            System.out.println("HELP!!! I'M NOT REAL!!!");
+        }
+
+        if (biomeRegistry == null) {
+            System.out.println("what the...? Wrong constructor?");
+        }
+
         long stamp = this.lock.readLock();
         try {
             // TODO: no crash sampler
@@ -108,10 +122,10 @@ public class EcotonesBiomeSource extends BiomeSource implements CaveBiomeSource 
         return CODEC;
     }
 
-//    @Override
-//    public BiomeSource withSeed(long seed) {
-//        return new EcotonesBiomeSource(this.biomeRegistry, seed);
-//    }
+    @Override
+    protected Stream<RegistryEntry<Biome>> biomeStream() {
+        return superSetup(isReal, biomeRegistry);
+    }
 
     @Override
     public CaveBiome getCaveBiomeForNoiseGen(int x, int z) {

@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -13,6 +11,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -38,11 +37,11 @@ public class HotPineForestBiome extends EcotonesBiomeBuilder {
     public static Biome MONTANE;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hot_pine_forest"), new HotPineForestBiome(0.3f, 0.075f, 2.2, 0.96).build());
-        CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hot_pine_forest_clearing"), new HotPineForestBiome(0.3f, 0.085f, 1.4, 0.975, 2.4).build());
-        LAKE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hot_pine_forest_lake"), new HotPineForestBiome(-0.25f, 0.075f, 0.8, 0.975, 5.4).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hot_pine_forest_hilly"), new HotPineForestBiome(1f, 0.5f, 4.2, 0.92).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "hot_pine_forest_mountainous"), new HotPineForestBiome(1.75f, 0.8f, 8, 0.84).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "hot_pine_forest"), new HotPineForestBiome(0.3f, 0.075f, 2.2, 0.96).build());
+        CLEARING = EarlyBiomeRegistry.register(new Identifier("ecotones", "hot_pine_forest_clearing"), new HotPineForestBiome(0.3f, 0.085f, 1.4, 0.975, 2.4).build());
+        LAKE = EarlyBiomeRegistry.register(new Identifier("ecotones", "hot_pine_forest_lake"), new HotPineForestBiome(-0.25f, 0.075f, 0.8, 0.975, 5.4).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "hot_pine_forest_hilly"), new HotPineForestBiome(1f, 0.5f, 4.2, 0.92).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "hot_pine_forest_mountainous"), new HotPineForestBiome(1.75f, 0.8f, 8, 0.84).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.HOT_VERY_DRY.add(INSTANCE, 0.2);
@@ -56,7 +55,7 @@ public class HotPineForestBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 3);
         BiomeRegistries.registerBiomeVariants(INSTANCE, LAKE, CLEARING);
 
-        MONTANE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "montane_hot_pine_forest"), new HotPineForestBiome(3.0f, 0.125f, 2.2, 0.96).build());
+        MONTANE = EarlyBiomeRegistry.register(new Identifier("ecotones", "montane_hot_pine_forest"), new HotPineForestBiome(3.0f, 0.125f, 2.2, 0.96).build());
         BiomeRegistries.addMountainBiome(MONTANE);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, MONTANE);
 

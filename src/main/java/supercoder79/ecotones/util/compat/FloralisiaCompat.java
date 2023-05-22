@@ -1,8 +1,8 @@
 package supercoder79.ecotones.util.compat;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.function.Supplier;
 
@@ -22,14 +22,14 @@ public final class FloralisiaCompat {
     }
 
     public static Supplier<BlockState> anastasia() {
-        return () -> Registry.BLOCK.get(id("anastasia")).getDefaultState();
+        return () -> Registries.BLOCK.get(id("anastasia")).getDefaultState();
     }
 
     public static Supplier<BlockState> cymbidium() {
-        return () -> Registry.BLOCK.get(id("cymbidium")).getDefaultState();
+        return () -> Registries.BLOCK.get(id("cymbidium")).getDefaultState();
     }
 
     public static Supplier<BlockState> gladiolus() {
-        return () -> Registry.BLOCK.get(id("gladiolus")).getDefaultState();
+        return () -> Registries.BLOCK.get(id("gladiolus")).getDefaultState();
     }
 }

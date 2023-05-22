@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.TallPlantBlock;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -25,7 +25,7 @@ public class RandomPatchFeature extends EcotonesFeature<RandomPatchFeatureConfig
       Random random = context.getRandom();
       BlockPos blockPos = context.getOrigin();
       StructureWorldAccess structureWorldAccess = context.getWorld();
-      BlockState blockState = randomPatchFeatureConfig.stateProvider.getBlockState(random, blockPos);
+      BlockState blockState = randomPatchFeatureConfig.stateProvider.get(random, blockPos);
       BlockPos blockPos2;
       if (randomPatchFeatureConfig.project) {
          blockPos2 = structureWorldAccess.getTopPosition(Heightmap.Type.WORLD_SURFACE_WG, blockPos);
@@ -47,7 +47,7 @@ public class RandomPatchFeature extends EcotonesFeature<RandomPatchFeatureConfig
          BlockState blockState2 = structureWorldAccess.getBlockState(blockPos4);
          if ((
                structureWorldAccess.isAir(mutable)
-                  || randomPatchFeatureConfig.canReplace && structureWorldAccess.getBlockState(mutable).getMaterial().isReplaceable()
+                  || randomPatchFeatureConfig.canReplace && structureWorldAccess.getBlockState(mutable).isReplaceable()
             )
             && blockState.canPlaceAt(structureWorldAccess, mutable)
             && (randomPatchFeatureConfig.whitelist.isEmpty() || randomPatchFeatureConfig.whitelist.contains(blockState2.getBlock()))

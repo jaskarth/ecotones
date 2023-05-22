@@ -1,5 +1,7 @@
 package supercoder79.ecotones.world.biome;
 
+import net.minecraft.registry.BuiltinRegistries;
+import supercoder79.ecotones.util.register.EarlyRegistrationState;
 import supercoder79.ecotones.world.biome.base.hot.*;
 import supercoder79.ecotones.world.biome.base.warm.*;
 import supercoder79.ecotones.world.biome.cave.LimestoneCaveBiome;

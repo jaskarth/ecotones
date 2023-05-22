@@ -18,8 +18,7 @@ import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
 import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.util.math.random.CheckedRandom;
 import net.minecraft.util.math.random.ChunkRandom;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
@@ -93,9 +92,9 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
     private final OctaveNoiseSampler<OpenSimplexNoise> riverNoiseNoise;
     private final long seed;
 
-    public BaseEcotonesChunkGenerator(Registry<StructureSet> structures, BiomeSource biomeSource, long seed) {
+    public BaseEcotonesChunkGenerator(BiomeSource biomeSource, long seed) {
 //        super(biomeSource, biomeSource, new EcotonesStructuresConfig(Optional.of(DEFAULT_STRONGHOLD), Maps.newHashMap(DEFAULT_STRUCTURES)), seed);
-        super(structures, Optional.empty(), biomeSource);
+        super(biomeSource);
         this.seed = seed;
         this.verticalNoiseResolution = 8;
         this.horizontalNoiseResolution = 4;
@@ -549,7 +548,8 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
 
             // [0, 4] -> z noise chunks
             for(int noiseZ = 0; noiseZ < this.noiseSizeZ; ++noiseZ) {
-                ChunkSection section = protoChunk.getSection(chunk.getSectionIndex(319));
+                int lastSecY = chunk.getSectionIndex(319);
+                ChunkSection section = protoChunk.getSection(lastSecY);
                 section.lock();
 
                 // [0, 32] -> y noise chunks
@@ -577,9 +577,10 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                         int localY = realY & 15;
                         int sectionY = chunk.getSectionIndex(realY);
                         // Get the chunk section
-                        if (section.getYOffset() >> 4 != sectionY) {
+                        if (lastSecY != sectionY) {
                             section.unlock();
                             section = protoChunk.getSection(sectionY);
+                            lastSecY = sectionY;
                             section.lock();
                         }
 
@@ -627,7 +628,6 @@ public abstract class BaseEcotonesChunkGenerator extends ChunkGenerator {
                                     // Add light source if the state has light
                                     if (state.getLuminance() != 0) {
                                         mutable.set(realX, realY, realZ);
-                                        protoChunk.addLightSource(mutable);
                                     }
 
                                     // Place the state at the position

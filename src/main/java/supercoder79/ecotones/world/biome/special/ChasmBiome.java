@@ -3,15 +3,16 @@ package supercoder79.ecotones.world.biome.special;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -29,8 +30,8 @@ public class ChasmBiome extends EcotonesBiomeBuilder {
     public static Biome EDGE;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "chasm"), new ChasmBiome(-1.5f, false).build());
-        EDGE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "chasm_edge"), new ChasmBiome(0.375f, true).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "chasm"), new ChasmBiome(-1.5f, false).build());
+        EDGE = EarlyBiomeRegistry.register(new Identifier("ecotones", "chasm_edge"), new ChasmBiome(0.375f, true).build());
 
         BiomeRegistries.registerAllSpecial(id -> !BiomeHelper.isOcean(id), INSTANCE, EDGE);
 
@@ -83,13 +84,13 @@ public class ChasmBiome extends EcotonesBiomeBuilder {
                         .repeat(12));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.IRON_ORE.getDefaultState(), 9)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(new TagMatchRuleTest(BlockTags.BASE_STONE_OVERWORLD), Blocks.IRON_ORE.getDefaultState(), 9)))
                         .uniformRange(YOffset.fixed(0), YOffset.fixed(64))
                         .spreadHorizontally()
                         .repeat(30));
 
         this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES,
-                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(OreConfiguredFeatures.BASE_STONE_OVERWORLD, Blocks.GOLD_ORE.getDefaultState(), 9)))
+                EcotonesConfiguredFeature.wrap(Feature.ORE, (new OreFeatureConfig(new TagMatchRuleTest(BlockTags.BASE_STONE_OVERWORLD), Blocks.GOLD_ORE.getDefaultState(), 9)))
                         .uniformRange(YOffset.fixed(0), YOffset.fixed(32))
                         .spreadHorizontally()
                         .repeat(6));

@@ -3,8 +3,6 @@ package supercoder79.ecotones.world.biome.base.hot;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -12,6 +10,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
@@ -37,9 +36,9 @@ public class TropicalRainforestBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_rainforest"), new TropicalRainforestBiome(0.5f, 0.4f, 1.8, 0.93).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_rainforest_hilly"), new TropicalRainforestBiome(1f, 0.7f, 4.2, 0.82).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "tropical_rainforest_mountainous"), new TropicalRainforestBiome(1.75f, 0.9f, 7, 0.74).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_rainforest"), new TropicalRainforestBiome(0.5f, 0.4f, 1.8, 0.93).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_rainforest_hilly"), new TropicalRainforestBiome(1f, 0.7f, 4.2, 0.82).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_rainforest_mountainous"), new TropicalRainforestBiome(1.75f, 0.9f, 7, 0.74).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.HOT_RAINFOREST.add(INSTANCE, 1);

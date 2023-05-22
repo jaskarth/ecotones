@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -11,6 +9,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
@@ -36,9 +35,9 @@ public class PineBarrensBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "pine_barrens"), new PineBarrensBiome(0.5f, 0.05f, 3.6, 0.92).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "pine_barrens_hilly"), new PineBarrensBiome(0.75f, 0.15f, 4.8, 0.90).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "pine_barrens_mountainous"), new PineBarrensBiome(0.45f, 0.9f, 5.2, 0.86).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "pine_barrens"), new PineBarrensBiome(0.5f, 0.05f, 3.6, 0.92).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "pine_barrens_hilly"), new PineBarrensBiome(0.75f, 0.15f, 4.8, 0.90).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "pine_barrens_mountainous"), new PineBarrensBiome(0.45f, 0.9f, 5.2, 0.86).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_DRY.add(INSTANCE, 0.2);
         Climate.WARM_MODERATE.add(INSTANCE, 0.3);

@@ -1,7 +1,6 @@
 package supercoder79.ecotones.blocks;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +20,6 @@ public class DuckweedBlock extends EcotonesLeafPileBlock {
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         FluidState fluid = world.getFluidState(pos);
         FluidState up = world.getFluidState(pos.up());
-        return (fluid.getFluid() == Fluids.WATER || floor.getMaterial() == Material.ICE) && up.getFluid() == Fluids.EMPTY;
+        return (fluid.getFluid() == Fluids.WATER) && up.getFluid() == Fluids.EMPTY;
     }
 }

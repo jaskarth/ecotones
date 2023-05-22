@@ -1,18 +1,16 @@
 package supercoder79.ecotones.world.structure;
 
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.structure.StructureSet;
-import net.minecraft.structure.StructureSetKeys;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.gen.chunk.placement.RandomSpreadStructurePlacement;
 import net.minecraft.world.gen.chunk.placement.SpreadType;
 import net.minecraft.world.gen.chunk.placement.StructurePlacement;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.Structures;
 import supercoder79.ecotones.Ecotones;
+import supercoder79.ecotones.util.register.EarlyRegistrationState;
 
 import java.util.List;
 
@@ -43,11 +41,15 @@ public final class EcotonesStructureSets {
     }
 
     private static RegistryKey<StructureSet> of(String id) {
-        return RegistryKey.of(Registry.STRUCTURE_SET_KEY, Ecotones.id(id));
+        return RegistryKey.of(RegistryKeys.STRUCTURE_SET, Ecotones.id(id));
     }
 
     private static RegistryEntry<StructureSet> register(RegistryKey<StructureSet> key, StructureSet structureSet) {
-        return BuiltinRegistries.add(BuiltinRegistries.STRUCTURE_SET, key, structureSet);
+//        return BuiltinRegistries.add(BuiltinRegistries.STRUCTURE_SET, key, structureSet);
+
+        EarlyRegistrationState.STRUCTURE_SETS.put(key.getValue(), structureSet);
+
+        return RegistryEntry.of(structureSet);
     }
 
     private static RegistryEntry<StructureSet> register(RegistryKey<StructureSet> key, RegistryEntry<Structure> structure, StructurePlacement placement) {

@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -11,6 +9,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -31,9 +30,9 @@ public class RedRockRidgeBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "red_rock_ridge"), new RedRockRidgeBiome(1.2F, 0.125F, 9, 0.92).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "red_rock_ridge_hills"), new RedRockRidgeBiome(1.5F, 0.225F, 10, 0.85).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "red_rock_ridge_mountainous"), new RedRockRidgeBiome(2.5F, 0.625F, 10, 0.8).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "red_rock_ridge"), new RedRockRidgeBiome(1.2F, 0.125F, 9, 0.92).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "red_rock_ridge_hills"), new RedRockRidgeBiome(1.5F, 0.225F, 10, 0.85).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "red_rock_ridge_mountainous"), new RedRockRidgeBiome(2.5F, 0.625F, 10, 0.8).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.HOT_DESERT.add(INSTANCE, 0.2);

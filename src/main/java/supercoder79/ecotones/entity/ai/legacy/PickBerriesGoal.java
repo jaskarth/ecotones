@@ -46,7 +46,7 @@ public class PickBerriesGoal extends Goal {
     public void tick() {
         if (!this.isAtBush) {
             if (this.mob.getPos().squaredDistanceTo(this.bushPos.getX(), this.bushPos.getY(), this.bushPos.getZ()) <= 2.5) {
-                World world = this.mob.world;
+                World world = this.mob.getWorld();
                 if (this.damagingBush) {
                     int count = 1 + this.mob.getRandom().nextInt(2);
                     Block.dropStack(world, this.bushPos, new ItemStack(Items.SWEET_BERRIES, count));
@@ -92,13 +92,13 @@ public class PickBerriesGoal extends Goal {
             return false;
         }
 
-        BlockPos target = locateBerries(this.mob.world, 12, 6);
+        BlockPos target = locateBerries(this.mob.getWorld(), 12, 6);
         if (target == null) {
             return false;
         }
 
         this.bushPos = target;
-        this.damagingBush = this.mob.world.getBlockState(target).isOf(Blocks.SWEET_BERRY_BUSH);
+        this.damagingBush = this.mob.getWorld().getBlockState(target).isOf(Blocks.SWEET_BERRY_BUSH);
         this.isAtBush = false;
         AiLog.log(this.mob, "Found berry bush at " + target + ". Moving there" + (this.damagingBush ? " and making sure to avoid it" : ""));
 

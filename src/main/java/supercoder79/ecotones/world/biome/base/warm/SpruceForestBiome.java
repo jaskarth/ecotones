@@ -3,8 +3,6 @@ package supercoder79.ecotones.world.biome.base.warm;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.TaigaVillageData;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -14,6 +12,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.ChanceDecoratorConfig;
 import supercoder79.ecotones.world.decorator.Spread32Decorator;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
@@ -45,12 +44,12 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest"), new SpruceForestBiome(0.4f, 0.125f, 3.2, 0.88).build());
-        CLEARING = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_clearing"), new SpruceForestBiome(0.5f, 0.125f, 2.2, 0.95, 1.25, SurfaceBuilder.DEFAULT).build());
-        GRAVELLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_gravelly"), new SpruceForestBiome(0.4f, 0.125f, 2.8, 0.88, 7.5, EcotonesSurfaces.GRAVEL_BANDS).build());
-        LAKE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_lake"), new SpruceForestBiome(-0.25f, 0.075f, 1.2, 0.97).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_hilly"), new SpruceForestBiome(1f, 0.5f, 4.2, 0.83).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_forest_mountainous"), new SpruceForestBiome(1.75f, 0.8f, 7, 0.75).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_forest"), new SpruceForestBiome(0.4f, 0.125f, 3.2, 0.88).build());
+        CLEARING = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_forest_clearing"), new SpruceForestBiome(0.5f, 0.125f, 2.2, 0.95, 1.25, SurfaceBuilder.DEFAULT).build());
+        GRAVELLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_forest_gravelly"), new SpruceForestBiome(0.4f, 0.125f, 2.8, 0.88, 7.5, EcotonesSurfaces.GRAVEL_BANDS).build());
+        LAKE = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_forest_lake"), new SpruceForestBiome(-0.25f, 0.075f, 1.2, 0.97).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_forest_hilly"), new SpruceForestBiome(1f, 0.5f, 4.2, 0.83).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_forest_mountainous"), new SpruceForestBiome(1.75f, 0.8f, 7, 0.75).build());
 
         BiomeRegistries.registerBiomeVariantChance(INSTANCE, 4);
         BiomeRegistries.registerBiomeVariants(INSTANCE, LAKE, CLEARING, GRAVELLY);

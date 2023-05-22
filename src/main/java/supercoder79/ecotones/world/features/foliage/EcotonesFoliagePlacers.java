@@ -1,6 +1,7 @@
 package supercoder79.ecotones.world.features.foliage;
 
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.mixin.FoliagePlacerTypeAccessor;
@@ -16,7 +17,7 @@ public final class EcotonesFoliagePlacers {
     }
 
     private static void register(String name, FoliagePlacerType<?> type) {
-        Registry.register(Registry.FOLIAGE_PLACER_TYPE, Ecotones.id(name), type);
+        Registry.register(Registries.FOLIAGE_PLACER_TYPE, Ecotones.id(name), type);
         RegistryReport.increment("Foliage Placer");
     }
 }

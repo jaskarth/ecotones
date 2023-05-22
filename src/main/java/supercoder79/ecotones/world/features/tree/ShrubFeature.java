@@ -51,6 +51,6 @@ public class ShrubFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
     }
 
     protected void trySet(WorldAccess world, BlockPos pos, BlockState state) {
-        if (!world.getBlockState(pos).getMaterial().isSolid()) world.setBlockState(pos, state, 2);
+        if (!world.getBlockState(pos).isSolid()) world.setBlockState(pos, state, 2);
     }
 }

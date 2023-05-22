@@ -3,7 +3,8 @@ package supercoder79.ecotones.items;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.util.RegistryReport;
 
@@ -23,8 +24,9 @@ public final class EcotonesItemBlocks {
     }
 
     public static void associate(Block block, String name) {
-        BlockItem item = new BlockItem(block, new Item.Settings().group(EcotonesItemGroups.ECOTONES));
-        Registry.register(Registry.ITEM, Ecotones.id(name), item);
+        BlockItem item = new BlockItem(block, new Item.Settings());
+        EcotonesItems.ITEMS_FOR_GROUP.add(item);
+        Registry.register(Registries.ITEM, Ecotones.id(name), item);
         RegistryReport.increment("Item");
 
         MAP.put(block, item);

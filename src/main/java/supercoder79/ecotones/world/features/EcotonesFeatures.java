@@ -1,7 +1,8 @@
 package supercoder79.ecotones.world.features;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
@@ -135,7 +136,7 @@ public final class EcotonesFeatures {
     }
 
     private static void register(String name, Feature<?> feature) {
-        Registry.register(Registry.FEATURE, Ecotones.id(name), feature);
+        Registry.register(Registries.FEATURE, Ecotones.id(name), feature);
         RegistryReport.increment("Feature");
     }
 }

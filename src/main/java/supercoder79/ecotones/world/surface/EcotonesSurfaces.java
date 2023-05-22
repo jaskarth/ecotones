@@ -1,7 +1,6 @@
 package supercoder79.ecotones.world.surface;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.util.registry.Registry;
 import supercoder79.ecotones.Ecotones;
 import supercoder79.ecotones.util.RegistryReport;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;

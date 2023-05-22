@@ -50,7 +50,7 @@ public class SurfacePatchReplaceFeature extends EcotonesFeature<DefaultFeatureCo
                     BlockPos local = new BlockPos(worldX, topY, worldZ);
 
                     BlockState startState = world.getBlockState(local);
-                    if (!startState.getMaterial().isReplaceable()) {
+                    if (!startState.isReplaceable()) {
                         continue;
                     }
 

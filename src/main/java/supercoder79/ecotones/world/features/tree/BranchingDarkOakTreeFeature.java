@@ -69,9 +69,12 @@ public class BranchingDarkOakTreeFeature extends EcotonesFeature<TreeGenerationC
         boolean hasModified = false;
         for (int i = 0; i < maxHeight; i++) {
             BlockPos local = startPos.add(
+                    BlockPos.ofFloored(
                     MathHelper.sin(pitch) * MathHelper.cos(yaw) * i,
                     MathHelper.cos(pitch) * i,
-                    MathHelper.sin(pitch) * MathHelper.sin(yaw) * i);
+                    MathHelper.sin(pitch) * MathHelper.sin(yaw) * i
+                    )
+            );
 
             //if the tree hits a solid block, stop
             if (TreeHelper.canLogReplace(world, local)) {

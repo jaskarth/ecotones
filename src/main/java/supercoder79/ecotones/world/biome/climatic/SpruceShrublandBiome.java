@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -11,6 +9,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.data.EcotonesData;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
@@ -34,9 +33,9 @@ public class SpruceShrublandBiome extends EcotonesBiomeBuilder {
     public static Biome FOOTHILLS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_shrubland"), new SpruceShrublandBiome(0.3f, 0.075f, 2.2, 0.96).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_shrubland_hilly"), new SpruceShrublandBiome(1f, 0.5f, 4.2, 0.92).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_shrubland_mountainous"), new SpruceShrublandBiome(1.75f, 0.8f, 8, 0.84).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_shrubland"), new SpruceShrublandBiome(0.3f, 0.075f, 2.2, 0.96).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_shrubland_hilly"), new SpruceShrublandBiome(1f, 0.5f, 4.2, 0.92).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_shrubland_mountainous"), new SpruceShrublandBiome(1.75f, 0.8f, 8, 0.84).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.HOT_VERY_DRY.add(INSTANCE, 0.5);
@@ -47,7 +46,7 @@ public class SpruceShrublandBiome extends EcotonesBiomeBuilder {
         Climate.WARM_DRY.add(INSTANCE, 0.3);
         Climate.WARM_MODERATE.add(INSTANCE, 0.3);
 
-        FOOTHILLS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "spruce_shrubland_foothills"), new SpruceShrublandBiome(1.5f, 0.175f, 2.2, 0.96).build());
+        FOOTHILLS = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_shrubland_foothills"), new SpruceShrublandBiome(1.5f, 0.175f, 2.2, 0.96).build());
         BiomeRegistries.addMountainBiome(FOOTHILLS);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS, FOOTHILLS);
 

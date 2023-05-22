@@ -6,8 +6,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -17,6 +15,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.PredicatedStateProvider;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import supercoder79.ecotones.world.decorator.*;
@@ -39,9 +38,9 @@ public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "shield_taiga"), new ShieldTaigaBiome(0.0325f, 0.025f, 1.8, 1.05).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "shield_taiga_hilly"), new ShieldTaigaBiome(0.25f, 0.4f, 2.6, 0.92).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "shield_taiga_mountainous"), new ShieldTaigaBiome(0.55f, 0.6f, 4, 0.81).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "shield_taiga"), new ShieldTaigaBiome(0.0325f, 0.025f, 1.8, 1.05).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "shield_taiga_hilly"), new ShieldTaigaBiome(0.25f, 0.4f, 2.6, 0.92).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "shield_taiga_mountainous"), new ShieldTaigaBiome(0.55f, 0.6f, 4, 0.81).build());
         BiomeRegistries.registerNoBeachBiome(INSTANCE);
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.WARM_HUMID.add(INSTANCE, 0.1);

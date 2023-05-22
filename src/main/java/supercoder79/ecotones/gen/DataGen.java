@@ -2,7 +2,7 @@ package supercoder79.ecotones.gen;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.registry.tag.BlockTags;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import supercoder79.ecotones.blocks.EcotonesBlocks;
@@ -39,6 +39,9 @@ public final class DataGen {
 
     private static void runDataGen() throws IOException {
         TagGen.automakeStructureHas();
+        WorldgenGen.genBiomes();
+        WorldgenGen.genStructures();
+        WorldgenGen.genStructureSets();
 
         crossBlock("flame_lily", "Flame Lily");
 

@@ -11,7 +11,6 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.tag.ItemTags;
 import org.jetbrains.annotations.Nullable;
 import supercoder79.ecotones.items.EcotonesItems;
 import supercoder79.ecotones.recipe.EcotonesGrindingRecipes;
@@ -67,7 +66,7 @@ public class GrindstoneScreenHandler extends ScreenHandler {
     }
 
     @Override
-    public ItemStack transferSlot(PlayerEntity player, int index) {
+    public ItemStack quickMove(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
 

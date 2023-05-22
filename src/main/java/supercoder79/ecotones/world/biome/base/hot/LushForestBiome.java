@@ -2,15 +2,13 @@ package supercoder79.ecotones.world.biome.base.hot;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
 import supercoder79.ecotones.api.BiomeRegistries;
 import supercoder79.ecotones.api.Climate;
@@ -33,9 +31,9 @@ public class LushForestBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_forest"), new LushForestBiome(0.5f, 0.4f, 1.8, 0.93).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_forest_hilly"), new LushForestBiome(1f, 0.7f, 4.2, 0.82).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "lush_forest_mountainous"), new LushForestBiome(1.75f, 0.9f, 7, 0.74).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_forest"), new LushForestBiome(0.5f, 0.4f, 1.8, 0.93).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_forest_hilly"), new LushForestBiome(1f, 0.7f, 4.2, 0.82).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_forest_mountainous"), new LushForestBiome(1.75f, 0.9f, 7, 0.74).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
 
         Climate.HOT_VERY_HUMID.add(INSTANCE, 1);

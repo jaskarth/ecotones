@@ -1,18 +1,18 @@
 package supercoder79.ecotones.world.biome;
 
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.structure.Structure;
 import supercoder79.ecotones.api.BiomeRegistries;
+import supercoder79.ecotones.api.FeatureList;
 import supercoder79.ecotones.util.RegistryReport;
+import supercoder79.ecotones.util.register.EcotonesLookupBuilder;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.gen.BiomeGenData;
 import supercoder79.ecotones.world.surface.system.ConfiguredSurfaceBuilder;
@@ -31,6 +31,7 @@ public abstract class EcotonesBiomeBuilder {
     private final GenerationSettings.Builder generationSettings;
     private final BiomeEffects.Builder biomeEffects;
     private final List<RegistryEntry<Structure>> structures = new ArrayList<>();
+    private final FeatureList features = new FeatureList();
 
     private double depth = 0.1;
     private double scale = 0.05;
@@ -44,7 +45,7 @@ public abstract class EcotonesBiomeBuilder {
     public EcotonesBiomeBuilder() {
         this.builder = new Biome.Builder();
         this.spawnSettings = new SpawnSettings.Builder();
-        this.generationSettings = new GenerationSettings.Builder();
+        this.generationSettings = new EcotonesLookupBuilder();
         this.biomeEffects = new BiomeEffects.Builder();
 
         // Defaults
@@ -97,7 +98,7 @@ public abstract class EcotonesBiomeBuilder {
     }
 
     protected void precipitation(Biome.Precipitation precipitation) {
-        this.builder.precipitation(precipitation);
+        this.builder.precipitation(precipitation != Biome.Precipitation.NONE);
     }
 
     protected void addSpawn(SpawnGroup group, SpawnSettings.SpawnEntry entry) {
@@ -126,10 +127,6 @@ public abstract class EcotonesBiomeBuilder {
 
     protected void waterFogColor(int waterFogColor) {
         this.biomeEffects.waterFogColor(waterFogColor);
-    }
-
-    protected void loopSound(SoundEvent loopSound) {
-        this.biomeEffects.loopSound(loopSound);
     }
 
     protected void particleConfig(BiomeParticleConfig particleConfig) {
@@ -163,14 +160,14 @@ public abstract class EcotonesBiomeBuilder {
 
         Identifier id = new Identifier("ecotones", "ecotones_auto_registered_" + biomeName + "_" + name.toLowerCase(Locale.ROOT) + "_" + featureId.incrementAndGet());
 //        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, id, feature);
-        RegistryEntry<ConfiguredFeature<?, ?>> featHolder = BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, id, feature);
 
-        PlacedFeature plf = ecfeature.placed(featHolder);
+        PlacedFeature plf = ecfeature.placed(RegistryEntry.of(feature));
 //        Registry.register(BuiltinRegistries.PLACED_FEATURE, id, plf);
-        RegistryEntry<PlacedFeature> plHolder = BuiltinRegistries.add(BuiltinRegistries.PLACED_FEATURE, id, plf);
+//        RegistryEntry<PlacedFeature> plHolder = BuiltinRegistries.add(BuiltinRegistries.PLACED_FEATURE, id, plf);
 
         RegistryReport.increment("Configured Feature");
-        this.generationSettings.feature(step, plHolder);
+        features.add(step, plf);
+//        this.generationSettings.feature(step, plHolder);
     }
 
     protected void addStructureFeature(RegistryEntry<Structure> structure) {
@@ -191,14 +188,17 @@ public abstract class EcotonesBiomeBuilder {
             BiomeRegistries.associateTag(tag, biome);
         }
 
+        BiomeRegistries.registerFeatureList(biome, features);
+
         OBJ2DATA.put(biome, new BiomeGenData(this.depth, this.scale, this.volatility, this.hilliness, this.configuredSurfaceBuilder));
 //        BIOME_STRUCTURES.put(biome, this.structures);
 
         return biome;
     }
 
-    public GenerationSettings.Builder getGenerationSettings() {
-        return generationSettings;
+    public GenerationSettings.LookupBackedBuilder getGenerationSettings() {
+        // cast is safe
+        return (GenerationSettings.LookupBackedBuilder) generationSettings;
     }
 
     public SpawnSettings.Builder getSpawnSettings() {

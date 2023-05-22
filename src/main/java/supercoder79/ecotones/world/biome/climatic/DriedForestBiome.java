@@ -2,8 +2,6 @@ package supercoder79.ecotones.world.biome.climatic;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -12,6 +10,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import supercoder79.ecotones.world.biome.BiomeAssociations;
+import supercoder79.ecotones.world.biome.EarlyBiomeRegistry;
 import supercoder79.ecotones.world.decorator.*;
 import supercoder79.ecotones.world.features.EcotonesConfiguredFeature;
 import supercoder79.ecotones.world.surface.system.SurfaceBuilder;
@@ -31,9 +30,9 @@ public class DriedForestBiome extends EcotonesBiomeBuilder {
     public static Biome MOUNTAINOUS;
 
     public static void init() {
-        INSTANCE = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dried_forest"), new DriedForestBiome(0.5f, 0.075f, 2.8, 0.88).build());
-        HILLY = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dried_forest_hilly"), new DriedForestBiome(1f, 0.5f, 4.2, 0.83).build());
-        MOUNTAINOUS = Registry.register(BuiltinRegistries.BIOME, new Identifier("ecotones", "dried_forest_mountainous"), new DriedForestBiome(1.75f, 0.8f, 7, 0.75).build());
+        INSTANCE = EarlyBiomeRegistry.register(new Identifier("ecotones", "dried_forest"), new DriedForestBiome(0.5f, 0.075f, 2.8, 0.88).build());
+        HILLY = EarlyBiomeRegistry.register(new Identifier("ecotones", "dried_forest_hilly"), new DriedForestBiome(1f, 0.5f, 4.2, 0.83).build());
+        MOUNTAINOUS = EarlyBiomeRegistry.register(new Identifier("ecotones", "dried_forest_mountainous"), new DriedForestBiome(1.75f, 0.8f, 7, 0.75).build());
         BiomeRegistries.registerMountains(INSTANCE, HILLY, MOUNTAINOUS);
         Climate.HOT_DRY.add(INSTANCE, 0.3);
         Climate.HOT_MODERATE.add(INSTANCE, 0.1);

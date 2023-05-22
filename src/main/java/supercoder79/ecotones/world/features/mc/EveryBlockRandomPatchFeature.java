@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.TallPlantBlock;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.state.property.Property;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -43,12 +43,12 @@ public class EveryBlockRandomPatchFeature extends EcotonesFeature<RandomPatchFea
             random.nextInt(randomPatchFeatureConfig.spreadY + 1) - random.nextInt(randomPatchFeatureConfig.spreadY + 1),
             random.nextInt(randomPatchFeatureConfig.spreadZ + 1) - random.nextInt(randomPatchFeatureConfig.spreadZ + 1)
          );
-         BlockState blockState = randomPatchFeatureConfig.stateProvider.getBlockState(random, mutable.toImmutable());
+         BlockState blockState = randomPatchFeatureConfig.stateProvider.get(random, mutable.toImmutable());
          BlockPos blockPos4 = mutable.down();
          BlockState blockState2 = structureWorldAccess.getBlockState(blockPos4);
          if ((
                structureWorldAccess.isAir(mutable)
-                  || randomPatchFeatureConfig.canReplace && structureWorldAccess.getBlockState(mutable).getMaterial().isReplaceable()
+                  || randomPatchFeatureConfig.canReplace && structureWorldAccess.getBlockState(mutable).isReplaceable()
             )
             && blockState.canPlaceAt(structureWorldAccess, mutable)
             && (randomPatchFeatureConfig.whitelist.isEmpty() || randomPatchFeatureConfig.whitelist.contains(blockState2.getBlock()))

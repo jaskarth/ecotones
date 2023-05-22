@@ -1,6 +1,7 @@
 package supercoder79.ecotones.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -33,36 +34,36 @@ public class SapDistilleryScreen extends HandledScreen<SapDistilleryScreenHandle
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
-        this.drawMouseoverTooltip(matrices, mouseX, mouseY);
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.renderBackground(context);
+        super.render(context, mouseX, mouseY, delta);
+        this.drawMouseoverTooltip(context, mouseX, mouseY);
     }
 
     @Override
-    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
+//        RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (this.width - this.backgroundWidth) / 2;
         int y = (this.height - this.backgroundHeight) / 2;
-        this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        context.drawTexture(TEXTURE, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
         // Fire tex
         int burnTime = this.handler.getBurnTime();
         int scaledBurnTime = (burnTime * 14) / 600;
-        this.drawTexture(matrices, x + 80, y + 62 + (13 - scaledBurnTime), 176, 13 - scaledBurnTime, 14, scaledBurnTime + 1);
+        context.drawTexture(TEXTURE, x + 80, y + 62 + (13 - scaledBurnTime), 176, 13 - scaledBurnTime, 14, scaledBurnTime + 1);
 
         // Sap bar
         int sapAmt = this.handler.getSapAmount();
         int scaledSapAmt = (sapAmt * 36) / 40000;
-        this.drawTexture(matrices, x + 7, y + 21 + (35 - scaledSapAmt), 176, 123 - scaledSapAmt, 5, scaledSapAmt + 1);
+        context.drawTexture(TEXTURE, x + 7, y + 21 + (35 - scaledSapAmt), 176, 123 - scaledSapAmt, 5, scaledSapAmt + 1);
 
         // Render overlay with alpha based on how much heat there is
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, this.handler.getHeat() / 3000.f);
-        this.drawTexture(matrices, x + 50, y + 23, 176, 14, 76, 38);
+        context.drawTexture(TEXTURE, x + 50, y + 23, 176, 14, 76, 38);
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -71,14 +72,14 @@ public class SapDistilleryScreen extends HandledScreen<SapDistilleryScreenHandle
         RenderSystem.setShaderColor(229.f / 255.f, 134.f / 255.f, 50 / 255.f, 1.0F);
         int syrupAmt = this.handler.getSyrupAmount();
         int scaledSyrupAmt = (syrupAmt * 34) / 5000;
-        this.drawTexture(matrices, x + 52, y + 26 + (33 - scaledSyrupAmt), 176, 88 - scaledSyrupAmt, 72, scaledSyrupAmt);
+        context.drawTexture(TEXTURE, x + 52, y + 26 + (33 - scaledSyrupAmt), 176, 88 - scaledSyrupAmt, 72, scaledSyrupAmt);
 
 
         // Maple: 0xD96927
         RenderSystem.setShaderColor(217 / 255.f, 105 / 255.f, 39 / 255.f, 1.0F);
 
         for (ParticleState particle : this.particles) {
-            this.drawTexture(matrices, x + particle.pos.x(), y + particle.pos.y(), particle.getU(), 0, 3, 3);
+            context.drawTexture(TEXTURE, x + particle.pos.x(), y + particle.pos.y(), particle.getU(), 0, 3, 3);
         }
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
@@ -118,20 +119,20 @@ public class SapDistilleryScreen extends HandledScreen<SapDistilleryScreenHandle
     }
 
     @Override
-    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
-        super.drawForeground(matrices, mouseX, mouseY);
+    protected void drawForeground(DrawContext context, int mouseX, int mouseY) {
+        super.drawForeground(context, mouseX, mouseY);
 
         int x = mouseX - (this.width - this.backgroundWidth) / 2;
         int y = mouseY - (this.height - this.backgroundHeight) / 2;
 
         // Syrup tooltip
         if (x >= 50 && x <= 122 && y >= 23 && y <= 61) {
-            this.renderTooltip(matrices, Text.literal(this.handler.getSyrupAmount() + " / 5000"), x, y);
+            context.drawTooltip(this.textRenderer, Text.literal(this.handler.getSyrupAmount() + " / 5000"), x, y);
         }
 
         // Sap tooltip
         if (x >= 7 && x <= 12 && y >= 21 && y <= 57) {
-            this.renderTooltip(matrices, Text.literal(this.handler.getSapAmount() + " / 40000"), x, y);
+            context.drawTooltip(this.textRenderer, Text.literal(this.handler.getSapAmount() + " / 40000"), x, y);
         }
     }
 

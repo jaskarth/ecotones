@@ -4,13 +4,14 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LanternBlock;
 import net.minecraft.block.enums.SlabType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import supercoder79.ecotones.util.CampfireLogHelper;
@@ -32,10 +33,10 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public final class AurorasDecoCompat {
-    public static final TagKey<Biome> WAY_SIGN_OAK = TagKey.of(Registry.BIOME_KEY, id("feature/way_sign/oak"));
-    public static final TagKey<Biome> WAY_SIGN_BIRCH = TagKey.of(Registry.BIOME_KEY, id("feature/way_sign/birch"));
-    public static final TagKey<Biome> WAY_SIGN_SPRUCE = TagKey.of(Registry.BIOME_KEY, id("feature/way_sign/taiga"));
-    public static final TagKey<Biome> WAY_SIGN_DESERT = TagKey.of(Registry.BIOME_KEY, id("feature/way_sign/desert"));
+    public static final TagKey<Biome> WAY_SIGN_OAK = TagKey.of(RegistryKeys.BIOME, id("feature/way_sign/oak"));
+    public static final TagKey<Biome> WAY_SIGN_BIRCH = TagKey.of(RegistryKeys.BIOME, id("feature/way_sign/birch"));
+    public static final TagKey<Biome> WAY_SIGN_SPRUCE = TagKey.of(RegistryKeys.BIOME, id("feature/way_sign/taiga"));
+    public static final TagKey<Biome> WAY_SIGN_DESERT = TagKey.of(RegistryKeys.BIOME, id("feature/way_sign/desert"));
     private static boolean aurorasDecoEnabled = false;
 
     public static void init() {
@@ -70,7 +71,7 @@ public final class AurorasDecoCompat {
     }
 
     private static BlockState getDeco(String name) {
-        return Registry.BLOCK.get(new Identifier("aurorasdeco", name)).getDefaultState();
+        return Registries.BLOCK.get(new Identifier("aurorasdeco", name)).getDefaultState();
     }
 
     public static void applyDaffodils(EcotonesBiomeBuilder biome) {
@@ -92,7 +93,7 @@ public final class AurorasDecoCompat {
     }
 
     public static Supplier<BlockState> lavender() {
-        return () -> Registry.BLOCK.get(id("lavender")).getDefaultState();
+        return () -> Registries.BLOCK.get(id("lavender")).getDefaultState();
     }
 
     private static Identifier id(String name) {
