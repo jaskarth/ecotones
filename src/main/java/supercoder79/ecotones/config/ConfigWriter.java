@@ -13,9 +13,11 @@ public class ConfigWriter {
         try {
             writeClass(builder, spec.getClass(), spec, 0);
 
+            Paths.get(".", "config").toFile().mkdirs();
             Files.writeString(Paths.get(".", "config", "ecotones.json"), builder.toString(), Charsets.UTF_8);
         } catch (IllegalAccessException | IOException e) {
-            throw new RuntimeException("Exception writing config file: ", e);
+            System.err.println("Exception writing config file: ");
+            e.printStackTrace();
         }
     }
 
