@@ -39,8 +39,6 @@ public class OutpostLayout extends Layout {
                 }
             }
         });
-
-        System.out.println(">>>> " + cells);
     }
 
     private void generateBuildings(BuildingCell building, ChunkGenerator generator, HeightLimitView height) {
