@@ -98,16 +98,16 @@ public class FertilizerSpreaderScreen extends HandledScreen<FertilizerSpreaderSc
             context.drawTooltip(this.textRenderer, Text.literal(this.handler.getPercent() + "% Fertilizer dissolved"), x, y);
         }
 
-        context.drawTextWithShadow(this.textRenderer, "Farms: " + this.handler.getFarmCount(), 117, 58 - 8, 4210752);
-        context.drawTextWithShadow(this.textRenderer, "Water: " + this.handler.getWaterCount(), 117, 58 - 8 + 9, 4210752);
-        context.drawTextWithShadow(this.textRenderer, switch (this.handler.getStatus()) {
+        context.drawText(this.textRenderer, "Farms: " + this.handler.getFarmCount(), 117, 58 - 8, 4210752, false);
+        context.drawText(this.textRenderer, "Water: " + this.handler.getWaterCount(), 117, 58 - 8 + 9, 4210752, false);
+        context.drawText(this.textRenderer, switch (this.handler.getStatus()) {
             case 0 -> "Invalid!";
             case 1 -> "Working...";
             case 2 -> "Water!";
             case 3 -> "Idle";
             case 4 -> "Plants!";
             default -> "Invalid!";
-        }, 117, 58 - 8 + 18, 4210752);
+        }, 117, 58 - 8 + 18, 4210752, false);
     }
 
     private static void drawWater(Matrix4f matrices, int x0, int x1, int y0, int y1, int z, float u0, float u1, float v0, float v1) {

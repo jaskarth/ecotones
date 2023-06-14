@@ -24,18 +24,18 @@ public class SapDistilleryScreenHandler extends ScreenHandler {
         super(EcotonesScreenHandlers.SAP_DISTILLERY, syncId);
         this.propertyDelegate = propertyDelegate;
 
-        this.addSlot(new SapSlot(inventory, 0, 26, 37 - 7));
-        this.addSlot(new LogSlot(inventory, 1, 80, 79 - 7));
+        this.addSlot(new SapSlot(inventory, 0, 26, 37 - 7 - 1));
+        this.addSlot(new LogSlot(inventory, 1, 80, 79 - 7 - 1));
 
         int k;
         for(k = 0; k < 3; ++k) {
             for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInventory, j + k * 9 + 9, 8 + j * 18, 84 + k * 18 + 8));
+                this.addSlot(new Slot(playerInventory, j + k * 9 + 9, 8 + j * 18, 84 + k * 18 + 8 - 1));
             }
         }
 
         for(k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142 + 8));
+            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142 + 8 - 1));
         }
 
         this.addProperties(propertyDelegate);

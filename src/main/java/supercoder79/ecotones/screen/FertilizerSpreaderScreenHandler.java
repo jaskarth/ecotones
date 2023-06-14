@@ -23,17 +23,17 @@ public class FertilizerSpreaderScreenHandler extends ScreenHandler {
 
         this.propertyDelegate = propertyDelegate;
 
-        this.addSlot(new FertilizerSlot(inventory, 0, 80, 71 - 7));
+        this.addSlot(new FertilizerSlot(inventory, 0, 80, 71 - 7 - 1));
 
         int k;
         for(k = 0; k < 3; ++k) {
             for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInventory, j + k * 9 + 9, 8 + j * 18, 84 + k * 18 + 8));
+                this.addSlot(new Slot(playerInventory, j + k * 9 + 9, 8 + j * 18, 84 + k * 18 + 8 - 1));
             }
         }
 
         for(k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142 + 8));
+            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142 + 8 - 1));
         }
 
         this.addProperties(propertyDelegate);

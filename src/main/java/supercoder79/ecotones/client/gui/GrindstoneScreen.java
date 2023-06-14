@@ -69,11 +69,11 @@ public class GrindstoneScreen extends HandledScreen<GrindstoneScreenHandler> {
         // TODO: move these to a custom 9patch so the bubble is dynamic
 
         if (this.handler.getMainChance() > 0) {
-            context.drawTextWithShadow(this.textRenderer, this.handler.getMainChance() + "%", 102, 67 - 7, 4210752);
+            context.drawText(this.textRenderer, this.handler.getMainChance() + "%", 102, 67 - 7, 4210752, false);
         }
 
         if (this.handler.getAltChance() > 0) {
-            context.drawTextWithShadow(this.textRenderer, this.handler.getAltChance() + "%", 25, 54 - 7, 4210752);
+            context.drawText(this.textRenderer, this.handler.getAltChance() + "%", 25, 54 - 7, 4210752, false);
         }
     }
 }

@@ -92,7 +92,6 @@ public final class EcotonesStructures {
     }
 
     private static RegistryEntryList<Biome> getOrCreateBiomeTag(TagKey<Biome> key) {
-        System.out.println(EarlyRegistrationState.globalBuiltins.createRegistryLookup().getOrThrow(RegistryKeys.BIOME));
         Optional<RegistryEntryList.Named<Biome>> optional = EarlyRegistrationState.globalBuiltins.createRegistryLookup().getOrThrow(RegistryKeys.BIOME).getOptional(key);
 //        return BuiltinRegistries.BIOME.getOrCreateEntryList(key);
 //        return new SyntheticRegistryEntryList(Stream.of());

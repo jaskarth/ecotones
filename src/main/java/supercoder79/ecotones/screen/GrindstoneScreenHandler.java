@@ -26,20 +26,20 @@ public class GrindstoneScreenHandler extends ScreenHandler {
         super(EcotonesScreenHandlers.GRINDSTONE, syncId);
         this.propertyDelegate = propertyDelegate;
 
-        this.addSlot(new FuelSlot(inventory, 0, 152, 74 - 7));
-        this.addSlot(new Slot(inventory, 1, 80, 5 - 7));
-        this.addSlot(new JarSlot(inventory, 2, 116, 30 - 7));
-        this.addSlot(new OutSlot(inventory, 3, 80, 74 - 7));
-        this.addSlot(new OutSlot(inventory, 4, 44, 74 - 7));
+        this.addSlot(new FuelSlot(inventory, 0, 152, 74 - 7 - 1));
+        this.addSlot(new Slot(inventory, 1, 80, 5 - 7 - 1));
+        this.addSlot(new JarSlot(inventory, 2, 116, 30 - 7 - 1));
+        this.addSlot(new OutSlot(inventory, 3, 80, 74 - 7 - 1));
+        this.addSlot(new OutSlot(inventory, 4, 44, 74 - 7 - 1));
 
         for(int k = 0; k < 3; ++k) {
             for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInventory, j + k * 9 + 9, 8 + j * 18, 84 + k * 18 + 8));
+                this.addSlot(new Slot(playerInventory, j + k * 9 + 9, 8 + j * 18, 84 + k * 18 + 8 - 1));
             }
         }
 
         for(int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142 + 8));
+            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142 + 8 - 1));
         }
 
         this.addProperties(propertyDelegate);
