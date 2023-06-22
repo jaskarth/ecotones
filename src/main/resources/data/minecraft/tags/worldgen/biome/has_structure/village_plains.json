@@ -29,6 +29,9 @@
     "ecotones:pumpkin_patch_mountainous",
     "ecotones:dandelion_field",
     "ecotones:dandelion_field_hilly",
-    "ecotones:dandelion_field_mountainous"
+    "ecotones:dandelion_field_mountainous",
+    "ecotones:rocky_grassland",
+    "ecotones:rocky_grassland_hilly",
+    "ecotones:rocky_grassland_mountainous"
   ]
 }

@@ -51,6 +51,7 @@ public final class EcotonesFeatures {
     public static final EcotonesFeature<DefaultFeatureConfig> PUMPKIN_FARM = new PumpkinFarmFeature(DefaultFeatureConfig.CODEC);
     public static final EcotonesFeature<DefaultFeatureConfig> ROSEMARY = new RosemaryFeature(DefaultFeatureConfig.CODEC);
     public static final EcotonesFeature<OakTreeFeatureConfig> STRAIGHT_OAK = new StraightOakTreeFeature(OakTreeFeatureConfig.CODEC);
+    public static final EcotonesFeature<OakTreeFeatureConfig> STRAIGHT_SCRAGGLY_OAK = new StraightScragglyOakTreeFeature(OakTreeFeatureConfig.CODEC);
     public static final EcotonesFeature<SimpleTreeFeatureConfig> BARREN_TREE = new BarrenTreeFeature(SimpleTreeFeatureConfig.CODEC);
     public static final EcotonesFeature<SimpleTreeFeatureConfig> FAN_TREE = new FanTreeFeature(SimpleTreeFeatureConfig.CODEC);
     public static final EcotonesFeature<DefaultFeatureConfig> SMALL_ROCK = new SmallRockFeature(DefaultFeatureConfig.CODEC);
@@ -109,6 +110,7 @@ public final class EcotonesFeatures {
         register("pumpkin_farm", PUMPKIN_FARM);
         register("rosemary", ROSEMARY);
         register("straight_oak", STRAIGHT_OAK);
+        register("straight_scraggly_oak", STRAIGHT_SCRAGGLY_OAK);
         register("barren_tree", BARREN_TREE);
         register("fan_tree", FAN_TREE);
         register("small_rock", SMALL_ROCK);

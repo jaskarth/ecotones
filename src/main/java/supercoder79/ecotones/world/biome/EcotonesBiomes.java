@@ -100,6 +100,7 @@ public final class EcotonesBiomes {
         RockySlopesBiome.init();
         SparseTundraBiome.init();
         LavenderFieldBiome.init();
+        RockyGrasslandBiome.init();
 
         // Cave biomes
         LimestoneCaveBiome.init();

@@ -60,6 +60,9 @@
     "ecotones:dandelion_field_mountainous",
     "ecotones:rocky_slopes",
     "ecotones:rocky_slopes_hilly",
-    "ecotones:rocky_slopes_mountainous"
+    "ecotones:rocky_slopes_mountainous",
+    "ecotones:rocky_grassland",
+    "ecotones:rocky_grassland_hilly",
+    "ecotones:rocky_grassland_mountainous"
   ]
 }

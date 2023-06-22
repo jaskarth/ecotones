@@ -35,7 +35,7 @@ dependencies {
 //		exclude module : "fabric-loader"
 //	}
 
-	modCompileOnly ("dev.emi:emi:0.7.1+1.19.2") {
+	modImplementation ("dev.emi:emi-fabric:1.0.5+1.20.1") {
 		transitive = false
 	}
 
