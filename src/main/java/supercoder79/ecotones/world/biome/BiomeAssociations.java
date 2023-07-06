@@ -15,9 +15,9 @@ public class BiomeAssociations {
     public static final BiomeAssociation LONELY_SAVANNA_LIKE = new BiomeAssociation(DEFAULT, BiomeTags.IS_SAVANNA);
     public static final BiomeAssociation SAVANNA_LIKE = new BiomeAssociation(LONELY_SAVANNA_LIKE, BiomeTags.PILLAGER_OUTPOST_HAS_STRUCTURE, BiomeTags.VILLAGE_SAVANNA_HAS_STRUCTURE);
     public static final BiomeAssociation FOREST_LIKE = new BiomeAssociation(DEFAULT, BiomeTags.IS_FOREST);
-    public static final BiomeAssociation JUNGLE_LIKE = new BiomeAssociation(DEFAULT_STRUCTURES, BiomeTags.RUINED_PORTAL_JUNGLE_HAS_STRUCTURE, BiomeTags.JUNGLE_TEMPLE_HAS_STRUCTURE, BiomeTags.IS_JUNGLE);
+    public static final BiomeAssociation JUNGLE_LIKE = new BiomeAssociation(DEFAULT_STRUCTURES, BiomeTags.RUINED_PORTAL_JUNGLE_HAS_STRUCTURE, BiomeTags.JUNGLE_TEMPLE_HAS_STRUCTURE, BiomeTags.IS_JUNGLE, BiomeTags.TRAIL_RUINS_HAS_STRUCTURE);
     public static final BiomeAssociation LONLEY_SPRUCE_LIKE = new BiomeAssociation(DEFAULT, BiomeTags.IS_TAIGA);
-    public static final BiomeAssociation SPRUCE_LIKE = new BiomeAssociation(LONLEY_SPRUCE_LIKE, BiomeTags.PILLAGER_OUTPOST_HAS_STRUCTURE, BiomeTags.VILLAGE_TAIGA_HAS_STRUCTURE, AurorasDecoCompat.WAY_SIGN_SPRUCE);
+    public static final BiomeAssociation SPRUCE_LIKE = new BiomeAssociation(LONLEY_SPRUCE_LIKE, BiomeTags.PILLAGER_OUTPOST_HAS_STRUCTURE, BiomeTags.VILLAGE_TAIGA_HAS_STRUCTURE, AurorasDecoCompat.WAY_SIGN_SPRUCE, BiomeTags.TRAIL_RUINS_HAS_STRUCTURE);
     public static final BiomeAssociation PLAINS_LIKE = new BiomeAssociation(DEFAULT, BiomeTags.PILLAGER_OUTPOST_HAS_STRUCTURE, BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE, AurorasDecoCompat.WAY_SIGN_OAK);
     public static final BiomeAssociation LONELY_PLAINS_LIKE = new BiomeAssociation(DEFAULT);
     public static final BiomeAssociation MOUNTAIN_LIKE = new BiomeAssociation(DEFAULT_STRUCTURES, BiomeTags.IS_MOUNTAIN, BiomeTags.RUINED_PORTAL_MOUNTAIN_HAS_STRUCTURE);

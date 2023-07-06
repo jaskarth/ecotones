@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -40,7 +41,7 @@ public class LarchTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
         Random random = context.getRandom();
         SimpleTreeFeatureConfig config = context.getConfig();
 
-        if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) {
+        if (!world.getBlockState(pos.down()).isIn(BlockTags.DIRT)) {
             return false;
         }
 
@@ -52,7 +53,7 @@ public class LarchTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
 
         List<BlockPos> logs = new ArrayList<>();
         for (int y = 0; y < 8 + heightAddition; y++) {
-            world.setBlockState(mutable, config.woodState, 0);
+            world.setBlockState(mutable, config.woodState, 3);
             logs.add(mutable.toImmutable());
             mutable.move(Direction.UP);
         }
@@ -64,7 +65,7 @@ public class LarchTreeFeature extends EcotonesFeature<SimpleTreeFeatureConfig> {
         for (int y = 0; y < 8; y++) {
             Shapes.circle(mutable.mutableCopy(), maxRadius * model(y / 8.f), leafPos -> {
                 if (AbstractTreeFeature.isAirOrLeaves(world, leafPos)) {
-                    world.setBlockState(leafPos, config.leafState, 0);
+                    world.setBlockState(leafPos, config.leafState, 3);
                     leaves.add(leafPos.toImmutable());
                 }
             });

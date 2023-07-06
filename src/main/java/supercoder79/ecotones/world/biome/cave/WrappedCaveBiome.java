@@ -26,15 +26,17 @@ public static WrappedCaveBiome DRIPSTONE;
 public static WrappedCaveBiome DEEP_DARK;
 
     public static void init() {
-        LUSH = new WrappedCaveBiome(BiomeKeys.LUSH_CAVES);
-        DRIPSTONE = new WrappedCaveBiome(BiomeKeys.DRIPSTONE_CAVES);
-        DEEP_DARK = new WrappedCaveBiome(BiomeKeys.DEEP_DARK);
+        LUSH = new WrappedCaveBiome(BiomeKeys.LUSH_CAVES, 50);
+        DRIPSTONE = new WrappedCaveBiome(BiomeKeys.DRIPSTONE_CAVES, 50);
+        DEEP_DARK = new WrappedCaveBiome(BiomeKeys.DEEP_DARK, 10);
     }
 
     private final RegistryKey<Biome> key;
+    private final int y;
 
-    protected WrappedCaveBiome(RegistryKey<Biome> key) {
+    protected WrappedCaveBiome(RegistryKey<Biome> key, int y) {
         this.key = key;
+        this.y = y;
     }
 
     @Override
@@ -55,16 +57,22 @@ public static WrappedCaveBiome DEEP_DARK;
     @NotNull
     private List<PlacementModifier> mapPlacements(PlacedFeature p) {
         List<PlacementModifier> list = new ArrayList<>(p.placementModifiers().stream().filter(m -> !(m instanceof BiomePlacementModifier)).toList());
-        list.add(new CavePlacementModifier());
+        list.add(new CavePlacementModifier(this.y));
 
         return list;
     }
 
     private static class CavePlacementModifier extends PlacementModifier {
 
+        private final int y;
+
+        private CavePlacementModifier(int y) {
+            this.y = y;
+        }
+
         @Override
         public Stream<BlockPos> getPositions(FeaturePlacementContext context, Random random, BlockPos pos) {
-            return pos.getY() > 50 ? Stream.empty() : Stream.of(pos);
+            return pos.getY() > this.y ? Stream.empty() : Stream.of(pos);
         }
 
         @Override

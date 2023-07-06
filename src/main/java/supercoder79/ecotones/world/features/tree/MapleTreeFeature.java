@@ -2,6 +2,7 @@ package supercoder79.ecotones.world.features.tree;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.StructureWorldAccess;
@@ -30,7 +31,7 @@ public class MapleTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
         TreeGenerationConfig config = context.getConfig();
 
         // Ensure spawn
-        if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) {
+        if (!world.getBlockState(pos.down()).isIn(BlockTags.DIRT)) {
             return false;
         }
 
@@ -49,7 +50,7 @@ public class MapleTreeFeature extends EcotonesFeature<TreeGenerationConfig> {
 
         growLeaves(world, random, maxHeight, leafPlacementNodes, config);
 
-        return false;
+        return true;
     }
 
     private void trunk(WorldAccess world, BlockPos startPos, Random random, float yaw, float pitch, int maxHeight, List<LeafNode> leafPlacementNodes, TreeGenerationConfig config) {
