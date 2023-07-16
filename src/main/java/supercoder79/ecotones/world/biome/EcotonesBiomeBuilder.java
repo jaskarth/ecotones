@@ -39,13 +39,10 @@ public abstract class EcotonesBiomeBuilder {
     private double volatility = 1.0;
     private ConfiguredSurfaceBuilder<?> configuredSurfaceBuilder;
     private List<TagKey<Biome>> tags = new ArrayList<>();
-//    private final List<ConfiguredStructureFeature<?, ?>> structures = new ArrayList<>();
-//    private Biome.Category category;
-
     public EcotonesBiomeBuilder() {
         this.builder = new Biome.Builder();
         this.spawnSettings = new SpawnSettings.Builder();
-        this.generationSettings = new EcotonesLookupBuilder();
+        this.generationSettings = new EcotonesLookupBuilder(this.features);
         this.biomeEffects = new BiomeEffects.Builder();
 
         // Defaults
@@ -54,11 +51,6 @@ public abstract class EcotonesBiomeBuilder {
         this.biomeEffects.fogColor(0xC0D8FF);
         associate(BiomeAssociations.DEFAULT);
     }
-
-//    protected void category(Biome.Category category) {
-////        this.category = category;
-//        this.builder.category(category);
-//    }
 
     protected void associate(BiomeAssociations.BiomeAssociation... associations) {
         this.tags = Arrays.stream(associations).flatMap(a -> Arrays.stream(a.tags())).toList();
@@ -105,10 +97,6 @@ public abstract class EcotonesBiomeBuilder {
         this.spawnSettings.spawn(group, entry);
     }
 
-    protected void playerSpawnFriendly() {
-//        this.spawnSettings.playerSpawnFriendly();
-    }
-
     protected void grassColor(int grassColor) {
         this.biomeEffects.grassColor(grassColor);
     }
@@ -133,41 +121,13 @@ public abstract class EcotonesBiomeBuilder {
         this.biomeEffects.particleConfig(particleConfig);
     }
 
-//    protected void addFeature(GenerationStep.Feature step, EcotonesConfiguredFeature<?, ?> feature) {
-//        addFeature(step, feature.vanilla(), feature.placed());
-//    }
-
-//    protected void addFeature(GenerationStep.Feature step, ConfiguredFeature<?, ?> feature) {
-//        addFeature(step, feature, new PlacedFeature(new RegistryEntry.Direct<>(feature), new ArrayList<>()));
-//    }
-
     public void addFeature(GenerationStep.Feature step, EcotonesConfiguredFeature<?, ?> ecfeature) {
-//        while (wrapper.feature instanceof DecoratedFeature) {
-//            wrapper = ((DecoratedFeatureConfig)wrapper.config).feature.get();
-//        }
-//        PlacedFeature plf;
-//        if (feature instanceof EcotonesConfiguredFeature ecf) {
-//            plf = ecf.placed();
-//        } else {
-//            plf = new PlacedFeature(new RegistryEntry.Direct<>(feature), new ArrayList<>());
-//        }
-
         ConfiguredFeature<?, ?> feature = ecfeature.vanilla();
-        String name = feature.feature().getClass().getSimpleName();
-        String biomeName = Thread.currentThread().getStackTrace()[3].getClassName();
-        biomeName = biomeName.substring(biomeName.lastIndexOf(".") + 1).toLowerCase(Locale.ROOT);
-        // TODO: refactor this mess into actually putting the biome name in the super call
-
-        Identifier id = new Identifier("ecotones", "ecotones_auto_registered_" + biomeName + "_" + name.toLowerCase(Locale.ROOT) + "_" + featureId.incrementAndGet());
-//        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, id, feature);
 
         PlacedFeature plf = ecfeature.placed(RegistryEntry.of(feature));
-//        Registry.register(BuiltinRegistries.PLACED_FEATURE, id, plf);
-//        RegistryEntry<PlacedFeature> plHolder = BuiltinRegistries.add(BuiltinRegistries.PLACED_FEATURE, id, plf);
 
         RegistryReport.increment("Configured Feature");
         features.add(step, plf);
-//        this.generationSettings.feature(step, plHolder);
     }
 
     protected void addStructureFeature(RegistryEntry<Structure> structure) {
@@ -191,7 +151,6 @@ public abstract class EcotonesBiomeBuilder {
         BiomeRegistries.registerFeatureList(biome, features);
 
         OBJ2DATA.put(biome, new BiomeGenData(this.depth, this.scale, this.volatility, this.hilliness, this.configuredSurfaceBuilder));
-//        BIOME_STRUCTURES.put(biome, this.structures);
 
         return biome;
     }
@@ -204,10 +163,6 @@ public abstract class EcotonesBiomeBuilder {
     public SpawnSettings.Builder getSpawnSettings() {
         return spawnSettings;
     }
-
-//    public Biome.Category getBiomeCategory() {
-//        return this.category;
-//    }
 
     private static int getSkyColor(float temperature) {
         float f = temperature / 3.0F;

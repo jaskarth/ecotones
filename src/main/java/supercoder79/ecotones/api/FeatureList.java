@@ -15,6 +15,10 @@ public class FeatureList {
     }
 
     public void add(GenerationStep.Feature step, PlacedFeature feature) {
+        if (feature == null) {
+            throw new IllegalStateException("Feature list encountered null feature!");
+        }
+
         this.features.computeIfAbsent(step, k -> new ArrayList<>()).add(feature);
     }
 
