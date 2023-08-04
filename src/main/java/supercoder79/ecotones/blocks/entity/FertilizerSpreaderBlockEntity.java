@@ -349,7 +349,13 @@ public class FertilizerSpreaderBlockEntity extends LockableContainerBlockEntity 
 
     @Override
     public boolean isEmpty() {
-        return this.inventory.get(0).isEmpty();
+        for(ItemStack itemStack : this.inventory) {
+            if (!itemStack.isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
