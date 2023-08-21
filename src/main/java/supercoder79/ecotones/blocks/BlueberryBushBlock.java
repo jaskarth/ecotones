@@ -143,6 +143,8 @@ public class BlueberryBushBlock extends PlantBlock implements Fertilizable {
         int baseCount = 1;
         int randomCount = 3;
 
+        if (state.get(AGE) < 2) return ImmutableList.of();
+
         ServerWorld world = builder.getWorld();
         ChunkGenerator generator = world.getChunkManager().getChunkGenerator();
 
