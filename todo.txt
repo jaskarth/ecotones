@@ -1,3 +1,10 @@
+1.10 stuff:
+- All plains-like biome needs horse and donkey spawns
+- Proper cave biome integration
+- Cherry
+- Mangrove
+- Frog spawns
+
 # Biomes
 * Plateau biomes?
 * Bayou

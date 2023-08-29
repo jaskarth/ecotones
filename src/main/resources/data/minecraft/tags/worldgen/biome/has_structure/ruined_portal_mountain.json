@@ -3,19 +3,13 @@
   "values": [
     "ecotones:aspen_foothills",
     "ecotones:aspen_foothills_clearing",
-    "ecotones:aspen_hills",
-    "ecotones:aspen_mountains",
     "ecotones:rocky_foothills",
     "ecotones:rocky_foothills_plateau",
     "ecotones:rocky_foothills_thicket",
     "ecotones:rocky_foothills_lake",
-    "ecotones:rocky_hills",
-    "ecotones:rocky_mountains",
     "ecotones:mountain_peaks",
     "ecotones:lush_foothills",
     "ecotones:sparse_alpine_forest",
-    "ecotones:rocky_slopes",
-    "ecotones:rocky_slopes_hilly",
-    "ecotones:rocky_slopes_mountainous"
+    "ecotones:rocky_slopes"
   ]
 }

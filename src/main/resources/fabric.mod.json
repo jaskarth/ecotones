@@ -4,12 +4,12 @@
   "version": "${version}",
 
   "name": "Ecotones",
-  "description": "A biome overhaul mod with realistic and expansive biomes filled with life!",
+  "description": "A biome overhaul mod with realistic and expansive biomes filled with life",
   "authors": [
-    "SuperCoder79"
+    "jaskarth"
   ],
   "contact": {
-    "sources": "https://github.com/SuperCoder7979/ecotones"
+    "sources": "https://github.com/jaskarth/ecotones"
   },
 
   "license": "LGPLv3",
@@ -18,16 +18,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "supercoder79.ecotones.Ecotones"
+      "com.jaskarth.ecotones.Ecotones"
     ],
     "client": [
-      "supercoder79.ecotones.EcotonesClient"
-    ],
-    "preLaunch": [
-      "supercoder79.ecotones.EcotonesPrelaunch"
+      "com.jaskarth.ecotones.EcotonesClient"
     ],
     "emi": [
-      "supercoder79.ecotones.util.compat.emi.EcotonesEmi"
+      "com.jaskarth.ecotones.util.compat.emi.EcotonesEmi"
     ]
   },
   "mixins": [
@@ -39,7 +36,7 @@
   "depends": {
     "fabricloader": ">=0.7.2",
     "fabric": "*",
-    "minecraft": ">=1.16-"
+    "minecraft": ">=1.20-"
   },
   "suggests": {
     "traverse": "*",

@@ -2,14 +2,8 @@
   "replace": false,
   "values": [
     "ecotones:savanna_mesa",
-    "ecotones:savanna_mesa_hilly",
-    "ecotones:savanna_mesa_mountainous",
     "ecotones:white_mesa",
     "ecotones:white_mesa_plateau",
-    "ecotones:white_mesa_hilly",
-    "ecotones:white_mesa_mountainous",
-    "ecotones:red_rock_ridge",
-    "ecotones:red_rock_ridge_hills",
-    "ecotones:red_rock_ridge_mountainous"
+    "ecotones:red_rock_ridge"
   ]
 }

@@ -30,11 +30,6 @@ dependencies {
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 
-
-//	modRuntimeOnly ("supercoder79:databreaker:0.2.10") {
-//		exclude module : "fabric-loader"
-//	}
-
 	modImplementation ("dev.emi:emi-fabric:1.0.5+1.20.1") {
 		transitive = false
 	}
@@ -77,30 +72,6 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 jar {
 	from "LICENSE"
-
-	List<String> ex = excludedFiles(sourceSets.main.allSource.files)
-	exclude ex
-}
-
-def excludedFiles(Collection<File> files) {
-	List<String> classes = new ArrayList<>()
-//	files.each { file ->
-//		if (file.isDirectory()) {
-//			classes.addAll(excludedFiles(Arrays.asList(file.listFiles())))
-//		} else {
-//			if (file.text.contains("@DevOnly") && file.text.contains("import supercoder79.ecotones.api.DevOnly")) {
-//				classes.add(getClassName(file.absolutePath))
-//			}
-//		}
-//	}
-	return classes
-}
-
-// TODO: doesn't handle inner classes?
-static def getClassName(String path) {
-	String s = path.replace(".java", ".class")
-	s = s.substring(s.indexOf("\\src\\main\\java\\") + "\\src\\main\\java\\".length())
-	return s
 }
 
 // configure the maven publication
