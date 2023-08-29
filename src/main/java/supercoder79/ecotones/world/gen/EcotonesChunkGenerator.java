@@ -7,8 +7,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.structure.StructureSet;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.crash.CrashException;
@@ -432,8 +430,10 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         edgeDecorator.decorate(chunkPos.x, chunkPos.z, this.biomeSource, new FeatureContext<>(Optional.empty(), world, this, new CheckedRandom(random.nextLong()), pos, DefaultFeatureConfig.INSTANCE));
 
 
+        FeatureList featureList = BiomeRegistries.FEATURE_LISTS.get(BiomeRegistries.key(biome));
+
         try {
-            generateFeatureStep(biome, structureAccessor, this, (ChunkRegion) world, populationSeed, new ChunkRandom(new CheckedRandom(random.nextLong())), pos, chunk);
+            generateEcotonesFeatures(this, featureList, biome, structureAccessor, (ChunkRegion) world, populationSeed, new ChunkRandom(new CheckedRandom(random.nextLong())), pos, chunk);
         } catch (Exception ex) {
             CrashReport crashReport = CrashReport.create(ex, "Biome decoration");
             crashReport.addElement("Generation")
@@ -453,14 +453,23 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
         }
     }
 
-    public void generateFeatureStep(Biome biome, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, ChunkRegion region, long populationSeed, ChunkRandom random, BlockPos origin, Chunk chunk) {
+    public static void generateEcotonesFeatures(ChunkGenerator self, FeatureList featureList, Biome biome, StructureAccessor structureAccessor, ChunkRegion region, long populationSeed, ChunkRandom random, BlockPos origin, Chunk chunk) {
         ChunkPos chunkPos = region.getCenterPos();
         ChunkSectionPos chunkSectionPos = ChunkSectionPos.from(chunkPos, region.getBottomSectionCoord());
 
         List<ArrayList<PlacedFeature>> list = new ArrayList<>(biome.getGenerationSettings().getFeatures().stream().map(s -> new ArrayList<>(s.stream().map(RegistryEntry::value).toList())).toList());
-        FeatureList featureList = BiomeRegistries.FEATURE_LISTS.get(BiomeRegistries.key(biome));
+
         if (featureList != null) {
-            for (GenerationStep.Feature step : GenerationStep.Feature.values()) {
+            GenerationStep.Feature[] values = GenerationStep.Feature.values();
+
+            // Fill in empty
+            int diff = values.length - list.size();
+            for (int i = 0; i < diff; i++) {
+                list.add(new ArrayList<>());
+            }
+
+            for (int i = 0; i < values.length; i++) {
+                GenerationStep.Feature step = values[i];
                 list.get(step.ordinal()).addAll(featureList.get(step));
             }
         }
@@ -483,7 +492,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
                     try {
                         region.setCurrentlyGeneratingStructureName(supplier);
                         structureAccessor.getStructureStarts(chunkSectionPos, structure)
-                                .forEach(start -> start.place(region, structureAccessor, this, random, getBlockBoxForChunk(chunk), chunkPos));
+                                .forEach(start -> start.place(region, structureAccessor, self, random, getBlockBoxForChunk(chunk), chunkPos));
                     } catch (Exception var29) {
                         CrashReport crashReport = CrashReport.create(var29, "Feature placement");
                         crashReport.addElement("Feature").add("Description", supplier::get);
@@ -501,7 +510,7 @@ public class EcotonesChunkGenerator extends BaseEcotonesChunkGenerator implement
 
                     try {
                         region.setCurrentlyGeneratingStructureName(supplier3);
-                        feature.generate(region, chunkGenerator, random, origin);
+                        feature.generate(region, self, random, origin);
                     } catch (Exception var25) {
                         CrashReport crashReport2 = CrashReport.create(var25, "Feature placement");
                         crashReport2.addElement("Feature").add("Description", supplier3::get);

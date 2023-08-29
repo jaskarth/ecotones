@@ -54,7 +54,6 @@ public final class Ecotones implements ModInitializer {
 	public static final ConfigSpec CONFIG = ConfigReader.read();
 	private static final boolean RUN_DATA_GEN = "true".equals(System.getProperty("ECOTONES_RUN_DATAGEN", null));
 
-	// TODO: split out into it's own class
 	public static final Identifier WORLD_TYPE = new Identifier("ecotones", "world_type");
 
 	public static final Logger LOGGER = LogManager.getLogger("ecotones");
@@ -145,10 +144,8 @@ public final class Ecotones implements ModInitializer {
 			if (id.getNamespace().contains("ecotones")) {
 				Biome biome = EarlyBiomeRegistry.get(id);
 				BiomeGenData data = EcotonesBiomeBuilder.OBJ2DATA.get(biome);
-//				List<ConfiguredStructureFeature<?, ?>> structures = EcotonesBiomeBuilder.BIOME_STRUCTURES.get(biome);
 
 				RegistryKey<Biome> key = EarlyBiomeRegistry.get(biome).get();
-//				EcotonesStructuresConfig.STRUCTURE_DATA.put(key, structures);
 				BiomeGenData.LOOKUP.put(key, data);
 				if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 					BiomeChecker.check(biome);
@@ -166,13 +163,6 @@ public final class Ecotones implements ModInitializer {
 		// register chunk generator and world type
 		Registry.register(Registries.BIOME_SOURCE, new Identifier("ecotones", "ecotones"), EcotonesBiomeSource.CODEC);
 		Registry.register(Registries.CHUNK_GENERATOR, new Identifier("ecotones", "ecotones"), EcotonesChunkGenerator.CODEC);
-
-//		EcotonesWorldType.init();
-
-		// Store if this server is in ecotones or not
-//		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-//			isServerEcotones = server.getOverworld().getChunkManager().getChunkGenerator() instanceof EcotonesChunkGenerator;
-//		});
 
 		log("Ecotones init took " + (System.currentTimeMillis() - start) + "ms!");
 	}
