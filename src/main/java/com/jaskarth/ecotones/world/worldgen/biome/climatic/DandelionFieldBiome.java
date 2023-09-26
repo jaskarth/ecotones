@@ -48,18 +48,9 @@ public class DandelionFieldBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(EcotonesStructures.CAMPFIRE_OAK);
         BiomeHelper.addDefaultFeatures(this);
 
-        
+        BiomeDecorator.addSurfaceRocks(this);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .decorate(EcotonesDecorators.ROCKINESS.configure()));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.GRASSLAND_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .decorate(NoiseThresholdCountPlacementModifier.of(-0.8D, 8, 12)));
+        BiomeDecorator.addGrass(this, FeatureConfigHolder.GRASSLAND_CONFIG, 12);
 
         BiomeDecorator.addOakShrubs(this, 0.6, 1.2);
 
@@ -98,9 +89,7 @@ public class DandelionFieldBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .applyChance(48));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 1))
-                        .decorate(EcotonesDecorators.LARGE_ROCK.configure(new ChanceDecoratorConfig(6))));
+        BiomeDecorator.addRock(this, 6);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
@@ -108,11 +97,7 @@ public class DandelionFieldBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(UniformIntProvider.create(1, 2)));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
-                        .decorate(new Spread32Decorator())
-                        .spreadHorizontally()
-                        .repeat(UniformIntProvider.create(0, 2)));
+        BiomeDecorator.addClover(this, UniformIntProvider.create(0, 2));
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.GROUND_PATCH.configure(new PatchFeatureConfig(EcotonesBlocks.PEAT_BLOCK.getDefaultState(), Blocks.GRASS_BLOCK, UniformIntProvider.create(1, 4)))

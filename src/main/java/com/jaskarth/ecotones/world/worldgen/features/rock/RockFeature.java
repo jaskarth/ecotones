@@ -57,8 +57,6 @@ public class RockFeature extends EcotonesFeature<RockFeatureConfig> {
                     float radius = (float)(x + y + z) * 0.333F + 0.5F;
                     Iterator<BlockPos> iterator = BlockPos.iterate(pos.add(-x, -y, -z), pos.add(x, y, z)).iterator();
 
-                    // We disable this inspection because ***somehow*** it doesn't work with a foreach?! How?!
-                    //noinspection WhileLoopReplaceableByForEach
                     while(iterator.hasNext()) {
                         BlockPos local = iterator.next();
                         if (local.getSquaredDistance(pos) <= (double)(radius * radius)) {

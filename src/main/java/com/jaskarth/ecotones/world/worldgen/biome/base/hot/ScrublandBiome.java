@@ -1,5 +1,6 @@
 package com.jaskarth.ecotones.world.worldgen.biome.base.hot;
 
+import com.jaskarth.ecotones.world.worldgen.biome.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -17,10 +18,6 @@ import com.jaskarth.ecotones.api.Climate;
 import com.jaskarth.ecotones.api.SimpleTreeDecorationData;
 import com.jaskarth.ecotones.client.particle.EcotonesParticles;
 import com.jaskarth.ecotones.util.compat.LambdaFoxesCompat;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeAssociations;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeHelper;
-import com.jaskarth.ecotones.world.worldgen.biome.EarlyBiomeRegistry;
-import com.jaskarth.ecotones.world.worldgen.biome.EcotonesBiomeBuilder;
 import com.jaskarth.ecotones.world.worldgen.decorator.*;
 import com.jaskarth.ecotones.world.worldgen.features.EcotonesFeatures;
 import com.jaskarth.ecotones.world.worldgen.features.config.FeatureConfigHolder;
@@ -54,11 +51,8 @@ public class ScrublandBiome extends EcotonesBiomeBuilder {
         this.volatility(volatility);
         associate(BiomeAssociations.SAVANNA_LIKE);
 
-        
-
-        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
-                        .decorate(EcotonesDecorators.LARGE_ROCK.configure(new ChanceDecoratorConfig(8))));
+        BiomeDecorator.addRock(this, Blocks.COBBLESTONE.getDefaultState(), 1, 8);
+        BiomeDecorator.addAcaciaShrubs(this, 4.5, 0.05);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
@@ -83,40 +77,14 @@ public class ScrublandBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.CACTI.configure(FeatureConfig.DEFAULT)
                         .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(2))));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(4.5))));
+        BiomeDecorator.addSurfaceRocks(this);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .decorate(EcotonesDecorators.ROCKINESS.configure()));
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.SMALL_CACTUS, 4);
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.ONLY_TALL_GRASS_CONFIG, 4);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_CACTUS)
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .applyChance(3));
+        BiomeDecorator.addGrass(this, FeatureConfigHolder.SCRUBLAND_CONFIG, 10);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.ONLY_TALL_GRASS_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .applyChance(4));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SCRUBLAND_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .decorate(NoiseThresholdCountPlacementModifier.of(-0.8D, 5, 10)));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .repeat(3));
+        BiomeDecorator.addPatch(this, FeatureConfigHolder.DESERT_GRASS_CONFIG, 3);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BIG_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()))
@@ -128,12 +96,7 @@ public class ScrublandBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .decorate(EcotonesDecorators.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(3, 0.5f, 2))));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.FLAME_LILY)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .applyChance(6));
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.FLAME_LILY, 6);
 
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
         BiomeHelper.addDefaultFeatures(this);

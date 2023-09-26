@@ -2,6 +2,7 @@ package com.jaskarth.ecotones.world.worldgen.biome.climatic;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.jaskarth.ecotones.world.worldgen.biome.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.fluid.Fluids;
@@ -14,8 +15,6 @@ import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.PredicatedStateProvider;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeAssociations;
-import com.jaskarth.ecotones.world.worldgen.biome.EarlyBiomeRegistry;
 import com.jaskarth.ecotones.world.worldgen.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import com.jaskarth.ecotones.world.worldgen.decorator.*;
@@ -25,8 +24,6 @@ import com.jaskarth.ecotones.api.BiomeRegistries;
 import com.jaskarth.ecotones.api.Climate;
 import com.jaskarth.ecotones.api.SimpleTreeDecorationData;
 import com.jaskarth.ecotones.world.blocks.EcotonesBlocks;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeHelper;
-import com.jaskarth.ecotones.world.worldgen.biome.EcotonesBiomeBuilder;
 import com.jaskarth.ecotones.world.worldgen.features.EcotonesFeatures;
 import com.jaskarth.ecotones.world.worldgen.features.config.*;
 import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
@@ -57,9 +54,7 @@ public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
 
         this.addStructureFeature(EcotonesStructures.CAMPFIRE_SPRUCE);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(2.4))));
+        BiomeDecorator.addSpruceShrubs(this, 2.4, 0.85);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                         EcotonesConfiguredFeature.wrap(Feature.TREE, (FeatureConfigHolder.SMALL_PINE_CONFIG))
@@ -69,20 +64,10 @@ public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
                 EcotonesConfiguredFeature.wrap(Feature.TREE, (FeatureConfigHolder.SPRUCE_TREE_CONFIG))
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(6.2))));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .decorate(NoiseThresholdCountPlacementModifier.of(-0.8D, 6, 8)));
+        BiomeDecorator.addGrass(this, FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG, 8);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.85))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 2))
-                        .decorate(EcotonesDecorators.LARGE_ROCK.configure(new ChanceDecoratorConfig(3))));
+        BiomeDecorator.addRock(this, 3);
+        // TODO: rock_in_water
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
@@ -110,13 +95,7 @@ public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
                         .repeat(3)
                         .applyChance(48));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .repeat(2)
-        );
+        BiomeDecorator.addClover(this, 2);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)

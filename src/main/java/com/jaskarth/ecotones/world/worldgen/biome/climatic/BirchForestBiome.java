@@ -44,17 +44,8 @@ public class BirchForestBiome extends EcotonesBiomeBuilder {
 
         this.addStructureFeature(EcotonesStructures.CAMPFIRE_BIRCH);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .decorate(EcotonesDecorators.ROCKINESS.configure()));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SHORT_GRASS_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .decorate(NoiseThresholdCountPlacementModifier.of(-0.8D, 16, 20)));
-
+        BiomeDecorator.addSurfaceRocks(this);
+        BiomeDecorator.addGrass(this, FeatureConfigHolder.SHORT_GRASS_CONFIG, 20);
         BiomeDecorator.addBirchShrubs(this, 2.5, 2.5);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,

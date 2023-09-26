@@ -1,5 +1,6 @@
 package com.jaskarth.ecotones.world.worldgen.biome.climatic;
 
+import com.jaskarth.ecotones.world.worldgen.biome.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -11,8 +12,6 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.NoiseThresholdCountPlacementModifier;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeAssociations;
-import com.jaskarth.ecotones.world.worldgen.biome.EarlyBiomeRegistry;
 import com.jaskarth.ecotones.world.worldgen.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import com.jaskarth.ecotones.world.worldgen.decorator.Spread32Decorator;
@@ -23,8 +22,6 @@ import com.jaskarth.ecotones.api.BiomeRegistries;
 import com.jaskarth.ecotones.api.Climate;
 import com.jaskarth.ecotones.api.SimpleTreeDecorationData;
 import com.jaskarth.ecotones.util.compat.LambdaFoxesCompat;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeHelper;
-import com.jaskarth.ecotones.world.worldgen.biome.EcotonesBiomeBuilder;
 import com.jaskarth.ecotones.world.worldgen.decorator.EcotonesDecorators;
 import com.jaskarth.ecotones.world.worldgen.features.EcotonesFeatures;
 import com.jaskarth.ecotones.world.worldgen.features.config.FeatureConfigHolder;
@@ -69,18 +66,8 @@ public class LushDesertBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(16));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.DESERT_GRASS_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .decorate(NoiseThresholdCountPlacementModifier.of(-0.8D, 9, 12)));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_CACTUS)
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .applyChance(2));
+        BiomeDecorator.addGrass(this, FeatureConfigHolder.DESERT_GRASS_CONFIG, 12);
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.SMALL_CACTUS, 2);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))

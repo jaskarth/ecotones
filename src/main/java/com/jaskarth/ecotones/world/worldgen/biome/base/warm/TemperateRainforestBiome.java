@@ -1,5 +1,6 @@
 package com.jaskarth.ecotones.world.worldgen.biome.base.warm;
 
+import com.jaskarth.ecotones.world.worldgen.biome.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
@@ -8,8 +9,6 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeAssociations;
-import com.jaskarth.ecotones.world.worldgen.biome.EarlyBiomeRegistry;
 import com.jaskarth.ecotones.world.worldgen.decorator.ChanceDecoratorConfig;
 import com.jaskarth.ecotones.world.worldgen.decorator.Spread32Decorator;
 import com.jaskarth.ecotones.world.worldgen.features.EcotonesConfiguredFeature;
@@ -18,8 +17,6 @@ import com.jaskarth.ecotones.api.BiomeRegistries;
 import com.jaskarth.ecotones.api.Climate;
 import com.jaskarth.ecotones.api.SimpleTreeDecorationData;
 import com.jaskarth.ecotones.api.TreeType;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeHelper;
-import com.jaskarth.ecotones.world.worldgen.biome.EcotonesBiomeBuilder;
 import com.jaskarth.ecotones.world.worldgen.decorator.EcotonesDecorators;
 import com.jaskarth.ecotones.world.worldgen.decorator.ShrubDecoratorConfig;
 import com.jaskarth.ecotones.world.worldgen.features.EcotonesFeatures;
@@ -84,7 +81,7 @@ public class TemperateRainforestBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesConfiguredFeature.wrap(Feature.TREE, FeatureConfigHolder.MEGA_JUNGLE)
-                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(1.75, true))));
+                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(2.75, true))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
@@ -92,12 +89,7 @@ public class TemperateRainforestBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(4));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .decorate(NoiseThresholdCountPlacementModifier.of(-0.8D, 20, 20)));
+        BiomeDecorator.addGrass(this, FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG, 20);
 
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
         BiomeHelper.addDefaultFeatures(this);

@@ -1,5 +1,6 @@
 package com.jaskarth.ecotones.world.worldgen.biome.climatic;
 
+import com.jaskarth.ecotones.world.worldgen.biome.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
@@ -8,8 +9,6 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
 import com.jaskarth.ecotones.util.compat.AurorasDecoCompat;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeAssociations;
-import com.jaskarth.ecotones.world.worldgen.biome.EarlyBiomeRegistry;
 import com.jaskarth.ecotones.world.data.EcotonesData;
 import com.jaskarth.ecotones.world.worldgen.decorator.Spread32Decorator;
 import com.jaskarth.ecotones.world.worldgen.surface.system.SurfaceBuilder;
@@ -17,8 +16,6 @@ import com.jaskarth.ecotones.api.BiomeRegistries;
 import com.jaskarth.ecotones.api.Climate;
 import com.jaskarth.ecotones.api.SimpleTreeDecorationData;
 import com.jaskarth.ecotones.api.TreeType;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeHelper;
-import com.jaskarth.ecotones.world.worldgen.biome.EcotonesBiomeBuilder;
 import com.jaskarth.ecotones.world.worldgen.decorator.EcotonesDecorators;
 import com.jaskarth.ecotones.world.worldgen.decorator.ShrubDecoratorConfig;
 import com.jaskarth.ecotones.world.worldgen.features.EcotonesFeatures;
@@ -57,41 +54,16 @@ public class FlowerPrairieBiome extends EcotonesBiomeBuilder {
         DefaultBiomeFeatures.addForestFlowers(this.getGenerationSettings());
         this.getGenerationSettings().feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.FLOWER_FLOWER_FOREST);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .decorate(EcotonesDecorators.ROCKINESS.configure()));
+        BiomeDecorator.addSurfaceRocks(this);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.PRAIRIE_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .decorate(NoiseThresholdCountPlacementModifier.of(-0.8D, 16, 18)));
+        BiomeDecorator.addGrass(this, FeatureConfigHolder.PRAIRIE_CONFIG, 18);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .repeat(1)
-        );
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(2))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.15))));
+        BiomeDecorator.addClover(this, 1);
+        BiomeDecorator.addOakShrubs(this, 1, 0.85);
 
         DefaultBiomeFeatures.addForestFlowers(this.getGenerationSettings());
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SWITCHGRASS_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .applyChance(2));
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.SWITCHGRASS_CONFIG, 2);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.DENSE_LAVENDER_LILAC)
@@ -105,12 +77,7 @@ public class FlowerPrairieBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING)));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_LILAC)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .repeat(2));
+        BiomeDecorator.addLilacs(this, 2);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.STRAIGHT_OAK.configure(new OakTreeFeatureConfig(12, 7))

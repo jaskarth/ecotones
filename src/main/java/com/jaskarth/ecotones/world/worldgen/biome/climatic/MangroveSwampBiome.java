@@ -1,5 +1,6 @@
 package com.jaskarth.ecotones.world.worldgen.biome.climatic;
 
+import com.jaskarth.ecotones.world.worldgen.biome.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
@@ -9,8 +10,6 @@ import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.feature.*;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeAssociations;
-import com.jaskarth.ecotones.world.worldgen.biome.EarlyBiomeRegistry;
 import com.jaskarth.ecotones.world.worldgen.features.EcotonesConfiguredFeature;
 import com.jaskarth.ecotones.world.worldgen.features.mc.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
@@ -22,8 +21,6 @@ import com.jaskarth.ecotones.api.Climate;
 import com.jaskarth.ecotones.api.SimpleTreeDecorationData;
 import com.jaskarth.ecotones.api.TreeType;
 import com.jaskarth.ecotones.world.blocks.EcotonesBlocks;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeHelper;
-import com.jaskarth.ecotones.world.worldgen.biome.EcotonesBiomeBuilder;
 import com.jaskarth.ecotones.world.worldgen.decorator.EcotonesDecorators;
 import com.jaskarth.ecotones.world.worldgen.decorator.ShrubDecoratorConfig;
 import com.jaskarth.ecotones.world.worldgen.features.EcotonesFeatures;
@@ -56,31 +53,10 @@ public class MangroveSwampBiome extends EcotonesBiomeBuilder {
         this.hilliness(0.3);
         this.volatility(1.0);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(1.3))));
-
-        this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
-                EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 0))
-                        .decorate(EcotonesDecorators.LARGE_ROCK.configure(new ChanceDecoratorConfig(12))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.55))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .decorate(NoiseThresholdCountPlacementModifier.of(-0.8D, 7, 12)));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .repeat(6));
+        BiomeDecorator.addOakShrubs(this, 1.3, 0.55);
+        BiomeDecorator.addRock(this, Blocks.COBBLESTONE.getDefaultState(), 1, 12);
+        BiomeDecorator.addGrass(this, FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG, 12);
+        BiomeDecorator.addPatch(this, FeatureConfigHolder.MOSS, 6);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.MANGROVE_TREE.configure(TreeType.MANGROVE)

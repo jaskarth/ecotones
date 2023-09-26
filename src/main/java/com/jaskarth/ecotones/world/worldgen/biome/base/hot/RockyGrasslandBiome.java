@@ -1,5 +1,6 @@
 package com.jaskarth.ecotones.world.worldgen.biome.base.hot;
 
+import com.jaskarth.ecotones.world.worldgen.biome.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -17,12 +18,7 @@ import com.jaskarth.ecotones.api.Climate;
 import com.jaskarth.ecotones.api.SimpleTreeDecorationData;
 import com.jaskarth.ecotones.api.TreeType;
 import com.jaskarth.ecotones.world.blocks.EcotonesBlocks;
-import com.jaskarth.ecotones.util.compat.FloralisiaCompat;
 import com.jaskarth.ecotones.util.state.DeferredBlockStateProvider;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeAssociations;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeHelper;
-import com.jaskarth.ecotones.world.worldgen.biome.EarlyBiomeRegistry;
-import com.jaskarth.ecotones.world.worldgen.biome.EcotonesBiomeBuilder;
 import com.jaskarth.ecotones.world.worldgen.decorator.ChanceDecoratorConfig;
 import com.jaskarth.ecotones.world.worldgen.decorator.EcotonesDecorators;
 import com.jaskarth.ecotones.world.worldgen.decorator.ShrubDecoratorConfig;
@@ -57,22 +53,11 @@ public class RockyGrasslandBiome extends EcotonesBiomeBuilder {
 
         this.addStructureFeature(EcotonesStructures.CAMPFIRE_OAK);
 
-        
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .decorate(EcotonesDecorators.ROCKINESS.configure()));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.GRASSLAND_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .decorate(NoiseThresholdCountPlacementModifier.of(-0.8D, 12, 15)));
-
-        this.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 1))
-                        .decorate(EcotonesDecorators.LARGE_ROCK.configure(new ChanceDecoratorConfig(16))));
+        BiomeDecorator.addSurfaceRocks(this);
+        BiomeDecorator.addGrass(this, FeatureConfigHolder.GRASSLAND_CONFIG, 15);
+        BiomeDecorator.addRock(this, 16);
+        BiomeDecorator.addOakShrubs(this, 0.2, 0.25);
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.SWITCHGRASS_CONFIG, 4);
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.ROCK_SPIRE.configure(FeatureConfigHolder.STONE_SPIRE)
@@ -81,27 +66,12 @@ public class RockyGrasslandBiome extends EcotonesBiomeBuilder {
                         .applyChance(26));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.2))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.STRAIGHT_SCRAGGLY_OAK.configure(new OakTreeFeatureConfig(8, 6).branchCount(2).randomBranchCount(2).branchLength(2).randomBranchLength(4))
                         .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_LARGE_CLUSTERED_OAK.decorationData)));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.25))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DEAD_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
                         .decorate(EcotonesDecorators.REVERSE_QUALITY_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.08))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SWITCHGRASS_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .applyChance(4));
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.GROUND_PATCH.configure(new PatchFeatureConfig(EcotonesBlocks.PEAT_BLOCK.getDefaultState(), Blocks.GRASS_BLOCK, UniformIntProvider.create(1, 4)))
@@ -127,14 +97,6 @@ public class RockyGrasslandBiome extends EcotonesBiomeBuilder {
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
                         .repeat(2));
-
-        if (FloralisiaCompat.isEnabled()) {
-            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                    EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new DeferredBlockStateProvider(FloralisiaCompat.gladiolus())).tries(24).build())
-                            .decorate(new Spread32Decorator())
-                            .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                            .spreadHorizontally());
-        }
 
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
 

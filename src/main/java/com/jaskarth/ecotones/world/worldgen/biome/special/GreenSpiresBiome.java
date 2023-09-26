@@ -1,6 +1,7 @@
 package com.jaskarth.ecotones.world.worldgen.biome.special;
 
 import com.google.common.collect.ImmutableList;
+import com.jaskarth.ecotones.world.worldgen.biome.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -17,8 +18,6 @@ import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.heightprovider.BiasedToBottomHeightProvider;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeAssociations;
-import com.jaskarth.ecotones.world.worldgen.biome.EarlyBiomeRegistry;
 import com.jaskarth.ecotones.world.worldgen.decorator.CountExtraDecoratorConfig;
 import com.jaskarth.ecotones.world.worldgen.features.EcotonesConfiguredFeature;
 import com.jaskarth.ecotones.world.worldgen.surface.system.SurfaceBuilder;
@@ -27,8 +26,6 @@ import net.minecraft.world.gen.treedecorator.LeavesVineTreeDecorator;
 import net.minecraft.world.gen.treedecorator.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import com.jaskarth.ecotones.api.BiomeRegistries;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeHelper;
-import com.jaskarth.ecotones.world.worldgen.biome.EcotonesBiomeBuilder;
 import com.jaskarth.ecotones.world.worldgen.decorator.EcotonesDecorators;
 import com.jaskarth.ecotones.world.worldgen.decorator.ShrubDecoratorConfig;
 import com.jaskarth.ecotones.world.worldgen.decorator.Spread32Decorator;
@@ -75,9 +72,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
         this.waterColor(0x74ad57);
         this.waterFogColor(0x73a859);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SURFACE_ROCKS)
-                        .decorate(EcotonesDecorators.ROCKINESS.configure()));
+        BiomeDecorator.addSurfaceRocks(this);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.JUNGLE_PALM_TREE.configure(JUNGLE_TREE)
@@ -106,16 +101,8 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
                 .repeat(256)
         );
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.JUNGLE_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(8))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .decorate(NoiseThresholdCountPlacementModifier.of(-0.8D, 10, 20)));
+        BiomeDecorator.addJungleShrubs(this, 8, 4);
+        BiomeDecorator.addGrass(this, FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG, 20);
 
         
 

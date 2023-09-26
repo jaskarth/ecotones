@@ -87,9 +87,9 @@ public final class BiomeHelper {
                         .spreadHorizontally()
                         .applyChance(220));
 
-        builder.addFeature(GenerationStep.Feature.RAW_GENERATION,
-                EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT)
-                        .decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure()));
+//        builder.addFeature(GenerationStep.Feature.RAW_GENERATION,
+//                EcotonesFeatures.DRAINAGE.configure(FeatureConfig.DEFAULT)
+//                        .decorate(EcotonesDecorators.DRAINAGE_DECORATOR.configure()));
     }
 
     public static boolean isOcean(int id) {

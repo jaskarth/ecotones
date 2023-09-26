@@ -1,6 +1,7 @@
 package com.jaskarth.ecotones.world.worldgen.biome.climatic;
 
 import com.google.common.collect.ImmutableSet;
+import com.jaskarth.ecotones.world.worldgen.biome.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.util.Identifier;
@@ -15,12 +16,7 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import com.jaskarth.ecotones.api.*;
 import com.jaskarth.ecotones.world.blocks.EcotonesBlocks;
 import com.jaskarth.ecotones.util.compat.AurorasDecoCompat;
-import com.jaskarth.ecotones.util.compat.FloralisiaCompat;
 import com.jaskarth.ecotones.util.state.DeferredBlockStateProvider;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeAssociations;
-import com.jaskarth.ecotones.world.worldgen.biome.BiomeHelper;
-import com.jaskarth.ecotones.world.worldgen.biome.EarlyBiomeRegistry;
-import com.jaskarth.ecotones.world.worldgen.biome.EcotonesBiomeBuilder;
 import com.jaskarth.ecotones.world.worldgen.decorator.*;
 import com.jaskarth.ecotones.world.worldgen.features.EcotonesConfiguredFeature;
 import com.jaskarth.ecotones.world.worldgen.features.EcotonesFeatures;
@@ -64,11 +60,8 @@ public class LavenderFieldBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(EcotonesStructures.CAMPFIRE_SPRUCE);
         this.addStructureFeature(EcotonesStructures.COTTAGE);
 
-        
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.4))));
+        BiomeDecorator.addSpruceShrubs(this, 0.4, 0.95);
+        BiomeDecorator.addOakShrubs(this, 0, 0.1);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesConfiguredFeature.wrap(Feature.TREE, FeatureConfigHolder.SPRUCE_TREE_CONFIG)
@@ -83,34 +76,12 @@ public class LavenderFieldBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.1))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.95))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.1))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.RARE_DEAD_SPRUCE)
                         .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DEAD_SPRUCE.decorationData)));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.BIRCH_GROVE_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .decorate(NoiseThresholdCountPlacementModifier.of(-0.8D, 8, 10)));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_LILAC)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .repeat(1));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.STONE.getDefaultState(), 1))
-                        .decorate(EcotonesDecorators.LARGE_ROCK.configure(new ChanceDecoratorConfig(8))));
+        BiomeDecorator.addGrass(this, FeatureConfigHolder.BIRCH_GROVE_CONFIG, 10);
+        BiomeDecorator.addLilacs(this, 1);
+        BiomeDecorator.addRock(this, 8);
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
@@ -121,19 +92,8 @@ public class LavenderFieldBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(2));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .repeat(1));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .repeat(2));
+        BiomeDecorator.addClover(this, 1);
+        BiomeDecorator.addPatch(this, FeatureConfigHolder.MOSS, 2);
 
         // Build lavender
 
@@ -149,12 +109,7 @@ public class LavenderFieldBiome extends EcotonesBiomeBuilder {
                     EcotonesFeatures.LOOKUP.configure(new LookupFeature.Config("aurorasdeco:trees_lavender_plains"))
                             .repeat(1));
 
-            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                    EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.DENSE_LAVENDER)
-                            .decorate(new Spread32Decorator())
-                            .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                            .spreadHorizontally()
-                            .repeat(2, 3));
+            BiomeDecorator.addPatch(this, FeatureConfigHolder.DENSE_LAVENDER, UniformIntProvider.create(2, 3));
 
             this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                     EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(
@@ -168,12 +123,7 @@ public class LavenderFieldBiome extends EcotonesBiomeBuilder {
                             .repeat(5, 7));
         }
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SWITCHGRASS_CONFIG)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .applyChance(6));
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.SWITCHGRASS_CONFIG, 6);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))
@@ -237,15 +187,6 @@ public class LavenderFieldBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .repeat(3)
                         .applyChance(60));
-
-        if (FloralisiaCompat.isEnabled()) {
-            this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                    EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new DeferredBlockStateProvider(FloralisiaCompat.cymbidium())).tries(12).build())
-                            .decorate(new Spread32Decorator())
-                            .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                            .spreadHorizontally()
-                            .repeat(2));
-        }
 
         BiomeHelper.addDefaultSpawns(this.getSpawnSettings());
         BiomeHelper.addDefaultFeatures(this);

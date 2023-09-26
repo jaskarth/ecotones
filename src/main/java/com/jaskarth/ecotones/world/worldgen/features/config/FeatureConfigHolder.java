@@ -61,6 +61,11 @@ public final class FeatureConfigHolder {
                     .add(EcotonesBlocks.SHORT_GRASS.getDefaultState(), 1)
                     .add(Blocks.GRASS.getDefaultState(), 4))).tries(32).build();
 
+    public static final RandomPatchFeatureConfig JUNGLE_CONFIG =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
+                    .add(Blocks.FERN.getDefaultState(), 1)
+                    .add(Blocks.GRASS.getDefaultState(), 2))).tries(32).build();
+
     public static final RandomPatchFeatureConfig PRAIRIE_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.SHORT_GRASS.getDefaultState(), 16)

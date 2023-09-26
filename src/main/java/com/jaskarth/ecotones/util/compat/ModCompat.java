@@ -8,11 +8,6 @@ import static com.jaskarth.ecotones.Ecotones.*;
 public class ModCompat {
     public static void initEarly() {
         // Mod compat handlers that add new blocks that we use
-        if (isModLoaded("floralisia")) {
-            FloralisiaCompat.init();
-            log("Registered Floralisia compat!");
-        }
-
         if (isModLoaded("aurorasdeco")) {
             AurorasDecoCompat.init();
         }
