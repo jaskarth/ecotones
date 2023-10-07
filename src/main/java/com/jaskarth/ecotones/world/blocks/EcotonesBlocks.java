@@ -14,19 +14,18 @@ import com.jaskarth.ecotones.util.RegistryReport;
 
 public final class EcotonesBlocks {
     public static final Block PEAT_BLOCK = new Block(FabricBlockSettings.copy(Blocks.DIRT).hardness(1f));
-    public static final Block SHORT_GRASS = new EcotonesPlantBlock(FabricBlockSettings.create().replaceable().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
-    public static final Block WILDFLOWERS = new EcotonesPlantBlock(FabricBlockSettings.create().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
+    public static final Block SHORT_GRASS = new EcotonesPlantBlock(FabricBlockSettings.create().replaceable().offset(AbstractBlock.OffsetType.XZ).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
+    public static final Block WILDFLOWERS = new EcotonesPlantBlock(FabricBlockSettings.create().nonOpaque().offset(AbstractBlock.OffsetType.XZ).noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
     public static final Block SMALL_SHRUB = new EcotonesPlantBlock(FabricBlockSettings.create().replaceable().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
     public static final Block GEYSER = new GeyserBlock(FabricBlockSettings.create().strength(2.5F, 8.0F).ticksRandomly());
     public static final Block COCONUT = new CoconutBlock(FabricBlockSettings.create().strength(0.2F, 3.0F).sounds(BlockSoundGroup.WOOD).nonOpaque());
     public static final Block HAZEL_LEAVES = new LeavesBlock(FabricBlockSettings.create().strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque());
     public static final Block HAZEL_SAPLING = new SimpleSaplingBlock(new HazelSaplingGenerator());
-    public static final Block SANDY_GRASS = new EcotonesSandyPlantBlock(FabricBlockSettings.create().replaceable().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
-    public static final Block SURFACE_ROCK = new SurfaceRockBlock(FabricBlockSettings.create().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.STONE));
+    public static final Block SANDY_GRASS = new EcotonesSandyPlantBlock(FabricBlockSettings.create().offset(AbstractBlock.OffsetType.XZ).replaceable().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
+    public static final Block SURFACE_ROCK = new SurfaceRockBlock(FabricBlockSettings.create().offset(AbstractBlock.OffsetType.XZ).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.STONE));
     public static final Block CLOVER = new EcotonesLeafPileBlock(FabricBlockSettings.create().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
-    public static final Block PINECONE = new PineconeBlock(FabricBlockSettings.create().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
-    public static final Block BLUEBELL = new EcotonesPlantBlock(FabricBlockSettings.create().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
-    public static final Block WIDE_FERN = new EcotonesPlantBlock(FabricBlockSettings.create().replaceable().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
+    public static final Block PINECONE = new PineconeBlock(FabricBlockSettings.create().offset(AbstractBlock.OffsetType.XZ).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
+    public static final Block BLUEBELL = new EcotonesPlantBlock(FabricBlockSettings.create().offset(AbstractBlock.OffsetType.XZ).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
     public static final Block SMALL_LILAC = new EcotonesPlantBlock(FabricBlockSettings.create().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
     public static final Block LICHEN = new LichenBlock(FabricBlockSettings.create().replaceable().nonOpaque().noCollision().hardness(0.2F).sounds(BlockSoundGroup.VINE));
     public static final Block MOSS = new EcotonesLeafPileBlock(FabricBlockSettings.create().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
@@ -35,7 +34,7 @@ public final class EcotonesBlocks {
     public static final Block NEST = new NestBlock(FabricBlockSettings.create().nonOpaque().breakInstantly().sounds(BlockSoundGroup.WOOD));
     public static final Block SWITCHGRASS = new EcotonesPlantBlock(FabricBlockSettings.create().replaceable().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
     public static final Block ROSEMARY = new RosemaryBlock(FabricBlockSettings.create().replaceable().nonOpaque().noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS));
-    public static final Block LAVENDER = new EcotonesPlantBlock(FabricBlockSettings.create().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
+    public static final Block LAVENDER = new EcotonesPlantBlock(FabricBlockSettings.create().offset(AbstractBlock.OffsetType.XZ).nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
     public static final Block BLUEBERRY_JAM_JAR = new JarBlock(FabricBlockSettings.create().nonOpaque().breakInstantly().sounds(BlockSoundGroup.STONE));
     public static final Block SPRUCE_LEAF_PILE = new EcotonesLeafPileBlock(FabricBlockSettings.create().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
     public static final Block MARIGOLD = new EcotonesPlantBlock(FabricBlockSettings.create().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
@@ -43,7 +42,7 @@ public final class EcotonesBlocks {
     public static final Block MAPLE_SYRUP_JAR = new JarBlock(FabricBlockSettings.create().nonOpaque().breakInstantly().sounds(BlockSoundGroup.STONE));
     public static final Block LARCH_LEAVES = new LeavesBlock(FabricBlockSettings.create().strength(0.2F, 0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque());
     public static final Block SAP_DISTILLERY = new SapDistilleryBlock(FabricBlockSettings.create().strength(3.5F, 1.0F).sounds(BlockSoundGroup.STONE));
-    public static final Block SMALL_CACTUS = new SmallCactusBlock(FabricBlockSettings.create().ticksRandomly().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
+    public static final Block SMALL_CACTUS = new SmallCactusBlock(FabricBlockSettings.create().offset(AbstractBlock.OffsetType.XZ).ticksRandomly().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
     public static final Block LARCH_SAPLING = new SimpleSaplingBlock(new LarchSaplingGenerator());
     public static final Block TREETAP = new TreetapBlock(FabricBlockSettings.create().strength(2.5F, 1.0F).sounds(BlockSoundGroup.STONE));
     public static final Block LIMESTONE = new Block(FabricBlockSettings.copy(Blocks.DRIPSTONE_BLOCK).hardness(1f));
@@ -81,7 +80,6 @@ public final class EcotonesBlocks {
         registerWithItem("clover", CLOVER);
         registerWithItem("pinecone", PINECONE);
         registerWithItem("bluebell", BLUEBELL);
-        registerWithItem("wide_fern", WIDE_FERN);
         registerWithItem("small_lilac", SMALL_LILAC);
         registerWithItem("lichen", LICHEN);
         registerWithItem("moss", MOSS);

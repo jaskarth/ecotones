@@ -32,8 +32,8 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 
 public class DeadSpruceForestBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "dead_spruce_forest"), new DeadSpruceForestBiome(0.5F, 0.025F, false).build());
-        Biome clearing = EarlyBiomeRegistry.register(new Identifier("ecotones", "dead_spruce_forest_clearing"), new DeadSpruceForestBiome(0.5F, 0.025F, true).build());
+        Biome biome = EarlyBiomeRegistry.register("dead_spruce_forest", new DeadSpruceForestBiome(0.5F, 0.025F, false));
+        Biome clearing = EarlyBiomeRegistry.register("dead_spruce_forest_clearing", new DeadSpruceForestBiome(0.5F, 0.025F, true));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 3);
         BiomeRegistries.registerBiomeVariants(biome, clearing);
@@ -87,13 +87,6 @@ public class DeadSpruceForestBiome extends EcotonesBiomeBuilder {
                         .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
                         .spreadHorizontally()
                         .repeat(3));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.WIDE_FERNS)
-                .decorate(new Spread32Decorator())
-                .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                .spreadHorizontally()
-                .repeat(4)
-        );
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)

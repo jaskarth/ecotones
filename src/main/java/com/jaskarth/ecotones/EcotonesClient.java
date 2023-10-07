@@ -37,7 +37,6 @@ public final class EcotonesClient implements ClientModInitializer {
 
         ColorProviderRegistry.BLOCK.register(
                 (state, view, pos, tintIndex) -> view != null && pos != null ? BiomeColors.getGrassColor(view, pos) : FoliageColors.getDefaultColor(),
-                EcotonesBlocks.WIDE_FERN,
                 EcotonesBlocks.SHORT_GRASS,
                 EcotonesBlocks.WILDFLOWERS,
                 EcotonesBlocks.BLUEBELL,
@@ -47,7 +46,6 @@ public final class EcotonesClient implements ClientModInitializer {
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> FoliageColors.getDefaultColor(),
                 EcotonesBlocksItems.getAll(
                 EcotonesBlocks.SHORT_GRASS,
-                        EcotonesBlocks.WIDE_FERN,
                         EcotonesBlocks.HAZEL_LEAVES));
 
         // Maple leaves
@@ -75,7 +73,6 @@ public final class EcotonesClient implements ClientModInitializer {
                 EcotonesBlocks.SANDY_GRASS,
                 EcotonesBlocks.CLOVER,
                 EcotonesBlocks.BLUEBELL,
-                EcotonesBlocks.WIDE_FERN,
                 EcotonesBlocks.SMALL_LILAC,
                 EcotonesBlocks.CYAN_ROSE,
                 EcotonesBlocks.LICHEN,

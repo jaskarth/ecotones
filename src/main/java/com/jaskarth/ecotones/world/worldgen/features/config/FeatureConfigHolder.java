@@ -175,18 +175,11 @@ public final class FeatureConfigHolder {
                     .spreadZ(7)
                     .tries(64).cannotProject().build();
 
-    public static final RandomPatchFeatureConfig WIDE_FERNS =
-            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
-                    .add(EcotonesBlocks.WIDE_FERN.getDefaultState(), 1)))
-                    .spreadX(7)
-                    .spreadZ(7)
-                    .tries(48).build();
-
     public static final RandomPatchFeatureConfig SMALL_LILAC =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.SMALL_LILAC.getDefaultState(), 1)))
-                    .spreadX(7)
-                    .spreadZ(7)
+                    .spreadX(5)
+                    .spreadZ(5)
                     .tries(12).build();
 
     public static final RandomPatchFeatureConfig LAVENDER =
@@ -211,6 +204,13 @@ public final class FeatureConfigHolder {
                     .spreadZ(5)
                     .tries(32).build();
 
+    public static final RandomPatchFeatureConfig BLUEBELL_PATCH =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
+                    .add(EcotonesBlocks.BLUEBELL.getDefaultState(), 1)))
+                    .spreadX(5)
+                    .spreadZ(5)
+                    .tries(40).build();
+
     public static final RandomPatchFeatureConfig WILDFLOWERS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.WILDFLOWERS.getDefaultState(), 1)))
@@ -224,6 +224,13 @@ public final class FeatureConfigHolder {
                     .spreadX(5)
                     .spreadZ(5)
                     .tries(12).build();
+
+    public static final RandomPatchFeatureConfig FLAME_LILY_DENSE =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
+                    .add(EcotonesBlocks.FLAME_LILY.getDefaultState(), 1)))
+                    .spreadX(5)
+                    .spreadZ(5)
+                    .tries(36).build();
 
     public static final RandomPatchFeatureConfig DANDELION_FIELD_FLOWERS =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()

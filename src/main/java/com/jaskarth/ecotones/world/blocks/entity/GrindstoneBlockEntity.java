@@ -17,8 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import com.jaskarth.ecotones.world.items.EcotonesItems;
-import com.jaskarth.ecotones.recipe.EcotonesGrindingRecipes;
-import com.jaskarth.ecotones.recipe.GrindingRecipe;
+import com.jaskarth.ecotones.world.recipe.EcotonesGrindingRecipes;
+import com.jaskarth.ecotones.world.recipe.GrindingRecipe;
 import com.jaskarth.ecotones.screen.GrindstoneScreenHandler;
 
 public class GrindstoneBlockEntity extends LockableContainerBlockEntity {

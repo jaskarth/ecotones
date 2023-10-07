@@ -29,7 +29,7 @@ import com.jaskarth.ecotones.world.worldgen.surface.system.SurfaceBuilder;
 public class DesertBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "desert"), new DesertBiome(0.5f, 0.075f, 1.6, 0.95).build());
+        Biome biome = EarlyBiomeRegistry.register("desert", new DesertBiome(0.5f, 0.075f, 1.6, 0.95));
 
         Climate.HOT_DESERT.add(biome, 1);
 

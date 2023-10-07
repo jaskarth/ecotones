@@ -27,7 +27,7 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class SpruceFieldsBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_fields"), new SpruceFieldsBiome(0.5f, 0.05f, 3.6, 0.92).build());
+        Biome biome = EarlyBiomeRegistry.register("spruce_fields", new SpruceFieldsBiome(0.5f, 0.05f, 3.6, 0.92));
 
         Climate.WARM_HUMID.add(biome, 0.2);
         Climate.WARM_MILD.add(biome, 0.4);

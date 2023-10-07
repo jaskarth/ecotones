@@ -24,8 +24,8 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 public class CoolScrublandBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "cool_scrubland"), new CoolScrublandBiome(0.5f, 0.075f, 1.6, 1, false).build());
-        Biome thicket = EarlyBiomeRegistry.register(new Identifier("ecotones", "cool_scrubland_thicket"), new CoolScrublandBiome(0.5f, 0.075f, 1.6, 1, true).build());
+        Biome biome = EarlyBiomeRegistry.register("cool_scrubland", new CoolScrublandBiome(0.5f, 0.075f, 1.6, 1, false));
+        Biome thicket = EarlyBiomeRegistry.register("cool_scrubland_thicket", new CoolScrublandBiome(0.5f, 0.075f, 1.6, 1, true));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 3);
         BiomeRegistries.registerBiomeVariants(biome, thicket);

@@ -26,7 +26,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.FeatureConfigHolder;
 
 public class DryBeachBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "dry_beach"), new DryBeachBiome().build());
+        Biome biome = EarlyBiomeRegistry.register("dry_beach", new DryBeachBiome());
 
         BiomeRegistries.registerBeach(biome);
     }

@@ -28,9 +28,9 @@ import com.jaskarth.ecotones.world.worldgen.surface.system.SurfaceBuilder;
 
 public class LavenderFieldBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "lavender_field"), new LavenderFieldBiome(0.5f, 0.1f, 4.2, 0.92).build());
+        Biome biome = EarlyBiomeRegistry.register("lavender_field", new LavenderFieldBiome(0.5f, 0.1f, 4.2, 0.92));
 
-        Biome montane = EarlyBiomeRegistry.register(new Identifier("ecotones", "montane_lavender_field"), new LavenderFieldBiome(4.5f, 0.1f, 2.2, 0.92).build());
+        Biome montane = EarlyBiomeRegistry.register("montane_lavender_field", new LavenderFieldBiome(4.5f, 0.1f, 2.2, 0.92));
         BiomeRegistries.addMountainBiome(montane);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_PLAINS, montane);
 

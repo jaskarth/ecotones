@@ -23,8 +23,8 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 
 public class DrySteppeBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "dry_steppe"), new DrySteppeBiome(0.5F, 0.025F, 3, 0.96).build());
-        Biome thicket = EarlyBiomeRegistry.register(new Identifier("ecotones", "dry_steppe_thicket"), new DrySteppeBiome(0.5F, 0.025F, 3, 0.96, 6.4).build());
+        Biome biome = EarlyBiomeRegistry.register("dry_steppe", new DrySteppeBiome(0.5F, 0.025F, 3, 0.96));
+        Biome thicket = EarlyBiomeRegistry.register("dry_steppe_thicket", new DrySteppeBiome(0.5F, 0.025F, 3, 0.96, 6.4));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 4);
         BiomeRegistries.registerBiomeVariants(biome, thicket);

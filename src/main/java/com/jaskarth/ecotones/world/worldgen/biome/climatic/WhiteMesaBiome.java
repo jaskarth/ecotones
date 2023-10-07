@@ -22,8 +22,8 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 
 public class WhiteMesaBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "white_mesa"), new WhiteMesaBiome(0.4F, 0.05F, 3, 0.96).build());
-        Biome plateau = EarlyBiomeRegistry.register(new Identifier("ecotones", "white_mesa_plateau"), new WhiteMesaBiome(1.6F, 0.1F, 5, 1.2).build());
+        Biome biome = EarlyBiomeRegistry.register("white_mesa", new WhiteMesaBiome(0.4F, 0.05F, 3, 0.96));
+        Biome plateau = EarlyBiomeRegistry.register("white_mesa_plateau", new WhiteMesaBiome(1.6F, 0.1F, 5, 1.2));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 1);
         BiomeRegistries.registerBiomeVariants(biome, plateau);

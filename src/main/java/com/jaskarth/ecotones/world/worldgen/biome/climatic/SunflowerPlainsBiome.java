@@ -29,7 +29,7 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class SunflowerPlainsBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "sunflower_plains"), new SunflowerPlainsBiome(0.35F, 0.025F).build());
+        Biome biome = EarlyBiomeRegistry.register("sunflower_plains", new SunflowerPlainsBiome(0.35F, 0.025F));
         Climate.WARM_MODERATE.add(biome, 0.3);
     }
 

@@ -31,7 +31,7 @@ import net.minecraft.world.gen.YOffset;
 
 public class BirchLakesBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "birch_lakes"), new BirchLakesBiome(0.25F, 0.075F, 6.0, 0.92).build());
+        Biome biome = EarlyBiomeRegistry.register("birch_lakes", new BirchLakesBiome(0.25F, 0.075F, 6.0, 0.92));
 
         Climate.WARM_VERY_HUMID.add(biome, 0.3);
         Climate.WARM_HUMID.add(biome, 0.3);

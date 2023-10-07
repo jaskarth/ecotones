@@ -32,7 +32,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.FeatureConfigHolder;
 
 public class MountainLakeBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "mountain_lake"), new MountainLakeBiome().build());
+        Biome biome = EarlyBiomeRegistry.register("mountain_lake", new MountainLakeBiome());
         BiomeRegistries.addMountainBiome(biome, 3.5);
     }
 

@@ -28,10 +28,6 @@ public class SurfaceRockBlock extends Block {
         return !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, facing, neighborState, world, pos, neighborPos);
     }
 
-    public Block.OffsetType getOffsetType() {
-        return Block.OffsetType.XZ;
-    }
-
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockState downState = world.getBlockState(pos.down());

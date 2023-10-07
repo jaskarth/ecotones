@@ -30,7 +30,7 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 
 public class GraniteSpringsBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "granite_springs"), new GraniteSpringsBiome(0.5f, 0.075f, 4.0, 0.94).build());
+        Biome biome = EarlyBiomeRegistry.register("granite_springs", new GraniteSpringsBiome(0.5f, 0.075f, 4.0, 0.94));
 
         Climate.WARM_MILD.add(biome, 0.2);
         Climate.WARM_MODERATE.add(biome, 0.2);
@@ -73,6 +73,8 @@ public class GraniteSpringsBiome extends EcotonesBiomeBuilder {
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.7))));
 
         BiomeDecorator.addGrass(this, FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG, 12);
+
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.BLUEBELL_PATCH, 6);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(6, 14), true, UniformIntProvider.create(3, 5)))

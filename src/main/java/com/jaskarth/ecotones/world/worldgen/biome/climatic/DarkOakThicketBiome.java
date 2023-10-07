@@ -27,7 +27,7 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class DarkOakThicketBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "dark_oak_thicket"), new DarkOakThicketBiome(0.4F, 0.175F, 2.4, 0.97).build());
+        Biome biome = EarlyBiomeRegistry.register("dark_oak_thicket", new DarkOakThicketBiome(0.4F, 0.175F, 2.4, 0.97));
 
         Climate.WARM_MODERATE.add(biome, 0.1);
         Climate.WARM_MILD.add(biome, 0.1);

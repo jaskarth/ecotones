@@ -51,7 +51,6 @@ public class ShrubPlacementDecorator extends PlacementModifier {
             maxShrubHeight = 2;
         }
 
-        //java is bad
         double finalNoise = soilQuality;
         int finalMaxShrubHeight = maxShrubHeight;
 

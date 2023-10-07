@@ -25,7 +25,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 
 public class FloodedSavannaBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "flooded_savanna"), new FloodedSavannaBiome().build());
+        Biome biome = EarlyBiomeRegistry.register("flooded_savanna", new FloodedSavannaBiome());
 
         BiomeRegistries.registerNoBeachBiome(biome);
 

@@ -27,7 +27,7 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 
 public class RockySlopesBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_slopes"), new RockySlopesBiome(0.8F, 0.225F, 7, 0.935).build());
+        Biome biome = EarlyBiomeRegistry.register("rocky_slopes", new RockySlopesBiome(0.8F, 0.225F, 7, 0.935));
 
         Climate.WARM_VERY_HUMID.add(biome, 0.2);
         Climate.WARM_HUMID.add(biome, 0.2);
@@ -61,7 +61,7 @@ public class RockySlopesBiome extends EcotonesBiomeBuilder {
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.TALL_BARREN_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.15))));
+                        .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.25))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.ASPEN_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))

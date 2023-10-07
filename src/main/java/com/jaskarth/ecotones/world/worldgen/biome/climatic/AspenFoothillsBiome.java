@@ -31,8 +31,8 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 
 public class AspenFoothillsBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "aspen_foothills"), new AspenFoothillsBiome(1.5F, 0.075F, 5, 0.95, false).build());
-        Biome clearing = EarlyBiomeRegistry.register(new Identifier("ecotones", "aspen_foothills_clearing"), new AspenFoothillsBiome(1.5F, 0.025F, 5, 0.95, true).build());
+        Biome biome = EarlyBiomeRegistry.register("aspen_foothills", new AspenFoothillsBiome(1.5F, 0.075F, 5, 0.95, false));
+        Biome clearing = EarlyBiomeRegistry.register("aspen_foothills_clearing", new AspenFoothillsBiome(1.5F, 0.025F, 5, 0.95, true));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 3);
         BiomeRegistries.registerBiomeVariants(biome, clearing);

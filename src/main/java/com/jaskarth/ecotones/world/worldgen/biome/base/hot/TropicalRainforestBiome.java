@@ -29,7 +29,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 
 public class TropicalRainforestBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_rainforest"), new TropicalRainforestBiome(0.5f, 0.4f, 1.8, 0.93).build());
+        Biome biome = EarlyBiomeRegistry.register("tropical_rainforest", new TropicalRainforestBiome(0.5f, 0.4f, 1.8, 0.93));
 
         Climate.HOT_RAINFOREST.add(biome, 1);
     }

@@ -24,7 +24,7 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class BirchForestBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "birch_forest"), new BirchForestBiome(0.5F, 0.025F, 2.4, 0.95).build());
+        Biome biome = EarlyBiomeRegistry.register("birch_forest", new BirchForestBiome(0.5F, 0.025F, 2.4, 0.95));
         Climate.WARM_VERY_HUMID.add(biome, 0.2);
         Climate.WARM_HUMID.add(biome, 0.2);
     }

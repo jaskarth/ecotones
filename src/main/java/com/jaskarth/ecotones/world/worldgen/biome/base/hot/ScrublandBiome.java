@@ -31,7 +31,7 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 public class ScrublandBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "scrubland"), new ScrublandBiome(0.5f, 0.075f, 1.6, 1).build());
+        Biome biome = EarlyBiomeRegistry.register("scrubland", new ScrublandBiome(0.5f, 0.075f, 1.6, 1));
 
         Climate.HOT_VERY_DRY.add(biome, 1);
 

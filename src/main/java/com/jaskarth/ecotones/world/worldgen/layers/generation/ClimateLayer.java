@@ -15,6 +15,14 @@ import java.util.Random;
 public enum ClimateLayer implements InitLayer, SeedInitLayer {
     INSTANCE;
 
+    private static final double RAINFOREST_ABOVE = 0.5;
+    private static final double V_HUMID_ABOVE = 0.33;
+    private static final double HUMID_ABOVE = 0.175;
+    private static final double MILD_ABOVE = 0;
+    private static final double MODERATE_ABOVE = -0.175;
+    private static final double DRY_ABOVE = -0.33;
+    private static final double V_DRY_ABOVE = -0.5;
+
     public static OpenSimplexNoise humidityNoise;
     public static OpenSimplexNoise temperatureNoise;
 
@@ -25,54 +33,55 @@ public enum ClimateLayer implements InitLayer, SeedInitLayer {
 
     @Override
     public int sample(LayerRandomnessSource context, int x, int z) {
-        double humidity = MathHelper.clamp(ClimateLayer.humidityNoise.sample((x + ClimateLayer.INSTANCE.humidityOffsetX) / 6.0, (z + ClimateLayer.INSTANCE.humidityOffsetZ) / 6.0) * 1.1, -1, 1);
-        double temperature = ClimateLayer.temperatureNoise.sample((x + ClimateLayer.INSTANCE.temperatureOffsetX) / 8.0, (z + ClimateLayer.INSTANCE.temperatureOffsetZ) / 8.0);
+        double humidity = MathHelper.clamp(ClimateLayer.humidityNoise.sample((x + ClimateLayer.INSTANCE.humidityOffsetX) / 4.0, (z + ClimateLayer.INSTANCE.humidityOffsetZ) / 4.0), -1, 1);
+        double temperature = ClimateLayer.temperatureNoise.sample((x + ClimateLayer.INSTANCE.temperatureOffsetX) / 4.0, (z + ClimateLayer.INSTANCE.temperatureOffsetZ) / 4.0);
+
         if (temperature > 0) {
             // === Hot Biomes ===
-            if (humidity > 0.8) {
+            if (humidity > RAINFOREST_ABOVE) {
                 return Climate.HOT_RAINFOREST.ordinal();
             }
-            if (humidity > 0.6) {
+            if (humidity > V_HUMID_ABOVE) {
                 return Climate.HOT_VERY_HUMID.ordinal();
             }
-            if (humidity > 0.4) {
+            if (humidity > HUMID_ABOVE) {
                 return Climate.HOT_HUMID.ordinal();
             }
-            if (humidity > 0.2) {
+            if (humidity > MILD_ABOVE) {
                 return Climate.HOT_MILD.ordinal();
             }
-            if (humidity > -0.2) {
+            if (humidity > MODERATE_ABOVE) {
                 return Climate.HOT_MODERATE.ordinal();
             }
-            if (humidity > -0.4) {
+            if (humidity > DRY_ABOVE) {
                 return Climate.HOT_DRY.ordinal();
             }
-            if (humidity > -0.6) {
+            if (humidity > V_DRY_ABOVE) {
                 return Climate.HOT_VERY_DRY.ordinal();
             }
 
             return Climate.HOT_DESERT.ordinal();
         } else {
             // === Warm Biomes ===
-            if (humidity > 0.8) {
+            if (humidity > RAINFOREST_ABOVE) {
                 return Climate.WARM_RAINFOREST.ordinal();
             }
-            if (humidity > 0.6) {
+            if (humidity > V_HUMID_ABOVE) {
                 return Climate.WARM_VERY_HUMID.ordinal();
             }
-            if (humidity > 0.4) {
+            if (humidity > HUMID_ABOVE) {
                 return Climate.WARM_HUMID.ordinal();
             }
-            if (humidity > 0.2) {
+            if (humidity > MILD_ABOVE) {
                 return Climate.WARM_MILD.ordinal();
             }
-            if (humidity > -0.2) {
+            if (humidity > MODERATE_ABOVE) {
                 return Climate.WARM_MODERATE.ordinal();
             }
-            if (humidity > -0.4) {
+            if (humidity > DRY_ABOVE) {
                 return Climate.WARM_DRY.ordinal();
             }
-            if (humidity > -0.6) {
+            if (humidity > V_DRY_ABOVE) {
                 return Climate.WARM_VERY_DRY.ordinal();
             }
 

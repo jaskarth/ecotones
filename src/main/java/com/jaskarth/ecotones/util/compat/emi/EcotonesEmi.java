@@ -8,8 +8,8 @@ import net.minecraft.util.Identifier;
 import com.jaskarth.ecotones.Ecotones;
 import com.jaskarth.ecotones.world.blocks.EcotonesBlocks;
 import com.jaskarth.ecotones.world.items.EcotonesItems;
-import com.jaskarth.ecotones.recipe.EcotonesGrindingRecipes;
-import com.jaskarth.ecotones.recipe.GrindingRecipe;
+import com.jaskarth.ecotones.world.recipe.EcotonesGrindingRecipes;
+import com.jaskarth.ecotones.world.recipe.GrindingRecipe;
 
 import java.util.Map;
 

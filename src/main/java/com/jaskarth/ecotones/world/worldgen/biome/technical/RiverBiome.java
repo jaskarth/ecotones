@@ -20,7 +20,7 @@ import com.jaskarth.ecotones.world.worldgen.biome.EcotonesBiomeBuilder;
 
 public class RiverBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "river"), new RiverBiome().build());
+        Biome biome = EarlyBiomeRegistry.register("river", new RiverBiome());
         BiomeRegistries.registerNoBeachBiome(biome);
     }
 

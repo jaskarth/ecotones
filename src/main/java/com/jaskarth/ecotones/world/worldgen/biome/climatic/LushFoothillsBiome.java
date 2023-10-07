@@ -26,11 +26,11 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class LushFoothillsBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_foothills"), new LushFoothillsBiome(1.5F, 0.15F, 2, 0.94).build());
+        Biome biome = EarlyBiomeRegistry.register("lush_foothills", new LushFoothillsBiome(1.5F, 0.15F, 2, 0.94));
         BiomeRegistries.addMountainBiome(biome);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS, biome);
         BiomeRegistries.registerBiomeVariantChance(biome, 8);
-        BiomeRegistries.registerBiomeVariants(biome, EarlyBiomeRegistry.get(new Identifier("ecotones", "mountain_lake")));
+        BiomeRegistries.registerBiomeVariants(biome, EarlyBiomeRegistry.get("mountain_lake"));
 
         Climate.HOT_MILD.add(ClimateType.MOUNTAIN_FOOTHILLS, biome, 1.0);
         Climate.HOT_HUMID.add(ClimateType.MOUNTAIN_FOOTHILLS, biome, 1.0);

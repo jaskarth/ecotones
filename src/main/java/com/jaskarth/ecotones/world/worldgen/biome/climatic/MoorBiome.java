@@ -28,7 +28,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 
 public class MoorBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "moor"), new MoorBiome(0.74F, 0.025F, 5, 0.97).build());
+        Biome biome = EarlyBiomeRegistry.register("moor", new MoorBiome(0.74F, 0.025F, 5, 0.97));
 
         Climate.WARM_MODERATE.add(biome, 0.05);
         Climate.WARM_DRY.add(biome, 0.1);

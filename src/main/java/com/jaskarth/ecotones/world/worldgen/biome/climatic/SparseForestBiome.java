@@ -25,10 +25,10 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 public class SparseForestBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_forest"), new SparseForestBiome(0.3F, 0.065F, 2.8, 0.97).build());
-        Biome shrubs = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_forest_shrubs"), new SparseForestBiome(0.3F, 0.025F, 1.4, 0.97, 5.4, 64).build());
-        Biome lakes = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_forest_lakes"), new SparseForestBiome(-0.235F, 0.025F, 0.4, 0.97, 4.2, 52).build());
-        Biome bog = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_forest_bog"), new SparseForestBiome(-0.165F, 0.035F, 0.8, 0.97, 4.2, 10).build());
+        Biome biome = EarlyBiomeRegistry.register("sparse_forest", new SparseForestBiome(0.3F, 0.065F, 2.8, 0.97));
+        Biome shrubs = EarlyBiomeRegistry.register("sparse_forest_shrubs", new SparseForestBiome(0.3F, 0.025F, 1.4, 0.97, 5.4, 64));
+        Biome lakes = EarlyBiomeRegistry.register("sparse_forest_lakes", new SparseForestBiome(-0.235F, 0.025F, 0.4, 0.97, 4.2, 52));
+        Biome bog = EarlyBiomeRegistry.register("sparse_forest_bog", new SparseForestBiome(-0.165F, 0.035F, 0.8, 0.97, 4.2, 10));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 3);
         BiomeRegistries.registerBiomeVariants(biome, shrubs, lakes, bog);

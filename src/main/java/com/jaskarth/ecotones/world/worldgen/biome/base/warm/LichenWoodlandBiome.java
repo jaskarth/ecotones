@@ -27,9 +27,9 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class LichenWoodlandBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "lichen_woodland"), new LichenWoodlandBiome(0.4f, 0.125f, 3.4, 0.88).build());
+        Biome biome = EarlyBiomeRegistry.register("lichen_woodland", new LichenWoodlandBiome(0.4f, 0.125f, 3.4, 0.88));
 
-        Climate.WARM_MILD.add(biome, 1);
+        Climate.WARM_MILD.add(biome, 0.5);
     }
 
     protected LichenWoodlandBiome(float depth, float scale, double hilliness, double volatility) {
@@ -66,12 +66,6 @@ public class LichenWoodlandBiome extends EcotonesBiomeBuilder {
                         .decorate(new Spread32Decorator())
                         .spreadHorizontally()
                         .repeat(4));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.WIDE_FERNS)
-                        .decorate(new Spread32Decorator())
-                        .spreadHorizontally()
-                        .repeat(2));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)

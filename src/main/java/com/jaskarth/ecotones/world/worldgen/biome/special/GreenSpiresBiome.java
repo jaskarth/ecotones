@@ -48,7 +48,7 @@ public class GreenSpiresBiome extends EcotonesBiomeBuilder {
             ).ignoreVines().build();
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "green_spires"), new GreenSpiresBiome().build());
+        Biome biome = EarlyBiomeRegistry.register("green_spires", new GreenSpiresBiome());
         BiomeRegistries.registerSpecialBiome(biome, id -> true);
         BiomeRegistries.registerBigSpecialBiome(biome, 400);
         BiomeRegistries.registerNoBeachBiome(biome);

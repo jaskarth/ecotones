@@ -30,10 +30,10 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 public class RockyMountainBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_foothills"), new RockyMountainBiome(0.75f, 0.275f, 6.0, 0.86).build());
-        Biome plateau = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_foothills_plateau"), new RockyMountainBiome(1.5f, 0.05f, 3.0, 0.96).build());
-        Biome thicket = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_foothills_thicket"), new RockyMountainBiome(0.75f, 0.225f, 4.0, 0.86, true).build());
-        Biome lake = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_foothills_lake"), new RockyMountainBiome(0.0f, 0.15f, 3.0, 0.92).build());
+        Biome biome = EarlyBiomeRegistry.register("rocky_foothills", new RockyMountainBiome(0.75f, 0.275f, 6.0, 0.86));
+        Biome plateau = EarlyBiomeRegistry.register("rocky_foothills_plateau", new RockyMountainBiome(1.5f, 0.05f, 3.0, 0.96));
+        Biome thicket = EarlyBiomeRegistry.register("rocky_foothills_thicket", new RockyMountainBiome(0.75f, 0.225f, 4.0, 0.86, true));
+        Biome lake = EarlyBiomeRegistry.register("rocky_foothills_lake", new RockyMountainBiome(0.0f, 0.15f, 3.0, 0.92));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 4);
         BiomeRegistries.registerBiomeVariants(biome, false, plateau, thicket, lake);

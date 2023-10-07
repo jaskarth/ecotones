@@ -21,8 +21,8 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 
 public class DrySavannaBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "dry_savanna"), new DrySavannaBiome(0.5F, 0.025F, 3, 0.96, false).build());
-        Biome thicket = EarlyBiomeRegistry.register(new Identifier("ecotones", "dry_savanna_thicket"), new DrySavannaBiome(0.5F, 0.025F, 3, 0.96, true).build());
+        Biome biome = EarlyBiomeRegistry.register("dry_savanna", new DrySavannaBiome(0.5F, 0.025F, 3, 0.96, false));
+        Biome thicket = EarlyBiomeRegistry.register("dry_savanna_thicket", new DrySavannaBiome(0.5F, 0.025F, 3, 0.96, true));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 3);
         BiomeRegistries.registerBiomeVariants(biome, thicket);

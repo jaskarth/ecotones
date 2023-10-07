@@ -29,7 +29,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 
 public class LushDesertBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "lush_desert"), new LushDesertBiome(0.5f, 0.3f, 2.4, 0.94).build());
+        Biome biome = EarlyBiomeRegistry.register("lush_desert", new LushDesertBiome(0.5f, 0.3f, 2.4, 0.94));
 
         Climate.HOT_DESERT.add(biome, 0.3);
         Climate.WARM_DESERT.add(biome, 0.12);

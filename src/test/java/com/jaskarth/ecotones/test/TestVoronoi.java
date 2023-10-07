@@ -1,7 +1,6 @@
 package com.jaskarth.ecotones.test;
 
 import com.jaskarth.ecotones.util.Vec2i;
-import com.jaskarth.ecotones.util.noise.voronoi.Voronoi;
 import com.jaskarth.ecotones.util.noise.voronoi.VoronoiRaster;
 
 import java.util.Map;

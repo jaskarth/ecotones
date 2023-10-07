@@ -25,7 +25,7 @@ public class SavannaMesaBiome extends EcotonesBiomeBuilder {
     public static Biome INSTANCE;
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "savanna_mesa"), new SavannaMesaBiome(0.8F, 0.25F, 3, 0.96).build());
+        Biome biome = EarlyBiomeRegistry.register("savanna_mesa", new SavannaMesaBiome(0.8F, 0.25F, 3, 0.96));
 
         Climate.HOT_VERY_DRY.add(biome, 0.3);
         Climate.HOT_DRY.add(biome, 0.2);

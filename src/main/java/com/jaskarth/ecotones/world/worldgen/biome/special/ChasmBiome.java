@@ -27,8 +27,8 @@ import net.minecraft.world.gen.YOffset;
 
 public class ChasmBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "chasm"), new ChasmBiome(-1.5f, false).build());
-        Biome edge = EarlyBiomeRegistry.register(new Identifier("ecotones", "chasm_edge"), new ChasmBiome(0.375f, true).build());
+        Biome biome = EarlyBiomeRegistry.register("chasm", new ChasmBiome(-1.5f, false));
+        Biome edge = EarlyBiomeRegistry.register("chasm_edge", new ChasmBiome(0.375f, true));
 
         BiomeRegistries.registerAllSpecial(id -> !BiomeHelper.isOcean(id), biome, edge);
 

@@ -43,10 +43,10 @@ public class HazelGroveBiome extends EcotonesBiomeBuilder {
         .ignoreVines().build();
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "hazel_grove"), new HazelGroveBiome(false, false).build());
-        Biome clearing = EarlyBiomeRegistry.register(new Identifier("ecotones", "hazel_grove_clearing"), new HazelGroveBiome(true, false).build());
-        Biome hilly = EarlyBiomeRegistry.register(new Identifier("ecotones", "hazel_grove_hilly"), new HazelGroveBiome(false, true).build());
-        Biome hillyClearing = EarlyBiomeRegistry.register(new Identifier("ecotones", "hazel_grove_hilly_clearing"), new HazelGroveBiome(true, true).build());
+        Biome biome = EarlyBiomeRegistry.register("hazel_grove", new HazelGroveBiome(false, false));
+        Biome clearing = EarlyBiomeRegistry.register("hazel_grove_clearing", new HazelGroveBiome(true, false));
+        Biome hilly = EarlyBiomeRegistry.register("hazel_grove_hilly", new HazelGroveBiome(false, true));
+        Biome hillyClearing = EarlyBiomeRegistry.register("hazel_grove_hilly_clearing", new HazelGroveBiome(true, true));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 3);
         BiomeRegistries.registerBiomeVariants(biome, clearing, hilly, hillyClearing);

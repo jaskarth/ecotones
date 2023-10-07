@@ -26,7 +26,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.*;
 public class SpruceShrublandBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_shrubland"), new SpruceShrublandBiome(0.3f, 0.075f, 2.2, 0.96).build());
+        Biome biome = EarlyBiomeRegistry.register("spruce_shrubland", new SpruceShrublandBiome(0.3f, 0.075f, 2.2, 0.96));
 
         Climate.HOT_VERY_DRY.add(biome, 0.5);
         Climate.HOT_DRY.add(biome, 0.3);
@@ -36,7 +36,7 @@ public class SpruceShrublandBiome extends EcotonesBiomeBuilder {
         Climate.WARM_DRY.add(biome, 0.3);
         Climate.WARM_MODERATE.add(biome, 0.3);
 
-        Biome foothills = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_shrubland_foothills"), new SpruceShrublandBiome(1.5f, 0.175f, 2.2, 0.96).build());
+        Biome foothills = EarlyBiomeRegistry.register("spruce_shrubland_foothills", new SpruceShrublandBiome(1.5f, 0.175f, 2.2, 0.96));
         BiomeRegistries.addMountainBiome(foothills);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS, foothills);
 

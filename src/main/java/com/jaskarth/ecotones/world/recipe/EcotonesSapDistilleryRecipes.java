@@ -1,4 +1,4 @@
-package com.jaskarth.ecotones.recipe;
+package com.jaskarth.ecotones.world.recipe;
 
 import net.minecraft.util.Identifier;
 import com.jaskarth.ecotones.Ecotones;

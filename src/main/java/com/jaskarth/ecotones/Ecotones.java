@@ -23,7 +23,7 @@ import com.jaskarth.ecotones.world.entity.EcotonesEntities;
 import com.jaskarth.ecotones.datagen.DataGen;
 import com.jaskarth.ecotones.world.items.EcotonesItemGroups;
 import com.jaskarth.ecotones.world.items.EcotonesItems;
-import com.jaskarth.ecotones.recipe.EcotonesRecipes;
+import com.jaskarth.ecotones.world.recipe.EcotonesRecipes;
 import com.jaskarth.ecotones.screen.EcotonesScreenHandlers;
 import com.jaskarth.ecotones.util.*;
 import com.jaskarth.ecotones.util.compat.*;
@@ -125,7 +125,6 @@ public final class Ecotones implements ModInitializer {
 			MapSoilPhCommand.init();
 			DumpClimatesCommand.init();
 			TestTranslationKeysCommand.init();
-			MapClimatesCommand.init();
 			MapMountainsCommand.init();
 			MapBiomeColorsCommand.init();
 			TestLootTablesCommand.init();

@@ -28,7 +28,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.*;
 
 public class MangroveSwampBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "mangrove_swamp"), new MangroveSwampBiome().build());
+        Biome biome = EarlyBiomeRegistry.register("mangrove_swamp", new MangroveSwampBiome());
         Climate.HOT_MILD.add(biome, 0.3);
         Climate.HOT_MODERATE.add(biome, 0.2);
         Climate.HOT_DRY.add(biome, 0.2);

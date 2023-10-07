@@ -31,7 +31,7 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 
 public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "shield_taiga"), new ShieldTaigaBiome(0.0325f, 0.025f, 1.8, 1.05).build());
+        Biome biome = EarlyBiomeRegistry.register("shield_taiga", new ShieldTaigaBiome(0.0325f, 0.025f, 1.8, 1.05));
         BiomeRegistries.registerNoBeachBiome(biome);
         Climate.WARM_HUMID.add(biome, 0.1);
         Climate.WARM_MILD.add(biome, 0.4);
@@ -66,8 +66,11 @@ public class ShieldTaigaBiome extends EcotonesBiomeBuilder {
 
         BiomeDecorator.addGrass(this, FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG, 8);
 
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.SMALL_LILAC, 3);
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.BLUEBELL_PATCH, 6);
+
         BiomeDecorator.addRock(this, 3);
-        // TODO: rock_in_water
+        BiomeDecorator.addWaterRock(this, Blocks.STONE.getDefaultState(), 1, 5);
 
         this.addFeature(GenerationStep.Feature.RAW_GENERATION,
                 EcotonesFeatures.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(

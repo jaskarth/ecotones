@@ -29,7 +29,7 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 // TODO: add large pumpkins
 public class PumpkinPatchBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "pumpkin_patch"), new PumpkinPatchBiome(0.5f, 0.075f, 1.6, 0.96).build());
+        Biome biome = EarlyBiomeRegistry.register("pumpkin_patch", new PumpkinPatchBiome(0.5f, 0.075f, 1.6, 0.96));
 
         Climate.WARM_MODERATE.add(biome, 0.1);
         Climate.WARM_MILD.add(biome, 0.1);

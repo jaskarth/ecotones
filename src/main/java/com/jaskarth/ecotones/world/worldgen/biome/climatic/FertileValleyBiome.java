@@ -34,10 +34,10 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class FertileValleyBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "fertile_valley"), new FertileValleyBiome(0.2F, 0.025F, 0.6, 0.15).build());
-        Biome clearing = EarlyBiomeRegistry.register(new Identifier("ecotones", "fertile_valley_clearing"), new FertileValleyBiome(0.2F, 0.025F, 0.1, 0.35).build());
-        Biome thicket = EarlyBiomeRegistry.register(new Identifier("ecotones", "fertile_valley_thicket"), new FertileValleyBiome(0.2F, 0.025F, 1.6, 0.4).build());
-        Biome lake = EarlyBiomeRegistry.register(new Identifier("ecotones", "fertile_valley_lake"), new FertileValleyBiome(-0.25F, 0.025F, 0.8, 1.2).build());
+        Biome biome = EarlyBiomeRegistry.register("fertile_valley", new FertileValleyBiome(0.2F, 0.025F, 0.6, 0.15));
+        Biome clearing = EarlyBiomeRegistry.register("fertile_valley_clearing", new FertileValleyBiome(0.2F, 0.025F, 0.1, 0.35));
+        Biome thicket = EarlyBiomeRegistry.register("fertile_valley_thicket", new FertileValleyBiome(0.2F, 0.025F, 1.6, 0.4));
+        Biome lake = EarlyBiomeRegistry.register("fertile_valley_lake", new FertileValleyBiome(-0.25F, 0.025F, 0.8, 1.2));
 
         BiomeRegistries.registerNoBeachBiomes(biome, thicket, clearing, lake);
 

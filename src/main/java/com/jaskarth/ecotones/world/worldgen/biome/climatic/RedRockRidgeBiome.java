@@ -22,7 +22,7 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 
 public class RedRockRidgeBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "red_rock_ridge"), new RedRockRidgeBiome(1.2F, 0.125F, 9, 0.92).build());
+        Biome biome = EarlyBiomeRegistry.register("red_rock_ridge", new RedRockRidgeBiome(1.2F, 0.125F, 9, 0.92));
 
         Climate.HOT_DESERT.add(biome, 0.2);
         Climate.HOT_VERY_DRY.add(biome, 0.1);

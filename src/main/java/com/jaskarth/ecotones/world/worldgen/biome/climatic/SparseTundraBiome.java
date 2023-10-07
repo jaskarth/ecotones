@@ -1,5 +1,6 @@
 package com.jaskarth.ecotones.world.worldgen.biome.climatic;
 
+import com.jaskarth.ecotones.Ecotones;
 import com.jaskarth.ecotones.world.worldgen.biome.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryKey;
@@ -23,10 +24,10 @@ import com.jaskarth.ecotones.world.worldgen.features.EcotonesFeatures;
 import com.jaskarth.ecotones.world.worldgen.features.config.*;
 
 public class SparseTundraBiome extends EcotonesBiomeBuilder {
-    public static RegistryKey<Biome> KEY = RegistryKey.of(RegistryKeys.BIOME, new Identifier("ecotones", "sparse_tundra"));
+    public static RegistryKey<Biome> KEY = RegistryKey.of(RegistryKeys.BIOME, Ecotones.id("sparse_tundra"));
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_tundra"), new SparseTundraBiome(0.3f, 0.155f, 2.4, 0.96).build());
+        Biome biome = EarlyBiomeRegistry.register("sparse_tundra", new SparseTundraBiome(0.3f, 0.155f, 2.4, 0.96));
         Climate.WARM_MILD.add(biome, 0.2);
         Climate.WARM_HUMID.add(biome, 0.2);
     }

@@ -32,7 +32,7 @@ import com.jaskarth.ecotones.world.worldgen.surface.system.SurfaceBuilder;
 
 public class RockyGrasslandBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "rocky_grassland"), new RockyGrasslandBiome(0.5F, 0.1F).build());
+        Biome biome = EarlyBiomeRegistry.register("rocky_grassland", new RockyGrasslandBiome(0.5F, 0.1F));
 
         Climate.HOT_MILD.add(biome, 1);
         Climate.HOT_MODERATE.add(biome, 0.4);

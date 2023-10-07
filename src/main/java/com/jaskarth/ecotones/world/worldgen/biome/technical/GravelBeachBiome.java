@@ -24,7 +24,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.FeatureConfigHolder;
 
 public class GravelBeachBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "gravel_beach"), new GravelBeachBiome().build());
+        Biome biome = EarlyBiomeRegistry.register("gravel_beach", new GravelBeachBiome());
 
         BiomeRegistries.registerBeach(biome);
     }

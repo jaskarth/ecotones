@@ -31,7 +31,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 // TODO: change to gravelly desert
 public class CoolDesertBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "cool_desert"), new CoolDesertBiome(0.5f, 0.075f, 1.6, 0.94).build());
+        Biome biome = EarlyBiomeRegistry.register("cool_desert", new CoolDesertBiome(0.5f, 0.075f, 1.6, 0.94));
 
         Climate.WARM_DESERT.add(biome, 1);
 

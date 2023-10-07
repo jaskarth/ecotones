@@ -25,11 +25,11 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class MontaneFieldsBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "montane_fields"), new MontaneFieldsBiome(4.5f, 0.09f, 2.6, 0.94).build());
+        Biome biome = EarlyBiomeRegistry.register("montane_fields", new MontaneFieldsBiome(4.5f, 0.09f, 2.6, 0.94));
         BiomeRegistries.addMountainBiome(biome);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_PLAINS, biome);
         BiomeRegistries.registerBiomeVariantChance(biome, 8);
-        BiomeRegistries.registerBiomeVariants(biome, EarlyBiomeRegistry.get(new Identifier("ecotones", "mountain_lake")));
+        BiomeRegistries.registerBiomeVariants(biome, EarlyBiomeRegistry.get("mountain_lake"));
 
         Climate.HOT_MILD.add(ClimateType.MOUNTAIN_PLAINS, biome, 1.0);
         Climate.HOT_HUMID.add(ClimateType.MOUNTAIN_PLAINS, biome, 1.0);

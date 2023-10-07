@@ -31,10 +31,10 @@ import java.util.OptionalInt;
 
 public class WoodlandThicketBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "woodland_thicket"), new WoodlandThicketBiome(0.5F, 0.125F, 2.1, 1, 8).build());
-        Biome clearing = EarlyBiomeRegistry.register(new Identifier("ecotones", "woodland_clearing"), new WoodlandThicketBiome(0.5F, 0.0F, 1.2, 0.88, 2).build());
-        Biome hilly = EarlyBiomeRegistry.register(new Identifier("ecotones", "woodland_hilly"), new WoodlandThicketBiome(1.2F, 0.8F, 3.2, 0.7, 6).build());
-        Biome hillyClearing = EarlyBiomeRegistry.register(new Identifier("ecotones", "woodland_clearing_hilly"), new WoodlandThicketBiome(1.2F, 0.2F, 1.6, 0.8, 2).build());
+        Biome biome = EarlyBiomeRegistry.register("woodland_thicket", new WoodlandThicketBiome(0.5F, 0.125F, 2.1, 1, 8));
+        Biome clearing = EarlyBiomeRegistry.register("woodland_clearing", new WoodlandThicketBiome(0.5F, 0.0F, 1.2, 0.88, 2));
+        Biome hilly = EarlyBiomeRegistry.register("woodland_hilly", new WoodlandThicketBiome(1.2F, 0.8F, 3.2, 0.7, 6));
+        Biome hillyClearing = EarlyBiomeRegistry.register("woodland_clearing_hilly", new WoodlandThicketBiome(1.2F, 0.2F, 1.6, 0.8, 2));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 4);
         BiomeRegistries.registerBiomeVariants(biome, clearing, hilly, hillyClearing);

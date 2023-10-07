@@ -31,8 +31,8 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class SpruceMarshBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_marsh"), new SpruceMarshBiome(0.1F, 0.025F, false).build());
-        Biome thicket = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_marsh_thicket"), new SpruceMarshBiome(0.1F, 0.025F, true).build());
+        Biome biome = EarlyBiomeRegistry.register("spruce_marsh", new SpruceMarshBiome(0.1F, 0.025F, false));
+        Biome thicket = EarlyBiomeRegistry.register("spruce_marsh_thicket", new SpruceMarshBiome(0.1F, 0.025F, true));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 3);
         BiomeRegistries.registerBiomeVariants(biome, thicket);
@@ -191,8 +191,6 @@ public class SpruceMarshBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesConfiguredFeature.wrap(Feature.TREE, (FeatureConfigHolder.SMALL_PINE_CONFIG))
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.45))));
-
-        BiomeDecorator.addPatch(this, FeatureConfigHolder.WIDE_FERNS, 6);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.SMALL_SPRUCE.configure(new SimpleTreeFeatureConfig(Blocks.SPRUCE_LOG.getDefaultState(), Blocks.SPRUCE_LEAVES.getDefaultState()))

@@ -27,9 +27,9 @@ import com.jaskarth.ecotones.world.worldgen.features.config.*;
 
 public class ClayBasinBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "clay_basin"), new ClayBasinBiome(0.2f, 0.125f, 2.8, 0.94).build());
-        Biome lakebed = EarlyBiomeRegistry.register(new Identifier("ecotones", "clay_basin_lakebed"), new ClayBasinBiome(0.2f, 0.125f, 1.2, 0.98, 8, 1).build());
-        Biome wet = EarlyBiomeRegistry.register(new Identifier("ecotones", "clay_basin_wet"), new ClayBasinBiome(0.1f, 0.125f, 2.8, 0.94, 3, 10).build());
+        Biome biome = EarlyBiomeRegistry.register("clay_basin", new ClayBasinBiome(0.2f, 0.125f, 2.8, 0.94));
+        Biome lakebed = EarlyBiomeRegistry.register("clay_basin_lakebed", new ClayBasinBiome(0.2f, 0.125f, 1.2, 0.98, 8, 1));
+        Biome wet = EarlyBiomeRegistry.register("clay_basin_wet", new ClayBasinBiome(0.1f, 0.125f, 2.8, 0.94, 3, 10));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 4);
         BiomeRegistries.registerBiomeVariants(biome, lakebed, wet);

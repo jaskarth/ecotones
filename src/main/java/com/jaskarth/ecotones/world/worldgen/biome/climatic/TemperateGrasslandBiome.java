@@ -32,7 +32,7 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class TemperateGrasslandBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "temperate_grassland"), new TemperateGrasslandBiome(0.5F, 0.025F).build());
+        Biome biome = EarlyBiomeRegistry.register("temperate_grassland", new TemperateGrasslandBiome(0.5F, 0.025F));
 
         Climate.WARM_DRY.add(biome, 0.2);
         Climate.WARM_MODERATE.add(biome, 0.4);

@@ -24,7 +24,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.*;
 
 public class DandelionFieldBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "dandelion_field"), new DandelionFieldBiome(0.35f, 0.15f, 4.2, 0.92).build());
+        Biome biome = EarlyBiomeRegistry.register("dandelion_field", new DandelionFieldBiome(0.35f, 0.15f, 4.2, 0.92));
 
         Climate.WARM_HUMID.add(biome, 0.1);
         Climate.WARM_MILD.add(biome, 0.1);

@@ -29,10 +29,10 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 
 public class CloverFieldsBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "clover_fields"), new CloverFieldsBiome(0.5F, 0.05F, 0, 1, 2.4, 0.95).build());
-        Biome thicket = EarlyBiomeRegistry.register(new Identifier("ecotones", "clover_thicket"), new CloverFieldsBiome(0.5F, 0.025F, 2, 2, 2.8, 0.9).build());
-        Biome flats = EarlyBiomeRegistry.register(new Identifier("ecotones", "clover_flats"), new CloverFieldsBiome(0.5F, 0.01F, 0, 2, 1.2, 1.2).build());
-        Biome hills = EarlyBiomeRegistry.register(new Identifier("ecotones", "clover_hills"), new CloverFieldsBiome(1.2F, 0.625F, 0, 1, 4.8, 0.75).build());
+        Biome biome = EarlyBiomeRegistry.register("clover_fields", new CloverFieldsBiome(0.5F, 0.05F, 0, 1, 2.4, 0.95));
+        Biome thicket = EarlyBiomeRegistry.register("clover_thicket", new CloverFieldsBiome(0.5F, 0.025F, 2, 2, 2.8, 0.9));
+        Biome flats = EarlyBiomeRegistry.register("clover_flats", new CloverFieldsBiome(0.5F, 0.01F, 0, 2, 1.2, 1.2));
+        Biome hills = EarlyBiomeRegistry.register("clover_hills", new CloverFieldsBiome(1.2F, 0.625F, 0, 1, 4.8, 0.75));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 3);
         BiomeRegistries.registerBiomeVariants(biome, thicket, flats, hills);

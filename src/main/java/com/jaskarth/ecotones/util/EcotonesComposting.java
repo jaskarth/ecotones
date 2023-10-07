@@ -14,12 +14,11 @@ public final class EcotonesComposting {
         register(EcotonesBlocksItems.get(EcotonesBlocks.HAZEL_LEAVES), 0.3);
         register(EcotonesBlocksItems.get(EcotonesBlocks.HAZEL_SAPLING), 0.3);
         register(EcotonesBlocksItems.get(EcotonesBlocks.SANDY_GRASS), 0.2);
-        register(EcotonesBlocksItems.get(EcotonesBlocks.CLOVER), 0.4);
-        register(EcotonesBlocksItems.get(EcotonesBlocks.BLUEBELL), 0.65);
-        register(EcotonesBlocksItems.get(EcotonesBlocks.WIDE_FERN), 0.3);
+        register(EcotonesBlocksItems.get(EcotonesBlocks.CLOVER), 0.3);
+        register(EcotonesBlocksItems.get(EcotonesBlocks.BLUEBELL), 0.55);
         register(EcotonesBlocksItems.get(EcotonesBlocks.SMALL_LILAC), 0.65);
         register(EcotonesBlocksItems.get(EcotonesBlocks.LICHEN), 0.4);
-        register(EcotonesBlocksItems.get(EcotonesBlocks.MOSS), 0.4);
+        register(EcotonesBlocksItems.get(EcotonesBlocks.MOSS), 0.3);
         register(EcotonesBlocksItems.get(EcotonesBlocks.MAPLE_LEAVES), 0.3);
         register(EcotonesBlocksItems.get(EcotonesBlocks.SWITCHGRASS), 0.3);
         register(EcotonesBlocksItems.get(EcotonesBlocks.LAVENDER), 0.65);

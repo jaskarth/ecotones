@@ -26,7 +26,7 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class PineForestBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "pine_forest"), new PineForestBiome(0.5f, 0.225f, 2.8, 0.96).build());
+        Biome biome = EarlyBiomeRegistry.register("pine_forest", new PineForestBiome(0.5f, 0.225f, 2.8, 0.96));
 
         Climate.WARM_HUMID.add(biome, 0.2);
         Climate.WARM_MILD.add(biome, 0.4);

@@ -22,16 +22,16 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 public class TropicalGrasslandBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_grassland"), new TropicalGrasslandBiome(0.5f, 0.15f, 1.8, 0.88).build());
-        Biome shrubs = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_grassland_shrubs"), new TropicalGrasslandBiome(0.5f, 0.15f, 1.8, 0.88, 2.8, 0.4).build());
-        Biome thicket = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_grassland_thicket"), new TropicalGrasslandBiome(0.5f, 0.075f, 1.8, 0.88, 1.4, 2.6).build());
+        Biome biome = EarlyBiomeRegistry.register("tropical_grassland", new TropicalGrasslandBiome(0.5f, 0.15f, 1.8, 0.88));
+        Biome shrubs = EarlyBiomeRegistry.register("tropical_grassland_shrubs", new TropicalGrasslandBiome(0.5f, 0.15f, 1.8, 0.88, 2.8, 0.4));
+        Biome thicket = EarlyBiomeRegistry.register("tropical_grassland_thicket", new TropicalGrasslandBiome(0.5f, 0.075f, 1.8, 0.88, 1.4, 2.6));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 3);
         BiomeRegistries.registerBiomeVariants(biome, shrubs, thicket);
 
         Climate.HOT_MODERATE.add(biome, 1);
 
-        Biome montane = EarlyBiomeRegistry.register(new Identifier("ecotones", "montane_tropical_grassland"), new TropicalGrasslandBiome(4.5f, 0.15f, 1.8, 0.97, 1.4, 0.1).build());
+        Biome montane = EarlyBiomeRegistry.register("montane_tropical_grassland", new TropicalGrasslandBiome(4.5f, 0.15f, 1.8, 0.97, 1.4, 0.1));
         BiomeRegistries.addMountainBiome(montane);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_PLAINS, montane);
 

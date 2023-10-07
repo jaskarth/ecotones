@@ -32,7 +32,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 
 public class PinePeaksBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "pine_peaks"), new PinePeaksBiome().build());
+        Biome biome = EarlyBiomeRegistry.register("pine_peaks", new PinePeaksBiome());
 
         BiomeRegistries.registerNoBeachBiome(biome);
         Climate.WARM_HUMID.add(biome, 0.05);

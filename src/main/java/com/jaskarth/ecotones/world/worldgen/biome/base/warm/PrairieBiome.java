@@ -26,7 +26,7 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class PrairieBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "prairie"), new PrairieBiome(0.5f, 0.075f, 2.8, 0.88).build());
+        Biome biome = EarlyBiomeRegistry.register("prairie", new PrairieBiome(0.5f, 0.075f, 2.8, 0.88));
 
         Climate.WARM_MODERATE.add(biome, 1);
     }

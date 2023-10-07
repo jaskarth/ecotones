@@ -24,7 +24,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.RockFeatureConfig;
 
 public class MountainPeaksBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "mountain_peaks"), new MountainPeaksBiome(7.5F, 0.175F, 9, 0.9).build());
+        Biome biome = EarlyBiomeRegistry.register("mountain_peaks", new MountainPeaksBiome(7.5F, 0.175F, 9, 0.9));
         BiomeRegistries.addMountainBiome(biome);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_PEAKS, biome);
 

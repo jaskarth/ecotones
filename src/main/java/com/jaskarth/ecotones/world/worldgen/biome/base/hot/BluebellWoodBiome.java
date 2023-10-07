@@ -26,9 +26,9 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class BluebellWoodBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "bluebell_wood"), new BluebellWoodBiome(0.3F, 0.05F, false, false).build());
-        Biome flats = EarlyBiomeRegistry.register(new Identifier("ecotones", "bluebell_wood_flats"), new BluebellWoodBiome(0.3F, 0F, false, true).build());
-        Biome clearing = EarlyBiomeRegistry.register(new Identifier("ecotones", "bluebell_wood_clearing"), new BluebellWoodBiome(0.3F, 0.0125F, true, false).build());
+        Biome biome = EarlyBiomeRegistry.register("bluebell_wood", new BluebellWoodBiome(0.3F, 0.05F, false, false));
+        Biome flats = EarlyBiomeRegistry.register("bluebell_wood_flats", new BluebellWoodBiome(0.3F, 0F, false, true));
+        Biome clearing = EarlyBiomeRegistry.register("bluebell_wood_clearing", new BluebellWoodBiome(0.3F, 0.0125F, true, false));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 4);
         BiomeRegistries.registerBiomeVariants(biome, flats, clearing);

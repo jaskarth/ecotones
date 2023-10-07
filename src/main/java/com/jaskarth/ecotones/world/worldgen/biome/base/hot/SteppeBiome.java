@@ -22,8 +22,8 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 public class SteppeBiome extends EcotonesBiomeBuilder {
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "steppe"), new SteppeBiome(0.5f, 0.075f, 2.8, 0.88, false).build());
-        Biome thicket = EarlyBiomeRegistry.register(new Identifier("ecotones", "steppe_thicket"), new SteppeBiome(0.5f, 0.075f, 3.2, 0.98, true).build());
+        Biome biome = EarlyBiomeRegistry.register("steppe", new SteppeBiome(0.5f, 0.075f, 2.8, 0.88, false));
+        Biome thicket = EarlyBiomeRegistry.register("steppe_thicket", new SteppeBiome(0.5f, 0.075f, 3.2, 0.98, true));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 3);
         BiomeRegistries.registerBiomeVariants(biome, thicket);

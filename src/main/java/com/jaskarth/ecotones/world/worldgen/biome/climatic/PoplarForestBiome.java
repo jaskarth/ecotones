@@ -26,12 +26,12 @@ import com.jaskarth.ecotones.world.worldgen.structure.EcotonesStructures;
 
 public class PoplarForestBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "poplar_forest"), new PoplarForestBiome(0.5F, 0.05F, 3, 2, 1, 2.4, 0.95).build());
-        Biome clearing = EarlyBiomeRegistry.register(new Identifier("ecotones", "poplar_forest_clearing"), new PoplarForestBiome(0.5F, 0.05F, 0, 0, 1, 2.4, 0.95).build());
-        Biome thicket = EarlyBiomeRegistry.register(new Identifier("ecotones", "poplar_forest_thicket"), new PoplarForestBiome(0.5F, 0.025F, 6, 6, 2, 2.8, 0.9).build());
-        Biome flats = EarlyBiomeRegistry.register(new Identifier("ecotones", "poplar_forest_flats"), new PoplarForestBiome(0.5F, 0.01F, 2, 2, 2, 1.2, 1.2).build());
-        Biome hills = EarlyBiomeRegistry.register(new Identifier("ecotones", "poplar_forest_hills"), new PoplarForestBiome(1.2F, 0.625F, 3, 2, 1, 4.8, 0.75).build());
-        Biome shrubs = EarlyBiomeRegistry.register(new Identifier("ecotones", "poplar_forest_shrubs"), new PoplarForestBiome(0.5F, 0.025F, 2, 2, 4, 2.8, 0.9).build());
+        Biome biome = EarlyBiomeRegistry.register("poplar_forest", new PoplarForestBiome(0.5F, 0.05F, 3, 2, 1, 2.4, 0.95));
+        Biome clearing = EarlyBiomeRegistry.register("poplar_forest_clearing", new PoplarForestBiome(0.5F, 0.05F, 0, 0, 1, 2.4, 0.95));
+        Biome thicket = EarlyBiomeRegistry.register("poplar_forest_thicket", new PoplarForestBiome(0.5F, 0.025F, 6, 6, 2, 2.8, 0.9));
+        Biome flats = EarlyBiomeRegistry.register("poplar_forest_flats", new PoplarForestBiome(0.5F, 0.01F, 2, 2, 2, 1.2, 1.2));
+        Biome hills = EarlyBiomeRegistry.register("poplar_forest_hills", new PoplarForestBiome(1.2F, 0.625F, 3, 2, 1, 4.8, 0.75));
+        Biome shrubs = EarlyBiomeRegistry.register("poplar_forest_shrubs", new PoplarForestBiome(0.5F, 0.025F, 2, 2, 4, 2.8, 0.9));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 2);
         BiomeRegistries.registerBiomeVariants(biome, clearing, thicket, flats, hills, shrubs);

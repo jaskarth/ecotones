@@ -1,4 +1,4 @@
-package com.jaskarth.ecotones.recipe;
+package com.jaskarth.ecotones.world.recipe;
 
 public final class EcotonesRecipes {
     public static void init() {

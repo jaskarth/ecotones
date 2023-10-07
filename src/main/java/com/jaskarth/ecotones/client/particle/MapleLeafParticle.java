@@ -1,5 +1,6 @@
 package com.jaskarth.ecotones.client.particle;
 
+import com.jaskarth.ecotones.client.Colors;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
@@ -12,7 +13,7 @@ public class MapleLeafParticle extends SpriteBillboardParticle {
         super(clientWorld, x, y - 0.125D, z, velocityX, velocityY, velocityZ);
         this.collidesWithWorld = true;
 
-        double noise = (Biome.FOLIAGE_NOISE.sample(x / 80.0, z / 80.0, false) + 1) / 2.0;
+        double noise = (Colors.FOLIAGE_NOISE.sample(x / 80.0, z / 80.0, false) + 1) / 2.0;
 
         this.velocityX = velocityX;
         this.velocityY = velocityY;

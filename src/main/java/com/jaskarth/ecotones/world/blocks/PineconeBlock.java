@@ -28,10 +28,6 @@ public class PineconeBlock extends Block {
         return !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, facing, neighborState, world, pos, neighborPos);
     }
 
-    public OffsetType getOffsetType() {
-        return OffsetType.XZ;
-    }
-
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockState upState = world.getBlockState(pos.up());

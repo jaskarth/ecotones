@@ -33,9 +33,9 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 // For Amelia Rose, with love. - Jasmine Karthikeyan
 public class RoseFieldBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "rose_field"), new RoseFieldBiome().build());
-        Climate.WARM_MILD.add(biome, 0.1);
-        Climate.WARM_HUMID.add(biome, 0.1);
+        Biome biome = EarlyBiomeRegistry.register("rose_field", new RoseFieldBiome());
+        Climate.WARM_MILD.add(biome, 0.02);
+        Climate.WARM_HUMID.add(biome, 0.02);
     }
 
     public RoseFieldBiome() {
@@ -58,13 +58,7 @@ public class RoseFieldBiome extends EcotonesBiomeBuilder {
 
         BiomeDecorator.addGrass(this, FeatureConfigHolder.RARELY_SHORT_GRASS_CONFIG, 16);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(1.25))));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.WIDE_SHRUB.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
-                        .decorate(EcotonesDecorators.SHRUB_PLACEMENT_DECORATOR.configure(new ShrubDecoratorConfig(0.45))));
+        BiomeDecorator.addOakShrubs(this, 1.25, 0.45);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.BEEHIVES.configure(FeatureConfig.DEFAULT)

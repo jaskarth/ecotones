@@ -22,7 +22,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 
 public class DriedForestBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "dried_forest"), new DriedForestBiome(0.5f, 0.075f, 2.8, 0.88).build());
+        Biome biome = EarlyBiomeRegistry.register("dried_forest", new DriedForestBiome(0.5f, 0.075f, 2.8, 0.88));
 
         Climate.WARM_DRY.add(biome, 1);
         Climate.HOT_DRY.add(biome, 0.3);

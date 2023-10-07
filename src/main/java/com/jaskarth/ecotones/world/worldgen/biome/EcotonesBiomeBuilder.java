@@ -22,7 +22,6 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class EcotonesBiomeBuilder {
-    private static final AtomicInteger featureId = new AtomicInteger(0);
     public static final Map<Biome, BiomeGenData> OBJ2DATA = new HashMap<>();
     private final Biome.Builder builder;
     private final SpawnSettings.Builder spawnSettings;

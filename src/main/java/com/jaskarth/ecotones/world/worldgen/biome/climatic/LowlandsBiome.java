@@ -24,7 +24,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.*;
 // TODO: more golden grass color, split into tundra
 public class LowlandsBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "lowlands"), new LowlandsBiome(0.02f, 0.125f, 2.4, 0.96).build());
+        Biome biome = EarlyBiomeRegistry.register("lowlands", new LowlandsBiome(0.02f, 0.125f, 2.4, 0.96));
 
         Climate.WARM_MILD.add(biome, 0.2);
         Climate.WARM_HUMID.add(biome, 0.2);

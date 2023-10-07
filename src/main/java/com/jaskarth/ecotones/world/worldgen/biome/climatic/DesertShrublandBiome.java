@@ -31,7 +31,7 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 
 public class DesertShrublandBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "desert_shrubland"), new DesertShrublandBiome(0.4f, 0.1f, 2.4, 0.94).build());
+        Biome biome = EarlyBiomeRegistry.register("desert_shrubland", new DesertShrublandBiome(0.4f, 0.1f, 2.4, 0.94));
 
         Climate.HOT_DESERT.add(biome, 0.3);
         Climate.WARM_DESERT.add(biome, 0.2);

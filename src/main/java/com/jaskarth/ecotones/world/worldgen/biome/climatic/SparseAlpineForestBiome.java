@@ -24,7 +24,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.*;
 
 public class SparseAlpineForestBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "sparse_alpine_forest"), new SparseAlpineForestBiome(3f, 0.125f, 2.2, 0.98).build());
+        Biome biome = EarlyBiomeRegistry.register("sparse_alpine_forest", new SparseAlpineForestBiome(3f, 0.125f, 2.2, 0.98));
         BiomeRegistries.addMountainBiome(biome);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, biome);
 

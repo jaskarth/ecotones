@@ -11,7 +11,7 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import com.jaskarth.ecotones.world.items.EcotonesItems;
-import com.jaskarth.ecotones.recipe.EcotonesGrindingRecipes;
+import com.jaskarth.ecotones.world.recipe.EcotonesGrindingRecipes;
 
 public class GrindstoneScreenHandler extends ScreenHandler {
     private final PropertyDelegate propertyDelegate;

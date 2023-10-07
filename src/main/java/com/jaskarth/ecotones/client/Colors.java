@@ -1,17 +1,23 @@
 package com.jaskarth.ecotones.client;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.noise.OctaveSimplexNoiseSampler;
+import net.minecraft.util.math.random.CheckedRandom;
+import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.world.biome.Biome;
 
 public final class Colors {
+    public static final OctaveSimplexNoiseSampler FOLIAGE_NOISE = new OctaveSimplexNoiseSampler(new ChunkRandom(new CheckedRandom(2345L)), ImmutableList.of(0));
+
     public static int maple() {
         // 194, 51, 47
         return 0xc2332f;
     }
 
     public static int maple(BlockPos pos) {
-        double noise = (Biome.FOLIAGE_NOISE.sample(pos.getX() / 80.0, pos.getZ() / 80.0, false) + 1) / 2.0;
+        double noise = (FOLIAGE_NOISE.sample(pos.getX() / 80.0, pos.getZ() / 80.0, false) + 1) / 2.0;
         // bottom: 194, 51, 47
         // top: 217, 105, 26
 
@@ -24,7 +30,7 @@ public final class Colors {
     }
 
     public static int larch(BlockPos pos) {
-        double noise = (Biome.FOLIAGE_NOISE.sample(pos.getX() / 30.0, pos.getZ() / 30.0, false) + 1) / 2.0;
+        double noise = (FOLIAGE_NOISE.sample(pos.getX() / 30.0, pos.getZ() / 30.0, false) + 1) / 2.0;
         // bottom: 242, 190, 48
         // top: 242, 225, 48
 

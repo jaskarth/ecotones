@@ -49,7 +49,7 @@ public class TropicalBeachBiome extends EcotonesBiomeBuilder {
             ).ignoreVines().build();
 
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "tropical_beach"), new TropicalBeachBiome().build());
+        Biome biome = EarlyBiomeRegistry.register("tropical_beach", new TropicalBeachBiome());
 
         BiomeRegistries.registerBeach(biome);
     }

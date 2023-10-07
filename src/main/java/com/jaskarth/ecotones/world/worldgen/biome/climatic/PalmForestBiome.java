@@ -36,7 +36,7 @@ import com.jaskarth.ecotones.world.worldgen.features.config.SimpleTreeFeatureCon
 
 public class PalmForestBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "palm_forest"), new PalmForestBiome(0.5F, 0.025F, 2, 0.9).build());
+        Biome biome = EarlyBiomeRegistry.register("palm_forest", new PalmForestBiome(0.5F, 0.025F, 2, 0.9));
 
         Climate.HOT_VERY_HUMID.add(biome, 0.2);
         Climate.HOT_RAINFOREST.add(biome, 0.07);

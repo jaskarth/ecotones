@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import com.jaskarth.ecotones.Ecotones;
 import com.jaskarth.ecotones.world.items.EcotonesItems;
-import com.jaskarth.ecotones.recipe.GrindingRecipe;
+import com.jaskarth.ecotones.world.recipe.GrindingRecipe;
 
 import java.util.ArrayList;
 import java.util.List;

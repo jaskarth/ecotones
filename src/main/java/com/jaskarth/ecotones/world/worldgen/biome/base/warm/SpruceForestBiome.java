@@ -31,10 +31,10 @@ import com.jaskarth.ecotones.world.worldgen.surface.system.TernarySurfaceConfig;
 
 public class SpruceForestBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_forest"), new SpruceForestBiome(0.4f, 0.125f, 3.2, 0.88).build());
-        Biome clearing = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_forest_clearing"), new SpruceForestBiome(0.5f, 0.125f, 2.2, 0.95, 1.25, SurfaceBuilder.DEFAULT).build());
-        Biome gravelly = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_forest_gravelly"), new SpruceForestBiome(0.4f, 0.125f, 2.8, 0.88, 7.5, EcotonesSurfaces.GRAVEL_BANDS).build());
-        Biome lake = EarlyBiomeRegistry.register(new Identifier("ecotones", "spruce_forest_lake"), new SpruceForestBiome(-0.25f, 0.075f, 1.2, 0.97).build());
+        Biome biome = EarlyBiomeRegistry.register("spruce_forest", new SpruceForestBiome(0.4f, 0.125f, 3.2, 0.88));
+        Biome clearing = EarlyBiomeRegistry.register("spruce_forest_clearing", new SpruceForestBiome(0.5f, 0.125f, 2.2, 0.95, 1.25, SurfaceBuilder.DEFAULT));
+        Biome gravelly = EarlyBiomeRegistry.register("spruce_forest_gravelly", new SpruceForestBiome(0.4f, 0.125f, 2.8, 0.88, 7.5, EcotonesSurfaces.GRAVEL_BANDS));
+        Biome lake = EarlyBiomeRegistry.register("spruce_forest_lake", new SpruceForestBiome(-0.25f, 0.075f, 1.2, 0.97));
 
         BiomeRegistries.registerBiomeVariantChance(biome, 4);
         BiomeRegistries.registerBiomeVariants(biome, false, lake, clearing, gravelly);
@@ -60,8 +60,6 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
         this.addStructureFeature(EcotonesStructures.CAMPFIRE_SPRUCE);
         this.addStructureFeature(EcotonesStructures.COTTAGE);
 
-        
-
         this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS,
                 EcotonesFeatures.ROCK.configure(new RockFeatureConfig(Blocks.COBBLESTONE.getDefaultState(), 1))
                         .decorate(EcotonesDecorators.LARGE_ROCK.configure(new ChanceDecoratorConfig(8))));
@@ -80,48 +78,14 @@ public class SpruceForestBiome extends EcotonesBiomeBuilder {
                 EcotonesFeatures.IMPROVED_BIRCH.configure(TreeType.RARE_DEAD_SPRUCE)
                         .decorate(EcotonesDecorators.TREE_DECORATOR.configure(TreeType.RARE_DEAD_SPRUCE.decorationData)));
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.TAIGA_FLOWERS)
-                        .decorate(new Spread32Decorator())
-                        .spreadHorizontally()
-                        .applyChance(2));
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.TAIGA_FLOWERS, 2);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.WIDE_FERNS)
-                        .decorate(new Spread32Decorator())
-                        .spreadHorizontally()
-                        .repeat(2));
+        BiomeDecorator.addClover(this, 4);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.CLOVER)
-                        .decorate(new Spread32Decorator())
-                        .spreadHorizontally()
-                        .repeat(4));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.SMALL_LILAC)
-                        .decorate(new Spread32Decorator())
-                        .spreadHorizontally()
-                        .repeat(1));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.LAVENDER)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .repeat(1));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
-                        .decorate(new Spread32Decorator())
-                        .spreadHorizontally()
-                        .repeat(3));
-
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MUSHROOMS)
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .applyChance(2));
+        BiomeDecorator.addPatch(this, FeatureConfigHolder.SMALL_LILAC, 1);
+        BiomeDecorator.addPatch(this, FeatureConfigHolder.MOSS, 3);
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.MUSHROOMS, 2);
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.BLUEBELL_PATCH, 5);
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.CATTAIL.configure(new CattailFeatureConfig(EcotonesBlocks.WATERGRASS.getDefaultState(), UniformIntProvider.create(64, 96), true, UniformIntProvider.create(10, 14)))

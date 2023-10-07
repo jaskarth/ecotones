@@ -25,9 +25,9 @@ import com.jaskarth.ecotones.world.worldgen.features.config.*;
 
 public class HotPineForestBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "hot_pine_forest"), new HotPineForestBiome(0.3f, 0.075f, 2.2, 0.96).build());
-        Biome clearing = EarlyBiomeRegistry.register(new Identifier("ecotones", "hot_pine_forest_clearing"), new HotPineForestBiome(0.3f, 0.085f, 1.4, 0.975, 2.4).build());
-        Biome lake = EarlyBiomeRegistry.register(new Identifier("ecotones", "hot_pine_forest_lake"), new HotPineForestBiome(-0.25f, 0.075f, 0.8, 0.975, 5.4).build());
+        Biome biome = EarlyBiomeRegistry.register("hot_pine_forest", new HotPineForestBiome(0.3f, 0.075f, 2.2, 0.96));
+        Biome clearing = EarlyBiomeRegistry.register("hot_pine_forest_clearing", new HotPineForestBiome(0.3f, 0.085f, 1.4, 0.975, 2.4));
+        Biome lake = EarlyBiomeRegistry.register("hot_pine_forest_lake", new HotPineForestBiome(-0.25f, 0.075f, 0.8, 0.975, 5.4));
 
         Climate.HOT_VERY_DRY.add(biome, 0.2);
         Climate.HOT_DRY.add(biome, 0.4);
@@ -40,7 +40,7 @@ public class HotPineForestBiome extends EcotonesBiomeBuilder {
         BiomeRegistries.registerBiomeVariantChance(biome, 3);
         BiomeRegistries.registerBiomeVariants(biome, lake, clearing);
 
-        Biome montane = EarlyBiomeRegistry.register(new Identifier("ecotones", "montane_hot_pine_forest"), new HotPineForestBiome(3.0f, 0.125f, 2.2, 0.96).build());
+        Biome montane = EarlyBiomeRegistry.register("montane_hot_pine_forest", new HotPineForestBiome(3.0f, 0.125f, 2.2, 0.96));
         BiomeRegistries.addMountainBiome(montane);
         BiomeRegistries.addMountainType(ClimateType.MOUNTAIN_FOOTHILLS_UPPER, montane);
 

@@ -29,7 +29,7 @@ import com.jaskarth.ecotones.world.worldgen.surface.EcotonesSurfaces;
 
 public class ThornBrushBiome extends EcotonesBiomeBuilder {
     public static void init() {
-        Biome biome = EarlyBiomeRegistry.register(new Identifier("ecotones", "thorn_brush"), new ThornBrushBiome(0.5f, 0.075f, 2.8, 0.88).build());
+        Biome biome = EarlyBiomeRegistry.register("thorn_brush", new ThornBrushBiome(0.5f, 0.075f, 2.8, 0.88));
 
         Climate.WARM_VERY_DRY.add(biome, 0.3);
         Climate.HOT_VERY_DRY.add(biome, 0.6);
