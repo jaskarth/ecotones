@@ -55,18 +55,15 @@ public class BirchGroveBiome extends EcotonesBiomeBuilder {
 
         BiomeDecorator.addClover(this, 2);
 
-        this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-                EcotonesFeatures.RANDOM_PATCH.configure(FeatureConfigHolder.MOSS)
-                        .decorate(new Spread32Decorator())
-                        .decorate(HeightmapPlacementModifier.of(Heightmap.Type.MOTION_BLOCKING))
-                        .spreadHorizontally()
-                        .repeat(1));
+        BiomeDecorator.addPatch(this, FeatureConfigHolder.MOSS, 1);
 
         BiomeDecorator.addRock(this, 4);
 
         BiomeDecorator.addSurfaceRocks(this);
 
         BiomeDecorator.addGrass(this, FeatureConfigHolder.BIRCH_GROVE_CONFIG, 12);
+
+        BiomeDecorator.addPatchChance(this, FeatureConfigHolder.LILY_OF_THE_VALLEY_PATCH, 6);
 
         BiomeDecorator.addBirchShrubs(this, 1, 0.6);
         BiomeDecorator.addShrubs(this, Blocks.BIRCH_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), 0, 0.2);
@@ -78,10 +75,6 @@ public class BirchGroveBiome extends EcotonesBiomeBuilder {
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.ASPEN_TREE.configure(new SimpleTreeFeatureConfig(Blocks.BIRCH_LOG.getDefaultState(), Blocks.AIR.getDefaultState()))
                         .decorate(EcotonesDecorators.REVERSE_QUALITY_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.05))));
-
-        this.addFeature(GenerationStep.Feature.TOP_LAYER_MODIFICATION,
-                EcotonesFeatures.DUCK_NEST.configure(DefaultFeatureConfig.INSTANCE)
-                        .decorate(EcotonesDecorators.DUCK_NEST.configure(new ShrubDecoratorConfig(0.2))));
 
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.DUCKWEED.configure(new DuckweedFeatureConfig(UniformIntProvider.create(64, 96), UniformIntProvider.create(10, 14)))

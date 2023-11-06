@@ -43,7 +43,7 @@ public class GraniteSpringsBiome extends EcotonesBiomeBuilder {
         this.scale(scale);
         this.temperature(0.8F);
         this.downfall(0.5F);
-        this.associate(BiomeAssociations.SPRUCE_LIKE);
+        this.associate(BiomeAssociations.LONLEY_SPRUCE_LIKE);
 
         this.hilliness(hilliness);
         this.volatility(volatility);

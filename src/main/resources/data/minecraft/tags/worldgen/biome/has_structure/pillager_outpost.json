@@ -20,10 +20,6 @@
     "ecotones:spruce_forest_gravelly",
     "ecotones:spruce_forest_lake",
     "ecotones:flower_prairie",
-    "ecotones:clover_fields",
-    "ecotones:clover_thicket",
-    "ecotones:clover_flats",
-    "ecotones:clover_hills",
     "ecotones:temperate_grassland",
     "ecotones:lush_desert",
     "ecotones:dry_steppe",
@@ -38,7 +34,6 @@
     "ecotones:sunflower_plains",
     "ecotones:spruce_fields",
     "ecotones:pumpkin_patch",
-    "ecotones:granite_springs",
     "ecotones:dandelion_field",
     "ecotones:spruce_glen",
     "ecotones:desert_shrubland"

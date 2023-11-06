@@ -93,6 +93,8 @@ public class WoodlandThicketBiome extends EcotonesBiomeBuilder {
                         .spreadHorizontally()
                         .applyChance(2));
 
+        BiomeDecorator.addPatch(this, FeatureConfigHolder.POPPY, 1);
+
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
                 EcotonesFeatures.POPLAR_TREE.configure(new SimpleTreeFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()))
                         .decorate(EcotonesDecorators.SIMPLE_TREE_DECORATOR.configure(new SimpleTreeDecorationData(0.3))));

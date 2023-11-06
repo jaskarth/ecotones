@@ -138,6 +138,13 @@ public final class FeatureConfigHolder {
                     .add(Blocks.GRASS.getDefaultState(), 4)
                     .add(Blocks.TALL_GRASS.getDefaultState(), 2))).tries(48).build();
 
+    public static final RandomPatchFeatureConfig LILY_OF_THE_VALLEY_PATCH =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
+                    .add(Blocks.LILY_OF_THE_VALLEY.getDefaultState(), 1)))
+                    .spreadX(5)
+                    .spreadZ(5)
+                    .tries(48).build();
+
     public static final RandomPatchFeatureConfig DESERT_GRASS_CONFIG =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
                     .add(EcotonesBlocks.SANDY_GRASS.getDefaultState(), 1)))
@@ -240,6 +247,13 @@ public final class FeatureConfigHolder {
                     .spreadX(4)
                     .spreadZ(4)
                     .tries(16).build();
+
+    public static final RandomPatchFeatureConfig POPPY =
+            new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()
+                    .add(Blocks.POPPY.getDefaultState(), 1)))
+                    .spreadX(5)
+                    .spreadZ(5)
+                    .tries(12).build();
 
     public static final RandomPatchFeatureConfig CYAN_ROSE =
             new RandomPatchFeatureConfig.Builder(new WeightedBlockStateProvider(pool()

@@ -45,14 +45,12 @@ public final class EcotonesBiomes {
         HazelGroveBiome.init();
         PinePeaksBiome.init();
         FlowerPrairieBiome.init();
-        CloverFieldsBiome.init();
         PoplarForestBiome.init();
         TemperateGrasslandBiome.init();
         BirchForestBiome.init();
         FloodedSavannaBiome.init();
         DeadSpruceForestBiome.init();
         PalmForestBiome.init();
-        MoorBiome.init();
         AspenFoothillsBiome.init();
         LushDesertBiome.init();
         DrySteppeBiome.init();
