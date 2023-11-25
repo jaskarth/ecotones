@@ -39,7 +39,7 @@ public class TreetapBlockEntity extends BlockEntity {
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, TreetapBlockEntity blockEntity) {
-        if (blockEntity.isValid) {
+        if (blockEntity.isValid && blockEntity.sapAmount < 8000) {
             blockEntity.sapAmount++;
 
             // Used to lock the amount for display purposes

@@ -5,12 +5,15 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
 public abstract class InventoryBlockEntity extends LockableContainerBlockEntity {
     protected InventoryBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
     }
+
+    protected abstract DefaultedList<ItemStack> inventory();
 
     @Override
     public int size() {

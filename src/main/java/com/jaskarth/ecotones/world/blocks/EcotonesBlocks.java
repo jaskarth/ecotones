@@ -2,6 +2,7 @@ package com.jaskarth.ecotones.world.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -11,6 +12,9 @@ import com.jaskarth.ecotones.world.blocks.sapling.LarchSaplingGenerator;
 import com.jaskarth.ecotones.world.blocks.sapling.MapleSaplingGenerator;
 import com.jaskarth.ecotones.world.items.EcotonesBlocksItems;
 import com.jaskarth.ecotones.util.RegistryReport;
+import net.minecraft.state.property.Properties;
+
+import java.util.function.ToIntFunction;
 
 public final class EcotonesBlocks {
     public static final Block PEAT_BLOCK = new Block(FabricBlockSettings.copy(Blocks.DIRT).hardness(1f));
@@ -63,6 +67,7 @@ public final class EcotonesBlocks {
     public static final Block POTTED_MAPLE_SAPLING = new FlowerPotBlock(MAPLE_SAPLING, FabricBlockSettings.create().breakInstantly().nonOpaque());
     public static final Block POTTED_LARCH_SAPLING = new FlowerPotBlock(LARCH_SAPLING, FabricBlockSettings.create().breakInstantly().nonOpaque());
     public static final Block POTTED_HAZEL_SAPLING = new FlowerPotBlock(HAZEL_SAPLING, FabricBlockSettings.create().breakInstantly().nonOpaque());
+    public static final Block BRICK_COOKTOP = new CooktopBlock(AbstractBlock.Settings.create().mapColor(MapColor.RED).instrument(Instrument.BASEDRUM).requiresTool().strength(3.5F).luminance(createLightLevelFromLitBlockState(13)));
 
     public static final Block CYAN_ROSE = new CyanRoseBlock(FabricBlockSettings.create().nonOpaque().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS));
 
@@ -117,6 +122,7 @@ public final class EcotonesBlocks {
         register("potted_maple_sapling", POTTED_MAPLE_SAPLING);
         register("potted_larch_sapling", POTTED_LARCH_SAPLING);
         register("potted_hazel_sapling", POTTED_HAZEL_SAPLING);
+        registerWithItem("brick_cooktop", BRICK_COOKTOP);
 
         register("cyan_rose", CYAN_ROSE);
     }
@@ -130,5 +136,9 @@ public final class EcotonesBlocks {
         Registry.register(Registries.BLOCK, Ecotones.id(name), block);
         RegistryReport.increment("Block");
         EcotonesBlocksItems.associate(block, name);
+    }
+
+    private static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
+        return state -> state.get(Properties.LIT) ? litLevel : 0;
     }
 }

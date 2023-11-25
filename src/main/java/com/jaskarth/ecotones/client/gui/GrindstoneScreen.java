@@ -52,7 +52,7 @@ public class GrindstoneScreen extends HandledScreen<GrindstoneScreenHandler> {
             context.drawTexture(TEXTURE, x + 152, y + 57 + (13 - scaledBurnTime), 176, 13 - scaledBurnTime, 14, scaledBurnTime + 1);
         }
 
-        // TODO: ghost textures
+        // TODO: ghost textures (RecipeBookGhostSlots#draw)
     }
 
     @Override

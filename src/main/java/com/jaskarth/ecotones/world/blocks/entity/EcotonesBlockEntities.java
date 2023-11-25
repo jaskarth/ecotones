@@ -13,12 +13,14 @@ public final class EcotonesBlockEntities {
     public static final BlockEntityType<TreetapBlockEntity> TREETAP = FabricBlockEntityTypeBuilder.create(TreetapBlockEntity::new, EcotonesBlocks.TREETAP).build();
     public static final BlockEntityType<FertilizerSpreaderBlockEntity> FERTILIZER_SPREADER = FabricBlockEntityTypeBuilder.create(FertilizerSpreaderBlockEntity::new, EcotonesBlocks.FERTILIZER_SPREADER).build();
     public static final BlockEntityType<GrindstoneBlockEntity> GRINDSTONE = FabricBlockEntityTypeBuilder.create(GrindstoneBlockEntity::new, EcotonesBlocks.GRINDSTONE).build();
+    public static final BlockEntityType<CooktopBlockEntity> COOKTOP = FabricBlockEntityTypeBuilder.create(CooktopBlockEntity::new, EcotonesBlocks.BRICK_COOKTOP).build();
 
     public static void init() {
         register("sap_distillery", SAP_DISTILLERY);
         register("treetap", TREETAP);
         register("fertilizer_spreader", FERTILIZER_SPREADER);
         register("grindstone", GRINDSTONE);
+        register("cooktop", COOKTOP);
     }
 
     private static void register(String path, BlockEntityType<?> be) {

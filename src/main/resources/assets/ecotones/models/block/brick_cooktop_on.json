@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "minecraft:block/bricks",
+    "front": "ecotones:generated/brick_cooktop_front/on",
+    "side": "ecotones:block/brick_cooktop_side",
+    "top": "ecotones:block/cooktop_top",
+    "particle": "ecotones:block/cooktop_top"
+  }
+}

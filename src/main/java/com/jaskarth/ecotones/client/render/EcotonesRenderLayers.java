@@ -1,5 +1,6 @@
 package com.jaskarth.ecotones.client.render;
 
+import com.jaskarth.ecotones.client.tex.CooktopTextureGenerator;
 import net.minecraft.client.render.*;
 import com.jaskarth.ecotones.client.tex.SyrupTextureGenerator;
 
@@ -13,7 +14,23 @@ public final class EcotonesRenderLayers {
             RenderLayer.MultiPhaseParameters.builder()
                     .program(POSITION_COLOR_TEXTURE_PROGRAM)
                     .texture(new RenderPhase.Texture(SyrupTextureGenerator.ID, false, false))
-                    .build(false));
+                    .build(false)
+    );
+
+    public static final RenderLayer COOKTOP_FACE = RenderLayer.of(
+            "cooktop_face",
+            VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL,
+            VertexFormat.DrawMode.QUADS,
+            2097152,
+            true,
+            false,
+            RenderLayer.MultiPhaseParameters.builder()
+                    .lightmap(ENABLE_LIGHTMAP)
+                    .program(SOLID_PROGRAM)
+                    .layering(POLYGON_OFFSET_LAYERING)
+                    .texture(new RenderPhase.Texture(CooktopTextureGenerator.ID, false, false))
+                    .build(true)
+    );
 
     public static final RenderLayer SOLID_LINES = RenderLayer.of(
             "solid_lines",

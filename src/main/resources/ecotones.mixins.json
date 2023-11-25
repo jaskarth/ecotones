@@ -32,6 +32,7 @@
     "client.MixinEntityModels",
     "client.MixinHeldItemRenderer",
     "client.MixinMinecraftClient",
+    "client.MixinTextureManager",
     "client.MixinWorldRenderer"
   ],
   "injectors": {

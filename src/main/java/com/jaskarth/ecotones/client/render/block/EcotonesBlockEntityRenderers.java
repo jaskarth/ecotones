@@ -7,5 +7,6 @@ public final class EcotonesBlockEntityRenderers {
     public static void init() {
         BlockEntityRendererRegistry.register(EcotonesBlockEntities.SAP_DISTILLERY, SapDistilleryBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(EcotonesBlockEntities.TREETAP, TreetapBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(EcotonesBlockEntities.COOKTOP, CooktopBlockEntityRenderer::new);
     }
 }

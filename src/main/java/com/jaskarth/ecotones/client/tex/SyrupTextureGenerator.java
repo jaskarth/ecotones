@@ -2,6 +2,7 @@ package com.jaskarth.ecotones.client.tex;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.texture.NativeImage;
+import net.minecraft.client.texture.TextureManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import com.jaskarth.ecotones.Ecotones;
@@ -22,13 +23,15 @@ public final class SyrupTextureGenerator {
         }
 
         TEXTURE = new DynamicTexture(image, SyrupTextureGenerator::tick);
-
-        MinecraftClient.getInstance().getTextureManager().registerTexture(ID, TEXTURE);
     }
 
     // Particle phases for the current texture, from 0 to 3
     // Expands outwards from a central node, creating semigeometrical shapes
     private static final int[] PARTICLE_PHASE = new int[16 * 16];
+
+    public static void register(TextureManager manager) {
+        manager.registerTexture(ID, TEXTURE);
+    }
 
     private static int ticks = 0;
     private static void tick() {
@@ -111,7 +114,7 @@ public final class SyrupTextureGenerator {
                 finalColor = MathHelper.clamp(finalColor, 0, 255);
                 int finalRed = MathHelper.clamp((int)(finalColor * 1.25), 0, 255);
 
-                // Set RGB to this color, color is handled by the BER (ARGB format)
+                // TODO: this is actually broken! NativeImages are ABGR, not ARGB
                 image.setColor(x, z, (255 << 24) | (finalRed << 16) | (finalColor << 8) | finalColor);
             }
         }

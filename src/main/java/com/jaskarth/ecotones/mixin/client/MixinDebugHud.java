@@ -1,5 +1,7 @@
 package com.jaskarth.ecotones.mixin.client;
 
+import com.jaskarth.ecotones.client.tex.CooktopTextureGenerator;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -65,9 +67,7 @@ public class MixinDebugHud {
     @Inject(method = "render", at = @At("HEAD"))
     private void renderCloudTex(DrawContext context, CallbackInfo ci) {
         if (ClientSidedServerData.isInEcotonesWorld && EcotonesClientDebug.RENDER_CLOUDS_TEX && !this.client.options.debugProfilerEnabled) {
-//            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-//            RenderSystem.setShaderTexture(0, CLOUDS);
-            context.drawTexture(CLOUDS, this.client.getWindow().getScaledWidth() - 128, this.client.getWindow().getScaledHeight() - 128, 0.0F, 0.0F, 128, 128, 128, 128);
+            context.drawTexture(CooktopTextureGenerator.ID, this.client.getWindow().getScaledWidth() - 128, this.client.getWindow().getScaledHeight() - 128, 0.0F, 0.0F, 16, 16, 16, 16);
 //            DrawableHelper.drawTexture(matrices, );
         }
     }

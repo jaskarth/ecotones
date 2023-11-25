@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.render.RenderLayer;
@@ -23,6 +24,7 @@ import com.jaskarth.ecotones.client.render.entity.DuckEntityRenderer;
 import com.jaskarth.ecotones.client.render.magnifying.EcotonesMagnifyingGlassRenderers;
 import com.jaskarth.ecotones.world.entity.EcotonesEntities;
 import com.jaskarth.ecotones.world.items.EcotonesBlocksItems;
+import net.minecraft.resource.ResourceType;
 
 @Environment(EnvType.CLIENT)
 public final class EcotonesClient implements ClientModInitializer {
@@ -108,6 +110,8 @@ public final class EcotonesClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.MAPLE_LEAF, MapleLeafParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SYRUP_POP, SyrupPopParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(EcotonesParticles.SAP_DRIP, SapDripParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(EcotonesParticles.CHIMNEY_SMOKE, SmokeParticle.ChimneySmokeFactory::new);
+        ParticleFactoryRegistry.getInstance().register(EcotonesParticles.DIRECTED_SMOKE, SmokeParticle.DirectedSmokeFactory::new);
 
         EcotonesModelLayers.init();
         EcotonesScreens.init();

@@ -6,6 +6,7 @@ accessible class net/minecraft/client/render/WorldRenderer$ChunkInfo
 accessible field net/minecraft/client/render/WorldRenderer$ChunkInfo chunk Lnet/minecraft/client/render/chunk/ChunkBuilder$BuiltChunk;
 accessible class net/minecraft/client/render/RenderLayer$MultiPhaseParameters
 accessible class net/minecraft/client/gui/screen/advancement/AdvancementTabType
+accessible class net/minecraft/client/texture/ResourceTexture$TextureData
 
 # accessible method net/minecraft/client/world/GeneratorType <init> (Ljava/lang/String;)V
 accessible method net/minecraft/client/render/RenderLayer of (Ljava/lang/String;Lnet/minecraft/client/render/VertexFormat;Lnet/minecraft/client/render/VertexFormat$DrawMode;IZZLnet/minecraft/client/render/RenderLayer$MultiPhaseParameters;)Lnet/minecraft/client/render/RenderLayer$MultiPhase;
